@@ -32,7 +32,6 @@ ostream & operator<<(ostream & out, Volunteer & rhs)
 	return out;
 }
 
-
 DisjointSets::Representor *& DisjointSets::Representor::operator+=(Representor * & rhs)
 {
 	_tail = rhs->_tail;
@@ -61,4 +60,4 @@ Volunteer * DisjointSets::findSet(int ID)
 	it = volunteers.find(ID);
 	if (it == volunteers.end()) throw "no such volunteer";
 	return it->second;
-
+}
