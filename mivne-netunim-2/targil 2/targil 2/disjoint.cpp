@@ -32,8 +32,33 @@ ostream & operator<<(ostream & out, Volunteer & rhs)
 	return out;
 }
 
-DisjointSets::Representor & DisjointSets::Representor::operator+=(Representor rhs)
+
+DisjointSets::Representor *& DisjointSets::Representor::operator+=(Representor * & rhs)
 {
-	// TODO: insert return statement here
-	return *this;
+	_tail = rhs->_tail;
+	_size = rhs->_size;
+	_tail->_next = rhs->_head;
+	DisNode * p = rhs;
+	while (p->_next != NULL)
+	{
+		p->_head = _head;
+		p = p->_next;
+	}
+	Representor * pRepresentor = this;
+	return pRepresentor;
 }
+
+void DisjointSets::makeSet(Volunteer * volunteer)
+{
+	Representor * newRep = new Representor(volunteer);
+	representors.push_back(newRep);
+	volunteers[volunteer->ID] = volunteer;
+}
+
+Volunteer * DisjointSets::findSet(int ID)
+{
+	map<int, Volunteer*>::iterator it;
+	it = volunteers.find(ID);
+	if (it == volunteers.end()) throw "no such volunteer";
+	return it->second;
+
