@@ -49,7 +49,6 @@ public:
 	void makeSet(Volunteer * volunteer);
 	Volunteer * findSet(int ID);
 
-
 };
 
 
