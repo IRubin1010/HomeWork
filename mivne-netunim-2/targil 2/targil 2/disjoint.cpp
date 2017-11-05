@@ -13,16 +13,7 @@ Volunteer::Volunteer(Volunteer & volunteer)
 
 istream & operator>>(istream & in, Volunteer & rhs)
 {
-	cout << "enter ID" << endl;
-	in >> rhs._ID;
-	cout << "enter name" << endl;
-	in >> rhs._name;
-	cout << "enter address" << endl;
-	in >> rhs._address;
-	cout << "enter phone number" << endl;
-	in >> rhs._phone;
-	cout << "enter city" << endl;
-	in >> rhs._city;
+	in >> rhs._ID >> rhs._name >> rhs._address >> rhs._phone >> rhs._city;
 	return in;
 }
 
