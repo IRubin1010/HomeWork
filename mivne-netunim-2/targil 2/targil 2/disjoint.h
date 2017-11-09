@@ -33,7 +33,7 @@ class DisjointSets
 		DisNode * _next; // point to the next volunteer
 		DisNode * _head; // point to representor
 		DisNode(Volunteer * volunteer) { _volunteer = volunteer; _next = NULL; _head = this; } // constractor
-		virtual ~DisNode(); /////////// need to implement
+		virtual ~DisNode();
 	};
 	class Representor :public DisNode
 	{
