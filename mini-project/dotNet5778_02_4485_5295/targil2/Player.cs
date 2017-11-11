@@ -12,8 +12,16 @@ namespace targil2
         public string Name
         {
             get { return name; }
+            set { name = value; }
         }
-        Queue<Card> PlayerCards = new Queue<Card>();
+        private Queue<Card> PlayerCards = new Queue<Card>();
+        public int NumberOfCards
+        {
+            get
+            {
+                return PlayerCards.Count;
+            }
+        }
         public void AddCard(params Card[] cards)
         {
             foreach (Card card in cards)
@@ -35,7 +43,7 @@ namespace targil2
             return (PlayerCards.Count == 0);
         }
 
-        public Card RemoveCard()
+        public Card PopCard()
         {
             if (PlayerCards.Count == 0) return null;
             Card card = PlayerCards.Dequeue();
