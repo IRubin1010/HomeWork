@@ -11,6 +11,7 @@ namespace targil2
         private CardStock stock ;
         private Player pl1 = new Player();
         private Player pl2 = new Player();
+        // begin game - mix the stock and distribute the cards
         public void BeginGame(string fName, string sName)
         {
             stock = new CardStock();
@@ -19,6 +20,7 @@ namespace targil2
             pl1.Name = fName;
             pl2.Name = sName;
         }
+        // retrun the winer - the second player have no cards
         public string Winer()
         {
             if(pl1.lose())
@@ -29,11 +31,13 @@ namespace targil2
             {
                 return pl1.Name;
             }
+            // there is no winer - both have cards
             else
             {
                 return "no one win yet";
             }
         }
+        // check if finish the game - there is winer
         public bool FinishGame()
         {
             if(Winer() == "no one win yet")
@@ -45,17 +49,20 @@ namespace targil2
                 return true;
             }
         }
+        // override ToString
         public override string ToString()
         {
             string str = pl1.Name + " number of cards: " + pl1.NumberOfCards + ",  " + pl2.Name + " number of cards: " + pl2.NumberOfCards;
             return str;
         }
+        // make a move on the game
         public void Move()
         {
-            if (FinishGame()) return;
+            if (FinishGame()) return; // if finish the game
             Card firstCard = pl1.PopCard();
             Card SecondCard = pl2.PopCard();
-            if(firstCard.Number > SecondCard.Number)
+            // check whose ticket is bigger
+            if (firstCard.Number > SecondCard.Number) 
             {
                 pl1.AddCard(firstCard, SecondCard);
             }
@@ -63,8 +70,11 @@ namespace targil2
             {
                 pl2.AddCard(firstCard, SecondCard);
             }
+            // both tickets the same
             else
             {
+                // get 2 more cards end check beteen them
+                // the biggest take all 4 cards
                 Card[] cards = new Card[4];
                 cards[0] = firstCard;
                 cards[1] = SecondCard;
