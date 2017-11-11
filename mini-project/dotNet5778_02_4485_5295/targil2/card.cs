@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace targil2
 {
-    enum E_Color { red, blak }
+    // enum for the color
+    enum E_Color { red, black }
 
+    // class for card, inherits from IComparable interfase
     class Card : IComparable
     {
         private E_Color color;
+        private int number;
+        // constractor 
+        public Card(E_Color col, int num)
+        {
+            color = col;
+            number = num;
+        }
+        // color ptoperty
         public E_Color Color
         {
             get
@@ -22,7 +32,7 @@ namespace targil2
                 color = value;
             }
         }
-        private int number;
+        // number property
         public int Number
         {
             get
@@ -35,12 +45,9 @@ namespace targil2
                 {
                     number = value;
                 }
-                else
-                {
-
-                }
             }
         }
+        // property who get back the card name
         public string CardName
         {
             get
@@ -65,18 +72,14 @@ namespace targil2
                 }
             }
         }
-        public Card() { }
-        public Card(E_Color col,int num) // constractor
+        // override ToString
+        public override string ToString() { return CardName + " " + Color; }
+        // implement CompareTo in order to implement IComparable 
+        public int CompareTo(object obj)
         {
-            color = col;
-            number = num;
-        }
-        public override string ToString() { return CardName + " " + Color; } // override To string
-        public int CompareTo(object obj) // implement CompareTo
-        {
-            Card card = obj as Card;
-            if (card == null) throw new ArgumentException("object is not a card");
-            return number.CompareTo(card.Number);
+            Card card = obj as Card; // get the card object from "obj"
+            if (card == null) throw new ArgumentException("object is not a card"); // if obj wasn't card
+            return number.CompareTo(card.Number); // use int.CompareTo to compare the number of the card
         }
     }
 }
