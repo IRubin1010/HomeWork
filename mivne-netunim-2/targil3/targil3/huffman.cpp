@@ -14,14 +14,7 @@ void HuffmanTree::buildFrequencyTable(string text)
 
 HuffmanNode * HuffmanTree::buildTree(int * frequencyTable)
 {
-	for (int i = 0; i < 256; i++)
-	{
-		if (frequencyTable[i] != 0)
-		{
-			HuffmanNode* node = new HuffmanNode(frequencyTable[i]);
-			pQueue.push(node);
-		}
-	}
+	fullPriartyQueue(frequencyTable);
 	for (int i = 0; i < pQueue.size; i++)
 	{
 		HuffmanNode* newNode = new HuffmanNode();
@@ -33,4 +26,26 @@ HuffmanNode * HuffmanTree::buildTree(int * frequencyTable)
 		pQueue.push(newNode);
 	}
 	return pQueue.top();
+}
+
+void HuffmanTree::fullPriartyQueue(int * frequencyTable)
+{
+	for (int i = 0; i < 256; i++)
+	{
+		if (frequencyTable[i] != 0)
+		{
+			HuffmanNode* node = new HuffmanNode(frequencyTable[i]);
+			node->_tav = i;
+			pQueue.push(node);
+		}
+	}
+}
+
+void HuffmanTree::func(HuffmanNode * root, string * codedTable, string & strTree, string & strChar)
+{
+	if (root->left==NULL&&root->right==NULL)
+	{
+		strTree += "1";
+		strChar += root->_tav;
+	}
 }
