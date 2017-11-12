@@ -8,6 +8,7 @@
 using namespace std;
 
 class compareNode; //declar on class compreNode
+class HuffmanTree;
 
 //Represents a node in the Hoffmann tree
 class HuffmanNode
@@ -18,7 +19,10 @@ private:
 	HuffmanNode* left; //point to left son
 	HuffmanNode* right; //point to right son
 public:
+	HuffmanNode() {};
+	HuffmanNode(int freq):str(""),left(NULL),right(NULL) { frequency = freq;  }
 	friend compareNode;
+	friend HuffmanTree;
 };
 class compareNode
 {
@@ -35,8 +39,10 @@ private:
 	HuffmanNode* root;
 	int frequencyTable[256];
 	string codedTable[256];
+	priority_queue<HuffmanNode*, vector<HuffmanNode*>, compareNode> pQueue;
 public:
-	HuffmanTree() {};
+	HuffmanTree(){};
 	void buildFrequencyTable(string text);
+	HuffmanNode* buildTree(int * frequencyTable);
 };
 #endif // !__HUFFMAN_H

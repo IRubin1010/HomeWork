@@ -7,7 +7,30 @@ void HuffmanTree::buildFrequencyTable(string text)
 	char tav;
 	while (infile.get(tav)) //loop on akk the file
 	{
-		frequencyTable[tav]++; 
+		frequencyTable[tav]++;
 	}
 	infile.close(); // close the file
+}
+
+HuffmanNode * HuffmanTree::buildTree(int * frequencyTable)
+{
+	for (int i = 0; i < 256; i++)
+	{
+		if (frequencyTable[i] != 0)
+		{
+			HuffmanNode* node = new HuffmanNode(frequencyTable[i]);
+			pQueue.push(node);
+		}
+	}
+	for (int i = 0; i < pQueue.size; i++)
+	{
+		HuffmanNode* newNode = new HuffmanNode();
+		newNode->left = pQueue.top();
+		pQueue.pop();
+		newNode->right = pQueue.top();
+		pQueue.pop();
+		newNode->frequency = newNode->left->frequency + newNode->right->frequency;
+		pQueue.push(newNode);
+	}
+	return pQueue.top();
 }
