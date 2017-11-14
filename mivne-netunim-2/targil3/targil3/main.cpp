@@ -3,7 +3,8 @@ using namespace std;
 int main()
 {
 	HuffmanTree temp;
-	temp.buildFrequencyTable("mosh.txt");
+	temp.encode("in.txt", "out.txt");
+	
 
 
 	return 0;
