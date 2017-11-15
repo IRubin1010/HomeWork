@@ -8,7 +8,7 @@ namespace targil2
 {
     class Game
     {
-        private CardStock stock ;
+        private CardStock stock;
         private Player pl1 = new Player();
         private Player pl2 = new Player();
         // begin game - mix the stock and distribute the cards
@@ -19,15 +19,17 @@ namespace targil2
             stock.distribute(pl1, pl2);
             pl1.Name = fName;
             pl2.Name = sName;
+            Console.WriteLine(pl1.ToString());
+            Console.WriteLine(pl2.ToString());
         }
         // retrun the winer - the second player have no cards
         public string Winer()
         {
-            if(pl1.lose())
+            if (pl1.lose())
             {
                 return pl2.Name;
             }
-            else if(pl2.lose())
+            else if (pl2.lose())
             {
                 return pl1.Name;
             }
@@ -40,7 +42,7 @@ namespace targil2
         // check if finish the game - there is winer
         public bool FinishGame()
         {
-            if(Winer() == "no one win yet")
+            if (Winer() == "no one win yet")
             {
                 return false;
             }
@@ -52,43 +54,45 @@ namespace targil2
         // override ToString
         public override string ToString()
         {
-            string str = pl1.Name + " number of cards: " + pl1.NumberOfCards + ",  " + pl2.Name + " number of cards: " + pl2.NumberOfCards;
+            string str = pl1.Name + " number of cards: " + pl1.NumberOfCards + '\n' + pl2.Name + " number of cards: " + pl2.NumberOfCards;
             return str;
         }
         // make a move on the game
-        public void Move()
+        // we use a list instead of array becouse if in the second move
+        // the cards are stil the same, we want to to make a third move and etc.
+        // and for each move we need to add the cards to the array, and this is much easier
+        // to this with a list.
+        public string Move()
         {
-            if (FinishGame()) return; // if finish the game
-            Card firstCard = pl1.PopCard();
-            Card SecondCard = pl2.PopCard();
-            // check whose ticket is bigger
-            if (firstCard.Number > SecondCard.Number) 
+            bool isMove = false;
+            Card firstCard;
+            Card SecondCard;
+            List<Card> cards = new List<Card>();
+            string moveCards = "";
+            // iterate the move as long as the cards are the same
+            do
             {
-                pl1.AddCard(firstCard, SecondCard);
-            }
-            else if(firstCard.Number < SecondCard.Number)
-            {
-                pl2.AddCard(firstCard, SecondCard);
-            }
-            // both tickets the same
-            else
-            {
-                // get 2 more cards end check beteen them
-                // the biggest take all 4 cards
-                Card[] cards = new Card[4];
-                cards[0] = firstCard;
-                cards[1] = SecondCard;
-                cards[2] = pl1.PopCard();
-                cards[3] = pl2.PopCard();
-                if(cards[2].Number > cards[3].Number)
+                if (FinishGame()) return ""; // if finish the game
+                firstCard = pl1.PopCard();
+                SecondCard = pl2.PopCard();
+                // add to the list
+                cards.Add(firstCard);
+                cards.Add(SecondCard);
+                moveCards += pl1.Name + ": " + firstCard.ToString() + "  " + pl2.Name + ": " + SecondCard.ToString() + '\n';
+                // check whose ticket is bigger
+                if (firstCard.Number > SecondCard.Number)
                 {
-                    pl1.AddCard(cards);
+                    pl1.AddCard(cards.ToArray());
+                    isMove = true;
                 }
-                else
+                else if (firstCard.Number < SecondCard.Number)
                 {
-                    pl2.AddCard(cards);
+                    pl2.AddCard(cards.ToArray());
+                    isMove = true;
                 }
-            }
+                // if the cerds the same make another move
+            } while (!isMove);
+            return moveCards;
         }
     }
 }

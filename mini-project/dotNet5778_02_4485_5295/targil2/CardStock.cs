@@ -50,10 +50,10 @@ namespace targil2
         public override string ToString()
         {
             // go over the list and get all their names
-            string list = Cards[0].ToString();
+            string list = Cards[0].ToString() + '\n';
             for (int i = 1; i < 26; i++)
             {
-                list += ", " + Cards[i].ToString();
+                list += Cards[i].ToString() + '\n';
             }
             return list;
         }
