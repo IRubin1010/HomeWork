@@ -19,44 +19,36 @@ namespace targil2
             game.BeginGame(firstPlayerName, secondPlayerName);
             int choice;
             string menu = @"menu
-1: check the winer
-2: check if the game is finished
-3: print the players and theier cards
-4: make a move
-5: exit";
+0: play the all game
+1: make a move
+2: exit";
             do
             {
                 Console.WriteLine(menu);
                 choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
+                    case 0:
+                        while(!game.FinishGame())
+                        {
+                            Console.WriteLine(game.Move());
+                            Console.WriteLine(game.ToString());
+                            Console.WriteLine("*******" + '\n');
+                        }
+                        Console.WriteLine(game.Winer() + '\n');
+                        break;
                     case 1:
-                        Console.WriteLine(game.Winer());
+                        Console.WriteLine(game.Move());
+                        Console.WriteLine(game.ToString() + '\n');
                         break;
                     case 2:
-                        if (game.FinishGame())
-                        {
-                            Console.WriteLine("the game is over");
-                        }
-                        else
-                        {
-                            Console.WriteLine("the game is not over");
-                        }
-                        break;
-                    case 3:
-                        Console.WriteLine(game.ToString());
-                        break;
-                    case 4:
-                        game.Move();
-                        break;
-                    case 5:
                         break;
                     default:
                         Console.WriteLine("ERROR!!");
                         break;
                 }
 
-            } while (choice != 5);
+            } while (choice != 2);
 
         }
     }

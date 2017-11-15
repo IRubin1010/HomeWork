@@ -35,10 +35,10 @@ namespace targil2
         // override ToString
         public override string ToString()
         {
-            string playerString = "name: " + name + ", number of cards: " + PlayerCards.Count + ", card names: ";
+            string playerString = "name: " + name + ", number of cards: " + PlayerCards.Count +'\n' + "card names: " + '\n';
             foreach (Card card in PlayerCards)
             {
-                playerString += card.ToString();
+                playerString += card.ToString() + '\n';
             }
             return playerString;
         }
