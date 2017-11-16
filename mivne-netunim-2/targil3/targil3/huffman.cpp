@@ -127,6 +127,8 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	outfile << strLatter << endl;
 	outfile << strTree << endl;
 	outfile << encodeText << endl;
+	infile.close();
+	outfile.close();
 }
 
 string HuffmanTree::encode(const char letter)
@@ -177,6 +179,8 @@ void HuffmanTree::decode(string sourceFileName, string destFileName)
 	}
 	cout << "The decoded string is: " << text << endl;
 	outfile << text << endl;
+	infile.close();
+	outfile.close();
 }
 
 void HuffmanTree::decodeTree(HuffmanNode * root, string &strTree)
@@ -208,7 +212,7 @@ void HuffmanTree::decodeTree(HuffmanNode * root, string &strTree)
 	return;
 }
 
-void HuffmanTree::addLettersToTree(HuffmanNode * root, string & strLetter, string & codedTableLatter)
+void HuffmanTree::addLettersToTree(HuffmanNode * root, string & strLetter, string codedTableLatter)
 {
 	if (root == NULL) return;
 	if (root->left == NULL && root->right == NULL)
@@ -226,7 +230,6 @@ void HuffmanTree::addLettersToTree(HuffmanNode * root, string & strLetter, strin
 	{
 		addLettersToTree(root->right, strLetter, codedTableLatter + "1");
 	}
-	codedTableLatter.erase(codedTableLatter.end());
 }
 
 string HuffmanTree::decodeLetter(HuffmanNode * root, string & code)
@@ -247,7 +250,7 @@ string HuffmanTree::decodeLetter(HuffmanNode * root, string & code)
 	}
 	else
 	{
-		throw "rhe code is invalid";
+		throw "the code is invalid";
 	}
 }
 
