@@ -51,8 +51,13 @@ private:
 	int bitHuffmanCode();
 	string encode(const char letter);
 	string encode(string text);
+	void decodeTree(HuffmanNode * toot, string &strTree);
+	void addLettersToTree(HuffmanNode * root, string & strLetter, string & codedTableLatter);
+	string decodeLetter(HuffmanNode * root, string & code);
+	string decodeWord(string code);
 public:
 
 	void encode(string sourceFileName, string destFileName);
+	void decode(string sourceFileName, string destFileName);
 };
 #endif // !__HUFFMAN_H
