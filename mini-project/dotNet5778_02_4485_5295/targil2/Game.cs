@@ -14,11 +14,11 @@ namespace targil2
         // begin game - mix the stock and distribute the cards
         public void BeginGame(string fName, string sName)
         {
+            pl1.Name = fName;
+            pl2.Name = sName;
             stock = new CardStock();
             stock.Mix();
             stock.distribute(pl1, pl2);
-            pl1.Name = fName;
-            pl2.Name = sName;
             Console.WriteLine(pl1.ToString());
             Console.WriteLine(pl2.ToString());
         }
@@ -72,23 +72,30 @@ namespace targil2
             // iterate the move as long as the cards are the same
             do
             {
-                if (FinishGame()) return ""; // if finish the game
+                if (FinishGame()) return "no body has cards"; // if finish the game
                 firstCard = pl1.PopCard();
                 SecondCard = pl2.PopCard();
                 // add to the list
-                cards.Add(firstCard);
-                cards.Add(SecondCard);
                 moveCards += pl1.Name + ": " + firstCard.ToString() + "  " + pl2.Name + ": " + SecondCard.ToString() + '\n';
                 // check whose ticket is bigger
                 if (firstCard.Number > SecondCard.Number)
                 {
+                    cards.Add(firstCard);
+                    cards.Add(SecondCard);
                     pl1.AddCard(cards.ToArray());
                     isMove = true;
                 }
                 else if (firstCard.Number < SecondCard.Number)
                 {
+                    cards.Add(SecondCard);
+                    cards.Add(firstCard);
                     pl2.AddCard(cards.ToArray());
                     isMove = true;
+                }
+                else
+                {
+                    cards.Add(firstCard);
+                    cards.Add(SecondCard);
                 }
                 // if the cerds the same make another move
             } while (!isMove);

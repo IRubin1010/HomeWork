@@ -32,7 +32,7 @@ namespace targil2
         public void Mix()
         {
             // go over the list take 2 random cards and swap beteen them
-            for (int i = 0; i <= 25; i++)
+            for (int i = 0; i <= 26; i++)
             {
                 int RandA = rand.Next(0, 26);
                 int RandB = rand.Next(0, 26);
@@ -50,8 +50,8 @@ namespace targil2
         public override string ToString()
         {
             // go over the list and get all their names
-            string list = Cards[0].ToString() + '\n';
-            for (int i = 1; i < 26; i++)
+            string list = "";
+            for (int i = 0; i < 26; i++)
             {
                 list += Cards[i].ToString() + '\n';
             }
