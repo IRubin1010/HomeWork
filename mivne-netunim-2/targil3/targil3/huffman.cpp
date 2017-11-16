@@ -27,7 +27,7 @@ void HuffmanTree::buildcodedTable()
 int HuffmanTree::buildTree()
 {
 	int count = fullPriorityQueue(); //Calls the function that filled the frequencyTable and counting the diffrent latter
-	for (int i = 0; i < count-1; i++) //loop on all the queue
+	for (int i = 0; i < count - 1; i++) //loop on all the queue
 	{
 		HuffmanNode* newNode = new HuffmanNode(); //creat a new node
 		newNode->left = pQueue.top(); //The left son points to the smallest organ in the priority queue
@@ -75,7 +75,7 @@ void HuffmanTree::func(HuffmanNode * root, string  codedTableLatter, string & st
 	//go right
 	if (root->right != NULL)
 	{
-		func(root->right, codedTableLatter+"1", strTree, strLatter);
+		func(root->right, codedTableLatter + "1", strTree, strLatter);
 	}
 }
 
@@ -93,7 +93,7 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 {
 	string  codedTableLatter;
 	string  strTree;
-	string strLatter ;
+	string strLatter;
 	int sumOfLetter;
 	ifstream infile(sourceFileName);
 	if (!infile) throw "error opening input"; //check if the file open 
@@ -123,10 +123,10 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	cout << sumOfLetter << endl << strLatter << endl << strTree << endl;
 	cout << encodeText << endl;
 
-	outfile << sumOfLetter<<endl;
-	outfile << strLatter<<endl;
-	outfile << strTree<<endl;
-	outfile << encodeText<<endl;
+	outfile << sumOfLetter << endl;
+	outfile << strLatter << endl;
+	outfile << strTree << endl;
+	outfile << encodeText << endl;
 }
 
 string HuffmanTree::encode(const char letter)
@@ -143,3 +143,130 @@ string HuffmanTree::encode(string text)
 	}
 	return str;
 }
+
+
+void HuffmanTree::decode(string sourceFileName, string destFileName)
+{
+	ifstream infile(sourceFileName);
+	if (!infile) throw "error opening input"; //check if the file open 
+	ofstream outfile(destFileName);
+	if (!outfile) throw "error opening output"; //check if the file open 
+	string treeText;
+	string letterText;
+	string strLetter;
+	string strTree;
+	string code;
+	string text;
+	string codedTableLatter;
+	int sumOfLetters;
+	infile >> sumOfLetters;
+	infile >> strLetter;
+	letterText = strLetter;
+	infile >> strTree;
+	treeText = strTree;
+	infile >> code;
+	root = new HuffmanNode();
+	decodeTree(root, treeText);
+	addLettersToTree(root, letterText, codedTableLatter);
+	text = decodeWord(code);
+	cout << "huffman code:" << endl;
+	for (int i = 0; i < 256; i++)
+	{
+		if (codedTable[i] != "")
+			cout << (char)i << ": " << codedTable[i] << endl;
+	}
+	cout << "The decoded string is: " << text << endl;
+	outfile << text << endl;
+}
+
+void HuffmanTree::decodeTree(HuffmanNode * root, string &strTree)
+{
+	if (strTree == "")
+	{
+		return;
+	}
+	if (strTree[0] == '0')
+	{
+		root->left = new HuffmanNode();
+		root->right = new HuffmanNode();
+		strTree.erase(strTree.begin());
+		if (strTree[0] == '0')
+		{
+			decodeTree(root->left, strTree);
+		}
+		else if (strTree[0] == '1')
+		{
+			strTree.erase(strTree.begin());
+			decodeTree(root->right, strTree);
+		}
+		else
+		{
+			return;
+		}
+	}
+	strTree.erase(strTree.begin());
+	return;
+}
+
+void HuffmanTree::addLettersToTree(HuffmanNode * root, string & strLetter, string & codedTableLatter)
+{
+	if (root == NULL) return;
+	if (root->left == NULL && root->right == NULL)
+	{
+		root->str = strLetter[0];
+		strLetter.erase(strLetter.begin());
+		codedTable[root->str[0]] = codedTableLatter;
+		return;
+	}
+	if (root->left != NULL)
+	{
+		addLettersToTree(root->left, strLetter, codedTableLatter + "0");
+	}
+	if (root->right != NULL)
+	{
+		addLettersToTree(root->right, strLetter, codedTableLatter + "1");
+	}
+	codedTableLatter.erase(codedTableLatter.end());
+}
+
+string HuffmanTree::decodeLetter(HuffmanNode * root, string & code)
+{
+	if (root->left == NULL && root->right == NULL)
+	{
+		return root->str;
+	}
+	if (code[0] == '0')
+	{
+		code.erase(code.begin());
+		return decodeLetter(root->left, code);
+	}
+	if (code[0] == '1')
+	{
+		code.erase(code.begin());
+		return decodeLetter(root->right, code);
+	}
+	else
+	{
+		throw "rhe code is invalid";
+	}
+}
+
+string HuffmanTree::decodeWord(string code)
+{
+	string word;
+	try
+	{
+		while (code != "")
+		{
+			word += decodeLetter(root, code);
+		}
+		return word;
+	}
+	catch (const char * msg)
+	{
+		return msg;
+	}
+}
+
+
+
