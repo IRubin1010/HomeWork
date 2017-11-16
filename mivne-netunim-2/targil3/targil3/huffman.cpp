@@ -110,7 +110,7 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	cout << "huffman code:" << endl;
 	for (int i = 0; i < 256; i++)
 		if (codedTable[i] != "")
-			cout << i << ": " << codedTable[i] << endl;
+			cout << (char)i << ": " << codedTable[i] << endl;
 	int totalFrequncy = root->frequency;
 	int fixCode = ceil(log2(sumOfLetter));
 	int bitFixCode = totalFrequncy*fixCode;
