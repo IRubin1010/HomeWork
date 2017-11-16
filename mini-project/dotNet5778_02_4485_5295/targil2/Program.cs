@@ -1,4 +1,6 @@
-﻿using System;
+﻿// yitzchk yeret 206244485
+// meir shimon 305625295
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,9 +35,9 @@ namespace targil2
                         {
                             Console.WriteLine(game.Move());
                             Console.WriteLine(game.ToString());
-                            Console.WriteLine("*******" + '\n');
+                            Console.WriteLine("*******" );
                         }
-                        Console.WriteLine(game.Winer() + '\n');
+                        Console.WriteLine("the winer is: " + game.Winer() + '\n');
                         break;
                     case 1:
                         Console.WriteLine(game.Move());
