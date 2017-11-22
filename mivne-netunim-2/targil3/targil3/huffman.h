@@ -25,6 +25,8 @@ public:
 	friend compareNode;
 	friend HuffmanTree;
 };
+
+
 class compareNode
 {
 public:
@@ -33,6 +35,7 @@ public:
 		return n1->frequency > n2->frequency;
 	}
 };
+
 
 class HuffmanTree
 {
@@ -46,7 +49,7 @@ private:
 
 	int buildTree();
 	int fullPriorityQueue();
-	void func(HuffmanNode * root, string  codedTableLatter, string & strTree, string & strLatter);
+	void fillCodedTable(HuffmanNode * root, string  codedTableLatter, string & strTree, string & strLatter);
 
 	int bitHuffmanCode();
 	string encode(const char letter);
@@ -55,8 +58,9 @@ private:
 	void addLettersToTree(HuffmanNode * root, string & strLetter, string codedTableLatter);
 	string decodeLetter(HuffmanNode * root, string & code);
 	string decodeWord(string code);
+	void Dtor(HuffmanNode * root);
 public:
-
+	~HuffmanTree() { Dtor(root); };
 	void encode(string sourceFileName, string destFileName);
 	void decode(string sourceFileName, string destFileName);
 };

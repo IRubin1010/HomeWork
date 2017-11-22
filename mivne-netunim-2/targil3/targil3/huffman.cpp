@@ -1,5 +1,6 @@
 #include "huffman.h"
 
+// build the array of the frequency of the charactors
 void HuffmanTree::buildFrequencyTable(string text)
 {
 	//Places zero in all array cells
@@ -14,6 +15,7 @@ void HuffmanTree::buildFrequencyTable(string text)
 	}
 }
 
+// build the array of the charactors code
 void HuffmanTree::buildcodedTable()
 {
 	//Updating all array cells with empty strings
@@ -22,6 +24,7 @@ void HuffmanTree::buildcodedTable()
 		codedTable[i] = "";
 	}
 }
+
 //build the huffman tree
 //return the count of the diffrent latter
 int HuffmanTree::buildTree()
@@ -56,7 +59,8 @@ int HuffmanTree::fullPriorityQueue()
 	return count;
 }
 
-void HuffmanTree::func(HuffmanNode * root, string  codedTableLatter, string & strTree, string & strLatter)
+// fill the code array
+void HuffmanTree::fillCodedTable(HuffmanNode * root, string  codedTableLatter, string & strTree, string & strLatter)
 {
 	if (root == NULL)return;
 	//is leaf
@@ -70,15 +74,16 @@ void HuffmanTree::func(HuffmanNode * root, string  codedTableLatter, string & st
 	if (root->left != NULL)
 	{
 		strTree += "0";
-		func(root->left, codedTableLatter + "0", strTree, strLatter);
+		fillCodedTable(root->left, codedTableLatter + "0", strTree, strLatter);
 	}
 	//go right
 	if (root->right != NULL)
 	{
-		func(root->right, codedTableLatter + "1", strTree, strLatter);
+		fillCodedTable(root->right, codedTableLatter + "1", strTree, strLatter);
 	}
 }
 
+// sum the number of bitd needed in huffman code
 int HuffmanTree::bitHuffmanCode()
 {
 	int sum = 0;
@@ -89,24 +94,27 @@ int HuffmanTree::bitHuffmanCode()
 	return sum;
 }
 
+// encode a file
 void HuffmanTree::encode(string sourceFileName, string destFileName)
 {
+	Dtor(root);
 	string  codedTableLatter;
 	string  strTree;
 	string strLatter;
 	int sumOfLetter;
+	// read from file
 	ifstream infile(sourceFileName);
 	if (!infile) throw "error opening input"; //check if the file open 
 	ofstream outfile(destFileName);
 	if (!outfile) throw "error opening output"; //check if the file open 
 	string text;
 	infile >> text;
-
+	// build the tree and tha arrays
 	buildFrequencyTable(text);
 	buildcodedTable();
 	sumOfLetter = buildTree();
 	func(root, codedTableLatter, strTree, strLatter);
-
+	// print the details to the console
 	cout << "huffman code:" << endl;
 	for (int i = 0; i < 256; i++)
 		if (codedTable[i] != "")
@@ -122,7 +130,7 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	cout << "The encoded string is:" << endl;
 	cout << sumOfLetter << endl << strLatter << endl << strTree << endl;
 	cout << encodeText << endl;
-
+	// print to file
 	outfile << sumOfLetter << endl;
 	outfile << strLatter << endl;
 	outfile << strTree << endl;
@@ -131,11 +139,13 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	outfile.close();
 }
 
+// return the code of a charactor
 string HuffmanTree::encode(const char letter)
 {
 	return codedTable[letter];
 }
 
+// code a string with according the code array
 string HuffmanTree::encode(string text)
 {
 	string str;
@@ -146,9 +156,10 @@ string HuffmanTree::encode(string text)
 	return str;
 }
 
-
+// decode a file
 void HuffmanTree::decode(string sourceFileName, string destFileName)
 {
+	Dtor(root);
 	ifstream infile(sourceFileName);
 	if (!infile) throw "error opening input"; //check if the file open 
 	ofstream outfile(destFileName);
@@ -168,9 +179,12 @@ void HuffmanTree::decode(string sourceFileName, string destFileName)
 	treeText = strTree;
 	infile >> code;
 	root = new HuffmanNode();
+
+	// decode the tree wint the information from file 
 	decodeTree(root, treeText);
 	addLettersToTree(root, letterText, codedTableLatter);
 	text = decodeWord(code);
+
 	cout << "huffman code:" << endl;
 	for (int i = 0; i < 256; i++)
 	{
@@ -183,12 +197,17 @@ void HuffmanTree::decode(string sourceFileName, string destFileName)
 	outfile.close();
 }
 
+// build the tree
 void HuffmanTree::decodeTree(HuffmanNode * root, string &strTree)
 {
 	if (strTree == "")
 	{
 		return;
 	}
+
+	// if get 0 build 2 sons
+	// then check the next char, if it is 0 - call function again with left sun
+	//                           if it is 1 - call function again with right sun
 	if (strTree[0] == '0')
 	{
 		root->left = new HuffmanNode();
@@ -212,6 +231,8 @@ void HuffmanTree::decodeTree(HuffmanNode * root, string &strTree)
 	return;
 }
 
+// go over the tree and add the letters
+// and fill the code array of each letter
 void HuffmanTree::addLettersToTree(HuffmanNode * root, string & strLetter, string codedTableLatter)
 {
 	if (root == NULL) return;
@@ -232,6 +253,7 @@ void HuffmanTree::addLettersToTree(HuffmanNode * root, string & strLetter, strin
 	}
 }
 
+// get a code and return the letter it represent
 string HuffmanTree::decodeLetter(HuffmanNode * root, string & code)
 {
 	if (root->left == NULL && root->right == NULL)
@@ -254,11 +276,13 @@ string HuffmanTree::decodeLetter(HuffmanNode * root, string & code)
 	}
 }
 
+// decode the text in file
 string HuffmanTree::decodeWord(string code)
 {
 	string word;
 	try
 	{
+		// go over the text and decode it.
 		while (code != "")
 		{
 			word += decodeLetter(root, code);
@@ -269,6 +293,22 @@ string HuffmanTree::decodeWord(string code)
 	{
 		return msg;
 	}
+}
+
+// distractor 
+void HuffmanTree::Dtor(HuffmanNode * root)
+{
+	if (root == NULL) return;
+	if (root->left != NULL)
+	{
+		Dtor(root->left);
+	}
+	else
+	{
+		Dtor(root->right);
+	}
+	delete root;
+	root = nullptr;
 }
 
 
