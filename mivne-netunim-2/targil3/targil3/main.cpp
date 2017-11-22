@@ -1,3 +1,9 @@
+/*
+yitzchk yeret - 206244485
+meir shimon - 305625295
+moshe halevi - 053067708
+הוגש בשלושה באישור חיים פריינתה
+*/
 #include"huffman.h"
 using namespace std;
 int main()
