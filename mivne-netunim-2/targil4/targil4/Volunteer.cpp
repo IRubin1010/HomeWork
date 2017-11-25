@@ -3,7 +3,7 @@
 //using namespace std;
 
 // copy constractor
-Volunteer::Volunteer(Volunteer & volunteer)
+Volunteer::Volunteer(const Volunteer & volunteer)
 {
 	_ID = volunteer._ID;
 	_name = volunteer._name;

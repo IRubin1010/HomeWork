@@ -15,7 +15,7 @@ private:
 	int _distance;
 public:
 	Volunteer() {}; // constractor
-	Volunteer(Volunteer & volunteer); // copy constractor
+	Volunteer(const Volunteer & volunteer); // copy constractor
 	int ID() { return _ID; } // geter
 	void setDistance(int distance) { _distance = distance; }
 	int getDistance() {return _distance; }
