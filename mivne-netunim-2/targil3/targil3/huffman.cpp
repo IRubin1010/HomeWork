@@ -113,7 +113,7 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	buildFrequencyTable(text);
 	buildcodedTable();
 	sumOfLetter = buildTree();
-	func(root, codedTableLatter, strTree, strLatter);
+	fillCodedTable(root, codedTableLatter, strTree, strLatter);
 	// print the details to the console
 	cout << "huffman code:" << endl;
 	for (int i = 0; i < 256; i++)
