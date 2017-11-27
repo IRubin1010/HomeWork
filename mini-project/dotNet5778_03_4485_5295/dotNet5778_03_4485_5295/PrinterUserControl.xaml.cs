@@ -25,16 +25,16 @@ namespace dotNet5778_03_4485_5295
         private event EventHandler<PrinterEventArgs> PageMissing;
         private event EventHandler<PrinterEventArgs> InkEmpty;
 
-        public string PrinterName { get; }
-        public double InkCount { get; }
-        public int PageCount { get; }
+        public string PrinterName { get; set; }
+        public double InkCount { get; set; }
+        public int PageCount { get; set; }
 
         const int MAX_INK = 100;
         const double MIN_ADD_INK = 5.0;
         const double MAX_PRINT_INK = 50.0;
         const int MAX_PAGES = 400;
         const int MIN_ADD_PAGES = 10;
-        const int MAX_PTINT_PAGES = 300;
+        const int MAX_PRINT_PAGES = 300;
 
         public PrinterUserControl()
         {
@@ -42,6 +42,47 @@ namespace dotNet5778_03_4485_5295
             InkCount = randNum.Next(0, 101) + randNum.NextDouble();
             PageCount = randNum.Next(0, 401);
             InitializeComponent();
+        }
+
+        public void AddPages()
+        {
+            int addPage;
+            if (MAX_PAGES - PageCount < MAX_PRINT_PAGES)
+                addPage = MAX_PAGES - PageCount;
+            else addPage = MAX_PRINT_PAGES;
+            PageCount = randNum.Next(MIN_ADD_PAGES, addPage);
+        }
+
+        public void AddInk()
+        {
+            double addInk;
+            if (MAX_INK - InkCount < MAX_PRINT_INK)
+                addInk = MAX_INK - InkCount;
+            else addInk = MAX_PRINT_INK - 1;
+            InkCount = randNum.Next((int)MIN_ADD_INK, (int)addInk) + randNum.NextDouble();
+        }
+
+        public void print()
+        {
+            PageCount -= randNum.Next(1, MAX_PRINT_PAGES);
+            InkCount -= randNum.Next(1, (int)MAX_PRINT_INK) + randNum.NextDouble();
+
+        }
+
+        private void NoPages(object sender,PrinterEventArgs e)
+        {
+
+        }
+
+        private void addEvents()
+        {
+            
+
+
+                // =  new PrinterEventArgs(true, "there is no pages", PrinterName);
+                //EventHandler<PrinterEventArgs> noPages = new EventHandler<PrinterEventArgs>(new PrinterEventArgs(true, "there is no pages", PrinterName), null);
+            PageMissing += NoPages;
+            PageMissing += new EventHandler<PrinterEventArgs> mymissing (this, new PrinterEventArgs(true, "there is no pages", PrinterName));
         }
 
         private void printerNameLabel_MouseEnter(object sender, MouseEventArgs e)
