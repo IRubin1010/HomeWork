@@ -54,6 +54,6 @@ istream & operator>>(istream & in, Volunteer & rhs)
 // utput operator
 ostream & operator<<(ostream & out, Volunteer & rhs)
 {
-	out << "id=" << rhs._ID << " name=" << rhs._name << " address=" << rhs._address << " phone=" << rhs._phone << " city=" << rhs._city << endl << " distance=" << rhs._distance;
+	out << "id=" << rhs._ID << " name=" << rhs._name << " address=" << rhs._address << " pnone=" << rhs._phone << " city= " << rhs._city << " distance= " << rhs._distance << endl;
 	return out;
 }
