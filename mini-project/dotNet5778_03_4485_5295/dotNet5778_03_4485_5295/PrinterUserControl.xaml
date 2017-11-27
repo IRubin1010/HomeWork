@@ -13,7 +13,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Source="images/printer.jpg"/>
-        <Label Grid.Row="1" Name="printerNameLabel" Content="printer name" HorizontalAlignment="Center" Foreground="RoyalBlue" FontSize="16" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Name="printerNameLabel" Content="printer name" HorizontalAlignment="Center" Foreground="RoyalBlue" FontSize="16" VerticalAlignment="Top" MouseEnter="printerNameLabel_MouseEnter" MouseLeave="printerNameLabel_MouseLeave" Loaded="printerNameLabel_Loaded"/>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -25,8 +25,8 @@
             </Grid.ColumnDefinitions>
             <Label Content="Ink" Name="inkLabel"/>
             <Label Content="Pages" Grid.Row="1" Name="pageLabel"/>
-            <ProgressBar Grid.Column="1"  Grid.Row="0" Name="inkCountProgressBar" Value="23" />
-            <Slider Grid.Column="1" Grid.Row="1" Name="pageCountSlider" Value="200" Maximum="400" />
+            <ProgressBar Grid.Column="1"  Grid.Row="0" Name="inkCountProgressBar" Value="23" ValueChanged="inkCountProgressBar_ValueChanged" />
+            <Slider Grid.Column="1" Grid.Row="1" Name="pageCountSlider" Value="200" Maximum="400" ValueChanged="pageCountSlider_ValueChanged" />
         </Grid>
 
 
