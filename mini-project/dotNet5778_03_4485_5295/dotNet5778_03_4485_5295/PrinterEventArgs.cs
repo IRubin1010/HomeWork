@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5778_03_4485_5295
 {
-    class PrinterEventArgs
+    class PrinterEventArgs : EventArgs
     {
         public bool Critical { get; }
         public string Error { get; }
