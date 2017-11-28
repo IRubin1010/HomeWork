@@ -26,7 +26,7 @@
             <Label Content="Ink" Name="inkLabel"/>
             <Label Content="Pages" Grid.Row="1" Name="pageLabel"/>
             <ProgressBar Grid.Column="1"  Grid.Row="0" Name="inkCountProgressBar" Value="23" ValueChanged="inkCountProgressBar_ValueChanged" />
-            <Slider Grid.Column="1" Grid.Row="1" Name="pageCountSlider" Value="200" Maximum="400" ValueChanged="pageCountSlider_ValueChanged" />
+            <Slider Grid.Column="1" Grid.Row="1" Name="pageCountSlider" Value="200" Maximum="400" ValueChanged="pageCountSlider_ValueChanged"/>
         </Grid>
 
 
