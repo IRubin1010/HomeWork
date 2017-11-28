@@ -20,28 +20,30 @@ namespace dotNet5778_03_4485_5295
     /// </summary>
     public partial class PrinterUserControl : UserControl
     {
+        private static int i = 1;
         public static Random randNum = new Random();
 
-        private event EventHandler<PrinterEventArgs> PageMissing;
-        private event EventHandler<PrinterEventArgs> InkEmpty;
+        internal event EventHandler<PrinterEventArgs> PageMissing;
+        internal event EventHandler<PrinterEventArgs> InkEmpty;
 
         public string PrinterName { get; set; }
         public double InkCount { get; set; }
         public int PageCount { get; set; }
 
         const int MAX_INK = 100;
-        const double MIN_ADD_INK = 5.0;
-        const double MAX_PRINT_INK = 50.0;
+        const double MIN_ADD_INK = 15.0;
+        const double MAX_PRINT_INK = 100.0;
         const int MAX_PAGES = 400;
         const int MIN_ADD_PAGES = 10;
         const int MAX_PRINT_PAGES = 300;
 
         public PrinterUserControl()
         {
-            PrinterName = "printer 1";
+            PrinterName = "printer " + i;
             InkCount = randNum.Next(0, 101) + randNum.NextDouble();
             PageCount = randNum.Next(0, 401);
             InitializeComponent();
+            i++;
         }
 
         public void AddPages()
@@ -51,6 +53,8 @@ namespace dotNet5778_03_4485_5295
                 addPage = MAX_PAGES - PageCount;
             else addPage = MAX_PRINT_PAGES;
             PageCount = randNum.Next(MIN_ADD_PAGES, addPage);
+            pageCountSlider.Value = PageCount;
+            pageLabel.Foreground = Brushes.Black;
         }
 
         public void AddInk()
@@ -60,29 +64,25 @@ namespace dotNet5778_03_4485_5295
                 addInk = MAX_INK - InkCount;
             else addInk = MAX_PRINT_INK - 1;
             InkCount = randNum.Next((int)MIN_ADD_INK, (int)addInk) + randNum.NextDouble();
+            inkCountProgressBar.Value = InkCount;
+            inkLabel.Foreground = Brushes.Black;
         }
 
         public void print()
         {
-            PageCount -= randNum.Next(1, MAX_PRINT_PAGES);
-            InkCount -= randNum.Next(1, (int)MAX_PRINT_INK) + randNum.NextDouble();
-
-        }
-
-        private void NoPages(object sender,PrinterEventArgs e)
-        {
-
-        }
-
-        private void addEvents()
-        {
-            
-
-
-                // =  new PrinterEventArgs(true, "there is no pages", PrinterName);
-                //EventHandler<PrinterEventArgs> noPages = new EventHandler<PrinterEventArgs>(new PrinterEventArgs(true, "there is no pages", PrinterName), null);
-            PageMissing += NoPages;
-            PageMissing += new EventHandler<PrinterEventArgs> mymissing (this, new PrinterEventArgs(true, "there is no pages", PrinterName));
+            PageCount -= randNum.Next(1, 20);
+            InkCount -= randNum.Next(1, 5);
+            if (InkCount < 0) InkCount = 0;
+            pageCountSlider.Value = PageCount;
+            inkCountProgressBar.Value = InkCount;
+            if(PageCount < 0)
+            {
+                PageMissing(this, new PrinterEventArgs(true, "Missing " + (-1 * PageCount) + " pages", PrinterName));
+            }
+            if (InkCount < 15 && InkCount > 1)
+                InkEmpty(this, new PrinterEventArgs(false, "your ink is only " + (int)InkCount + " %", PrinterName));
+            else if (InkCount < 1)
+                InkEmpty(this, new PrinterEventArgs(true, "your ink is only " + (int)InkCount + " %", PrinterName));
         }
 
         private void printerNameLabel_MouseEnter(object sender, MouseEventArgs e)
@@ -108,6 +108,7 @@ namespace dotNet5778_03_4485_5295
         {
             Slider slider = sender as Slider;
             slider.Value = PageCount;
+            
         }
 
         private void printerNameLabel_Loaded(object sender, RoutedEventArgs e)

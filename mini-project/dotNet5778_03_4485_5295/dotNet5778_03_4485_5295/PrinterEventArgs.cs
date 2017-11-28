@@ -12,6 +12,10 @@ namespace dotNet5778_03_4485_5295
         public string Error { get; }
         public string PrinterName { get; }
         private DateTime time = DateTime.Now;
+        public DateTime Time
+        {
+            get { return time; }
+        }
 
         public PrinterEventArgs(bool criti, string err,string name)
         {
