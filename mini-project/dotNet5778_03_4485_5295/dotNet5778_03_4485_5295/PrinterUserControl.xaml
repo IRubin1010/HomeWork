@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              xmlns:local="clr-namespace:dotNet5778_03_4485_5295"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"  BorderBrush="Black" BorderThickness="1">
@@ -26,7 +27,7 @@
             <Label Content="Ink" Name="inkLabel"/>
             <Label Content="Pages" Grid.Row="1" Name="pageLabel"/>
             <ProgressBar Grid.Column="1"  Grid.Row="0" Name="inkCountProgressBar" Value="23" ValueChanged="inkCountProgressBar_ValueChanged" />
-            <Slider Grid.Column="1" Grid.Row="1" Name="pageCountSlider" Value="200" Maximum="400" ValueChanged="pageCountSlider_ValueChanged"/>
+            <Slider Grid.Column="1" Grid.Row="1" Name="pageCountSlider" Value="200" Maximum="{x:Static local:PrinterUserControl.MaxPages}" ValueChanged="pageCountSlider_ValueChanged"/>
         </Grid>
 
 

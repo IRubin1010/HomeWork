@@ -87,8 +87,11 @@ namespace dotNet5778_03_4485_5295
                     if (result == MessageBoxResult.OK)
                     {
                         printer.AddInk();
-                        queue.Enqueue(CourentPrinter);
-                        CourentPrinter = queue.Dequeue();
+                        if (printer == CourentPrinter)
+                        {
+                            queue.Enqueue(CourentPrinter);
+                            CourentPrinter = queue.Dequeue();
+                        }
                     }
                 }
                 else

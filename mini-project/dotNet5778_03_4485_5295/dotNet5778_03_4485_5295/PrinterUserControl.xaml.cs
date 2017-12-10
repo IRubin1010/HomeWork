@@ -29,6 +29,7 @@ namespace dotNet5778_03_4485_5295
         public string PrinterName { get; set; }
         public double InkCount { get; set; }
         public int PageCount { get; set; }
+        public static double MaxPages { get { return MAX_PAGES; } }
 
         const int MAX_INK = 100;
         const double MIN_ADD_INK = 15.0;
