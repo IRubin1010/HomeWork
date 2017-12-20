@@ -14,6 +14,9 @@ namespace BE
         public int PhoneNumber { get; }
         public string Address { get; }
         public string SearchAreaForNanny { get; }
+        public bool WantElevator { get; }
+        public int MinSeniority { get; }
+        public int MaxFloor { get; }
         public bool[] NeedNanny;
         public TimeSpan[,] NeedNannyHours = new TimeSpan[2, 6];
         public string Remarks { get; }
