@@ -210,6 +210,7 @@ namespace BL
             return dal.ContractList();
         }
 
+
         public int Distance(string addressA, string addressB)
         {
             var drivingDirectionRequest = new DirectionsRequest
@@ -237,26 +238,52 @@ namespace BL
 
         public bool PotentialMatch(Nanny nanny, Mother mother)
         {
-            if (nanny.IsWork.Length < mother.NeedNanny.Length)
-                return false;
             for (int i = 0; i < nanny.IsWork.Length; i++)
             {
                 if (nanny.IsWork[i] == false && mother.NeedNanny[i] == true)
                     return false;
             }
-            for (int i = 0; i < mother.NeedNannyHours.Length; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0, i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1, i])
                     return false;
             }
             return true;
-
         }
+
+        public List<Nanny> MotherConditions(Mother mother)
+        {
+            List<Nanny> nannyList = PotentialMatch(mother);
+            foreach (Nanny nanny in nannyList)
+            {
+                if ((mother.WantElevator==true && nanny.Elevator==false) || (mother.MinSeniority<nanny.Seniority) || 
+                    (mother.MaxFloor<nanny.Floor))
+                {
+                    nannyList.Remove(nanny);
+                }
+            }
+            return nannyList;
+        }
+
+        public List<Nanny> NannysInKM(Mother mother, int Km)
+        {
+            List<Nanny> nannyList = MotherConditions(mother);
+            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny: mother.Address;
+            foreach (Nanny nanny in nannyList)
+                if (Distance(address, nanny.Address) > Km)
+                    nannyList.Remove(nanny);
+            return nannyList;
+        }
+
+        //public List<Nanny> PartialMatch(Mother mother)
+        //{
+        //    List<Nanny> nannyList = new List<Nanny>();
+        //}
 
         public List<Child> ChildrenWithNoNanny()
         {
             List<Child> children = new List<Child>();
-            foreach(Child child in ChildList())
+            foreach (Child child in ChildList())
             {
                 if (child.HaveNanny == false)
                     children.Add(child);
@@ -267,7 +294,7 @@ namespace BL
         public List<Nanny> ValidVacationsNannys()
         {
             List<Nanny> nannys = new List<Nanny>();
-            foreach(Nanny nanny in NannyList())
+            foreach (Nanny nanny in NannyList())
             {
                 if (nanny.IsValidVacationDays == true)
                     nannys.Add(nanny);
@@ -291,7 +318,7 @@ namespace BL
             int numOfContracts = 0;
             foreach (Contract contract in ContractList())
             {
-                if (contractCondition(contract) == true)
+                if (contractCondition(contract))
                     numOfContracts++;
             }
             return numOfContracts;

@@ -33,14 +33,21 @@ namespace BE
         {
             return base.ToString();
         }
-
-        public Nanny(int id) { ID = id; }
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
             Nanny nanny = obj as Nanny;
             if (nanny == null) return false;
             return this.ID == nanny.ID;
+        }
+
+        public Nanny(int id, int age, string address, bool elevator,int floor)
+        {
+            ID = id;
+            NannyAge = age;
+            Address = address;
+            Elevator = elevator;
+            Floor = floor;
         }
     }
 }

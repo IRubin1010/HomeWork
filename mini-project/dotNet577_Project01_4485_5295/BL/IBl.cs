@@ -49,7 +49,9 @@ namespace BL
         int Distance(string addressA, string addressB);
         List<Nanny> PotentialMatch(Mother mother);
         bool PotentialMatch(Nanny nanny, Mother mother);
+        List<Nanny> MotherConditions(Mother mother);
         List<Nanny> NannysInKM(string address = null);
+        //List<Nanny> PartialMatch(Mother mother);
         List<Child> ChildrenWithNoNanny();
         List<Nanny> ValidVacationsNannys();
         List<Contract> SpesificsContracts(Func<Contract, bool> contractCondition);
