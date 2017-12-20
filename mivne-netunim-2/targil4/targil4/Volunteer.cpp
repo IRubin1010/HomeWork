@@ -1,6 +1,4 @@
-//#include <iostream>
 #include "Volunteer.h"
-//using namespace std;
 
 // copy constractor
 Volunteer::Volunteer(const Volunteer & volunteer)
@@ -12,6 +10,8 @@ Volunteer::Volunteer(const Volunteer & volunteer)
 	_city = volunteer._city;
 	_distance = volunteer._distance;
 }
+
+/*operators*/
 
 bool Volunteer::operator==(const Volunteer & rhs) const
 {
@@ -54,6 +54,6 @@ istream & operator>>(istream & in, Volunteer & rhs)
 // utput operator
 ostream & operator<<(ostream & out, Volunteer & rhs)
 {
-	out << "id=" << rhs._ID << " name=" << rhs._name << " address=" << rhs._address << " pnone=" << rhs._phone << " city= " << rhs._city << " distance= " << rhs._distance << endl;
+	out << "id=" << rhs._ID << " name=" << rhs._name << " address=" << rhs._address << " phone=" << rhs._phone << " city=" << rhs._city << " distance=" << rhs._distance << endl;
 	return out;
 }
