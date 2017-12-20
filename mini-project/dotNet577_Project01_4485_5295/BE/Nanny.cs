@@ -11,12 +11,13 @@ namespace BE
         public int ID { get; }
         public string LastName { get; }
         public string FirstName { get; }
-        public string BirthDate { get; }
+        public DateTime BirthDate { get; }
         public int NannyAge { get; }
         public int PhoneNumber { get; }
         public string Address { get; }
         public bool Elevator { get; }
         public int Floor { get; }
+        public int Seniority { get; }
         public int Children { get; set; }
         public int MaxChildren { get; }
         public int MinAge { get; }
@@ -34,5 +35,12 @@ namespace BE
         }
 
         public Nanny(int id) { ID = id; }
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Nanny nanny = obj as Nanny;
+            if (nanny == null) return false;
+            return this.ID == nanny.ID;
+        }
     }
 }

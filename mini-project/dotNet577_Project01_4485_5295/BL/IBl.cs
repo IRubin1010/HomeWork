@@ -14,7 +14,7 @@ namespace BL
         void DeleteNanny(int id);
         void UpdateNanny(int id);
         void UpdateNanny(Nanny nanny);
-        Nanny FindNanny(Nanny nanny);
+        bool FindNanny(Nanny nanny);
         Nanny FindNanny(int id);
 
         bool AddMother(Mother mother);
@@ -22,7 +22,7 @@ namespace BL
         void DeleteMother(int id);
         void UpdateMother(int id);
         void UpdateMother(Mother mother);
-        Mother FindMother(Mother mother);
+        bool FindMother(Mother mother);
         Mother FindMother(int id);
 
         bool AddChild(Child child);
@@ -30,7 +30,7 @@ namespace BL
         void DeleteChild(int id);
         void UpdateChild(int id);
         void UPdateChild(Child child);
-        Child FindChild(Child child);
+        bool FindChild(Child child);
         Child FindChild(int id);
 
         bool AddContract(Contract contract);
@@ -38,7 +38,7 @@ namespace BL
         void DeleteContract(int contractNumber);
         void UpdateContract(int contractNumber);
         void UpdateContract(Contract contract);
-        Contract FindContract(Contract contract);
+        bool FindContract(Contract contract);
         Contract FindContract(int contractNumber);
 
         List<Nanny> NannyList();
@@ -47,5 +47,12 @@ namespace BL
         List<Contract> ContractList();
 
         int Distance(string addressA, string addressB);
+        List<Nanny> PotentialMatch(Mother mother);
+        bool PotentialMatch(Nanny nanny, Mother mother);
+        List<Nanny> NannysInKM(string address = null);
+        List<Child> ChildrenWithNoNanny();
+        List<Nanny> ValidVacationsNannys();
+        List<Contract> SpesificsContracts(Func<Contract, bool> contractCondition);
+        int NumOfSpesificsContracts(Func<Contract, bool> contractCondition);
     }
 }

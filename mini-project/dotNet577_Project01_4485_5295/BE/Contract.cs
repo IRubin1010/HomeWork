@@ -13,7 +13,7 @@ namespace BE
         public int ChildID { get; }
         public int MotherID { get; }
         public bool IsMeet { get; }
-        public bool IsContract { get; }
+        public bool ContractSigned { get; }
         public int HourlyFee { get; }
         public int MonthlyFee { get; }
         public bool IsPaymentByHour { get; }
@@ -23,6 +23,13 @@ namespace BE
         public override string ToString()
         {
             return base.ToString();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Contract contract = obj as Contract;
+            if (contract == null) return false;
+            return this.ContractNumber == contract.ContractNumber;
         }
 
         public Contract(int num) { ContractNumber = num; }

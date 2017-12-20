@@ -16,6 +16,7 @@ namespace BL
     {
         Dal_imp dal = new Dal_imp();
 
+        // Nanny
         public bool AddNanny(Nanny nanny)
         {
             if (nanny.NannyAge < 18)
@@ -43,7 +44,7 @@ namespace BL
             dal.UpdateNanny(nanny);
         }
 
-        public Nanny FindNanny(Nanny nanny)
+        public bool FindNanny(Nanny nanny)
         {
             return dal.FindNanny(nanny);
         }
@@ -53,6 +54,7 @@ namespace BL
             return dal.FindNanny(id);
         }
 
+        // Mother
         public bool AddMother(Mother mother)
         {
             return dal.AddMother(mother);
@@ -78,7 +80,7 @@ namespace BL
             dal.UpdateMother(mother);
         }
 
-        public Mother FindMother(Mother mother)
+        public bool FindMother(Mother mother)
         {
             return dal.FindMother(mother);
         }
@@ -88,6 +90,7 @@ namespace BL
             return dal.FindMother(id);
         }
 
+        // Child
         public bool AddChild(Child child)
         {
             return dal.AddChild(child);
@@ -113,7 +116,7 @@ namespace BL
             dal.UpdateChild(child);
         }
 
-        public Child FindChild(Child child)
+        public bool FindChild(Child child)
         {
             return dal.FindChild(child);
         }
@@ -123,6 +126,7 @@ namespace BL
             return dal.FindChild(id);
         }
 
+        // Contracts
         public bool AddContract(Contract contract)
         {
             Mother mother = FindMother(contract.MotherID);
@@ -175,7 +179,7 @@ namespace BL
             dal.UpdateContract(contract);
         }
 
-        public Contract FindContract(Contract contract)
+        public bool FindContract(Contract contract)
         {
             return dal.FindContract(contract);
         }
@@ -185,6 +189,7 @@ namespace BL
             return dal.FindContract(contractNumber);
         }
 
+        // Lists
         public List<Nanny> NannyList()
         {
             return dal.NannyList();
@@ -217,6 +222,79 @@ namespace BL
             Route route = drivingDirections.Routes.First();
             Leg leg = route.Legs.First();
             return leg.Distance.Value;
+        }
+
+        public List<Nanny> PotentialMatch(Mother mother)
+        {
+            List<Nanny> nannyList = new List<Nanny>();
+            foreach (Nanny nanny in NannyList())
+            {
+                if (PotentialMatch(nanny, mother) == true)
+                    nannyList.Add(nanny);
+            }
+            return nannyList;
+        }
+
+        public bool PotentialMatch(Nanny nanny, Mother mother)
+        {
+            if (nanny.IsWork.Length < mother.NeedNanny.Length)
+                return false;
+            for (int i = 0; i < nanny.IsWork.Length; i++)
+            {
+                if (nanny.IsWork[i] == false && mother.NeedNanny[i] == true)
+                    return false;
+            }
+            for (int i = 0; i < mother.NeedNannyHours.Length; i++)
+            {
+                if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0, i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1, i])
+                    return false;
+            }
+            return true;
+
+        }
+
+        public List<Child> ChildrenWithNoNanny()
+        {
+            List<Child> children = new List<Child>();
+            foreach(Child child in ChildList())
+            {
+                if (child.HaveNanny == false)
+                    children.Add(child);
+            }
+            return children;
+        }
+
+        public List<Nanny> ValidVacationsNannys()
+        {
+            List<Nanny> nannys = new List<Nanny>();
+            foreach(Nanny nanny in NannyList())
+            {
+                if (nanny.IsValidVacationDays == true)
+                    nannys.Add(nanny);
+            }
+            return nannys;
+        }
+
+        public List<Contract> SpesificsContracts(Func<Contract, bool> contractCondition)
+        {
+            List<Contract> contractsList = new List<Contract>();
+            foreach (Contract contract in ContractList())
+            {
+                if (contractCondition(contract) == true)
+                    contractsList.Add(contract);
+            }
+            return contractsList;
+        }
+
+        public int NumOfSpesificsContracts(Func<Contract, bool> contractCondition)
+        {
+            int numOfContracts = 0;
+            foreach (Contract contract in ContractList())
+            {
+                if (contractCondition(contract) == true)
+                    numOfContracts++;
+            }
+            return numOfContracts;
         }
     }
 }
