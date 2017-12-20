@@ -38,6 +38,7 @@ namespace dotNet5778_03_4485_5295
         const int MIN_ADD_PAGES = 10;
         const int MAX_PRINT_PAGES = 300;
 
+        // intialize the printer
         public PrinterUserControl()
         {
             PrinterName = "printer " + i;
@@ -47,8 +48,10 @@ namespace dotNet5778_03_4485_5295
             i++;
         }
 
+        // add pages
         public void AddPages()
         {
+            // validate the pages and add them
             int addPage;
             if (MAX_PAGES - PageCount < MAX_PRINT_PAGES)
                 addPage = MAX_PAGES - PageCount;
@@ -60,6 +63,7 @@ namespace dotNet5778_03_4485_5295
 
         public void AddInk()
         {
+            // validate the ink and add ink
             double addInk;
             if (MAX_INK - InkCount < MAX_PRINT_INK)
                 addInk = MAX_INK - InkCount;
@@ -73,10 +77,11 @@ namespace dotNet5778_03_4485_5295
         {
             PageCount -= randNum.Next(1, 20);
             InkCount -= randNum.Next(1, 5);
-            if (InkCount < 0) InkCount = 0;
+            if (InkCount < 0) InkCount = 0; // ink can't be less then 0;
             pageCountSlider.Value = PageCount;
             inkCountProgressBar.Value = InkCount;
-            if(PageCount < 0)
+            // if there is events, call the event handler with the appropriate message
+            if (PageCount < 0)
             {
                 PageMissing(this, new PrinterEventArgs(true, "Missing " + (-1 * PageCount) + " pages", PrinterName));
             }
@@ -86,25 +91,31 @@ namespace dotNet5778_03_4485_5295
                 InkEmpty(this, new PrinterEventArgs(true, "your ink is only " + (int)InkCount + " %", PrinterName));
         }
 
+        // mouse over event
         private void printerNameLabel_MouseEnter(object sender, MouseEventArgs e)
         {
+            // if the mouse over make bigger the font
             if (sender is Label label)
                 label.FontSize = 25;
         }
 
+        // mouse leave event
         private void printerNameLabel_MouseLeave(object sender, MouseEventArgs e)
         {
+            // when the mouse leave return to normal font size
             if (sender is Label label)
                 label.FontSize = 16;
         }
 
+        // progress bar event
         private void inkCountProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ProgressBar progressBar = sender as ProgressBar;
-            progressBar.Value = InkCount;
+            progressBar.Value = InkCount; // put value
             progressBar.ToolTip = "ink: " + string.Format("{0:F1}", progressBar.Value) + "%";
         }
 
+        // slider event
         private void pageCountSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider slider = sender as Slider;
@@ -112,6 +123,7 @@ namespace dotNet5778_03_4485_5295
             
         }
 
+        // printer name label event - put the name
         private void printerNameLabel_Loaded(object sender, RoutedEventArgs e)
         {
             if (sender is Label label)
