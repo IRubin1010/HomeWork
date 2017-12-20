@@ -21,6 +21,13 @@ namespace BE
         {
             return base.ToString();
         }
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Mother mother = obj as Mother;
+            if (mother == null) return false;
+            return this.ID == mother.ID;
+        }
 
         public Mother(int id) { ID = id; }
     }

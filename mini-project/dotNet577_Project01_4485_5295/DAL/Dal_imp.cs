@@ -8,15 +8,16 @@ using DS;
 
 namespace DAL
 {
-    public class Dal_imp :IDal
+    public class Dal_imp : IDal
     {
         public static int ContractNumber = 10000000;
 
+        // Nanny
         public bool AddNanny(Nanny nanny)
         {
-            if (FindNanny(nanny) == null)
+            if (!FindNanny(nanny))
             {
-                DataSource.NannyList.Add(nanny);
+                NannyList().Add(nanny);
                 return true;
             }
             return false;
@@ -24,14 +25,12 @@ namespace DAL
 
         public void DeleteNanny(Nanny nanny)
         {
-            DataSource.NannyList.Remove(nanny);
+            NannyList().Remove(nanny);
         }
 
         public void DeleteNanny(int id)
         {
-            if (FindNanny(id) != null)
-                DeleteNanny(FindNanny(id));
-
+            NannyList().Remove(FindNanny(id));
         }
 
         public void UpdateNanny(int id)
@@ -45,32 +44,30 @@ namespace DAL
 
         public void UpdateNanny(Nanny nanny)
         {
-            if (FindNanny(nanny) != null)
+            if (FindNanny(nanny))
             {
                 //TO DO
             }
         }
 
-        public Nanny FindNanny(Nanny nanny)
+        public bool FindNanny(Nanny nanny)
         {
-            return FindNanny(nanny.ID);
+            return FindNanny(nanny.ID) != null;
         }
 
         public Nanny FindNanny(int id)
         {
             foreach (Nanny item in DataSource.NannyList)
-            {
-                if (item.ID == id)
-                    return item;
-            }
+                if (item.ID == id) return item;
             return null;
         }
 
+        // Mother
         public bool AddMother(Mother mother)
         {
-            if (FindMother(mother) == null)
+            if (!FindMother(mother))
             {
-                DataSource.MotherList.Add(mother);
+                MotherList().Add(mother);
                 return true;
             }
             return false;
@@ -79,13 +76,13 @@ namespace DAL
         public void DeleteMother(int id)
         {
             if (FindMother(id) != null)
-                DataSource.MotherList.Remove(FindMother(id));
+                MotherList().Remove(FindMother(id));
         }
 
         public void DeleteMother(Mother mother)
         {
-            if (FindMother(mother) != null)
-                DataSource.MotherList.Remove(mother);
+            if (FindMother(mother))
+                MotherList().Remove(mother);
         }
 
         public void UpdateMother(int id)
@@ -100,33 +97,31 @@ namespace DAL
 
         public void UpdateMother(Mother mother)
         {
-            if (FindMother(mother) != null)
+            if (FindMother(mother))
             {
                 //TO DO
             }
 
         }
 
-        public Mother FindMother(Mother mother)
+        public bool FindMother(Mother mother)
         {
-            return FindMother(mother.ID);
+            return FindMother(mother.ID) != null;
         }
 
         public Mother FindMother(int id)
         {
             foreach (Mother item in DataSource.MotherList)
-            {
-                if (item.ID == id)
-                    return item;
-            }
+                if (item.ID == id) return item;
             return null;
         }
 
+        // Child
         public bool AddChild(Child child)
         {
-            if (FindChild(child) == null)
+            if (!FindChild(child))
             {
-                DataSource.ChildList.Add(child);
+                ChildList().Add(child);
                 return true;
             }
             return false;
@@ -134,14 +129,14 @@ namespace DAL
 
         public void DeleteChild(Child child)
         {
-            if (FindChild(child) != null)
-                DataSource.ChildList.Remove(child);
+            if (FindChild(child))
+                ChildList().Remove(child);
         }
 
         public void DeleteChild(int id)
         {
             if (FindChild(id) != null)
-                DataSource.ChildList.Remove(FindChild(id));
+                ChildList().Remove(FindChild(id));
         }
 
         public void UpdateChild(int id)
@@ -155,33 +150,31 @@ namespace DAL
 
         public void UpdateChild(Child child)
         {
-            if (FindChild(child) != null)
+            if (FindChild(child))
             {
                 //TO DO
             }
         }
 
-        public Child FindChild(Child child)
+        public bool FindChild(Child child)
         {
-            return FindChild(child.ID);
+            return FindChild(child.ID) != null;
         }
 
         public Child FindChild(int id)
         {
             foreach (Child item in DataSource.ChildList)
-            {
-                if (item.ID == id)
-                    return item;
-            }
+                if (item.ID == id) return item;
             return null;
         }
 
+        // Contract
         public bool AddContract(Contract contract)
         {
             if (FindNanny(contract.NannyID) != null && FindMother(contract.MotherID) != null)
             {
                 contract.ContractNumber = ContractNumber++;
-                DataSource.ContractList.Add(contract);
+                ContractList().Add(contract);
                 return true;
             }
             return false;
@@ -189,14 +182,14 @@ namespace DAL
 
         public void DeleteContract(Contract contract)
         {
-            if (FindContract(contract) != null)
-                DataSource.ContractList.Remove(contract);
+            if (FindContract(contract))
+                ContractList().Remove(contract);
         }
 
         public void DeleteContract(int contractNumber)
         {
             if (FindContract(contractNumber) != null)
-                DataSource.ContractList.Remove(FindContract(contractNumber));
+                ContractList().Remove(FindContract(contractNumber));
         }
 
         public void UpdateContract(int contractNumber)
@@ -210,27 +203,25 @@ namespace DAL
 
         public void UpdateContract(Contract contract)
         {
-            if (FindContract(contract) != null)
+            if (FindContract(contract))
             {
                 //TO DO
             }
         }
 
-        public Contract FindContract(Contract contarct)
+        public bool FindContract(Contract contarct)
         {
-            return FindContract(contarct.ContractNumber);
+            return FindContract(contarct.ContractNumber) != null;
         }
 
         public Contract FindContract(int contractNumber)
         {
             foreach (Contract contract in DataSource.ContractList)
-            {
-                if (contract.ContractNumber == contractNumber)
-                    return contract;
-            }
+                if (contract.ContractNumber == contractNumber)  return contract;
             return null;
         }
 
+        // Lists
         public List<Nanny> NannyList()
         {
             return DataSource.NannyList;

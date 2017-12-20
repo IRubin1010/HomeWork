@@ -15,9 +15,17 @@ namespace BE
         public int AgeInMonth { get; }
         public bool IsSpecialNeeds { get; }
         public string SpecialNeeds { get; }
+        public bool HaveNanny { get; }
         public override string ToString()
         {
             return base.ToString();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Child child = obj as Child;
+            if (child == null) return false;
+            return this.ID == child.ID;
         }
 
         public Child(int id) { ID = id; }
