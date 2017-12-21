@@ -304,6 +304,7 @@ namespace BL
 
         public List<Nanny> PartialMatch(Mother mother, int Km)
         {
+            PropertiesMatch(mother, Km);
             List<Nanny> nannyList = NannyList().OrderBy(nanny => nanny.SumValue).ToList<Nanny>();
             nannyList.RemoveRange(0,nannyList.Count - 5);
             return nannyList;
