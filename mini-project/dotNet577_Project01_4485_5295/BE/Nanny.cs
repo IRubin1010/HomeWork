@@ -29,6 +29,15 @@ namespace BE
         public TimeSpan[,] WorkHours = new TimeSpan[2, 6];
         public bool IsValidVacationDays { get; }
         public string Recommendations { get; }
+
+        public int HoursValue { get; set; }
+        public int DaysValue { get; set; }
+        public int SeniorityValue { get; set; }
+        public int DistanceValue { get; set; }
+        public int ElevatorValue { get; set; }
+        public int FloorValue { get; set; }
+        public int SumValue { get; set; }
+
         public override string ToString()
         {
             return base.ToString();

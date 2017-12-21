@@ -20,6 +20,7 @@ namespace BE
         public bool[] NeedNanny;
         public TimeSpan[,] NeedNannyHours = new TimeSpan[2, 6];
         public string Remarks { get; }
+
         public override string ToString()
         {
             return base.ToString();

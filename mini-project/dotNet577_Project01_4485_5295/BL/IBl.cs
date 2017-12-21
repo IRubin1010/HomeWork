@@ -48,10 +48,13 @@ namespace BL
 
         int Distance(string addressA, string addressB);
         List<Nanny> PotentialMatch(Mother mother);
-        bool PotentialMatch(Nanny nanny, Mother mother);
+        bool PotentialHoursMatch(Nanny nanny, Mother mother);
+        bool PotentialDaysMatch(Nanny nanny, Mother mother);
         List<Nanny> MotherConditions(Mother mother);
-        List<Nanny> NannysInKM(string address = null);
-        //List<Nanny> PartialMatch(Mother mother);
+        bool IsNannyInKM(Mother mother, Nanny nanny, int Km);
+        List<Nanny> NannysInKM(Mother mother, int Km);
+        void PropertiesMatch(Mother mother, int Km);
+        List<Nanny> PartialMatch(Mother mother, int Km);
         List<Child> ChildrenWithNoNanny();
         List<Nanny> ValidVacationsNannys();
         List<Contract> SpesificsContracts(Func<Contract, bool> contractCondition);
