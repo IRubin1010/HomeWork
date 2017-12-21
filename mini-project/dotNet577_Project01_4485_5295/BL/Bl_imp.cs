@@ -230,22 +230,27 @@ namespace BL
             List<Nanny> nannyList = new List<Nanny>();
             foreach (Nanny nanny in NannyList())
             {
-                if (PotentialMatch(nanny, mother) == true)
+                if (PotentialHoursMatch(nanny, mother) && PotentialDaysMatch(nanny, mother))
                     nannyList.Add(nanny);
             }
             return nannyList;
         }
 
-        public bool PotentialMatch(Nanny nanny, Mother mother)
+        public bool PotentialHoursMatch(Nanny nanny, Mother mother)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0, i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1, i])
+                    return false;
+            }
+            return true;
+        }
+
+        public bool PotentialDaysMatch(Nanny nanny, Mother mother)
         {
             for (int i = 0; i < nanny.IsWork.Length; i++)
             {
                 if (nanny.IsWork[i] == false && mother.NeedNanny[i] == true)
-                    return false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0, i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1, i])
                     return false;
             }
             return true;
@@ -256,8 +261,8 @@ namespace BL
             List<Nanny> nannyList = PotentialMatch(mother);
             foreach (Nanny nanny in nannyList)
             {
-                if ((mother.WantElevator==true && nanny.Elevator==false) || (mother.MinSeniority<nanny.Seniority) || 
-                    (mother.MaxFloor<nanny.Floor))
+                if ((mother.WantElevator == true && nanny.Elevator == false) || (mother.MinSeniority > nanny.Seniority) ||
+                    (mother.MaxFloor < nanny.Floor))
                 {
                     nannyList.Remove(nanny);
                 }
@@ -265,20 +270,44 @@ namespace BL
             return nannyList;
         }
 
+        public bool IsNannyInKM(Mother mother, Nanny nanny, int Km)
+        {
+            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny : mother.Address;
+            if (Distance(address, nanny.Address) > Km)
+                return false;
+            return true;
+        }
+
         public List<Nanny> NannysInKM(Mother mother, int Km)
         {
             List<Nanny> nannyList = MotherConditions(mother);
-            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny: mother.Address;
             foreach (Nanny nanny in nannyList)
-                if (Distance(address, nanny.Address) > Km)
+                if (IsNannyInKM(mother, nanny, Km) == false)
                     nannyList.Remove(nanny);
             return nannyList;
         }
 
-        //public List<Nanny> PartialMatch(Mother mother)
-        //{
-        //    List<Nanny> nannyList = new List<Nanny>();
-        //}
+        public void PropertiesMatch(Mother mother, int Km)
+        {
+            foreach (Nanny nanny in NannyList())
+            {
+                nanny.HoursValue = PotentialHoursMatch(nanny, mother) == true ? 6 : 0;
+                nanny.DaysValue = PotentialDaysMatch(nanny, mother) == true ? 5 : 0;
+                nanny.SeniorityValue = mother.MinSeniority < nanny.Seniority ? 4 : 0;
+                nanny.DistanceValue = IsNannyInKM(mother, nanny, Km) == true ? 3 : 0;
+                nanny.ElevatorValue = !(mother.WantElevator == true && nanny.Elevator == false) ? 2 : 0;
+                nanny.FloorValue = mother.MaxFloor < nanny.Floor ? 1 : 0;
+                nanny.SumValue = nanny.HoursValue + nanny.DaysValue + nanny.SeniorityValue +
+                    nanny.DistanceValue + nanny.ElevatorValue + nanny.FloorValue;
+            }
+        }
+
+        public List<Nanny> PartialMatch(Mother mother, int Km)
+        {
+            List<Nanny> nannyList = NannyList().OrderBy(nanny => nanny.SumValue).ToList<Nanny>();
+            nannyList.RemoveRange(0,nannyList.Count - 5);
+            return nannyList;
+        }
 
         public List<Child> ChildrenWithNoNanny()
         {
