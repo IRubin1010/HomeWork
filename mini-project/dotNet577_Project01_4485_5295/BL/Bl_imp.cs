@@ -12,21 +12,34 @@ using GoogleMapsApi.Entities.Directions.Response;
 
 namespace BL
 {
-    public class Bl_imp : IBl
+    class Bl_imp : IBL
     {
-        Dal_imp dal = new Dal_imp();
+        IDAL dal;
+
+        public Bl_imp()
+        {
+            dal = FactoryDAL.GetIDAL();
+        }
 
         // Nanny
-        public bool AddNanny(Nanny nanny)
+        public void AddNanny(Nanny nanny)
         {
             if (nanny.NannyAge < 18)
-                return false;
-            return dal.AddNanny(nanny);
+                throw new BLException(nanny.FullName() + " age is under 18", "add nanny");
+            try
+            {
+                dal.AddNanny(nanny.Clone());
+            }
+            catch (DALException ex)
+            {
+                // CHECK IF CAN ONLY THROW
+                throw;/*new BLException(ex.Message, ex.sender);*/
+            }
         }
 
         public void DeleteNanny(Nanny nanny)
         {
-            dal.DeleteNanny(nanny);
+            dal.DeleteNanny(nanny.Clone());
         }
 
         public void DeleteNanny(int id)
@@ -34,35 +47,44 @@ namespace BL
             dal.DeleteNanny(id);
         }
 
-        public void UpdateNanny(int id)
-        {
-            dal.UpdateNanny(id);
-        }
-
         public void UpdateNanny(Nanny nanny)
         {
-            dal.UpdateNanny(nanny);
+            try
+            {
+                dal.UpdateNanny(nanny.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public bool FindNanny(Nanny nanny)
         {
-            return dal.FindNanny(nanny);
+            return dal.FindNanny(nanny.Clone());
         }
 
         public Nanny FindNanny(int id)
         {
-            return dal.FindNanny(id);
+            return dal.FindNanny(id).Clone();
         }
 
         // Mother
-        public bool AddMother(Mother mother)
+        public void AddMother(Mother mother)
         {
-            return dal.AddMother(mother);
+            try
+            {
+                dal.AddMother(mother.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public void DeleteMother(Mother mother)
         {
-            dal.DeleteMother(mother);
+            dal.DeleteMother(mother.Clone());
         }
 
         public void DeleteMother(int id)
@@ -70,35 +92,44 @@ namespace BL
             dal.DeleteMother(id);
         }
 
-        public void UpdateMother(int id)
-        {
-            dal.UpdateMother(id);
-        }
-
         public void UpdateMother(Mother mother)
         {
-            dal.UpdateMother(mother);
+            try
+            {
+                dal.UpdateMother(mother.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public bool FindMother(Mother mother)
         {
-            return dal.FindMother(mother);
+            return dal.FindMother(mother.Clone());
         }
 
         public Mother FindMother(int id)
         {
-            return dal.FindMother(id);
+            return dal.FindMother(id).Clone();
         }
 
         // Child
-        public bool AddChild(Child child)
+        public void AddChild(Child child)
         {
-            return dal.AddChild(child);
+            try
+            {
+                dal.AddChild(child.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public void DeleteChild(Child child)
         {
-            dal.DeleteChild(child);
+            dal.DeleteChild(child.Clone());
         }
 
         public void DeleteChild(int id)
@@ -106,40 +137,42 @@ namespace BL
             dal.DeleteChild(id);
         }
 
-        public void UpdateChild(int id)
+        public void UpdateChild(Child child)
         {
-            dal.UpdateChild(id);
-        }
-
-        public void UPdateChild(Child child)
-        {
-            dal.UpdateChild(child);
+            try
+            {
+                dal.UpdateChild(child.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public bool FindChild(Child child)
         {
-            return dal.FindChild(child);
+            return dal.FindChild(child.Clone());
         }
 
         public Child FindChild(int id)
         {
-            return dal.FindChild(id);
+            return dal.FindChild(id).Clone();
         }
 
         // Contracts
-        public bool AddContract(Contract contract)
+        public void AddContract(Contract contract)
         {
             Mother mother = FindMother(contract.MotherID);
             Nanny nanny = FindNanny(contract.NannyID);
             Child child = FindChild(contract.ChildID);
             if (mother == null || nanny == null || child == null)
-                return false;
+                throw new BLException(mother.FullName() + " or " + nanny.FullName() + " or " + child.FirstName + " dosn't exsist", "add contract");
             if (child.AgeInMonth < 3)
-                return false;
-            if (nanny.Children > nanny.MaxChildren)
-                return false;
+                throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
+            if (nanny.Children >= nanny.MaxChildren)
+                throw new BLException(nanny.FullName() + "already has " + nanny.MaxChildren + " children", "Add contract");
             double discount = 1.0;
-            foreach (Contract item in ContractList())
+            foreach (Contract item in CloneContractList())
             {
                 if (item.MotherID == contract.MotherID && item.NannyID == contract.NannyID)
                     discount -= 0.02;
@@ -156,12 +189,19 @@ namespace BL
                 contract.FinalPayment = hoursPerWeek * discount;
             }
             nanny.Children++;
-            return dal.AddContract(contract);
+            try
+            {
+                dal.AddContract(contract.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public void DeleteContract(Contract contract)
         {
-            dal.DeleteContract(contract);
+            dal.DeleteContract(contract.Clone());
         }
 
         public void DeleteContract(int contractNumber)
@@ -169,45 +209,47 @@ namespace BL
             dal.DeleteContract(contractNumber);
         }
 
-        public void UpdateContract(int contractNumber)
-        {
-            dal.UpdateContract(contractNumber);
-        }
-
         public void UpdateContract(Contract contract)
         {
-            dal.UpdateContract(contract);
+            try
+            {
+                dal.UpdateContract(contract.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
+            }
         }
 
         public bool FindContract(Contract contract)
         {
-            return dal.FindContract(contract);
+            return dal.FindContract(contract.Clone());
         }
 
         public Contract FindContract(int contractNumber)
         {
-            return dal.FindContract(contractNumber);
+            return dal.FindContract(contractNumber).Clone();
         }
 
         // Lists
-        public List<Nanny> NannyList()
+        public List<Nanny> CloneNannyList()
         {
-            return dal.NannyList();
+            return dal.NannyList().Select(nanny => nanny.Clone()).ToList();
         }
 
-        public List<Mother> MotherList()
+        public List<Mother> CloneMotherList()
         {
-            return dal.MotherList();
+            return dal.MotherList().Select(mother => mother.Clone()).ToList();
         }
 
-        public List<Child> ChildList()
+        public List<Child> CloneChildList()
         {
-            return dal.ChildList();
+            return dal.ChildList().Select(child => child.Clone()).ToList();
         }
 
-        public List<Contract> ContractList()
+        public List<Contract> CloneContractList()
         {
-            return dal.ContractList();
+            return dal.ContractList().Select(contract => contract.Clone()).ToList();
         }
 
 
@@ -227,13 +269,8 @@ namespace BL
 
         public List<Nanny> PotentialMatch(Mother mother)
         {
-            List<Nanny> nannyList = new List<Nanny>();
-            foreach (Nanny nanny in NannyList())
-            {
-                if (PotentialHoursMatch(nanny, mother) && PotentialDaysMatch(nanny, mother))
-                    nannyList.Add(nanny);
-            }
-            return nannyList;
+            return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
+                && PotentialDaysMatch(nanny, mother)).ToList();
         }
 
         public bool PotentialHoursMatch(Nanny nanny, Mother mother)
@@ -278,18 +315,15 @@ namespace BL
             return true;
         }
 
-        public List<Nanny> NannysInKM(Mother mother, int Km)
+        public List<Nanny> NannysInKMWithConditions(Mother mother, int Km)
         {
-            List<Nanny> nannyList = MotherConditions(mother);
-            foreach (Nanny nanny in nannyList)
-                if (IsNannyInKM(mother, nanny, Km) == false)
-                    nannyList.Remove(nanny);
-            return nannyList;
+            return MotherConditions(mother).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
         }
 
-        public void PropertiesMatch(Mother mother, int Km)
+        public List<Nanny> PropertiesMatch(Mother mother, int Km)
         {
-            foreach (Nanny nanny in NannyList())
+            List<Nanny> nannyList = CloneNannyList();
+            foreach (Nanny nanny in nannyList)
             {
                 nanny.HoursValue = PotentialHoursMatch(nanny, mother) == true ? 6 : 0;
                 nanny.DaysValue = PotentialDaysMatch(nanny, mother) == true ? 5 : 0;
@@ -300,58 +334,68 @@ namespace BL
                 nanny.SumValue = nanny.HoursValue + nanny.DaysValue + nanny.SeniorityValue +
                     nanny.DistanceValue + nanny.ElevatorValue + nanny.FloorValue;
             }
+            return nannyList;
         }
 
         public List<Nanny> PartialMatch(Mother mother, int Km)
         {
-            PropertiesMatch(mother, Km);
-            List<Nanny> nannyList = NannyList().OrderBy(nanny => nanny.SumValue).ToList<Nanny>();
-            nannyList.RemoveRange(0,nannyList.Count - 5);
-            return nannyList;
+            return PropertiesMatch(mother, Km).OrderByDescending(nanny => nanny.SumValue)
+                .Take(5).ToList();
         }
 
         public List<Child> ChildrenWithNoNanny()
         {
-            List<Child> children = new List<Child>();
-            foreach (Child child in ChildList())
-            {
-                if (child.HaveNanny == false)
-                    children.Add(child);
-            }
-            return children;
+            return CloneChildList().Where(child => child.HaveNanny == false).ToList();
         }
 
         public List<Nanny> ValidVacationsNannys()
         {
-            List<Nanny> nannys = new List<Nanny>();
-            foreach (Nanny nanny in NannyList())
-            {
-                if (nanny.IsValidVacationDays == true)
-                    nannys.Add(nanny);
-            }
-            return nannys;
+            return CloneNannyList().Where(nanny => nanny.IsValidVacationDays == true).ToList();
         }
 
         public List<Contract> SpesificsContracts(Func<Contract, bool> contractCondition)
         {
-            List<Contract> contractsList = new List<Contract>();
-            foreach (Contract contract in ContractList())
-            {
-                if (contractCondition(contract) == true)
-                    contractsList.Add(contract);
-            }
-            return contractsList;
+            return CloneContractList().Where(contract => contractCondition(contract) == true).ToList();
         }
 
         public int NumOfSpesificsContracts(Func<Contract, bool> contractCondition)
         {
-            int numOfContracts = 0;
-            foreach (Contract contract in ContractList())
-            {
-                if (contractCondition(contract))
-                    numOfContracts++;
-            }
-            return numOfContracts;
+            return CloneContractList().Where(contract => contractCondition(contract) == true).ToList().Count;
+        }
+
+        public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool descendig, bool order)
+        {
+            IEnumerable<IGrouping<int, Nanny>> group;
+            if (order)
+                if (descendig)
+                    group = CloneNannyList().OrderByDescending(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MaxAge);
+                else
+                    group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MaxAge);
+            else
+                if (descendig)
+                group = CloneNannyList().OrderByDescending(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MaxAge);
+            else
+                group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MaxAge);
+            return group;
+        }
+
+        public int DistanceBetweenNannyAndMother(Contract contract)
+        {
+            Mother mother = FindMother(contract.MotherID);
+            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny : mother.Address;
+            int distance = Distance(address, FindNanny(contract.NannyID).Address) / 5;
+            if (distance == 0)
+                return 5;
+            return (distance + 1) * 5;
+        }
+        public IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order)
+        {
+            IEnumerable<IGrouping<int, Contract>> group;
+            if (order)
+                group = CloneContractList().OrderBy(contract => contract.ContractNumber).GroupBy(contract => DistanceBetweenNannyAndMother(contract));
+            else
+                group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract));
+            return group;
         }
     }
 }

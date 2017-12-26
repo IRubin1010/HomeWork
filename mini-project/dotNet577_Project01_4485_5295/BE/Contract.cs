@@ -18,8 +18,8 @@ namespace BE
         public int MonthlyFee { get; }
         public bool IsPaymentByHour { get; }
         public double FinalPayment { get; set; }
-        public DateTime BeginTransection { get; }
-        public DateTime EndTransection { get; }
+        public DateTime BeginTransection { get; set; }
+        public DateTime EndTransection { get; set; }
         public override string ToString()
         {
             return base.ToString();
@@ -32,6 +32,12 @@ namespace BE
             return this.ContractNumber == contract.ContractNumber;
         }
 
-        public Contract(int num) { ContractNumber = num; }
+        public Contract Clone()
+        {
+            Contract contract = (Contract)MemberwiseClone();
+            contract.BeginTransection = new DateTime(BeginTransection.Year, BeginTransection.Month, BeginTransection.Day);
+            contract.EndTransection = new DateTime(EndTransection.Year, EndTransection.Month, EndTransection.Day);
+            return contract;
+        }
     }
 }

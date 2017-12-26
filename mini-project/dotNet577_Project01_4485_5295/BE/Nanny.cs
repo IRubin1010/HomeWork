@@ -8,27 +8,27 @@ namespace BE
 {
     public class Nanny
     {
-        public int ID { get; }
-        public string LastName { get; }
-        public string FirstName { get; }
-        public DateTime BirthDate { get; }
-        public int NannyAge { get; }
-        public int PhoneNumber { get; }
-        public string Address { get; }
-        public bool Elevator { get; }
-        public int Floor { get; }
-        public int Seniority { get; }
+        public int ID { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public int NannyAge { get; set; }
+        public int PhoneNumber { get; set; }
+        public string Address { get; set; }
+        public bool Elevator { get; set; }
+        public int Floor { get; set; }
+        public int Seniority { get; set; }
         public int Children { get; set; }
-        public int MaxChildren { get; }
-        public int MinAge { get; }
-        public int MaxAge { get; }
-        public bool IsHourlyFee { get; }
-        public int HourlyFee { get; }
-        public int MonthlyFee { get; }
+        public int MaxChildren { get; set; }
+        public int MinAge { get; set; }
+        public int MaxAge { get; set; }
+        public bool IsHourlyFee { get; set; }
+        public int HourlyFee { get; set; }
+        public int MonthlyFee { get; set; }
         public bool[] IsWork;
         public TimeSpan[,] WorkHours = new TimeSpan[2, 6];
-        public bool IsValidVacationDays { get; }
-        public string Recommendations { get; }
+        public bool IsValidVacationDays { get; set; }
+        public string Recommendations { get; set; }
 
         public int HoursValue { get; set; }
         public int DaysValue { get; set; }
@@ -50,13 +50,21 @@ namespace BE
             return this.ID == nanny.ID;
         }
 
-        public Nanny(int id, int age, string address, bool elevator,int floor)
+        public Nanny Clone()
         {
-            ID = id;
-            NannyAge = age;
-            Address = address;
-            Elevator = elevator;
-            Floor = floor;
+            Nanny nanny = (Nanny)MemberwiseClone();
+            nanny.BirthDate = new DateTime(BirthDate.Year,BirthDate.Month,BirthDate.Day);
+            for (int i = 0; i < 6; i++)
+            {
+                nanny.WorkHours[0, i] = new TimeSpan(WorkHours[0, i].Hours, WorkHours[0, i].Minutes, WorkHours[0, i].Seconds);
+                nanny.WorkHours[1, i] = new TimeSpan(WorkHours[1, i].Hours, WorkHours[1, i].Minutes, WorkHours[1, i].Seconds);
+            }
+            return nanny;
+        }
+
+        public string FullName()
+        {
+            return FirstName + " " + LastName;
         }
     }
 }

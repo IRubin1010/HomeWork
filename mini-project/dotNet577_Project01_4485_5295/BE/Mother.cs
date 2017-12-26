@@ -33,6 +33,20 @@ namespace BE
             return this.ID == mother.ID;
         }
 
-        public Mother(int id) { ID = id; }
+        public Mother Clone()
+        {
+            Mother mother = (Mother)MemberwiseClone();
+            for (int i = 0; i < 6; i++)
+            {
+                mother.NeedNannyHours[0, i] = new TimeSpan(NeedNannyHours[0, i].Hours, NeedNannyHours[0, i].Minutes, NeedNannyHours[0, i].Seconds);
+                mother.NeedNannyHours[1, i] = new TimeSpan(NeedNannyHours[1, i].Hours, NeedNannyHours[1, i].Minutes, NeedNannyHours[1, i].Seconds);
+            }
+            return mother;
+        }
+
+        public string FullName()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

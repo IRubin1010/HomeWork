@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLException.cs" />
     <Compile Include="Bl_imp.cs" />
-    <Compile Include="IBl.cs" />
+    <Compile Include="FactoryBL.cs" />
+    <Compile Include="IBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
