@@ -8,46 +8,62 @@ using DS;
 
 namespace DAL
 {
-    public class Dal_imp : IDal
+    sealed class Dal_imp : IDAL
     {
         public static int ContractNumber = 10000000;
 
+        static Dal_imp() { }
+
+        static readonly IDAL instance = new Dal_imp();
+
+        public static IDAL Instance { get { return instance; } }
+
         // Nanny
-        public bool AddNanny(Nanny nanny)
+        public void AddNanny(Nanny nanny)
         {
             if (!FindNanny(nanny))
             {
-                NannyList().Add(nanny);
-                return true;
+                NannyList().Add(nanny.Clone());
             }
-            return false;
+            else
+                throw new DALException(nanny.FullName() + " already exsist", "Add nanny");
         }
 
         public void DeleteNanny(Nanny nanny)
         {
-            NannyList().Remove(nanny);
+            try
+            {
+                DeleteNanny(nanny.ID);
+            }
+            catch (DALException ex)
+            {
+                throw new DALException(nanny.FullName() + " " + ex.Message, ex.sender);
+            }
         }
 
         public void DeleteNanny(int id)
         {
-            NannyList().Remove(FindNanny(id));
-        }
-
-        public void UpdateNanny(int id)
-        {
-            Nanny nanny = FindNanny(id);
-            if (nanny != null)
-            {
-                //TO DO
-            }
+            if (!NannyList().Remove(FindNanny(id)))
+                throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
         public void UpdateNanny(Nanny nanny)
         {
             if (FindNanny(nanny))
             {
-                //TO DO
+                // CHECK IF CAN'T ADD BUT ALREADY REMOVED
+                DeleteNanny(nanny);
+                try
+                {
+                    AddNanny(nanny);
+                }
+                catch (DALException)
+                {
+                    throw new DALException("can't update " + nanny.FullName() + "details", "update nanny");
+                }
             }
+            else
+                throw new DALException(nanny.FullName() + " dosn't exsist", "update nanny");
         }
 
         public bool FindNanny(Nanny nanny)
@@ -57,51 +73,58 @@ namespace DAL
 
         public Nanny FindNanny(int id)
         {
-            foreach (Nanny item in DataSource.NannyList)
-                if (item.ID == id) return item;
-            return null;
+            List<Nanny> NannyList = CloneNannyList().Where(nanny => nanny.ID == id).ToList();
+            if (NannyList.Count == 0)
+                return null;
+            return NannyList[0];
         }
 
         // Mother
-        public bool AddMother(Mother mother)
+        public void AddMother(Mother mother)
         {
             if (!FindMother(mother))
             {
-                MotherList().Add(mother);
-                return true;
+                MotherList().Add(mother.Clone());
             }
-            return false;
-        }
-
-        public void DeleteMother(int id)
-        {
-            if (FindMother(id) != null)
-                MotherList().Remove(FindMother(id));
+            else
+                throw new DALException(mother.FullName() + " already exsist", "Add mother");
         }
 
         public void DeleteMother(Mother mother)
         {
-            if (FindMother(mother))
-                MotherList().Remove(mother);
+            try
+            {
+                DeleteMother(mother.ID);
+            }
+            catch (DALException ex)
+            {
+                throw new DALException(mother.FullName() + " " + ex.Message, ex.sender);
+            }
         }
 
-        public void UpdateMother(int id)
+        public void DeleteMother(int id)
         {
-            Mother mother = FindMother(id);
-            if (mother != null)
-            {
-                //TO DO
-            }
-
+            if (!MotherList().Remove(FindMother(id)))
+                throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
         public void UpdateMother(Mother mother)
         {
             if (FindMother(mother))
             {
-                //TO DO
+                // CHECK IF CAN'T ADD BUT ALREADY REMOVED
+                DeleteMother(mother);
+                try
+                {
+                    AddMother(mother);
+                }
+                catch (DALException)
+                {
+                    throw new DALException("can't update " + mother.FullName(), "update mother");
+                }
             }
-
+            else
+                throw new DALException(mother.FullName() + " dosn't exsist", "update mother");
         }
 
         public bool FindMother(Mother mother)
@@ -111,49 +134,58 @@ namespace DAL
 
         public Mother FindMother(int id)
         {
-            foreach (Mother item in DataSource.MotherList)
-                if (item.ID == id) return item;
-            return null;
+            List<Mother> MotherList = CloneMotherList().Where(mother => mother.ID == id).ToList();
+            if (MotherList.Count == 0)
+                return null;
+            return MotherList[0];
         }
 
         // Child
-        public bool AddChild(Child child)
+        public void AddChild(Child child)
         {
             if (!FindChild(child))
             {
-                ChildList().Add(child);
-                return true;
+                ChildList().Add(child.Clone());
             }
-            return false;
+            else
+                throw new DALException(child.FirstName + " already exsist", "Add child");
         }
 
         public void DeleteChild(Child child)
         {
-            if (FindChild(child))
-                ChildList().Remove(child);
+            try
+            {
+                DeleteChild(child.ID);
+            }
+            catch (DALException ex)
+            {
+                throw new DALException(child.FirstName + " " + ex.Message, ex.sender);
+            }
         }
 
         public void DeleteChild(int id)
         {
-            if (FindChild(id) != null)
-                ChildList().Remove(FindChild(id));
-        }
-
-        public void UpdateChild(int id)
-        {
-            Child child = FindChild(id);
-            if (child != null)
-            {
-                //TO DO
-            }
+            if (!ChildList().Remove(FindChild(id)))
+                throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
         public void UpdateChild(Child child)
         {
             if (FindChild(child))
             {
-                //TO DO
+                // CHECK IF CAN'T ADD BUT ALREADY REMOVED
+                DeleteChild(child);
+                try
+                {
+                    AddChild(child);
+                }
+                catch (Exception)
+                {
+                    throw new DALException("can't update " + child.FirstName, "update child");
+                }
             }
+            else
+                throw new DALException(child.FirstName + " dosn't exsist", "update child");
         }
 
         public bool FindChild(Child child)
@@ -163,50 +195,64 @@ namespace DAL
 
         public Child FindChild(int id)
         {
-            foreach (Child item in DataSource.ChildList)
-                if (item.ID == id) return item;
-            return null;
+            List<Child> ChildList = CloneChildList().Where(child => child.ID == id).ToList();
+            if (ChildList.Count == 0)
+                return null;
+            return ChildList[0];
         }
 
         // Contract
-        public bool AddContract(Contract contract)
+        public void AddContract(Contract contract)
         {
-            if (FindNanny(contract.NannyID) != null && FindMother(contract.MotherID) != null)
-            {
-                contract.ContractNumber = ContractNumber++;
-                ContractList().Add(contract);
-                return true;
-            }
-            return false;
+            Nanny nanny = FindNanny(contract.NannyID);
+            Mother mother = FindMother(contract.MotherID);
+            if (nanny != null)
+                if (mother != null)
+                    if (FindContract(contract.ContractNumber) == null)
+                    {
+                        contract.ContractNumber = ContractNumber++;
+                        ContractList().Add(contract.Clone());
+                    }
+                    else throw new DALException("this contract number already exsist", "Add contract");
+                else throw new DALException(mother.FullName() + " dosn't exsist", "Add contract");
+            else throw new DALException(nanny.FullName() + " dosn't exsist", "Add contract");
         }
 
         public void DeleteContract(Contract contract)
         {
-            if (FindContract(contract))
-                ContractList().Remove(contract);
+            try
+            {
+                DeleteContract(contract.ContractNumber);
+            }
+            catch (DALException ex)
+            {
+                throw new DALException("contract number: " + contract.ContractNumber + " " + ex.Message, ex.sender);
+            }
         }
 
         public void DeleteContract(int contractNumber)
         {
-            if (FindContract(contractNumber) != null)
-                ContractList().Remove(FindContract(contractNumber));
-        }
-
-        public void UpdateContract(int contractNumber)
-        {
-            Contract contract = FindContract(ContractNumber);
-            if (contract != null)
-            {
-                //TO DO
-            }
+            if (!ContractList().Remove(FindContract(contractNumber)))
+                throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
         public void UpdateContract(Contract contract)
         {
             if (FindContract(contract))
             {
-                //TO DO
+                // CHECK IF CAN'T ADD BUT ALREADY REMOVED
+                DeleteContract(contract);
+                try
+                {
+                    AddContract(contract);
+                }
+                catch (Exception)
+                {
+                    throw new DALException("can't update contract", "update contract");
+                }
             }
+            else
+                throw new DALException("contract number: " + contract.ContractNumber + " dosn't exsist", "update contract");
         }
 
         public bool FindContract(Contract contarct)
@@ -216,12 +262,33 @@ namespace DAL
 
         public Contract FindContract(int contractNumber)
         {
-            foreach (Contract contract in DataSource.ContractList)
-                if (contract.ContractNumber == contractNumber)  return contract;
-            return null;
+            List<Contract> ContractList = CloneContractList().Where(contract => contract.ContractNumber == contractNumber).ToList();
+            if (ContractList.Count == 0)
+                return null;
+            return ContractList[0];
         }
 
         // Lists
+        public List<Nanny> CloneNannyList()
+        {
+            return NannyList().Select(nanny => nanny.Clone()).ToList();
+        }
+
+        public List<Mother> CloneMotherList()
+        {
+            return MotherList().Select(mother => mother.Clone()).ToList();
+        }
+
+        public List<Child> CloneChildList()
+        {
+            return ChildList().Select(child => child.Clone()).ToList();
+        }
+
+        public List<Contract> CloneContractList()
+        {
+            return ContractList().Select(contract => contract.Clone()).ToList();
+        }
+
         public List<Nanny> NannyList()
         {
             return DataSource.NannyList;

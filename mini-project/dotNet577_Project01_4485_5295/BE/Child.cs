@@ -28,6 +28,10 @@ namespace BE
             return this.ID == child.ID;
         }
 
-        public Child(int id) { ID = id; }
+        public Child Clone()
+        {
+            return (Child)MemberwiseClone();
+        }
+
     }
 }
