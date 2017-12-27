@@ -8,14 +8,14 @@ namespace BE
 {
     public class Child
     {
-        public int ID { get; }
-        public int MotherID { get; }
-        public string FirstName { get; }
-        public string BirthDate { get; }
-        public int AgeInMonth { get; }
-        public bool IsSpecialNeeds { get; }
-        public string SpecialNeeds { get; }
-        public bool HaveNanny { get; }
+        public int ID { get; set; }
+        public int MotherID { get; set; }
+        public string FirstName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public int AgeInMonth { get; set; }
+        public bool IsSpecialNeeds { get; set; }
+        public string SpecialNeeds { get; set; }
+        public bool HaveNanny { get; set; }
         public override string ToString()
         {
             return base.ToString();

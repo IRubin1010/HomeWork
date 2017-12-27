@@ -211,6 +211,7 @@ namespace DAL
                     if (FindContract(contract.ContractNumber) == null)
                     {
                         contract.ContractNumber = ContractNumber++;
+                        contract.IsContractSigned = true;
                         ContractList().Add(contract.Clone());
                     }
                     else throw new DALException("this contract number already exsist", "Add contract");

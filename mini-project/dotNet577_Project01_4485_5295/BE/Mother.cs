@@ -8,18 +8,18 @@ namespace BE
 {
     public class Mother
     {
-        public int ID { get; }
-        public string LastName { get; }
-        public string FirstName { get; }
-        public int PhoneNumber { get; }
-        public string Address { get; }
-        public string SearchAreaForNanny { get; }
-        public bool WantElevator { get; }
-        public int MinSeniority { get; }
-        public int MaxFloor { get; }
+        public int ID { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public int PhoneNumber { get; set; }
+        public string Address { get; set; }
+        public string SearchAreaForNanny { get; set; }
+        public bool WantElevator { get; set; }
+        public int MinSeniority { get; set; }
+        public int MaxFloor { get; set; }
         public bool[] NeedNanny;
-        public TimeSpan[,] NeedNannyHours = new TimeSpan[2, 6];
-        public string Remarks { get; }
+        public TimeSpan[,] NeedNannyHours;
+        public string Remarks { get; set; }
 
         public override string ToString()
         {
