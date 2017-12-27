@@ -9,14 +9,14 @@ namespace BE
     public class Contract
     {
         public int ContractNumber { get; set; }
-        public int NannyID { get; }
-        public int ChildID { get; }
-        public int MotherID { get; }
-        public bool IsMeet { get; }
-        public bool ContractSigned { get; }
-        public int HourlyFee { get; }
-        public int MonthlyFee { get; }
-        public bool IsPaymentByHour { get; }
+        public int NannyID { get; set; }
+        public int ChildID { get; set; }
+        public int MotherID { get; set; }
+        public bool IsMeet { get; set; }
+        public bool IsContractSigned { get; set; }
+        public int HourlyFee { get; set; }
+        public int MonthlyFee { get; set; }
+        public bool IsPaymentByHour { get; set; }
         public double FinalPayment { get; set; }
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }

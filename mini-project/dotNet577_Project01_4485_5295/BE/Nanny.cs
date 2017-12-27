@@ -26,7 +26,7 @@ namespace BE
         public int HourlyFee { get; set; }
         public int MonthlyFee { get; set; }
         public bool[] IsWork;
-        public TimeSpan[,] WorkHours = new TimeSpan[2, 6];
+        public TimeSpan[,] WorkHours;
         public bool IsValidVacationDays { get; set; }
         public string Recommendations { get; set; }
 
