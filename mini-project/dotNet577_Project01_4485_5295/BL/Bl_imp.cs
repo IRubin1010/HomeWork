@@ -166,7 +166,7 @@ namespace BL
             Nanny nanny = FindNanny(contract.NannyID);
             Child child = FindChild(contract.ChildID);
             if (mother == null || nanny == null || child == null) //לפצל ל3 ולא להחזיר פונקציה נקודה כי האובקיט שווה לנל אלא להחזיר חוזה נקודה מספר זהות
-                throw new BLException(mother.FullName() + " or " + nanny.FullName() + " or " + child.FirstName + " dosn't exsist", "add contract");
+                throw new BLException(/*mother.FullName() + */" or " +/* nanny.FullName() + */  " or " + /*child.FirstName + */  " dosn't exsist", "add contract");
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
             if (nanny.Children >= nanny.MaxChildren)

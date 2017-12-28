@@ -627,10 +627,10 @@ namespace Pl
             ibl.AddContract(contract1);
             ibl.AddContract(contract2);
             ibl.AddContract(contract3);
-            ibl.AddContract(contract4);
+            //ibl.AddContract(contract4);
             ibl.AddContract(contract5);
             ibl.AddContract(contract6);
-            ibl.AddContract(contract7);
+            //ibl.AddContract(contract7);
         }
 
     }
