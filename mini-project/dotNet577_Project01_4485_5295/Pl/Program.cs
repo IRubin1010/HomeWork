@@ -209,8 +209,8 @@ namespace Pl
                 ID = 305216295,
                 LastName = "shimon",
                 FirstName = "ahron",
-                BirthDate = new DateTime(2001, 4, 2),
-                NannyAge = 17,
+                BirthDate = new DateTime(2000, 4, 2),
+                NannyAge = 18,
                 PhoneNumber = 0543429642,
                 Address = "Beit Ha-Defus St 21, Jerusalem",
                 Elevator = true,
@@ -234,7 +234,7 @@ namespace Pl
             };
             Nanny ariShimon = new Nanny
             {
-                ID = 305625295,
+                ID = 355625295,
                 LastName = "shimon",
                 FirstName = "ari",
                 BirthDate = new DateTime(1991, 3, 22),

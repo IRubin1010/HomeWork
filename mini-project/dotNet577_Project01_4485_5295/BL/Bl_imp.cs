@@ -66,7 +66,7 @@ namespace BL
 
         public Nanny FindNanny(int id)
         {
-            return dal.FindNanny(id).Clone();
+            return dal.FindNanny(id)/*.Clone()*/;
         }
 
         // Mother
@@ -111,7 +111,7 @@ namespace BL
 
         public Mother FindMother(int id)
         {
-            return dal.FindMother(id).Clone();
+            return dal.FindMother(id)/*.Clone()*/;
         }
 
         // Child
@@ -156,7 +156,7 @@ namespace BL
 
         public Child FindChild(int id)
         {
-            return dal.FindChild(id).Clone();
+            return dal.FindChild(id)/*.Clone()*/;
         }
 
         // Contracts
@@ -165,7 +165,7 @@ namespace BL
             Mother mother = FindMother(contract.MotherID);
             Nanny nanny = FindNanny(contract.NannyID);
             Child child = FindChild(contract.ChildID);
-            if (mother == null || nanny == null || child == null)
+            if (mother == null || nanny == null || child == null) //לפצל ל3 ולא להחזיר פונקציה נקודה כי האובקיט שווה לנל אלא להחזיר חוזה נקודה מספר זהות
                 throw new BLException(mother.FullName() + " or " + nanny.FullName() + " or " + child.FirstName + " dosn't exsist", "add contract");
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
@@ -228,7 +228,7 @@ namespace BL
 
         public Contract FindContract(int contractNumber)
         {
-            return dal.FindContract(contractNumber).Clone();
+            return dal.FindContract(contractNumber)/*.Clone()*/;
         }
 
         // Lists
