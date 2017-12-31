@@ -16,9 +16,21 @@ namespace BE
         public bool IsSpecialNeeds { get; set; }
         public string SpecialNeeds { get; set; }
         public bool HaveNanny { get; set; }
+
         public override string ToString()
         {
-            return base.ToString();
+            string needs = "";
+            if (IsSpecialNeeds)
+                needs += "is special needs: " + IsSpecialNeeds + '\n' + '\t' + SpecialNeeds;
+            else
+                needs += "is special needs: " + IsSpecialNeeds;
+            return "ID: " + ID + '\n' +
+                    "mother ID: " + MotherID + '\n' +
+                    "name: " + FirstName + '\n' +
+                    "birth date: " + BirthDate.ToShortDateString() + '\n' +
+                    "age in month: " + AgeInMonth + '\n' +
+                    needs + '\n' +
+                    "have nanny: " + HaveNanny + '\n';
         }
         public override bool Equals(object obj)
         {

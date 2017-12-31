@@ -20,9 +20,21 @@ namespace BE
         public double FinalPayment { get; set; }
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }
+
         public override string ToString()
         {
-            return base.ToString();
+            return "contract number: " + ContractNumber + '\n' +
+                    "nanny ID: " + NannyID + '\n' +
+                    "child ID: " + ChildID + '\n' +
+                    "mother ID: " + MotherID + '\n' +
+                    "is Meet: " + IsMeet + '\n' +
+                    "is contreact signed: " + IsContractSigned + '\n' +
+                    "hourly fee: " + HourlyFee + '\n' +
+                    "monthly fee: " + MonthlyFee + '\n' +
+                    "is payment by hour: " + IsPaymentByHour + '\n' +
+                    "final payment: " + FinalPayment + '\n' +
+                    "begin transection: " + BeginTransection.ToShortDateString() + '\n' +
+                    "end transection: " + EndTransection.ToShortDateString() + '\n';
         }
         public override bool Equals(object obj)
         {
@@ -35,8 +47,6 @@ namespace BE
         public Contract Clone()
         {
             Contract contract = (Contract)MemberwiseClone();
-            contract.BeginTransection = new DateTime(BeginTransection.Year, BeginTransection.Month, BeginTransection.Day);
-            contract.EndTransection = new DateTime(EndTransection.Year, EndTransection.Month, EndTransection.Day);
             return contract;
         }
     }

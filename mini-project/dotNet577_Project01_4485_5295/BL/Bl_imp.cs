@@ -30,21 +30,36 @@ namespace BL
             {
                 dal.AddNanny(nanny.Clone());
             }
-            catch (DALException ex)
+            catch (DALException)
             {
-                // CHECK IF CAN ONLY THROW
-                throw;/*new BLException(ex.Message, ex.sender);*/
+                throw;
             }
         }
 
         public void DeleteNanny(Nanny nanny)
         {
-            dal.DeleteNanny(nanny.Clone());
+            try
+            {
+                dal.DeleteNanny(nanny.Clone());
+            }
+            catch (DALException)
+            {
+
+                throw;
+            }
         }
 
         public void DeleteNanny(int id)
         {
-            dal.DeleteNanny(id);
+            try
+            {
+                dal.DeleteNanny(id);
+            }
+            catch (DALException)
+            {
+
+                throw;
+            }
         }
 
         public void UpdateNanny(Nanny nanny)
@@ -66,7 +81,20 @@ namespace BL
 
         public Nanny FindNanny(int id)
         {
-            return dal.FindNanny(id)/*.Clone()*/;
+            Nanny nanny = dal.FindNanny(id);
+            return nanny == null ? null : nanny.Clone();
+        }
+
+        public void UpdateNannyChildren(Nanny nanny, int num)
+        {
+            try
+            {
+                dal.UpdateNannyChildren(nanny,num);
+            }
+            catch (DALException)
+            {
+                throw;
+            }
         }
 
         // Mother
@@ -111,7 +139,8 @@ namespace BL
 
         public Mother FindMother(int id)
         {
-            return dal.FindMother(id)/*.Clone()*/;
+            Mother mother = dal.FindMother(id);
+            return mother == null ? null : mother.Clone();
         }
 
         // Child
@@ -156,7 +185,20 @@ namespace BL
 
         public Child FindChild(int id)
         {
-            return dal.FindChild(id)/*.Clone()*/;
+            Child child = dal.FindChild(id);
+            return child == null ? null : child.Clone();
+        }
+
+        public void UpdateHaveNanny(Child child, bool change)
+        {
+            try
+            {
+                dal.UpdateHaveNanny(child, change);
+            }
+            catch (DALException)
+            {
+                throw;
+            }
         }
 
         // Contracts
@@ -165,36 +207,29 @@ namespace BL
             Mother mother = FindMother(contract.MotherID);
             Nanny nanny = FindNanny(contract.NannyID);
             Child child = FindChild(contract.ChildID);
-            if (mother == null || nanny == null || child == null) //לפצל ל3 ולא להחזיר פונקציה נקודה כי האובקיט שווה לנל אלא להחזיר חוזה נקודה מספר זהות
-                throw new BLException(/*mother.FullName() + */" or " +/* nanny.FullName() + */  " or " + /*child.FirstName + */  " dosn't exsist", "add contract");
+            if (mother == null)
+                throw new BLException("mother with ID: " + contract.MotherID + " dosn't exsist", "add contract");
+            if (nanny == null)
+                throw new BLException("nanny with ID: " + contract.NannyID + " dosn't exsist", "add contract");
+            if (child == null)
+                throw new BLException("child with ID: " + contract.ChildID + " dosn't exsist", "add contract");
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
             if (nanny.Children >= nanny.MaxChildren)
-                throw new BLException(nanny.FullName() + "already has " + nanny.MaxChildren + " children", "Add contract");
-            double discount = 1.0;
-            foreach (Contract item in CloneContractList())
-            {
-                if (item.MotherID == contract.MotherID && item.NannyID == contract.NannyID)
-                    discount -= 0.02;
-            }
-            if (contract.IsPaymentByHour == false)
-                contract.FinalPayment = nanny.MonthlyFee * discount;
-            else
-            {
-                double hoursPerWeek = 0;
-                for (int i = 0; i < 6; i++)
-                {
-                    hoursPerWeek += mother.NeedNannyHours[1, i].TotalHours - mother.NeedNannyHours[0, i].TotalHours;
-                }
-                contract.FinalPayment = hoursPerWeek * discount;
-            }
-            nanny.Children++;
+                throw new BLException(nanny.FullName() + " already has " + nanny.MaxChildren + " children", "Add contract");
+            CalculatePayment(contract);
             try
             {
+                UpdateNannyChildren(nanny, 1);
+                UpdateHaveNanny(child, true);
                 dal.AddContract(contract.Clone());
             }
             catch (DALException ex)
             {
+                if (ex.sender == "Update Have Nanny")
+                    UpdateNannyChildren(nanny, -1);
+                if(ex.sender == "Add contract")
+                    UpdateNannyChildren(nanny, -1); UpdateHaveNanny(child, false);
                 throw new BLException(ex.Message, ex.sender);
             }
         }
@@ -213,6 +248,7 @@ namespace BL
         {
             try
             {
+                CalculatePayment(contract);
                 dal.UpdateContract(contract.Clone());
             }
             catch (DALException ex)
@@ -228,7 +264,45 @@ namespace BL
 
         public Contract FindContract(int contractNumber)
         {
-            return dal.FindContract(contractNumber)/*.Clone()*/;
+            Contract contract = dal.FindContract(contractNumber);
+            return contract == null ? null : contract.Clone();
+        }
+
+        public void CalculatePayment(Contract contract)
+        {
+            Mother mother = FindMother(contract.MotherID);
+            Nanny nanny = FindNanny(contract.NannyID);
+            Child child = FindChild(contract.ChildID);
+            if (mother == null)
+                throw new BLException("mother with ID: " + contract.MotherID + " dosn't exsist", "add contract");
+            if (nanny == null)
+                throw new BLException("nanny with ID: " + contract.NannyID + " dosn't exsist", "add contract");
+            if (child == null)
+                throw new BLException("child with ID: " + contract.ChildID + " dosn't exsist", "add contract");
+            double discount = 1.0;
+            foreach (Contract item in CloneContractList())
+            {
+                if (item.MotherID == contract.MotherID && item.NannyID == contract.NannyID && item.ContractNumber != contract.ContractNumber)
+                    discount -= 0.02;
+            }
+            if (contract.IsPaymentByHour == false)
+                contract.FinalPayment = contract.MonthlyFee * discount;
+            else
+            {
+                double hoursPerWeek = 0;
+                for (int i = 0; i < 6; i++)
+                {
+                    if (mother.NeedNannyHours[1, i] <= nanny.WorkHours[1, i])
+                        hoursPerWeek += mother.NeedNannyHours[1, i].TotalHours;
+                    else
+                        hoursPerWeek += nanny.WorkHours[1, i].TotalHours;
+                    if (mother.NeedNannyHours[0, i] <= nanny.WorkHours[0, i])
+                        hoursPerWeek -= nanny.WorkHours[0, i].TotalHours;
+                    else
+                        hoursPerWeek -= mother.NeedNannyHours[0, i].TotalHours;
+                }
+                contract.FinalPayment = hoursPerWeek * discount * contract.HourlyFee;
+            }
         }
 
         // Lists

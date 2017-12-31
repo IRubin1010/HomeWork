@@ -16,6 +16,7 @@ namespace DAL
         void UpdateNanny(Nanny nanny);
         bool FindNanny(Nanny nanny);
         Nanny FindNanny(int id);
+        void UpdateNannyChildren(Nanny nanny, int num);
 
         // Mother
         void AddMother(Mother mother);
@@ -32,6 +33,7 @@ namespace DAL
         void UpdateChild(Child child);
         bool FindChild(Child child);
         Child FindChild(int id);
+        void UpdateHaveNanny(Child child, bool change);
 
         // Contract
         void AddContract(Contract contract);
