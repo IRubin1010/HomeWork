@@ -37,14 +37,14 @@ namespace DAL
             }
             catch (DALException ex)
             {
-                throw new DALException(nanny.FullName() + " " + ex.Message, ex.sender);
+                throw new DALException(nanny.FullName() + " dosn't exsist", ex.sender);
             }
         }
 
         public void DeleteNanny(int id)
         {
             if (!NannyList().Remove(FindNanny(id)))
-                throw new DALException("dosn't exsist", "Delete Nanny");
+                throw new DALException("nanny with ID: " + id + " dosn't exsist", "Delete Nanny");
         }
 
         public void UpdateNanny(Nanny nanny)
@@ -73,10 +73,20 @@ namespace DAL
 
         public Nanny FindNanny(int id)
         {
-            List<Nanny> NannyList = CloneNannyList().Where(nanny => nanny.ID == id).ToList();
-            if (NannyList.Count == 0)
-                return null;
-            return NannyList[0];
+            return CloneNannyList().Find(nanny => nanny.ID == id);
+        }
+
+        public void UpdateNannyChildren(Nanny nanny, int num)
+        {
+            if (FindNanny(nanny))
+            {
+                if (num == 1)
+                    NannyList().Find(nan => nan.Equals(nanny)).Children++;
+                else
+                    NannyList().Find(nan => nan.Equals(nanny)).Children--;
+            }
+            else
+                throw new DALException(nanny.FullName() + " dosn't exsist", "AddNannyChildren");
         }
 
         // Mother
@@ -134,10 +144,7 @@ namespace DAL
 
         public Mother FindMother(int id)
         {
-            List<Mother> MotherList = CloneMotherList().Where(mother => mother.ID == id).ToList();
-            if (MotherList.Count == 0)
-                return null;
-            return MotherList[0];
+            return CloneMotherList().Find(moth => moth.ID == id);
         }
 
         // Child
@@ -195,10 +202,16 @@ namespace DAL
 
         public Child FindChild(int id)
         {
-            List<Child> ChildList = CloneChildList().Where(child => child.ID == id).ToList();
-            if (ChildList.Count == 0)
-                return null;
-            return ChildList[0];
+            return CloneChildList().Find(chil => chil.ID == id);
+        }
+
+        public void UpdateHaveNanny(Child child, bool change)
+        {
+            Child Child = ChildList().Find(chil => chil.Equals(child));
+            if (Child != null)
+                Child.HaveNanny = change;
+            else
+                throw new DALException(child.FirstName + " dosn't exsist", "Update Have Nanny");
         }
 
         // Contract
@@ -206,14 +219,18 @@ namespace DAL
         {
             Nanny nanny = FindNanny(contract.NannyID);
             Mother mother = FindMother(contract.MotherID);
+            Child child = FindChild(contract.ChildID);
             if (nanny != null)
                 if (mother != null)
-                    if (FindContract(contract.ContractNumber) == null)
-                    {
-                        contract.ContractNumber = ContractNumber++;
-                        contract.IsContractSigned = true;
-                        ContractList().Add(contract.Clone());
-                    }
+                    if (child != null)
+                        if (FindContract(contract.ContractNumber) == null)
+                        {
+                            if (contract.ContractNumber == 0)
+                                contract.ContractNumber = ContractNumber++;
+                            contract.IsContractSigned = true;
+                            ContractList().Add(contract.Clone());
+                        }
+                        else throw new DALException(child.FirstName + " dosn't exsist", "Add contract");
                     else throw new DALException("this contract number already exsist", "Add contract");
                 else throw new DALException(mother.FullName() + " dosn't exsist", "Add contract");
             else throw new DALException(nanny.FullName() + " dosn't exsist", "Add contract");
@@ -263,10 +280,7 @@ namespace DAL
 
         public Contract FindContract(int contractNumber)
         {
-            List<Contract> ContractList = CloneContractList().Where(contract => contract.ContractNumber == contractNumber).ToList();
-            if (ContractList.Count == 0)
-                return null;
-            return ContractList[0];
+            return CloneContractList().Find(contract => contract.ContractNumber == contractNumber);
         }
 
         // Lists

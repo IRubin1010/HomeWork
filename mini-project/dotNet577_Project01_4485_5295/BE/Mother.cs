@@ -23,7 +23,67 @@ namespace BE
 
         public override string ToString()
         {
-            return base.ToString();
+            string needNannyDaysAndHours = "";
+            for (int i = 0; i < 6; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        needNannyDaysAndHours += "Sunday: ";
+                        if (NeedNanny[i] == true)
+                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                        else
+                            needNannyDaysAndHours += "don't need nanny \n \t";
+                        break;
+                    case 1:
+                        needNannyDaysAndHours += "Monday: ";
+                        if (NeedNanny[i] == true)
+                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                        else
+                            needNannyDaysAndHours += "don't work \n \t";
+                        break;
+                    case 2:
+                        needNannyDaysAndHours += "Tuesday: ";
+                        if (NeedNanny[i] == true)
+                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                        else
+                            needNannyDaysAndHours += "don't work \n \t";
+                        break;
+                    case 3:
+                        needNannyDaysAndHours += "Wednesday: ";
+                        if (NeedNanny[i] == true)
+                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                        else
+                            needNannyDaysAndHours += "don't work \n \t";
+                        break;
+                    case 4:
+                        needNannyDaysAndHours += "Thursday: ";
+                        if (NeedNanny[i] == true)
+                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                        else
+                            needNannyDaysAndHours += "don't work \n \t";
+                        break;
+                    case 5:
+                        needNannyDaysAndHours += "Friday: ";
+                        if (NeedNanny[i] == true)
+                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i];
+                        else
+                            needNannyDaysAndHours += "don't work";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return "ID: " + ID + '\n' +
+                    "name: " + FirstName + " " + LastName + '\n' +
+                    "phon number: 0" + PhoneNumber + '\n' +
+                    "address: " + Address + '\n' +
+                    "search area for nanny: " + SearchAreaForNanny + '\n' +
+                    "want elevator: " + WantElevator + '\n' +
+                    "minimum seniority: " + MinSeniority + '\n' +
+                    "max floor: " + MaxFloor + '\n' +
+                    "day and hours work: \n \t" + needNannyDaysAndHours + '\n' +
+                    "remarks: " + Remarks + '\n';
         }
         public override bool Equals(object obj)
         {
@@ -36,11 +96,7 @@ namespace BE
         public Mother Clone()
         {
             Mother mother = (Mother)MemberwiseClone();
-            for (int i = 0; i < 6; i++)
-            {
-                mother.NeedNannyHours[0, i] = new TimeSpan(NeedNannyHours[0, i].Hours, NeedNannyHours[0, i].Minutes, NeedNannyHours[0, i].Seconds);
-                mother.NeedNannyHours[1, i] = new TimeSpan(NeedNannyHours[1, i].Hours, NeedNannyHours[1, i].Minutes, NeedNannyHours[1, i].Seconds);
-            }
+            mother.NeedNannyHours = (TimeSpan[,])NeedNannyHours.Clone();
             return mother;
         }
 
