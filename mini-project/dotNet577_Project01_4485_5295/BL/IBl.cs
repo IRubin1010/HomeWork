@@ -15,6 +15,7 @@ namespace BL
         void UpdateNanny(Nanny nanny);
         bool FindNanny(Nanny nanny);
         Nanny FindNanny(int id);
+        void UpdateNannyChildren(Nanny nanny, int num);
 
         void AddMother(Mother mother);
         void DeleteMother(Mother mother);
@@ -29,6 +30,7 @@ namespace BL
         void UpdateChild(Child child);
         bool FindChild(Child child);
         Child FindChild(int id);
+        void UpdateHaveNanny(Child child, bool change);
 
         void AddContract(Contract contract);
         void DeleteContract(Contract contract);
@@ -36,6 +38,7 @@ namespace BL
         void UpdateContract(Contract contract);
         bool FindContract(Contract contract);
         Contract FindContract(int contractNumber);
+        void CalculatePayment(Contract contract);
 
         List<Nanny> CloneNannyList();
         List<Mother> CloneMotherList();

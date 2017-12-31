@@ -40,25 +40,89 @@ namespace BE
 
         public override string ToString()
         {
-            return base.ToString();
+            string dayWorkHors = "";
+            for (int i = 0; i < 6; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        dayWorkHors += "Sunday: ";
+                        if (IsWork[i] == true)
+                            dayWorkHors += WorkHours[0, i] + " - " + WorkHours[1, i] + '\n' + '\t';
+                        else
+                            dayWorkHors += "don't work \n \t";
+                        break;
+                    case 1:
+                        dayWorkHors += "Monday: ";
+                        if (IsWork[i] == true)
+                            dayWorkHors += WorkHours[0, i] + " - " + WorkHours[1, i] + '\n' + '\t';
+                        else
+                            dayWorkHors += "don't work \n \t";
+                        break;
+                    case 2:
+                        dayWorkHors += "Tuesday: ";
+                        if (IsWork[i] == true)
+                            dayWorkHors += WorkHours[0, i] + " - " + WorkHours[1, i] + '\n' + '\t';
+                        else
+                            dayWorkHors += "don't work \n \t";
+                        break;
+                    case 3:
+                        dayWorkHors += "Wednesday: ";
+                        if (IsWork[i] == true)
+                            dayWorkHors += WorkHours[0, i] + " - " + WorkHours[1, i] + '\n' + '\t';
+                        else
+                            dayWorkHors += "don't work \n \t";
+                        break;
+                    case 4:
+                        dayWorkHors += "Thursday: ";
+                        if (IsWork[i] == true)
+                            dayWorkHors += WorkHours[0, i] + " - " + WorkHours[1, i] + '\n' + '\t';
+                        else
+                            dayWorkHors += "don't work \n \t";
+                        break;
+                    case 5:
+                        dayWorkHors += "Friday: ";
+                        if (IsWork[i] == true)
+                            dayWorkHors += WorkHours[0, i] + " - " + WorkHours[1, i] + '\n';
+                        else
+                            dayWorkHors += "don't work" + '\n';
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return "ID: " + ID + '\n' +
+                    "name: " + FirstName + " " + LastName + '\n' +
+                    "birth date: " + BirthDate.ToShortDateString() + '\n' +
+                    "age: " + NannyAge + '\n' +
+                    "phon number: 0" + PhoneNumber + '\n' +
+                    "address: " + Address + '\n' +
+                    "elevator: " + Elevator + '\n' +
+                    "floor: " + Floor + '\n' +
+                    "seniority: " + Seniority + '\n' +
+                    "children: " + Children + '\n' +
+                    "max children: " + MaxChildren + '\n' +
+                    "min age: " + MinAge + '\n' +
+                    "max age: " + MaxAge + '\n' +
+                    "is hourly fee: " + IsHourlyFee + '\n' +
+                    "hourly fee: " + HourlyFee + '\n' +
+                    "monthly fee: " + MonthlyFee + '\n' +
+                    "day and hours work: \n \t" + dayWorkHors +
+                    "valid vacation days: " + IsValidVacationDays + '\n' +
+                    "recomendations: " + Recommendations + '\n';    
         }
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
             Nanny nanny = obj as Nanny;
             if (nanny == null) return false;
-            return this.ID == nanny.ID;
+            return ID == nanny.ID;
         }
 
         public Nanny Clone()
         {
             Nanny nanny = (Nanny)MemberwiseClone();
-            nanny.BirthDate = new DateTime(BirthDate.Year,BirthDate.Month,BirthDate.Day);
-            for (int i = 0; i < 6; i++)
-            {
-                nanny.WorkHours[0, i] = new TimeSpan(WorkHours[0, i].Hours, WorkHours[0, i].Minutes, WorkHours[0, i].Seconds);
-                nanny.WorkHours[1, i] = new TimeSpan(WorkHours[1, i].Hours, WorkHours[1, i].Minutes, WorkHours[1, i].Seconds);
-            }
+            nanny.WorkHours = (TimeSpan[,])WorkHours.Clone();
             return nanny;
         }
 
