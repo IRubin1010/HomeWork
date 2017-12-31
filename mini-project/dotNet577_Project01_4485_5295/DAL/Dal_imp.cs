@@ -21,8 +21,11 @@ namespace DAL
 
         /* Nanny functions */
 
-        // add nanny
-        // if find the nanny on the list - this nanny already exsist throw exception
+        /// <summary>
+        /// add nanny
+        /// if find the nanny on the list - this nanny already exsist throw exception
+        /// </summary>
+        /// <param name="nanny">the nanny to add to NannyList</param>
         public void AddNanny(Nanny nanny)
         {
             if (!FindNanny(nanny))
@@ -32,9 +35,11 @@ namespace DAL
             else
                 throw new DALException(nanny.FullName() + " already exsist", "Add nanny");
         }
-
-        // delete nanny
-        // accept nanny and send to DeleteNanny(int id) function nanny's id 
+        /// <summary>
+        /// delete nanny
+        /// accept nanny and send to DeleteNanny(int id) function nanny's id 
+        /// </summary>
+        /// <param name="nanny">the nanny to delete from NannyList</param>
         public void DeleteNanny(Nanny nanny)
         {
             try
@@ -47,17 +52,23 @@ namespace DAL
             }
         }
 
-        // delete nanny
-        // if didn't find to remove, throw exception
+        /// <summary>
+        /// delete nanny
+        /// if didn't find to remove, throw exception
+        /// </summary>
+        /// <param name="id">the Nanny's id to delete from NannyList</param>
         public void DeleteNanny(int id)
         {
             if (!NannyList().Remove(FindNanny(id)))
                 throw new DALException("nanny with ID: " + id + " dosn't exsist", "Delete Nanny");
         }
 
-        // update nanny
-        // accept nanny, delete the old nanny and replace it with the new nanny
-        // if didn't find the nannyto delete, or can't add the new nanny throw exception
+        /// <summary>
+        /// update nanny
+        /// accept nanny, delete the old nanny and replace it with the new nanny
+        /// if didn't find the nanny to delete, or can't add the new nanny throw exception
+        /// </summary>
+        /// <param name="nanny">the new Nanny that replace the old nanny</param>
         public void UpdateNanny(Nanny nanny)
         {
             if (FindNanny(nanny))
@@ -76,26 +87,38 @@ namespace DAL
                 throw new DALException(nanny.FullName() + " dosn't exsist", "update nanny");
         }
 
-        // find nanny
-        // accept nanny and send to FindNanny(int id) function with nanny id 
-        // return true if find, else return false
+        /// <summary>
+        /// find nanny
+        /// accept nanny and send to FindNanny(int id) function with nanny id 
+        /// return true if find, else return false
+        /// </summary>
+        /// <param name="nanny">the nanny that we whant to find</param>
+        /// <returns></returns>
         public bool FindNanny(Nanny nanny)
         {
             return FindNanny(nanny.ID) != null;
         }
 
-        // find nanny
-        // accept nanny id, return nanny if find, else return null
+        /// <summary>
+        /// find nanny
+        /// accept nanny id, return nanny if find, else return null
+        /// </summary>
+        /// <param name="id">the nanny's id that we whant to find</param>
+        /// <returns></returns>
         public Nanny FindNanny(int id)
         {
             return CloneNannyList().Find(nanny => nanny.ID == id);
         }
 
-        // update the numabr of nanny's children
-        // accept nanny and a number
-        // if number = 1, add 1 to nanny's children
-        // else reduce nanny's children by 1
-        // if didn't find the nanny throw exception
+        /// <summary>
+        /// update the numabr of nanny's children
+        /// accept nanny and a number
+        /// if number = 1, add 1 to nanny's children
+        /// else reduce nanny's children by 1
+        /// if didn't find the nanny throw exception
+        /// </summary>
+        /// <param name="nanny">the nanny that we whnt to update her children number</param>
+        /// <param name="num">flag, if num = 1 add 1 else sub 1 </param>
         public void UpdateNannyChildren(Nanny nanny, int num)
         {
             if (FindNanny(nanny))
@@ -113,8 +136,11 @@ namespace DAL
 
         /* mother functions */
 
-        // add mother
-        // if find the mother on the list - this nanny already exsist throw exception
+        /// <summary>
+        /// add mother
+        /// if find the mother on the list - this nanny already exsist throw exception
+        /// </summary>
+        /// <param name="mother">the mother to add to MotherList</param>
         public void AddMother(Mother mother)
         {
             if (!FindMother(mother))
@@ -125,8 +151,11 @@ namespace DAL
                 throw new DALException(mother.FullName() + " already exsist", "Add mother");
         }
 
-        // delete mother
-        // accept mother and send to DeleteMother(int id) function mother's id 
+        /// <summary>
+        /// delete mother
+        /// accept mother and send to DeleteMother(int id) function mother's id 
+        /// </summary>
+        /// <param name="mother">the mother to delete from MotherList</param>
         public void DeleteMother(Mother mother)
         {
             try
@@ -139,17 +168,23 @@ namespace DAL
             }
         }
 
-        // delete mother
-        // if didn't find to remove, throw exception
+        /// <summary>
+        /// delete mother
+        /// if didn't find to remove, throw exception
+        /// </summary>
+        /// <param name="id">the Mother's id to delete from MotherList</param>
         public void DeleteMother(int id)
         {
             if (!MotherList().Remove(FindMother(id)))
                 throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
-        // update mother
-        // accept mother, delete the old mother and replace it with the new mother
-        // if didn't find the mother to delete, or can't add the new mother throw exception
+        /// <summary>
+        /// update mother
+        /// accept mother, delete the old mother and replace it with the new mother
+        /// if didn't find the mother to delete, or can't add the new mother throw exception
+        /// </summary>
+        /// <param name="mother">the new mother that replace the old mother</param>
         public void UpdateMother(Mother mother)
         {
             if (FindMother(mother))
@@ -168,16 +203,24 @@ namespace DAL
                 throw new DALException(mother.FullName() + " dosn't exsist", "update mother");
         }
 
-        // find mother
-        // accept momther and send to FindMother(int id) function with mother id 
-        // return true if find, else return false
+        /// <summary>
+        /// find mother
+        /// accept momther and send to FindMother(int id) function with mother id 
+        /// return true if find, else return false
+        /// </summary>
+        /// <param name="mother">the mother that we whant to find</param>
+        /// <returns></returns
         public bool FindMother(Mother mother)
         {
             return FindMother(mother.ID) != null;
         }
 
-        // find mother
-        // accept mother id, return mother if find, else return null
+        /// <summary>
+        /// find mother
+        /// accept mother id, return mother if find, else return null
+        /// </summary>
+        /// <param name="id">>the mother's id that we whant to find</param>
+        /// <returns></returns>
         public Mother FindMother(int id)
         {
             return CloneMotherList().Find(moth => moth.ID == id);
@@ -185,8 +228,11 @@ namespace DAL
 
         /* Child functions */
 
-        // add child
-        // if find the child on the list - this child already exsist throw exception
+        /// <summary>
+        /// add child
+        /// if find the child on the list - this child already exsist throw exception
+        /// </summary>
+        /// <param name="child">the child to add to ChildList</param>
         public void AddChild(Child child)
         {
             if (!FindChild(child))
@@ -197,8 +243,11 @@ namespace DAL
                 throw new DALException(child.FirstName + " already exsist", "Add child");
         }
 
-        // delete child
-        // accept child and send to DeleteChild(int id) function child's id 
+        /// <summary>
+        /// delete child
+        /// accept child and send to DeleteChild(int id) function child's id 
+        /// </summary>
+        /// <param name="child">the child to delete from ChildList</param>
         public void DeleteChild(Child child)
         {
             try
@@ -211,17 +260,23 @@ namespace DAL
             }
         }
 
-        // delete child
-        // if didn't find to remove, throw exception
+        /// <summary>
+        /// delete child
+        /// if didn't find to remove, throw exception
+        /// </summary>
+        /// <param name="id">the child's id to delete from childList</param>
         public void DeleteChild(int id)
         {
             if (!ChildList().Remove(FindChild(id)))
                 throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
-        // update child
-        // accept child, delete the old child and replace it with the new child
-        // if didn't find the child to delete, or can't add the new child throw exception
+        /// <summary>
+        /// update child
+        /// accept child, delete the old child and replace it with the new child
+        /// if didn't find the child to delete, or can't add the new child throw exception
+        /// </summary>
+        /// <param name="child">the new child that replace the old child</param>
         public void UpdateChild(Child child)
         {
             if (FindChild(child))
@@ -240,25 +295,36 @@ namespace DAL
                 throw new DALException(child.FirstName + " dosn't exsist", "update child");
         }
 
-        // find child
-        // accept child and send to FindChild(int id) function with child id 
-        // return true if find, else return false
+        /// <summary>
+        /// find child
+        /// accept child and send to FindChild(int id) function with child id 
+        /// return true if find, else return false
+        /// </summary>
+        /// <param name="child">the child that we whant to find</param>
+        /// <returns></returns
         public bool FindChild(Child child)
         {
             return FindChild(child.ID) != null;
         }
 
-        // find child
-        // accept child id, return child if find, else return null
+        /// <summary>
+        /// find child
+        /// accept child id, return child if find, else return null
+        /// </summary>
+        /// <param name="id">the child's id that we whant to find</param>
+        /// <returns></returns>
         public Child FindChild(int id)
         {
             return CloneChildList().Find(chil => chil.ID == id);
         }
 
-        // update if the child has nanny
-        // accept child and bool parameter - of what to change
-        // get the child, if find the child change the "have nanny" parameter - according to 'change'
-        //                else throw exception  
+        /// <summary>
+        /// update if the child has nanny
+        /// get the child, if find the child change the "have nanny" parameter - according to 'change'
+        ///                else throw exception  
+        /// </summary>
+        /// <param name="child">the child that we whant to change if he have a nanny</param>
+        /// <param name="change">to what change</param>
         public void UpdateHaveNanny(Child child, bool change)
         {
             Child Child = ChildList().Find(chil => chil.Equals(child));
@@ -357,8 +423,8 @@ namespace DAL
             return CloneContractList().Find(contract => contract.ContractNumber == contractNumber);
         }
 
-        /* list return functions */ 
-        
+        /* list return functions */
+
         // return a list of clone nanny objects
         public List<Nanny> CloneNannyList()
         {
