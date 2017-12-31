@@ -15,13 +15,15 @@ namespace BL
     class Bl_imp : IBL
     {
         IDAL dal;
-
+        // get dal object
         public Bl_imp()
         {
             dal = FactoryDAL.GetIDAL();
         }
+        /* Nanny functions */
 
-        // Nanny
+        // add Nanny
+        // if nany age is under 18 throw exception 
         public void AddNanny(Nanny nanny)
         {
             if (nanny.NannyAge < 18)
@@ -36,6 +38,7 @@ namespace BL
             }
         }
 
+        // delete nanny
         public void DeleteNanny(Nanny nanny)
         {
             try
