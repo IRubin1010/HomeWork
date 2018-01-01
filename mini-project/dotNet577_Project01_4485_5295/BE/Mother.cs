@@ -40,35 +40,35 @@ namespace BE
                         if (NeedNanny[i] == true)
                             needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
                         else
-                            needNannyDaysAndHours += "don't work \n \t";
+                            needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 2:
                         needNannyDaysAndHours += "Tuesday: ";
                         if (NeedNanny[i] == true)
                             needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
                         else
-                            needNannyDaysAndHours += "don't work \n \t";
+                            needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 3:
                         needNannyDaysAndHours += "Wednesday: ";
                         if (NeedNanny[i] == true)
                             needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
                         else
-                            needNannyDaysAndHours += "don't work \n \t";
+                            needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 4:
                         needNannyDaysAndHours += "Thursday: ";
                         if (NeedNanny[i] == true)
                             needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
                         else
-                            needNannyDaysAndHours += "don't work \n \t";
+                            needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 5:
                         needNannyDaysAndHours += "Friday: ";
                         if (NeedNanny[i] == true)
                             needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i];
                         else
-                            needNannyDaysAndHours += "don't work";
+                            needNannyDaysAndHours += "don't need nanny";
                         break;
                     default:
                         break;

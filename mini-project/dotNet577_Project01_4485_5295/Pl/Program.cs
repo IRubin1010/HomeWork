@@ -33,62 +33,95 @@ namespace Pl
             ChildInitialize();
             ContractInitialize();
 
-            Console.WriteLine(contract1);
-            Console.WriteLine(contract6);
-            Console.WriteLine(ibl.FindContract(10000004));
-            Contract con = ibl.FindContract(10000004);
-            con.MonthlyFee = 4000;
-            con.IsPaymentByHour = false;
-            ibl.UpdateContract(con);
-            Console.WriteLine(ibl.FindContract(10000004));
-
-            Console.WriteLine("=========================================");
-            foreach (var item in ibl.CloneNannyList())
-            {
-                if (item.FirstName == "meir")
-                    Console.WriteLine(item);
-                //Console.WriteLine("=========");
-            }
+            //ibl.AddNanny(test);
+            //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
             //ibl.DeleteNanny(meirShimon);
-            meirShimon.BirthDate = new DateTime(2017, 1, 1);
-            meirShimon.WorkHours[0, 0] = new TimeSpan(10, 45, 0);
-            Console.WriteLine("=========================================");
-            foreach (var item in ibl.CloneNannyList())
-            {
-                if (item.FirstName == "meir")
-                    Console.WriteLine(item);
-                //Console.WriteLine("=========");
-            }
+            //Console.WriteLine(ibl.FindNanny(meirShimon));
+            //ibl.DeleteNanny(meirShimon);
+            //Nanny upnanny = ibl.FindNanny(davidShimon.ID);
+            //Console.WriteLine(upnanny);
+            //upnanny.MaxChildren = 5;
+            //upnanny.ID = 123456789;
+            //ibl.UpdateNanny(upnanny);
+            //Console.WriteLine(ibl.FindNanny(davidShimon.ID
+            //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
+            //ibl.UpdateNannyChildren(meirShimon, 0);
+            //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
 
-            List<Child> nonanny = ibl.ChildrenWithNoNanny();
-            foreach (var item in nonanny)
-            {
-                Console.WriteLine(item);
-            }
-            List<Nanny> vacation = ibl.ValidVacationsNannys();
-            foreach (var item in vacation)
-            {
-                Console.WriteLine(item);
-            }
-            //foreach (var item in ibl.CloneMotherList())
+            //ibl.AddMother(MotherTest);
+            //Console.WriteLine(ibl.FindMother(MotherTest));
+            //ibl.DeleteMother(MotherTest);
+            //Console.WriteLine(ibl.FindMother(MotherTest));
+            //ibl.DeleteMother(MotherTest);
+            //Mother upMother = ibl.FindMother(shimshonYeret.ID);
+            //Console.WriteLine(ibl.FindMother(shimshonYeret.ID));
+            //upMother.NeedNanny[2] = false;
+            //upMother.NeedNannyHours[0, 2] = new TimeSpan(12, 0, 0);
+            //ibl.DeleteMother(upMother);
+            //ibl.UpdateMother(upMother);
+            //Console.WriteLine(ibl.FindMother(shimshonYeret.ID));
+
+            //ibl.AddChild(ChildTest);
+            //Console.WriteLine(ibl.FindChild(ChildTest.ID));
+            ////ibl.DeleteChild(ChildTest);
+            ////Console.WriteLine(ibl.FindChild(ChildTest));
+            //Child UpChild = ibl.FindChild(ChildTest.ID);
+            //UpChild.AgeInMonth = 50;
+            ////ibl.DeleteChild(UpChild);
+            //ibl.UpdateChild(UpChild);
+            //Console.WriteLine(ibl.FindChild(ChildTest.ID));
+            //ibl.UpdateHaveNanny(UpChild, true);
+            //Console.WriteLine(ibl.FindChild(ChildTest.ID));
+
+            //ibl.AddContract(TestContract);
+            //Console.WriteLine(TestContract);
+            //Contract Upocontract = ibl.FindContract(10000005);
+            //Upocontract.IsPaymentByHour = true;
+            //Upocontract.HourlyFee = 40;
+            //ibl.UpdateContract(Upocontract);
+            //Console.WriteLine(ibl.FindContract( 10000005));
+            //Console.WriteLine(ibl.FindNanny(305625295));
+            //Console.WriteLine(ibl.FindMother(294335086));
+            //ibl.DeleteContract(10000005);
+            //Console.WriteLine(ibl.FindContract(TestContract)); 
+            //foreach (Contract item in ibl.CloneContractList())
+            //    Console.WriteLine(item);
+            //List<Child> list = ibl.ChildrenWithNoNanny();
+            //foreach (var item in list)
             //{
             //    Console.WriteLine(item);
-            //    Console.WriteLine("=========");
             //}
-            //Console.WriteLine("=========================================");
-            //foreach (var item in ibl.CloneChildList())
+            //Console.WriteLine(shimshonYeret);
+            //List<Nanny> list1 = ibl.PartialMatch(shimshonYeret);
+            //Console.WriteLine(list1.Count);
+            //foreach (var item in list1)
             //{
             //    Console.WriteLine(item);
-            //    Console.WriteLine("=========");
+            //    Console.WriteLine("===");
+            //    Console.WriteLine(item.HoursValue);
+            //    Console.WriteLine(item.DaysValue);
+            //    Console.WriteLine(item.SeniorityValue);
+            //    Console.WriteLine(item.ElevatorValue);
+            //    Console.WriteLine(item.FloorValue);
             //}
-            //Console.WriteLine("=========================================");
-            //foreach (var item in ibl.CloneContractList())
+            //Console.WriteLine("=================================================");
+            //List<Contract> list = ibl.SpesificsContracts(contract => contract.IsPaymentByHour);
+            //foreach (var item in list)
             //{
             //    Console.WriteLine(item);
-            //    Console.WriteLine("=========");
             //}
+            //int i = ibl.NumOfSpesificsContracts(contract => contract.IsPaymentByHour == true);
+            //Console.WriteLine(i);
 
-
+            var test = ibl.GruopNannyByChildAge(true, true);
+            foreach (var item in test)
+            {
+                Console.WriteLine(item.Key);
+                foreach (var g in item)
+                {
+                    Console.WriteLine(g);
+                }
+            }
         }
         void NannyInitialize()
         {
@@ -144,8 +177,8 @@ namespace Pl
             Elevator = true,
             Floor = 0,
             Seniority = 5,
-            Children = 0,
-            MaxChildren = 18,
+            Children = 3,
+            MaxChildren = 10,
             MinAge = 0,
             MaxAge = 6,
             IsHourlyFee = true,
@@ -155,7 +188,7 @@ namespace Pl
             WorkHours = new TimeSpan[2, 6]
            {
                 { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
+                { new TimeSpan(15,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
            },
             IsValidVacationDays = true,
             Recommendations = "",
@@ -207,7 +240,7 @@ namespace Pl
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool[6] { false, true, true, true, true, true },
+            IsWork = new bool[6] { false, false, true, true, true, true },
             WorkHours = new TimeSpan[2, 6]
            {
                 { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) },
@@ -283,7 +316,7 @@ namespace Pl
             Address = "Beit Ha-Defus St 21, Jerusalem",
             Elevator = false,
             Floor = 1,
-            Seniority = 4,
+            Seniority = 1,
             Children = 0,
             MaxChildren = 14,
             MinAge = 0,
@@ -384,9 +417,9 @@ namespace Pl
             IsValidVacationDays = false,
             Recommendations = "",
         };
-        public Nanny chaiShimon = new Nanny
+        public Nanny test = new Nanny
         {
-            ID = 303964290,
+            ID = 305695295,
             LastName = "shimon",
             FirstName = "chai",
             BirthDate = new DateTime(1995, 3, 7),
@@ -546,6 +579,25 @@ namespace Pl
            },
             Remarks = ""
         };
+        public Mother MotherTest = new Mother()
+        {
+            ID = 294337686,
+            LastName = "yeret",
+            FirstName = "hilel",
+            PhoneNumber = 0504395188,
+            Address = "Beit Ha-Defus St 21, Jerusalem",
+            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            WantElevator = false,
+            MinSeniority = 3,
+            MaxFloor = 5,
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2, 6]
+   {
+                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
+   },
+            Remarks = ""
+        };
 
 
 
@@ -618,6 +670,17 @@ namespace Pl
         public Child moti = new Child()
         {
             ID = 594028499,
+            MotherID = 294335086,
+            FirstName = "moti",
+            BirthDate = new DateTime(2017, 2, 2),
+            AgeInMonth = 10,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+        public Child ChildTest = new Child()
+        {
+            ID = 594028789,
             MotherID = 294335086,
             FirstName = "moti",
             BirthDate = new DateTime(2017, 2, 2),
@@ -710,6 +773,19 @@ namespace Pl
             NannyID = 305916295,
             ChildID = 594028499,
             MotherID = 294335086,
+            IsMeet = true,
+            IsContractSigned = false,
+            HourlyFee = 42,
+            MonthlyFee = 2500,
+            IsPaymentByHour = false,
+            BeginTransection = new DateTime(2018, 1, 1),
+            EndTransection = new DateTime(2018, 8, 1)
+        };
+        public Contract TestContract = new Contract()
+        {
+            NannyID = 305625295,
+            ChildID = 594028499,
+            MotherID = 294839286,
             IsMeet = true,
             IsContractSigned = false,
             HourlyFee = 42,
