@@ -35,6 +35,7 @@ namespace DAL
             else
                 throw new DALException(nanny.FullName() + " already exsist", "Add nanny");
         }
+
         /// <summary>
         /// delete nanny
         /// accept nanny and send to DeleteNanny(int id) function nanny's id 
@@ -56,7 +57,7 @@ namespace DAL
         /// delete nanny
         /// if didn't find to remove, throw exception
         /// </summary>
-        /// <param name="id">the Nanny's id to delete from NannyList</param>
+        /// <param name="id">nanny's id of the nanny that want to deletee from NannyList</param>
         public void DeleteNanny(int id)
         {
             if (!NannyList().Remove(FindNanny(id)))
@@ -107,7 +108,12 @@ namespace DAL
         /// <returns></returns>
         public Nanny FindNanny(int id)
         {
-            return CloneNannyList().Find(nanny => nanny.ID == id);
+            List<Nanny> list = (from nanny in CloneNannyList()
+                                where nanny.ID == id
+                                select nanny).ToList();
+            if (list.Count() == 0) return null;
+            return list[0];
+            //return CloneNannyList().Find(nanny => nanny.ID == id);
         }
 
         /// <summary>
@@ -172,7 +178,7 @@ namespace DAL
         /// delete mother
         /// if didn't find to remove, throw exception
         /// </summary>
-        /// <param name="id">the Mother's id to delete from MotherList</param>
+        /// <param name="id">mother's id of the mother that want to delete from MotherList</param>
         public void DeleteMother(int id)
         {
             if (!MotherList().Remove(FindMother(id)))
@@ -223,7 +229,12 @@ namespace DAL
         /// <returns></returns>
         public Mother FindMother(int id)
         {
-            return CloneMotherList().Find(moth => moth.ID == id);
+            List<Mother> list = (from mother in CloneMotherList()
+                                 where mother.ID == id
+                                 select mother).ToList();
+            if (list.Count() == 0) return null;
+            return list[0];
+            //return CloneMotherList().Find(moth => moth.ID == id);
         }
 
         /* Child functions */
@@ -264,7 +275,7 @@ namespace DAL
         /// delete child
         /// if didn't find to remove, throw exception
         /// </summary>
-        /// <param name="id">the child's id to delete from childList</param>
+        /// <param name="id">child's id of the child that want to delete from childList</param>
         public void DeleteChild(int id)
         {
             if (!ChildList().Remove(FindChild(id)))
@@ -315,7 +326,12 @@ namespace DAL
         /// <returns></returns>
         public Child FindChild(int id)
         {
-            return CloneChildList().Find(chil => chil.ID == id);
+            List<Child> list = (from child in CloneChildList()
+                                where child.ID == id
+                                select child).ToList();
+            if (list.Count() == 0) return null;
+            return list[0];
+            //return CloneChildList().Find(chil => chil.ID == id);
         }
 
         /// <summary>
@@ -336,11 +352,14 @@ namespace DAL
 
         /* contract functions */
 
-        // add contract
-        // accept contract, give the contract a number and add to contract list
-        // check that - nanny, mother and child exsist 
-        // check also that there this contract dosn't already exsist
-        // throw exceptions accordingly
+        /// <summary>
+        /// add contract
+        /// accept contract, give the contract a number and add to contract list
+        /// check that - nanny, mother and child exsist 
+        /// check also that there this contract dosn't already exsist
+        /// throw exceptions accordingly
+        /// </summary>
+        /// <param name="contract">the contract to add to ContractList</param>
         public void AddContract(Contract contract)
         {
             Nanny nanny = FindNanny(contract.NannyID);
@@ -365,8 +384,11 @@ namespace DAL
             else throw new DALException(nanny.FullName() + " dosn't exsist", "Add contract");
         }
 
-        // delete contract
-        // accept contract and send to DeleteContract(int id) function contract's number 
+        /// <summary>
+        /// delete contract
+        /// accept contract and send to DeleteContract(int id) function contract's number 
+        /// </summary>
+        /// <param name="contract">the contract to delete from ContractList</param
         public void DeleteContract(Contract contract)
         {
             try
@@ -379,17 +401,23 @@ namespace DAL
             }
         }
 
-        // delete contract
-        // if didn't find to remove, throw exception
+        /// <summary>
+        /// delete contract
+        /// if didn't find to remove, throw exception
+        /// </summary>
+        /// <param name="contractNumber">Contract's number of the contract that want to delete</param>
         public void DeleteContract(int contractNumber)
         {
             if (!ContractList().Remove(FindContract(contractNumber)))
                 throw new DALException("dosn't exsist", "Delete Nanny");
         }
 
-        // update contract
-        // accept contract, delete the old contract and replace it with the new contract
-        // if didn't find the contract to delete, or can't add the new contract throw exception
+        /// <summary>
+        /// update contract
+        /// accept contract, delete the old contract and replace it with the new contract
+        /// if didn't find the contract to delete, or can't add the new contract throw exception
+        /// </summary>
+        /// <param name="contract">the new child that replace the old child</param>
         public void UpdateContract(Contract contract)
         {
             if (FindContract(contract))
@@ -408,66 +436,99 @@ namespace DAL
                 throw new DALException("contract number: " + contract.ContractNumber + " dosn't exsist", "update contract");
         }
 
-        // find contract
-        // accept contract and send to FindContract(int id) function with contract's nunmber 
-        // return true if find, else return false
+        /// <summary>
+        /// find contract
+        /// accept contract and send to FindContract(int id) function with contract's nunmber 
+        /// return true if find, else return false
+        /// </summary>
+        /// <param name="contarct">the contract that we whant to find</param>
+        /// <returns></returns>
         public bool FindContract(Contract contarct)
         {
             return FindContract(contarct.ContractNumber) != null;
         }
 
-        // find contract
-        // accept contract id, return contract if find, else return null
+        /// <summary>
+        /// find contract
+        /// accept contract id, return contract if find, else return null
+        /// </summary>
+        /// <param name="contractNumber">the contract's number that we whant to find</param>
+        /// <returns></returns>
         public Contract FindContract(int contractNumber)
         {
+            
             return CloneContractList().Find(contract => contract.ContractNumber == contractNumber);
         }
 
         /* list return functions */
 
-        // return a list of clone nanny objects
+        /// <summary>
+        /// return a list of clone nanny objects
+        /// </summary>
+        /// <returns></returns>
         public List<Nanny> CloneNannyList()
         {
             return NannyList().Select(nanny => nanny.Clone()).ToList();
         }
 
-        // return a list of clone mother objects
+        /// <summary>
+        /// return a list of clone mother objects
+        /// </summary>
+        /// <returns></returns>
         public List<Mother> CloneMotherList()
         {
             return MotherList().Select(mother => mother.Clone()).ToList();
         }
 
-        // return a list of clone child objects
+        /// <summary>
+        /// return a list of clone child objects
+        /// </summary>
+        /// <returns></returns>
         public List<Child> CloneChildList()
         {
             return ChildList().Select(child => child.Clone()).ToList();
         }
 
-        // return a list of clone contract objects
+        /// <summary>
+        /// return a list of clone contract objects
+        /// </summary>
+        /// <returns></returns>
         public List<Contract> CloneContractList()
         {
             return ContractList().Select(contract => contract.Clone()).ToList();
         }
 
-        // return a List of the original nanny objects
+        /// <summary>
+        /// return a List of the original nanny objects
+        /// </summary>
+        /// <returns></returns>
         public List<Nanny> NannyList()
         {
             return DataSource.NannyList;
         }
 
-        // return a List of the original mother objects
+        /// <summary>
+        /// return a List of the original mother objects
+        /// </summary>
+        /// <returns></returns>
         public List<Mother> MotherList()
         {
             return DataSource.MotherList;
         }
 
-        // return a List of the original child objects
+        /// <summary>
+        /// return a List of the original child objects
+        /// </summary>
+        /// <returns></returns>
         public List<Child> ChildList()
         {
             return DataSource.ChildList;
         }
 
-        // return a List of the original contract objects
+        /// <summary>
+        /// return a List of the original contract objects
+        /// </summary>
+        /// <returns></returns>
         public List<Contract> ContractList()
         {
             return DataSource.ContractList;
