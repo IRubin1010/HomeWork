@@ -111,9 +111,8 @@ namespace DAL
             List<Nanny> list = (from nanny in CloneNannyList()
                                 where nanny.ID == id
                                 select nanny).ToList();
-            if (list.Count() == 0) return null;
+            if (list.Count == 0) return null;
             return list[0];
-            //return CloneNannyList().Find(nanny => nanny.ID == id);
         }
 
         /// <summary>
@@ -215,7 +214,7 @@ namespace DAL
         /// return true if find, else return false
         /// </summary>
         /// <param name="mother">the mother that we whant to find</param>
-        /// <returns></returns
+        /// <returns></returns>
         public bool FindMother(Mother mother)
         {
             return FindMother(mother.ID) != null;
@@ -232,9 +231,8 @@ namespace DAL
             List<Mother> list = (from mother in CloneMotherList()
                                  where mother.ID == id
                                  select mother).ToList();
-            if (list.Count() == 0) return null;
+            if (list.Count == 0) return null;
             return list[0];
-            //return CloneMotherList().Find(moth => moth.ID == id);
         }
 
         /* Child functions */
@@ -329,9 +327,8 @@ namespace DAL
             List<Child> list = (from child in CloneChildList()
                                 where child.ID == id
                                 select child).ToList();
-            if (list.Count() == 0) return null;
+            if (list.Count == 0) return null;
             return list[0];
-            //return CloneChildList().Find(chil => chil.ID == id);
         }
 
         /// <summary>
@@ -456,8 +453,11 @@ namespace DAL
         /// <returns></returns>
         public Contract FindContract(int contractNumber)
         {
-            
-            return CloneContractList().Find(contract => contract.ContractNumber == contractNumber);
+            List<Contract> list = (from contract in CloneContractList()
+                                where contract.ContractNumber == contractNumber
+                                select contract).ToList();
+            if (list.Count == 0) return null;
+            return list[0];
         }
 
         /* list return functions */

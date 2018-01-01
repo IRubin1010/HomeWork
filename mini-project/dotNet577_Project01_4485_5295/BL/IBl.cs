@@ -53,7 +53,7 @@ namespace BL
         bool IsNannyInKM(Mother mother, Nanny nanny, int Km);
         List<Nanny> NannysInKMWithConditions(Mother mother, int Km);
         List<Nanny> PropertiesMatch(Mother mother, int Km);
-        List<Nanny> PartialMatch(Mother mother, int Km);
+        List<Nanny> PartialMatch(Mother mother/*, int Km*/);
         List<Child> ChildrenWithNoNanny();
         List<Nanny> ValidVacationsNannys();
         List<Contract> SpesificsContracts(Func<Contract, bool> contractCondition);

@@ -273,6 +273,8 @@ namespace BL
             // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
+            if(child.HaveNanny==true)
+                throw new BLException(child.FirstName + " already has a nanny ", "add contrsct");
             // if nanny has more then his max childre throw exception
             if (nanny.Children >= nanny.MaxChildren)
                 throw new BLException(nanny.FullName() + " already has " + nanny.MaxChildren + " children", "Add contract");
@@ -443,6 +445,7 @@ namespace BL
             return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
                 && PotentialDaysMatch(nanny, mother)).ToList();
         }
+        
 
         public bool PotentialHoursMatch(Nanny nanny, Mother mother)
         {
@@ -467,7 +470,7 @@ namespace BL
         public List<Nanny> MotherConditions(Mother mother)
         {
             List<Nanny> nannyList = PotentialMatch(mother);
-            foreach (Nanny nanny in nannyList)
+            foreach (Nanny nanny in nannyList.Reverse<Nanny>())
             {
                 if ((mother.WantElevator == true && nanny.Elevator == false) || (mother.MinSeniority > nanny.Seniority) ||
                     (mother.MaxFloor < nanny.Floor))
@@ -498,19 +501,19 @@ namespace BL
             {
                 nanny.HoursValue = PotentialHoursMatch(nanny, mother) == true ? 6 : 0;
                 nanny.DaysValue = PotentialDaysMatch(nanny, mother) == true ? 5 : 0;
-                nanny.SeniorityValue = mother.MinSeniority < nanny.Seniority ? 4 : 0;
-                nanny.DistanceValue = IsNannyInKM(mother, nanny, Km) == true ? 3 : 0;
+                nanny.SeniorityValue = mother.MinSeniority <= nanny.Seniority ? 4 : 0;
+               // nanny.DistanceValue = IsNannyInKM(mother, nanny, Km) == true ? 3 : 0;
                 nanny.ElevatorValue = !(mother.WantElevator == true && nanny.Elevator == false) ? 2 : 0;
-                nanny.FloorValue = mother.MaxFloor < nanny.Floor ? 1 : 0;
+                nanny.FloorValue = mother.MaxFloor >= nanny.Floor ? 1 : 0;
                 nanny.SumValue = nanny.HoursValue + nanny.DaysValue + nanny.SeniorityValue +
                     nanny.DistanceValue + nanny.ElevatorValue + nanny.FloorValue;
             }
             return nannyList;
         }
 
-        public List<Nanny> PartialMatch(Mother mother, int Km)
+        public List<Nanny> PartialMatch(Mother mother/*, int Km*/)
         {
-            return PropertiesMatch(mother, Km).OrderByDescending(nanny => nanny.SumValue)
+            return PropertiesMatch(mother, 5).OrderByDescending(nanny => nanny.SumValue)
                 .Take(5).ToList();
         }
 
