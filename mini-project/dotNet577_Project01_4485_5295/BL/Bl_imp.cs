@@ -20,10 +20,12 @@ namespace BL
         {
             dal = FactoryDAL.GetIDAL();
         }
+
         /* Nanny functions */
 
         // add Nanny
         // if nany age is under 18 throw exception 
+        // cal dal.addNanny 
         public void AddNanny(Nanny nanny)
         {
             if (nanny.NannyAge < 18)
@@ -39,6 +41,7 @@ namespace BL
         }
 
         // delete nanny
+        // accept nanny and cal dal.DeleteNanny(Nanny nanny)
         public void DeleteNanny(Nanny nanny)
         {
             try
@@ -52,6 +55,8 @@ namespace BL
             }
         }
 
+        // delete nanny
+        // accept id and cal dal.DeleteNanny(int id)
         public void DeleteNanny(int id)
         {
             try
@@ -65,6 +70,8 @@ namespace BL
             }
         }
 
+        // update nanny
+        // accept nanny and cal dal.UpdateNanny 
         public void UpdateNanny(Nanny nanny)
         {
             try
@@ -77,17 +84,25 @@ namespace BL
             }
         }
 
+        // find nanny
+        // accept nanny and cal dal.FindNanny(Nanny nanny)
+        // retrun true if find, else return false
         public bool FindNanny(Nanny nanny)
         {
             return dal.FindNanny(nanny.Clone());
         }
 
+        // find nanny
+        // accept nanny and cal dal.FindNanny(int id)
+        // retrun nanny if find, else return null
         public Nanny FindNanny(int id)
         {
             Nanny nanny = dal.FindNanny(id);
             return nanny == null ? null : nanny.Clone();
         }
 
+        // update the numabr of nanny's children
+        // cal dal.UpdateNannyChildren to update
         public void UpdateNannyChildren(Nanny nanny, int num)
         {
             try
@@ -100,7 +115,10 @@ namespace BL
             }
         }
 
-        // Mother
+        /* mother functions */
+
+        // add mother
+        // call dal.addmother
         public void AddMother(Mother mother)
         {
             try
@@ -113,16 +131,22 @@ namespace BL
             }
         }
 
+        // delete mother
+        // accept mother and cal dal.DeleteMother(Mother mother)
         public void DeleteMother(Mother mother)
         {
             dal.DeleteMother(mother.Clone());
         }
 
+        // delete mother
+        // accept id and cal dal.DeleteMother(int id)
         public void DeleteMother(int id)
         {
             dal.DeleteMother(id);
         }
 
+        // update mother
+        // accept mother and cal dal.UpdateMother
         public void UpdateMother(Mother mother)
         {
             try
@@ -135,18 +159,27 @@ namespace BL
             }
         }
 
+        // find mother
+        // accept mother and cal dal.FindMother(Mother mother)
+        // retrun true if find, else return false
         public bool FindMother(Mother mother)
         {
             return dal.FindMother(mother.Clone());
         }
 
+        // find mother
+        // accept mother and cal dal.FindMother(int id)
+        // retrun mother if find, else return null
         public Mother FindMother(int id)
         {
             Mother mother = dal.FindMother(id);
             return mother == null ? null : mother.Clone();
         }
 
-        // Child
+        /* child functions */
+
+        // add Child
+        // call dal.AddChild
         public void AddChild(Child child)
         {
             try
@@ -159,16 +192,22 @@ namespace BL
             }
         }
 
+        // delete child
+        // accept child and cal dal.DeleteMother(Child child)
         public void DeleteChild(Child child)
         {
             dal.DeleteChild(child.Clone());
         }
 
+        // delete child
+        // accept id and cal dal.DeleteChild(int id)
         public void DeleteChild(int id)
         {
             dal.DeleteChild(id);
         }
 
+        // update child
+        // accept child and cal dal.UpdateChild
         public void UpdateChild(Child child)
         {
             try
@@ -181,17 +220,25 @@ namespace BL
             }
         }
 
+        // find child
+        // accept child and cal dal.FindChild(Child child)
+        // retrun true if find, else return false
         public bool FindChild(Child child)
         {
             return dal.FindChild(child.Clone());
         }
 
+        // find child
+        // accept child and cal dal.FindChild(int id)
+        // retrun child if find, else return null
         public Child FindChild(int id)
         {
             Child child = dal.FindChild(id);
             return child == null ? null : child.Clone();
         }
 
+        // update if the child has nanny
+        // cal dal.UpdateHaveNanny to update
         public void UpdateHaveNanny(Child child, bool change)
         {
             try
@@ -204,7 +251,14 @@ namespace BL
             }
         }
 
-        // Contracts
+        /* contract functions */
+
+        // add contract
+        // accept contract, update number of nanny's children, that the child has nanny,
+        // the final payment and cal dal.AddContract to add the contract
+        // check that - nanny, mother and child exsist 
+        // check also that there this contract dosn't already exsist
+        // throw exceptions accordingly
         public void AddContract(Contract contract)
         {
             Mother mother = FindMother(contract.MotherID);
@@ -216,19 +270,26 @@ namespace BL
                 throw new BLException("nanny with ID: " + contract.NannyID + " dosn't exsist", "add contract");
             if (child == null)
                 throw new BLException("child with ID: " + contract.ChildID + " dosn't exsist", "add contract");
+            // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
+            // if nanny has more then his max childre throw exception
             if (nanny.Children >= nanny.MaxChildren)
                 throw new BLException(nanny.FullName() + " already has " + nanny.MaxChildren + " children", "Add contract");
+            // calculate the final payment
             CalculatePayment(contract);
             try
             {
+                // update number of nanny's children and that the child has nanny
                 UpdateNannyChildren(nanny, 1);
                 UpdateHaveNanny(child, true);
                 dal.AddContract(contract.Clone());
             }
             catch (DALException ex)
             {
+                // if fail at UpdateHaveNanny need to reduce back nanny children,
+                // and if fail at AddContract need to reduce back nanny children
+                // and change back the have nanny feild of child.
                 if (ex.sender == "Update Have Nanny")
                     UpdateNannyChildren(nanny, -1);
                 if(ex.sender == "Add contract")
@@ -237,16 +298,23 @@ namespace BL
             }
         }
 
+        // delete contract
+        // accept contract and cal dal.DeleteContract(Contract contract)
         public void DeleteContract(Contract contract)
         {
             dal.DeleteContract(contract.Clone());
         }
 
+        // delete contract
+        // accept contractNumber and cal dal.DeleteContract(int contractNumber)
         public void DeleteContract(int contractNumber)
         {
             dal.DeleteContract(contractNumber);
         }
 
+        // update contract
+        // accept contract, calculate the final payment again (in case  there
+        // was a change in the payment configuration) and cal dal.UpdateContract
         public void UpdateContract(Contract contract)
         {
             try
@@ -260,19 +328,29 @@ namespace BL
             }
         }
 
+        // find contract
+        // accept contract and cal dal.FindContract(Contract contract)
+        // retrun true if find, else return false
         public bool FindContract(Contract contract)
         {
             return dal.FindContract(contract.Clone());
         }
 
+        // find contract
+        // accept contractNumber and cal dal.FindChild(int contractNumber)
+        // retrun contract if find, else return null
         public Contract FindContract(int contractNumber)
         {
             Contract contract = dal.FindContract(contractNumber);
             return contract == null ? null : contract.Clone();
         }
 
+        // clculate payment
+        // calculate the payment according to the children the mother have 
+        // at this nanny, and according to pay per hour or week
         public void CalculatePayment(Contract contract)
         {
+            // check that the mother, nanny and child exsist
             Mother mother = FindMother(contract.MotherID);
             Nanny nanny = FindNanny(contract.NannyID);
             Child child = FindChild(contract.ChildID);
@@ -285,14 +363,21 @@ namespace BL
             double discount = 1.0;
             foreach (Contract item in CloneContractList())
             {
-                if (item.MotherID == contract.MotherID && item.NannyID == contract.NannyID && item.ContractNumber != contract.ContractNumber)
+                // (check the contract number becouse, update contract calculate the payment 
+                // again and the previous contract still exsist, this couse that the calculation of the 
+                // discount consider at list one child which is in common with the nanny and the mother)
+                if (item.MotherID == contract.MotherID && item.NannyID == contract.NannyID 
+                    && item.ContractNumber != contract.ContractNumber)
                     discount -= 0.02;
             }
+            // if monthly fee
             if (contract.IsPaymentByHour == false)
                 contract.FinalPayment = contract.MonthlyFee * discount;
+            // if hourly fee
             else
             {
                 double hoursPerWeek = 0;
+                // calculate the actual hours 
                 for (int i = 0; i < 6; i++)
                 {
                     if (mother.NeedNannyHours[1, i] <= nanny.WorkHours[1, i])
@@ -308,28 +393,35 @@ namespace BL
             }
         }
 
-        // Lists
+        /* list return functions */
+
+        // return a list of clone nanny objects
         public List<Nanny> CloneNannyList()
         {
-            return dal.NannyList().Select(nanny => nanny.Clone()).ToList();
+            return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
         }
 
+        // return a list of clone mother objects
         public List<Mother> CloneMotherList()
         {
-            return dal.MotherList().Select(mother => mother.Clone()).ToList();
+            return dal.CloneMotherList().Select(mother => mother.Clone()).ToList();
         }
 
+        // return a list of clone child objects
         public List<Child> CloneChildList()
         {
-            return dal.ChildList().Select(child => child.Clone()).ToList();
+            return dal.CloneChildList().Select(child => child.Clone()).ToList();
         }
 
+        // return a list of clone contract objects
         public List<Contract> CloneContractList()
         {
-            return dal.ContractList().Select(contract => contract.Clone()).ToList();
+            return dal.CloneContractList().Select(contract => contract.Clone()).ToList();
         }
 
 
+        // distance
+        // calculate the distance between 2 address
         public int Distance(string addressA, string addressB)
         {
             var drivingDirectionRequest = new DirectionsRequest
@@ -344,6 +436,8 @@ namespace BL
             return leg.Distance.Value;
         }
 
+        // Potential match
+        // return a list of nanny who work at the same days and hours as the mother need
         public List<Nanny> PotentialMatch(Mother mother)
         {
             return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
