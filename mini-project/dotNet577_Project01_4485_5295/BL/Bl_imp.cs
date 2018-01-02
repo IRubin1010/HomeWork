@@ -156,8 +156,7 @@ namespace BL
         public void DeleteMother(int id)
         {
             try
-            {
-
+            { 
                 foreach (Child child in CloneChildList().Reverse<Child>())
                 {
                     if (child.MotherID == id)
@@ -167,7 +166,6 @@ namespace BL
             }
             catch (DALException)
             {
-
                 throw;
             }
         }
@@ -364,18 +362,17 @@ namespace BL
                 {
                     dal.UpdateNannyChildren(dal.FindNanny(contract.NannyID), -1);
                     dal.UpdateHaveNanny(dal.FindChild(contract.ChildID), false);
-                    dal.DeleteContract(contract.Clone());
+                    dal.DeleteContract(contractNumber);
                 }
                 catch (DALException ex)
                 {
                     if (ex.sender == "Update Have Nanny")
                         UpdateNannyChildren(dal.FindNanny(contract.NannyID), 1);
-                    if (ex.sender == "Add contract")
+                    if (ex.sender == "Delete contract")
                         UpdateNannyChildren(dal.FindNanny(contract.NannyID), 1); UpdateHaveNanny(dal.FindChild(contract.ChildID), true);
                     throw;
                 }
             }
-            dal.DeleteContract(contractNumber);
         }
 
         // update contract

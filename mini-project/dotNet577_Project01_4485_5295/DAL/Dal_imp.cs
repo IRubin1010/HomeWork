@@ -187,7 +187,7 @@ namespace DAL
         public void DeleteMother(int id)
         {
             if (!MotherList().Remove(FindMother(id)))
-                throw new DALException("dosn't exsist", "Delete Nanny");
+                throw new DALException("dosn't exsist", "Delete mother");
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace DAL
         public void DeleteChild(int id)
         {
             if (!ChildList().Remove(FindChild(id)))
-                throw new DALException("dosn't exsist", "Delete Nanny");
+                throw new DALException("dosn't exsist", "Delete child");
         }
 
         /// <summary>
@@ -412,7 +412,7 @@ namespace DAL
         public void DeleteContract(int contractNumber)
         {
             if (!ContractList().Remove(FindContract(contractNumber)))
-                throw new DALException("dosn't exsist", "Delete Nanny");
+                throw new DALException("dosn't exsist", "Delete contract");
         }
 
         /// <summary>
