@@ -62,19 +62,13 @@ namespace DAL
         {
             if (!NannyList().Remove(FindNanny(id)))
                 throw new DALException("nanny with ID: " + id + " dosn't exsist", "Delete Nanny");
-            foreach (Contract item in ContractList().Reverse<Contract>())
-            {
-
-            }
-
-
         }
 
         /// <summary>
-        /// update nanny
         /// accept nanny, delete the old nanny and replace it with the new nanny
         /// if didn't find the nanny to delete, or can't add the new nanny throw exception
         /// </summary>
+        /// <remarks></remarks>
         /// <param name="nanny">the new Nanny that replace the old nanny</param>
         public void UpdateNanny(Nanny nanny)
         {

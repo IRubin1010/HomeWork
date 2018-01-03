@@ -156,7 +156,7 @@ namespace BL
         public void DeleteMother(int id)
         {
             try
-            { 
+            {
                 foreach (Child child in CloneChildList().Reverse<Child>())
                 {
                     if (child.MotherID == id)
@@ -599,19 +599,37 @@ namespace BL
             return CloneContractList().Where(contract => contractCondition(contract) == true).ToList().Count;
         }
 
-        public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool descendig, bool order)
+        //public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
+        //{
+        //    IEnumerable<IGrouping<int, Nanny>> group;
+        //    if (order)
+        //        if (orderByMaxAge)
+        //            group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => ((nanny.MaxAge / 6) + 1) * 6);
+        //        else
+        //            group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MinAge);
+        //    else
+        //        if (orderByMaxAge)
+        //        group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => ((nanny.MaxAge / 6) + 1) * 6);
+        //    else
+        //        group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MinAge);
+        //    return group;
+        //}
+
+        public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
         {
             IEnumerable<IGrouping<int, Nanny>> group;
             if (order)
-                if (descendig)
-                    group = CloneNannyList().OrderByDescending(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MaxAge);
-                else
-                    group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MaxAge);
+            {
+                group = from nanny in CloneNannyList()
+                        group nanny by (orderByMaxAge ? nanny.MaxAge : nanny.MinAge) into g
+                        orderby g.Key
+                        select g;
+            }
             else
-                if (descendig)
-                group = CloneNannyList().OrderByDescending(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MaxAge);
-            else
-                group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MaxAge);
+            {
+                group = from nanny in CloneNannyList()
+                        group nanny by (orderByMaxAge ? nanny.MaxAge : nanny.MinAge);
+            }
             return group;
         }
 
