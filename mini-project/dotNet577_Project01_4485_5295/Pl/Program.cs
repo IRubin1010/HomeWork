@@ -113,15 +113,38 @@ namespace Pl
             //int i = ibl.NumOfSpesificsContracts(contract => contract.IsPaymentByHour == true);
             //Console.WriteLine(i);
 
-            var test = ibl.GruopNannyByChildAge(true, true);
-            foreach (var item in test)
+            //var test = ibl.GruopNannyByChildAge(true, false);
+            //foreach (var item in test)
+            //{
+            //    Console.WriteLine(item.Key);
+            //    foreach (var g in item)
+            //    {
+            //        Console.WriteLine(g);
+            //    }
+            //}
+            Console.WriteLine("=================================== \n " + "mother \n");
+            Console.WriteLine(shimshonYeret);
+            Console.WriteLine("===================================\n PotentialMatch \n");
+            List<Nanny> list = ibl.PotentialMatch(shimshonYeret);
+            foreach (var item in list)
             {
-                Console.WriteLine(item.Key);
-                foreach (var g in item)
-                {
-                    Console.WriteLine(g);
-                }
+                Console.WriteLine(item);
             }
+            Console.WriteLine(list.Count);
+            Console.WriteLine("=================================\n MotherConditions \n");
+            List<Nanny> list1 = ibl.MotherConditions(shimshonYeret);
+            foreach (var item in list1)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine(list1.Count);
+            Console.WriteLine("================================= \n NannysInKMWithConditions\n");
+            List<Nanny> list2 = ibl.NannysInKMWithConditions(shimshonYeret,600);
+            foreach (var item in list2)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine(list2.Count);
         }
         void NannyInitialize()
         {
@@ -173,7 +196,7 @@ namespace Pl
             BirthDate = new DateTime(1991, 7, 16),
             NannyAge = 26,
             PhoneNumber = 0543453882,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Ovadya St 6, Bnei Brak",
             Elevator = true,
             Floor = 0,
             Seniority = 5,
@@ -188,7 +211,7 @@ namespace Pl
             WorkHours = new TimeSpan[2, 6]
            {
                 { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(15,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
+                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
            },
             IsValidVacationDays = true,
             Recommendations = "",
@@ -201,7 +224,7 @@ namespace Pl
             BirthDate = new DateTime(1990, 11, 4),
             NannyAge = 27,
             PhoneNumber = 0543395033,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Yerushalayim St 51, Bnei Brak",
             Elevator = true,
             Floor = 2,
             Seniority = 4,
@@ -229,7 +252,7 @@ namespace Pl
             BirthDate = new DateTime(1993, 8, 12),
             NannyAge = 24,
             PhoneNumber = 0543453834,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "hebron St 7, Bnei Brak",
             Elevator = true,
             Floor = 4,
             Seniority = 3,
@@ -257,7 +280,7 @@ namespace Pl
             BirthDate = new DateTime(1994, 12, 9),
             NannyAge = 23,
             PhoneNumber = 0543456372,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "be'eri St 20, Bnei Brak",
             Elevator = false,
             Floor = 2,
             Seniority = 2,
@@ -285,9 +308,9 @@ namespace Pl
             BirthDate = new DateTime(1990, 2, 23),
             NannyAge = 27,
             PhoneNumber = 0543451042,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "chason ish St 43, Bnei Brak",
             Elevator = true,
-            Floor = 3,
+            Floor = 1,
             Seniority = 8,
             Children = 0,
             MaxChildren = 14,
@@ -296,11 +319,11 @@ namespace Pl
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 3750,
-            IsWork = new bool[6] { true, true, true, false, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2, 6]
            {
                 { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(15,0,0), new TimeSpan(15, 0, 0) , new TimeSpan(15, 0, 0) , new TimeSpan(15, 0, 0) , new TimeSpan(15, 0, 0) , new TimeSpan(15, 0, 0) }
+                { new TimeSpan(16,0,0), new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) }
            },
             IsValidVacationDays = true,
             Recommendations = "",
@@ -313,10 +336,10 @@ namespace Pl
             BirthDate = new DateTime(1987, 5, 19),
             NannyAge = 30,
             PhoneNumber = 0543483782,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            Elevator = false,
+            Address = "rabi akiva St 69, Bnei Brak",
+            Elevator = true,
             Floor = 1,
-            Seniority = 1,
+            Seniority = 6,
             Children = 0,
             MaxChildren = 14,
             MinAge = 0,
@@ -341,7 +364,7 @@ namespace Pl
             BirthDate = new DateTime(2000, 4, 2),
             NannyAge = 18,
             PhoneNumber = 0543429642,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Ha-Rav Desler St 69, Bnei Brak",
             Elevator = true,
             Floor = 4,
             Seniority = 0,
@@ -397,7 +420,7 @@ namespace Pl
             BirthDate = new DateTime(1995, 3, 7),
             NannyAge = 22,
             PhoneNumber = 0543473882,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Rabbi Yehuda HaNassi St 27, Bnei Brak",
             Elevator = false,
             Floor = 3,
             Seniority = 4,
@@ -425,7 +448,7 @@ namespace Pl
             BirthDate = new DateTime(1995, 3, 7),
             NannyAge = 22,
             PhoneNumber = 0543473834,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Nissenboim St 11, Bnei Brak",
             Elevator = false,
             Floor = 3,
             Seniority = 4,
@@ -452,7 +475,7 @@ namespace Pl
             LastName = "yeret",
             FirstName = "itzik",
             PhoneNumber = 0504182088,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "ha-rav mohilever St 8, Bnei Brak",
             SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
             WantElevator = true,
             MinSeniority = 3,
@@ -471,8 +494,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "shimshon",
             PhoneNumber = 0504397588,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Rabbi Yehuda HaNassi St 49, Bnei Brak",
+            SearchAreaForNanny = "",
             WantElevator = true,
             MinSeniority = 4,
             MaxFloor = 2,
@@ -490,8 +513,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "moshe",
             PhoneNumber = 0504003828,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "ovadya St 8, Bnei Brak",
+            SearchAreaForNanny = "Hannah Szenes St 8, Bnei Brak",
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 1,
@@ -509,8 +532,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "natan",
             PhoneNumber = 0504129888,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Hannah Szenes St 8, Bnei Brak",
+            SearchAreaForNanny = "Chason Ish St 20, Bnei Brak",
             WantElevator = false,
             MinSeniority = 2,
             MaxFloor = 2,
@@ -528,8 +551,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "simcha",
             PhoneNumber = 0504184920,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "Yerushalayim St 72, Bnei Brak",
+            SearchAreaForNanny = "",
             WantElevator = true,
             MinSeniority = 3,
             MaxFloor = 3,
@@ -547,8 +570,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "yakov",
             PhoneNumber = 0504183827,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "gottlieb St 4, Bnei Brak",
+            SearchAreaForNanny = "",
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 4,
@@ -566,8 +589,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "hilel",
             PhoneNumber = 0504395188,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "sokolow St 34, Bnei Brak",
+            SearchAreaForNanny = "",
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,
@@ -585,8 +608,8 @@ namespace Pl
             LastName = "yeret",
             FirstName = "hilel",
             PhoneNumber = 0504395188,
-            Address = "Beit Ha-Defus St 21, Jerusalem",
-            SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
+            Address = "hafes haim St 14, Bnei Brak",
+            SearchAreaForNanny = "",
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,

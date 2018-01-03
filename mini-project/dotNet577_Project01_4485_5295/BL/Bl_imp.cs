@@ -756,7 +756,7 @@ namespace BL
         /// <param name="Km">the range of Km to check</param>
         public bool IsNannyInKM(Mother mother, Nanny nanny, int Km)
         {
-            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny : mother.Address;
+            string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
             if (Distance(address, nanny.Address) > Km)
                 return false;
             return true;
@@ -847,19 +847,37 @@ namespace BL
             return CloneContractList().Where(contract => contractCondition(contract) == true).ToList().Count;
         }
 
-        public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool descendig, bool order)
+        //public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
+        //{
+        //    IEnumerable<IGrouping<int, Nanny>> group;
+        //    if (order)
+        //        if (orderByMaxAge)
+        //            group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => ((nanny.MaxAge / 6) + 1) * 6);
+        //        else
+        //            group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MinAge);
+        //    else
+        //        if (orderByMaxAge)
+        //        group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => ((nanny.MaxAge / 6) + 1) * 6);
+        //    else
+        //        group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MinAge);
+        //    return group;
+        //}
+
+        public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
         {
             IEnumerable<IGrouping<int, Nanny>> group;
             if (order)
-                if (descendig)
-                    group = CloneNannyList().OrderByDescending(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MaxAge);
-                else
-                    group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MaxAge);
+            {
+                group = from nanny in CloneNannyList()
+                        group nanny by (orderByMaxAge ? nanny.MaxAge : nanny.MinAge) into g
+                        orderby g.Key
+                        select g;
+            }
             else
-                if (descendig)
-                group = CloneNannyList().OrderByDescending(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MaxAge);
-            else
-                group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MaxAge);
+            {
+                group = from nanny in CloneNannyList()
+                        group nanny by (orderByMaxAge ? nanny.MaxAge : nanny.MinAge);
+            }
             return group;
         }
 

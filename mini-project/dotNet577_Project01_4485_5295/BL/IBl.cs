@@ -255,6 +255,6 @@ namespace BL
         int NumOfSpesificsContracts(Func<Contract, bool> contractCondition);
 
         //Gouping
-        IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool descendig, bool ordered = false);
+        IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool ordered = false);
     }
 }
