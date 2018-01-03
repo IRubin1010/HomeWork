@@ -10,6 +10,9 @@ namespace DAL
     [Serializable]
     public class DALException : Exception, ISerializable
     {
+        /// <summary>
+        /// the name of the function that throw the exception
+        /// </summary>
         public readonly string sender;
 
         public DALException() : base() { }
