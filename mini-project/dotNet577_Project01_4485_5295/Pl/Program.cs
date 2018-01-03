@@ -113,38 +113,38 @@ namespace Pl
             //int i = ibl.NumOfSpesificsContracts(contract => contract.IsPaymentByHour == true);
             //Console.WriteLine(i);
 
-            //var test = ibl.GruopNannyByChildAge(true, false);
-            //foreach (var item in test)
+            var test = ibl.GroupContractByDistance(true);
+            foreach (var item in test)
+            {
+                Console.WriteLine(item.Key);
+                foreach (var g in item)
+                {
+                    Console.WriteLine(g);
+                }
+            }
+            //Console.WriteLine("=================================== \n " + "mother \n");
+            //Console.WriteLine(shimshonYeret);
+            //Console.WriteLine("===================================\n PotentialMatch \n");
+            //List<Nanny> list = ibl.PotentialMatch(shimshonYeret);
+            //foreach (var item in list)
             //{
-            //    Console.WriteLine(item.Key);
-            //    foreach (var g in item)
-            //    {
-            //        Console.WriteLine(g);
-            //    }
+            //    Console.WriteLine(item);
             //}
-            Console.WriteLine("=================================== \n " + "mother \n");
-            Console.WriteLine(shimshonYeret);
-            Console.WriteLine("===================================\n PotentialMatch \n");
-            List<Nanny> list = ibl.PotentialMatch(shimshonYeret);
-            foreach (var item in list)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine(list.Count);
-            Console.WriteLine("=================================\n MotherConditions \n");
-            List<Nanny> list1 = ibl.MotherConditions(shimshonYeret);
-            foreach (var item in list1)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine(list1.Count);
-            Console.WriteLine("================================= \n NannysInKMWithConditions\n");
-            List<Nanny> list2 = ibl.NannysInKMWithConditions(shimshonYeret,600);
-            foreach (var item in list2)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine(list2.Count);
+            //Console.WriteLine(list.Count);
+            //Console.WriteLine("=================================\n MotherConditions \n");
+            //List<Nanny> list1 = ibl.MotherConditions(shimshonYeret);
+            //foreach (var item in list1)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            //Console.WriteLine(list1.Count);
+            //Console.WriteLine("================================= \n NannysInKMWithConditions\n");
+            //List<Nanny> list2 = ibl.NannysInKMWithConditions(shimshonYeret,600);
+            //foreach (var item in list2)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            //Console.WriteLine(list2.Count);
         }
         void NannyInitialize()
         {

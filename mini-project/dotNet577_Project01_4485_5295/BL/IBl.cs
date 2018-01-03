@@ -258,5 +258,6 @@ namespace BL
         IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool ordered = false);
         IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order);
         int DistanceBetweenNannyAndMother(Contract contract);
+
     }
 }
