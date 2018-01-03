@@ -7,6 +7,9 @@ using BE;
 
 namespace DS
 {
+    /// <summary>
+    /// class to hold the data
+    /// </summary>
     public class DataSource
     {
         public static List<Nanny> NannyList = new List<Nanny>();

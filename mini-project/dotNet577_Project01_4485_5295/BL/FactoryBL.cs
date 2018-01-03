@@ -8,6 +8,7 @@ namespace BL
 {
     public static class FactoryBL
     {
+        // retrun the instance of Bl_imp
         public static IBL GetBL()
         {
             return new Bl_imp();

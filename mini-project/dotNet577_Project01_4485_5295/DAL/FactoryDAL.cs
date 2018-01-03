@@ -8,6 +8,7 @@ namespace DAL
 {
     public static class FactoryDAL
     {
+        // retrun the instance of Dal_imp
         public static IDAL GetIDAL()
         {
             return Dal_imp.Instance;
