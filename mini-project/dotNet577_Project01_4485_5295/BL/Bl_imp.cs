@@ -636,8 +636,8 @@ namespace BL
         public int DistanceBetweenNannyAndMother(Contract contract)
         {
             Mother mother = FindMother(contract.MotherID);
-            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny : mother.Address;
-            int distance = Distance(address, FindNanny(contract.NannyID).Address) / 5;
+            string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
+            int distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
             if (distance == 0)
                 return 5;
             return (distance + 1) * 5;

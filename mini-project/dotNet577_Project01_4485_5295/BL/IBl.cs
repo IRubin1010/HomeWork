@@ -61,5 +61,7 @@ namespace BL
 
         //Gouping
         IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool ordered = false);
+        IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order);
+
     }
 }
