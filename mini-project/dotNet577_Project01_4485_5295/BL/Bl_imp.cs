@@ -901,7 +901,7 @@ namespace BL
         {
             IEnumerable<IGrouping<int, Contract>> group;
             if (order)
-                group = CloneContractList().OrderBy(contract => contract.ContractNumber).GroupBy(contract => DistanceBetweenNannyAndMother(contract));
+                group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract)).OrderBy(contract => contract.Key);
             else
                 group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract));
             return group;
