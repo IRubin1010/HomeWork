@@ -508,9 +508,16 @@ namespace BL
                 try
                 {
                     // update number of nanny's children and that the child has nanny
-                    dal.UpdateNannyChildren(dal.FindNanny(contract.NannyID), -1);
-                    dal.UpdateHaveNanny(dal.FindChild(contract.ChildID), false);
+                    UpdateNannyChildren(dal.FindNanny(contract.NannyID), -1);
+                    UpdateHaveNanny(dal.FindChild(contract.ChildID), false);
                     dal.DeleteContract(contractNumber);
+                }
+                catch(BLException ex)
+                {
+                    // if fail at UpdateHaveNanny need to reduce back nanny children
+                    if (ex.sender == "Update Have Nanny")
+                        UpdateNannyChildren(FindNanny(contract.NannyID), 1);
+                    throw;
                 }
                 catch (DALException ex)
                 {
@@ -518,9 +525,9 @@ namespace BL
                     // and if fail at AddContract need to increase back nanny children
                     // and change back the have nanny feild of child.
                     if (ex.sender == "Update Have Nanny")
-                        UpdateNannyChildren(dal.FindNanny(contract.NannyID), 1);
+                        UpdateNannyChildren(FindNanny(contract.NannyID), 1);
                     if (ex.sender == "Delete contract")
-                        UpdateNannyChildren(dal.FindNanny(contract.NannyID), 1); UpdateHaveNanny(dal.FindChild(contract.ChildID), true);
+                        UpdateNannyChildren(FindNanny(contract.NannyID), 1); UpdateHaveNanny(FindChild(contract.ChildID), true);
                     throw new BLException(ex.Message, ex.sender);
                 }
             }

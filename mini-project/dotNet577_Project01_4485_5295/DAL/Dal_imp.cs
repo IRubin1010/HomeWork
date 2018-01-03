@@ -507,7 +507,7 @@ namespace DAL
         /// </summary>
         public List<Nanny> CloneNannyList()
         {
-            return NannyList().Select(nanny => nanny.Clone());
+            return NannyList().Select(nanny => nanny.Clone()).ToList();
         }
 
         /// <summary>
