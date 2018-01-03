@@ -545,7 +545,7 @@ namespace BL
 
         public bool IsNannyInKM(Mother mother, Nanny nanny, int Km)
         {
-            string address = mother.SearchAreaForNanny != null ? mother.SearchAreaForNanny : mother.Address;
+            string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
             if (Distance(address, nanny.Address) > Km)
                 return false;
             return true;
