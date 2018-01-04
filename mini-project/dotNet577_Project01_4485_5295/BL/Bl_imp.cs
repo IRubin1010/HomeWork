@@ -20,7 +20,7 @@ namespace BL
         {
             dal = FactoryDAL.GetIDAL();
         }
-
+        
         /* Nanny functions */
 
         /// <summary>

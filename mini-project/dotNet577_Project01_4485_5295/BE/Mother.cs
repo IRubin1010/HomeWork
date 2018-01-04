@@ -96,6 +96,7 @@ namespace BE
         public Mother Clone()
         {
             Mother mother = (Mother)MemberwiseClone();
+            mother.NeedNanny = (bool[])NeedNanny.Clone();
             mother.NeedNannyHours = (TimeSpan[,])NeedNannyHours.Clone();
             return mother;
         }
