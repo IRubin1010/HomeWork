@@ -233,7 +233,7 @@ namespace BL
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        List<Nanny> PartialMatch(Mother mother/*, int Km*/);
+        List<Nanny> PartialMatch(Mother mother, int Km);
         /// <summary>
         /// return a list of children who don't has nanny
         /// </summary>
@@ -253,10 +253,44 @@ namespace BL
         /// </summary>
         /// <param name="contractCondition">boolean func that chack some conditions</param>
         int NumOfSpesificsContracts(Func<Contract, bool> contractCondition);
-
+        /// <summary>
+        /// return a list of all mother's children
+        /// </summary>
+        /// <param name="mother">mother to get his children</param>
+        List<Child> MotherChildren(Mother mother);
+        /// <summary>
+        /// chaeck if a child is cared for by a nanny
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        /// <param name="child">child to check</param>
+        bool IsChildByNanny(Nanny nanny, Child child);
+        /// <summary>
+        /// return a list of all children cared for by a nanny
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        List<Child> NannyChildren(Nanny nanny);
+        /// <summary>
+        /// return a list of nanny hwo have less then "num" children
+        /// </summary>
+        /// <param name="num">number of children</param>
+        List<Nanny> NannyWitheChildrenLessThen(int num);
         //Gouping
+
+        /// <summary>
+        /// group nannys by the children age
+        /// </summary>
+        /// <param name="orderByMaxAge">if to order by max age</param>
+        /// <param name="order">if to order at all</param>
         IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool ordered = false);
+        /// <summary>
+        /// calculate the distance between a mother and nanny
+        /// </summary>
+        /// <param name="contract">contract to calculate the distance</param>
         IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order);
+        /// <summary>
+        /// return a group of contract group by the distance between nanny and mother
+        /// </summary>
+        /// <param name="order">if to order</param>
         int DistanceBetweenNannyAndMother(Contract contract);
 
     }
