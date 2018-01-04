@@ -167,6 +167,8 @@ namespace Pl
             ibl.AddMother(simchaYeret);
             ibl.AddMother(yakovYeret);
             ibl.AddMother(hilelYeret);
+            ibl.AddMother(MotherTest);
+
         }
         void ChildInitialize()
         {
@@ -177,6 +179,11 @@ namespace Pl
             ibl.AddChild(ronen);
             ibl.AddChild(eran);
             ibl.AddChild(moti);
+            ibl.AddChild(ChildTest);
+            ibl.AddChild(a);
+            ibl.AddChild(b);
+            ibl.AddChild(c);
+            ibl.AddChild(d);
         }
         void ContractInitialize()
         {
@@ -200,7 +207,7 @@ namespace Pl
             Elevator = true,
             Floor = 0,
             Seniority = 5,
-            Children = 3,
+            Children = 0,
             MaxChildren = 10,
             MinAge = 0,
             MaxAge = 6,
@@ -252,7 +259,7 @@ namespace Pl
             BirthDate = new DateTime(1993, 8, 12),
             NannyAge = 24,
             PhoneNumber = 0543453834,
-            Address = "hebron St 7, Bnei Brak",
+            Address = "Sokolov st 44, Bnei Brak",
             Elevator = true,
             Floor = 4,
             Seniority = 3,
@@ -629,8 +636,8 @@ namespace Pl
             ID = 397458103,
             MotherID = 294839286,
             FirstName = "yoni",
-            BirthDate = new DateTime(2016, 8, 2),
-            AgeInMonth = 16,
+            BirthDate = new DateTime(2017, 9, 2),
+            AgeInMonth = 5,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
@@ -701,6 +708,61 @@ namespace Pl
             SpecialNeeds = "",
             HaveNanny = false
         };
+
+        public Child a = new Child()
+        {
+            ID = 397460103,
+            MotherID = 294337686,
+            FirstName = "a",
+            BirthDate = new DateTime(2016, 8, 2),
+            AgeInMonth = 16,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+
+        public Child b = new Child()
+        {
+            ID = 397240103,
+            MotherID = 294337686,
+            FirstName = "b",
+            BirthDate = new DateTime(2016, 8, 2),
+            AgeInMonth = 16,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+
+        public Child c = new Child()
+        {
+            ID = 310460103,
+            MotherID = 294337686,
+            FirstName = "c",
+            BirthDate = new DateTime(2016, 8, 2),
+            AgeInMonth = 16,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+
+        public Child d = new Child()
+        {
+            ID = 397055103,
+            MotherID = 294839286,
+            FirstName = "d",
+            BirthDate = new DateTime(2016, 8, 2),
+            AgeInMonth = 16,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+
+
+
+
+
+
+
         public Child ChildTest = new Child()
         {
             ID = 594028789,
@@ -808,7 +870,7 @@ namespace Pl
         {
             NannyID = 305625295,
             ChildID = 594028499,
-            MotherID = 294839286,
+            MotherID = 294335086,
             IsMeet = true,
             IsContractSigned = false,
             HourlyFee = 42,
