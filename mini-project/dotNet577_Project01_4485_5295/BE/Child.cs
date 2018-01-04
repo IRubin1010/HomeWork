@@ -8,6 +8,7 @@ namespace BE
 {
     public class Child
     {
+        //Properties//
         public int ID { get; set; }
         public int MotherID { get; set; }
         public string FirstName { get; set; }
@@ -17,6 +18,7 @@ namespace BE
         public string SpecialNeeds { get; set; }
         public bool HaveNanny { get; set; }
 
+        //override//
         public override string ToString()
         {
             string needs = "";
@@ -40,6 +42,10 @@ namespace BE
             return this.ID == child.ID;
         }
 
+        /// <summary>
+        /// clone child
+        /// </summary>
+        /// <returns>clone child object</returns>
         public Child Clone()
         {
             return (Child)MemberwiseClone();
