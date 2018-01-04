@@ -8,6 +8,7 @@ namespace BE
 {
     public class Nanny
     {
+        //Properties//
         public int ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -38,6 +39,7 @@ namespace BE
         public int FloorValue { get; set; }
         public int SumValue { get; set; }
 
+        //override//
         public override string ToString()
         {
             string dayWorkHors = "";
@@ -119,6 +121,10 @@ namespace BE
             return ID == nanny.ID;
         }
 
+        /// <summary>
+        /// clone nanny
+        /// </summary>
+        /// <returns>clone nanny object</returns>
         public Nanny Clone()
         {
             Nanny nanny = (Nanny)MemberwiseClone();

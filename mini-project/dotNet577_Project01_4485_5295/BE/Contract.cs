@@ -8,6 +8,7 @@ namespace BE
 {
     public class Contract
     {
+        //Properties//
         public int ContractNumber { get; set; }
         public int NannyID { get; set; }
         public int ChildID { get; set; }
@@ -20,7 +21,8 @@ namespace BE
         public double FinalPayment { get; set; }
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }
-
+       
+        //override//
         public override string ToString()
         {
             return "contract number: " + ContractNumber + '\n' +
@@ -44,10 +46,13 @@ namespace BE
             return this.ContractNumber == contract.ContractNumber;
         }
 
+        /// <summary>
+        /// clone contract
+        /// </summary>
+        /// <returns>clone contract object</returns>
         public Contract Clone()
         {
-            Contract contract = (Contract)MemberwiseClone();
-            return contract;
+            return (Contract)MemberwiseClone();
         }
     }
 }

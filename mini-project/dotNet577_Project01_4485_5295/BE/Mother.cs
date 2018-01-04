@@ -8,6 +8,7 @@ namespace BE
 {
     public class Mother
     {
+        //Properties//
         public int ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -21,6 +22,7 @@ namespace BE
         public TimeSpan[,] NeedNannyHours;
         public string Remarks { get; set; }
 
+        //override//
         public override string ToString()
         {
             string needNannyDaysAndHours = "";
@@ -93,6 +95,10 @@ namespace BE
             return this.ID == mother.ID;
         }
 
+        /// <summary>
+        /// clone mother
+        /// </summary>
+        /// <returns>clone mother object</returns>
         public Mother Clone()
         {
             Mother mother = (Mother)MemberwiseClone();
