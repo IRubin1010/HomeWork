@@ -33,6 +33,62 @@ namespace Pl
             ChildInitialize();
             ContractInitialize();
 
+
+
+            List<Child> list = ibl.MotherChildren(MotherTest);
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("=======================");
+
+            List<Child> list2 = ibl.NannyChildren(davidShimon);
+            foreach (var item in list2)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("=======================");
+            List<Contract> conList = ibl.NannyContracts(davidShimon);
+            foreach (var item in conList)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("=======================");
+            ibl.DeleteMother(MotherTest);
+            List<Child> list1 = ibl.MotherChildren(MotherTest);
+            foreach (var item in list1)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("=======================");
+
+            List<Child> list3 = ibl.NannyChildren(davidShimon);
+            foreach (var item in list3)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("=======================");
+            List<Contract> conList1 = ibl.NannyContracts(davidShimon);
+            foreach (var item in conList1)
+            {
+                Console.WriteLine(item);
+            }
+            //Console.WriteLine("=======================");
+            //Console.WriteLine(ibl.FindNanny(davidShimon.ID).Children);
+            //Console.WriteLine(ibl.FindChild(310460103).HaveNanny);
+            //ibl.DeleteContract(10000008);
+            //Console.WriteLine(ibl.FindNanny(davidShimon.ID).Children);
+            //Console.WriteLine(ibl.FindChild(397240103).HaveNanny);
+            //Console.WriteLine(ibl.FindChild(310460103).HaveNanny);
+            
+
+
+
+
+
+
             //ibl.AddNanny(test);
             //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
             //ibl.DeleteNanny(meirShimon);
@@ -113,15 +169,15 @@ namespace Pl
             //int i = ibl.NumOfSpesificsContracts(contract => contract.IsPaymentByHour == true);
             //Console.WriteLine(i);
 
-            var test = ibl.GroupContractByDistance(true);
-            foreach (var item in test)
-            {
-                Console.WriteLine(item.Key);
-                foreach (var g in item)
-                {
-                    Console.WriteLine(g);
-                }
-            }
+            //var test = ibl.GroupContractByDistance(true);
+            //foreach (var item in test)
+            //{
+            //    Console.WriteLine(item.Key);
+            //    foreach (var g in item)
+            //    {
+            //        Console.WriteLine(g);
+            //    }
+            //}
             //Console.WriteLine("=================================== \n " + "mother \n");
             //Console.WriteLine(shimshonYeret);
             //Console.WriteLine("===================================\n PotentialMatch \n");
@@ -194,6 +250,11 @@ namespace Pl
             ibl.AddContract(contract5);
             ibl.AddContract(contract6);
             //ibl.AddContract(contract7);
+            ibl.AddContract(TestContract);
+            ibl.AddContract(aa);
+            ibl.AddContract(bb);
+            ibl.AddContract(cc);
+
         }
         public Nanny meirShimon = new Nanny
         {
@@ -237,8 +298,8 @@ namespace Pl
             Seniority = 4,
             Children = 0,
             MaxChildren = 18,
-            MinAge = 0,
-            MaxAge = 6,
+            MinAge = 6,
+            MaxAge = 12,
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
@@ -647,8 +708,8 @@ namespace Pl
             ID = 397004103,
             MotherID = 294894786,
             FirstName = "shimon",
-            BirthDate = new DateTime(2016, 12, 2),
-            AgeInMonth = 12,
+            BirthDate = new DateTime(2017, 6, 2),
+            AgeInMonth = 7,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
@@ -691,8 +752,8 @@ namespace Pl
             ID = 294083104,
             MotherID = 294800286,
             FirstName = "eran",
-            BirthDate = new DateTime(2016, 12, 28),
-            AgeInMonth = 12,
+            BirthDate = new DateTime(2017, 10, 28),
+            AgeInMonth = 4,
             IsSpecialNeeds = true,
             SpecialNeeds = "",
             HaveNanny = false
@@ -702,8 +763,8 @@ namespace Pl
             ID = 594028499,
             MotherID = 294335086,
             FirstName = "moti",
-            BirthDate = new DateTime(2017, 2, 2),
-            AgeInMonth = 10,
+            BirthDate = new DateTime(2017, 9, 2),
+            AgeInMonth = 6,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
@@ -714,8 +775,8 @@ namespace Pl
             ID = 397460103,
             MotherID = 294337686,
             FirstName = "a",
-            BirthDate = new DateTime(2016, 8, 2),
-            AgeInMonth = 16,
+            BirthDate = new DateTime(2016, 12, 2),
+            AgeInMonth = 11,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
@@ -726,8 +787,8 @@ namespace Pl
             ID = 397240103,
             MotherID = 294337686,
             FirstName = "b",
-            BirthDate = new DateTime(2016, 8, 2),
-            AgeInMonth = 16,
+            BirthDate = new DateTime(2017, 1, 2),
+            AgeInMonth = 10,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
@@ -738,8 +799,8 @@ namespace Pl
             ID = 310460103,
             MotherID = 294337686,
             FirstName = "c",
-            BirthDate = new DateTime(2016, 8, 2),
-            AgeInMonth = 16,
+            BirthDate = new DateTime(2016, 11, 2),
+            AgeInMonth = 12,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
@@ -767,7 +828,7 @@ namespace Pl
         {
             ID = 594028789,
             MotherID = 294335086,
-            FirstName = "moti",
+            FirstName = "childtest",
             BirthDate = new DateTime(2017, 2, 2),
             AgeInMonth = 10,
             IsSpecialNeeds = false,
@@ -879,7 +940,45 @@ namespace Pl
             BeginTransection = new DateTime(2018, 1, 1),
             EndTransection = new DateTime(2018, 8, 1)
         };
-
+        public Contract aa = new Contract()
+        {
+            NannyID = 294003857,
+            ChildID = 397460103,
+            MotherID = 294337686,
+            IsMeet = true,
+            IsContractSigned = false,
+            HourlyFee = 42,
+            MonthlyFee = 2500,
+            IsPaymentByHour = false,
+            BeginTransection = new DateTime(2018, 1, 1),
+            EndTransection = new DateTime(2018, 8, 1)
+        };
+        public Contract bb = new Contract()
+        {
+            NannyID = 305625275,
+            ChildID = 397240103,
+            MotherID = 294337686,
+            IsMeet = true,
+            IsContractSigned = false,
+            HourlyFee = 42,
+            MonthlyFee = 2500,
+            IsPaymentByHour = false,
+            BeginTransection = new DateTime(2018, 1, 1),
+            EndTransection = new DateTime(2018, 8, 1)
+        };
+        public Contract cc = new Contract()
+        {
+            NannyID = 305625275,
+            ChildID = 310460103,
+            MotherID = 294337686,
+            IsMeet = true,
+            IsContractSigned = false,
+            HourlyFee = 42,
+            MonthlyFee = 2500,
+            IsPaymentByHour = false,
+            BeginTransection = new DateTime(2018, 1, 1),
+            EndTransection = new DateTime(2018, 8, 1)
+        };
 
     }
 }

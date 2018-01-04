@@ -270,10 +270,16 @@ namespace BL
         /// <param name="nanny">nanny to check</param>
         List<Child> NannyChildren(Nanny nanny);
         /// <summary>
+        /// return a list of all nanny's contracts
+        /// </summary>
+        /// <param name="nanny">nanny to check for</param>
+        List<Contract> NannyContracts(Nanny nanny);
+        /// <summary>
         /// return a list of nanny hwo have less then "num" children
         /// </summary>
         /// <param name="num">number of children</param>
         List<Nanny> NannyWitheChildrenLessThen(int num);
+
         //Gouping
 
         /// <summary>
