@@ -439,6 +439,8 @@ namespace BL
             // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
+            if(child.AgeInMonth > nanny.MaxAge || child.AgeInMonth < nanny.MinAge)
+                throw new BLException(child.FirstName + " is not on nanny's age range", "add contrsct");
             if (child.HaveNanny == true)
                 throw new BLException(child.FirstName + " already has a nanny ", "add contrsct");
             // if nanny has more then his max childre throw exception
@@ -764,7 +766,7 @@ namespace BL
         public bool IsNannyInKM(Mother mother, Nanny nanny, int Km)
         {
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
-            if (Distance(address, nanny.Address) > Km)
+            if (Distance(address, nanny.Address) > Km * 1000)
                 return false;
             return true;
         }
@@ -800,7 +802,7 @@ namespace BL
                 nanny.HoursValue = PotentialHoursMatch(nanny, mother) == true ? 6 : 0;
                 nanny.DaysValue = PotentialDaysMatch(nanny, mother) == true ? 5 : 0;
                 nanny.SeniorityValue = mother.MinSeniority <= nanny.Seniority ? 4 : 0;
-                // nanny.DistanceValue = IsNannyInKM(mother, nanny, Km) == true ? 3 : 0;
+                nanny.DistanceValue = IsNannyInKM(mother, nanny, Km) == true ? 3 : 0;
                 nanny.ElevatorValue = !(mother.WantElevator == true && nanny.Elevator == false) ? 2 : 0;
                 nanny.FloorValue = mother.MaxFloor >= nanny.Floor ? 1 : 0;
                 nanny.SumValue = nanny.HoursValue + nanny.DaysValue + nanny.SeniorityValue +
@@ -813,9 +815,9 @@ namespace BL
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        public List<Nanny> PartialMatch(Mother mother/*, int Km*/)
+        public List<Nanny> PartialMatch(Mother mother, int Km)
         {
-            return PropertiesMatch(mother, 5).OrderByDescending(nanny => nanny.SumValue)
+            return PropertiesMatch(mother, Km).OrderByDescending(nanny => nanny.SumValue)
                 .Take(5).ToList();
         }
 
@@ -851,25 +853,68 @@ namespace BL
         /// <param name="contractCondition">boolean func that chack some conditions</param>
         public int NumOfSpesificsContracts(Func<Contract, bool> contractCondition)
         {
-            return CloneContractList().Where(contract => contractCondition(contract) == true).ToList().Count;
+            return SpesificsContracts(contractCondition).Count;
         }
 
-        //public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
-        //{
-        //    IEnumerable<IGrouping<int, Nanny>> group;
-        //    if (order)
-        //        if (orderByMaxAge)
-        //            group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => ((nanny.MaxAge / 6) + 1) * 6);
-        //        else
-        //            group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).ThenBy(nanny => nanny.LastName).GroupBy(nanny => nanny.MinAge);
-        //    else
-        //        if (orderByMaxAge)
-        //        group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => ((nanny.MaxAge / 6) + 1) * 6);
-        //    else
-        //        group = CloneNannyList().OrderBy(nanny => nanny.MaxAge).GroupBy(nanny => nanny.MinAge);
-        //    return group;
-        //}
+        /// <summary>
+        /// return a list of all mother's children
+        /// </summary>
+        /// <param name="mother">mother to get his children</param>
+        public List<Child> MotherChildren(Mother mother)
+        {
+            return CloneChildList().Where(child => child.MotherID == mother.ID).ToList();
+        }
 
+        /// <summary>
+        /// chaeck if a child is cared for by a nanny
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        /// <param name="child">child to check</param>
+        public bool IsChildByNanny(Nanny nanny, Child child)
+        {
+            foreach (Contract contract in CloneContractList())
+            {
+                if (contract.NannyID == nanny.ID && contract.ChildID == child.ID)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// return a list of all children cared for by a nanny
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        public List<Child> NannyChildren(Nanny nanny)
+        {
+            return CloneChildList().Where(child => IsChildByNanny(nanny, child)).ToList();
+        }
+
+        /// <summary>
+        /// return a list of all nanny's contracts
+        /// </summary>
+        /// <param name="nanny">nanny to check for</param>
+        public List<Contract> NannyContracts(Nanny nanny)
+        {
+            var nannyContracts = from contract in CloneContractList()
+                                 where contract.NannyID == nanny.ID
+                                 select contract;
+            return nannyContracts.ToList();
+        }
+
+        /// <summary>
+        /// return a list of nanny hwo have less then "num" children
+        /// </summary>
+        /// <param name="num">number of children</param>
+        public List<Nanny> NannyWitheChildrenLessThen(int num)
+        {
+            return CloneNannyList().Where(nanny => nanny.Children <= num).ToList();
+        }
+
+        /// <summary>
+        /// rrturn group of nannys group by the children age
+        /// </summary>
+        /// <param name="orderByMaxAge">if to order by max age</param>
+        /// <param name="order">if to order at all</param>
         public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
         {
             IEnumerable<IGrouping<int, Nanny>> group;
@@ -888,23 +933,39 @@ namespace BL
             return group;
         }
 
+        /// <summary>
+        /// calculate the distance between a mother and nanny
+        /// </summary>
+        /// <param name="contract">contract to calculate the distance</param>
         public int DistanceBetweenNannyAndMother(Contract contract)
         {
             Mother mother = FindMother(contract.MotherID);
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
-            int distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
+            // the distance function returns meter that's why they divide by 5000
+            int distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000; 
             if (distance == 0)
                 return 5;
             return (distance + 1) * 5;
         }
+
+        /// <summary>
+        /// return a group of contract group by the distance between nanny and mother
+        /// </summary>
+        /// <param name="order">if to order</param>
         public IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order)
         {
             IEnumerable<IGrouping<int, Contract>> group;
             if (order)
-                group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract)).OrderBy(contract => contract.Key);
+                group = from contract in CloneContractList()
+                        group contract by DistanceBetweenNannyAndMother(contract) into g
+                        orderby g.Key
+                        select g;
             else
-                group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract));
+                group = from contract in CloneContractList()
+                        group contract by DistanceBetweenNannyAndMother(contract);
             return group;
         }
+
+
     }
 }
