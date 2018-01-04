@@ -853,7 +853,7 @@ namespace BL
         /// <param name="contractCondition">boolean func that chack some conditions</param>
         public int NumOfSpesificsContracts(Func<Contract, bool> contractCondition)
         {
-            return CloneContractList().Where(contract => contractCondition(contract) == true).ToList().Count;
+            return SpesificsContracts(contractCondition).Count;
         }
 
         /// <summary>
@@ -887,6 +887,18 @@ namespace BL
         public List<Child> NannyChildren(Nanny nanny)
         {
             return CloneChildList().Where(child => IsChildByNanny(nanny, child)).ToList();
+        }
+
+        /// <summary>
+        /// return a list of all nanny's contracts
+        /// </summary>
+        /// <param name="nanny">nanny to check for</param>
+        public List<Contract> NannyContracts(Nanny nanny)
+        {
+            var nannyContracts = from contract in CloneContractList()
+                                 where contract.NannyID == nanny.ID
+                                 select contract;
+            return nannyContracts.ToList();
         }
 
         /// <summary>
@@ -944,9 +956,13 @@ namespace BL
         {
             IEnumerable<IGrouping<int, Contract>> group;
             if (order)
-                group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract)).OrderBy(contract => contract.Key);
+                group = from contract in CloneContractList()
+                        group contract by DistanceBetweenNannyAndMother(contract) into g
+                        orderby g.Key
+                        select g;
             else
-                group = CloneContractList().GroupBy(contract => DistanceBetweenNannyAndMother(contract));
+                group = from contract in CloneContractList()
+                        group contract by DistanceBetweenNannyAndMother(contract);
             return group;
         }
 
