@@ -3,50 +3,61 @@
 //using namespace std;
 //#include "TestHash.h"
 //#include <time.h>
-
-
+//
+//
 //int main()
 //{
-//	//srand(time(NULL));
-//	int val;
-//	TestHash table(6);
-//	for (int i=0;i<7;i++)
+//	try
 //	{
-//		val=rand()%100;
-//		table.add(val,val);
-//		cout<<val<<' ';
-//	}
-//	cout<<endl;
-//	table.print();
+//		srand(time(NULL));
+//		int val;
+//		TestHash table(6);
+//		for (int i = 0; i<7; i++)
+//		{
+//			val = rand() % 100;
+//			table.add(val, val);
+//			cout << val << ' ';
+//		}
+//		cout << endl;
+//		table.print();
 //
-//	for(int i=0;i<3;i++)
+//		for (int i = 0; i<3; i++)
+//		{
+//			cout << "enter to remove" << endl;
+//			cin >> val;
+//			table.remove(val);
+//		}
+//		cout << endl;
+//		table.print();
+//		cout << "enter to add " << endl;
+//		cin >> val;
+//		table.add(val, val);
+//		cout << "enter to search " << endl;
+//		cin >> val;
+//		cout << "find at " << table.search(val) << endl;;
+//
+//
+//
+//		for (int i = 0; i<10; i++)
+//		{
+//			
+//			val = rand() % 50;
+//			int pos = table.search(val);
+//			if (pos>-1)
+//				cout << val << " was found at place: " << pos << endl;
+//			else
+//				cout << val << " was not found\n";
+//		}
+//	}
+//	catch (const char * er)
 //	{
-//		cin>>val;
-//		table.remove(val);
+//		cout << er << endl;
 //	}
-//		cout<<endl;
-//	table.print();
-//			cin>>val;
-//		table.add(val,val);
-//
-//				cin>>val;
-//		table.search(val);
-//
-//
-//
-//	for (int i=0;i<10;i++)
-//	{
-//		val=rand()%50;
-//		int pos=table.search(val);
-//		if (pos>-1)
-//			cout<<val<<" was found at place: "<<pos<<endl;
-//		else
-//			cout<<val<<" was not found\n";
-//	}
+//	
 //	
 //	return 0;
 //}
-//
+
 
 #include <iostream>
 #include <string>
@@ -82,15 +93,17 @@ int main()
 			{
 			case 1: cout << "Enter volunteers id, name, address, phone number and city" << endl;
 				cin >> v;
-				vh.add(v.getName(), v);
+				vh.add(v,v.getName());
+				vh.print();
 				break;
 			case 2: cout << "Enter the name of volunteer to remove" << endl;
 				cin >> name;
 				vh.remove(name);
+				vh.print();
 				break;
 			case 3: cout << "Enter clients name, phone number and city" << endl;
 				cin >> c;
-				ch.add(c.getPhone(), c);
+				ch.add(c,c.getPhone());
 				break;
 			case 4: cout << "Enter the phone number of client to remove" << endl;
 				cin >> phone;
@@ -99,7 +112,7 @@ int main()
 			case 5: {
 				cout << "enter volunteers name and clients phone number" << endl;
 				cin >> name >> phone;
-				Client& c = ch.getData(phone);
+				Client & c = ch.getData(phone);
 				c.addVolunteerToList(name);
 				cout << c;
 			}
@@ -113,6 +126,7 @@ int main()
 			}
 					break;
 			case 7: {
+				ch.print();
 				cout << "enter volunteers name " << endl;
 				cin >> name;
 				list<string>lst = ch.getClientList(name);

@@ -139,10 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="ClientHash.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="TestHash.cpp" />
+    <ClCompile Include="Volunteer.cpp" />
+    <ClCompile Include="VolunteerHash.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="ClientHash.h" />
     <ClInclude Include="HashTable.h" />
+    <ClInclude Include="TestHash.h" />
+    <ClInclude Include="Volunteer.h" />
+    <ClInclude Include="VolunteerHash.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
