@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-enum state { empty, full, deleted };
+enum state { Empty, full, deleted };
 template <typename T, typename K>
 class Item
 {
@@ -11,7 +11,7 @@ public:
 	T data;
 	K key;
 	state flag;
-	Item() { flag = state::empty; }
+	Item() { flag = Empty; }
 	Item(T d, K k, state f) { data = d; key = k; flag = f; }
 };
 
@@ -24,7 +24,6 @@ protected:
 public:
 	HashTable(int num);
 	virtual ~HashTable();
-	//int getSize();
 	virtual int H1(K key) = 0;
 	virtual int H2(K key) = 0;
 	int hash(K key, int i);
@@ -36,7 +35,7 @@ public:
 };
 
 template <typename T, typename K>
-HashTable<typename T, typename K>::HashTable(int num)
+HashTable<T, K>::HashTable(int num)
 {
 	int i = num;
 	bool isPrime = true;
@@ -61,13 +60,9 @@ template<typename T, typename K>
 HashTable<T, K>::~HashTable()
 {
 	delete[] table;
-	table = nullptr;
+	table = NULL;
 }
-//template<typename T, typename K>
-//int HashTable<T, K>::getSize()
-//{
-//	return size;
-//}
+
 template<typename T, typename K>
 int HashTable<T, K>::hash(K key, int i)
 {
@@ -84,7 +79,7 @@ int HashTable<T, K>::search(K key)
 		if (table[j].key == key)
 			return j;
 		i++;
-	} while (table[j].flag != state::empty && i != size);
+	} while (table[j].flag != Empty && i != size);
 	return -1;
 }
 
@@ -103,7 +98,7 @@ void HashTable<T, K>::add(T data, K key)
 			return;
 		}
 		i++;
-	} while (j != size);
+	} while (i != size);
 	throw "No place!";
 }
 
@@ -113,8 +108,7 @@ void HashTable<T, K>::remove(K key)
 	int i = search(key);
 	if (i != -1)
 	{
-		Item<T, K> item;
-		item.flag = deleted;
+		Item<T, K> item(T(), K(), deleted);
 		table[i] = item;
 	}
 	else
