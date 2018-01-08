@@ -15,42 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClientHash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestHash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Volunteer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="VolunteerHash.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ClientHash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientHash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="HashTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Volunteer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VolunteerHash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
