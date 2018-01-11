@@ -10,7 +10,7 @@ namespace DAL
 {
     sealed class Dal_imp : IDAL
     {
-        public static int ContractNumber = 10000000;
+        public static int? ContractNumber = 10000000;
 
         // implement for singelton
         static Dal_imp() { }
@@ -41,7 +41,7 @@ namespace DAL
         /// delete nanny from nanny's DB
         /// </summary>
         /// <param name="nanny">the nanny to delete from NannyList</param>
-        /// <remarks> accept nanny and send to DeleteNanny(int id) function nanny's id </remarks>
+        /// <remarks> accept nanny and send to DeleteNanny(int? id) function nanny's id </remarks>
         public void DeleteNanny(Nanny nanny)
         {
             try
@@ -59,7 +59,7 @@ namespace DAL
         /// </summary>
         /// <param name="id">nanny's id of the nanny that want to deletee from NannyList</param>
         /// <remarks> if didn't find to remove, throw exception </remarks>
-        public void DeleteNanny(int id)
+        public void DeleteNanny(int? id)
         {
             if (!NannyList().Remove(FindNanny(id)))
                 throw new DALException("nanny with ID: " + id + " dosn't exsist", "Delete Nanny");
@@ -97,7 +97,7 @@ namespace DAL
         /// </summary>
         /// <param name="nanny">the nanny that we whant to find</param>
         /// <remarks>
-        /// accept nanny and send to FindNanny(int id) function with nanny id 
+        /// accept nanny and send to FindNanny(int? id) function with nanny id 
         /// return true if find, else return false
         /// </remarks>
         public bool FindNanny(Nanny nanny)
@@ -112,7 +112,7 @@ namespace DAL
         /// <remarks>
         /// accept nanny id, return nanny if find, else return null
         /// </remarks>
-        public Nanny FindNanny(int id)
+        public Nanny FindNanny(int? id)
         {
             List<Nanny> list = (from nanny in CloneNannyList()
                                 where nanny.ID == id
@@ -132,7 +132,7 @@ namespace DAL
         /// else reduce nanny's children by 1
         /// if didn't find the nanny throw exception
         /// </remarks>
-        public void UpdateNannyChildren(Nanny nanny, int num)
+        public void UpdateNannyChildren(Nanny nanny, int? num)
         {
             if (FindNanny(nanny))
             {
@@ -171,7 +171,7 @@ namespace DAL
         /// </summary>
         /// <param name="mother">the mother to delete from MotherList</param>
         /// <remarks>
-        /// accept mother and send to DeleteMother(int id) function mother's id 
+        /// accept mother and send to DeleteMother(int? id) function mother's id 
         /// </remarks>
         public void DeleteMother(Mother mother)
         {
@@ -192,7 +192,7 @@ namespace DAL
         /// <remarks>
         /// if didn't find to remove, throw exception
         /// </remarks>
-        public void DeleteMother(int id)
+        public void DeleteMother(int? id)
         {
             if (!MotherList().Remove(FindMother(id)))
                 throw new DALException("mohter with ID: " + id + " dosn't exsist", "Delete mother");
@@ -229,7 +229,7 @@ namespace DAL
         /// </summary>
         /// <param name="mother">the mother that we whant to find</param>
         /// <remarks>
-        /// accept momther and send to FindMother(int id) function with mother id 
+        /// accept momther and send to FindMother(int? id) function with mother id 
         /// return true if find, else return false
         /// </remarks>
         public bool FindMother(Mother mother)
@@ -244,7 +244,7 @@ namespace DAL
         /// <remarks>
         /// accept mother id, return mother if find, else return null
         /// </remarks>
-        public Mother FindMother(int id)
+        public Mother FindMother(int? id)
         {
             List<Mother> list = (from mother in CloneMotherList()
                                  where mother.ID == id
@@ -277,7 +277,7 @@ namespace DAL
         /// </summary>
         /// <param name="child">the child to delete from ChildList</param>
         /// <remarks>
-        /// accept child and send to DeleteChild(int id) function child's id 
+        /// accept child and send to DeleteChild(int? id) function child's id 
         /// </remarks>
         public void DeleteChild(Child child)
         {
@@ -298,7 +298,7 @@ namespace DAL
         /// <remarks>
         /// if didn't find to remove, throw exception
         /// </remarks>
-        public void DeleteChild(int id)
+        public void DeleteChild(int? id)
         {
             if (!ChildList().Remove(FindChild(id)))
                 throw new DALException("nanny with ID: " + id + " dosn't exsist", "Delete child");
@@ -335,7 +335,7 @@ namespace DAL
         /// </summary>
         /// <param name="child">the child that we whant to find</param>
         /// <remarks>
-        /// accept child and send to FindChild(int id) function with child id 
+        /// accept child and send to FindChild(int? id) function with child id 
         /// return true if find, else return false
         /// </remarks>
         public bool FindChild(Child child)
@@ -350,7 +350,7 @@ namespace DAL
         /// <remarks>
         /// accept child id, return child if find, else return null
         /// </remarks>
-        public Child FindChild(int id)
+        public Child FindChild(int? id)
         {
             List<Child> list = (from child in CloneChildList()
                                 where child.ID == id
@@ -418,7 +418,7 @@ namespace DAL
         /// </summary>
         /// <param name="contract">the contract to delete from ContractList</param>
         /// <remarks>
-        /// accept contract and send to DeleteContract(int id) function contract's number 
+        /// accept contract and send to DeleteContract(int? id) function contract's number 
         /// </remarks>
         public void DeleteContract(Contract contract)
         {
@@ -439,7 +439,7 @@ namespace DAL
         /// <remarks>
         /// if didn't find to remove, throw exception
         /// </remarks>
-        public void DeleteContract(int contractNumber)
+        public void DeleteContract(int? contractNumber)
         {
             if (!ContractList().Remove(FindContract(contractNumber)))
                 throw new DALException("contract with contract number: " + contractNumber + " dosn't exsist", "Delete contract");
@@ -476,7 +476,7 @@ namespace DAL
         /// </summary>
         /// <param name="contarct">the contract that we whant to find</param>
         /// <remarks>
-        /// accept contract and send to FindContract(int id) function with contract's nunmber 
+        /// accept contract and send to FindContract(int? id) function with contract's nunmber 
         /// return true if find, else return false
         /// </remarks>
         public bool FindContract(Contract contarct)
@@ -491,7 +491,7 @@ namespace DAL
         /// <remarks>
         /// accept contract id, return contract if find, else return null
         /// </remarks>
-        public Contract FindContract(int contractNumber)
+        public Contract FindContract(int? contractNumber)
         {
             List<Contract> list = (from contract in CloneContractList()
                                    where contract.ContractNumber == contractNumber

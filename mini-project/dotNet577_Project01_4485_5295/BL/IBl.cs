@@ -25,7 +25,7 @@ namespace BL
         /// delete nanny from nanny's DB
         /// </summary>
         /// <param name="id">nanny's id of the nanny that want to deletee from NannyList</param>
-        void DeleteNanny(int id);
+        void DeleteNanny(int? id);
         /// <summary>
         /// update nanny 
         /// </summary>
@@ -40,13 +40,13 @@ namespace BL
         /// find nanny with given ID
         /// </summary>
         /// <param name="id">the nanny's id that we whant to find</param>
-        Nanny FindNanny(int id);
+        Nanny FindNanny(int? id);
         /// <summary>
         /// update the numabr of nanny's children
         /// </summary>
         /// <param name="nanny">the nanny that we whnt to update her children number</param>
         /// <param name="num">flag, if num = 1 add 1 else sub 1 </param>
-        void UpdateNannyChildren(Nanny nanny, int num);
+        void UpdateNannyChildren(Nanny nanny, int? num);
 
         // mother functions 
 
@@ -64,7 +64,7 @@ namespace BL
         /// delete mother from mother's DB
         /// </summary>
         /// <param name="id">mother's id of the mother that want to delete from MotherList</param>
-        void DeleteMother(int id);
+        void DeleteMother(int? id);
         /// <summary>
         /// update mother
         /// </summary>
@@ -79,7 +79,7 @@ namespace BL
         /// find mother with givan ID
         /// </summary>
         /// <param name="id">>the mother's id that we whant to find</param>
-        Mother FindMother(int id);
+        Mother FindMother(int? id);
 
         // child functions
 
@@ -97,7 +97,7 @@ namespace BL
         /// delete child from child's DB
         /// </summary>
         /// <param name="id">child's id of the child that want to delete from childList</param>
-        void DeleteChild(int id);
+        void DeleteChild(int? id);
         /// <summary>
         /// update child
         /// </summary>
@@ -112,7 +112,7 @@ namespace BL
         /// find child with given ID
         /// </summary>
         /// <param name="id">the child's id that we whant to find</param>
-        Child FindChild(int id);
+        Child FindChild(int? id);
         /// <summary>
         /// update if the child has nanny
         /// </summary>
@@ -136,7 +136,7 @@ namespace BL
         /// delete contract from contract's DB
         /// </summary>
         /// <param name="contractNumber">Contract's number of the contract that want to delete</param>
-        void DeleteContract(int contractNumber);
+        void DeleteContract(int? contractNumber);
         /// <summary>
         /// update contract
         /// </summary>
@@ -151,7 +151,7 @@ namespace BL
         /// find contract with given contrat number
         /// </summary>
         /// <param name="contractNumber">the contract's number that we whant to find</param>
-        Contract FindContract(int contractNumber);
+        Contract FindContract(int? contractNumber);
         /// <summary>
         /// clculate the payment for a contract
         /// </summary>
@@ -183,7 +183,7 @@ namespace BL
         /// </summary>
         /// <param name="addressA">the address to calculate from</param>
         /// <param name="addressB">the address to calculate to</param>
-        int Distance(string addressA, string addressB);
+        int? Distance(string addressA, string addressB);
         /// <summary>
         /// return a list of nanny who work at the same days and hours as the mother need
         /// </summary>
@@ -213,14 +213,14 @@ namespace BL
         /// <param name="mother">mother to chack range of Km</param>
         /// <param name="nanny">nanny to chack if is in the range of Km</param>
         /// <param name="Km">the range of Km to check</param>
-        bool IsNannyInKM(Mother mother, Nanny nanny, int Km);
+        bool IsNannyInKM(Mother mother, Nanny nanny, int? Km);
         /// <summary>
         /// return a list of nannys who match perfectly to the mother, 
         /// considering range of Km too
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
         /// <param name="Km">the range of Km to check</param>
-        List<Nanny> NannysInKMWithConditions(Mother mother, int Km);
+        List<Nanny> NannysInKMWithConditions(Mother mother, int? Km);
         /// <summary>
         /// return a list of nannys with a value, so that the value is 
         /// according tne mother needs
@@ -228,12 +228,12 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to check match</param>
         /// <param name="Km">the range of Km</param>
-        List<Nanny> PropertiesMatch(Mother mother, int Km);
+        List<Nanny> PropertiesMatch(Mother mother, int? Km);
         /// <summary>
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        List<Nanny> PartialMatch(Mother mother, int Km);
+        List<Nanny> PartialMatch(Mother mother, int? Km);
         /// <summary>
         /// return a list of children who don't has nanny
         /// </summary>
@@ -252,7 +252,7 @@ namespace BL
         /// return the number of contracts that meet certain conditions 
         /// </summary>
         /// <param name="contractCondition">boolean func that chack some conditions</param>
-        int NumOfSpesificsContracts(Func<Contract, bool> contractCondition);
+        int? NumOfSpesificsContracts(Func<Contract, bool> contractCondition);
         /// <summary>
         /// return a list of all mother's children
         /// </summary>
@@ -278,7 +278,7 @@ namespace BL
         /// return a list of nanny hwo have less then "num" children
         /// </summary>
         /// <param name="num">number of children</param>
-        List<Nanny> NannyWitheChildrenLessThen(int num);
+        List<Nanny> NannyWitheChildrenLessThen(int? num);
 
         //Gouping
 
@@ -287,17 +287,17 @@ namespace BL
         /// </summary>
         /// <param name="orderByMaxAge">if to order by max age</param>
         /// <param name="order">if to order at all</param>
-        IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool ordered = false);
+        IEnumerable<IGrouping<int?, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool ordered = false);
         /// <summary>
         /// calculate the distance between a mother and nanny
         /// </summary>
         /// <param name="contract">contract to calculate the distance</param>
-        IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order);
+        IEnumerable<IGrouping<int?, Contract>> GroupContractByDistance(bool order);
         /// <summary>
         /// return a group of contract group by the distance between nanny and mother
         /// </summary>
         /// <param name="order">if to order</param>
-        int DistanceBetweenNannyAndMother(Contract contract);
+        int? DistanceBetweenNannyAndMother(Contract contract);
 
     }
 }

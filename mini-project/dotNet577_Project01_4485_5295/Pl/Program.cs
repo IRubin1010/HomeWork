@@ -275,12 +275,12 @@ namespace Pl
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = true,
             Recommendations = "",
         };
@@ -303,12 +303,12 @@ namespace Pl
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool[6] { true, true, false, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
-           },
+            IsWork = new bool?[6] { true, true, false, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = true,
             Recommendations = "",
         };
@@ -331,12 +331,12 @@ namespace Pl
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool[6] { false, false, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
-           },
+            IsWork = new bool?[6] { false, false, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = true,
             Recommendations = "",
         };
@@ -359,12 +359,12 @@ namespace Pl
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 3000,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = false,
             Recommendations = "",
         };
@@ -387,12 +387,12 @@ namespace Pl
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 3750,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+           WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = true,
             Recommendations = "",
         };
@@ -415,12 +415,12 @@ namespace Pl
             IsHourlyFee = true,
             HourlyFee = 40,
             MonthlyFee = 1000,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(17,0,0), new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) , new TimeSpan(17, 0, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = false,
             Recommendations = "",
         };
@@ -443,12 +443,12 @@ namespace Pl
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 2500,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) },
-                { new TimeSpan(13,0,0), new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = true,
             Recommendations = "",
         };
@@ -471,12 +471,12 @@ namespace Pl
             IsHourlyFee = true,
             HourlyFee = 35,
             MonthlyFee = 1000,
-            IsWork = new bool[6] { true, true, true, true, true, false },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(15,30,0), new TimeSpan(15, 30, 0) , new TimeSpan(15, 30, 0) , new TimeSpan(15, 30, 0) , new TimeSpan(15, 30, 0) , new TimeSpan(15, 30, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, false },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = false,
             Recommendations = "",
         };
@@ -499,12 +499,12 @@ namespace Pl
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 4000,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = false,
             Recommendations = "",
         };
@@ -527,12 +527,12 @@ namespace Pl
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 4000,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2, 6]
-           {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
-           },
+            IsWork = new bool?[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+            },
             IsValidVacationDays = false,
             Recommendations = "",
         };
