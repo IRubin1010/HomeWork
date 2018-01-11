@@ -35,13 +35,7 @@ namespace PLWPF
         {
             try
             {
-                Console.WriteLine(nanny.WorkHours[0][0]);
-                Console.WriteLine(nanny.WorkHours[1][0]);
-                Console.WriteLine(nanny.WorkHours[0][3]);
-                Console.WriteLine(nanny.WorkHours[1][3]);
-                Console.WriteLine(nanny.IsWork[0]);
                 bl.AddNanny(nanny);
-                Console.WriteLine(nanny);
                 nanny = new Nanny();
                 NannyDeatails.DataContext = nanny;
                 Close();
@@ -57,13 +51,9 @@ namespace PLWPF
             new NannyWorkDaysHours(nanny).Show();
         }
 
-        private void textboxes_TextChanged(object sender, TextChangedEventArgs e)
+        private void iDTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableButton();
-        }
-        private void EnableButton()
-        {
-            
+
         }
     }
 }

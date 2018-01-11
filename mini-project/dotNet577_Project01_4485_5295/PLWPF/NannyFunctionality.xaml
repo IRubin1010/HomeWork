@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Content="Add Nanny" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Bottom" Width="100" Click="AddNanny_Click"/>
-        <Button Content="Delete Nanny" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="100"/>
-        <Button Content="Update Nanny" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Delete Nanny" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="100" Click="DeleteNanny_Click"/>
+        <Button Content="Update Nanny" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Top" Width="100" Click="UpdateNanny_Click"/>
     </Grid>
 </Window>
