@@ -37,7 +37,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="ID:"/>
-                <TextBox x:Name="iDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" TextChanged="textboxes_TextChanged"/>
+                <TextBox x:Name="iDTextBox" Width="120"  VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" TextChanged="iDTextBox_TextChanged"/>
                 <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="First Name:"/>
                 <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
                 <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Last Name:"/>
@@ -113,6 +113,6 @@
             <Label Content="Nanny details" HorizontalAlignment="Center" Margin="5" VerticalAlignment="center" FontSize="20"/>
             <Label Content="other details" Grid.Column="1" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
-        <Button Content="submit" HorizontalAlignment="center" Margin="0" Grid.Row="1" VerticalAlignment="Top" Width="200" FontSize="20" Click="submit_Click"/>
+        <Button Name="submit" Content="submit" HorizontalAlignment="center" Margin="0" Grid.Row="1" VerticalAlignment="Top" Width="200" FontSize="20" Click="submit_Click" AutomationProperties.Name="submit"/>
     </Grid>
 </Window>

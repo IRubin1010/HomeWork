@@ -5,13 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="270">
+        Title="MainWindow" Height="400" Width="500">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="20,15"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="IsEditable" Value="True"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -20,12 +35,34 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Mother" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10" VerticalAlignment="Bottom" Width="75"/>
-            <Button Content="Nanny" HorizontalAlignment="Right" Margin="10,10" VerticalAlignment="Bottom" Width="75" Click="Nanny_Click" RenderTransformOrigin="0.504,0.5"/>
-            <Button Content="Child" HorizontalAlignment="Right" Margin="10,10" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-            <Button Content="Contract" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+            <ComboBox Name="mother" Style="{StaticResource ButtonStyle}" Background="Black" Text="Mother" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="add mother"/>
+                <ComboBoxItem Content="delete mother"/>
+                <ComboBoxItem Content="update mother"/>
+            </ComboBox>
+            <ComboBox Style="{StaticResource ButtonStyle}" SelectedIndex="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <ComboBoxItem Content="Nanny"/>
+                <ComboBoxItem Content="add nanny"/>
+                <ComboBoxItem Content="delete nanny"/>
+                <ComboBoxItem Content="update nanny"/>
+            </ComboBox>
+            <ComboBox Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <ComboBoxItem Content="Contract"/>
+                <ComboBoxItem Content="add contract"/>
+                <ComboBoxItem Content="delete contract"/>
+                <ComboBoxItem Content="update contract"/>
+            </ComboBox>
+            <ComboBox Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <ComboBoxItem Content="Child"/>
+                <ComboBoxItem Content="add child"/>
+                <ComboBoxItem Content="delete child"/>
+                <ComboBoxItem Content="update child"/>
+            </ComboBox>
+            <!--<Button Content="Nanny" Style="{StaticResource ButtonStyle}" Click="Nanny_Click"/>
+            <Button Content="Child" Style="{StaticResource ButtonStyle}" Grid.Row="1" />
+            <Button Content="Contract" Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="1"/>-->
         </Grid>
-        <Button Content="Search" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <!--<Button Content="Search" Style="{StaticResource ButtonStyle}" Grid.Row="2" />-->
 
     </Grid>
 </Window>

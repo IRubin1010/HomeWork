@@ -29,5 +29,10 @@ namespace PLWPF
         {
             new NannyFunctionality().Show();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

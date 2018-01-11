@@ -17,21 +17,13 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for NannyWorkDaysHours.xaml
+    /// Interaction logic for UpdateNannyDetailsWindow.xaml
     /// </summary>
-    public partial class NannyWorkDaysHours : Window
+    public partial class UpdateNannyDetailsWindow : Window
     {
-        Nanny Nanny;
-        public NannyWorkDaysHours(Nanny nanny)
+        public UpdateNannyDetailsWindow(Nanny nanny)
         {
             InitializeComponent();
-            Nanny = nanny;
-            WorkDaysHours.DataContext = Nanny;
-        }
-
-        private void submit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

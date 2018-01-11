@@ -1,0 +1,24 @@
+﻿<Window x:Class="PLWPF.UpdateNannyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="Update Nanny" Height="130" Width="270">
+    <Grid Name="update">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="ID:" HorizontalAlignment="center" Margin="0" VerticalAlignment="Center"/>
+            <TextBox Name="IDtextbox" Grid.Column="1" HorizontalAlignment="Center" Height="23" Margin="0" TextWrapping="Wrap" Text="{}" VerticalAlignment="Center" Width="140" TextChanged="TextBox_TextChanged"/>
+        </Grid>
+        <Button Content="update" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="130" FontSize="20" Click="Update_Click"/>
+    </Grid>
+</Window>

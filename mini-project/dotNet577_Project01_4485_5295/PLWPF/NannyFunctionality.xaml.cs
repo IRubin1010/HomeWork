@@ -28,5 +28,15 @@ namespace PLWPF
         {
             new AddNannyWindow().Show();
         }
+
+        private void DeleteNanny_Click(object sender, RoutedEventArgs e)
+        {
+            new DeleteNanny().Show();
+        }
+
+        private void UpdateNanny_Click(object sender, RoutedEventArgs e)
+        {
+            new UpdateNannyWindow().Show();
+        }
     }
 }
