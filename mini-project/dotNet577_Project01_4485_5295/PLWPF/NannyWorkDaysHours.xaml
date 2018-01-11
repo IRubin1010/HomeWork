@@ -1,0 +1,73 @@
+﻿<Window x:Class="PLWPF.NannyWorkDaysHours"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="NannyWorkDaysHours" Height="350" Width="370">
+    
+    <Grid Name="WorkDaysHours">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Content="select work days and work hours" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" FontSize="20"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="WhiteSmoke">
+                <Label Content="day" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+            </Border>
+            <Border Grid.Column="1" Background="WhiteSmoke">
+                <Label Content="work" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+            </Border>
+            <Border Grid.Column="2" Background="WhiteSmoke">
+                <Label Content="begin hour" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+            </Border>
+            <Border Grid.Column="3" Background="WhiteSmoke">
+                <Label Content="end hour" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+            </Border>
+            <Label Content="Sunday" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" FontSize="15"/>
+            <Label Content="Monday" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" FontSize="15"/>
+            <Label Content="Tuesday" HorizontalAlignment="Center" Margin="0" Grid.Row="3" VerticalAlignment="Center" FontSize="15"/>
+            <Label Content="wednesday" HorizontalAlignment="Center" Margin="0" Grid.Row="4" VerticalAlignment="Center" FontSize="15"/>
+            <Label Content="Thursday" HorizontalAlignment="Center" Margin="0" Grid.Row="5" VerticalAlignment="Center" FontSize="15"/>
+            <Label Content="Friday" HorizontalAlignment="Center" Margin="0" Grid.Row="6" VerticalAlignment="Center" FontSize="15"/>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" IsChecked="{Binding IsWork[0], Mode=TwoWay}"/>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" IsChecked="{Binding IsWork[1], Mode=TwoWay}"/>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="3" VerticalAlignment="Center" IsChecked="{Binding IsWork[2], Mode=TwoWay}"/>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="4" VerticalAlignment="Center" IsChecked="{Binding IsWork[3], Mode=TwoWay}"/>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="5" VerticalAlignment="Center" IsChecked="{Binding IsWork[4], Mode=TwoWay}"/>
+            <CheckBox Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="6" VerticalAlignment="Center" IsChecked="{Binding IsWork[5], Mode=TwoWay}"/>
+            <TextBox Name="a1" Text="{Binding WorkHours[0][0],Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="a2" Text="{Binding WorkHours[0][1],Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="a3" Text="{Binding WorkHours[0][2],Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="3" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="a4" Text="{Binding WorkHours[0][3],Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="4" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="a5" Text="{Binding WorkHours[0][4],Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="5" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="a6" Text="{Binding WorkHours[0][5],Mode=TwoWay}" Grid.Column="2" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="6" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="b1" Text="{Binding WorkHours[1][0],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="b2" Text="{Binding WorkHours[1][1],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="b3" Text="{Binding WorkHours[1][2],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="3" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="b4" Text="{Binding WorkHours[1][3],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="4" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="b5" Text="{Binding WorkHours[1][4],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="5" VerticalAlignment="Center" Width="Auto"/>
+            <TextBox Name="b6" Text="{Binding WorkHours[1][5],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="6" VerticalAlignment="Center" Width="Auto"/>
+        </Grid>
+        <Button Content="submit" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="200" FontSize="20" Click="submit_Click"/>
+        
+    </Grid>
+</Window>

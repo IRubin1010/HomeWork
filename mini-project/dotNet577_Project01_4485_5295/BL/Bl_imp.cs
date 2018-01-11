@@ -33,7 +33,7 @@ namespace BL
         /// </remarks>
         public void AddNanny(Nanny nanny)
         {
-            if (nanny.NannyAge < 18)
+            if (nanny.NannyAge < 18 || nanny.NannyAge == null)
                 throw new BLException(nanny.FullName() + " age is under 18", "add nanny");
             try
             {
@@ -50,7 +50,7 @@ namespace BL
         /// </summary>
         /// <param name="nanny">the nanny to delete from NannyList</param>
         /// <remarks>
-        /// accept nanny and send to DeleteNanny(int id) function nanny's id
+        /// accept nanny and send to DeleteNanny(int?? id) function nanny's id
         /// </remarks> 
         public void DeleteNanny(Nanny nanny)
         {
@@ -69,10 +69,10 @@ namespace BL
         /// </summary>
         /// <param name="id">nanny's id of the nanny that want to deletee from NannyList</param>
         /// <remarks>
-        /// accept id and cal dal.DeleteNanny(int id)
+        /// accept id and cal dal.DeleteNanny(int?? id)
         /// before delteting the nanny go over all his contracts and delete them 
         /// </remarks>
-        public void DeleteNanny(int id)
+        public void DeleteNanny(int? id)
         {
             try
             {
@@ -132,10 +132,10 @@ namespace BL
         /// </summary>
         /// <param name="id">the nanny's id that we whant to find</param>
         /// <remarks>
-        /// accept nanny and cal dal.FindNanny(int id)
+        /// accept nanny and cal dal.FindNanny(int?? id)
         /// retrun nanny if find, else return null
         /// </remarks>
-        public Nanny FindNanny(int id)
+        public Nanny FindNanny(int? id)
         {
             Nanny nanny = dal.FindNanny(id);
             return nanny == null ? null : nanny.Clone();
@@ -149,7 +149,7 @@ namespace BL
         /// <remarks>
         /// cal dal.UpdateNannyChildren to update
         /// </remarks>
-        public void UpdateNannyChildren(Nanny nanny, int num)
+        public void UpdateNannyChildren(Nanny nanny, int? num)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to delete from MotherList</param>
         /// <remarks>
-        /// accept mother and send to DeleteMother(int id) function mother's id 
+        /// accept mother and send to DeleteMother(int?? id) function mother's id 
         /// </remarks>
         public void DeleteMother(Mother mother)
         {
@@ -206,11 +206,11 @@ namespace BL
         /// </summary>
         /// <param name="id">mother's id of the mother that want to delete from MotherList</param>
         /// <remarks>
-        /// accept id and cal dal.DeleteMother(int id)
+        /// accept id and cal dal.DeleteMother(int?? id)
         /// before delteting the mother go over all his children 
         /// and delete them (this delete also all conected contracts)
         /// </remarks>
-        public void DeleteMother(int id)
+        public void DeleteMother(int? id)
         {
             try
             {
@@ -268,10 +268,10 @@ namespace BL
         /// </summary>
         /// <param name="id">>the mother's id that we whant to find</param>
         /// <remarks>
-        /// accept mother and cal dal.FindMother(int id)
+        /// accept mother and cal dal.FindMother(int?? id)
         /// retrun mother if find, else return null
         /// </remarks>
-        public Mother FindMother(int id)
+        public Mother FindMother(int? id)
         {
             Mother mother = dal.FindMother(id);
             return mother == null ? null : mother.Clone();
@@ -303,7 +303,7 @@ namespace BL
         /// </summary>
         /// <param name="child">the child to delete from ChildList</param>
         /// <remarks>
-        /// accept child and send to DeleteMother(int id) function child's id
+        /// accept child and send to DeleteMother(int?? id) function child's id
         /// </remarks>
         public void DeleteChild(Child child)
         {
@@ -322,10 +322,10 @@ namespace BL
         /// </summary>
         /// <param name="id">child's id of the child that want to delete from childList</param>
         /// <remarks>
-        /// accept id and cal dal.DeleteChild(int id)
+        /// accept id and cal dal.DeleteChild(int?? id)
         /// befpre deleting the child delete the his contract
         /// </remarks>
-        public void DeleteChild(int id)
+        public void DeleteChild(int? id)
         {
             try
             {
@@ -383,10 +383,10 @@ namespace BL
         /// </summary>
         /// <param name="id">the child's id that we whant to find</param>
         /// <remarks>
-        /// accept child and cal dal.FindChild(int id)
+        /// accept child and cal dal.FindChild(int?? id)
         /// retrun child if find, else return null
         /// </remarks>
-        public Child FindChild(int id)
+        public Child FindChild(int? id)
         {
             Child child = dal.FindChild(id);
             return child == null ? null : child.Clone();
@@ -480,7 +480,7 @@ namespace BL
         /// </summary>
         /// <param name="contract">the contract to delete from ContractList</param>
         /// <remarks>
-        /// accept contract and send to DeleteContract(int contractNumber) function contract's contractNumber
+        /// accept contract and send to DeleteContract(int?? contractNumber) function contract's contractNumber
         /// </remarks>
         public void DeleteContract(Contract contract)
         {
@@ -499,10 +499,10 @@ namespace BL
         /// </summary>
         /// <param name="contractNumber">Contract's number of the contract that want to delete</param>
         /// <remarks>
-        /// accept contractNumber and cal dal.DeleteContract(int contractNumber)
+        /// accept contractNumber and cal dal.DeleteContract(int?? contractNumber)
         /// before deleting update number of nanny's children, and the child has nanny
         /// </remarks>
-        public void DeleteContract(int contractNumber)
+        public void DeleteContract(int? contractNumber)
         {
             Contract contract = FindContract(contractNumber);
             if (contract != null)
@@ -578,10 +578,10 @@ namespace BL
         /// </summary>
         /// <param name="contractNumber">the contract's number that we whant to find</param>
         /// <remarks>
-        /// accept contractNumber and cal dal.FindChild(int contractNumber)
+        /// accept contractNumber and cal dal.FindChild(int?? contractNumber)
         /// retrun contract if find, else return null
         /// </remarks>
-        public Contract FindContract(int contractNumber)
+        public Contract FindContract(int? contractNumber)
         {
             Contract contract = dal.FindContract(contractNumber);
             return contract == null ? null : contract.Clone();
@@ -619,7 +619,7 @@ namespace BL
             }
             // if monthly fee
             if (contract.IsPaymentByHour == false)
-                contract.FinalPayment = contract.MonthlyFee * discount;
+                contract.FinalPayment = (int)contract.MonthlyFee * discount;
             // if hourly fee
             else
             {
@@ -627,16 +627,16 @@ namespace BL
                 // calculate the actual hours 
                 for (int i = 0; i < 6; i++)
                 {
-                    if (mother.NeedNannyHours[1, i] <= nanny.WorkHours[1, i])
+                    if (mother.NeedNannyHours[1, i] <= nanny.WorkHours[1][i])
                         hoursPerWeek += mother.NeedNannyHours[1, i].TotalHours;
                     else
-                        hoursPerWeek += nanny.WorkHours[1, i].TotalHours;
-                    if (mother.NeedNannyHours[0, i] <= nanny.WorkHours[0, i])
-                        hoursPerWeek -= nanny.WorkHours[0, i].TotalHours;
+                        hoursPerWeek += nanny.WorkHours[1][i].TotalHours;
+                    if (mother.NeedNannyHours[0, i] <= nanny.WorkHours[0][i])
+                        hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
                     else
                         hoursPerWeek -= mother.NeedNannyHours[0, i].TotalHours;
                 }
-                contract.FinalPayment = hoursPerWeek * discount * contract.HourlyFee;
+                contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee;
             }
         }
 
@@ -679,7 +679,7 @@ namespace BL
         /// </summary>
         /// <param name="addressA">the address to calculate from</param>
         /// <param name="addressB">the address to calculate to</param>
-        public int Distance(string addressA, string addressB)
+        public int? Distance(string addressA, string addressB)
         {
             var drivingDirectionRequest = new DirectionsRequest
             {
@@ -713,8 +713,8 @@ namespace BL
             // go over nanny and mother hours and check the match
             for (int i = 0; i < 6; i++)
             {
-                if (nanny.IsWork[i])
-                    if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0, i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1, i])
+                if ((bool)nanny.IsWork[i])
+                    if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0][i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1][i])
                         return false;
             }
             return true;
@@ -763,7 +763,7 @@ namespace BL
         /// <param name="mother">mother to chack range of Km</param>
         /// <param name="nanny">nanny to chack if is in the range of Km</param>
         /// <param name="Km">the range of Km to check</param>
-        public bool IsNannyInKM(Mother mother, Nanny nanny, int Km)
+        public bool IsNannyInKM(Mother mother, Nanny nanny, int? Km)
         {
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
             if (Distance(address, nanny.Address) > Km * 1000)
@@ -777,7 +777,7 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
         /// <param name="Km">the range of Km to check</param>
-        public List<Nanny> NannysInKMWithConditions(Mother mother, int Km)
+        public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km)
         {
             return MotherConditions(mother).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
         }
@@ -789,7 +789,7 @@ namespace BL
         /// </summary>
         /// <param name="mother">mother to check match</param>
         /// <param name="Km">the range of Km</param>
-        public List<Nanny> PropertiesMatch(Mother mother, int Km)
+        public List<Nanny> PropertiesMatch(Mother mother, int? Km)
         {
             // give value for each mother's need
             // if the nanny match this need give it a value 
@@ -815,7 +815,7 @@ namespace BL
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        public List<Nanny> PartialMatch(Mother mother, int Km)
+        public List<Nanny> PartialMatch(Mother mother, int? Km)
         {
             return PropertiesMatch(mother, Km).OrderByDescending(nanny => nanny.SumValue)
                 .Take(5).ToList();
@@ -851,7 +851,7 @@ namespace BL
         /// return the number of contracts that meet certain conditions 
         /// </summary>
         /// <param name="contractCondition">boolean func that chack some conditions</param>
-        public int NumOfSpesificsContracts(Func<Contract, bool> contractCondition)
+        public int? NumOfSpesificsContracts(Func<Contract, bool> contractCondition)
         {
             return SpesificsContracts(contractCondition).Count;
         }
@@ -905,7 +905,7 @@ namespace BL
         /// return a list of nanny hwo have less then "num" children
         /// </summary>
         /// <param name="num">number of children</param>
-        public List<Nanny> NannyWitheChildrenLessThen(int num)
+        public List<Nanny> NannyWitheChildrenLessThen(int? num)
         {
             return CloneNannyList().Where(nanny => nanny.Children <= num).ToList();
         }
@@ -915,9 +915,9 @@ namespace BL
         /// </summary>
         /// <param name="orderByMaxAge">if to order by max age</param>
         /// <param name="order">if to order at all</param>
-        public IEnumerable<IGrouping<int, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
+        public IEnumerable<IGrouping<int?, Nanny>> GruopNannyByChildAge(bool orderByMaxAge, bool order)
         {
-            IEnumerable<IGrouping<int, Nanny>> group;
+            IEnumerable<IGrouping<int?, Nanny>> group;
             if (order)
             {
                 group = from nanny in CloneNannyList()
@@ -937,12 +937,12 @@ namespace BL
         /// calculate the distance between a mother and nanny
         /// </summary>
         /// <param name="contract">contract to calculate the distance</param>
-        public int DistanceBetweenNannyAndMother(Contract contract)
+        public int? DistanceBetweenNannyAndMother(Contract contract)
         {
             Mother mother = FindMother(contract.MotherID);
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
             // the distance function returns meter that's why they divide by 5000
-            int distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000; 
+            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000; 
             if (distance == 0)
                 return 5;
             return (distance + 1) * 5;
@@ -952,9 +952,9 @@ namespace BL
         /// return a group of contract group by the distance between nanny and mother
         /// </summary>
         /// <param name="order">if to order</param>
-        public IEnumerable<IGrouping<int, Contract>> GroupContractByDistance(bool order)
+        public IEnumerable<IGrouping<int?, Contract>> GroupContractByDistance(bool order)
         {
-            IEnumerable<IGrouping<int, Contract>> group;
+            IEnumerable<IGrouping<int?, Contract>> group;
             if (order)
                 group = from contract in CloneContractList()
                         group contract by DistanceBetweenNannyAndMother(contract) into g

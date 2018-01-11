@@ -25,7 +25,7 @@ namespace DAL
         /// delete nanny from nanny's DB
         /// </summary>
         /// <param name="id">nanny's id of the nanny that want to deletee from NannyList</param>
-        void DeleteNanny(int id);
+        void DeleteNanny(int? id);
         /// <summary>
         /// update nanny 
         /// </summary>
@@ -40,13 +40,13 @@ namespace DAL
         /// find nanny with given ID
         /// </summary>
         /// <param name="id">the nanny's id that we whant to find</param>
-        Nanny FindNanny(int id);
+        Nanny FindNanny(int? id);
         /// <summary>
         /// update the numabr of nanny's children
         /// </summary>
         /// <param name="nanny">the nanny that we whnt to update her children number</param>
         /// <param name="num">flag, if num = 1 add 1 else sub 1 </param>
-        void UpdateNannyChildren(Nanny nanny, int num);
+        void UpdateNannyChildren(Nanny nanny, int? num);
 
         // Mother functions
 
@@ -64,7 +64,7 @@ namespace DAL
         /// delete mother from mother's DB
         /// </summary>
         /// <param name="id">mother's id of the mother that want to delete from MotherList</param>
-        void DeleteMother(int id);
+        void DeleteMother(int? id);
         /// <summary>
         /// update mother
         /// </summary>
@@ -79,7 +79,7 @@ namespace DAL
         /// find mother with givan ID
         /// </summary>
         /// <param name="id">>the mother's id that we whant to find</param>
-        Mother FindMother(int id);
+        Mother FindMother(int? id);
 
         // Child functions 
 
@@ -97,7 +97,7 @@ namespace DAL
         /// delete child from child's DB
         /// </summary>
         /// <param name="id">child's id of the child that want to delete from childList</param>
-        void DeleteChild(int id);
+        void DeleteChild(int? id);
         /// <summary>
         /// update child
         /// </summary>
@@ -112,7 +112,7 @@ namespace DAL
         /// find child with given ID
         /// </summary>
         /// <param name="id">the child's id that we whant to find</param>
-        Child FindChild(int id);
+        Child FindChild(int? id);
         /// <summary>
         /// update if the child has nanny
         /// </summary>
@@ -136,7 +136,7 @@ namespace DAL
         /// delete contract from contract's DB
         /// </summary>
         /// <param name="contractNumber">Contract's number of the contract that want to delete</param>
-        void DeleteContract(int contractNumber);
+        void DeleteContract(int? contractNumber);
         /// <summary>
         /// update contract
         /// </summary>
@@ -151,7 +151,7 @@ namespace DAL
         /// find contract with given contrat number
         /// </summary>
         /// <param name="contractNumber">the contract's number that we whant to find</param>
-        Contract FindContract(int contractNumber);
+        Contract FindContract(int? contractNumber);
 
         // list return functions
 
