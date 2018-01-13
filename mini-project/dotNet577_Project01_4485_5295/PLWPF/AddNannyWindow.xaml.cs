@@ -51,10 +51,6 @@ namespace PLWPF
             new NannyWorkDaysHours(nanny).Show();
         }
 
-        private void iDTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
 

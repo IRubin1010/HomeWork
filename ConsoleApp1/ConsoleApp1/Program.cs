@@ -18,11 +18,17 @@ namespace ConsoleApp1
             b.a = 10;
             Console.WriteLine(a.a);
             Console.WriteLine(b.a);
+            int[][] d = new int[3][];
+            DateTime da = new DateTime(1990, 1, 1);
+            Console.WriteLine(da.ToString("dd/MM/yyyy"));
+            
         }
     }
     public class A
     {
-        public int? a { get; set; }
+        private int b;
+        public int a { get { return b; } set { } }
+        public int[][] c = new int[3][];
         public A Clone()
         {
             return (A)MemberwiseClone();

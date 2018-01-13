@@ -21,21 +21,28 @@ namespace PLWPF
     /// </summary>
     public partial class UpdateNannyWindow : Window
     {
-        Nanny nanny;
         IBL bl;
+        Nanny nanny;
+        List<Nanny> nannyList;
         public UpdateNannyWindow()
         {
             InitializeComponent();
             bl = FactoryBL.GetBL();
+            nannyList = bl.CloneNannyList();
+            list.DataContext = nannyList;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int id = int.Parse(IDtextbox.Text);
-            nanny = bl.FindNanny(id);
-            if (nanny != null)
+            TextBox text = sender as TextBox;
+            if (text.Text != null)
             {
-                new UpdateNannyDetailsWindow(nanny).Show();
+                int id = int.Parse(IDtextbox.Text);
+                nanny = bl.FindNanny(id);
+                if (nanny != null)
+                {
+                    NannyToDelete.DataContext = nanny;
+                }
             }
         }
 
@@ -59,5 +66,16 @@ namespace PLWPF
             }
         }
 
+        private void WorkDaysHours(object sender, RoutedEventArgs e)
+        {
+            new NannyWorkDaysHours(nanny).Show();
+        }
+
+        private void NannySelected(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            nanny = (Nanny)comboBox.SelectedItem;
+            NannyToDelete.DataContext = nanny;
+        }
     }
 }

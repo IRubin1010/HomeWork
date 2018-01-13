@@ -14,9 +14,6 @@
             <Setter Property="Margin" Value="20,15"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Focusable" Value="False"/>
-            <Setter Property="IsEditable" Value="True"/>
-            <Setter Property="IsReadOnly" Value="True"/>
         </Style>
         
     </Window.Resources>
@@ -35,34 +32,36 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Name="mother" Style="{StaticResource ButtonStyle}" Background="Black" Text="Mother" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox Name="mother" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectionChanged="MotherSelectionChanged">
+                <ComboBoxItem Content="Mother" Visibility="Collapsed"/>
                 <ComboBoxItem Content="add mother"/>
                 <ComboBoxItem Content="delete mother"/>
                 <ComboBoxItem Content="update mother"/>
             </ComboBox>
-            <ComboBox Style="{StaticResource ButtonStyle}" SelectedIndex="0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <ComboBoxItem Content="Nanny"/>
-                <ComboBoxItem Content="add nanny"/>
-                <ComboBoxItem Content="delete nanny"/>
-                <ComboBoxItem Content="update nanny"/>
+            <ComboBox Name="nanny" Style="{StaticResource ButtonStyle}" SelectedIndex="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" SelectionChanged="NannySelectionChanged">
+                <ComboBoxItem Content="Nanny" Visibility="Collapsed" />
+                <ComboBoxItem Content="add nanny" Selected="AddNannySelect"/>
+                <ComboBoxItem Content="delete nanny" Selected="DeleteNannySelect"/>
+                <ComboBoxItem Content="update nanny" Selected="UpdateNannySelect"/>
             </ComboBox>
-            <ComboBox Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <ComboBoxItem Content="Contract"/>
+            <ComboBox Name="contract" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ContractSelectionChanged">
+                <ComboBoxItem Content="Contract" Visibility="Collapsed"/>
                 <ComboBoxItem Content="add contract"/>
                 <ComboBoxItem Content="delete contract"/>
                 <ComboBoxItem Content="update contract"/>
             </ComboBox>
-            <ComboBox Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <ComboBoxItem Content="Child"/>
+            <ComboBox Name="child" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="ChildSelectionChanged">
+                <ComboBoxItem Content="Child" Visibility="Collapsed"/>
                 <ComboBoxItem Content="add child"/>
                 <ComboBoxItem Content="delete child"/>
                 <ComboBoxItem Content="update child"/>
             </ComboBox>
-            <!--<Button Content="Nanny" Style="{StaticResource ButtonStyle}" Click="Nanny_Click"/>
-            <Button Content="Child" Style="{StaticResource ButtonStyle}" Grid.Row="1" />
-            <Button Content="Contract" Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="1"/>-->
         </Grid>
-        <!--<Button Content="Search" Style="{StaticResource ButtonStyle}" Grid.Row="2" />-->
-
+        <ComboBox Name="search" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0" SelectionChanged="SearchSelectionChanged">
+            <ComboBoxItem Content="Search" Visibility="Collapsed"/>
+            <ComboBoxItem Content="search"/>
+            <ComboBoxItem Content="search"/>
+            <ComboBoxItem Content="search"/>
+        </ComboBox>
     </Grid>
 </Window>

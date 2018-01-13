@@ -16,24 +16,19 @@ using BE;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for NannyWorkDaysHours.xaml
+    /// Interaction logic for NannyWorkDaysHoursDelete.xaml
     /// </summary>
-    public partial class NannyWorkDaysHours : Window
+    public partial class NannyWorkDaysHoursDelete : Window
     {
         Nanny Nanny;
-        public NannyWorkDaysHours(Nanny nanny)
+        public NannyWorkDaysHoursDelete(Nanny nanny)
         {
-            InitializeComponent();
             if (nanny != null)
                 Nanny = nanny;
             else
                 Nanny = new Nanny();
+            InitializeComponent();
             WorkDaysHours.DataContext = Nanny;
-        }
-
-        private void submit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }
