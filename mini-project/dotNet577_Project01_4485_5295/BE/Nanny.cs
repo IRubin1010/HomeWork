@@ -13,6 +13,7 @@ namespace BE
         public int? ID { get { return id; }  set { if (value >= 100000000 && value <= 999999999) id = value; else throw new Exception("iligell ID"); } }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }
         public DateTime BirthDate { get; set; }
         public int? NannyAge { get; set; }
         public int? PhoneNumber { get; set; }

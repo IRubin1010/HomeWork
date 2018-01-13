@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="NannyWorkDaysHours" Height="350" Width="370">
-    
+
     <Grid Name="WorkDaysHours">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -42,7 +42,7 @@
             <Border Grid.Column="3" Background="WhiteSmoke">
                 <Label Content="end hour" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
             </Border>
-            <Label Content="Sunday" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center" FontSize="15"/>
+            <Label Content="Sunday" HorizontalAlignment="Center" Margin="32,0,32.333,2" Grid.Row="1" VerticalAlignment="Bottom" FontSize="15"/>
             <Label Content="Monday" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" FontSize="15"/>
             <Label Content="Tuesday" HorizontalAlignment="Center" Margin="0" Grid.Row="3" VerticalAlignment="Center" FontSize="15"/>
             <Label Content="wednesday" HorizontalAlignment="Center" Margin="0" Grid.Row="4" VerticalAlignment="Center" FontSize="15"/>
@@ -68,6 +68,6 @@
             <TextBox Name="b6" Text="{Binding WorkHours[1][5],Mode=TwoWay}" Grid.Column="3" HorizontalAlignment="Center" Height="23" Margin="0" Grid.Row="6" VerticalAlignment="Center" Width="Auto"/>
         </Grid>
         <Button Content="submit" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="200" FontSize="20" Click="submit_Click"/>
-        
+
     </Grid>
 </Window>

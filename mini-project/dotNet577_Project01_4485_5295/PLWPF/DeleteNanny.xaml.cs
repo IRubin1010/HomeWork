@@ -23,25 +23,29 @@ namespace PLWPF
     {
         IBL bl;
         Nanny nanny;
-        string name;
+        List<Nanny> nannyList;
         public DeleteNanny()
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();  
-            Name.DataContext = this;
+            bl = FactoryBL.GetBL();
+            nannyList = bl.CloneNannyList();
+            list.DataContext = nannyList;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int id = int.Parse(IDtextbox.Text);
-            nanny = bl.FindNanny(id);
-            if (nanny != null)
+            TextBox text = sender as TextBox;
+            if (text.Text != null)
             {
-                name = nanny.FullName();
-                BindingExpression be = Nametextblock.GetBindingExpression(TextBlock.TextProperty);
-                Nametextblock.Text = name;
-                be.UpdateSource();
+                int id = int.Parse(IDtextbox.Text);
+                nanny = bl.FindNanny(id);
+                if (nanny != null)
+                {
+                    NannyToDelete.DataContext = nanny;
+                    nanny = new Nanny();
+                }
             }
+
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -62,6 +66,19 @@ namespace PLWPF
             {
                 MessageBox.Show("ther is no such nanny", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void NannySelected(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            nanny = (Nanny)comboBox.SelectedItem;
+            NannyToDelete.DataContext = nanny;
+            nanny = new Nanny();
+        }
+
+        private void WorkDaysHours(object sender, RoutedEventArgs e)
+        {
+            new NannyWorkDaysHoursDelete(nanny).Show();
         }
     }
 }

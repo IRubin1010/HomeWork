@@ -25,14 +25,44 @@ namespace PLWPF
             InitializeComponent();
         }
 
-        private void Nanny_Click(object sender, RoutedEventArgs e)
+        private void NannySelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            new NannyFunctionality().Show();
+            nanny.SelectedIndex = 0;
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MotherSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            mother.SelectedIndex = 0;
+        }
 
+        private void ChildSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            child.SelectedIndex = 0;
+        }
+
+        private void ContractSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            contract.SelectedIndex = 0;
+        }
+
+        private void SearchSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            search.SelectedIndex = 0;
+        }
+
+        private void AddNannySelect(object sender, RoutedEventArgs e)
+        {
+            new AddNannyWindow().Show();
+        }
+
+        private void DeleteNannySelect(object sender, RoutedEventArgs e)
+        {
+            new DeleteNanny().Show();
+        }
+
+        private void UpdateNannySelect(object sender, RoutedEventArgs e)
+        {
+            new UpdateNannyWindow().Show();
         }
     }
 }
