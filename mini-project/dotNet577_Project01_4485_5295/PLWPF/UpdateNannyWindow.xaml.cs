@@ -35,7 +35,7 @@ namespace PLWPF
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox text = sender as TextBox;
-            if (text.Text != null)
+            if (text.Text != "")
             {
                 int id = int.Parse(IDtextbox.Text);
                 nanny = bl.FindNanny(id);
