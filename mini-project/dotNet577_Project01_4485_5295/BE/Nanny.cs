@@ -10,7 +10,8 @@ namespace BE
     {
         //Properties//
         private int? id;
-        public int? ID { get { return id; }  set { if (value >= 100000000 && value <= 999999999) id = value; else throw new Exception("iligell ID"); } }
+        public int? ID { get; set; }
+        // public int? ID { get { return id; }  set { if (value >= 100000000 && value <= 999999999) id = value; else throw new Exception("iligell ID"); } }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }
@@ -44,13 +45,13 @@ namespace BE
         public Nanny()
         {
             BirthDate = new DateTime(1990, 1, 1);
-            IsWork = new bool?[6] { false,false,false,false,false,false};
+            IsWork = new bool?[6] { false, false, false, false, false, false };
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
                 new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) }
             };
-             
+
         }
 
         //override//
@@ -125,7 +126,7 @@ namespace BE
                     "monthly fee: " + MonthlyFee + '\n' +
                     "day and hours work: \n \t" + dayWorkHors +
                     "valid vacation days: " + IsValidVacationDays + '\n' +
-                    "recomendations: " + Recommendations + '\n';    
+                    "recomendations: " + Recommendations + '\n';
         }
         public override bool Equals(object obj)
         {
@@ -134,7 +135,7 @@ namespace BE
             if (nanny == null) return false;
             return ID == nanny.ID;
         }
-        
+
 
         /// <summary>
         /// clone nanny

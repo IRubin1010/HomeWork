@@ -57,6 +57,7 @@
     <Compile Include="AddMotherWindow.xaml.cs">
       <DependentUpon>AddMotherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IntColorConverter.cs" />
     <Compile Include="NannyWorkDaysHoursDelete.xaml.cs">
       <DependentUpon>NannyWorkDaysHoursDelete.xaml</DependentUpon>
     </Compile>
