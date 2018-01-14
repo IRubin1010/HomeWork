@@ -548,11 +548,11 @@ namespace Pl
             WantElevator = true,
             MinSeniority = 3,
             MaxFloor = 4,
-            NeedNanny = new bool[6] { true, true, true, true, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
             {
-                    { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                    { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
+                    new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                    new TimeSpan[6] { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
             },
             Remarks = ""
         };
@@ -567,11 +567,11 @@ namespace Pl
             WantElevator = true,
             MinSeniority = 4,
             MaxFloor = 2,
-            NeedNanny = new bool[6] { false, true, true, true, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { false, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
             {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
+                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
             },
             Remarks = ""
         };
@@ -586,11 +586,11 @@ namespace Pl
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 1,
-            NeedNanny = new bool[6] { true, true, true, false, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, true, true, false, true, true },
+            NeedNannyHours = new TimeSpan[2][]
            {
-                { new TimeSpan(7,0,0), new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) },
-                { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
+                new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) },
+                new TimeSpan[6] { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
            },
             Remarks = ""
         };
@@ -605,11 +605,11 @@ namespace Pl
             WantElevator = false,
             MinSeniority = 2,
             MaxFloor = 2,
-            NeedNanny = new bool[6] { true, true, true, true, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
            {
-                { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) },
-                { new TimeSpan(16,0,0), new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16, 30, 0) }
+                new TimeSpan[6] { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) },
+                new TimeSpan[6] { new TimeSpan(16,0,0), new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16, 30, 0) }
            },
             Remarks = ""
         };
@@ -624,11 +624,11 @@ namespace Pl
             WantElevator = true,
             MinSeniority = 3,
             MaxFloor = 3,
-            NeedNanny = new bool[6] { true, true, true, true, false, false },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, true, true, true, false, false },
+            NeedNannyHours = new TimeSpan[2][]
            {
-                { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) },
-                { new TimeSpan(14,0,0), new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) }
+                new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) },
+                new TimeSpan[6] { new TimeSpan(14,0,0), new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) }
            },
             Remarks = ""
         };
@@ -643,11 +643,11 @@ namespace Pl
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 4,
-            NeedNanny = new bool[6] { true, false, true, true, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, false, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
            {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
+                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
            },
             Remarks = ""
         };
@@ -662,11 +662,11 @@ namespace Pl
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,
-            NeedNanny = new bool[6] { true, true, true, true, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
            {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
+                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
            },
             Remarks = ""
         };
@@ -681,11 +681,11 @@ namespace Pl
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,
-            NeedNanny = new bool[6] { true, true, true, true, true, true },
-            NeedNannyHours = new TimeSpan[2, 6]
+            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
    {
-                { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
+                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
    },
             Remarks = ""
         };

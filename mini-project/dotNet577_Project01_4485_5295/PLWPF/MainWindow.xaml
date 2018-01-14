@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox Name="mother" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectionChanged="MotherSelectionChanged">
                 <ComboBoxItem Content="Mother" Visibility="Collapsed"/>
-                <ComboBoxItem Content="add mother"/>
+                <ComboBoxItem Content="add mother" Selected="AddMotherSelect"/>
                 <ComboBoxItem Content="delete mother"/>
                 <ComboBoxItem Content="update mother"/>
             </ComboBox>

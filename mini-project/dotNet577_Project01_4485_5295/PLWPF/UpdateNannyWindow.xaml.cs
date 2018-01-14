@@ -41,7 +41,7 @@ namespace PLWPF
                 nanny = bl.FindNanny(id);
                 if (nanny != null)
                 {
-                    NannyToDelete.DataContext = nanny;
+                    NannyToUpdate.DataContext = nanny;
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace PLWPF
         {
             ComboBox comboBox = sender as ComboBox;
             nanny = (Nanny)comboBox.SelectedItem;
-            NannyToDelete.DataContext = nanny;
+            NannyToUpdate.DataContext = nanny;
         }
     }
 }

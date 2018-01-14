@@ -627,14 +627,14 @@ namespace BL
                 // calculate the actual hours 
                 for (int i = 0; i < 6; i++)
                 {
-                    if (mother.NeedNannyHours[1, i] <= nanny.WorkHours[1][i])
-                        hoursPerWeek += mother.NeedNannyHours[1, i].TotalHours;
+                    if (mother.NeedNannyHours[1][i] <= nanny.WorkHours[1][i])
+                        hoursPerWeek += mother.NeedNannyHours[1][i].TotalHours;
                     else
                         hoursPerWeek += nanny.WorkHours[1][i].TotalHours;
-                    if (mother.NeedNannyHours[0, i] <= nanny.WorkHours[0][i])
+                    if (mother.NeedNannyHours[0][i] <= nanny.WorkHours[0][i])
                         hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
                     else
-                        hoursPerWeek -= mother.NeedNannyHours[0, i].TotalHours;
+                        hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
                 }
                 contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee;
             }
@@ -714,7 +714,7 @@ namespace BL
             for (int i = 0; i < 6; i++)
             {
                 if ((bool)nanny.IsWork[i])
-                    if (mother.NeedNannyHours[0, i] < nanny.WorkHours[0][i] || mother.NeedNannyHours[1, i] > nanny.WorkHours[1][i])
+                    if (mother.NeedNannyHours[0][i] < nanny.WorkHours[0][i] || mother.NeedNannyHours[1][i] > nanny.WorkHours[1][i])
                         return false;
             }
             return true;
