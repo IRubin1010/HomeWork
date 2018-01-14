@@ -69,7 +69,7 @@
             <Label Content="or select" Grid.Column="2" Style="{StaticResource LebelRwo1Style}"/>
             <ComboBox Name="list" Grid.Column="3" ItemsSource="{Binding}" DisplayMemberPath="FullNameAndID" Style="{StaticResource ComboBoxRow1Style}" SelectionChanged="NannySelected"/>
         </Grid>
-        <Grid Grid.Row="1" Name="NannyToDelete">
+        <Grid Grid.Row="1" Name="NannyToUpdate">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>

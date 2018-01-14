@@ -18,9 +18,19 @@ namespace BE
         public bool WantElevator { get; set; }
         public int? MinSeniority { get; set; }
         public int? MaxFloor { get; set; }
-        public bool[] NeedNanny;
-        public TimeSpan[,] NeedNannyHours;
+        public bool?[] NeedNanny { get; set; }
+        public TimeSpan[][] NeedNannyHours { get; set; }
         public string Remarks { get; set; }
+
+        public Mother()
+        {
+            NeedNanny = new bool?[6] { false, false, false, false, false, false };
+            NeedNannyHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
+                new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) }
+            };
+        }
 
         //override//
         public override string ToString()
@@ -33,42 +43,42 @@ namespace BE
                     case 0:
                         needNannyDaysAndHours += "Sunday: ";
                         if (NeedNanny[i] == true)
-                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                            needNannyDaysAndHours += NeedNannyHours[0][i] + " - " + NeedNannyHours[1][i] + '\n' + '\t';
                         else
                             needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 1:
                         needNannyDaysAndHours += "Monday: ";
                         if (NeedNanny[i] == true)
-                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                            needNannyDaysAndHours += NeedNannyHours[0][i] + " - " + NeedNannyHours[1][i] + '\n' + '\t';
                         else
                             needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 2:
                         needNannyDaysAndHours += "Tuesday: ";
                         if (NeedNanny[i] == true)
-                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                            needNannyDaysAndHours += NeedNannyHours[0][i] + " - " + NeedNannyHours[1][i] + '\n' + '\t';
                         else
                             needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 3:
                         needNannyDaysAndHours += "Wednesday: ";
                         if (NeedNanny[i] == true)
-                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                            needNannyDaysAndHours += NeedNannyHours[0][i] + " - " + NeedNannyHours[1][i] + '\n' + '\t';
                         else
                             needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 4:
                         needNannyDaysAndHours += "Thursday: ";
                         if (NeedNanny[i] == true)
-                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i] + '\n' + '\t';
+                            needNannyDaysAndHours += NeedNannyHours[0][i] + " - " + NeedNannyHours[1][i] + '\n' + '\t';
                         else
                             needNannyDaysAndHours += "don't need nanny \n \t";
                         break;
                     case 5:
                         needNannyDaysAndHours += "Friday: ";
                         if (NeedNanny[i] == true)
-                            needNannyDaysAndHours += NeedNannyHours[0, i] + " - " + NeedNannyHours[1, i];
+                            needNannyDaysAndHours += NeedNannyHours[0][i] + " - " + NeedNannyHours[1][i];
                         else
                             needNannyDaysAndHours += "don't need nanny";
                         break;
@@ -102,8 +112,8 @@ namespace BE
         public Mother Clone()
         {
             Mother mother = (Mother)MemberwiseClone();
-            mother.NeedNanny = (bool[])NeedNanny.Clone();
-            mother.NeedNannyHours = (TimeSpan[,])NeedNannyHours.Clone();
+            mother.NeedNanny = (bool?[])NeedNanny.Clone();
+            mother.NeedNannyHours = (TimeSpan[][])NeedNannyHours.Clone();
             return mother;
         }
 

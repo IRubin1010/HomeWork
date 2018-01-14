@@ -6,54 +6,176 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddMotherWindow"
         mc:Ignorable="d"
-        Title="AddMotherWindow" Height="500" Width="500" Loaded="Window_Loaded">
+        Title="Add Mother" Height="600" Width="515">
     <Window.Resources>
-        <CollectionViewSource x:Key="motherViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Mother}, CreateList=True}"/>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="0"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="23"/>
+        </Style>
+        <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="1"/>
+        </Style>
+
+        <Style x:Key="TableLabelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="TableCheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Grid.Column" Value="1"/>
+        </Style>
+        <Style x:Key="TebleTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="23"/>
+        </Style>
+
     </Window.Resources>
-    <Grid>
+    <Grid Name="MotherDetails">
         <Grid.RowDefinitions>
+            <RowDefinition Height="220"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="181,130,0,0" HorizontalAlignment="Left" DataContext="{StaticResource motherViewSource}">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Address:"/>
-            <TextBox x:Name="addressTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="First Name:"/>
-            <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="2" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="ID:"/>
-            <TextBox x:Name="iDTextBox" Width="120" VerticalAlignment="Center" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Last Name:"/>
-            <TextBox x:Name="lastNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Max Floor:"/>
-            <TextBox x:Name="maxFloorTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MaxFloor, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Min Seniority:"/>
-            <TextBox x:Name="minSeniorityTextBox" Width="120" VerticalAlignment="Center" Text="{Binding MinSeniority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Phone Number:"/>
-            <TextBox x:Name="phoneNumberTextBox" Width="120" VerticalAlignment="Center" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Remarks:"/>
-            <TextBox x:Name="remarksTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="8" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Search Area For Nanny:"/>
-            <TextBox x:Name="searchAreaForNannyTextBox" Width="120" VerticalAlignment="Center" Text="{Binding SearchAreaForNanny, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="9" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Want Elevator:"/>
-            <CheckBox x:Name="wantElevatorCheckBox" VerticalAlignment="Center" Grid.Row="9" Margin="3" IsChecked="{Binding WantElevator, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="1" Content=""/>
+            <Label Content="mother details" Margin="45,5,0,5" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+            <Label Content="other details" Grid.Column="1" Margin="5" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <Grid x:Name="grid1" Grid.Row="1" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="iDTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
+                <Label Content="First Name:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="firstNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
+                <Label Content="Last Name:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="lastNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
+                <Label Content="Address:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="addressTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
+                <Label Content="Phone Number:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="phoneNumberTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
+            </Grid>
+            <Grid x:Name="grid2" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Min Seniority:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="minSeniorityTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding MinSeniority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
+                <Label Content="Max Floor:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="maxFloorTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding MaxFloor, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
+                <Label Content="Want Elevator:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
+                <CheckBox x:Name="wantElevatorCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding WantElevator, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
+                <Label Content="Search Area For Nanny:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="searchAreaForNannyTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding SearchAreaForNanny, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
+                <Label Content="Remarks:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="remarksTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
+            </Grid>
         </Grid>
-
+        <Border Grid.Row="1" BorderThickness="0 1 0 1" BorderBrush="LightGray">
+            <Grid Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="select days and hours the mother needs the nanny" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="WhiteSmoke">
+                        <Label Content="day" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    </Border>
+                    <Border Grid.Column="1" Background="WhiteSmoke">
+                        <Label Content="work" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    </Border>
+                    <Border Grid.Column="2" Background="WhiteSmoke">
+                        <Label Content="begin hour" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    </Border>
+                    <Border Grid.Column="3" Background="WhiteSmoke">
+                        <Label Content="end hour" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    </Border>
+                    <Label Content="Sunday" Style="{StaticResource TableLabelStyle}" Grid.Row="1"/>
+                    <Label Content="Monday" Style="{StaticResource TableLabelStyle}" Grid.Row="2"/>
+                    <Label Content="Tuesday" Style="{StaticResource TableLabelStyle}" Grid.Row="3"/>
+                    <Label Content="wednesday" Style="{StaticResource TableLabelStyle}" Grid.Row="4"/>
+                    <Label Content="Thursday" Style="{StaticResource TableLabelStyle}" Grid.Row="5"/>
+                    <Label Content="Friday" Style="{StaticResource TableLabelStyle}" Grid.Row="6"/>
+                    <CheckBox Name="Sunday" Style="{StaticResource TableCheckBoxStyle}" Grid.Row="1" IsChecked="{Binding NeedNanny[0], Mode=TwoWay}"/>
+                    <CheckBox Name="Monday" Style="{StaticResource TableCheckBoxStyle}" Grid.Row="2" IsChecked="{Binding NeedNanny[1], Mode=TwoWay}"/>
+                    <CheckBox Name="Tuesday" Style="{StaticResource TableCheckBoxStyle}" Grid.Row="3" IsChecked="{Binding NeedNanny[2], Mode=TwoWay}"/>
+                    <CheckBox Name="wednesday" Style="{StaticResource TableCheckBoxStyle}" Grid.Row="4" IsChecked="{Binding NeedNanny[3], Mode=TwoWay}"/>
+                    <CheckBox Name="Thursday" Style="{StaticResource TableCheckBoxStyle}" Grid.Row="5" IsChecked="{Binding NeedNanny[4], Mode=TwoWay}"/>
+                    <CheckBox Name="Friday" Style="{StaticResource TableCheckBoxStyle}" Grid.Row="6" IsChecked="{Binding NeedNanny[5], Mode=TwoWay}"/>
+                    <TextBox Text="{Binding NeedNannyHours[0][0],Mode=TwoWay}" IsEnabled="{Binding ElementName=Sunday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="2" Grid.Row="1"/>
+                    <TextBox Text="{Binding NeedNannyHours[0][1],Mode=TwoWay}" IsEnabled="{Binding ElementName=Monday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="2" Grid.Row="2"/>
+                    <TextBox Text="{Binding NeedNannyHours[0][2],Mode=TwoWay}" IsEnabled="{Binding ElementName=Tuesday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="2" Grid.Row="3"/>
+                    <TextBox Text="{Binding NeedNannyHours[0][3],Mode=TwoWay}" IsEnabled="{Binding ElementName=wednesday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="2" Grid.Row="4"/>
+                    <TextBox Text="{Binding NeedNannyHours[0][4],Mode=TwoWay}" IsEnabled="{Binding ElementName=Thursday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="2" Grid.Row="5"/>
+                    <TextBox Text="{Binding NeedNannyHours[0][5],Mode=TwoWay}" IsEnabled="{Binding ElementName=Friday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="2" Grid.Row="6"/>
+                    <TextBox Text="{Binding NeedNannyHours[1][0],Mode=TwoWay}" IsEnabled="{Binding ElementName=Sunday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="3" Grid.Row="1"/>
+                    <TextBox Text="{Binding NeedNannyHours[1][1],Mode=TwoWay}" IsEnabled="{Binding ElementName=Monday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="3" Grid.Row="2"/>
+                    <TextBox Text="{Binding NeedNannyHours[1][2],Mode=TwoWay}" IsEnabled="{Binding ElementName=Tuesday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="3" Grid.Row="3"/>
+                    <TextBox Text="{Binding NeedNannyHours[1][3],Mode=TwoWay}" IsEnabled="{Binding ElementName=wednesday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="3" Grid.Row="4"/>
+                    <TextBox Text="{Binding NeedNannyHours[1][4],Mode=TwoWay}" IsEnabled="{Binding ElementName=Thursday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="3" Grid.Row="5"/>
+                    <TextBox Text="{Binding NeedNannyHours[1][5],Mode=TwoWay}" IsEnabled="{Binding ElementName=Friday, Path=IsChecked}" Style="{StaticResource TebleTextBoxStyle}" Grid.Column="3" Grid.Row="6"/>
+                </Grid>
+            </Grid>
+        </Border>
+        <Button Content="submit" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="200" FontSize="20" Click="AddMother_Click"/>
     </Grid>
 </Window>
