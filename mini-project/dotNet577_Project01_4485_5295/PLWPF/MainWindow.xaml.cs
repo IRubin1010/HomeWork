@@ -64,5 +64,10 @@ namespace PLWPF
         {
             new UpdateNannyWindow().Show();
         }
+
+        private void AddMotherSelect(object sender, RoutedEventArgs e)
+        {
+            new AddMotherWindow().Show();
+        }
     }
 }
