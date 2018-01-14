@@ -9,11 +9,11 @@ namespace BE
     public class Child
     {
         //Properties//
-        public int ID { get; set; }
-        public int MotherID { get; set; }
+        public int? ID { get; set; }
+        public int? MotherID { get; set; }
         public string FirstName { get; set; }
         public DateTime BirthDate { get; set; }
-        public int AgeInMonth { get; set; }
+        public int? AgeInMonth { get; set; }
         public bool IsSpecialNeeds { get; set; }
         public string SpecialNeeds { get; set; }
         public bool HaveNanny { get; set; }
