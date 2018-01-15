@@ -84,5 +84,30 @@ namespace PLWPF
         {
             new AddChildWindow().Show();
         }
+
+        private void UpdateChildSelect(object sender, RoutedEventArgs e)
+        {
+            new UpdateChildWindow().Show();
+        }
+
+        private void DeleteChildSelect(object sender, RoutedEventArgs e)
+        {
+            new DeleteChildWindow().Show();
+        }
+
+        private void DeleteContractSelect(object sender, RoutedEventArgs e)
+        {
+            new DeleteContractWindow().Show();
+        }
+
+        private void UpdateContractSelect(object sender, RoutedEventArgs e)
+        {
+            new UpdateContractWindow().Show();
+        }
+
+        private void AddContractSelect(object sender, RoutedEventArgs e)
+        {
+            new AddContractWindow().Show();
+        }
     }
 }

@@ -46,15 +46,15 @@
             </ComboBox>
             <ComboBox Name="contract" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" SelectionChanged="ContractSelectionChanged">
                 <ComboBoxItem Content="Contract" Visibility="Collapsed"/>
-                <ComboBoxItem Content="add contract"/>
-                <ComboBoxItem Content="delete contract"/>
-                <ComboBoxItem Content="update contract"/>
+                <ComboBoxItem Content="add contract" Selected="AddContractSelect"/>
+                <ComboBoxItem Content="delete contract" Selected="DeleteContractSelect"/>
+                <ComboBoxItem Content="update contract" Selected="UpdateContractSelect"/>
             </ComboBox>
             <ComboBox Name="child" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="ChildSelectionChanged">
                 <ComboBoxItem Content="Child" Visibility="Collapsed"/>
                 <ComboBoxItem Content="add child" Selected="AddChildSelect"/>
-                <ComboBoxItem Content="delete child"/>
-                <ComboBoxItem Content="update child"/>
+                <ComboBoxItem Content="delete child" Selected="DeleteChildSelect"/>
+                <ComboBoxItem Content="update child" Selected="UpdateChildSelect"/>
             </ComboBox>
         </Grid>
         <ComboBox Name="search" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0" SelectionChanged="SearchSelectionChanged">

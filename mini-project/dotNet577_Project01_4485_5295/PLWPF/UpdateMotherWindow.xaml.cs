@@ -34,20 +34,6 @@ namespace PLWPF
             UpdateMother.DataContext = mother;
         }
 
-        private void IDtextbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-            if (text.Text != "")
-            {
-                int id = int.Parse(IDtextbox.Text);
-                mother = bl.FindMother(id);
-                if (mother != null)
-                {
-                    UpdateMother.DataContext = mother;
-                }
-            }
-        }
-
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
