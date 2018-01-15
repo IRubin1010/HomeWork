@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Converters="clr-namespace:PLWPF"
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddNannyWindow"
         mc:Ignorable="d"
@@ -36,6 +37,7 @@
             <Setter Property="Width" Value="120"/>
             <Setter Property="Height" Value="23"/>
         </Style>
+        <Converters:IntColorConverter x:Key="IntColorConverter"/>
     </Window.Resources>
     <Grid Name="NannyDeatails">
         <Grid.RowDefinitions>
@@ -67,7 +69,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="ID:" Style="{StaticResource LabelStyle}" Grid.Row="0"/>
-                <TextBox x:Name="iDTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
+                <TextBox x:Name="iDTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Background="{Binding ID, Converter={StaticResource IntColorConverter},Mode=TwoWay ,UpdateSourceTrigger=LostFocus}" />
                 <Label Content="First Name:" Style="{StaticResource LabelStyle}" Grid.Row="1"/>
                 <TextBox x:Name="firstNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
                 <Label Content="Last Name:" Style="{StaticResource LabelStyle}" Grid.Row="2"/>
@@ -143,6 +145,28 @@
             <Label Content="Nanny details" HorizontalAlignment="Center" Margin="5" VerticalAlignment="center" FontSize="20"/>
             <Label Content="other details" Grid.Column="1" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
-        <Button Name="submit" Content="submit" HorizontalAlignment="center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="200" FontSize="20" Click="submit_Click"/>
+        <Button Name="submit" Content="submit" HorizontalAlignment="center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="200" FontSize="20" Click="submit_Click">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=iDTextBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=firstNameTextBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=lastNameTextBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=addressTextBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=phoneNumberTextBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
     </Grid>
 </Window>
