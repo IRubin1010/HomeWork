@@ -76,7 +76,7 @@ namespace PLWPF
 
         private void AddContract_Click(object sender, RoutedEventArgs e)
         {
-            if(nanny != null && mother != null && child!= null)
+            if (nanny != null && mother != null && child != null)
             {
                 Console.WriteLine(contract);
                 try
@@ -93,8 +93,15 @@ namespace PLWPF
 
         private void CalculatePayment_Click(object sender, RoutedEventArgs e)
         {
-            bl.CalculatePayment(contract);
-            finalPaymentTextBox.DataContext = contract;
+            try
+            {
+                bl.CalculatePayment(contract);
+                finalPaymentTextBox.DataContext = contract;
+            }
+            catch (BLException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
