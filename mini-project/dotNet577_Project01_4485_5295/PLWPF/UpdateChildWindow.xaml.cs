@@ -17,37 +17,35 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for DeleteMotherWindow.xaml
+    /// Interaction logic for UpdateChildWindow.xaml
     /// </summary>
-    public partial class DeleteMotherWindow : Window
+    public partial class UpdateChildWindow : Window
     {
         IBL bl;
-        Mother mother;
-        List<Mother> motherList;
-        public DeleteMotherWindow()
+        Child child;
+        List<Child> childList;
+        public UpdateChildWindow()
         {
             InitializeComponent();
             bl = FactoryBL.GetBL();
-            motherList = bl.CloneMotherList();
-            list.DataContext = motherList;
-            mother = new Mother();
-            DeleteMother.DataContext = mother;
+            childList = bl.CloneChildList();
+            list.DataContext = childList;
         }
 
-        private void MotherSelected(object sender, SelectionChangedEventArgs e)
+        private void ChildSelected(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            mother = (Mother)comboBox.SelectedItem;
-            DeleteMother.DataContext = mother;
+            ComboBox combobox = sender as ComboBox;
+            child = (Child)combobox.SelectedItem;
+            UpdateChild.DataContext = child;
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
-            if(mother != null)
+            if(child != null)
             {
                 try
                 {
-                    bl.DeleteMother(mother);
+                    bl.UpdateChild(child);
                     Close();
                 }
                 catch (BLException ex)

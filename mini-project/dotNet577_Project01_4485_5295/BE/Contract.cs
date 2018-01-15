@@ -22,6 +22,12 @@ namespace BE
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }
        
+        public Contract()
+        {
+            BeginTransection = DateTime.Today;
+            EndTransection = DateTime.Today;
+        }
+
         //override//
         public override string ToString()
         {

@@ -9,6 +9,7 @@ namespace BE
     public class Nanny
     {
         //Properties//
+      
         private int? id;
         //public int? ID { get; set; }
         public int? ID { get { return id; }  set { if (value >= 100000000 && value <= 999999999) id = value; else throw new ArgumentException("iligell ID"); } }

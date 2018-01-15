@@ -57,8 +57,17 @@
     <Compile Include="AddChildWindow.xaml.cs">
       <DependentUpon>AddChildWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddContractWindow.xaml.cs">
+      <DependentUpon>AddContractWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddMotherWindow.xaml.cs">
       <DependentUpon>AddMotherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteChildWindow.xaml.cs">
+      <DependentUpon>DeleteChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteContractWindow.xaml.cs">
+      <DependentUpon>DeleteContractWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeleteMotherWindow.xaml.cs">
       <DependentUpon>DeleteMotherWindow.xaml</DependentUpon>
@@ -68,6 +77,12 @@
     </Compile>
     <Compile Include="splashScreen.xaml.cs">
       <DependentUpon>splashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateChildWindow.xaml.cs">
+      <DependentUpon>UpdateChildWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateContractWindow.xaml.cs">
+      <DependentUpon>UpdateContractWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateMotherWindow.xaml.cs">
       <DependentUpon>UpdateMotherWindow.xaml</DependentUpon>
@@ -79,11 +94,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddContractWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddMotherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNannyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteContractWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,6 +149,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="splashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateContractWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
