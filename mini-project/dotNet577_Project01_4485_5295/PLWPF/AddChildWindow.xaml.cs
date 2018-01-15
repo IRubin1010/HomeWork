@@ -17,33 +17,34 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for AddMotherWindow.xaml
+    /// Interaction logic for AddChildWindow.xaml
     /// </summary>
-    public partial class AddMotherWindow : Window
+    public partial class AddChildWindow : Window
     {
-        Mother mother;
         IBL bl;
-        public AddMotherWindow()
+        Child child;
+        public AddChildWindow()
         {
             InitializeComponent();
             bl = FactoryBL.GetBL();
-            mother = new Mother();
-            MotherDetails.DataContext = mother;
+            child = new Child();
+            AddChild.DataContext = child;
         }
 
-        private void AddMother_Click(object sender, RoutedEventArgs e)
+        private void AddChild_CLick(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.AddMother(mother);
-                mother = new Mother();
-                MotherDetails.DataContext = mother;
+                bl.AddChild(child);
+                child = new Child();
+                AddChild.DataContext = child;
                 Close();
             }
             catch (BLException ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
     }
 }

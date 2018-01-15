@@ -69,5 +69,20 @@ namespace PLWPF
         {
             new AddMotherWindow().Show();
         }
+
+        private void UpdateMotherSelect(object sender, RoutedEventArgs e)
+        {
+            new UpdateMotherWindow().Show();
+        }
+
+        private void DeleteMotherSelect(object sender, RoutedEventArgs e)
+        {
+            new DeleteMotherWindow().Show();
+        }
+
+        private void AddChildSelect(object sender, RoutedEventArgs e)
+        {
+            new AddChildWindow().Show();
+        }
     }
 }
