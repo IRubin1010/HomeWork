@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D36E3278-0BEB-43C9-9FAB-158C10C62C79}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <ProjectGuid>{8B7FBB38-CC80-4823-8A2F-9E40A36FC463}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Pl</RootNamespace>
+    <AssemblyName>Pl</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,25 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DALException.cs" />
-    <Compile Include="Dal_imp.cs" />
-    <Compile Include="Dal_XML_imp.cs" />
-    <Compile Include="FactoryDAL.cs" />
-    <Compile Include="IDAL.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">
       <Project>{a8d915d8-a30b-4f58-b111-7d6565ac07a7}</Project>
       <Name>BE</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DS\DS.csproj">
-      <Project>{ce3a5233-da29-46d2-9150-b02ca3b5f48b}</Project>
-      <Name>DS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ds_Xml\Ds_Xml.csproj">
-      <Project>{85fe5039-e9f7-4cf2-a1b0-3efb509a5235}</Project>
-      <Name>Ds_Xml</Name>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{0fa062bf-a6e7-4f07-ad44-a11ca41be9c3}</Project>
+      <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

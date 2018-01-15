@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="DALException.cs" />
     <Compile Include="Dal_imp.cs" />
-    <Compile Include="Dal_XML_imp.cs" />
     <Compile Include="FactoryDAL.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,10 +54,6 @@
     <ProjectReference Include="..\DS\DS.csproj">
       <Project>{ce3a5233-da29-46d2-9150-b02ca3b5f48b}</Project>
       <Name>DS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ds_Xml\Ds_Xml.csproj">
-      <Project>{85fe5039-e9f7-4cf2-a1b0-3efb509a5235}</Project>
-      <Name>Ds_Xml</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
