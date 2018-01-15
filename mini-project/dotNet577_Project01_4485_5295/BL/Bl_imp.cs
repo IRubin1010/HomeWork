@@ -20,7 +20,7 @@ namespace BL
         {
             dal = FactoryDAL.GetIDAL();
         }
-        
+
         /* Nanny functions */
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace BL
         /// </remarks>
         public void AddChild(Child child)
         {
-            if(FindMother(child.MotherID) == null)
+            if (FindMother(child.MotherID) == null)
                 throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
             try
             {
@@ -441,7 +441,7 @@ namespace BL
             // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
-            if(child.AgeInMonth > nanny.MaxAge || child.AgeInMonth < nanny.MinAge)
+            if (child.AgeInMonth > nanny.MaxAge || child.AgeInMonth < nanny.MinAge)
                 throw new BLException(child.FirstName + " is not on nanny's age range", "add contrsct");
             if (child.HaveNanny == true)
                 throw new BLException(child.FirstName + " already has a nanny ", "add contrsct");
@@ -516,7 +516,7 @@ namespace BL
                     UpdateHaveNanny(dal.FindChild(contract.ChildID), false);
                     dal.DeleteContract(contractNumber);
                 }
-                catch(BLException ex)
+                catch (BLException ex)
                 {
                     // if fail at UpdateHaveNanny need to reduce back nanny children
                     if (ex.sender == "Update Have Nanny")
@@ -621,24 +621,30 @@ namespace BL
             }
             // if monthly fee
             if (contract.IsPaymentByHour == false)
+            {
+                if (contract.MonthlyFee == null)
+                    throw new BLException("No monthly payment set", "CalculatePayment");
                 contract.FinalPayment = (int)contract.MonthlyFee * discount;
+            }
             // if hourly fee
             else
             {
+                if (contract.HourlyFee == null)
+                    throw new BLException("No monthly payment set", "CalculatePayment");
                 double hoursPerWeek = 0;
                 // calculate the actual hours 
                 for (int i = 0; i < 6; i++)
                 {
-                    if(mother.NeedNanny[i] == true && nanny.IsWork[i] == true)
+                    if (mother.NeedNanny[i] == true && nanny.IsWork[i] == true)
                     {
-                    if (mother.NeedNannyHours[1][i] <= nanny.WorkHours[1][i])
-                        hoursPerWeek += mother.NeedNannyHours[1][i].TotalHours;
-                    else
-                        hoursPerWeek += nanny.WorkHours[1][i].TotalHours;
-                    if (mother.NeedNannyHours[0][i] <= nanny.WorkHours[0][i])
-                        hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
-                    else
-                        hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
+                        if (mother.NeedNannyHours[1][i] <= nanny.WorkHours[1][i])
+                            hoursPerWeek += mother.NeedNannyHours[1][i].TotalHours;
+                        else
+                            hoursPerWeek += nanny.WorkHours[1][i].TotalHours;
+                        if (mother.NeedNannyHours[0][i] <= nanny.WorkHours[0][i])
+                            hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
+                        else
+                            hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
                     }
                 }
                 contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee;
@@ -947,7 +953,7 @@ namespace BL
             Mother mother = FindMother(contract.MotherID);
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
             // the distance function returns meter that's why they divide by 5000
-            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000; 
+            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000;
             if (distance == 0)
                 return 5;
             return (distance + 1) * 5;

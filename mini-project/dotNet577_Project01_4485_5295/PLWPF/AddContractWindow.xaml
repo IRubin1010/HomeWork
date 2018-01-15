@@ -44,6 +44,20 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ButtonEnable" TargetType="Button">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=nannyComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=motherComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=childComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -95,8 +109,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="submit" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="AddContract_Click"/>
-            <Button Content="calculat payment" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="CalculatePayment_Click"/>
+            <Button Content="submit" Style="{StaticResource ButtonEnable}" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="AddContract_Click"/>
+            <Button Content="calculat payment" Style="{StaticResource ButtonEnable}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="CalculatePayment_Click"/>
         </Grid>
     </Grid>
 </Window>
