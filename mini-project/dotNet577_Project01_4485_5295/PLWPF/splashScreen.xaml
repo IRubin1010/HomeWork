@@ -10,13 +10,13 @@
         <ImageBrush ImageSource="image/גן משחקים.jpg"/>
     </Window.Background>
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="100"/>
-            </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="center" Margin="0" TextWrapping="Wrap" Text="welcome" VerticalAlignment="center" FontSize="40"/>
-            <TextBlock HorizontalAlignment="center" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="To a management system for mothers and nannys" VerticalAlignment="center" FontSize="40"/>
-            <TextBlock HorizontalAlignment="Center" Margin="0" Grid.Row="2" TextWrapping="Wrap" Text=" ©Developed by yitzchk yeret and meir shimon" VerticalAlignment="center" Width="320" FontSize="15"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="center" Margin="0" TextWrapping="Wrap" Text="welcome" VerticalAlignment="center" FontSize="40"/>
+        <TextBlock HorizontalAlignment="center" Margin="0" Grid.Row="1" TextWrapping="Wrap" Text="To a management system for mothers and nannys" VerticalAlignment="center" FontSize="40"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0" Grid.Row="2" TextWrapping="Wrap" Text=" ©Developed by yitzchk yeret and meir shimon" VerticalAlignment="center" Width="320" FontSize="15"/>
     </Grid>
 </Window>
