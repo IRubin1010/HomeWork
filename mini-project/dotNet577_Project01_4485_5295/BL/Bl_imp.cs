@@ -288,6 +288,8 @@ namespace BL
         /// </remarks>
         public void AddChild(Child child)
         {
+            if(FindMother(child.MotherID) == null)
+                throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
             try
             {
                 dal.AddChild(child.Clone());
