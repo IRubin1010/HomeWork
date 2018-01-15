@@ -87,7 +87,7 @@
             <CheckBox x:Name="isPaymentByHourCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsHourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
             <Label Content="Is Meet:" Grid.Row="8" Style="{StaticResource LabelStyle}"/>
             <CheckBox x:Name="isMeetCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsMeet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8"/>
-            <Label Content="Final Payment:" Grid.Row="9" Style="{StaticResource LabelStyle}"/>
+            <Label Content="month Final Payment:" Grid.Row="9" Style="{StaticResource LabelStyle}"/>
             <TextBox x:Name="finalPaymentTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding FinalPayment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
         </Grid>
         <Grid Grid.Row="2">
