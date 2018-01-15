@@ -60,11 +60,17 @@
     <Compile Include="AddMotherWindow.xaml.cs">
       <DependentUpon>AddMotherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeleteMotherWindow.xaml.cs">
+      <DependentUpon>DeleteMotherWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NannyWorkDaysHoursDelete.xaml.cs">
       <DependentUpon>NannyWorkDaysHoursDelete.xaml</DependentUpon>
     </Compile>
     <Compile Include="splashScreen.xaml.cs">
       <DependentUpon>splashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateMotherWindow.xaml.cs">
+      <DependentUpon>UpdateMotherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateNannyWindow.xaml.cs">
       <DependentUpon>UpdateNannyWindow.xaml</DependentUpon>
@@ -119,6 +125,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UpdateMotherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UpdateNannyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -167,15 +177,12 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="image\images %282%29.jpg" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="image\images %281%29.jpg" />
+    <Resource Include="image\images %282%29.jpg" />
     <Resource Include="image\images.jpg" />
     <Resource Include="image\גן משחקים.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="image\הורד.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,21 +51,12 @@ namespace PLWPF
             new NannyWorkDaysHours(nanny).Show();
         }
 
-        //private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        //{
-        //    TextBox text = sender as TextBox;
-        //    int id = 0;
-        //    if (text.Text != "")
-        //    {
-        //        id = int.Parse(iDTextBox.Text);
-        //    }
-        //    if (!(id >= 100000000 && id <= 999999999))
-        //    {
-        //        iDTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-        //    }
-        //}
     }
 }
+
+
+
+
 
 
 //BindingExpression be = iDTextBox.GetBindingExpression(TextBox.TextProperty);
