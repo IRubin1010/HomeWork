@@ -12,6 +12,7 @@ namespace BE
         public int? ID { get; set; }
         public int? MotherID { get; set; }
         public string FirstName { get; set; }
+        public string NameAndID { get { return FirstName + " ID: " + ID; } }
         public DateTime BirthDate { get; set; }
         public int? AgeInMonth { get; set; }
         public bool IsSpecialNeeds { get; set; }
