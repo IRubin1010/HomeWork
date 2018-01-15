@@ -1,0 +1,102 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddContractWindow"
+        mc:Ignorable="d"
+        Title="AddContractWindow" Height="460" Width="300">
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="0"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="23"/>
+        </Style>
+        <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="1"/>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="23"/>
+        </Style>
+        <Style x:Key="ChildCombobox" TargetType="ComboBox" BasedOn="{StaticResource ComboBoxStyle}">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=motherComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Content="contract details" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <Grid x:Name="NannyDetails" Grid.Row="1" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Nanny ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+            <ComboBox x:Name="nannyComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+            <Label Content="Mother ID:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+            <ComboBox x:Name="motherComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="1" DisplayMemberPath="FullNameAndID" SelectionChanged="MotherSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+            <Label Content="Child ID:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
+            <ComboBox x:Name="childComboBox" Style="{StaticResource ChildCombobox}" ItemsSource="{Binding}" Grid.Row="2" DisplayMemberPath="NameAndID" SelectionChanged="ChildSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+            <Label Content="Begin Transection:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
+            <DatePicker x:Name="beginTransectionDatePicker" VerticalAlignment="Center" Width="120" SelectedDate="{Binding BeginTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label Content="End Transection:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
+            <DatePicker x:Name="endTransectionDatePicker" VerticalAlignment="Center" Width="120" SelectedDate="{Binding EndTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label Content="Hourly Fee:" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="hourlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding HourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
+            <Label Content="Monthly Fee:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="monthlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding MonthlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
+            <Label Content="Is Payment By Hour:" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
+            <CheckBox x:Name="isPaymentByHourCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsHourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
+            <Label Content="Is Meet:" Grid.Row="8" Style="{StaticResource LabelStyle}"/>
+            <CheckBox x:Name="isMeetCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsMeet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8"/>
+            <Label Content="Final Payment:" Grid.Row="9" Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="finalPaymentTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding FinalPayment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="submit" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="AddContract_Click"/>
+            <Button Content="calculat payment" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="CalculatePayment_Click"/>
+        </Grid>
+    </Grid>
+</Window>
