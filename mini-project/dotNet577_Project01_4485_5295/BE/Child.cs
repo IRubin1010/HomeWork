@@ -18,6 +18,11 @@ namespace BE
         public string SpecialNeeds { get; set; }
         public bool HaveNanny { get; set; }
 
+        public Child()
+        {
+            BirthDate = DateTime.Today;
+        }
+
         //override//
         public override string ToString()
         {

@@ -54,20 +54,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddChildWindow.xaml.cs">
+      <DependentUpon>AddChildWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddMotherWindow.xaml.cs">
       <DependentUpon>AddMotherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteMotherWindow.xaml.cs">
+      <DependentUpon>DeleteMotherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="NannyWorkDaysHoursDelete.xaml.cs">
       <DependentUpon>NannyWorkDaysHoursDelete.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateMotherWindow.xaml.cs">
+      <DependentUpon>UpdateMotherWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateNannyWindow.xaml.cs">
       <DependentUpon>UpdateNannyWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddChildWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddMotherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNannyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteMotherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NannyWorkDaysHoursDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateMotherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

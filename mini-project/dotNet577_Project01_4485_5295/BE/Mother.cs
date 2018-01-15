@@ -12,6 +12,7 @@ namespace BE
         public int? ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+        public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }
         public int? PhoneNumber { get; set; }
         public string Address { get; set; }
         public string SearchAreaForNanny { get; set; }

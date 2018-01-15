@@ -143,7 +143,7 @@ namespace BE
         public Nanny Clone()
         {
             Nanny nanny = (Nanny)MemberwiseClone();
-            //nanny.IsWork = (bool[])IsWork.Clone();
+            nanny.IsWork = (bool?[])IsWork.Clone();
             nanny.WorkHours = (TimeSpan[][])WorkHours.Clone();
             return nanny;
         }

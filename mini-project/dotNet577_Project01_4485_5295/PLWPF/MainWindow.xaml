@@ -35,8 +35,8 @@
             <ComboBox Name="mother" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" SelectionChanged="MotherSelectionChanged">
                 <ComboBoxItem Content="Mother" Visibility="Collapsed"/>
                 <ComboBoxItem Content="add mother" Selected="AddMotherSelect"/>
-                <ComboBoxItem Content="delete mother"/>
-                <ComboBoxItem Content="update mother"/>
+                <ComboBoxItem Content="delete mother" Selected="DeleteMotherSelect"/>
+                <ComboBoxItem Content="update mother" Selected="UpdateMotherSelect"/>
             </ComboBox>
             <ComboBox Name="nanny" Style="{StaticResource ButtonStyle}" SelectedIndex="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" SelectionChanged="NannySelectionChanged">
                 <ComboBoxItem Content="Nanny" Visibility="Collapsed" />
@@ -52,7 +52,7 @@
             </ComboBox>
             <ComboBox Name="child" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" SelectionChanged="ChildSelectionChanged">
                 <ComboBoxItem Content="Child" Visibility="Collapsed"/>
-                <ComboBoxItem Content="add child"/>
+                <ComboBoxItem Content="add child" Selected="AddChildSelect"/>
                 <ComboBoxItem Content="delete child"/>
                 <ComboBoxItem Content="update child"/>
             </ComboBox>
