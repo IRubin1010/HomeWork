@@ -11,7 +11,7 @@ namespace Ds_Xml
 {
     public class NannyXml
     {
-        public  XElement NannyRoot;
+        public XElement NannyRoot;
         public string NannyPath;
         public string locaition()
         {
