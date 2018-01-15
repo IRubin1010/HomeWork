@@ -629,6 +629,8 @@ namespace BL
                 // calculate the actual hours 
                 for (int i = 0; i < 6; i++)
                 {
+                    if(mother.NeedNanny[i] == true && nanny.IsWork[i] == true)
+                    {
                     if (mother.NeedNannyHours[1][i] <= nanny.WorkHours[1][i])
                         hoursPerWeek += mother.NeedNannyHours[1][i].TotalHours;
                     else
@@ -637,6 +639,7 @@ namespace BL
                         hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
                     else
                         hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
+                    }
                 }
                 contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee;
             }
