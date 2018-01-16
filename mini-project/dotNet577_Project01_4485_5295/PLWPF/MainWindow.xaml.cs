@@ -109,5 +109,10 @@ namespace PLWPF
         {
             new AddContractWindow().Show();
         }
+
+        private void SearchSelect(object sender, RoutedEventArgs e)
+        {
+            new SearchWindow().Show();
+        }
     }
 }
