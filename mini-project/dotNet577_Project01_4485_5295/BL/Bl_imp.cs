@@ -647,7 +647,7 @@ namespace BL
                             hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
                     }
                 }
-                contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee;
+                contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee * 4;
             }
         }
 

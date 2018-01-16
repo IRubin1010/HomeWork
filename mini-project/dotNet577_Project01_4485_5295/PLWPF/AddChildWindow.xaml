@@ -44,6 +44,23 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="buttonEnable" TargetType="Button">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=iDTextBox , Path=Text}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=motherIDTextBox , Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=firstNameTextBox , Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ageInMonthTextBox , Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid Name="AddChild">
         <Grid.RowDefinitions>
@@ -84,7 +101,7 @@
             </Grid>
         </Grid>
         <Label Content="Child details" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" FontSize="20"/>
-        <Button Content="submit" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="20" Click="AddChild_CLick"/>
+        <Button Content="submit" Style="{StaticResource buttonEnable}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="20" Click="AddChild_CLick"/>
 
     </Grid>
 </Window>
