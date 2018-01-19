@@ -24,10 +24,10 @@ namespace PLWPF
         IBL bl;
         Mother mother;
         List<Mother> motherList;
-        public UpdateMotherWindow()
+        public UpdateMotherWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             motherList = bl.CloneMotherList();
             list.DataContext = motherList;
             mother = new Mother();

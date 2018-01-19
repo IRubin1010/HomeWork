@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
@@ -20,9 +22,22 @@ namespace PLWPF
     /// </summary>
     public partial class SearchChild : Page
     {
-        public SearchChild()
+        IBL bl;
+        Child child;
+        List<Child> childList;
+        public SearchChild(IBL Bl)
         {
             InitializeComponent();
+            bl = Bl;
+            child = new Child();
+            childList = bl.CloneChildList();
+            list.DataContext = childList;
+        }
+
+        private void ChildSelected(object sender, SelectionChangedEventArgs e)
+        {
+            child = (Child)(sender as ComboBox).SelectedItem;
+            searchChild.DataContext = child;
         }
     }
 }

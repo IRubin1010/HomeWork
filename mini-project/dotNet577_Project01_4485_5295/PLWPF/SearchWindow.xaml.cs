@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BL;
 
 namespace PLWPF
 {
@@ -19,37 +20,33 @@ namespace PLWPF
     /// </summary>
     public partial class SearchWindow : Window
     {
-        public SearchWindow()
+        IBL bl;
+        public SearchWindow(IBL Bl)
         {
             InitializeComponent();
+            bl = Bl;
         }
 
         private void EntitySelected(object sender, SelectionChangedEventArgs e)
         {
             Entity entity = (Entity)(sender as ComboBox).SelectedItem;
-            switch(entity)
+            switch (entity)
             {
                 case Entity.nanny:
-                        selectedAction.Content = new SearchNanny();
-                        break;
+                    selectedAction.Content = new SearchNanny(bl);
+                    break;
                 case Entity.mother:
-                    selectedAction.Content = new SearchMother();
+                    selectedAction.Content = new SearchMother(bl);
                     break;
                 case Entity.child:
-                    selectedAction.Content = new SearchChild();
+                    selectedAction.Content = new SearchChild(bl);
                     break;
                 case Entity.contract:
-                    selectedAction.Content = new SearchContract();
+                    selectedAction.Content = new SearchContract(bl);
                     break;
                 default:
                     break;
             }
         }
-
-
-        //private void click(object sender, RoutedEventArgs e)
-        //{
-        //    selectedAction.Content = new SearchNanny();
-        //}
     }
 }

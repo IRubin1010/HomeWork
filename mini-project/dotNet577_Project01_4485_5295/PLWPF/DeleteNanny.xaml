@@ -78,7 +78,7 @@
                 <Label Content="Last Name:" Style="{StaticResource LabelStyle}" Grid.Row="2"/>
                 <TextBox x:Name="lastNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
                 <Label Content="Birth Date:" Style="{StaticResource LabelStyle}" Grid.Row="3"/>
-                <TextBox x:Name="birthDateDatePicker" Style="{StaticResource TextBoxStyle}" Text="{Binding BirthDate, StringFormat=dd/MM/yyyy, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
+                <DatePicker x:Name="birthDateDatePicker" IsEnabled="False" Width="120" VerticalAlignment="Center" SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"  Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
                 <Label Content="Nanny Age:" Style="{StaticResource LabelStyle}" Grid.Row="4"/>
                 <TextBox x:Name="nannyAgeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding NannyAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
                 <Label Content="Address:" Style="{StaticResource LabelStyle}" Grid.Row="5"/>

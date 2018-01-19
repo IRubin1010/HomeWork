@@ -441,7 +441,7 @@ namespace BL
             // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
-            if (child.AgeInMonth > nanny.MaxAge || child.AgeInMonth < nanny.MinAge)
+            if (IsChildInNannyAge(nanny,child.ID) == false)
                 throw new BLException(child.FirstName + " is not on nanny's age range", "add contrsct");
             if (child.HaveNanny == true)
                 throw new BLException(child.FirstName + " already has a nanny ", "add contrsct");
@@ -705,13 +705,15 @@ namespace BL
         }
 
         /// <summary>
-        /// return a list of nanny who work at the same days and hours as the mother need
+        /// return a list of nanny who work at the same days and hours as the mother need,
+        /// check also that the child is whitin nanny age range
         /// </summary>
         /// <param name="mother">the mother to check match for a nanny</param>
-        public List<Nanny> PotentialMatch(Mother mother)
+        /// <param name="id">child id</param>
+        public List<Nanny> PotentialMatch(Mother mother, int? id)
         {
             return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
-                && PotentialDaysMatch(nanny, mother)).ToList();
+                && PotentialDaysMatch(nanny, mother) && IsChildInNannyAge(nanny,id)).ToList();
         }
 
         /// <summary>
@@ -748,14 +750,29 @@ namespace BL
         }
 
         /// <summary>
+        /// checks if a child is in nanny range of age
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        /// <param name="id">child id to check</param>
+        public bool IsChildInNannyAge(Nanny nanny, int? id)
+        {
+            Child child = FindChild(id);
+            if (child == null) return false;
+            if (child.AgeInMonth < nanny.MinAge || child.AgeInMonth > nanny.MaxAge)
+                return false;
+            return true;
+        }
+
+        /// <summary>
         /// return a list of nannys who match perfectly to the mother, 
         /// considering hours, days, elevator, seniority and floor match.
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
-        public List<Nanny> MotherConditions(Mother mother)
+        /// <param name="id">child id</param>
+        public List<Nanny> MotherConditions(Mother mother, int? id)
         {
             // get a list of nannys who thier days and hours match
-            List<Nanny> nannyList = PotentialMatch(mother);
+            List<Nanny> nannyList = PotentialMatch(mother,id);
             // check the elevator, seniority and floor
             foreach (Nanny nanny in nannyList.Reverse<Nanny>())
             {
@@ -788,9 +805,10 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
         /// <param name="Km">the range of Km to check</param>
-        public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km)
+        /// <param name="id">child id</param>
+        public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km, int? id)
         {
-            return MotherConditions(mother).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
+            return MotherConditions(mother, id).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
         }
 
         /// <summary>
@@ -800,7 +818,8 @@ namespace BL
         /// </summary>
         /// <param name="mother">mother to check match</param>
         /// <param name="Km">the range of Km</param>
-        public List<Nanny> PropertiesMatch(Mother mother, int? Km)
+        /// <param name="id">child id</param>
+        public List<Nanny> PropertiesMatch(Mother mother, int? Km, int?id)
         {
             // give value for each mother's need
             // if the nanny match this need give it a value 
@@ -808,8 +827,12 @@ namespace BL
             // than sum the values 
             // the highest value means it is the best match
             List<Nanny> nannyList = CloneNannyList();
-            foreach (Nanny nanny in nannyList)
+            foreach (Nanny nanny in nannyList.Reverse<Nanny>())
             {
+                if (IsChildInNannyAge(nanny, id) == false)
+                {
+                    nannyList.Remove(nanny); continue;
+                }
                 nanny.HoursValue = PotentialHoursMatch(nanny, mother) == true ? 6 : 0;
                 nanny.DaysValue = PotentialDaysMatch(nanny, mother) == true ? 5 : 0;
                 nanny.SeniorityValue = mother.MinSeniority <= nanny.Seniority ? 4 : 0;
@@ -826,9 +849,10 @@ namespace BL
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        public List<Nanny> PartialMatch(Mother mother, int? Km)
+        /// /// <param name="id">child id</param>
+        public List<Nanny> PartialMatch(Mother mother, int? Km, int? id)
         {
-            return PropertiesMatch(mother, Km).OrderByDescending(nanny => nanny.SumValue)
+            return PropertiesMatch(mother, Km, id).OrderByDescending(nanny => nanny.SumValue)
                 .Take(5).ToList();
         }
 

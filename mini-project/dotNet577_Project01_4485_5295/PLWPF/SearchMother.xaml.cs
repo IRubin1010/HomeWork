@@ -25,10 +25,10 @@ namespace PLWPF
         IBL bl;
         Mother mother;
         List<Mother> motherList;
-        public SearchMother()
+        public SearchMother(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             motherList = bl.CloneMotherList();
             list.DataContext = motherList;
         }

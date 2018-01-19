@@ -60,7 +60,7 @@
         <ComboBox Name="search" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0" SelectionChanged="SearchSelectionChanged">
             <ComboBoxItem Content="Search" Visibility="Collapsed"/>
             <ComboBoxItem Content="search" Selected="SearchSelect"/>
-            <ComboBoxItem Content="search"/>
+            <ComboBoxItem Content="search" Selected="GroupByAge"/>
             <ComboBoxItem Content="search"/>
         </ComboBox>
     </Grid>

@@ -24,10 +24,10 @@ namespace PLWPF
         IBL bl;
         Contract contract;
         List<Contract> contractList;
-        public DeleteContractWindow()
+        public DeleteContractWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             contract = new Contract();
             contractList = bl.CloneContractList();
             list.DataContext = contractList;
