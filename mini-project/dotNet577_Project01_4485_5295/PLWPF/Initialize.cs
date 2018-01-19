@@ -6,201 +6,19 @@ using System.Threading.Tasks;
 using BE;
 using BL;
 
-namespace Pl
+namespace PLWPF
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            try
-            {
-                Initialize init = new Initialize();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-    }
-
     public class Initialize
     {
-        IBL ibl = FactoryBL.GetBL();
-        public Initialize()
+
+        IBL ibl;
+        public Initialize(IBL Bl)
         {
+            ibl = Bl;
             NannyInitialize();
             MotherInitialize();
             ChildInitialize();
-            ContractInitialize();
-
-
-
-            List<Child> list = ibl.MotherChildren(MotherTest);
-            foreach (var item in list)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine("=======================");
-
-            List<Child> list2 = ibl.NannyChildren(davidShimon);
-            foreach (var item in list2)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("=======================");
-            List<Contract> conList = ibl.NannyContracts(davidShimon);
-            foreach (var item in conList)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("=======================");
-            ibl.DeleteMother(MotherTest);
-            List<Child> list1 = ibl.MotherChildren(MotherTest);
-            foreach (var item in list1)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine("=======================");
-
-            List<Child> list3 = ibl.NannyChildren(davidShimon);
-            foreach (var item in list3)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("=======================");
-            List<Contract> conList1 = ibl.NannyContracts(davidShimon);
-            foreach (var item in conList1)
-            {
-                Console.WriteLine(item);
-            }
-            //Console.WriteLine("=======================");
-            //Console.WriteLine(ibl.FindNanny(davidShimon.ID).Children);
-            //Console.WriteLine(ibl.FindChild(310460103).HaveNanny);
-            //ibl.DeleteContract(10000008);
-            //Console.WriteLine(ibl.FindNanny(davidShimon.ID).Children);
-            //Console.WriteLine(ibl.FindChild(397240103).HaveNanny);
-            //Console.WriteLine(ibl.FindChild(310460103).HaveNanny);
-            
-
-
-
-
-
-
-            //ibl.AddNanny(test);
-            //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
-            //ibl.DeleteNanny(meirShimon);
-            //Console.WriteLine(ibl.FindNanny(meirShimon));
-            //ibl.DeleteNanny(meirShimon);
-            //Nanny upnanny = ibl.FindNanny(davidShimon.ID);
-            //Console.WriteLine(upnanny);
-            //upnanny.MaxChildren = 5;
-            //upnanny.ID = 123456789;
-            //ibl.UpdateNanny(upnanny);
-            //Console.WriteLine(ibl.FindNanny(davidShimon.ID
-            //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
-            //ibl.UpdateNannyChildren(meirShimon, 0);
-            //Console.WriteLine(ibl.FindNanny(meirShimon.ID));
-
-            //ibl.AddMother(MotherTest);
-            //Console.WriteLine(ibl.FindMother(MotherTest));
-            //ibl.DeleteMother(MotherTest);
-            //Console.WriteLine(ibl.FindMother(MotherTest));
-            //ibl.DeleteMother(MotherTest);
-            //Mother upMother = ibl.FindMother(shimshonYeret.ID);
-            //Console.WriteLine(ibl.FindMother(shimshonYeret.ID));
-            //upMother.NeedNanny[2] = false;
-            //upMother.NeedNannyHours[0, 2] = new TimeSpan(12, 0, 0);
-            //ibl.DeleteMother(upMother);
-            //ibl.UpdateMother(upMother);
-            //Console.WriteLine(ibl.FindMother(shimshonYeret.ID));
-
-            //ibl.AddChild(ChildTest);
-            //Console.WriteLine(ibl.FindChild(ChildTest.ID));
-            ////ibl.DeleteChild(ChildTest);
-            ////Console.WriteLine(ibl.FindChild(ChildTest));
-            //Child UpChild = ibl.FindChild(ChildTest.ID);
-            //UpChild.AgeInMonth = 50;
-            ////ibl.DeleteChild(UpChild);
-            //ibl.UpdateChild(UpChild);
-            //Console.WriteLine(ibl.FindChild(ChildTest.ID));
-            //ibl.UpdateHaveNanny(UpChild, true);
-            //Console.WriteLine(ibl.FindChild(ChildTest.ID));
-
-            //ibl.AddContract(TestContract);
-            //Console.WriteLine(TestContract);
-            //Contract Upocontract = ibl.FindContract(10000005);
-            //Upocontract.IsPaymentByHour = true;
-            //Upocontract.HourlyFee = 40;
-            //ibl.UpdateContract(Upocontract);
-            //Console.WriteLine(ibl.FindContract( 10000005));
-            //Console.WriteLine(ibl.FindNanny(305625295));
-            //Console.WriteLine(ibl.FindMother(294335086));
-            //ibl.DeleteContract(10000005);
-            //Console.WriteLine(ibl.FindContract(TestContract)); 
-            //foreach (Contract item in ibl.CloneContractList())
-            //    Console.WriteLine(item);
-            //List<Child> list = ibl.ChildrenWithNoNanny();
-            //foreach (var item in list)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine(shimshonYeret);
-            //List<Nanny> list1 = ibl.PartialMatch(shimshonYeret);
-            //Console.WriteLine(list1.Count);
-            //foreach (var item in list1)
-            //{
-            //    Console.WriteLine(item);
-            //    Console.WriteLine("===");
-            //    Console.WriteLine(item.HoursValue);
-            //    Console.WriteLine(item.DaysValue);
-            //    Console.WriteLine(item.SeniorityValue);
-            //    Console.WriteLine(item.ElevatorValue);
-            //    Console.WriteLine(item.FloorValue);
-            //}
-            //Console.WriteLine("=================================================");
-            //List<Contract> list = ibl.SpesificsContracts(contract => contract.IsPaymentByHour);
-            //foreach (var item in list)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //int i = ibl.NumOfSpesificsContracts(contract => contract.IsPaymentByHour == true);
-            //Console.WriteLine(i);
-
-            //var test = ibl.GroupContractByDistance(true);
-            //foreach (var item in test)
-            //{
-            //    Console.WriteLine(item.Key);
-            //    foreach (var g in item)
-            //    {
-            //        Console.WriteLine(g);
-            //    }
-            //}
-            //Console.WriteLine("=================================== \n " + "mother \n");
-            //Console.WriteLine(shimshonYeret);
-            //Console.WriteLine("===================================\n PotentialMatch \n");
-            //List<Nanny> list = ibl.PotentialMatch(shimshonYeret);
-            //foreach (var item in list)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine(list.Count);
-            //Console.WriteLine("=================================\n MotherConditions \n");
-            //List<Nanny> list1 = ibl.MotherConditions(shimshonYeret);
-            //foreach (var item in list1)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine(list1.Count);
-            //Console.WriteLine("================================= \n NannysInKMWithConditions\n");
-            //List<Nanny> list2 = ibl.NannysInKMWithConditions(shimshonYeret,600);
-            //foreach (var item in list2)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine(list2.Count);
+            //ContractInitialize();
         }
         void NannyInitialize()
         {
@@ -383,7 +201,7 @@ namespace Pl
             HourlyFee = 42,
             MonthlyFee = 3750,
             IsWork = new bool?[6] { true, true, true, true, true, true },
-           WorkHours = new TimeSpan[2][]
+            WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
@@ -970,6 +788,6 @@ namespace Pl
             EndTransection = new DateTime(2018, 8, 1)
         };
 
+
     }
 }
-

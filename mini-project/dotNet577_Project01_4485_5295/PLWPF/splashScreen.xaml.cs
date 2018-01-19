@@ -24,7 +24,7 @@ namespace PLWPF
         void StartTimer()
         {
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(4);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(timer_Elapsed);
             timer.Start();
         }

@@ -131,7 +131,7 @@
                     <Label Content="Recommendations:" Style="{StaticResource LabelStyle}" Grid.Row="9"/>
                     <TextBox x:Name="recommendationsTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Recommendations, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
                 </Grid>
-                <Button Content="work days and work hours" HorizontalAlignment="center" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="center" Width="230" FontSize="15"/>
+                <Button Content="work days and work hours" HorizontalAlignment="center" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="center" Width="230" FontSize="15" Click="WorkDaysHours_Click"/>
             </Grid>
         </Grid>
     </Grid>

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
@@ -20,9 +22,22 @@ namespace PLWPF
     /// </summary>
     public partial class SearchContract : Page
     {
-        public SearchContract()
+        IBL bl;
+        Contract contract;
+        List<Contract> contractList;
+        public SearchContract(IBL Bl)
         {
             InitializeComponent();
+            bl = Bl;
+            contract = new Contract();
+            contractList = bl.CloneContractList();
+            list.DataContext = contractList;
+        }
+
+        private void ContractSelected(object sender, SelectionChangedEventArgs e)
+        {
+            contract = (Contract)(sender as ComboBox).SelectedItem;
+            searchContract.DataContext = contract;
         }
     }
 }

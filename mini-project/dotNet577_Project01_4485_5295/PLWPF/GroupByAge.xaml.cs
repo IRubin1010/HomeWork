@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BE;
 using BL;
@@ -18,31 +17,23 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for SearchNanny.xaml
+    /// Interaction logic for GroupByAge.xaml
     /// </summary>
-    public partial class SearchNanny : Page
+    public partial class GroupByAge : Window
     {
         IBL bl;
-        Nanny nanny;
         List<Nanny> nannyList;
-        public SearchNanny(IBL Bl)
+        IEnumerable<IGrouping<int?,Nanny>> groupingList;
+        public GroupByAge(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
-            nanny = new Nanny();
             nannyList = bl.CloneNannyList();
-            list.DataContext = nannyList;
+
+            groupingList = bl.GruopNannyByChildAge(false, true);
+            Grouping.DataContext = groupingList;
+            
         }
 
-        private void NannySelected(object sender, SelectionChangedEventArgs e)
-        {
-            nanny = (Nanny)(sender as ComboBox).SelectedItem;
-            searchNanny.DataContext = nanny;
-        }
-
-        private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
-        {
-            new NannyWorkDaysHoursDelete(nanny).Show();
-        }
     }
 }

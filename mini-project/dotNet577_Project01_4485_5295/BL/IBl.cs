@@ -185,10 +185,12 @@ namespace BL
         /// <param name="addressB">the address to calculate to</param>
         int? Distance(string addressA, string addressB);
         /// <summary>
-        /// return a list of nanny who work at the same days and hours as the mother need
+        /// return a list of nanny who work at the same days and hours as the mother need,
+        /// check also that the child is whitin nanny age range
         /// </summary>
         /// <param name="mother">the mother to check match for a nanny</param>
-        List<Nanny> PotentialMatch(Mother mother);
+        /// <param name="id">child id</param>
+        List<Nanny> PotentialMatch(Mother mother, int? id);
         /// <summary>
         /// return true if the nanny's hours match to the mother's hours
         /// </summary>
@@ -202,11 +204,18 @@ namespace BL
         /// <param name="mother">the mother to check the days</param>
         bool PotentialDaysMatch(Nanny nanny, Mother mother);
         /// <summary>
+        /// checks if a child is in nanny range of age
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        /// <param name="id">child id to check</param>
+        bool IsChildInNannyAge(Nanny nanny, int? id);
+        /// <summary>
         /// return a list of nannys who match perfectly to the mother, 
         /// considering hours, days, elevator, seniority and floor match.
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
-        List<Nanny> MotherConditions(Mother mother);
+        ///  /// <param name="id">child id</param>
+        List<Nanny> MotherConditions(Mother mother, int? id);
         /// <summary>
         /// return true if a nanny is within the Km range of the mother
         /// </summary>
@@ -220,7 +229,8 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
         /// <param name="Km">the range of Km to check</param>
-        List<Nanny> NannysInKMWithConditions(Mother mother, int? Km);
+        /// /// <param name="id">child id</param>
+        List<Nanny> NannysInKMWithConditions(Mother mother, int? Km, int? id);
         /// <summary>
         /// return a list of nannys with a value, so that the value is 
         /// according tne mother needs
@@ -228,12 +238,14 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to check match</param>
         /// <param name="Km">the range of Km</param>
-        List<Nanny> PropertiesMatch(Mother mother, int? Km);
+        /// /// <param name="id">child id</param>
+        List<Nanny> PropertiesMatch(Mother mother, int? Km, int? id);
         /// <summary>
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        List<Nanny> PartialMatch(Mother mother, int? Km);
+        /// /// <param name="id">child id</param>
+        List<Nanny> PartialMatch(Mother mother, int? Km, int? id);
         /// <summary>
         /// return a list of children who don't has nanny
         /// </summary>

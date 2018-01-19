@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BL;
 
 namespace PLWPF
 {
@@ -20,9 +21,11 @@ namespace PLWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        IBL bl = FactoryBL.GetBL();
         public MainWindow()
         {
             InitializeComponent();
+            Initialize init = new Initialize(bl);
         }
 
         private void NannySelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,52 +55,52 @@ namespace PLWPF
 
         private void AddNannySelect(object sender, RoutedEventArgs e)
         {
-            new AddNannyWindow().Show();
+            new AddNannyWindow(bl).Show();
         }
 
         private void DeleteNannySelect(object sender, RoutedEventArgs e)
         {
-            new DeleteNanny().Show();
+            new DeleteNanny(bl).Show();
         }
 
         private void UpdateNannySelect(object sender, RoutedEventArgs e)
         {
-            new UpdateNannyWindow().Show();
+            new UpdateNannyWindow(bl).Show();
         }
 
         private void AddMotherSelect(object sender, RoutedEventArgs e)
         {
-            new AddMotherWindow().Show();
+            new AddMotherWindow(bl).Show();
         }
 
         private void UpdateMotherSelect(object sender, RoutedEventArgs e)
         {
-            new UpdateMotherWindow().Show();
+            new UpdateMotherWindow(bl).Show();
         }
 
         private void DeleteMotherSelect(object sender, RoutedEventArgs e)
         {
-            new DeleteMotherWindow().Show();
+            new DeleteMotherWindow(bl).Show();
         }
 
         private void AddChildSelect(object sender, RoutedEventArgs e)
         {
-            new AddChildWindow().Show();
+            new AddChildWindow(bl).Show();
         }
 
         private void UpdateChildSelect(object sender, RoutedEventArgs e)
         {
-            new UpdateChildWindow().Show();
+            new UpdateChildWindow(bl).Show();
         }
 
         private void DeleteChildSelect(object sender, RoutedEventArgs e)
         {
-            new DeleteChildWindow().Show();
+            new DeleteChildWindow(bl).Show();
         }
 
         private void DeleteContractSelect(object sender, RoutedEventArgs e)
         {
-            new DeleteContractWindow().Show();
+            new DeleteContractWindow(bl).Show();
         }
 
         private void UpdateContractSelect(object sender, RoutedEventArgs e)
@@ -107,12 +110,17 @@ namespace PLWPF
 
         private void AddContractSelect(object sender, RoutedEventArgs e)
         {
-            new AddContractWindow().Show();
+            new AddContractWindow(bl).Show();
         }
 
         private void SearchSelect(object sender, RoutedEventArgs e)
         {
-            new SearchWindow().Show();
+            new SearchWindow(bl).Show();
+        }
+
+        private void GroupByAge(object sender, RoutedEventArgs e)
+        {
+            new GroupByAge(bl).Show();
         }
     }
 }

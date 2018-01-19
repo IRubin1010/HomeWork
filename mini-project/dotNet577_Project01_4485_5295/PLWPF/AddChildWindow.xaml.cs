@@ -23,10 +23,10 @@ namespace PLWPF
     {
         IBL bl;
         Child child;
-        public AddChildWindow()
+        public AddChildWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             child = new Child();
             AddChild.DataContext = child;
         }

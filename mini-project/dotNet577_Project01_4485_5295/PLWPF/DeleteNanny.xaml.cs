@@ -24,10 +24,10 @@ namespace PLWPF
         IBL bl;
         Nanny nanny;
         List<Nanny> nannyList;
-        public DeleteNanny()
+        public DeleteNanny(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             nannyList = bl.CloneNannyList();
             list.DataContext = nannyList;
         }
