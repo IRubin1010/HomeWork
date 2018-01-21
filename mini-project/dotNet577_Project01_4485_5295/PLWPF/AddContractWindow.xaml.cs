@@ -52,6 +52,11 @@ namespace PLWPF
             hourlyFeeTextBox.DataContext = nanny;
             monthlyFeeTextBox.DataContext = nanny;
             isPaymentByHourCheckBox.DataContext = nanny;
+
+            contract.NannyID = nanny.ID;
+            contract.HourlyFee = nanny.HourlyFee;
+            contract.MonthlyFee = nanny.MonthlyFee;
+            contract.IsPaymentByHour = nanny.IsHourlyFee;
         }
 
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
@@ -59,23 +64,20 @@ namespace PLWPF
             mother = (Mother)(sender as ComboBox).SelectedItem;
             childList = bl.MotherChildren(mother);
             childComboBox.DataContext = childList;
+
+            contract.MotherID = mother.ID;
         }
 
         private void ChildSelected(object sender, SelectionChangedEventArgs e)
         {
             child = (Child)(sender as ComboBox).SelectedItem;
+            contract.ChildID = child.ID;
         }
 
         private void AddContract_Click(object sender, RoutedEventArgs e)
         {
-            if(nanny != null && mother != null && child!= null)
+            if (nanny != null && mother != null && child != null)
             {
-                contract.NannyID = nanny.ID;
-                contract.MotherID = mother.ID;
-                contract.ChildID = child.ID;
-                contract.HourlyFee = nanny.HourlyFee;
-                contract.MonthlyFee = nanny.MonthlyFee;
-                contract.IsPaymentByHour = nanny.IsHourlyFee;
                 Console.WriteLine(contract);
                 try
                 {
@@ -91,14 +93,15 @@ namespace PLWPF
 
         private void CalculatePayment_Click(object sender, RoutedEventArgs e)
         {
-            contract.NannyID = nanny.ID;
-            contract.MotherID = mother.ID;
-            contract.ChildID = child.ID;
-            contract.HourlyFee = nanny.HourlyFee;
-            contract.MonthlyFee = nanny.MonthlyFee;
-            contract.IsPaymentByHour = nanny.IsHourlyFee;
-            bl.CalculatePayment(contract);
-            finalPaymentTextBox.DataContext = contract;
+            try
+            {
+                bl.CalculatePayment(contract);
+                finalPaymentTextBox.DataContext = contract;
+            }
+            catch (BLException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
