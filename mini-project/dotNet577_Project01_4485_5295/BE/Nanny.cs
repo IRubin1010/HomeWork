@@ -29,7 +29,7 @@ namespace BE
         public bool IsHourlyFee { get; set; }
         public int? HourlyFee { get; set; }
         public int? MonthlyFee { get; set; }
-        public bool?[] IsWork { get; set; }
+        public bool[] IsWork { get; set; }
         public TimeSpan[][] WorkHours { get; set; }
         public bool IsValidVacationDays { get; set; }
         public string Recommendations { get; set; }
@@ -45,7 +45,7 @@ namespace BE
         public Nanny()
         {
             BirthDate = DateTime.Now;
-            IsWork = new bool?[6] { false, false, false, false, false, false };
+            IsWork = new bool[6] { false, false, false, false, false, false };
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6]{ new TimeSpan(0, 0, 0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
@@ -144,7 +144,7 @@ namespace BE
         public Nanny Clone()
         {
             Nanny nanny = (Nanny)MemberwiseClone();
-            nanny.IsWork = (bool?[])IsWork.Clone();
+            nanny.IsWork = (bool[])IsWork.Clone();
             nanny.WorkHours = (TimeSpan[][])WorkHours.Clone();
             return nanny;
         }

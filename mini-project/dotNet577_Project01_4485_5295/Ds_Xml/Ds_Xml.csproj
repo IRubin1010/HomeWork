@@ -43,7 +43,7 @@
     <Compile Include="ChildXml.cs" />
     <Compile Include="ContractXml.cs" />
     <Compile Include="MotherXml.cs" />
-    <Compile Include="NannyXml.cs" />
+    <Compile Include="DsXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

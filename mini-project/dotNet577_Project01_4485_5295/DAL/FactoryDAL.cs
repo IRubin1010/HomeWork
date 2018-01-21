@@ -11,7 +11,7 @@ namespace DAL
         // retrun the instance of Dal_imp
         public static IDAL GetIDAL()
         {
-            return Dal_imp.Instance;
+            return Dal_XML_imp.Instance;
         }
     }
 }
