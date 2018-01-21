@@ -95,8 +95,8 @@ namespace PLWPF
             IsWork = new bool?[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
-                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
-                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(9, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(14, 30, 0), new TimeSpan(15, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) }
             },
             IsValidVacationDays = true,
             Recommendations = "",

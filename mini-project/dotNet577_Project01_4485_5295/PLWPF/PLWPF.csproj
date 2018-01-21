@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GoogleMapsApi, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleMapsApi.0.69.0\lib\net40\GoogleMapsApi.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -62,6 +65,9 @@
     </Compile>
     <Compile Include="AddMotherWindow.xaml.cs">
       <DependentUpon>AddMotherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoCompleteAddressTextBox.xaml.cs">
+      <DependentUpon>AutoCompleteAddressTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeleteChildWindow.xaml.cs">
       <DependentUpon>DeleteChildWindow.xaml</DependentUpon>
@@ -123,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNannyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutoCompleteAddressTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,6 +244,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\BE.Child.datasource" />
     <None Include="Properties\DataSources\BE.Contract.datasource" />
     <None Include="Properties\DataSources\BE.Mother.datasource" />

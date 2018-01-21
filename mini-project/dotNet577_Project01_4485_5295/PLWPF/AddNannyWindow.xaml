@@ -90,7 +90,7 @@
                 <TextBox x:Name="nannyAgeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding NannyAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
                 <Label Content="*"  Style="{StaticResource LabelStyle}" Margin="50,0,0,0" Foreground="Red" Grid.Row="5"/>
                 <Label Content="Address:" Style="{StaticResource LabelStyle}" Grid.Row="5"/>
-                <TextBox x:Name="addressTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
+                <local:AutoCompleteAddressTextBox x:Name="addressTextBox" Margin="3" Height="23" Width="120" Grid.Column="1" Grid.Row="5"/>
                 <Label Content="*"  Style="{StaticResource LabelStyle}" Margin="86,0,0,0" Foreground="Red" Grid.Row="6"/>
                 <Label Content="Phone Number:" Style="{StaticResource LabelStyle}" Grid.Row="6"/>
                 <TextBox x:Name="phoneNumberTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>

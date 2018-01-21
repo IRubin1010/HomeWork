@@ -21,7 +21,14 @@ namespace ConsoleApp1
             int[][] d = new int[3][];
             DateTime da = new DateTime(1990, 1, 1);
             Console.WriteLine(da.ToString("dd/MM/yyyy"));
-            
+            int aaaa = new int();
+            aaaa = 5;
+            int bbbb = new int();
+            bbbb =    aaaa;
+            bbbb = 3;
+            Console.WriteLine(aaaa);
+            Console.WriteLine(bbbb);
+            Console.ReadKey();
         }
     }
     public class A
