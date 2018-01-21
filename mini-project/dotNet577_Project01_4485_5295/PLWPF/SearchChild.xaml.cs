@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BE;
 using BL;
@@ -17,42 +18,26 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for DeleteChildWindow.xaml
+    /// Interaction logic for SearchChild.xaml
     /// </summary>
-    public partial class DeleteChildWindow : Window
+    public partial class SearchChild : Page
     {
         IBL bl;
         Child child;
         List<Child> childList;
-        public DeleteChildWindow(IBL Bl)
+        public SearchChild(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
+            child = new Child();
             childList = bl.CloneChildList();
             list.DataContext = childList;
         }
 
         private void ChildSelected(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox combobox = sender as ComboBox;
-            child = (Child)combobox.SelectedItem;
-            UpdateChild.DataContext = child;
-        }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            if(child != null)
-            {
-                try
-                {
-                    bl.DeleteChild(child);
-                    Close();
-                }
-                catch (BLException ex)
-                {
-                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            child = (Child)(sender as ComboBox).SelectedItem;
+            searchChild.DataContext = child;
         }
     }
 }

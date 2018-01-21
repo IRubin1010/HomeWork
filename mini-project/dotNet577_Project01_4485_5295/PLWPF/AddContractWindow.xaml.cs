@@ -29,16 +29,14 @@ namespace PLWPF
         List<Nanny> nannyList;
         List<Mother> motherList;
         List<Child> childList;
-        public AddContractWindow()
+        public AddContractWindow(IBL BL)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = BL;
             nanny = new Nanny();
             mother = new Mother();
             child = new Child();
             contract = new Contract();
-            nannyList = bl.CloneNannyList();
-            nannyComboBox.DataContext = nannyList;
             motherList = bl.CloneMotherList();
             motherComboBox.DataContext = motherList;
             beginTransectionDatePicker.DataContext = contract;
@@ -53,10 +51,7 @@ namespace PLWPF
             monthlyFeeTextBox.DataContext = nanny;
             isPaymentByHourCheckBox.DataContext = nanny;
 
-            contract.NannyID = nanny.ID;
-            contract.HourlyFee = nanny.HourlyFee;
-            contract.MonthlyFee = nanny.MonthlyFee;
-            contract.IsPaymentByHour = nanny.IsHourlyFee;
+            
         }
 
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
@@ -65,19 +60,25 @@ namespace PLWPF
             childList = bl.MotherChildren(mother);
             childComboBox.DataContext = childList;
 
-            contract.MotherID = mother.ID;
+            
         }
 
         private void ChildSelected(object sender, SelectionChangedEventArgs e)
         {
             child = (Child)(sender as ComboBox).SelectedItem;
-            contract.ChildID = child.ID;
+           
         }
 
         private void AddContract_Click(object sender, RoutedEventArgs e)
         {
             if (nanny != null && mother != null && child != null)
             {
+                contract.NannyID = nanny.ID;
+                contract.HourlyFee = nanny.HourlyFee;
+                contract.MonthlyFee = nanny.MonthlyFee;
+                contract.IsPaymentByHour = nanny.IsHourlyFee;
+                contract.MotherID = mother.ID;
+                contract.ChildID = child.ID;
                 Console.WriteLine(contract);
                 try
                 {
@@ -93,15 +94,91 @@ namespace PLWPF
 
         private void CalculatePayment_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (nanny != null && mother != null && child != null)
             {
-                bl.CalculatePayment(contract);
-                finalPaymentTextBox.DataContext = contract;
+                contract.NannyID = nanny.ID;
+                contract.HourlyFee = nanny.HourlyFee;
+                contract.MonthlyFee = nanny.MonthlyFee;
+                contract.IsPaymentByHour = nanny.IsHourlyFee;
+                contract.MotherID = mother.ID;
+                contract.ChildID = child.ID;
+                try
+                {
+                    bl.CalculatePayment(contract);
+                    BindingExpression be = finalPaymentTextBox.GetBindingExpression(TextBox.TextProperty);
+                    finalPaymentTextBox.Text = contract.FinalPayment.ToString();
+                    be.UpdateSource();
+                }
+                catch (BLException ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            catch (BLException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        }
+
+        private void ManualChecked(object sender, RoutedEventArgs e)
+        {
+            nannyComboBox.Text = "";
+            nanny = new Nanny();
+            hourlyFeeTextBox.DataContext = nanny;
+            monthlyFeeTextBox.DataContext = nanny;
+            isPaymentByHourCheckBox.DataContext = nanny;
+            finalPaymentTextBox.Text = "";
+            nannyList = null;
+            nannyList = bl.CloneNannyList();
+            nannyComboBox.DataContext = nannyList;
+        }
+
+        private void HoursChecked(object sender, RoutedEventArgs e)
+        {
+            nannyComboBox.Text = "";
+            nanny = new Nanny();
+            hourlyFeeTextBox.DataContext = nanny;
+            monthlyFeeTextBox.DataContext = nanny;
+            isPaymentByHourCheckBox.DataContext = nanny;
+            finalPaymentTextBox.Text = "";
+            nannyList = null;
+            nannyList = bl.PotentialMatch(mother,child.ID);
+            nannyComboBox.DataContext = nannyList;
+        }
+
+        private void ConstraintsChecked(object sender, RoutedEventArgs e)
+        {
+            nannyComboBox.Text = "";
+            nanny = new Nanny();
+            hourlyFeeTextBox.DataContext = nanny;
+            monthlyFeeTextBox.DataContext = nanny;
+            isPaymentByHourCheckBox.DataContext = nanny;
+            finalPaymentTextBox.Text = "";
+            nannyList = null;
+            nannyList = bl.MotherConditions(mother, child.ID);
+            nannyComboBox.DataContext = nannyList;
+        }
+
+        private void DistanceChecked(object sender, RoutedEventArgs e)
+        {
+            nannyComboBox.Text = "";
+            nanny = new Nanny();
+            hourlyFeeTextBox.DataContext = nanny;
+            monthlyFeeTextBox.DataContext = nanny;
+            isPaymentByHourCheckBox.DataContext = nanny;
+            finalPaymentTextBox.Text = "";
+            nannyList = null;
+            nannyList = bl.NannysInKMWithConditions(mother,5, child.ID);//////////////////////
+            nannyComboBox.DataContext = nannyList;
+        }
+
+        private void BestMatchChecked(object sender, RoutedEventArgs e)
+        {
+            nannyComboBox.Text = "";
+            nanny = new Nanny();
+            hourlyFeeTextBox.DataContext = nanny;
+            monthlyFeeTextBox.DataContext = nanny;
+            isPaymentByHourCheckBox.DataContext = nanny;
+            finalPaymentTextBox.Text = "";
+            nannyList = null;
+            nannyList = bl.PartialMatch(mother, 5, child.ID);/////////////////////////////////
+            nannyComboBox.DataContext = nannyList;
         }
     }
 }

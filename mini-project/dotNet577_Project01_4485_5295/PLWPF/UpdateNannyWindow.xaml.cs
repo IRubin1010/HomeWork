@@ -24,26 +24,12 @@ namespace PLWPF
         IBL bl;
         Nanny nanny;
         List<Nanny> nannyList;
-        public UpdateNannyWindow()
+        public UpdateNannyWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             nannyList = bl.CloneNannyList();
             list.DataContext = nannyList;
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-            if (text.Text != "")
-            {
-                int id = int.Parse(IDtextbox.Text);
-                nanny = bl.FindNanny(id);
-                if (nanny != null)
-                {
-                    NannyToUpdate.DataContext = nanny;
-                }
-            }
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -77,5 +63,6 @@ namespace PLWPF
             nanny = (Nanny)comboBox.SelectedItem;
             NannyToUpdate.DataContext = nanny;
         }
+
     }
 }

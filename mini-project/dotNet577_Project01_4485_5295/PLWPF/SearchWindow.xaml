@@ -1,0 +1,32 @@
+﻿<Window x:Class="PLWPF.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        xmlns:sys ="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="SearchWindow" Height="540" Width="610">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="local:Entity"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="select entitiy" HorizontalAlignment="Center" Margin="0,10" VerticalAlignment="Bottom"/>
+            <ComboBox Name="searchList" Grid.Row="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" Width="80" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectionChanged="EntitySelected"/>
+        </Grid>
+        <Frame x:Name="selectedAction" Width="510" Height="600" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

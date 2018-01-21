@@ -402,7 +402,7 @@ namespace DAL
                             // if the contract number equals 0, give a new contract number
                             // if contract number is not 0 - means this is an update contract,
                             // don't give a new contract number
-                            if (contract.ContractNumber == 0)
+                            if (contract.ContractNumber == null)
                                 contract.ContractNumber = ContractNumber++;
                             contract.IsContractSigned = true;
                             ContractList().Add(contract.Clone());
