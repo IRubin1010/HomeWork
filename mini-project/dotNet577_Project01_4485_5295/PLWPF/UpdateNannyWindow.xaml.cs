@@ -38,6 +38,7 @@ namespace PLWPF
             {
                 try
                 {
+                    nanny.Address = addressTextBox.Text;
                     bl.UpdateNanny(nanny);
                     Close();
                 }
@@ -62,6 +63,7 @@ namespace PLWPF
             ComboBox comboBox = sender as ComboBox;
             nanny = (Nanny)comboBox.SelectedItem;
             NannyToUpdate.DataContext = nanny;
+            addressTextBox.Text = nanny.Address;
         }
 
     }

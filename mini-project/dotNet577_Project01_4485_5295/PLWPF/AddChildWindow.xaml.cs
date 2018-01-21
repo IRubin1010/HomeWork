@@ -46,5 +46,12 @@ namespace PLWPF
             }
 
         }
+
+        private void DateSelectsd(object sender, SelectionChangedEventArgs e)
+        {
+            BindingExpression be = ageInMonthTextBox.GetBindingExpression(TextBox.TextProperty);
+            ageInMonthTextBox.Text = child.AgeInMonth.ToString();
+            be.UpdateSource();
+        }
     }
 }

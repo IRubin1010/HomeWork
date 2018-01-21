@@ -93,7 +93,7 @@
                 <Label Content="Last Name:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
                 <TextBox x:Name="lastNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
                 <Label Content="Address:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
-                <TextBox x:Name="addressTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
+                <local:AutoCompleteAddressTextBox x:Name="addressTextBox" Margin="3" Grid.Column="1" Width="120" Height="23" Grid.Row="3"/>
                 <Label Content="Phone Number:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
                 <TextBox x:Name="phoneNumberTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
             </Grid>
