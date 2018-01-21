@@ -16,7 +16,7 @@ namespace BE
         public string FirstName { get; set; }
         public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }
         public DateTime BirthDate { get; set; }
-        public int? NannyAge { get { return DateTime.Today.Year - BirthDate.Year; } set { } }
+        public int? NannyAge { get { if (DateTime.Today.Year - BirthDate.Year == 0) return null; else return DateTime.Today.Year - BirthDate.Year; } set { } }
         public int? PhoneNumber { get; set; }
         public string Address { get; set; }
         public bool Elevator { get; set; }

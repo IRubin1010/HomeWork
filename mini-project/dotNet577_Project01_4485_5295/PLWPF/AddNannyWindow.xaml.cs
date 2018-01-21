@@ -36,7 +36,12 @@ namespace PLWPF
         {
             try
             {
+                nanny.Address = addressTextBox.Text;
+                Console.WriteLine(nanny.Address);
+                Console.WriteLine(nanny);
                 bl.AddNanny(nanny);
+                nanny = bl.FindNanny(nanny.ID);
+                Console.WriteLine(nanny);
                 nanny = new Nanny();
                 NannyDeatails.DataContext = nanny;
                 Close();

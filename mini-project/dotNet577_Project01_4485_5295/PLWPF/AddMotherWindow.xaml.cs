@@ -35,6 +35,7 @@ namespace PLWPF
         {
             try
             {
+                mother.Address = addressTextBox.Text;
                 bl.AddMother(mother);
                 mother = new Mother();
                 MotherDetails.DataContext = mother;

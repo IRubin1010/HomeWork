@@ -39,6 +39,7 @@ namespace PLWPF
             ComboBox comboBox = sender as ComboBox;
             mother = (Mother)comboBox.SelectedItem;
             UpdateMother.DataContext = mother;
+            addressTextBox.Text = mother.Address;
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,7 @@ namespace PLWPF
             {
                 try
                 {
+                    mother.Address = addressTextBox.Text;
                     bl.UpdateMother(mother);
                     Close();
                 }

@@ -91,9 +91,9 @@
                 <Label Content="First Name:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
                 <TextBox x:Name="firstNameTextBox" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Style="{StaticResource TextBoxStyle}"/>
                 <Label Content="Birth Date:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
-                <DatePicker x:Name="birthDateDatePicker" Width="140" VerticalAlignment="Center" SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="7,3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+                <DatePicker x:Name="birthDateDatePicker" SelectedDateChanged="DateSelectsd" Width="140" VerticalAlignment="Center" SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="7,3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
                 <Label Content="Age In Month:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
-                <TextBox x:Name="ageInMonthTextBox" Text="{Binding AgeInMonth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Style="{StaticResource TextBoxStyle}"/>
+                <TextBox x:Name="ageInMonthTextBox" IsEnabled="False" Text="{Binding AgeInMonth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Style="{StaticResource TextBoxStyle}"/>
                 <Label Content="Is Special Needs:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
                 <CheckBox x:Name="isSpecialNeedsCheckBox" IsChecked="{Binding IsSpecialNeeds, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Style="{StaticResource CheckBoxStyle}"/>
                 <Label x:Name="specialNeedsLabel" Content="Special Needs:" Grid.Row="7" Style="{StaticResource NeedsLabel}"/>
