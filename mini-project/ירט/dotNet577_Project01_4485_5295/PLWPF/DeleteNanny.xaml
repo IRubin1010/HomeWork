@@ -14,7 +14,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="18"/>
         </Style>
-        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+        <Style x:Key="ComboBoxRow1Style" TargetType="ComboBox">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -27,13 +27,14 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Grid.Column" Value="0"/>
         </Style>
-        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="Width" Value="120"/>
             <Setter Property="Height" Value="23"/>
+            <Setter Property="IsEnabled" Value="False"/>
         </Style>
         <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
             <Setter Property="Margin" Value="3"/>
@@ -48,20 +49,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Name="ID" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <TextBox Name="IDtextbox" Height="23" Margin="10,7" TextWrapping="Wrap" Width="130" TextChanged="TextBox_TextChanged"/>
-            </Grid>
-            <Label Content="ID:" Style="{StaticResource LebelRwo1Style}"/>
-            <Label Content="or select" Grid.Column="2" Style="{StaticResource LebelRwo1Style}"/>
-            <ComboBox Name="list" Grid.Column="3" ItemsSource="{Binding}" DisplayMemberPath="FullNameAndID" Style="{StaticResource ComboBoxStyle}" SelectionChanged="NannySelected"/>
-        </Grid>
+        <Label Content="select" HorizontalAlignment="Left" Margin="110,0,0,0" Style="{StaticResource LebelRwo1Style}" FontSize="20"/>
+        <ComboBox Name="list" HorizontalAlignment="Right" Margin="0,0,110,0" ItemsSource="{Binding}" DisplayMemberPath="FullNameAndID" Style="{StaticResource ComboBoxRow1Style}" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
         <Grid Grid.Row="1" Name="NannyToDelete">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -83,21 +72,21 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="ID:" Style="{StaticResource LabelStyle}" Grid.Row="0"/>
-                <TextBlock x:Name="iDTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
+                <TextBox x:Name="iDTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
                 <Label Content="First Name:" Style="{StaticResource LabelStyle}" Grid.Row="1"/>
-                <TextBlock x:Name="firstNameTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
+                <TextBox x:Name="firstNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
                 <Label Content="Last Name:" Style="{StaticResource LabelStyle}" Grid.Row="2"/>
-                <TextBlock x:Name="lastNameTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
+                <TextBox x:Name="lastNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding LastName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
                 <Label Content="Birth Date:" Style="{StaticResource LabelStyle}" Grid.Row="3"/>
-                <TextBlock x:Name="birthDateDatePicker" Width="120" VerticalAlignment="Center" Text="{Binding BirthDate, StringFormat=dd/MM/yyyy, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"  Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+                <DatePicker x:Name="birthDateDatePicker" IsEnabled="False" Width="120" VerticalAlignment="Center" SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"  Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
                 <Label Content="Nanny Age:" Style="{StaticResource LabelStyle}" Grid.Row="4"/>
-                <TextBlock x:Name="nannyAgeTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding NannyAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
+                <TextBox x:Name="nannyAgeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding NannyAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
                 <Label Content="Address:" Style="{StaticResource LabelStyle}" Grid.Row="5"/>
-                <TextBlock x:Name="addressTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
+                <TextBox x:Name="addressTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
                 <Label Content="Phone Number:" Style="{StaticResource LabelStyle}" Grid.Row="6"/>
-                <TextBlock x:Name="phoneNumberTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
+                <TextBox x:Name="phoneNumberTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding PhoneNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
                 <Label Content="Seniority:" Style="{StaticResource LabelStyle}" Grid.Row="7"/>
-                <TextBlock x:Name="seniorityTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding Seniority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
+                <TextBox x:Name="seniorityTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Seniority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
             </Grid>
             <Grid x:Name="grid2" Grid.Column="1" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Left" >
                 <Grid.RowDefinitions>
@@ -122,25 +111,25 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Min Age:" Style="{StaticResource LabelStyle}" Grid.Row="0"/>
-                    <TextBlock x:Name="minAgeTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding MinAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
+                    <TextBox x:Name="minAgeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding MinAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0"/>
                     <Label Content="Max Age:" Style="{StaticResource LabelStyle}" Grid.Row="1"/>
-                    <TextBlock x:Name="maxAgeTextBox"  Style="{StaticResource TextBlockStyle}" Text="{Binding MaxAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
+                    <TextBox x:Name="maxAgeTextBox"  Style="{StaticResource TextBoxStyle}" Text="{Binding MaxAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
                     <Label Content="Max Children:" Style="{StaticResource LabelStyle}" Grid.Row="2"/>
-                    <TextBlock x:Name="maxChildrenTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding MaxChildren, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
+                    <TextBox x:Name="maxChildrenTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding MaxChildren, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
                     <Label Content="Hourly Fee:" Style="{StaticResource LabelStyle}" Grid.Row="3"/>
-                    <TextBlock x:Name="hourlyFeeTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding HourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
+                    <TextBox x:Name="hourlyFeeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding HourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
                     <Label Content="Monthly Fee:" Style="{StaticResource LabelStyle}" Grid.Row="4"/>
-                    <TextBlock x:Name="monthlyFeeTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding MonthlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
+                    <TextBox x:Name="monthlyFeeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding MonthlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
                     <Label Content="Is Hourly Fee:" Style="{StaticResource LabelStyle}" Grid.Row="5"/>
                     <CheckBox x:Name="isHourlyFeeCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsHourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
                     <Label Content="Elevator:" Style="{StaticResource LabelStyle}" Grid.Row="6"/>
                     <CheckBox x:Name="elevatorCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding Elevator, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
                     <Label Content="Floor:" Style="{StaticResource LabelStyle}" Grid.Row="7"/>
-                    <TextBlock x:Name="floorTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding Floor, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
+                    <TextBox x:Name="floorTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Floor, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
                     <Label Content="Is Valid Vacation Days:" Style="{StaticResource LabelStyle}" Grid.Row="8"/>
                     <CheckBox x:Name="isValidVacationDaysCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsValidVacationDays, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8"/>
                     <Label Content="Recommendations:" Style="{StaticResource LabelStyle}" Grid.Row="9"/>
-                    <TextBlock x:Name="recommendationsTextBox" Style="{StaticResource TextBlockStyle}" Text="{Binding Recommendations, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
+                    <TextBox x:Name="recommendationsTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Recommendations, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
                 </Grid>
                 <Button Content="work days and work hours" HorizontalAlignment="center" Margin="0,10,0,10" Grid.Row="1" VerticalAlignment="center" Width="230" FontSize="15" Click="WorkDaysHours"/>
             </Grid>

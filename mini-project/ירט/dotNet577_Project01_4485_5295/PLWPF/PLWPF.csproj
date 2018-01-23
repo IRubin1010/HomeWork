@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GoogleMapsApi, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleMapsApi.0.69.0\lib\net40\GoogleMapsApi.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -63,6 +66,9 @@
     <Compile Include="AddMotherWindow.xaml.cs">
       <DependentUpon>AddMotherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AutoCompleteAddressTextBox.xaml.cs">
+      <DependentUpon>AutoCompleteAddressTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeleteChildWindow.xaml.cs">
       <DependentUpon>DeleteChildWindow.xaml</DependentUpon>
     </Compile>
@@ -72,8 +78,28 @@
     <Compile Include="DeleteMotherWindow.xaml.cs">
       <DependentUpon>DeleteMotherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
+    <Compile Include="GroupByAge.xaml.cs">
+      <DependentUpon>GroupByAge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Initialize.cs" />
     <Compile Include="NannyWorkDaysHoursDelete.xaml.cs">
       <DependentUpon>NannyWorkDaysHoursDelete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchChild.xaml.cs">
+      <DependentUpon>SearchChild.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchContract.xaml.cs">
+      <DependentUpon>SearchContract.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchMother.xaml.cs">
+      <DependentUpon>SearchMother.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchNanny.xaml.cs">
+      <DependentUpon>SearchNanny.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="splashScreen.xaml.cs">
       <DependentUpon>splashScreen.xaml</DependentUpon>
@@ -106,6 +132,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AutoCompleteAddressTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeleteChildWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DeleteNanny.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GroupByAge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +179,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NannyWorkDaysHoursDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchChild.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchContract.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchMother.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchNanny.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,6 +244,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\BE.Child.datasource" />
     <None Include="Properties\DataSources\BE.Contract.datasource" />
     <None Include="Properties\DataSources\BE.Mother.datasource" />

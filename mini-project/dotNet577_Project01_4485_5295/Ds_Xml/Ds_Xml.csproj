@@ -40,9 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChildXml.cs" />
-    <Compile Include="ContractXml.cs" />
-    <Compile Include="MotherXml.cs" />
     <Compile Include="DsXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -24,10 +24,10 @@ namespace PLWPF
         IBL bl;
         Mother mother;
         List<Mother> motherList;
-        public UpdateMotherWindow()
+        public UpdateMotherWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             motherList = bl.CloneMotherList();
             list.DataContext = motherList;
             mother = new Mother();
@@ -39,6 +39,7 @@ namespace PLWPF
             ComboBox comboBox = sender as ComboBox;
             mother = (Mother)comboBox.SelectedItem;
             UpdateMother.DataContext = mother;
+            addressTextBox.Text = mother.Address;
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,7 @@ namespace PLWPF
             {
                 try
                 {
+                    mother.Address = addressTextBox.Text;
                     bl.UpdateMother(mother);
                     Close();
                 }

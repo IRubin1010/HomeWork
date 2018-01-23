@@ -16,7 +16,7 @@ namespace BE
         public string FirstName { get; set; }
         public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }
         public DateTime BirthDate { get; set; }
-        public int? NannyAge { get; set; }
+        public int? NannyAge { get { if (DateTime.Today.Year - BirthDate.Year == 0) return null; else return DateTime.Today.Year - BirthDate.Year; } set { } }
         public int? PhoneNumber { get; set; }
         public string Address { get; set; }
         public bool Elevator { get; set; }
@@ -29,7 +29,7 @@ namespace BE
         public bool IsHourlyFee { get; set; }
         public int? HourlyFee { get; set; }
         public int? MonthlyFee { get; set; }
-        public bool?[] IsWork { get; set; }
+        public bool[] IsWork { get; set; }
         public TimeSpan[][] WorkHours { get; set; }
         public bool IsValidVacationDays { get; set; }
         public string Recommendations { get; set; }
@@ -44,11 +44,11 @@ namespace BE
 
         public Nanny()
         {
-            BirthDate = new DateTime(1990, 1, 1);
-            IsWork = new bool?[6] { false, false, false, false, false, false };
+            BirthDate = DateTime.Now;
+            IsWork = new bool[6] { false, false, false, false, false, false };
             WorkHours = new TimeSpan[2][]
             {
-                new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
+                new TimeSpan[6]{ new TimeSpan(0, 0, 0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
                 new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) }
             };
 
@@ -144,7 +144,7 @@ namespace BE
         public Nanny Clone()
         {
             Nanny nanny = (Nanny)MemberwiseClone();
-            nanny.IsWork = (bool?[])IsWork.Clone();
+            nanny.IsWork = (bool[])IsWork.Clone();
             nanny.WorkHours = (TimeSpan[][])WorkHours.Clone();
             return nanny;
         }

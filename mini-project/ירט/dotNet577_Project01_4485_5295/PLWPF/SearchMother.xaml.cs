@@ -10,43 +10,33 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for UpdateContractWindow.xaml
+    /// Interaction logic for SearchMother.xaml
     /// </summary>
-    public partial class UpdateContractWindow : Window
+    public partial class SearchMother : Page
     {
-        public UpdateContractWindow()
+        IBL bl;
+        Mother mother;
+        List<Mother> motherList;
+        public SearchMother(IBL Bl)
         {
             InitializeComponent();
-        }
-
-        private void NannySelected(object sender, SelectionChangedEventArgs e)
-        {
-
+            bl = Bl;
+            motherList = bl.CloneMotherList();
+            list.DataContext = motherList;
         }
 
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void ChildSelected(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void AddContract_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CalculatePayment_Click(object sender, RoutedEventArgs e)
-        {
-
+            mother = (Mother)(sender as ComboBox).SelectedItem;
+            searchMother.DataContext = mother;
         }
     }
 }
