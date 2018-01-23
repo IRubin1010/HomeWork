@@ -23,10 +23,10 @@ namespace PLWPF
     {
         Mother mother;
         IBL bl;
-        public AddMotherWindow()
+        public AddMotherWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             mother = new Mother();
             MotherDetails.DataContext = mother;
         }
@@ -35,6 +35,7 @@ namespace PLWPF
         {
             try
             {
+                mother.Address = addressTextBox.Text;
                 bl.AddMother(mother);
                 mother = new Mother();
                 MotherDetails.DataContext = mother;

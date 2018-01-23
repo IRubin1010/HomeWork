@@ -24,10 +24,10 @@ namespace PLWPF
         IBL bl;
         Child child;
         List<Child> childList;
-        public UpdateChildWindow()
+        public UpdateChildWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             childList = bl.CloneChildList();
             list.DataContext = childList;
         }

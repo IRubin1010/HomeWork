@@ -20,7 +20,7 @@ namespace BL
         {
             dal = FactoryDAL.GetIDAL();
         }
-        
+
         /* Nanny functions */
 
         /// <summary>
@@ -37,6 +37,14 @@ namespace BL
                 throw new BLException(nanny.FullName() + " age is under 18", "add nanny");
             try
             {
+                Valid(nanny);
+            }
+            catch (BLException)
+            {
+                throw;
+            }
+            try
+            {
                 dal.AddNanny(nanny.Clone());
             }
             catch (DALException ex)
@@ -44,7 +52,22 @@ namespace BL
                 throw new BLException(ex.Message, ex.sender);
             }
         }
-
+        public enum days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
+        public void Valid(Nanny nanny)
+        {
+            string message = null;
+            if (!nanny.ID.HasValue) message += "Must fill the field ID\n";
+            if (string.IsNullOrEmpty(nanny.FirstName)) message += "Must fill the field First name\n";
+            if (string.IsNullOrEmpty(nanny.LastName)) message += "Must fill the field Last nam\n";
+            if (string.IsNullOrEmpty(nanny.Address)) message += "Must fill the field Adsress\n";
+            if (nanny.BirthDate > DateTime.Now) message += "Invalid date\n";
+            if (!nanny.PhoneNumber.HasValue) message += "Must fill the field PhoneNumber\n";
+            if (nanny.MaxAge < nanny.MinAge) message += "The maximum age can not be greater than the minimum age\n";
+            for (int i = 0; i < 6; i++)
+                if (nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
+                    message += "Late start time from end time at day " + ((days)i).ToString()+ "\n";
+            if (message != null) throw new BLException(message, "AddNanny");
+        }
         /// <summary>
         /// delete nanny from nanny's DB
         /// </summary>
@@ -288,7 +311,7 @@ namespace BL
         /// </remarks>
         public void AddChild(Child child)
         {
-            if(FindMother(child.MotherID) == null)
+            if (FindMother(child.MotherID) == null)
                 throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
             try
             {
@@ -441,7 +464,7 @@ namespace BL
             // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
-            if(child.AgeInMonth > nanny.MaxAge || child.AgeInMonth < nanny.MinAge)
+            if (IsChildInNannyAge(nanny, child.ID) == false)
                 throw new BLException(child.FirstName + " is not on nanny's age range", "add contrsct");
             if (child.HaveNanny == true)
                 throw new BLException(child.FirstName + " already has a nanny ", "add contrsct");
@@ -516,7 +539,7 @@ namespace BL
                     UpdateHaveNanny(dal.FindChild(contract.ChildID), false);
                     dal.DeleteContract(contractNumber);
                 }
-                catch(BLException ex)
+                catch (BLException ex)
                 {
                     // if fail at UpdateHaveNanny need to reduce back nanny children
                     if (ex.sender == "Update Have Nanny")
@@ -621,24 +644,37 @@ namespace BL
             }
             // if monthly fee
             if (contract.IsPaymentByHour == false)
+            {
+                if (contract.MonthlyFee == null)
+                    throw new BLException("No monthly payment set", "CalculatePayment");
                 contract.FinalPayment = (int)contract.MonthlyFee * discount;
+            }
             // if hourly fee
             else
             {
+                if (contract.HourlyFee == null)
+                    throw new BLException("No monthly payment set", "CalculatePayment");
                 double hoursPerWeek = 0;
                 // calculate the actual hours 
                 for (int i = 0; i < 6; i++)
                 {
-                    if (mother.NeedNannyHours[1][i] <= nanny.WorkHours[1][i])
-                        hoursPerWeek += mother.NeedNannyHours[1][i].TotalHours;
-                    else
-                        hoursPerWeek += nanny.WorkHours[1][i].TotalHours;
-                    if (mother.NeedNannyHours[0][i] <= nanny.WorkHours[0][i])
-                        hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
-                    else
-                        hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
+                    if (mother.NeedNanny[i] == true && nanny.IsWork[i] == true)
+                    {
+                        if (mother.NeedNannyHours[1][i] >= nanny.WorkHours[0][i]
+                            && nanny.WorkHours[1][i] >= mother.NeedNannyHours[0][i])
+                        {
+                            if (mother.NeedNannyHours[1][i] <= nanny.WorkHours[1][i])
+                                hoursPerWeek += mother.NeedNannyHours[1][i].TotalHours;
+                            else
+                                hoursPerWeek += nanny.WorkHours[1][i].TotalHours;
+                            if (mother.NeedNannyHours[0][i] <= nanny.WorkHours[0][i])
+                                hoursPerWeek -= nanny.WorkHours[0][i].TotalHours;
+                            else
+                                hoursPerWeek -= mother.NeedNannyHours[0][i].TotalHours;
+                        }
+                    }
                 }
-                contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee;
+                contract.FinalPayment = hoursPerWeek * discount * (int)contract.HourlyFee * 4;
             }
         }
 
@@ -696,13 +732,15 @@ namespace BL
         }
 
         /// <summary>
-        /// return a list of nanny who work at the same days and hours as the mother need
+        /// return a list of nanny who work at the same days and hours as the mother need,
+        /// check also that the child is whitin nanny age range
         /// </summary>
         /// <param name="mother">the mother to check match for a nanny</param>
-        public List<Nanny> PotentialMatch(Mother mother)
+        /// <param name="id">child id</param>
+        public List<Nanny> PotentialMatch(Mother mother, int? id)
         {
             return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
-                && PotentialDaysMatch(nanny, mother)).ToList();
+                && PotentialDaysMatch(nanny, mother) && IsChildInNannyAge(nanny, id)).ToList();
         }
 
         /// <summary>
@@ -739,14 +777,29 @@ namespace BL
         }
 
         /// <summary>
+        /// checks if a child is in nanny range of age
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        /// <param name="id">child id to check</param>
+        public bool IsChildInNannyAge(Nanny nanny, int? id)
+        {
+            Child child = FindChild(id);
+            if (child == null) return false;
+            if (child.AgeInMonth < nanny.MinAge || child.AgeInMonth > nanny.MaxAge)
+                return false;
+            return true;
+        }
+
+        /// <summary>
         /// return a list of nannys who match perfectly to the mother, 
         /// considering hours, days, elevator, seniority and floor match.
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
-        public List<Nanny> MotherConditions(Mother mother)
+        /// <param name="id">child id</param>
+        public List<Nanny> MotherConditions(Mother mother, int? id)
         {
             // get a list of nannys who thier days and hours match
-            List<Nanny> nannyList = PotentialMatch(mother);
+            List<Nanny> nannyList = PotentialMatch(mother, id);
             // check the elevator, seniority and floor
             foreach (Nanny nanny in nannyList.Reverse<Nanny>())
             {
@@ -779,9 +832,10 @@ namespace BL
         /// </summary>
         /// <param name="mother">the mother to get a match</param>
         /// <param name="Km">the range of Km to check</param>
-        public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km)
+        /// <param name="id">child id</param>
+        public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km, int? id)
         {
-            return MotherConditions(mother).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
+            return MotherConditions(mother, id).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
         }
 
         /// <summary>
@@ -791,7 +845,8 @@ namespace BL
         /// </summary>
         /// <param name="mother">mother to check match</param>
         /// <param name="Km">the range of Km</param>
-        public List<Nanny> PropertiesMatch(Mother mother, int? Km)
+        /// <param name="id">child id</param>
+        public List<Nanny> PropertiesMatch(Mother mother, int? Km, int? id)
         {
             // give value for each mother's need
             // if the nanny match this need give it a value 
@@ -799,8 +854,12 @@ namespace BL
             // than sum the values 
             // the highest value means it is the best match
             List<Nanny> nannyList = CloneNannyList();
-            foreach (Nanny nanny in nannyList)
+            foreach (Nanny nanny in nannyList.Reverse<Nanny>())
             {
+                if (IsChildInNannyAge(nanny, id) == false)
+                {
+                    nannyList.Remove(nanny); continue;
+                }
                 nanny.HoursValue = PotentialHoursMatch(nanny, mother) == true ? 6 : 0;
                 nanny.DaysValue = PotentialDaysMatch(nanny, mother) == true ? 5 : 0;
                 nanny.SeniorityValue = mother.MinSeniority <= nanny.Seniority ? 4 : 0;
@@ -817,9 +876,10 @@ namespace BL
         /// retrun list of the best 5 match of nanny hwo match the mother
         /// </summary>
         /// <param name="mother">mothe to check the match</param>
-        public List<Nanny> PartialMatch(Mother mother, int? Km)
+        /// /// <param name="id">child id</param>
+        public List<Nanny> PartialMatch(Mother mother, int? Km, int? id)
         {
-            return PropertiesMatch(mother, Km).OrderByDescending(nanny => nanny.SumValue)
+            return PropertiesMatch(mother, Km, id).OrderByDescending(nanny => nanny.SumValue)
                 .Take(5).ToList();
         }
 
@@ -944,7 +1004,7 @@ namespace BL
             Mother mother = FindMother(contract.MotherID);
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
             // the distance function returns meter that's why they divide by 5000
-            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000; 
+            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000;
             if (distance == 0)
                 return 5;
             return (distance + 1) * 5;

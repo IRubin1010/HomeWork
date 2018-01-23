@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddContractWindow"
         mc:Ignorable="d"
-        Title="AddContractWindow" Height="460" Width="300">
+        Title="AddContractWindow" Height="460" Width="530">
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Margin" Value="10,3"/>
@@ -36,10 +36,35 @@
             <Setter Property="Width" Value="120"/>
             <Setter Property="Height" Value="23"/>
         </Style>
+        <Style x:Key="radioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Margin" Value="20,5,0,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=childComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="ChildCombobox" TargetType="ComboBox" BasedOn="{StaticResource ComboBoxStyle}">
             <Setter Property="IsEnabled" Value="True"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=motherComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonEnable" TargetType="Button">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=nannyComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=motherComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=childComboBox, Path=SelectedItem}" Value="{x:Null}">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -52,51 +77,87 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Label Content="contract details" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <Grid x:Name="NannyDetails" Grid.Row="1" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Nanny ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
-            <ComboBox x:Name="nannyComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
-            <Label Content="Mother ID:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
-            <ComboBox x:Name="motherComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="1" DisplayMemberPath="FullNameAndID" SelectionChanged="MotherSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
-            <Label Content="Child ID:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
-            <ComboBox x:Name="childComboBox" Style="{StaticResource ChildCombobox}" ItemsSource="{Binding}" Grid.Row="2" DisplayMemberPath="NameAndID" SelectionChanged="ChildSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
-            <Label Content="Begin Transection:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
-            <DatePicker x:Name="beginTransectionDatePicker" VerticalAlignment="Center" Width="120" SelectedDate="{Binding BeginTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label Content="End Transection:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
-            <DatePicker x:Name="endTransectionDatePicker" VerticalAlignment="Center" Width="120" SelectedDate="{Binding EndTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
-            <Label Content="Hourly Fee:" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
-            <TextBox x:Name="hourlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding HourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
-            <Label Content="Monthly Fee:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
-            <TextBox x:Name="monthlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding MonthlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
-            <Label Content="Is Payment By Hour:" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
-            <CheckBox x:Name="isPaymentByHourCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsHourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
-            <Label Content="Is Meet:" Grid.Row="8" Style="{StaticResource LabelStyle}"/>
-            <CheckBox x:Name="isMeetCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsMeet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8"/>
-            <Label Content="Final Payment:" Grid.Row="9" Style="{StaticResource LabelStyle}"/>
-            <TextBox x:Name="finalPaymentTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding FinalPayment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Mother ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="motherComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="MotherSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+                    <Label Content="Child ID:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="childComboBox" Style="{StaticResource ChildCombobox}" ItemsSource="{Binding}" Grid.Row="1" DisplayMemberPath="NameAndID" SelectionChanged="ChildSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+                </Grid>
+                <Grid Grid.Row="1" Margin="0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <RadioButton Content="Manual selection" Checked="ManualChecked" Style="{StaticResource radioButtonStyle}"/>
+                    <RadioButton Content="Filtered by mother hours" Checked="HoursChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="1"/>
+                    <RadioButton Content="Filtered by mother's constraints" Checked="ConstraintsChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="2"/>
+                    <RadioButton Content="Filtered by distance from mother" Checked="DistanceChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="3"/>
+                    <RadioButton Content="5 best matches" Checked="BestMatchChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="4"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid x:Name="NannyDetails" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Nanny ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
+                    <ComboBox x:Name="nannyComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+                    <Label Content="Begin Transection:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
+                    <DatePicker x:Name="beginTransectionDatePicker" VerticalAlignment="Center" Width="120" SelectedDate="{Binding BeginTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
+                    <Label Content="End Transection:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
+                    <DatePicker x:Name="endTransectionDatePicker" VerticalAlignment="Center" Width="120" SelectedDate="{Binding EndTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
+                    <Label Content="Hourly Fee:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="hourlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding HourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
+                    <Label Content="Monthly Fee:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="monthlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding MonthlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
+                    <Label Content="Is Payment By Hour:" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
+                    <CheckBox x:Name="isPaymentByHourCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsHourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
+                    <Label Content="Is Meet:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
+                    <CheckBox x:Name="isMeetCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsMeet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
+                    <Label Content="month Final Payment:" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
+                    <TextBox x:Name="finalPaymentTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding FinalPayment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>
+                </Grid>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="submit" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="AddContract_Click"/>
-            <Button Content="calculat payment" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="CalculatePayment_Click"/>
+            <Button Content="submit" Style="{StaticResource ButtonEnable}" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="15" Click="AddContract_Click"/>
+            <Button Content="calculat payment" Style="{StaticResource ButtonEnable}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="15" Click="CalculatePayment_Click"/>
         </Grid>
     </Grid>
 </Window>

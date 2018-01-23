@@ -23,19 +23,25 @@ namespace PLWPF
     {
         IBL bl;
         Nanny nanny;
-        public AddNannyWindow()
+        public AddNannyWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             nanny = new Nanny();
             NannyDeatails.DataContext = nanny;
+            nannyAgeTextBox.Text = "";
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                nanny.Address = addressTextBox.Text;
+                Console.WriteLine(nanny.Address);
+                Console.WriteLine(nanny);
                 bl.AddNanny(nanny);
+                nanny = bl.FindNanny(nanny.ID);
+                Console.WriteLine(nanny);
                 nanny = new Nanny();
                 NannyDeatails.DataContext = nanny;
                 Close();
@@ -51,6 +57,15 @@ namespace PLWPF
             new NannyWorkDaysHours(nanny).Show();
         }
 
+        private void DateSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (nanny.NannyAge != 0)
+            {
+                BindingExpression be = nannyAgeTextBox.GetBindingExpression(TextBox.TextProperty);
+                nannyAgeTextBox.Text = nanny.NannyAge.ToString();
+                be.UpdateSource();
+            }
+        }
     }
 }
 

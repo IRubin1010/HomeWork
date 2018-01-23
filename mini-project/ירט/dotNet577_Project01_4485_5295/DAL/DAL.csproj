@@ -56,6 +56,10 @@
       <Project>{ce3a5233-da29-46d2-9150-b02ca3b5f48b}</Project>
       <Name>DS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ds_Xml\Ds_Xml.csproj">
+      <Project>{b0aa0d68-c18d-4b6d-8811-22c97a48d790}</Project>
+      <Name>Ds_Xml</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

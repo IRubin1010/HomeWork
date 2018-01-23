@@ -23,10 +23,10 @@ namespace PLWPF
     {
         IBL bl;
         Child child;
-        public AddChildWindow()
+        public AddChildWindow(IBL Bl)
         {
             InitializeComponent();
-            bl = FactoryBL.GetBL();
+            bl = Bl;
             child = new Child();
             AddChild.DataContext = child;
         }
@@ -45,6 +45,13 @@ namespace PLWPF
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+
+        private void DateSelectsd(object sender, SelectionChangedEventArgs e)
+        {
+            BindingExpression be = ageInMonthTextBox.GetBindingExpression(TextBox.TextProperty);
+            ageInMonthTextBox.Text = child.AgeInMonth.ToString();
+            be.UpdateSource();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BE;
 using BL;
@@ -17,14 +18,14 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for DeleteContractWindow.xaml
+    /// Interaction logic for SearchContract.xaml
     /// </summary>
-    public partial class DeleteContractWindow : Window
+    public partial class SearchContract : Page
     {
         IBL bl;
         Contract contract;
         List<Contract> contractList;
-        public DeleteContractWindow(IBL Bl)
+        public SearchContract(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
@@ -36,23 +37,7 @@ namespace PLWPF
         private void ContractSelected(object sender, SelectionChangedEventArgs e)
         {
             contract = (Contract)(sender as ComboBox).SelectedItem;
-            DeleteContract.DataContext = contract;
-        }
-
-        private void DeleteContract_Click(object sender, RoutedEventArgs e)
-        {
-            if (contract != null)
-            {
-                try
-                {
-                    bl.DeleteContract(contract);
-                    Close();
-                }
-                catch (BLException ex)
-                {
-                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            searchContract.DataContext = contract;
         }
     }
 }

@@ -35,6 +35,7 @@ namespace PLWPF
             UpdateMother.DataContext = mother;
         }
 
+
         //private void MotherSelected(object sender, SelectionChangedEventArgs e)
         //{
         //    ComboBox comboBox = sender as ComboBox;
@@ -51,6 +52,7 @@ namespace PLWPF
         //        comboBox.IsDropDownOpen = true;
         //    }
         //}
+
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {

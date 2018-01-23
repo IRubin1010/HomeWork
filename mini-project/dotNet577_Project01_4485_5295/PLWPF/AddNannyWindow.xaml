@@ -157,7 +157,7 @@
             <Label Content="Nanny details" HorizontalAlignment="Center" Margin="5" VerticalAlignment="center" FontSize="20"/>
             <Label Content="other details" Grid.Column="1" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
-        <Button Name="submit" Content="submit" HorizontalAlignment="center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="200" FontSize="20" Click="submit_Click">
+        <Button Name="submit" Content="submit"  HorizontalAlignment="center" Margin="0" Grid.Row="1" VerticalAlignment="Center" Width="200" FontSize="20" Click="submit_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>

@@ -37,6 +37,14 @@ namespace BL
                 throw new BLException(nanny.FullName() + " age is under 18", "add nanny");
             try
             {
+                Valid(nanny);
+            }
+            catch (BLException)
+            {
+                throw;
+            }
+            try
+            {
                 dal.AddNanny(nanny.Clone());
             }
             catch (DALException ex)
@@ -44,7 +52,22 @@ namespace BL
                 throw new BLException(ex.Message, ex.sender);
             }
         }
-
+        public enum days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
+        public void Valid(Nanny nanny)
+        {
+            string message = null;
+            if (!nanny.ID.HasValue) message += "Must fill the field ID\n";
+            if (string.IsNullOrEmpty(nanny.FirstName)) message += "Must fill the field First name\n";
+            if (string.IsNullOrEmpty(nanny.LastName)) message += "Must fill the field Last nam\n";
+            if (string.IsNullOrEmpty(nanny.Address)) message += "Must fill the field Adsress\n";
+            if (nanny.BirthDate > DateTime.Now) message += "Invalid date\n";
+            if (!nanny.PhoneNumber.HasValue) message += "Must fill the field PhoneNumber\n";
+            if (nanny.MaxAge < nanny.MinAge) message += "The maximum age can not be greater than the minimum age\n";
+            for (int i = 0; i < 6; i++)
+                if (nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
+                    message += "Late start time from end time at day " + ((days)i).ToString()+ "\n";
+            if (message != null) throw new BLException(message, "AddNanny");
+        }
         /// <summary>
         /// delete nanny from nanny's DB
         /// </summary>
@@ -441,7 +464,7 @@ namespace BL
             // if child age is under 3 month throw exception
             if (child.AgeInMonth < 3)
                 throw new BLException(child.FirstName + " is under 3 month", "add contrsct");
-            if (IsChildInNannyAge(nanny,child.ID) == false)
+            if (IsChildInNannyAge(nanny, child.ID) == false)
                 throw new BLException(child.FirstName + " is not on nanny's age range", "add contrsct");
             if (child.HaveNanny == true)
                 throw new BLException(child.FirstName + " already has a nanny ", "add contrsct");
@@ -717,7 +740,7 @@ namespace BL
         public List<Nanny> PotentialMatch(Mother mother, int? id)
         {
             return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
-                && PotentialDaysMatch(nanny, mother) && IsChildInNannyAge(nanny,id)).ToList();
+                && PotentialDaysMatch(nanny, mother) && IsChildInNannyAge(nanny, id)).ToList();
         }
 
         /// <summary>
@@ -776,7 +799,7 @@ namespace BL
         public List<Nanny> MotherConditions(Mother mother, int? id)
         {
             // get a list of nannys who thier days and hours match
-            List<Nanny> nannyList = PotentialMatch(mother,id);
+            List<Nanny> nannyList = PotentialMatch(mother, id);
             // check the elevator, seniority and floor
             foreach (Nanny nanny in nannyList.Reverse<Nanny>())
             {
@@ -823,7 +846,7 @@ namespace BL
         /// <param name="mother">mother to check match</param>
         /// <param name="Km">the range of Km</param>
         /// <param name="id">child id</param>
-        public List<Nanny> PropertiesMatch(Mother mother, int? Km, int?id)
+        public List<Nanny> PropertiesMatch(Mother mother, int? Km, int? id)
         {
             // give value for each mother's need
             // if the nanny match this need give it a value 
