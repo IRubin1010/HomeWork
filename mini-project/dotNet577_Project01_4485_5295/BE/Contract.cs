@@ -30,7 +30,13 @@ namespace BE
         }
 
         //override//
+
         public override string ToString()
+        {
+            return ContractNumber.ToString();
+        }
+
+        public string Print()
         {
             return "contract number: " + ContractNumber + '\n' +
                     "nanny ID: " + NannyID + '\n' +

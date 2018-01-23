@@ -25,7 +25,13 @@ namespace BE
         }
 
         //override//
+
         public override string ToString()
+        {
+            return NameAndID;
+        }
+
+        public string Print()
         {
             string needs = "";
             if (IsSpecialNeeds)

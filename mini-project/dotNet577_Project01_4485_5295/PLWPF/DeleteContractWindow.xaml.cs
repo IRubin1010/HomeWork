@@ -33,10 +33,22 @@ namespace PLWPF
             list.DataContext = contractList;
         }
 
-        private void ContractSelected(object sender, SelectionChangedEventArgs e)
+        private void SelectContract(object sender, EventArgs e)
         {
-            contract = (Contract)(sender as ComboBox).SelectedItem;
-            DeleteContract.DataContext = contract;
+            if (list.Text != null)
+            {
+                contract = bl.CloneContractList().FirstOrDefault(contract => contract.ToString() == list.Text);
+                DeleteContract.DataContext = contract;
+            }
+        }
+
+        private void textChanged(object sender, EventArgs e)
+        {
+            if (list.Text == "")
+            {
+                contract = new Contract();
+                DeleteContract.DataContext = contract;
+            }
         }
 
         private void DeleteContract_Click(object sender, RoutedEventArgs e)

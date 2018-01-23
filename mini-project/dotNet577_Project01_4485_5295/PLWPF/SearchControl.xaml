@@ -11,10 +11,10 @@
     </UserControl.Resources>
     <Grid Name="SearchGrid">
         <ComboBox x:Name="textComboBox"  SelectionChanged="textComboBox_SelectionChanged"  PreviewKeyUp="textComboBox_PreviewKeyUp"/>
-        <TextBox x:Name="textInput" FontSize="15" 
+        <TextBox x:Name="textInput" FontSize="13" 
                  TextChanged="textInput_TextChanged"
                  Text="{Binding Text, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" 
             PreviewKeyDown="textInput_PreviewKeyDown" />
-        <Button Width="50" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top" Name="DropDownIcon" Content="{StaticResource DropIcon }"/>
+        <Button HorizontalAlignment="Right" Name="DropDownIcon" Content="{StaticResource DropIcon}" Click="Drop_Clic"/>
     </Grid>
 </UserControl>
