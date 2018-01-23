@@ -24,7 +24,6 @@ namespace PLWPF
         IBL bl;
         Mother mother;
         List<Mother> motherList;
-        string text;
         public UpdateMotherWindow(IBL Bl)
         {
             InitializeComponent();
