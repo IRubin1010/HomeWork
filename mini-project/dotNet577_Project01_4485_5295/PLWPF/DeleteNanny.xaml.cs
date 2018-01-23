@@ -52,11 +52,24 @@ namespace PLWPF
             }
         }
 
-        private void NannySelected(object sender, SelectionChangedEventArgs e)
+        private void SelectNanny(object sender, EventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            nanny = (Nanny)comboBox.SelectedItem;
-            NannyToDelete.DataContext = nanny;
+            if (list.Text != null)
+            {
+                nanny = bl.CloneNannyList().FirstOrDefault(nanny => nanny.ToString() == list.Text);
+                NannyToDelete.DataContext = nanny;
+                addressTextBox.Text = nanny.Address;
+            }
+        }
+
+        private void textChanged(object sender, EventArgs e)
+        {
+            if (list.Text == "")
+            {
+                nanny = new Nanny();
+                NannyToDelete.DataContext = nanny;
+                addressTextBox.Text = nanny.Address;
+            }
         }
 
         private void WorkDaysHours(object sender, RoutedEventArgs e)

@@ -274,7 +274,9 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="image\DropDownIcon.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="image\images %281%29.jpg" />
     <Resource Include="image\images %282%29.jpg" />

@@ -45,8 +45,8 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid>
-            <ComboBox Name="list" HorizontalAlignment="Right" Margin="0,0,50,0" VerticalAlignment="Center" Width="120" ItemsSource="{Binding}" DisplayMemberPath="Details" IsEditable="True" SelectionChanged="ContractSelected" IsTextSearchEnabled="True" TextSearch.TextPath="ContractNumber"/>
-            <Label Content="select" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" FontSize="20"/>
+            <local:SearchControl x:Name="list" HorizontalAlignment="Right" Margin="0,0,30,0" Width="155" Height="24" Entity="contract" ItemSelectsd="SelectContract" TextChanged="textChanged"/>
+            <Label Content="select" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
         <Grid x:Name="NannyDetails" Grid.Row="1" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Center">
             <Grid.RowDefinitions>

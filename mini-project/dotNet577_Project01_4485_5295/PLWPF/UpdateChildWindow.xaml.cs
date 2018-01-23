@@ -32,11 +32,22 @@ namespace PLWPF
             list.DataContext = childList;
         }
 
-        private void ChildSelected(object sender, SelectionChangedEventArgs e)
+        private void SelectChild(object sender, EventArgs e)
         {
-            ComboBox combobox = sender as ComboBox;
-            child = (Child)combobox.SelectedItem;
-            UpdateChild.DataContext = child;
+            if (list.Text != null)
+            {
+                child = bl.CloneChildList().FirstOrDefault(child => child.ToString() == list.Text);
+                UpdateChild.DataContext = child;
+            }
+        }
+
+        private void textChanged(object sender, EventArgs e)
+        {
+            if (list.Text == "")
+            {
+                child = new Child();
+                UpdateChild.DataContext = child;
+            }
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)

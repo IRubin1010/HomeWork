@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="UpdateContractWindow" Height="300" Width="300">
+        Title="UpdateContractWindow" Height="450" Width="300">
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Margin" Value="10,3"/>
@@ -64,7 +64,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Label Content="contract details" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <local:SearchControl x:Name="list" HorizontalAlignment="Right" Margin="0,0,30,0" Width="155" Height="24" Entity="contract" ItemSelectsd="SelectContract" TextChanged="textChanged"/>
+        <Label Content="select" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" FontSize="20"/>
         <Grid x:Name="NannyDetails" Grid.Row="1" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -103,13 +104,6 @@
             <Label Content="month Final Payment:" Grid.Row="9" Style="{StaticResource LabelStyle}"/>
             <TextBox x:Name="finalPaymentTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding FinalPayment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9"/>
         </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Content="submit" Style="{StaticResource ButtonEnable}" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="AddContract_Click"/>
-            <Button Content="calculat payment" Style="{StaticResource ButtonEnable}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="CalculatePayment_Click"/>
-        </Grid>
+        <Button Content="update" Style="{StaticResource ButtonEnable}" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="AddContract_Click"/>
     </Grid>
 </Window>
