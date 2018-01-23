@@ -92,6 +92,9 @@
     <Compile Include="SearchContract.xaml.cs">
       <DependentUpon>SearchContract.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchMother.xaml.cs">
       <DependentUpon>SearchMother.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SearchContract.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

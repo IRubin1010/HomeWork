@@ -58,13 +58,22 @@ namespace PLWPF
             new NannyWorkDaysHours(nanny).Show();
         }
 
-        private void NannySelected(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            nanny = (Nanny)comboBox.SelectedItem;
-            NannyToUpdate.DataContext = nanny;
-            addressTextBox.Text = nanny.Address;
-        }
+        //private void NannySelected(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ComboBox comboBox = sender as ComboBox;
+        //    nanny = (Nanny)comboBox.SelectedItem;
+        //    NannyToUpdate.DataContext = nanny;
+        //    addressTextBox.Text = nanny.Address;
+        //}
 
+        private void SelectNanny(object sender, EventArgs e)
+        {
+            if (list.Text != null)
+            {
+                nanny = bl.CloneNannyList().Where(nanny => nanny.ToString() == list.Text).ToList()[0];
+                NannyToUpdate.DataContext = nanny;
+                addressTextBox.Text = nanny.Address;
+            }
+        }
     }
 }
