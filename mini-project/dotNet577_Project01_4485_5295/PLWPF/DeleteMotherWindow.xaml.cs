@@ -34,11 +34,24 @@ namespace PLWPF
             DeleteMother.DataContext = mother;
         }
 
-        private void MotherSelected(object sender, SelectionChangedEventArgs e)
+        private void SelectMother(object sender, EventArgs e)
         {
-            ComboBox comboBox = sender as ComboBox;
-            mother = (Mother)comboBox.SelectedItem;
-            DeleteMother.DataContext = mother;
+            if (list.Text != null)
+            {
+                mother = bl.CloneMotherList().FirstOrDefault(mother => mother.ToString() == list.Text);
+                DeleteMother.DataContext = mother;
+                addressTextBox.Text = mother.Address;
+            }
+        }
+
+        private void textChanged(object sender, EventArgs e)
+        {
+            if (list.Text == "")
+            {
+                mother = new Mother();
+                DeleteMother.DataContext = mother;
+                addressTextBox.Text = mother.Address;
+            }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

@@ -25,6 +25,7 @@ namespace PLWPF
         IBL bl;
 
         public event EventHandler ItemSelectsd;
+        public event EventHandler TextChanged;
 
         public string Text
         {
@@ -53,10 +54,10 @@ namespace PLWPF
             this.SearchGrid.DataContext = this;
         }
 
-        private void setListInvok<T>(List<T> list, Entity entity)
+        private void setListInvok<T>(List<T> list)
         {
             this.textComboBox.ItemsSource = null;
-            if (list.Count > 0 )
+            if (list.Count > 0)
             {
                 this.textComboBox.ItemsSource = list;
                 textComboBox.IsDropDownOpen = true;
@@ -72,20 +73,24 @@ namespace PLWPF
             List<Mother> motherSearchList = new List<Mother>();
             List<Nanny> nannySearchList = new List<Nanny>();
             List<Child> childySearchList = new List<Child>();
-            //List<Nanny> nannySearchList = new List<Nanny>();
+            List<Contract> contractSearchList = new List<Contract>();
             switch (Entity)
             {
                 case Entity.nanny:
                     nannySearchList = bl.CloneNannyList().Where(nanny => nanny.ID.ToString().StartsWith(Text)).ToList();
-                    setListInvok(nannySearchList, Entity.mother);
+                    setListInvok(nannySearchList);
                     break;
                 case Entity.mother:
                     motherSearchList = bl.CloneMotherList().Where(mother => mother.ID.ToString().StartsWith(Text)).ToList();
-                    setListInvok(motherSearchList,Entity.mother);
+                    setListInvok(motherSearchList);
                     break;
                 case Entity.child:
                     childySearchList = bl.CloneChildList().Where(child => child.ID.ToString().StartsWith(Text)).ToList();
-                    setListInvok(childySearchList, Entity.mother);
+                    setListInvok(childySearchList);
+                    break;
+                case Entity.contract:
+                    contractSearchList = bl.CloneContractList().Where(contract => contract.ContractNumber.ToString().StartsWith(Text)).ToList();
+                    setListInvok(contractSearchList);
                     break;
                 default:
                     break;
@@ -93,7 +98,11 @@ namespace PLWPF
         }
         private void textInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            searchList();
+            if (Text == "")
+                textComboBox.IsDropDownOpen = false;
+            else
+                searchList();
+            TextChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private void textComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -124,6 +133,35 @@ namespace PLWPF
 
                 if (this.textComboBox.SelectedIndex == 0)
                     this.textInput.Focus();
+        }
+
+        private void Drop_Clic(object sender, RoutedEventArgs e)
+        {
+            List<Mother> motherSearchList = new List<Mother>();
+            List<Nanny> nannySearchList = new List<Nanny>();
+            List<Child> childySearchList = new List<Child>();
+            List<Contract> contractSearchList = new List<Contract>();
+            switch (Entity)
+            {
+                case Entity.nanny:
+                    nannySearchList = bl.CloneNannyList();
+                    setListInvok(nannySearchList);
+                    break;
+                case Entity.mother:
+                    motherSearchList = bl.CloneMotherList();
+                    setListInvok(motherSearchList);
+                    break;
+                case Entity.child:
+                    childySearchList = bl.CloneChildList();
+                    setListInvok(childySearchList);
+                    break;
+                case Entity.contract:
+                    contractSearchList = bl.CloneContractList();
+                    setListInvok(contractSearchList);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

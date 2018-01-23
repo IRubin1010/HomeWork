@@ -18,7 +18,7 @@ namespace PLWPF
             NannyInitialize();
             MotherInitialize();
             ChildInitialize();
-            //ContractInitialize();
+            ContractInitialize();
         }
         void NannyInitialize()
         {
@@ -69,9 +69,9 @@ namespace PLWPF
             ibl.AddContract(contract6);
             //ibl.AddContract(contract7);
             ibl.AddContract(TestContract);
-            ibl.AddContract(aa);
+            //ibl.AddContract(aa);
             ibl.AddContract(bb);
-            ibl.AddContract(cc);
+            //ibl.AddContract(cc);
 
         }
         public Nanny meirShimon = new Nanny
