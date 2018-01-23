@@ -56,7 +56,8 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Label Content="select" HorizontalAlignment="Left" Margin="110,0,0,0" Style="{StaticResource LebelRwo1Style}" FontSize="20"/>
-        <ComboBox Name="list" HorizontalAlignment="Right" Margin="0,0,110,0" ItemsSource="{Binding}" DisplayMemberPath="FullNameAndID" Style="{StaticResource ComboBoxRow1Style}" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+        <local:SearchControl x:Name="list" HorizontalAlignment="Right" Margin="0,0,110,0" Width="190" Height="25" Entity="nanny" ItemSelectsd="SelectNanny"/>
+        <!--<ComboBox Name="list" HorizontalAlignment="Right" Margin="0,0,110,0" ItemsSource="{Binding}" DisplayMemberPath="FullNameAndID" Style="{StaticResource ComboBoxRow1Style}" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>-->
         <Grid Grid.Row="1" Name="NannyToUpdate">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
