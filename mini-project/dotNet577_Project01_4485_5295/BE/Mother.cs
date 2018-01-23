@@ -36,6 +36,11 @@ namespace BE
         //override//
         public override string ToString()
         {
+            return FullNameAndID;
+        }
+
+        public string Print()
+        {
             string needNannyDaysAndHours = "";
             for (int i = 0; i < 6; i++)
             {
