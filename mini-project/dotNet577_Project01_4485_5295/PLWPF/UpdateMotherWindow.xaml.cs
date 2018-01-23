@@ -24,6 +24,7 @@ namespace PLWPF
         IBL bl;
         Mother mother;
         List<Mother> motherList;
+        string text;
         public UpdateMotherWindow(IBL Bl)
         {
             InitializeComponent();
@@ -34,17 +35,28 @@ namespace PLWPF
             UpdateMother.DataContext = mother;
         }
 
-        private void MotherSelected(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            mother = (Mother)comboBox.SelectedItem;
-            UpdateMother.DataContext = mother;
-            addressTextBox.Text = mother.Address;
-        }
+
+        //private void MotherSelected(object sender, SelectionChangedEventArgs e)
+        //{
+        //    ComboBox comboBox = sender as ComboBox;
+        //    if (e.Equals(Key.Enter))
+        //    {
+        //        mother = (Mother)comboBox.SelectedItem;
+        //        UpdateMother.DataContext = mother;
+        //        if (mother != null)
+        //            addressTextBox.Text = mother.Address;
+        //    }
+        //    else
+        //    {
+        //        comboBox.Text = text;
+        //        comboBox.IsDropDownOpen = true;
+        //    }
+        //}
+
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            if(mother != null)
+            if (mother != null)
             {
                 try
                 {
@@ -58,5 +70,38 @@ namespace PLWPF
                 }
             }
         }
+
+        private void SelectMother(object sender, EventArgs e)
+        {
+            if(list.Text != null)
+            {
+                mother = bl.CloneMotherList().Where(mother => mother.ToString() == list.Text).ToList()[0];
+                UpdateMother.DataContext = mother;
+                addressTextBox.Text = mother.Address;
+            }
+        }
+
+        //private void TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    List<Mother> searchList = new List<Mother>();
+        //    var textbox = (TextBox)list.Template.FindName("PART_EditableTextBox", list);
+        //    var item = (sender as ComboBox);
+        //    text = item.Text;
+        //    if (text == string.Empty)
+        //    {
+        //        list.IsDropDownOpen = false;
+        //        addressTextBox.Text = "";
+        //    }
+        //    searchList = motherList.Where(mother => mother.ID.ToString().StartsWith(text)).ToList();
+        //    if (searchList.Count > 0)
+        //    {
+        //        list.DataContext = searchList;
+        //        list.IsDropDownOpen = true;
+        //        textbox.CaretIndex = text.Length;
+        //    }
+        //    else
+        //        list.IsDropDownOpen = false;
+        //}
+
     }
 }
