@@ -23,5 +23,30 @@ namespace PLWPF
         {
             InitializeComponent();
         }
+
+        private void NannySelected(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void MotherSelected(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ChildSelected(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddContract_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CalculatePayment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

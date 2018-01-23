@@ -44,6 +44,23 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="buttonEnable" TargetType="Button">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=iDTextBox , Path=Text}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=motherIDTextBox , Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=firstNameTextBox , Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=ageInMonthTextBox , Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid Name="AddChild">
         <Grid.RowDefinitions>
@@ -74,9 +91,9 @@
                 <Label Content="First Name:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
                 <TextBox x:Name="firstNameTextBox" Text="{Binding FirstName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Style="{StaticResource TextBoxStyle}"/>
                 <Label Content="Birth Date:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
-                <DatePicker x:Name="birthDateDatePicker" Width="140" VerticalAlignment="Center" SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="7,3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+                <DatePicker x:Name="birthDateDatePicker" SelectedDateChanged="DateSelectsd" Width="140" VerticalAlignment="Center" SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="7,3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
                 <Label Content="Age In Month:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>
-                <TextBox x:Name="ageInMonthTextBox" Text="{Binding AgeInMonth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Style="{StaticResource TextBoxStyle}"/>
+                <TextBox x:Name="ageInMonthTextBox" IsEnabled="False" Text="{Binding AgeInMonth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Style="{StaticResource TextBoxStyle}"/>
                 <Label Content="Is Special Needs:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
                 <CheckBox x:Name="isSpecialNeedsCheckBox" IsChecked="{Binding IsSpecialNeeds, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Style="{StaticResource CheckBoxStyle}"/>
                 <Label x:Name="specialNeedsLabel" Content="Special Needs:" Grid.Row="7" Style="{StaticResource NeedsLabel}"/>
@@ -84,7 +101,7 @@
             </Grid>
         </Grid>
         <Label Content="Child details" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" FontSize="20"/>
-        <Button Content="submit" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="20" Click="AddChild_CLick"/>
+        <Button Content="submit" Style="{StaticResource buttonEnable}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="20" Click="AddChild_CLick"/>
 
     </Grid>
 </Window>

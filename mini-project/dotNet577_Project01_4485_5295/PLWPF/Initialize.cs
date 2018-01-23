@@ -92,7 +92,7 @@ namespace PLWPF
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(9, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -119,7 +119,7 @@ namespace PLWPF
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool?[6] { true, true, false, true, true, true },
+            IsWork = new bool[6] { true, true, false, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -146,7 +146,7 @@ namespace PLWPF
             IsHourlyFee = true,
             HourlyFee = 42,
             MonthlyFee = 1000,
-            IsWork = new bool?[6] { false, false, true, true, true, true },
+            IsWork = new bool[6] { false, false, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -173,7 +173,7 @@ namespace PLWPF
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 3000,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -200,7 +200,7 @@ namespace PLWPF
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 3750,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -227,7 +227,7 @@ namespace PLWPF
             IsHourlyFee = true,
             HourlyFee = 40,
             MonthlyFee = 1000,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -254,7 +254,7 @@ namespace PLWPF
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 2500,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -281,7 +281,7 @@ namespace PLWPF
             IsHourlyFee = true,
             HourlyFee = 35,
             MonthlyFee = 1000,
-            IsWork = new bool?[6] { true, true, true, true, true, false },
+            IsWork = new bool[6] { true, true, true, true, true, false },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -308,7 +308,7 @@ namespace PLWPF
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 4000,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -335,7 +335,7 @@ namespace PLWPF
             IsHourlyFee = false,
             HourlyFee = 42,
             MonthlyFee = 4000,
-            IsWork = new bool?[6] { true, true, true, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
@@ -354,9 +354,9 @@ namespace PLWPF
             Address = "ha-rav mohilever St 8, Bnei Brak",
             SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
             WantElevator = true,
-            MinSeniority = 3,
+            MinSeniority = 1,
             MaxFloor = 4,
-            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
             {
                     new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
@@ -375,7 +375,7 @@ namespace PLWPF
             WantElevator = true,
             MinSeniority = 4,
             MaxFloor = 2,
-            NeedNanny = new bool?[6] { false, true, true, true, true, true },
+            NeedNanny = new bool[6] { false, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
@@ -394,7 +394,7 @@ namespace PLWPF
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 1,
-            NeedNanny = new bool?[6] { true, true, true, false, true, true },
+            NeedNanny = new bool[6] { true, true, true, false, true, true },
             NeedNannyHours = new TimeSpan[2][]
            {
                 new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) },
@@ -413,7 +413,7 @@ namespace PLWPF
             WantElevator = false,
             MinSeniority = 2,
             MaxFloor = 2,
-            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
            {
                 new TimeSpan[6] { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) },
@@ -432,7 +432,7 @@ namespace PLWPF
             WantElevator = true,
             MinSeniority = 3,
             MaxFloor = 3,
-            NeedNanny = new bool?[6] { true, true, true, true, false, false },
+            NeedNanny = new bool[6] { true, true, true, true, false, false },
             NeedNannyHours = new TimeSpan[2][]
            {
                 new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) },
@@ -451,7 +451,7 @@ namespace PLWPF
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 4,
-            NeedNanny = new bool?[6] { true, false, true, true, true, true },
+            NeedNanny = new bool[6] { true, false, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
            {
                 new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
@@ -470,7 +470,7 @@ namespace PLWPF
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,
-            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
            {
                 new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
@@ -489,7 +489,7 @@ namespace PLWPF
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,
-            NeedNanny = new bool?[6] { true, true, true, true, true, true },
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
    {
                 new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },

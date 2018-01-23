@@ -19,13 +19,13 @@ namespace BE
         public bool WantElevator { get; set; }
         public int? MinSeniority { get; set; }
         public int? MaxFloor { get; set; }
-        public bool?[] NeedNanny { get; set; }
+        public bool[] NeedNanny { get; set; }
         public TimeSpan[][] NeedNannyHours { get; set; }
         public string Remarks { get; set; }
 
         public Mother()
         {
-            NeedNanny = new bool?[6] { false, false, false, false, false, false };
+            NeedNanny = new bool[6] { false, false, false, false, false, false };
             NeedNannyHours = new TimeSpan[2][]
             {
                 new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
@@ -113,7 +113,7 @@ namespace BE
         public Mother Clone()
         {
             Mother mother = (Mother)MemberwiseClone();
-            mother.NeedNanny = (bool?[])NeedNanny.Clone();
+            mother.NeedNanny = (bool[])NeedNanny.Clone();
             mother.NeedNannyHours = (TimeSpan[][])NeedNannyHours.Clone();
             return mother;
         }

@@ -60,6 +60,7 @@ namespace PLWPF
 
         private void SelectNanny(object sender, EventArgs e)
         {
+
             if (list.Text != null)
             {
                 nanny = bl.CloneNannyList().FirstOrDefault(nanny => nanny.ToString() == list.Text);
@@ -76,6 +77,7 @@ namespace PLWPF
                 NannyToUpdate.DataContext = nanny;
                 addressTextBox.Text = nanny.Address;
             }
+
         }
     }
 }

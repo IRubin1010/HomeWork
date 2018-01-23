@@ -14,7 +14,7 @@ namespace BE
         public string FirstName { get; set; }
         public string NameAndID { get { return FirstName + " ID: " + ID; } }
         public DateTime BirthDate { get; set; }
-        public int? AgeInMonth { get; set; }
+        public int? AgeInMonth { get { if (DateTime.Today.Month - BirthDate.Month == 0) return null; else return (DateTime.Today.Year - BirthDate.Year) * 12 + DateTime.Today.Month - BirthDate.Month; } set { } }
         public bool IsSpecialNeeds { get; set; }
         public string SpecialNeeds { get; set; }
         public bool HaveNanny { get; set; }
