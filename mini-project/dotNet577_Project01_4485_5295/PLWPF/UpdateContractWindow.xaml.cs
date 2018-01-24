@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BE;
+using BL;
 
 namespace PLWPF
 {
@@ -19,34 +21,52 @@ namespace PLWPF
     /// </summary>
     public partial class UpdateContractWindow : Window
     {
-        public UpdateContractWindow()
+        IBL bl;
+        Contract contract;
+        public UpdateContractWindow(IBL Bl)
         {
             InitializeComponent();
+            bl = Bl;
+            contract = new Contract();
+            UpdateContract.DataContext = contract;
+            endTransectionDatePicker.DataContext = contract;
         }
 
-        private void NannySelected(object sender, SelectionChangedEventArgs e)
+        private void SelectContract(object sender, EventArgs e)
         {
-
+            if (list.Text != null)
+            {
+                contract = bl.CloneContractList().FirstOrDefault(contract => contract.ToString() == list.Text);
+                UpdateContract.DataContext = contract;
+                endTransectionDatePicker.DataContext = contract;
+            }
         }
 
-        private void MotherSelected(object sender, SelectionChangedEventArgs e)
+        private void textChanged(object sender, EventArgs e)
         {
-
+            if (list.Text == "")
+            {
+                contract = new Contract();
+                UpdateContract.DataContext = contract;
+                endTransectionDatePicker.DataContext = contract;
+            }
         }
 
-        private void ChildSelected(object sender, SelectionChangedEventArgs e)
+        private void DeleteContract_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void AddContract_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CalculatePayment_Click(object sender, RoutedEventArgs e)
-        {
-
+            if (contract != null)
+            {
+                try
+                {
+                    Console.WriteLine(contract.Print());
+                    bl.UpdateContract(contract);
+                    Close();
+                }
+                catch (BLException ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

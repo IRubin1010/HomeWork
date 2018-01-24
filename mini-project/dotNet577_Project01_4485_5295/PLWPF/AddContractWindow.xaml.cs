@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
+using System.ComponentModel;
 using BE;
 using BL;
 
@@ -29,6 +31,7 @@ namespace PLWPF
         List<Nanny> nannyList;
         List<Mother> motherList;
         List<Child> childList;
+        BackgroundWorker worker;
         public AddContractWindow(IBL BL)
         {
             InitializeComponent();
@@ -42,6 +45,21 @@ namespace PLWPF
             beginTransectionDatePicker.DataContext = contract;
             endTransectionDatePicker.DataContext = contract;
             isMeetCheckBox.DataContext = contract;
+            worker = new BackgroundWorker();
+            worker.DoWork += worker_Dowork;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+        }
+
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            nannyList = (List<Nanny>)e.Result;
+            nannyComboBox.DataContext = nannyList;
+        }
+
+        private void worker_Dowork(object sender, DoWorkEventArgs e)
+        {
+            List<object> objList = (List<object>)e.Argument;
+            e.Result = bl.NannysInKMWithConditions((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
         }
 
         private void NannySelected(object sender, SelectionChangedEventArgs e)
@@ -51,7 +69,7 @@ namespace PLWPF
             monthlyFeeTextBox.DataContext = nanny;
             isPaymentByHourCheckBox.DataContext = nanny;
 
-            
+
         }
 
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
@@ -59,14 +77,12 @@ namespace PLWPF
             mother = (Mother)(sender as ComboBox).SelectedItem;
             childList = bl.MotherChildren(mother);
             childComboBox.DataContext = childList;
-
-            
         }
 
         private void ChildSelected(object sender, SelectionChangedEventArgs e)
         {
             child = (Child)(sender as ComboBox).SelectedItem;
-           
+
         }
 
         private void AddContract_Click(object sender, RoutedEventArgs e)
@@ -138,7 +154,7 @@ namespace PLWPF
             isPaymentByHourCheckBox.DataContext = nanny;
             finalPaymentTextBox.Text = "";
             nannyList = null;
-            nannyList = bl.PotentialMatch(mother,child.ID);
+            nannyList = bl.PotentialMatch(mother, child.ID);
             nannyComboBox.DataContext = nannyList;
         }
 
@@ -164,8 +180,13 @@ namespace PLWPF
             isPaymentByHourCheckBox.DataContext = nanny;
             finalPaymentTextBox.Text = "";
             nannyList = null;
-            nannyList = bl.NannysInKMWithConditions(mother,5, child.ID);//////////////////////
-            nannyComboBox.DataContext = nannyList;
+            List<object> objList = new List<object>();
+            objList.Add(mother);
+            objList.Add(5000);
+            objList.Add(child.ID);
+            worker.RunWorkerAsync(objList);
+            //nannyList = bl.NannysInKMWithConditions(mother, 5, child.ID);//////////////////////
+            //nannyComboBox.DataContext = nannyList;
         }
 
         private void BestMatchChecked(object sender, RoutedEventArgs e)

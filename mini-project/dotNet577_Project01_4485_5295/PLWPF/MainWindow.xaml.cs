@@ -105,7 +105,7 @@ namespace PLWPF
 
         private void UpdateContractSelect(object sender, RoutedEventArgs e)
         {
-            new UpdateContractWindow().Show();
+            new UpdateContractWindow(bl).Show();
         }
 
         private void AddContractSelect(object sender, RoutedEventArgs e)
