@@ -23,14 +23,11 @@ namespace PLWPF
     {
         IBL bl;
         Contract contract;
-        List<Contract> contractList;
         public DeleteContractWindow(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
             contract = new Contract();
-            contractList = bl.CloneContractList();
-            list.DataContext = contractList;
         }
 
         private void SelectContract(object sender, EventArgs e)
