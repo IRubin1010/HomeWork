@@ -92,6 +92,6 @@
             <Label Content="Is contract signed:" Grid.Row="11" Style="{StaticResource LabelStyle}"/>
             <CheckBox x:Name="isSignedCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsContractSigned, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="11"/>
         </Grid>
-        <Button Content="submit" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="DeleteContract_Click"/>
+        <Button Content="delete" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="120" FontSize="15" Click="DeleteContract_Click"/>
     </Grid>
 </Window>

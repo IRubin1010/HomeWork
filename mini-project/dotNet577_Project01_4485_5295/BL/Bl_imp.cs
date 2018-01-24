@@ -8,7 +8,7 @@ using DAL;
 using GoogleMapsApi;
 using GoogleMapsApi.Entities.Directions.Request;
 using GoogleMapsApi.Entities.Directions.Response;
-
+using System.Threading;
 
 namespace BL
 {
@@ -835,7 +835,17 @@ namespace BL
         /// <param name="id">child id</param>
         public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km, int? id)
         {
-            return MotherConditions(mother, id).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
+            List<Nanny> nanList = new List<Nanny>();
+            foreach(Nanny nanny in CloneNannyList())
+            {
+                if(IsNannyInKM(mother,nanny,Km) == true)
+                {
+                    nanList.Add(nanny);
+                }
+                Thread.Sleep(10000);
+            }
+            return nanList;
+            //return CloneNannyList().Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
         }
 
         /// <summary>

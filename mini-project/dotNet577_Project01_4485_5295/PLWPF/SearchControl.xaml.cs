@@ -98,7 +98,7 @@ namespace PLWPF
         }
         private void textInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Text == "")
+            if (Text == "" || textComboBox.SelectedItem != null)
                 textComboBox.IsDropDownOpen = false;
             else
                 searchList();
