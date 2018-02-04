@@ -82,7 +82,25 @@
     <Compile Include="GroupByAge.xaml.cs">
       <DependentUpon>GroupByAge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GroupByDistance.xaml.cs">
+      <DependentUpon>GroupByDistance.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Initialize.cs" />
+    <Compile Include="NannyChildren.xaml.cs">
+      <DependentUpon>NannyChildren.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NannyChildrenLess.xaml.cs">
+      <DependentUpon>NannyChildrenLess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NannyContracts.xaml.cs">
+      <DependentUpon>NannyContracts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NannyFunctions.xaml.cs">
+      <DependentUpon>NannyFunctions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NannyValidVactions.xaml.cs">
+      <DependentUpon>NannyValidVactions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NannyWorkDaysHoursDelete.xaml.cs">
       <DependentUpon>NannyWorkDaysHoursDelete.xaml</DependentUpon>
     </Compile>
@@ -159,6 +177,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GroupByDistance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -177,6 +199,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NannyChildren.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NannyChildrenLess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NannyContracts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NannyFunctions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NannyValidVactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NannyWorkDaysHours.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

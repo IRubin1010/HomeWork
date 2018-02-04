@@ -118,9 +118,19 @@ namespace PLWPF
             new SearchWindow(bl).Show();
         }
 
-        private void GroupByAge(object sender, RoutedEventArgs e)
+        private void GroupByAgeSelect(object sender, RoutedEventArgs e)
         {
             new GroupByAge(bl).Show();
+        }
+
+        private void GroupByDistanceSelect(object sender, RoutedEventArgs e)
+        {
+            new GroupByDistance(bl).Show();
+        }
+
+        private void NannyFunctionsSelect(object sender, RoutedEventArgs e)
+        {
+            new NannyFunctions(bl).Show();
         }
     }
 }
