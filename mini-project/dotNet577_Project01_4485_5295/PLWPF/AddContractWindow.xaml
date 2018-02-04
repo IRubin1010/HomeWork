@@ -47,6 +47,13 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="KMTextBox" TargetType="TextBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=childComboBox, Path=SelectedItem}" Value="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="ChildCombobox" TargetType="ComboBox" BasedOn="{StaticResource ComboBoxStyle}">
             <Setter Property="IsEnabled" Value="True"/>
             <Style.Triggers>
@@ -101,8 +108,9 @@
                     <Label Content="Child ID:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
                     <ComboBox x:Name="childComboBox" Style="{StaticResource ChildCombobox}" ItemsSource="{Binding}" Grid.Row="1" DisplayMemberPath="NameAndID" SelectionChanged="ChildSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
                 </Grid>
-                <Grid Grid.Row="1" Margin="0,10">
+                <Grid Name="RadioGrid" Grid.Row="1" Margin="0,10">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -112,8 +120,10 @@
                     <RadioButton Content="Manual selection" Checked="ManualChecked" Style="{StaticResource radioButtonStyle}"/>
                     <RadioButton Content="Filtered by mother hours" Checked="HoursChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="1"/>
                     <RadioButton Content="Filtered by mother's constraints" Checked="ConstraintsChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="2"/>
-                    <RadioButton Content="Filtered by distance from mother" Checked="DistanceChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="3"/>
-                    <RadioButton Content="5 best matches" Checked="BestMatchChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="4"/>
+                    <Label Content="select Km for distance" Margin="20,0" Grid.Row="3"/>
+                    <TextBox Name="KmTextBox" Style="{StaticResource KMTextBox}" Grid.Row="3" Width="50" HorizontalAlignment="Right" Height="20" Margin="20,0"/>
+                    <RadioButton Name="RButton4" Content="Filtered by distance from mother" Checked="DistanceChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="4"/>
+                    <RadioButton Name="RButton5" Content="5 best matches" Checked="BestMatchChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="5"/>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">

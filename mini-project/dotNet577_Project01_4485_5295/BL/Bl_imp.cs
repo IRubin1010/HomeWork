@@ -835,17 +835,7 @@ namespace BL
         /// <param name="id">child id</param>
         public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km, int? id)
         {
-            List<Nanny> nanList = new List<Nanny>();
-            foreach(Nanny nanny in CloneNannyList())
-            {
-                if(IsNannyInKM(mother,nanny,Km) == true)
-                {
-                    nanList.Add(nanny);
-                }
-                Thread.Sleep(10000);
-            }
-            return nanList;
-            //return CloneNannyList().Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
+            return CloneNannyList().Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
         }
 
         /// <summary>
@@ -1013,11 +1003,11 @@ namespace BL
         {
             Mother mother = FindMother(contract.MotherID);
             string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
-            // the distance function returns meter that's why they divide by 5000
-            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 5000;
+            // the distance function returns meter that's why they divide by 1000
+            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
             if (distance == 0)
-                return 5;
-            return (distance + 1) * 5;
+                return 1;
+            return (distance + 1);
         }
 
         /// <summary>
@@ -1035,7 +1025,7 @@ namespace BL
             else
                 group = from contract in CloneContractList()
                         group contract by DistanceBetweenNannyAndMother(contract);
-            return group;
+            return group.ToList();
         }
 
 

@@ -32,6 +32,7 @@ namespace PLWPF
         List<Mother> motherList;
         List<Child> childList;
         BackgroundWorker worker;
+        BackgroundWorker worker2;
         public AddContractWindow(IBL BL)
         {
             InitializeComponent();
@@ -48,6 +49,9 @@ namespace PLWPF
             worker = new BackgroundWorker();
             worker.DoWork += worker_Dowork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker2 = new BackgroundWorker();
+            worker2.DoWork += worker2_Dowork;
+            worker2.RunWorkerCompleted += worker2_RunWorkerCompleted;
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -60,6 +64,18 @@ namespace PLWPF
         {
             List<object> objList = (List<object>)e.Argument;
             e.Result = bl.NannysInKMWithConditions((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+        }
+
+        private void worker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            nannyList = (List<Nanny>)e.Result;
+            nannyComboBox.DataContext = nannyList;
+        }
+
+        private void worker2_Dowork(object sender, DoWorkEventArgs e)
+        {
+            List<object> objList = (List<object>)e.Argument;
+            e.Result = bl.PartialMatch((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
         }
 
         private void NannySelected(object sender, SelectionChangedEventArgs e)
@@ -181,12 +197,28 @@ namespace PLWPF
             finalPaymentTextBox.Text = "";
             nannyList = null;
             List<object> objList = new List<object>();
-            objList.Add(mother);
-            objList.Add(5000);
-            objList.Add(child.ID);
-            worker.RunWorkerAsync(objList);
-            //nannyList = bl.NannysInKMWithConditions(mother, 5, child.ID);//////////////////////
-            //nannyComboBox.DataContext = nannyList;
+            if (KmTextBox.Text == "")
+            {
+                var result = MessageBox.Show("No kilometer selected, the default is 1 kilometer", "No kilometer selected", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    objList.Add(mother);
+                    objList.Add(1);
+                    objList.Add(child.ID);
+                    worker.RunWorkerAsync(objList);
+                }
+                else
+                {
+                    RButton4.IsChecked = false;
+                }
+            }
+            else
+            {
+                objList.Add(mother);
+                objList.Add(int.Parse(KmTextBox.Text));
+                objList.Add(child.ID);
+                worker.RunWorkerAsync(objList);
+            }
         }
 
         private void BestMatchChecked(object sender, RoutedEventArgs e)
@@ -198,8 +230,29 @@ namespace PLWPF
             isPaymentByHourCheckBox.DataContext = nanny;
             finalPaymentTextBox.Text = "";
             nannyList = null;
-            nannyList = bl.PartialMatch(mother, 5, child.ID);/////////////////////////////////
-            nannyComboBox.DataContext = nannyList;
+            List<object> objList = new List<object>();
+            if (KmTextBox.Text == "")
+            {
+                var result = MessageBox.Show("No kilometer selected, the default is 1 kilometer", "No kilometer selected", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.OK)
+                {
+                    objList.Add(mother);
+                    objList.Add(1);
+                    objList.Add(child.ID);
+                    worker2.RunWorkerAsync(objList);
+                }
+                else
+                {
+                    RButton4.IsChecked = false;
+                }
+            }
+            else
+            {
+                objList.Add(mother);
+                objList.Add(int.Parse(KmTextBox.Text));
+                objList.Add(child.ID);
+                worker2.RunWorkerAsync(objList);
+            }
         }
     }
 }

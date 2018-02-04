@@ -8,37 +8,26 @@ namespace ConsoleApp1
 {
     class Program
     {
+        public delegate int someDelegate(int x, int y);
+
+        static public int sum(int num1, int num2)
+        {
+            Console.WriteLine("sum( {0} , {1} )", num1, num2);
+            return num1 + num2;
+        }
+        static public int mult(int num1, int num2)
+        {
+            Console.WriteLine("mult( {0} , {1} )", num1, num2);
+            return num1 * num2;
+        }
         static void Main(string[] args)
         {
-            A a = new A();
-            a.a = 5;
-            A b = a.Clone();
-            Console.WriteLine(a.a);
-            Console.WriteLine(b.a);
-            b.a = 10;
-            Console.WriteLine(a.a);
-            Console.WriteLine(b.a);
-            int[][] d = new int[3][];
-            DateTime da = new DateTime(1990, 1, 1);
-            Console.WriteLine(da.ToString("dd/MM/yyyy"));
-            int aaaa = new int();
-            aaaa = 5;
-            int bbbb = new int();
-            bbbb =    aaaa;
-            bbbb = 3;
-            Console.WriteLine(aaaa);
-            Console.WriteLine(bbbb);
-            Console.ReadKey();
-        }
-    }
-    public class A
-    {
-        private int b;
-        public int a { get { return b; } set { } }
-        public int[][] c = new int[3][];
-        public A Clone()
-        {
-            return (A)MemberwiseClone();
+            someDelegate myDelegate = new someDelegate(sum);
+            someDelegate d2 = new someDelegate(mult);
+            myDelegate += d2;
+            int x = myDelegate(5, 5);
+            Console.WriteLine(x);
+            
         }
     }
 }

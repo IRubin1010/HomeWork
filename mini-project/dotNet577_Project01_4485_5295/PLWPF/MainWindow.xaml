@@ -60,8 +60,9 @@
         <ComboBox Name="search" Style="{StaticResource ButtonStyle}" SelectedIndex="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0" SelectionChanged="SearchSelectionChanged">
             <ComboBoxItem Content="Search" Visibility="Collapsed"/>
             <ComboBoxItem Content="search" Selected="SearchSelect"/>
-            <ComboBoxItem Content="search" Selected="GroupByAge"/>
-            <ComboBoxItem Content="search"/>
+            <ComboBoxItem Content="group by age" Selected="GroupByAgeSelect"/>
+            <ComboBoxItem Content="gruop by distance" Selected="GroupByDistanceSelect"/>
+            <ComboBoxItem Content="nanny functions" Selected="NannyFunctionsSelect"/>
         </ComboBox>
     </Grid>
 </Window>
