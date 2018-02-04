@@ -69,6 +69,9 @@
     <Compile Include="AutoCompleteAddressTextBox.xaml.cs">
       <DependentUpon>AutoCompleteAddressTextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChildrenWithNoNanny.xaml.cs">
+      <DependentUpon>ChildrenWithNoNanny.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeleteChildWindow.xaml.cs">
       <DependentUpon>DeleteChildWindow.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,9 @@
       <DependentUpon>GroupByDistance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Initialize.cs" />
+    <Compile Include="MotherChildren.xaml.cs">
+      <DependentUpon>MotherChildren.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NannyChildren.xaml.cs">
       <DependentUpon>NannyChildren.xaml</DependentUpon>
     </Compile>
@@ -95,8 +101,8 @@
     <Compile Include="NannyContracts.xaml.cs">
       <DependentUpon>NannyContracts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NannyFunctions.xaml.cs">
-      <DependentUpon>NannyFunctions.xaml</DependentUpon>
+    <Compile Include="MoreOptions.xaml.cs">
+      <DependentUpon>MoreOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="NannyValidVactions.xaml.cs">
       <DependentUpon>NannyValidVactions.xaml</DependentUpon>
@@ -157,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ChildrenWithNoNanny.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeleteChildWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,6 +209,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MotherChildren.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NannyChildren.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,7 +225,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NannyFunctions.xaml">
+    <Page Include="MoreOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

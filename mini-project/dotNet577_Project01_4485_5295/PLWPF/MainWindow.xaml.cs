@@ -128,9 +128,9 @@ namespace PLWPF
             new GroupByDistance(bl).Show();
         }
 
-        private void NannyFunctionsSelect(object sender, RoutedEventArgs e)
+        private void MoreOptionssSelect(object sender, RoutedEventArgs e)
         {
-            new NannyFunctions(bl).Show();
+            new MoreOptions(bl).Show();
         }
     }
 }

@@ -1,23 +1,25 @@
-﻿<Window x:Class="PLWPF.NannyFunctions"
+﻿<Window x:Class="PLWPF.MoreOptions"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="NannyFunctions" Height="500" Width="570">
+        Title="more options" Height="500" Width="570">
     <Window.Resources>
         <Style x:Key="radioButtonStyle" TargetType="RadioButton">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="20,5,0,5"/>
         </Style>
-        <Style x:Key="SelectNannySearchControlStyle" TargetType="local:SearchControl">
+        <Style x:Key="SearchControlStyle" TargetType="local:SearchControl">
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Grid.RowSpan" Value="2"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="NannySearchControlStyle" TargetType="local:SearchControl" BasedOn="{StaticResource SearchControlStyle}">
+            <Setter Property="Grid.RowSpan" Value="2"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=RButton1, Path=IsChecked}" Value="true">
                     <Setter Property="Visibility" Value="Visible"/>
@@ -27,17 +29,33 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="SelectNannyLabelStyle" TargetType="Label">
+        <Style x:Key="MotherSearchControlStyle" TargetType="local:SearchControl" BasedOn="{StaticResource SearchControlStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=RButton5, Path=IsChecked}" Value="true">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Grid.RowSpan" Value="2"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="NannyLabelStyle" TargetType="Label" BasedOn="{StaticResource LabelStyle}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=RButton1, Path=IsChecked}" Value="true">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding ElementName=RButton2, Path=IsChecked}" Value="true">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MotherLabelStyle" TargetType="Label" BasedOn="{StaticResource LabelStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=RButton5, Path=IsChecked}" Value="true">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -46,15 +64,15 @@
             <Setter Property="Visibility" Value="Collapsed"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=RButton3, Path=IsChecked}" Value="true">
-                    <Setter Property="Visibility" Value="Visible"/>
-                    <Setter Property="Grid.Column" Value="1"/>
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="Height" Value="15"/>
-                    <Setter Property="Margin" Value="20,0,55,0"/>
-                    <Setter Property="Grid.Row" Value="2"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="Width" Value="30"/>
-                </DataTrigger>
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Margin" Value="20,0,55,0"/>
+            <Setter Property="Grid.Row" Value="2"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="30"/>
+            </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -71,6 +89,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -80,9 +100,13 @@
             <RadioButton Name="RButton2" Content="nanny children" Checked="NannyChildrenSelect" Style="{StaticResource radioButtonStyle}" Grid.Row="1"/>
             <RadioButton Name="RButton3" Content="nannies with children less than" Checked="NannyChildrenLessSelect" Style="{StaticResource radioButtonStyle}" Grid.Row="2"/>
             <RadioButton Content="nannies with valid vactions days" Checked="NannyVactionSelect" Style="{StaticResource radioButtonStyle}" Grid.Row="3"/>
+            <RadioButton Name="RButton5" Content="mother children" Checked="MotherChildrenSelect" Style="{StaticResource radioButtonStyle}" Grid.Row="4"/>
+            <RadioButton Content="children with no nanny" Checked="ChildrenWithNoNannySelect" Style="{StaticResource radioButtonStyle}" Grid.Row="5"/>
             <TextBox Name="lessThanTextBox" Style="{StaticResource LessThanTextBoxStyle}" TextChanged="lessThanTextChanged" Height="20" TextWrapping="Wrap"/>
-            <Label Style="{StaticResource SelectNannyLabelStyle}" Content="select nanny" Margin="14,10,0,0"/>
-            <local:SearchControl x:Name="list" Style="{StaticResource SelectNannySearchControlStyle}" ItemSelectsd="NannySelected" Height="20" Width="190" Entity="nanny" Margin="104.333,15,-100,0" TextChanged="textChanged"/>
+            <Label Style="{StaticResource NannyLabelStyle}" Content="select nanny" Margin="14,10,0,0"/>
+            <local:SearchControl x:Name="NannyList" Style="{StaticResource NannySearchControlStyle}" ItemSelectsd="NannySelected" Height="20" Width="190" Entity="nanny" Margin="104.333,15,-100,0" TextChanged="NannySearchtextChanged"/>
+            <Label Style="{StaticResource MotherLabelStyle}" Content="select mother" Grid.Row="3" Margin="14.333,22,0,0" Height="25"/>
+            <local:SearchControl x:Name="MotherList" Style="{StaticResource MotherSearchControlStyle}" Grid.Row="4" ItemSelectsd="MotherSelected" Height="20" Width="190" Entity="mother" Margin="104.333,2,-100,0" TextChanged="MotherSearchtextChanged"/>
         </Grid>
         <Frame x:Name="NannyFunctionFrame" NavigationUIVisibility="Hidden" Grid.Row="2" />
     </Grid>

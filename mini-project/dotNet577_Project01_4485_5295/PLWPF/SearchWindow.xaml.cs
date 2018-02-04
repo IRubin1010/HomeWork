@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BL;
+using BE;
 
 namespace PLWPF
 {
@@ -21,6 +22,10 @@ namespace PLWPF
     public partial class SearchWindow : Window
     {
         IBL bl;
+        Nanny nanny;
+        Mother mother;
+        Child child;
+        Contract contract;
         public SearchWindow(IBL Bl)
         {
             InitializeComponent();
@@ -33,19 +38,90 @@ namespace PLWPF
             switch (entity)
             {
                 case Entity.nanny:
-                    selectedAction.Content = new SearchNanny(bl);
+                    searchList.Entity = Entity.nanny;
+                    searchList.Text = "";
+                    selectedAction.Visibility = Visibility.Hidden;
                     break;
                 case Entity.mother:
-                    selectedAction.Content = new SearchMother(bl);
+                    searchList.Entity = Entity.mother;
+                    searchList.Text = "";
+                    selectedAction.Visibility = Visibility.Hidden;
+                    //selectedAction.Content = new SearchMother(bl);
                     break;
                 case Entity.child:
-                    selectedAction.Content = new SearchChild(bl);
+                    searchList.Entity = Entity.child;
+                    searchList.Text = "";
+                    selectedAction.Visibility = Visibility.Hidden;
+                    //selectedAction.Content = new SearchChild(bl);
                     break;
                 case Entity.contract:
-                    selectedAction.Content = new SearchContract(bl);
+                    searchList.Entity = Entity.contract;
+                    searchList.Text = "";
+                    selectedAction.Visibility = Visibility.Hidden;
+                    //selectedAction.Content = new SearchContract(bl);
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void ItemSelected(object sender, EventArgs e)
+        {
+            Entity entity = (Entity)EntityList.SelectedItem;
+            if (searchList.Text != null)
+            {
+                selectedAction.Visibility = Visibility.Visible;
+                switch (entity)
+                {
+
+                    case Entity.nanny:
+                        nanny = bl.CloneNannyList().FirstOrDefault(nanny => nanny.ToString() == searchList.Text);
+                        selectedAction.Content = new SearchNanny(bl, nanny);
+                        break;
+                    case Entity.mother:
+                        mother = bl.CloneMotherList().FirstOrDefault(mother => mother.ToString() == searchList.Text);
+                        selectedAction.Content = new SearchMother(bl, mother);
+                        break;
+                    case Entity.child:
+                        child = bl.CloneChildList().FirstOrDefault(child => child.ToString() == searchList.Text);
+                        selectedAction.Content = new SearchChild(bl, child);
+                        break;
+                    case Entity.contract:
+                        contract = bl.CloneContractList().FirstOrDefault(contract => contract.ToString() == searchList.Text);
+                        selectedAction.Content = new SearchContract(bl, contract);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void TextChanged(object sender, EventArgs e)
+        {
+            Entity entity = (Entity)EntityList.SelectedItem;
+            if (searchList.Text != "")
+            {
+                switch (entity)
+                {
+                    case Entity.nanny:
+                        nanny = new Nanny();
+                        selectedAction.Content = new SearchNanny(bl, nanny);
+                        break;
+                    case Entity.mother:
+                        mother = new Mother();
+                        selectedAction.Content = new SearchMother(bl, mother);
+                        break;
+                    case Entity.child:
+                        child = new Child();
+                        selectedAction.Content = new SearchChild(bl, child);
+                        break;
+                    case Entity.contract:
+                        contract = new Contract();
+                        selectedAction.Content = new SearchContract(bl, contract);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

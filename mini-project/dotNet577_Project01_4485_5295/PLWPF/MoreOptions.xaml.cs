@@ -19,11 +19,12 @@ namespace PLWPF
     /// <summary>
     /// Interaction logic for NannyFunctions.xaml
     /// </summary>
-    public partial class NannyFunctions : Window
+    public partial class MoreOptions : Window
     {
         IBL bl;
         Nanny nanny;
-        public NannyFunctions(IBL Bl)
+        Mother mother;
+        public MoreOptions(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
@@ -31,13 +32,13 @@ namespace PLWPF
 
         private void NannyContractsSelect(object sender, RoutedEventArgs e)
         {
-            list.Text = "";
+            NannyList.Text = "";
             NannyFunctionFrame.Visibility = Visibility.Hidden;
         }
 
         private void NannyChildrenSelect(object sender, RoutedEventArgs e)
         {
-            list.Text = "";
+            NannyList.Text = "";
             NannyFunctionFrame.Visibility = Visibility.Hidden;
         }
 
@@ -70,7 +71,7 @@ namespace PLWPF
 
         private void NannySelected(object sender, EventArgs e)
         {
-            nanny = (Nanny)list.textComboBox.SelectedItem;
+            nanny = (Nanny)NannyList.textComboBox.SelectedItem;
             if (nanny != null)
             {
                 if (RButton1.IsChecked == true)
@@ -86,12 +87,46 @@ namespace PLWPF
             }
         }
 
-        private void textChanged(object sender, EventArgs e)
+        private void NannySearchtextChanged(object sender, EventArgs e)
         {
-            if (list.Text == "")
+            if (NannyList.Text == "")
             {
                 NannyFunctionFrame.Visibility = Visibility.Hidden;
             }
         }
+
+        private void MotherChildrenSelect(object sender, RoutedEventArgs e)
+        {
+            MotherList.Text = "";
+            NannyFunctionFrame.Visibility = Visibility.Hidden;
+        }
+
+        private void ChildrenWithNoNannySelect(object sender, RoutedEventArgs e)
+        {
+            NannyFunctionFrame.Visibility = Visibility.Visible;
+            NannyFunctionFrame.Content = new ChildrenWithNoNanny(bl);
+        }
+
+        private void MotherSelected(object sender, EventArgs e)
+        {
+            mother = (Mother)MotherList.textComboBox.SelectedItem;
+            if (mother != null)
+            {
+                if (RButton5.IsChecked == true)
+                {
+                    NannyFunctionFrame.Visibility = Visibility.Visible;
+                    NannyFunctionFrame.Content = new MotherChildren(bl, mother);//////////
+                }
+            }
+        }
+
+        private void MotherSearchtextChanged(object sender, EventArgs e)
+        {
+            if (MotherList.Text == "")
+            {
+                NannyFunctionFrame.Visibility = Visibility.Hidden;
+            }
+        }
+
     }
 }

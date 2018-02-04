@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLWPF"
       mc:Ignorable="d" 
-      d:DesignHeight="510" d:DesignWidth="510"
+      d:DesignHeight="460" d:DesignWidth="510"
       Title="SearchContract">
     <Page.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
@@ -40,15 +40,7 @@
         </Style>
     </Page.Resources>
     <Grid Name="searchContract" Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid>
-            <ComboBox Name="list" HorizontalAlignment="Right" Margin="0,0,120,0" VerticalAlignment="Center" Width="160" ItemsSource="{Binding}" DisplayMemberPath="Details" IsEditable="True" SelectionChanged="ContractSelected" IsTextSearchEnabled="True" TextSearch.TextPath="ContractNumber"/>
-            <Label Content="select" HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Center" FontSize="20"/>
-        </Grid>
-        <Grid x:Name="NannyDetails" Grid.Row="1" VerticalAlignment="Top" Margin="0,10" HorizontalAlignment="Center">
+        <Grid x:Name="NannyDetails" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

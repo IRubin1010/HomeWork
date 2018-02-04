@@ -23,20 +23,12 @@ namespace PLWPF
     public partial class SearchMother : Page
     {
         IBL bl;
-        Mother mother;
-        List<Mother> motherList;
-        public SearchMother(IBL Bl)
+        public SearchMother(IBL Bl, Mother mother)
         {
             InitializeComponent();
             bl = Bl;
-            motherList = bl.CloneMotherList();
-            list.DataContext = motherList;
-        }
-
-        private void MotherSelected(object sender, SelectionChangedEventArgs e)
-        {
-            mother = (Mother)(sender as ComboBox).SelectedItem;
             searchMother.DataContext = mother;
+            work.DataContext = mother;
         }
     }
 }
