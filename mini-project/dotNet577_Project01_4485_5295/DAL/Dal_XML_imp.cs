@@ -9,6 +9,13 @@ using System.Xml.Linq;
 
 namespace DAL
 {
+    static class Tools
+    {
+        public static int? NullOrIntValue(this int? parm, XElement element)
+        {
+            return string.IsNullOrEmpty(element.Value) ? default(int?) : int.Parse(element.Value);
+        }
+    }
     sealed class Dal_XML_imp : IDAL
     {
         DsXml nannyXml;
@@ -16,6 +23,8 @@ namespace DAL
         DsXml childXml;
         DsXml contractXml;
         DsXml configXml;
+        int? tools = null;
+
         // implement for singelton
         static Dal_XML_imp() { }
 
@@ -75,7 +84,44 @@ namespace DAL
                                  new XElement("Recommendations", nanny.Recommendations)
                                );
         }
-
+        public Nanny GetNanny(XElement nanny)
+        {
+            return new Nanny()
+            {
+                ID = tools.NullOrIntValue(nanny.Element("ID")),
+                FirstName = nanny.Element("Name").Element("FirstName").Value,
+                LastName = nanny.Element("Name").Element("LastName").Value,
+                BirthDate = DateTime.Parse(nanny.Element("BirthDate").Value),
+                NannyAge = tools.NullOrIntValue(nanny.Element("NannyAge")),
+                PhoneNumber = tools.NullOrIntValue(nanny.Element("PhoneNumber")),
+                Address = nanny.Element("Address").Value,
+                Elevator = bool.Parse(nanny.Element("Elevator").Value),
+                Floor = tools.NullOrIntValue(nanny.Element("Floor")),
+                Seniority = tools.NullOrIntValue(nanny.Element("Seniority")),
+                Children = tools.NullOrIntValue(nanny.Element("Children")),
+                MaxChildren = tools.NullOrIntValue(nanny.Element("MaxChildren")),
+                MinAge = tools.NullOrIntValue(nanny.Element("MinAge")),
+                MaxAge = tools.NullOrIntValue(nanny.Element("MaxAge")),
+                IsHourlyFee = bool.Parse(nanny.Element("IsHourlyFee").Value),
+                HourlyFee = tools.NullOrIntValue(nanny.Element("HourlyFee")),
+                MonthlyFee = tools.NullOrIntValue(nanny.Element("MonthlyFee")),
+                IsValidVacationDays = bool.Parse(nanny.Element("IsValidVacationDays").Value),
+                Recommendations = nanny.Element("Recommendations").Value,
+                IsWork = (from day in nanny.Element("IsWork").Elements()
+                          select bool.Parse(day.Value)).ToArray(),
+                WorkHours = new TimeSpan[2][]
+                             {
+                                 (from day in nanny.Element("WorkHours").Elements("begin")
+                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
+                                                     int.Parse(day.Element("minute").Value),
+                                                     int.Parse(day.Element("second").Value))).ToArray(),
+                                 (from day in nanny.Element("WorkHours").Elements("end")
+                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
+                                                     int.Parse(day.Element("minute").Value),
+                                                     int.Parse(day.Element("second").Value))).ToArray()
+                             }
+            };
+        }
         /// <summary>
         /// add nanny to nanny's DB
         /// </summary>
@@ -166,6 +212,8 @@ namespace DAL
             return FindNanny(nanny.ID) != null;
         }
 
+
+
         /// <summary>
         /// find nanny with given ID
         /// </summary>
@@ -181,46 +229,12 @@ namespace DAL
                 Nanny Nanny;
                 Nanny = (from nanny in nannyXml.Root.Elements("Nanny")
                          where Int32.Parse(nanny.Element("ID").Value) == id
-                         select new Nanny()
-                         {
-                             ID = int.Parse(nanny.Element("ID").Value),
-                             FirstName = nanny.Element("Name").Element("FirstName").Value,
-                             LastName = nanny.Element("Name").Element("LastName").Value,
-                             BirthDate = DateTime.Parse(nanny.Element("BirthDate").Value),
-                             NannyAge = int.Parse(nanny.Element("NannyAge").Value),
-                             PhoneNumber = int.Parse(nanny.Element("PhoneNumber").Value),
-                             Address = nanny.Element("Address").Value,
-                             Elevator = bool.Parse(nanny.Element("Elevator").Value),
-                             Floor = int.Parse(nanny.Element("Floor").Value),
-                             Seniority = int.Parse(nanny.Element("Seniority").Value),
-                             Children = int.Parse(nanny.Element("Children").Value),
-                             MaxChildren = int.Parse(nanny.Element("MaxChildren").Value),
-                             MinAge = int.Parse(nanny.Element("MinAge").Value),
-                             MaxAge = int.Parse(nanny.Element("MaxAge").Value),
-                             IsHourlyFee = bool.Parse(nanny.Element("IsHourlyFee").Value),
-                             HourlyFee = int.Parse(nanny.Element("HourlyFee").Value),
-                             MonthlyFee = int.Parse(nanny.Element("MonthlyFee").Value),
-                             IsValidVacationDays = bool.Parse(nanny.Element("IsValidVacationDays").Value),
-                             Recommendations = nanny.Element("Recommendations").Value,
-                             IsWork = (from day in nanny.Element("IsWork").Elements()
-                                       select bool.Parse(day.Value)).ToArray(),
-                             WorkHours = new TimeSpan[2][]
-                             {
-                                 (from day in nanny.Element("WorkHours").Elements("begin")
-                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                     int.Parse(day.Element("minute").Value),
-                                                     int.Parse(day.Element("second").Value))).ToArray(),
-                                 (from day in nanny.Element("WorkHours").Elements("end")
-                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                     int.Parse(day.Element("minute").Value),
-                                                     int.Parse(day.Element("second").Value))).ToArray()
-                             }
-                         }).FirstOrDefault();
+                         select GetNanny(nanny)).FirstOrDefault();
                 return Nanny;
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
         XElement FindNannyXml(int? id)
@@ -303,7 +317,35 @@ namespace DAL
                                  new XElement("Remarks", mother.Remarks)
                                  );
         }
-
+        private Mother GetMother(XElement mother)
+        {
+            return new Mother()
+            {
+                ID = tools.NullOrIntValue(mother.Element("ID")),
+                FirstName = mother.Element("Name").Element("FirstName").Value,
+                LastName = mother.Element("Name").Element("LastName").Value,
+                PhoneNumber = tools.NullOrIntValue(mother.Element("PhoneNumber")),
+                Address = mother.Element("Address").Value,
+                SearchAreaForNanny = mother.Element("SearchAreaForNanny").Value,
+                WantElevator = bool.Parse(mother.Element("WantElevator").Value),
+                MinSeniority = tools.NullOrIntValue(mother.Element("MinSeniority")),
+                MaxFloor = tools.NullOrIntValue(mother.Element("MaxFloor")),
+                Remarks = mother.Element("Remarks").Value,
+                NeedNanny = (from day in mother.Element("NeedNanny").Elements()
+                             select bool.Parse(day.Value)).ToArray(),
+                NeedNannyHours = new TimeSpan[2][]
+                              {
+                                  (from day in mother.Element("NeedNannyHours").Elements("begin")
+                                  select new TimeSpan(int.Parse(day.Element("hour").Value),
+                                                      int.Parse(day.Element("minute").Value),
+                                                      int.Parse(day.Element("second").Value))).ToArray(),
+                                  (from day in mother.Element("NeedNannyHours").Elements("end")
+                                  select new TimeSpan(int.Parse(day.Element("hour").Value),
+                                                      int.Parse(day.Element("minute").Value),
+                                                      int.Parse(day.Element("second").Value))).ToArray()
+                              }
+            };
+        }
         /// <summary>
         /// add mother to mother's DB 
         /// </summary>
@@ -419,39 +461,15 @@ namespace DAL
                 Mother Mother;
                 Mother = (from mother in motherXml.Root.Elements()
                           where Int32.Parse(mother.Element("ID").Value) == id
-                          select new Mother()
-                          {
-                              ID = int.Parse(mother.Element("ID").Value),
-                              FirstName = mother.Element("Name").Element("FirstName").Value,
-                              LastName = mother.Element("Name").Element("LastName").Value,
-                              PhoneNumber = int.Parse(mother.Element("PhoneNumber").Value),
-                              Address = mother.Element("Address").Value,
-                              SearchAreaForNanny = mother.Element("SearchAreaForNanny").Value,
-                              WantElevator = bool.Parse(mother.Element("WantElevator").Value),
-                              MinSeniority = int.Parse(mother.Element("MinSeniority").Value),
-                              MaxFloor = int.Parse(mother.Element("MaxFloor").Value),
-                              Remarks = mother.Element("Remarks").Value,
-                              NeedNanny = (from day in mother.Element("NeedNanny").Elements()
-                                           select bool.Parse(day.Value)).ToArray(),
-                              NeedNannyHours = new TimeSpan[2][]
-                              {
-                                  (from day in mother.Element("NeedNannyHours").Elements("begin")
-                                  select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                      int.Parse(day.Element("minute").Value),
-                                                      int.Parse(day.Element("second").Value))).ToArray(),
-                                  (from day in mother.Element("NeedNannyHours").Elements("end")
-                                  select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                      int.Parse(day.Element("minute").Value),
-                                                      int.Parse(day.Element("second").Value))).ToArray()
-                              }
-                          }).FirstOrDefault();
+                          select GetMother(mother)).FirstOrDefault();
                 return Mother;
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
+
         XElement FindMotherXml(int? id)
         {
             motherXml.LoadData();
@@ -477,7 +495,20 @@ namespace DAL
                                  new XElement("HaveNanny", child.HaveNanny)
                                  );
         }
-
+        private Child GetChild(XElement child)
+        {
+            return new Child()
+            {
+                ID = tools.NullOrIntValue(child.Element("ID")),
+                MotherID = tools.NullOrIntValue(child.Element("MotherID")),
+                FirstName = child.Element("FirstName").Value,
+                BirthDate = DateTime.Parse(child.Element("BirthDate").Value),
+                AgeInMonth = tools.NullOrIntValue(child.Element("AgeInMonth")),
+                IsSpecialNeeds = bool.Parse(child.Element("IsSpecialNeeds").Value),
+                SpecialNeeds = child.Element("SpecialNeeds").Value,
+                HaveNanny = bool.Parse(child.Element("HaveNanny").Value)
+            };
+        }
         /// <summary>
         /// add child to child's DB
         /// </summary>
@@ -587,24 +618,16 @@ namespace DAL
                 Child Child;
                 Child = (from child in childXml.Root.Elements("Child")
                          where Int32.Parse(child.Element("ID").Value) == id
-                         select new Child()
-                         {
-                             ID = int.Parse(child.Element("ID").Value),
-                             MotherID = int.Parse(child.Element("MotherID").Value),
-                             FirstName = child.Element("FirstName").Value,
-                             BirthDate = DateTime.Parse(child.Element("BirthDate").Value),
-                             AgeInMonth = int.Parse(child.Element("AgeInMonth").Value),
-                             IsSpecialNeeds = bool.Parse(child.Element("IsSpecialNeeds").Value),
-                             SpecialNeeds = child.Element("SpecialNeeds").Value,
-                             HaveNanny = bool.Parse(child.Element("HaveNanny").Value)
-                         }).FirstOrDefault();
+                         select GetChild(child)).FirstOrDefault();
                 return Child;
             }
             catch (Exception)
             {
-                return null;
+                throw;
             }
         }
+
+
 
         XElement FindChildXml(int? id)
         {
@@ -655,8 +678,27 @@ namespace DAL
                                  new XElement("FinalPayment", contract.FinalPayment),
                                  new XElement("BeginTransection", contract.BeginTransection),
                                  new XElement("EndTransection", contract.EndTransection));
-
         }
+
+        private Contract GetContract(XElement contract)
+        {
+            return new Contract()
+            {
+                ContractNumber = tools.NullOrIntValue(contract.Element("ContractNumber")),
+                NannyID = tools.NullOrIntValue(contract.Element("NannyID")),
+                ChildID = tools.NullOrIntValue(contract.Element("ChildID")),
+                MotherID = tools.NullOrIntValue(contract.Element("MotherID")),
+                IsMeet = bool.Parse(contract.Element("IsMeet").Value),
+                IsContractSigned = bool.Parse(contract.Element("IsContractSigned").Value),
+                HourlyFee = tools.NullOrIntValue(contract.Element("HourlyFee")),
+                MonthlyFee = tools.NullOrIntValue(contract.Element("MonthlyFee")),
+                IsPaymentByHour = bool.Parse(contract.Element("IsPaymentByHour").Value),
+                FinalPayment = double.Parse(contract.Element("FinalPayment").Value),
+                BeginTransection = DateTime.Parse(contract.Element("BeginTransection").Value),
+                EndTransection = DateTime.Parse(contract.Element("EndTransection").Value),
+            };
+        }
+
         /// <summary>
         /// add contract to contract's DB
         /// </summary>
@@ -785,24 +827,17 @@ namespace DAL
         /// </remarks>
         public Contract FindContract(int? contractNumber)
         {
-            contractXml.LoadData();
-            return (from contract in contractXml.Root.Elements("Contract")
-                    where Int32.Parse(contract.Element("ContractNumber").Value) == contractNumber
-                    select new Contract()
-                    {
-                        ContractNumber = int.Parse(contract.Element("ContractNumber").Value),
-                        NannyID = int.Parse(contract.Element("NannyID").Value),
-                        ChildID = int.Parse(contract.Element("ChildID").Value),
-                        MotherID = int.Parse(contract.Element("MotherID").Value),
-                        IsMeet = bool.Parse(contract.Element("IsMeet").Value),
-                        IsContractSigned = bool.Parse(contract.Element("IsContractSigned").Value),
-                        HourlyFee = int.Parse(contract.Element("HourlyFee").Value),
-                        MonthlyFee = int.Parse(contract.Element("MonthlyFee").Value),
-                        IsPaymentByHour = bool.Parse(contract.Element("IsPaymentByHour").Value),
-                        FinalPayment = double.Parse(contract.Element("FinalPayment").Value),
-                        BeginTransection = DateTime.Parse(contract.Element("BeginTransection").Value),
-                        EndTransection = DateTime.Parse(contract.Element("EndTransection").Value),
-                    }).FirstOrDefault();
+            try
+            {
+                contractXml.LoadData();
+                return (from contract in contractXml.Root.Elements("Contract")
+                        where Int32.Parse(contract.Element("ContractNumber").Value) == contractNumber
+                        select GetContract(contract)).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public XElement FindContractXml(int? contractNumber)
@@ -819,43 +854,9 @@ namespace DAL
             {
                 nannyXml.LoadData();
                 return (from nanny in nannyXml.Root.Elements()
-                        select new Nanny()
-                        {
-                            ID = int.Parse(nanny.Element("ID").Value),
-                            FirstName = nanny.Element("Name").Element("FirstName").Value,
-                            LastName = nanny.Element("Name").Element("LastName").Value,
-                            BirthDate = DateTime.Parse(nanny.Element("BirthDate").Value),
-                            NannyAge = int.Parse(nanny.Element("NannyAge").Value),
-                            PhoneNumber = int.Parse(nanny.Element("PhoneNumber").Value),
-                            Address = nanny.Element("Address").Value,
-                            Elevator = bool.Parse(nanny.Element("Elevator").Value),
-                            Floor = int.Parse(nanny.Element("Floor").Value),
-                            Seniority = int.Parse(nanny.Element("Seniority").Value),
-                            Children = int.Parse(nanny.Element("Children").Value),
-                            MaxChildren = int.Parse(nanny.Element("MaxChildren").Value),
-                            MinAge = int.Parse(nanny.Element("MinAge").Value),
-                            MaxAge = int.Parse(nanny.Element("MaxAge").Value),
-                            IsHourlyFee = bool.Parse(nanny.Element("IsHourlyFee").Value),
-                            HourlyFee = int.Parse(nanny.Element("HourlyFee").Value),
-                            MonthlyFee = int.Parse(nanny.Element("MonthlyFee").Value),
-                            IsValidVacationDays = bool.Parse(nanny.Element("IsValidVacationDays").Value),
-                            Recommendations = nanny.Element("Recommendations").Value,
-                            IsWork = (from day in nanny.Element("IsWork").Elements()
-                                      select bool.Parse(day.Value)).ToArray(),
-                            WorkHours = new TimeSpan[2][]
-                                  {
-                                 (from day in nanny.Element("WorkHours").Elements("begin")
-                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                     int.Parse(day.Element("minute").Value),
-                                                     int.Parse(day.Element("second").Value))).ToArray(),
-                                 (from day in nanny.Element("WorkHours").Elements("end")
-                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                     int.Parse(day.Element("minute").Value),
-                                                     int.Parse(day.Element("second").Value))).ToArray()
-                                  }
-                        }).ToList();
+                        select GetNanny(nanny)).ToList();
             }
-            catch { return null; }
+            catch { throw; }
         }
 
         public List<Mother> CloneMotherList()
@@ -864,34 +865,9 @@ namespace DAL
             {
                 motherXml.LoadData();
                 return (from mother in motherXml.Root.Elements()
-                        select new Mother()
-                        {
-                            ID = int.Parse(mother.Element("ID").Value),
-                            FirstName = mother.Element("Name").Element("FirstName").Value,
-                            LastName = mother.Element("Name").Element("LastName").Value,
-                            PhoneNumber = int.Parse(mother.Element("PhoneNumber").Value),
-                            Address = mother.Element("Address").Value,
-                            SearchAreaForNanny = mother.Element("SearchAreaForNanny").Value,
-                            WantElevator = bool.Parse(mother.Element("WantElevator").Value),
-                            MinSeniority = int.Parse(mother.Element("MinSeniority").Value),
-                            MaxFloor = int.Parse(mother.Element("MaxFloor").Value),
-                            Remarks = mother.Element("Remarks").Value,
-                            NeedNanny = (from day in mother.Element("NeedNanny").Elements()
-                                         select bool.Parse(day.Value)).ToArray(),
-                            NeedNannyHours = new TimeSpan[2][]
-                             {
-                                 (from day in mother.Element("NeedNannyHours").Elements("begin")
-                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                     int.Parse(day.Element("minute").Value),
-                                                     int.Parse(day.Element("second").Value))).ToArray(),
-                                 (from day in mother.Element("NeedNannyHours").Elements("end")
-                                 select new TimeSpan(int.Parse(day.Element("hour").Value),
-                                                     int.Parse(day.Element("minute").Value),
-                                                     int.Parse(day.Element("second").Value))).ToArray()
-                             }
-                        }).ToList();
+                        select GetMother(mother)).ToList();
             }
-            catch { return null; }
+            catch { throw; }
         }
 
         public List<Child> CloneChildList()
@@ -900,19 +876,9 @@ namespace DAL
             {
                 childXml.LoadData();
                 return (from child in childXml.Root.Elements()
-                        select new Child()
-                        {
-                            ID = int.Parse(child.Element("ID").Value),
-                            MotherID = int.Parse(child.Element("MotherID").Value),
-                            FirstName = child.Element("FirstName").Value,
-                            BirthDate = DateTime.Parse(child.Element("BirthDate").Value),
-                            AgeInMonth = int.Parse(child.Element("AgeInMonth").Value),
-                            IsSpecialNeeds = bool.Parse(child.Element("IsSpecialNeeds").Value),
-                            SpecialNeeds = child.Element("SpecialNeeds").Value,
-                            HaveNanny = bool.Parse(child.Element("HaveNanny").Value)
-                        }).ToList();
+                        select GetChild(child)).ToList();
             }
-            catch { return null; }
+            catch { throw; }
         }
 
         public List<Contract> CloneContractList()
@@ -921,23 +887,9 @@ namespace DAL
             {
                 contractXml.LoadData();
                 return (from contract in contractXml.Root.Elements()
-                        select new Contract()
-                        {
-                            ContractNumber = int.Parse(contract.Element("ContractNumber").Value),
-                            NannyID = int.Parse(contract.Element("NannyID").Value),
-                            ChildID = int.Parse(contract.Element("ChildID").Value),
-                            MotherID = int.Parse(contract.Element("MotherID").Value),
-                            IsMeet = bool.Parse(contract.Element("IsMeet").Value),
-                            IsContractSigned = bool.Parse(contract.Element("IsContractSigned").Value),
-                            HourlyFee = int.Parse(contract.Element("HourlyFee").Value),
-                            MonthlyFee = int.Parse(contract.Element("MonthlyFee").Value),
-                            IsPaymentByHour = bool.Parse(contract.Element("IsPaymentByHour").Value),
-                            FinalPayment = double.Parse(contract.Element("FinalPayment").Value),
-                            BeginTransection = DateTime.Parse(contract.Element("BeginTransection").Value),
-                            EndTransection = DateTime.Parse(contract.Element("EndTransection").Value),
-                        }).ToList();
+                        select GetContract(contract)).ToList();
             }
-            catch { return null; }
+            catch { throw; }
         }
 
         public List<Nanny> NannyList()
