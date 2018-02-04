@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLWPF"
       mc:Ignorable="d" 
-      d:DesignHeight="530" d:DesignWidth="515"
+      d:DesignHeight="470" d:DesignWidth="515"
       Title="SearchMother">
     <Page.Resources>
         <Style x:Key="LebelRwo1Style" TargetType="Label">
@@ -67,13 +67,10 @@
     </Page.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
             <RowDefinition Height="170"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="select" HorizontalAlignment="Left" Margin="110,0,0,0" Style="{StaticResource LebelRwo1Style}" FontSize="20"/>
-        <ComboBox Name="list" HorizontalAlignment="Right" Margin="0,0,110,0" ItemsSource="{Binding}" DisplayMemberPath="FullNameAndID" Style="{StaticResource ComboBoxRow1Style}" SelectionChanged="MotherSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
-        <Grid Grid.Row="1" Name="searchMother">
+        <Grid Name="searchMother">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -125,7 +122,7 @@
                 <TextBox x:Name="remarksTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
             </Grid>
         </Grid >
-        <Border Grid.Row="2" BorderThickness="0 1 0 1" BorderBrush="LightGray">
+        <Border Grid.Row="1" BorderThickness="0 1 0 1" BorderBrush="LightGray">
             <Grid Margin="0,0,0,10" Name="work">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>

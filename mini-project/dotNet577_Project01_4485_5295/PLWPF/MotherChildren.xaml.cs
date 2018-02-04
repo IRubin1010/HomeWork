@@ -18,16 +18,18 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for SearchChild.xaml
+    /// Interaction logic for MotherChildren.xaml
     /// </summary>
-    public partial class SearchChild : Page
+    public partial class MotherChildren : Page
     {
         IBL bl;
-        public SearchChild(IBL Bl, Child child)
+        //Mother mother;
+        public MotherChildren(IBL Bl, Mother mother)
         {
             InitializeComponent();
             bl = Bl;
-            searchChild.DataContext = child;
+            //this.mother = mother;
+            Grouping.DataContext = bl.MotherChildren(mother);
         }
     }
 }

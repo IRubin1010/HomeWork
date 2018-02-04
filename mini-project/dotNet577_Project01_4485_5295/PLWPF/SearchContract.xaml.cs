@@ -23,20 +23,10 @@ namespace PLWPF
     public partial class SearchContract : Page
     {
         IBL bl;
-        Contract contract;
-        List<Contract> contractList;
-        public SearchContract(IBL Bl)
+        public SearchContract(IBL Bl, Contract contract)
         {
             InitializeComponent();
             bl = Bl;
-            contract = new Contract();
-            contractList = bl.CloneContractList();
-            list.DataContext = contractList;
-        }
-
-        private void ContractSelected(object sender, SelectionChangedEventArgs e)
-        {
-            contract = (Contract)(sender as ComboBox).SelectedItem;
             searchContract.DataContext = contract;
         }
     }
