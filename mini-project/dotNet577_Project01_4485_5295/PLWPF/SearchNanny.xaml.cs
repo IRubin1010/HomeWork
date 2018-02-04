@@ -24,19 +24,11 @@ namespace PLWPF
     {
         IBL bl;
         Nanny nanny;
-        List<Nanny> nannyList;
-        public SearchNanny(IBL Bl)
+        public SearchNanny(IBL Bl,Nanny Nanny)
         {
             InitializeComponent();
             bl = Bl;
-            nanny = new Nanny();
-            nannyList = bl.CloneNannyList();
-            list.DataContext = nannyList;
-        }
-
-        private void NannySelected(object sender, SelectionChangedEventArgs e)
-        {
-            nanny = (Nanny)(sender as ComboBox).SelectedItem;
+            nanny = Nanny;
             searchNanny.DataContext = nanny;
         }
 

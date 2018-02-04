@@ -62,7 +62,7 @@
             <ComboBoxItem Content="search" Selected="SearchSelect"/>
             <ComboBoxItem Content="group by age" Selected="GroupByAgeSelect"/>
             <ComboBoxItem Content="gruop by distance" Selected="GroupByDistanceSelect"/>
-            <ComboBoxItem Content="nanny functions" Selected="NannyFunctionsSelect"/>
+            <ComboBoxItem Content="more options" Selected="MoreOptionssSelect"/>
         </ComboBox>
     </Grid>
 </Window>

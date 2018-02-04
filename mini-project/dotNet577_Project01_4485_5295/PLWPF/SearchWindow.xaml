@@ -6,27 +6,37 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:sys ="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="SearchWindow" Height="540" Width="610">
+        Title="SearchWindow" Height="540" Width="550">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type Type="local:Entity"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <Style x:Key="SearchControlStyle" TargetType="local:SearchControl">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=EntityList,Path=SelectedItem}" Value ="{x:Null}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Content="select entitiy" HorizontalAlignment="Center" Margin="0,10" VerticalAlignment="Bottom"/>
-            <ComboBox Name="searchList" Grid.Row="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" Width="80" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectionChanged="EntitySelected"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="select entitiy" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="15"/>
+            <ComboBox Name="EntityList" HorizontalAlignment="Right" Height="25" Margin="0,0,10,0" VerticalAlignment="Center" Width="100" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectionChanged="EntitySelected"/>
+            <Label Content="select" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="15"/>
+            <local:SearchControl x:Name="searchList" Style="{StaticResource SearchControlStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Width="230" Height="25" ItemSelectsd="ItemSelected" TextChanged="TextChanged"/>
         </Grid>
-        <Frame x:Name="selectedAction" Width="510" Height="600" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="selectedAction" Grid.Row="1" Width="510" Height="600" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
