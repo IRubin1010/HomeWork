@@ -99,7 +99,11 @@ namespace PLWPF
         private void textInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (Text == "" || textComboBox.SelectedItem != null)
+            {
+                if (textComboBox.SelectedItem != null && Text != textComboBox.SelectedItem.ToString())
+                    textComboBox.SelectedItem = null;
                 textComboBox.IsDropDownOpen = false;
+            }
             else
                 searchList();
             TextChanged?.Invoke(this, EventArgs.Empty);
@@ -110,10 +114,10 @@ namespace PLWPF
             object item = textComboBox.SelectedItem;
             if (item != null)
             {
-                this.Text = item.ToString();
+                Text = item.ToString();
                 textComboBox.IsDropDownOpen = false;
+                ItemSelectsd?.Invoke(this, EventArgs.Empty);
             }
-            ItemSelectsd?.Invoke(this, EventArgs.Empty);
         }
 
 

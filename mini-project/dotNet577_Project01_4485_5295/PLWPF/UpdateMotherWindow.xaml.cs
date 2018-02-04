@@ -53,7 +53,7 @@ namespace PLWPF
 
         private void SelectMother(object sender, EventArgs e)
         {
-            if(list.Text != null)
+            if(list.Text != "")
             {
                 mother = bl.CloneMotherList().FirstOrDefault(mother => mother.ToString() == list.Text);
                 UpdateMother.DataContext = mother;

@@ -1,32 +1,23 @@
-﻿<Window x:Class="PLWPF.GroupByAge"
+﻿<Window x:Class="PLWPF.GroupByDistance"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="Group By Age" Height="350" Width="483">
+        Title="Group By Distance" Height="350" Width="483">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <Label Content="nannies gruop by age" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+        <Label Content="contracts gruop by distance" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <RadioButton Name="MaxAge" Content="order by max age" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Checked="MaxAgeChecked"/>
-            <RadioButton Name="MinAge" Content="order by min age" Grid.Column="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Checked="MinAgeChecked"/>
-        </Grid>
-        <Grid Grid.Row="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
                 <DataGrid Name="Grouping" Width="452" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" IsHitTestVisible="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="age" Binding="{Binding Path=Key}" Width="50">
+                        <DataGridTextColumn Header="distance" Binding="{Binding Path=Key}" Width="70">
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="VerticalAlignment" Value="Center" />
@@ -34,14 +25,14 @@
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
-                        <DataGridTemplateColumn Header="ID" Width="100">
+                        <DataGridTemplateColumn Header="contract number" Width="110">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
-                                 IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25" 
+                                 IsReadOnly="True" HeadersVisibility="None" Width="110" RowHeight="25" 
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Width="100" Binding="{Binding Path=ID}">
+                                            <DataGridTextColumn Width="110" Binding="{Binding Path=ContractNumber}">
                                                 <DataGridTextColumn.ElementStyle>
                                                     <Style TargetType="TextBlock">
                                                         <Setter Property="VerticalAlignment" Value="Center" />
@@ -54,14 +45,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="first name" Width="100">
+                        <DataGridTemplateColumn Header="nanny ID" Width="90">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
                                   IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Width="100" Binding="{Binding Path=FirstName}">
+                                            <DataGridTextColumn Width="100" Binding="{Binding Path=NannyID}">
                                                 <DataGridTextColumn.ElementStyle>
                                                     <Style TargetType="TextBlock">
                                                         <Setter Property="VerticalAlignment" Value="Center" />
@@ -74,14 +65,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="last name" Width="100">
+                        <DataGridTemplateColumn Header="mothe ID" Width="90">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
                                   IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Width="100" Binding="{Binding Path=LastName}">
+                                            <DataGridTextColumn Width="100" Binding="{Binding Path=MotherID}">
                                                 <DataGridTextColumn.ElementStyle>
                                                     <Style TargetType="TextBlock">
                                                         <Setter Property="VerticalAlignment" Value="Center" />
@@ -94,14 +85,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="phone number" Width="100">
+                        <DataGridTemplateColumn Header="child ID" Width="90">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
                                   IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Width="100" Binding="{Binding Path=PhoneNumber}">
+                                            <DataGridTextColumn Width="100" Binding="{Binding Path=ChildID}">
                                                 <DataGridTextColumn.ElementStyle>
                                                     <Style TargetType="TextBlock">
                                                         <Setter Property="VerticalAlignment" Value="Center" />
@@ -118,6 +109,6 @@
                 </DataGrid>
             </ScrollViewer>
         </Grid>
-        <Button Content="sort age" HorizontalAlignment="Center" Margin="0" Grid.Row="3" VerticalAlignment="Center" Width="150" FontSize="15" Click="Sort_CLick"/>
+        <Button Content="sort distance" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="15" Click="Sort_CLick"/>
     </Grid>
 </Window>
