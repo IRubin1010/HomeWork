@@ -16,6 +16,7 @@ using BL;
 
 namespace PLWPF
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -65,7 +66,15 @@ namespace PLWPF
 
         private void UpdateNannySelect(object sender, RoutedEventArgs e)
         {
+            //try
+            //{
             new UpdateNannyWindow(bl).Show();
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void AddMotherSelect(object sender, RoutedEventArgs e)

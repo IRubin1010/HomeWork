@@ -65,7 +65,7 @@ namespace BL
             if (nanny.MaxAge < nanny.MinAge) message += "The maximum age can not be greater than the minimum age\n";
             for (int i = 0; i < 6; i++)
                 if (nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
-                    message += "Late start time from end time at day " + ((days)i).ToString()+ "\n";
+                    message += "Late start time from end time at day " + ((days)i).ToString() + "\n";
             if (message != null) throw new BLException(message, "AddNanny");
         }
         /// <summary>
@@ -685,7 +685,12 @@ namespace BL
         /// </summary>
         public List<Nanny> CloneNannyList()
         {
-            return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
+
+            try
+            {
+                return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
+            }
+            catch { throw; }
         }
 
         /// <summary>
