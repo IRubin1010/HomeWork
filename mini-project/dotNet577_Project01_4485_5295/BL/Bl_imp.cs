@@ -33,8 +33,8 @@ namespace BL
         /// </remarks>
         public void AddNanny(Nanny nanny)
         {
-            if (nanny.NannyAge < 18 || nanny.NannyAge == null)
-                throw new BLException(nanny.FullName() + " age is under 18", "add nanny");
+            //if (nanny.NannyAge < 18 || nanny.NannyAge == null)
+            //    throw new BLException(nanny.FullName() + " age is under 18", "add nanny");
             try
             {
                 Valid(nanny);
@@ -58,7 +58,9 @@ namespace BL
             string message = null;
             if (!nanny.ID.HasValue) message += "Must fill the field ID\n";
             if (string.IsNullOrEmpty(nanny.FirstName)) message += "Must fill the field First name\n";
-            if (string.IsNullOrEmpty(nanny.LastName)) message += "Must fill the field Last nam\n";
+            if (string.IsNullOrEmpty(nanny.LastName)) message += "Must fill the field Last name\n";
+            if (nanny.NannyAge < 0) message += "Invalid birth date";
+            if ((nanny.NannyAge < 18 && nanny.NannyAge > 0) || nanny.NannyAge == null) message += "age is under 18\n";
             if (string.IsNullOrEmpty(nanny.Address)) message += "Must fill the field Adsress\n";
             if (nanny.BirthDate > DateTime.Now) message += "Invalid date\n";
             if (!nanny.PhoneNumber.HasValue) message += "Must fill the field PhoneNumber\n";
