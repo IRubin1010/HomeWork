@@ -3,15 +3,15 @@
   <Mother>
     <ID>294839286</ID>
     <Name>
-      <FirstName>itzik</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Bracha</FirstName>
+      <LastName>Polak</LastName>
     </Name>
     <PhoneNumber>504182088</PhoneNumber>
     <Address>ha-rav mohilever St 8, Bnei Brak</Address>
     <SearchAreaForNanny>Beit Ha-Defus St 21, Jerusalem</SearchAreaForNanny>
     <WantElevator>true</WantElevator>
-    <MinSeniority>1</MinSeniority>
-    <MaxFloor>4</MaxFloor>
+    <MinSeniority>2</MinSeniority>
+    <MaxFloor>3</MaxFloor>
     <NeedNanny>
       <day1>true</day1>
       <day2>true</day2>
@@ -53,32 +53,32 @@
       </begin>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
-        <minute>30</minute>
+        <hour>12</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
     </NeedNannyHours>
@@ -87,15 +87,15 @@
   <Mother>
     <ID>294894786</ID>
     <Name>
-      <FirstName>shimshon</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Oshrat</FirstName>
+      <LastName>Levi</LastName>
     </Name>
     <PhoneNumber>504397588</PhoneNumber>
     <Address>Rabbi Yehuda HaNassi St 49, Bnei Brak</Address>
     <SearchAreaForNanny></SearchAreaForNanny>
     <WantElevator>true</WantElevator>
-    <MinSeniority>4</MinSeniority>
-    <MaxFloor>2</MaxFloor>
+    <MinSeniority>5</MinSeniority>
+    <MaxFloor>7</MaxFloor>
     <NeedNanny>
       <day1>false</day1>
       <day2>true</day2>
@@ -106,62 +106,62 @@
     </NeedNanny>
     <NeedNannyHours>
       <begin>
-        <hour>7</hour>
-        <minute>30</minute>
+        <hour>0</hour>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
         <hour>7</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
         <hour>7</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
         <hour>7</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
         <hour>7</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
-        <minute>30</minute>
+        <hour>8</hour>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <end>
-        <hour>16</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>13</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>13</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>13</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>13</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>12</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
@@ -171,57 +171,57 @@
   <Mother>
     <ID>294892086</ID>
     <Name>
-      <FirstName>moshe</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Ayelt</FirstName>
+      <LastName>Shaked</LastName>
     </Name>
     <PhoneNumber>504003828</PhoneNumber>
     <Address>ovadya St 8, Bnei Brak</Address>
     <SearchAreaForNanny>Hannah Szenes St 8, Bnei Brak</SearchAreaForNanny>
     <WantElevator>false</WantElevator>
-    <MinSeniority>5</MinSeniority>
-    <MaxFloor>1</MaxFloor>
+    <MinSeniority>4</MinSeniority>
+    <MaxFloor>2</MaxFloor>
     <NeedNanny>
       <day1>true</day1>
       <day2>true</day2>
-      <day3>true</day3>
+      <day3>false</day3>
       <day4>false</day4>
       <day5>true</day5>
       <day6>true</day6>
     </NeedNanny>
     <NeedNannyHours>
       <begin>
-        <hour>7</hour>
+        <hour>8</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>8</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>8</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>8</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
@@ -230,13 +230,13 @@
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
-        <minute>30</minute>
+        <hour>0</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
-        <minute>30</minute>
+        <hour>0</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
@@ -255,8 +255,8 @@
   <Mother>
     <ID>294909286</ID>
     <Name>
-      <FirstName>natan</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Gilat</FirstName>
+      <LastName>Benet</LastName>
     </Name>
     <PhoneNumber>504129888</PhoneNumber>
     <Address>Hannah Szenes St 8, Bnei Brak</Address>
@@ -270,7 +270,7 @@
       <day3>true</day3>
       <day4>true</day4>
       <day5>true</day5>
-      <day6>true</day6>
+      <day6>false</day6>
     </NeedNanny>
     <NeedNannyHours>
       <begin>
@@ -299,7 +299,7 @@
         <second>0</second>
       </begin>
       <begin>
-        <hour>8</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
@@ -314,7 +314,7 @@
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>13</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
@@ -329,8 +329,8 @@
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
-        <minute>30</minute>
+        <hour>0</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
     </NeedNannyHours>
@@ -346,7 +346,7 @@
     <Address>Yerushalayim St 72, Bnei Brak</Address>
     <SearchAreaForNanny></SearchAreaForNanny>
     <WantElevator>true</WantElevator>
-    <MinSeniority>3</MinSeniority>
+    <MinSeniority>8</MinSeniority>
     <MaxFloor>3</MaxFloor>
     <NeedNanny>
       <day1>true</day1>
@@ -378,12 +378,12 @@
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
-        <hour>7</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </begin>
@@ -408,12 +408,12 @@
         <second>0</second>
       </end>
       <end>
-        <hour>14</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>14</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
       </end>
@@ -434,7 +434,7 @@
     <MaxFloor>4</MaxFloor>
     <NeedNanny>
       <day1>true</day1>
-      <day2>false</day2>
+      <day2>true</day2>
       <day3>true</day3>
       <day4>true</day4>
       <day5>true</day5>
@@ -442,8 +442,23 @@
     </NeedNanny>
     <NeedNannyHours>
       <begin>
-        <hour>7</hour>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
         <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>9</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
@@ -456,24 +471,9 @@
         <minute>30</minute>
         <second>0</second>
       </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
@@ -482,22 +482,22 @@
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
         <minute>30</minute>
         <second>0</second>
       </end>
       <end>
         <hour>16</hour>
-        <minute>30</minute>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>16</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>16</hour>
+        <hour>12</hour>
         <minute>30</minute>
         <second>0</second>
       </end>
@@ -507,8 +507,8 @@
   <Mother>
     <ID>294335086</ID>
     <Name>
-      <FirstName>hilel</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Sheindi</FirstName>
+      <LastName>Lider</LastName>
     </Name>
     <PhoneNumber>504395188</PhoneNumber>
     <Address>sokolow St 34, Bnei Brak</Address>
@@ -517,7 +517,7 @@
     <MinSeniority>3</MinSeniority>
     <MaxFloor>5</MaxFloor>
     <NeedNanny>
-      <day1>true</day1>
+      <day1>false</day1>
       <day2>true</day2>
       <day3>true</day3>
       <day4>true</day4>
@@ -526,8 +526,28 @@
     </NeedNanny>
     <NeedNannyHours>
       <begin>
-        <hour>7</hour>
-        <minute>30</minute>
+        <hour>0</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>13</hour>
+        <minute>0</minute>
         <second>0</second>
       </begin>
       <begin>
@@ -535,54 +555,34 @@
         <minute>30</minute>
         <second>0</second>
       </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>7</hour>
-        <minute>30</minute>
-        <second>0</second>
-      </begin>
       <end>
-        <hour>17</hour>
-        <minute>30</minute>
+        <hour>0</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>17</hour>
-        <minute>30</minute>
+        <hour>16</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>17</hour>
-        <minute>30</minute>
+        <hour>16</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>17</hour>
-        <minute>30</minute>
+        <hour>16</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>17</hour>
-        <minute>30</minute>
+        <hour>16</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
       <end>
-        <hour>17</hour>
-        <minute>30</minute>
+        <hour>12</hour>
+        <minute>0</minute>
         <second>0</second>
       </end>
     </NeedNannyHours>
@@ -666,6 +666,174 @@
       </end>
       <end>
         <hour>17</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+    </NeedNannyHours>
+    <Remarks></Remarks>
+  </Mother>
+  <Mother>
+    <ID>294337676</ID>
+    <Name>
+      <FirstName>Mina</FirstName>
+      <LastName>Berkovitz</LastName>
+    </Name>
+    <PhoneNumber>504395188</PhoneNumber>
+    <Address>hafes haim St 14, Bnei Brak</Address>
+    <SearchAreaForNanny></SearchAreaForNanny>
+    <WantElevator>false</WantElevator>
+    <MinSeniority>3</MinSeniority>
+    <MaxFloor>5</MaxFloor>
+    <NeedNanny>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </NeedNanny>
+    <NeedNannyHours>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>12</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </NeedNannyHours>
+    <Remarks></Remarks>
+  </Mother>
+  <Mother>
+    <ID>294355686</ID>
+    <Name>
+      <FirstName>Shani</FirstName>
+      <LastName>Hovav</LastName>
+    </Name>
+    <PhoneNumber>504395188</PhoneNumber>
+    <Address>hafes haim St 14, Bnei Brak</Address>
+    <SearchAreaForNanny></SearchAreaForNanny>
+    <WantElevator>false</WantElevator>
+    <MinSeniority>6</MinSeniority>
+    <MaxFloor>2</MaxFloor>
+    <NeedNanny>
+      <day1>true</day1>
+      <day2>false</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>false</day6>
+    </NeedNanny>
+    <NeedNannyHours>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>0</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>0</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>12</hour>
         <minute>30</minute>
         <second>0</second>
       </end>

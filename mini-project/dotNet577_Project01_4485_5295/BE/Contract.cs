@@ -21,6 +21,7 @@ namespace BE
         public double FinalPayment { get; set; }
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }
+        public double distence { get; set; }
         public string Details { get { return "contract number: " + ContractNumber; } }
        
         public Contract()

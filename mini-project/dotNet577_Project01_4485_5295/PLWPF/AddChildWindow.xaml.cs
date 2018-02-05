@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace PLWPF
             bl = Bl;
             child = new Child();
             AddChild.DataContext = child;
+            birthDateDatePicker.DisplayDateEnd = DateTime.Now;
         }
 
         private void AddChild_CLick(object sender, RoutedEventArgs e)
@@ -54,4 +56,19 @@ namespace PLWPF
             be.UpdateSource();
         }
     }
+    //public class BoolVisibiltyConvert : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        bool checkValue = (bool)value;
+    //        if (checkValue == true)
+    //            return Visibility.Visible;
+    //        else
+    //            return Visibility.Hidden;
+    //    }
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }
