@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
+        xmlns:Converters="clr-namespace:PLWPF"
         Title="more options" Height="500" Width="570">
     <Window.Resources>
         <Style x:Key="radioButtonStyle" TargetType="RadioButton">
@@ -61,9 +62,10 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="LessThanTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Visibility" Value="Collapsed"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=RButton3, Path=IsChecked}" Value="true">
+
+            <!--<Setter Property="Visibility" Value="Collapsed"/>-->
+            <!--<Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=RButton3, Path=IsChecked}" Value="true">-->
             <Setter Property="Visibility" Value="Visible"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -72,9 +74,11 @@
             <Setter Property="Grid.Row" Value="2"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="30"/>
-            </DataTrigger>
-            </Style.Triggers>
+            <!--</DataTrigger>
+            </Style.Triggers>-->
         </Style>
+        <Converters:BoolVisibiltyConverter x:Key="BoolVisibiltyConverter"/>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -102,7 +106,8 @@
             <RadioButton Content="nannies with valid vactions days" Checked="NannyVactionSelect" Style="{StaticResource radioButtonStyle}" Grid.Row="3"/>
             <RadioButton Name="RButton5" Content="mother children" Checked="MotherChildrenSelect" Style="{StaticResource radioButtonStyle}" Grid.Row="4"/>
             <RadioButton Content="children with no nanny" Checked="ChildrenWithNoNannySelect" Style="{StaticResource radioButtonStyle}" Grid.Row="5"/>
-            <TextBox Name="lessThanTextBox" Style="{StaticResource LessThanTextBoxStyle}" TextChanged="lessThanTextChanged" Height="20" TextWrapping="Wrap"/>
+            <TextBox Name="lessThanTextBox" Visibility="{Binding ElementName=RButton3, Path=IsChecked,Converter={StaticResource BoolVisibiltyConverter}}" Style="{StaticResource LessThanTextBoxStyle}" TextChanged="lessThanTextChanged" Height="20" TextWrapping="Wrap"/>
+
             <Label Style="{StaticResource NannyLabelStyle}" Content="select nanny" Margin="14,10,0,0"/>
             <local:SearchControl x:Name="NannyList" Style="{StaticResource NannySearchControlStyle}" ItemSelectsd="NannySelected" Height="20" Width="190" Entity="nanny" Margin="104.333,15,-100,0" TextChanged="NannySearchtextChanged"/>
             <Label Style="{StaticResource MotherLabelStyle}" Content="select mother" Grid.Row="3" Margin="14.333,22,0,0" Height="25"/>

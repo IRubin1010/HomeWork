@@ -9,7 +9,8 @@ namespace BE
     public class Mother
     {
         //Properties//
-        public int? ID { get; set; }
+        private int? id;
+        public int? ID { get { return id; } set { if (value >= 100000000 && value <= 999999999) id = value; else throw new ArgumentException("iligell ID"); } }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }

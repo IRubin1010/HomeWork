@@ -34,6 +34,7 @@ namespace PLWPF
             nannyAgeTextBox.Text = "";
             minAgeList = new List<int>() {0, 6, 12, 18, 24, 30};
             minAgeTextBox.DataContext = minAgeList;
+            birthDateDatePicker.DisplayDateEnd = DateTime.Now;
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)

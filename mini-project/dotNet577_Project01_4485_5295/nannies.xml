@@ -187,7 +187,7 @@
     <Recommendations>Clean and tidy place, amazing attitude for children strongly recommends. riky shimon</Recommendations>
   </Nanny>
   <Nanny>
-    <ID>305625275</ID>
+    <ID>305629275</ID>
     <Name>
       <FirstName>Sara</FirstName>
       <LastName>Kopolovitsh</LastName>
@@ -928,6 +928,99 @@
       </end>
     </WorkHours>
     <IsValidVacationDays>false</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>305625275</ID>
+    <Name>
+      <FirstName>BatSheva</FirstName>
+      <LastName>Choen</LastName>
+    </Name>
+    <BirthDate>12/08/1998</BirthDate>
+    <NannyAge>20</NannyAge>
+    <PhoneNumber>543453834</PhoneNumber>
+    <Address>Sokolov st 44, Bnei Brak</Address>
+    <Elevator>false</Elevator>
+    <Floor>0</Floor>
+    <Seniority>2</Seniority>
+    <Children>0</Children>
+    <MaxChildren>10</MaxChildren>
+    <MinAge>12</MinAge>
+    <MaxAge>18</MaxAge>
+    <IsHourlyFee>true</IsHourlyFee>
+    <HourlyFee>9</HourlyFee>
+    <MonthlyFee>2200</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>18</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>18</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>18</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>18</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>18</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>true</IsValidVacationDays>
     <Recommendations></Recommendations>
   </Nanny>
 </nannies>

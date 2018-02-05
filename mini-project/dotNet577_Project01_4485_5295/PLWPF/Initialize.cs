@@ -32,34 +32,40 @@ namespace PLWPF
             ibl.AddNanny(Yafi_Shtain);
             ibl.AddNanny(Adi_Shushan);
             ibl.AddNanny(Chavi_Horen);
-
+            ibl.AddNanny(BatSheva_Choen);
+            ibl.AddNanny(Avigail_Kuk);
         }
         void MotherInitialize()
         {
             ibl.AddMother(Bracha_Polak);
-            ibl.AddMother(shimshonYeret);
-            ibl.AddMother(mosheYeret);
-            ibl.AddMother(natanYeret);
-            ibl.AddMother(simchaYeret);
-            ibl.AddMother(yakovYeret);
-            ibl.AddMother(hilelYeret);
-            ibl.AddMother(MotherTest);
-
+            ibl.AddMother(Oshrat_Levi);
+            ibl.AddMother(Ayelt_Shaked);
+            ibl.AddMother(Gilat_Benet);
+            ibl.AddMother(Esti_Kopshitz);
+            ibl.AddMother(Tovi_Shachak);
+            ibl.AddMother(Sheindi_Lider);
+            ibl.AddMother(Beili_Yudkevitz);
+            ibl.AddMother(Mina_Berkovitz);
+            ibl.AddMother(Shani_Hovav);
         }
         void ChildInitialize()
         {
             ibl.AddChild(yoni);
-            ibl.AddChild(shimon);
+            ibl.AddChild(nadav);
             ibl.AddChild(roni);
+            ibl.AddChild(moty);
+            ibl.AddChild(eti);
             ibl.AddChild(aviad);
-            ibl.AddChild(ronen);
-            ibl.AddChild(eran);
-            ibl.AddChild(moti);
-            ibl.AddChild(ChildTest);
-            ibl.AddChild(a);
-            ibl.AddChild(b);
-            ibl.AddChild(c);
-            ibl.AddChild(d);
+            ibl.AddChild(miri);
+            ibl.AddChild(david);
+            ibl.AddChild(yael);
+            ibl.AddChild(naama);
+            ibl.AddChild(hila);
+            ibl.AddChild(michal);
+            ibl.AddChild(reut);
+            ibl.AddChild(dodo);
+            ibl.AddChild(maten);
+
         }
         void ContractInitialize()
         {
@@ -76,84 +82,32 @@ namespace PLWPF
             //ibl.AddContract(cc);
 
         }
-        public Nanny Michal_Shtern = new Nanny
+
+        public Nanny Malki_Fishman = new Nanny
         {
-            ID = 305625295,
-            LastName = "Stern",
-            FirstName = "Michal",
-            BirthDate = new DateTime(1982, 7, 16),
-            PhoneNumber = 0543972654,
-            Address = "Ovadya St 6, Bnei Brak",
-            Elevator = true,
-            Seniority = 10,
-            Children = 0,
-            MaxChildren = 5,
-            MinAge = 12,
-            MaxAge = 18,
-            IsHourlyFee = true,
-            HourlyFee = 10,
-            MonthlyFee = 1300,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2][]
-            {
-                new TimeSpan[6] { new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0) },
-                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(12, 0, 0) }
-            },
-            IsValidVacationDays = true,
-            Recommendations = "",
-        };
-        public Nanny Meirav_Levy = new Nanny
-        {
-            ID = 294003857,
-            LastName = "Levi",
-            FirstName = "Meirav",
-            BirthDate = new DateTime(1991, 11, 4),
-            PhoneNumber = 0543395033,
-            Address = "Yerushalayim St 51, Bnei Brak",
-            Elevator = true,
-            Floor = 2,
-            Seniority = 7,
-            Children = 0,
-            MaxChildren = 7,
-            MinAge = 6,
-            MaxAge = 12,
-            IsHourlyFee = true,
-            HourlyFee = 12,
-            MonthlyFee = 1000,
-            IsWork = new bool[6] { true, true, true, true, true, false },
-            WorkHours = new TimeSpan[2][]
-            {
-                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
-                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0) }
-            },
-            IsValidVacationDays = true,
-            Recommendations = "Clean and tidy place, amazing attitude for children strongly recommends. riky shimon",
-        };
-        public Nanny Sara_Kopolovitsh = new Nanny
-        {
-            ID = 305625275,
-            LastName = "Kopolovitsh",
-            FirstName = "Sara",
-            BirthDate = new DateTime(1998, 8, 12),
-            PhoneNumber = 0543453834,
-            Address = "Sokolov st 44, Bnei Brak",
+            ID = 305625695,
+            LastName = "Fishman",
+            FirstName = "Malki",
+            BirthDate = new DateTime(1987, 5, 19),
+            PhoneNumber = 0543483782,
+            Address = "rabi akiva St 69, Bnei Brak",
             Elevator = false,
-            Floor = 0,
-            Seniority = 2,
+            Floor = 2,
+            Seniority = 6,
             Children = 0,
-            MaxChildren = 10,
-            MinAge = 12,
-            MaxAge = 18,
+            MaxChildren = 4,
+            MinAge = 0,
+            MaxAge = 6,
             IsHourlyFee = true,
-            HourlyFee = 9,
-            MonthlyFee = 2000,
+            HourlyFee = 15,
+            MonthlyFee = 1000,
             IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
-            {
-                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
-                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0) }
-            },
-            IsValidVacationDays = true,
+           {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(07, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(12, 00, 0) }
+           },
+            IsValidVacationDays = false,
             Recommendations = "",
         };
         public Nanny Ayala_Zehavi = new Nanny
@@ -183,6 +137,170 @@ namespace PLWPF
             IsValidVacationDays = false,
             Recommendations = "",
         };
+        public Nanny Chavi_Horen = new Nanny
+        {
+            ID = 305695295,
+            LastName = "Horen",
+            FirstName = "Chavi",
+            BirthDate = new DateTime(1991, 3, 7),
+            PhoneNumber = 0543473834,
+            Address = "Nissenboim St 11, Bnei Brak",
+            Elevator = true,
+            Floor = 1,
+            Seniority = 7,
+            Children = 0,
+            MaxChildren = 7,
+            MinAge = 0,
+            MaxAge = 6,
+            IsHourlyFee = false,
+            HourlyFee = 42,
+            MonthlyFee = 4000,
+            IsWork = new bool[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+           {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0) }
+           },
+            IsValidVacationDays = false,
+            Recommendations = "",
+        };
+        public Nanny Avigail_Kuk = new Nanny
+        {
+            ID = 305825295,
+            LastName = "Kuk",
+            FirstName = "Avigail",
+            BirthDate = new DateTime(1991, 3, 7),
+            PhoneNumber = 0543473834,
+            Address = "Nissenboim St 11, Bnei Brak",
+            Elevator = true,
+            Floor = 1,
+            Seniority = 7,
+            Children = 0,
+            MaxChildren = 7,
+            MinAge = 0,
+            MaxAge = 6,
+            IsHourlyFee = false,
+            HourlyFee = 42,
+            MonthlyFee = 4000,
+            IsWork = new bool[6] { true, true, true, true, true, false },
+            WorkHours = new TimeSpan[2][]
+          {
+                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(00, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(00, 00, 0) }
+          },
+            IsValidVacationDays = false,
+            Recommendations = "",
+        };
+
+
+        public Nanny Meirav_Levy = new Nanny
+        {
+            ID = 294003857,
+            LastName = "Levi",
+            FirstName = "Meirav",
+            BirthDate = new DateTime(1991, 11, 4),
+            PhoneNumber = 0543395033,
+            Address = "Yerushalayim St 51, Bnei Brak",
+            Elevator = true,
+            Floor = 2,
+            Seniority = 7,
+            Children = 0,
+            MaxChildren = 7,
+            MinAge = 6,
+            MaxAge = 12,
+            IsHourlyFee = true,
+            HourlyFee = 12,
+            MonthlyFee = 1000,
+            IsWork = new bool[6] { true, true, true, true, true, false },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0) }
+            },
+            IsValidVacationDays = true,
+            Recommendations = "Clean and tidy place, amazing attitude for children strongly recommends. riky shimon",
+        };
+        public Nanny Mehira_Shulman = new Nanny
+        {
+            ID = 294003857,
+            LastName = "Levi",
+            FirstName = "Meirav",
+            BirthDate = new DateTime(1991, 11, 4),
+            PhoneNumber = 0543395033,
+            Address = "Yerushalayim St 51, Bnei Brak",
+            Elevator = true,
+            Floor = 2,
+            Seniority = 7,
+            Children = 0,
+            MaxChildren = 7,
+            MinAge = 6,
+            MaxAge = 12,
+            IsHourlyFee = true,
+            HourlyFee = 12,
+            MonthlyFee = 1250,
+            IsWork = new bool[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 00, 0) }
+            },
+            IsValidVacationDays = true,
+            Recommendations = "Clean and tidy place, amazing attitude for children strongly recommends. riky shimon",
+        };
+        public Nanny Michal_Shtern = new Nanny
+        {
+            ID = 305625295,
+            LastName = "Stern",
+            FirstName = "Michal",
+            BirthDate = new DateTime(1982, 7, 16),
+            PhoneNumber = 0543972654,
+            Address = "Ovadya St 6, Bnei Brak",
+            Elevator = true,
+            Seniority = 10,
+            Children = 0,
+            MaxChildren = 5,
+            MinAge = 12,
+            MaxAge = 18,
+            IsHourlyFee = true,
+            HourlyFee = 10,
+            MonthlyFee = 1300,
+            IsWork = new bool[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+           {
+                new TimeSpan[6] { new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(12, 0, 0) }
+           },
+            IsValidVacationDays = true,
+            Recommendations = "",
+        };
+        public Nanny Sara_Kopolovitsh = new Nanny
+        {
+            ID = 305629275,
+            LastName = "Kopolovitsh",
+            FirstName = "Sara",
+            BirthDate = new DateTime(1998, 8, 12),
+            PhoneNumber = 0543453834,
+            Address = "Sokolov st 44, Bnei Brak",
+            Elevator = false,
+            Floor = 0,
+            Seniority = 2,
+            Children = 0,
+            MaxChildren = 10,
+            MinAge = 12,
+            MaxAge = 18,
+            IsHourlyFee = true,
+            HourlyFee = 9,
+            MonthlyFee = 2000,
+            IsWork = new bool[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0) }
+            },
+            IsValidVacationDays = true,
+            Recommendations = "",
+        };
+
         public Nanny Moria_Schneider = new Nanny
         {
             ID = 305649295,
@@ -210,33 +328,34 @@ namespace PLWPF
             IsValidVacationDays = true,
             Recommendations = "",
         };
-        public Nanny Malki_Fishman = new Nanny
+        public Nanny BatSheva_Choen = new Nanny
         {
-            ID = 305625695,
-            LastName = "Fishman",
-            FirstName = "Malki",
-            BirthDate = new DateTime(1987, 5, 19),
-            PhoneNumber = 0543483782,
-            Address = "rabi akiva St 69, Bnei Brak",
+            ID = 305625275,
+            LastName = "Choen",
+            FirstName = "BatSheva",
+            BirthDate = new DateTime(1998, 8, 12),
+            PhoneNumber = 0543453834,
+            Address = "Sokolov st 44, Bnei Brak",
             Elevator = false,
-            Floor = 2,
-            Seniority = 6,
+            Floor = 0,
+            Seniority = 2,
             Children = 0,
-            MaxChildren = 4,
-            MinAge = 0,
-            MaxAge = 6,
+            MaxChildren = 10,
+            MinAge = 12,
+            MaxAge = 18,
             IsHourlyFee = true,
-            HourlyFee = 15,
-            MonthlyFee = 1000,
+            HourlyFee = 9,
+            MonthlyFee = 2200,
             IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
-                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(07, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
-                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(12, 00, 0) }
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(18, 00, 0), new TimeSpan(18, 00, 0), new TimeSpan(18, 00, 0), new TimeSpan(18, 00, 0), new TimeSpan(18, 00, 0), new TimeSpan(13, 00, 0) }
             },
-            IsValidVacationDays = false,
+            IsValidVacationDays = true,
             Recommendations = "",
         };
+
         public Nanny Elisheva_Shaked = new Nanny
         {
             ID = 305216295,
@@ -318,33 +437,7 @@ namespace PLWPF
             IsValidVacationDays = false,
             Recommendations = "",
         };
-        public Nanny Chavi_Horen = new Nanny
-        {
-            ID = 305695295,
-            LastName = "Horen",
-            FirstName = "Chavi",
-            BirthDate = new DateTime(1991, 3, 7),
-            PhoneNumber = 0543473834,
-            Address = "Nissenboim St 11, Bnei Brak",
-            Elevator = true,
-            Floor = 1,
-            Seniority = 7,
-            Children = 0,
-            MaxChildren = 7,
-            MinAge = 0,
-            MaxAge = 6,
-            IsHourlyFee = false,
-            HourlyFee = 42,
-            MonthlyFee = 4000,
-            IsWork = new bool[6] { true, true, true, true, true, true },
-            WorkHours = new TimeSpan[2][]
-            {
-                new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
-                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0) }
-            },
-            IsValidVacationDays = false,
-            Recommendations = "",
-        };
+
 
         public Mother Bracha_Polak = new Mother()
         {
@@ -355,74 +448,74 @@ namespace PLWPF
             Address = "ha-rav mohilever St 8, Bnei Brak",
             SearchAreaForNanny = "Beit Ha-Defus St 21, Jerusalem",
             WantElevator = true,
-            MinSeniority = 1,
-            MaxFloor = 4,
+            MinSeniority = 2,
+            MaxFloor = 3,
             NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
             {
                     new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                    new TimeSpan[6] { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
+                    new TimeSpan[6] { new TimeSpan(16,00,0), new TimeSpan(16, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(12, 00, 0) }
             },
             Remarks = ""
         };
-        public Mother shimshonYeret = new Mother()
+        public Mother Oshrat_Levi = new Mother()
         {
             ID = 294894786,
-            LastName = "yeret",
-            FirstName = "shimshon",
+            LastName = "Levi",
+            FirstName = "Oshrat",
             PhoneNumber = 0504397588,
             Address = "Rabbi Yehuda HaNassi St 49, Bnei Brak",
             SearchAreaForNanny = "",
             WantElevator = true,
-            MinSeniority = 4,
-            MaxFloor = 2,
+            MinSeniority = 5,
+            MaxFloor = 7,
             NeedNanny = new bool[6] { false, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
             {
-                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                new TimeSpan[6] { new TimeSpan(16,0,0), new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) , new TimeSpan(16, 0, 0) }
+                new TimeSpan[6] { new TimeSpan(00,00,0), new TimeSpan(7, 00,0) , new TimeSpan(7, 00,0) , new TimeSpan(7, 00,0) , new TimeSpan(7, 00,0) , new TimeSpan(08, 00,0) },
+                new TimeSpan[6] { new TimeSpan(00,0,0), new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) , new TimeSpan(13, 0, 0) , new TimeSpan(12, 0, 0) }
             },
             Remarks = ""
         };
-        public Mother mosheYeret = new Mother()
+        public Mother Ayelt_Shaked = new Mother()
         {
             ID = 294892086,
-            LastName = "yeret",
-            FirstName = "moshe",
+            LastName = "Shaked",
+            FirstName = "Ayelt",
             PhoneNumber = 0504003828,
             Address = "ovadya St 8, Bnei Brak",
             SearchAreaForNanny = "Hannah Szenes St 8, Bnei Brak",
             WantElevator = false,
-            MinSeniority = 5,
-            MaxFloor = 1,
-            NeedNanny = new bool[6] { true, true, true, false, true, true },
+            MinSeniority = 4,
+            MaxFloor = 2,
+            NeedNanny = new bool[6] { true, true, false, false, true, true },
             NeedNannyHours = new TimeSpan[2][]
-           {
-                new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) , new TimeSpan(7, 0,0) },
-                new TimeSpan[6] { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
-           },
+            {
+                new TimeSpan[6] { new TimeSpan(8,0,0), new TimeSpan(8, 0,0) , new TimeSpan(00, 00,00) , new TimeSpan(00, 00,00) , new TimeSpan(8, 0,0) , new TimeSpan(8, 0,0) },
+                new TimeSpan[6] { new TimeSpan(16,00,0), new TimeSpan(16, 30, 0) , new TimeSpan(00, 00, 0) , new TimeSpan(00, 00, 00) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
+            },
             Remarks = ""
         };
-        public Mother natanYeret = new Mother()
+        public Mother Gilat_Benet = new Mother()
         {
             ID = 294909286,
-            LastName = "yeret",
-            FirstName = "natan",
+            LastName = "Benet",
+            FirstName = "Gilat",
             PhoneNumber = 0504129888,
             Address = "Hannah Szenes St 8, Bnei Brak",
             SearchAreaForNanny = "Chason Ish St 20, Bnei Brak",
             WantElevator = false,
             MinSeniority = 2,
             MaxFloor = 2,
-            NeedNanny = new bool[6] { true, true, true, true, true, true },
+            NeedNanny = new bool[6] { true, true, true, true, true, false },
             NeedNannyHours = new TimeSpan[2][]
-           {
-                new TimeSpan[6] { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) },
-                new TimeSpan[6] { new TimeSpan(16,0,0), new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16, 30, 0) }
-           },
+            {
+                new TimeSpan[6] { new TimeSpan(8,0,0), new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(8,0,0) , new TimeSpan(00,00,00) },
+                new TimeSpan[6] { new TimeSpan(16,0,0), new TimeSpan(16,0, 0) , new TimeSpan(13,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(16,0, 0) , new TimeSpan(00, 00, 00) }
+            },
             Remarks = ""
         };
-        public Mother simchaYeret = new Mother()
+        public Mother Esti_Kopshitz = new Mother()
         {
             ID = 294849001,
             LastName = "yeret",
@@ -431,17 +524,17 @@ namespace PLWPF
             Address = "Yerushalayim St 72, Bnei Brak",
             SearchAreaForNanny = "",
             WantElevator = true,
-            MinSeniority = 3,
+            MinSeniority = 8,
             MaxFloor = 3,
             NeedNanny = new bool[6] { true, true, true, true, false, false },
             NeedNannyHours = new TimeSpan[2][]
-           {
-                new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) },
-                new TimeSpan[6] { new TimeSpan(14,0,0), new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) }
-           },
+            {
+                new TimeSpan[6] { new TimeSpan(7,0,0), new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(7,0,0) , new TimeSpan(00,0,0) , new TimeSpan(00,0,0) },
+                new TimeSpan[6] { new TimeSpan(14,0,0), new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(14,0, 0) , new TimeSpan(00,0, 0) , new TimeSpan(00,0, 0) }
+            },
             Remarks = ""
         };
-        public Mother yakovYeret = new Mother()
+        public Mother Tovi_Shachak = new Mother()
         {
             ID = 294800286,
             LastName = "yeret",
@@ -452,34 +545,34 @@ namespace PLWPF
             WantElevator = false,
             MinSeniority = 5,
             MaxFloor = 4,
-            NeedNanny = new bool[6] { true, false, true, true, true, true },
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
-           {
-                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                new TimeSpan[6] { new TimeSpan(16,30,0), new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) , new TimeSpan(16, 30, 0) }
-           },
+            {
+                new TimeSpan[6] { new TimeSpan(8,00,0), new TimeSpan(8, 30,0) , new TimeSpan(09, 00,0) , new TimeSpan(7, 00,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(16,00,0), new TimeSpan(16, 30, 0) , new TimeSpan(13, 00, 0) , new TimeSpan(13, 30, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(12, 30, 0) }
+            },
             Remarks = ""
         };
-        public Mother hilelYeret = new Mother()
+        public Mother Sheindi_Lider = new Mother()
         {
             ID = 294335086,
-            LastName = "yeret",
-            FirstName = "hilel",
+            LastName = "Lider",
+            FirstName = "Sheindi",
             PhoneNumber = 0504395188,
             Address = "sokolow St 34, Bnei Brak",
             SearchAreaForNanny = "",
             WantElevator = false,
             MinSeniority = 3,
             MaxFloor = 5,
-            NeedNanny = new bool[6] { true, true, true, true, true, true },
+            NeedNanny = new bool[6] { false, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
-           {
-                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
-                new TimeSpan[6] { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
-           },
+            {
+                new TimeSpan[6] { new TimeSpan(00,00,00), new TimeSpan(13, 00,0) , new TimeSpan(13, 00,00) , new TimeSpan(13, 00,0) , new TimeSpan(13, 00,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(00,00,00), new TimeSpan(16, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(12, 00, 0) }
+            },
             Remarks = ""
         };
-        public Mother MotherTest = new Mother()
+        public Mother Beili_Yudkevitz = new Mother()
         {
             ID = 294337686,
             LastName = "yeret",
@@ -492,14 +585,50 @@ namespace PLWPF
             MaxFloor = 5,
             NeedNanny = new bool[6] { true, true, true, true, true, true },
             NeedNannyHours = new TimeSpan[2][]
-   {
+            {
                 new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
                 new TimeSpan[6] { new TimeSpan(17,30,0), new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) , new TimeSpan(17, 30, 0) }
-   },
+            },
             Remarks = ""
         };
-
-
+        public Mother Mina_Berkovitz = new Mother()
+        {
+            ID = 294337676,
+            LastName = "Berkovitz",
+            FirstName = "Mina",
+            PhoneNumber = 0504395188,
+            Address = "hafes haim St 14, Bnei Brak",
+            SearchAreaForNanny = "",
+            WantElevator = false,
+            MinSeniority = 3,
+            MaxFloor = 5,
+            NeedNanny = new bool[6] { true, true, true, true, true, true },
+            NeedNannyHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(13,30,0), new TimeSpan(13, 30, 0) , new TimeSpan(13, 30, 0) , new TimeSpan(13, 30, 0) , new TimeSpan(13, 30, 0) , new TimeSpan(12, 00, 0) }
+            },
+            Remarks = ""
+        };
+        public Mother Shani_Hovav = new Mother()
+        {
+            ID = 294355686,
+            LastName = "Hovav",
+            FirstName = "Shani",
+            PhoneNumber = 0504395188,
+            Address = "hafes haim St 14, Bnei Brak",
+            SearchAreaForNanny = "",
+            WantElevator = false,
+            MinSeniority = 6,
+            MaxFloor = 2,
+            NeedNanny = new bool[6] { true, false, true, true, true, false },
+            NeedNannyHours = new TimeSpan[2][]
+             {
+                new TimeSpan[6] { new TimeSpan(7,30,0), new TimeSpan(00, 00,0) , new TimeSpan(7, 30,0) , new TimeSpan(8, 00,0) , new TimeSpan(7, 00,0) , new TimeSpan(7, 30,0) },
+                new TimeSpan[6] { new TimeSpan(13,30,0), new TimeSpan(00, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(17, 00, 0) , new TimeSpan(16, 00, 0) , new TimeSpan(12, 30, 0) }
+             },
+            Remarks = ""
+        };
 
         public Child yoni = new Child()
         {
@@ -512,11 +641,11 @@ namespace PLWPF
             SpecialNeeds = "",
             HaveNanny = false
         };
-        public Child shimon = new Child()
+        public Child nadav = new Child()
         {
             ID = 397004103,
-            MotherID = 294894786,
-            FirstName = "shimon",
+            MotherID = 294839286,
+            FirstName = "nadav",
             BirthDate = new DateTime(2017, 6, 2),
             AgeInMonth = 7,
             IsSpecialNeeds = false,
@@ -526,7 +655,7 @@ namespace PLWPF
         public Child roni = new Child()
         {
             ID = 392940383,
-            MotherID = 294892086,
+            MotherID = 294894786,
             FirstName = "roni",
             BirthDate = new DateTime(2017, 6, 2),
             AgeInMonth = 8,
@@ -537,7 +666,7 @@ namespace PLWPF
         public Child aviad = new Child()
         {
             ID = 397449028,
-            MotherID = 294909286,
+            MotherID = 294894786,
             FirstName = "aviad",
             BirthDate = new DateTime(2017, 3, 15),
             AgeInMonth = 9,
@@ -545,33 +674,33 @@ namespace PLWPF
             SpecialNeeds = "",
             HaveNanny = false
         };
-        public Child ronen = new Child()
+        public Child moty = new Child()
         {
             ID = 493029984,
-            MotherID = 294849001,
-            FirstName = "ronen",
+            MotherID = 294892086,
+            FirstName = "moty",
             BirthDate = new DateTime(2016, 9, 7),
             AgeInMonth = 15,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
         };
-        public Child eran = new Child()
+        public Child eti = new Child()
         {
             ID = 294083104,
-            MotherID = 294800286,
-            FirstName = "eran",
+            MotherID = 294892086,
+            FirstName = "eti",
             BirthDate = new DateTime(2017, 7, 28),
             AgeInMonth = 7,
             IsSpecialNeeds = true,
             SpecialNeeds = "",
             HaveNanny = false
         };
-        public Child moti = new Child()
+        public Child miri = new Child()
         {
             ID = 594028499,
-            MotherID = 294335086,
-            FirstName = "moti",
+            MotherID = 294909286,
+            FirstName = "miri",
             BirthDate = new DateTime(2017, 5, 2),
             AgeInMonth = 7,
             IsSpecialNeeds = false,
@@ -579,11 +708,11 @@ namespace PLWPF
             HaveNanny = false
         };
 
-        public Child a = new Child()
+        public Child david = new Child()
         {
             ID = 397460103,
-            MotherID = 294337686,
-            FirstName = "a",
+            MotherID = 294909286,
+            FirstName = "david",
             BirthDate = new DateTime(2016, 12, 2),
             AgeInMonth = 11,
             IsSpecialNeeds = false,
@@ -591,23 +720,44 @@ namespace PLWPF
             HaveNanny = false
         };
 
-        public Child b = new Child()
+        public Child yael = new Child()
         {
             ID = 397240103,
-            MotherID = 294337686,
-            FirstName = "b",
+            MotherID = 294909286,
+            FirstName = "yael",
             BirthDate = new DateTime(2017, 5, 2),
             AgeInMonth = 10,
             IsSpecialNeeds = false,
             SpecialNeeds = "",
             HaveNanny = false
         };
-
-        public Child c = new Child()
+        public Child naama = new Child()
         {
             ID = 310460103,
-            MotherID = 294337686,
-            FirstName = "c",
+            MotherID = 294849001,
+            FirstName = "naama",
+            BirthDate = new DateTime(2016, 11, 2),
+            AgeInMonth = 12,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+        public Child dodo = new Child()
+        {
+            ID = 310462203,
+            MotherID = 294335086,
+            FirstName = "naama",
+            BirthDate = new DateTime(2016, 11, 2),
+            AgeInMonth = 12,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+        public Child maten = new Child()
+        {
+            ID = 310457103,
+            MotherID = 294335086,
+            FirstName = "naama",
             BirthDate = new DateTime(2016, 11, 2),
             AgeInMonth = 12,
             IsSpecialNeeds = false,
@@ -615,11 +765,11 @@ namespace PLWPF
             HaveNanny = false
         };
 
-        public Child d = new Child()
+        public Child hila = new Child()
         {
             ID = 397055103,
-            MotherID = 294839286,
-            FirstName = "d",
+            MotherID = 294337676,
+            FirstName = "hila",
             BirthDate = new DateTime(2016, 8, 2),
             AgeInMonth = 16,
             IsSpecialNeeds = false,
@@ -627,13 +777,30 @@ namespace PLWPF
             HaveNanny = false
         };
 
+        public Child michal = new Child()
+        {
+            ID = 397054103,
+            MotherID = 294337676,
+            FirstName = "michal",
+            BirthDate = new DateTime(2016, 8, 2),
+            AgeInMonth = 16,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
 
-
-
-
-
-
-        public Child ChildTest = new Child()
+        public Child reut = new Child()
+        {
+            ID = 313260103,
+            MotherID = 294355686,
+            FirstName = "reut",
+            BirthDate = new DateTime(2016, 11, 2),
+            AgeInMonth = 12,
+            IsSpecialNeeds = false,
+            SpecialNeeds = "",
+            HaveNanny = false
+        };
+        public Child mosh = new Child()
         {
             ID = 594028789,
             MotherID = 294335086,
