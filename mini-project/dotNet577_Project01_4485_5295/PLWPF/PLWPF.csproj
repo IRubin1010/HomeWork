@@ -70,6 +70,7 @@
       <DependentUpon>AutoCompleteAddressTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="BoolVisibiltyConverter.cs" />
+
     <Compile Include="ChildrenWithNoNanny.xaml.cs">
       <DependentUpon>ChildrenWithNoNanny.xaml</DependentUpon>
     </Compile>
