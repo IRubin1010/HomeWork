@@ -23,6 +23,8 @@ namespace PLWPF
     {
         IBL bl;
         Nanny nanny;
+        List<int> maxAgeList;
+        List<int> minAgeList;
         public AddNannyWindow(IBL Bl)
         {
             InitializeComponent();
@@ -30,6 +32,8 @@ namespace PLWPF
             nanny = new Nanny();
             NannyDeatails.DataContext = nanny;
             nannyAgeTextBox.Text = "";
+            minAgeList = new List<int>() {0, 6, 12, 18, 24, 30};
+            minAgeTextBox.DataContext = minAgeList;
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
@@ -64,6 +68,40 @@ namespace PLWPF
                 BindingExpression be = nannyAgeTextBox.GetBindingExpression(TextBox.TextProperty);
                 nannyAgeTextBox.Text = nanny.NannyAge.ToString();
                 be.UpdateSource();
+            }
+        }
+
+        private void MinAgeSelected(object sender, SelectionChangedEventArgs e)
+        {
+            int minAge = int.Parse(minAgeTextBox.SelectedValue.ToString());
+            switch (minAge)
+            {
+                case 0:
+                    maxAgeList = new List<int>() { 6, 12, 18, 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 6:
+                    maxAgeList = new List<int>() { 12, 18, 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 12:
+                    maxAgeList = new List<int>() { 18, 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 18:
+                    maxAgeList = new List<int>() { 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 24:
+                    maxAgeList = new List<int>() { 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 30:
+                    maxAgeList = new List<int>() { 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                default:
+                    break;
             }
         }
     }

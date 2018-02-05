@@ -36,7 +36,7 @@ namespace PLWPF
         }
         void MotherInitialize()
         {
-            ibl.AddMother(itzikYeret);
+            ibl.AddMother(Bracha_Polak);
             ibl.AddMother(shimshonYeret);
             ibl.AddMother(mosheYeret);
             ibl.AddMother(natanYeret);
