@@ -46,6 +46,7 @@ namespace PLWPF
             motherComboBox.DataContext = motherList;
             // bind transection date to contract
             beginTransectionDatePicker.DataContext = contract;
+            beginTransectionDatePicker.DisplayDateStart = DateTime.Now;
             endTransectionDatePicker.DataContext = contract;
             isMeetCheckBox.DataContext = contract;
             // intialize 2 background workers
@@ -338,6 +339,26 @@ namespace PLWPF
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void BeginDateSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (endTransectionDatePicker.SelectedDate < beginTransectionDatePicker.SelectedDate)
+            {
+                endTransectionDatePicker.BorderBrush = Brushes.Red;
+                endTransectionDatePicker.ToolTip = "Selecd new date";
+            }
+            endTransectionDatePicker.SelectedDate= beginTransectionDatePicker.SelectedDate; 
+            endTransectionDatePicker.DisplayDateStart = beginTransectionDatePicker.SelectedDate;
+        }
+
+        private void EndDateSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (endTransectionDatePicker.SelectedDate > beginTransectionDatePicker.SelectedDate)
+            {
+                endTransectionDatePicker.BorderBrush = beginTransectionDatePicker.BorderBrush;
+                endTransectionDatePicker.ToolTip =null;
             }
         }
 
