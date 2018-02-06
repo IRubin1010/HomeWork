@@ -1,2 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<contracts />
+<contracts>
+  <contract>
+    <ContractNumber>10000000</ContractNumber>
+    <NannyID>305629275</NannyID>
+    <ChildID>397055103</ChildID>
+    <MotherID>294337676</MotherID>
+    <IsMeet>false</IsMeet>
+    <IsContractSigned>true</IsContractSigned>
+    <HourlyFee>9</HourlyFee>
+    <MonthlyFee>2000</MonthlyFee>
+    <IsPaymentByHour>true</IsPaymentByHour>
+    <FinalPayment>1242</FinalPayment>
+    <BeginTransection>2018-02-06T00:00:00+02:00</BeginTransection>
+    <EndTransection>2018-02-06T00:00:00+02:00</EndTransection>
+  </contract>
+</contracts>

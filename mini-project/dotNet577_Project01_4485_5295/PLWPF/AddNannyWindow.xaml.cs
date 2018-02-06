@@ -34,7 +34,7 @@ namespace PLWPF
             NannyDeatails.DataContext = nanny;
             nannyAgeTextBox.Text = "";
             // intialize min age list and bind to min age combobox
-            minAgeList = new List<int>() {0, 6, 12, 18, 24, 30};
+            minAgeList = new List<int>() { 0, 6, 12, 18, 24, 30 };
             minAgeTextBox.DataContext = minAgeList;
         }
 
@@ -57,7 +57,7 @@ namespace PLWPF
             }
         }
 
-        // v=event when select min age
+        // event when select min age
         private void MinAgeSelected(object sender, SelectionChangedEventArgs e)
         {
             // get min age selection
@@ -94,6 +94,20 @@ namespace PLWPF
             }
         }
 
+        // max age selected event
+        private void MaxAgeSelected(object sender, SelectionChangedEventArgs e)
+        {
+            // get the min and max age
+            if (minAgeTextBox.SelectedValue != null && maxAgeTextBox.SelectedValue != null)
+            {
+                int minage, maxage;
+                int.TryParse(minAgeTextBox.SelectedValue.ToString(), out minage);
+                int.TryParse(maxAgeTextBox.SelectedValue.ToString(), out maxage);
+                nanny.MinAge = minage;
+                nanny.MaxAge = maxage;
+            }
+        }
+
         // submit button click event
         private void submit_Click(object sender, RoutedEventArgs e)
         {
@@ -111,7 +125,6 @@ namespace PLWPF
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
 }
 

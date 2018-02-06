@@ -140,9 +140,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Min Age:" Style="{StaticResource LabelStyle}" Grid.Row="0"/>
-                    <ComboBox x:Name="minAgeTextBox" ItemsSource="{Binding}" Style="{StaticResource ComboBoxStyle}" Text="{Binding MinAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" SelectionChanged="MinAgeSelected"/>
+                    <ComboBox x:Name="minAgeTextBox" ItemsSource="{Binding}" Style="{StaticResource ComboBoxStyle}" Grid.Row="0" SelectionChanged="MinAgeSelected"/>
                     <Label Content="Max Age:" Style="{StaticResource LabelStyle}" Grid.Row="1"/>
-                    <ComboBox x:Name="maxAgeTextBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Text="{Binding MaxAge, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1"/>
+                    <ComboBox x:Name="maxAgeTextBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="1" SelectionChanged="MaxAgeSelected"/>
                     <Label Content="Max Children:" Style="{StaticResource LabelStyle}" Grid.Row="2"/>
                     <TextBox x:Name="maxChildrenTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding MaxChildren, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2"/>
                     <Label Content="Hourly Fee:" Style="{StaticResource LabelStyle}" Grid.Row="3"/>

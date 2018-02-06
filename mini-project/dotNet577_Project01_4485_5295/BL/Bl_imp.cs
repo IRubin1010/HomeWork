@@ -734,7 +734,7 @@ namespace BL
         /// </summary>
         public List<Nanny> CloneNannyList()
         {
-                return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
+            return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
         }
 
         /// <summary>
@@ -1015,13 +1015,13 @@ namespace BL
         /// <param name="child">child to check</param>
         public bool IsChildByNanny(Nanny nanny, Child child)
         {
-            if(nanny != null && child != null)
+            if (nanny != null && child != null)
             {
-            foreach (Contract contract in CloneContractList())
-            {
-                if (contract.NannyID == nanny.ID && contract.ChildID == child.ID)
-                    return true;
-            }
+                foreach (Contract contract in CloneContractList())
+                {
+                    if (contract.NannyID == nanny.ID && contract.ChildID == child.ID)
+                        return true;
+                }
             }
             return false;
         }
@@ -1046,8 +1046,8 @@ namespace BL
             if (nanny != null)
             {
                 return (from contract in CloneContractList()
-                                      where contract.NannyID == nanny.ID
-                                      select contract).ToList();
+                        where contract.NannyID == nanny.ID
+                        select contract).ToList();
             }
             else return new List<Contract>();
         }
@@ -1090,15 +1090,15 @@ namespace BL
         /// <param name="contract">contract to calculate the distance</param>
         public int? DistanceBetweenNannyAndMother(Contract contract)
         {
-            if(contract != null)
+            if (contract != null)
             {
-            Mother mother = FindMother(contract.MotherID);
-            string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
-            // the distance function returns meter that's why they divide by 1000
-            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
-            if (distance == 0)
-                return 1;
-            return (distance + 1);
+                Mother mother = FindMother(contract.MotherID);
+                string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
+                // the distance function returns meter that's why they divide by 1000
+                int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
+                if (distance == 0)
+                    return 1;
+                return (distance + 1);
             }
             return -1;
         }
