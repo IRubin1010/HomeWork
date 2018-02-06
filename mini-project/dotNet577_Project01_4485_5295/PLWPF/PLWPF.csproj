@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -70,7 +71,6 @@
       <DependentUpon>AutoCompleteAddressTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="BoolVisibiltyConverter.cs" />
-
     <Compile Include="ChildrenWithNoNanny.xaml.cs">
       <DependentUpon>ChildrenWithNoNanny.xaml</DependentUpon>
     </Compile>
