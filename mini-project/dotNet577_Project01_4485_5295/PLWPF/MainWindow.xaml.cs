@@ -29,6 +29,8 @@ namespace PLWPF
             Initialize init = new Initialize(bl);
         }
 
+        // make all combobox index to be 0
+
         private void NannySelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             nanny.SelectedIndex = 0;
@@ -54,6 +56,8 @@ namespace PLWPF
             search.SelectedIndex = 0;
         }
 
+        // for each choise open new window
+
         private void AddNannySelect(object sender, RoutedEventArgs e)
         {
             new AddNannyWindow(bl).Show();
@@ -66,15 +70,7 @@ namespace PLWPF
 
         private void UpdateNannySelect(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
             new UpdateNannyWindow(bl).Show();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
         }
 
         private void AddMotherSelect(object sender, RoutedEventArgs e)

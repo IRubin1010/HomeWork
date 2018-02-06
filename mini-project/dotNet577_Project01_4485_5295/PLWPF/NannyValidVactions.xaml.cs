@@ -27,6 +27,7 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Bl;
+            // bind data drid to nanny with valid vaction days list
             Grouping.DataContext = bl.ValidVacationsNannys();
         }
     }

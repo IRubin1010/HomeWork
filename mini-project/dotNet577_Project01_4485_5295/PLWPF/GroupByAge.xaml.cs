@@ -22,29 +22,28 @@ namespace PLWPF
     public partial class GroupByAge : Window
     {
         IBL bl;
-        IEnumerable<IGrouping<int?,Nanny>> groupingList;
         public GroupByAge(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
         }
 
+        // max age selected event
         private void MaxAgeChecked(object sender, RoutedEventArgs e)
         {
-            groupingList = bl.GruopNannyByChildAge(true, false);
-            Grouping.DataContext = groupingList;
+            Grouping.DataContext = bl.GruopNannyByChildAge(true, false);
         }
 
+        // min age selected event
         private void MinAgeChecked(object sender, RoutedEventArgs e)
         {
-            groupingList = bl.GruopNannyByChildAge(false, false);
-            Grouping.DataContext = groupingList;
+            Grouping.DataContext = bl.GruopNannyByChildAge(false, false);
         }
 
+        // sort button click event
         private void Sort_CLick(object sender, RoutedEventArgs e)
         {
-            groupingList = bl.GruopNannyByChildAge((bool)MaxAge.IsChecked, true);
-            Grouping.DataContext = groupingList;
+            Grouping.DataContext = bl.GruopNannyByChildAge((bool)MaxAge.IsChecked, true);
         }
     }
 }

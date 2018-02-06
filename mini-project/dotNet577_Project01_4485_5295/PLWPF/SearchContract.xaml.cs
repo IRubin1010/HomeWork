@@ -27,6 +27,7 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Bl;
+            // bind to contract
             searchContract.DataContext = contract;
         }
     }

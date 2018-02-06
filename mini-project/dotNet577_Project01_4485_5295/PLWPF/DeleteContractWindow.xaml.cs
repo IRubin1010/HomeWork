@@ -30,17 +30,22 @@ namespace PLWPF
             contract = new Contract();
         }
 
+        // event when select contract
         private void SelectContract(object sender, EventArgs e)
         {
             if (list.Text != null)
             {
+                // get the contratc and bind to all fields
                 contract = bl.CloneContractList().FirstOrDefault(contract => contract.ToString() == list.Text);
                 DeleteContract.DataContext = contract;
             }
         }
 
+        // event when text changed in search control
         private void textChanged(object sender, EventArgs e)
         {
+            // if text is enpty
+            // clear all fields
             if (list.Text == "")
             {
                 contract = new Contract();
@@ -48,13 +53,14 @@ namespace PLWPF
             }
         }
 
+        // delete contract button click event
         private void DeleteContract_Click(object sender, RoutedEventArgs e)
         {
             if (contract != null)
             {
                 try
                 {
-                    bl.DeleteContract(contract);
+                    bl.DeleteContract(contract.Clone());
                     Close();
                 }
                 catch (BLException ex)

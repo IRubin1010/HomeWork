@@ -27,6 +27,7 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Bl;
+            // bind to child
             searchChild.DataContext = child;
         }
     }

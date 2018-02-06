@@ -27,6 +27,7 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Bl;
+            // bind child data grid
             Grouping.DataContext = bl.ChildrenWithNoNanny();
         }
     }

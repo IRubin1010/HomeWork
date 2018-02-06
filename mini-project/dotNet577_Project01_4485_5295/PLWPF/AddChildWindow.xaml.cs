@@ -29,15 +29,17 @@ namespace PLWPF
             InitializeComponent();
             bl = Bl;
             child = new Child();
+            // bind child
             AddChild.DataContext = child;
             birthDateDatePicker.DisplayDateEnd = DateTime.Now;
         }
 
+        // add child button click event
         private void AddChild_CLick(object sender, RoutedEventArgs e)
         {
             try
             {
-                bl.AddChild(child);
+                bl.AddChild(child.Clone());
                 child = new Child();
                 AddChild.DataContext = child;
                 Close();
@@ -49,26 +51,13 @@ namespace PLWPF
 
         }
 
+        // date selected event
         private void DateSelectsd(object sender, SelectionChangedEventArgs e)
         {
+            // update child age field in UI
             BindingExpression be = ageInMonthTextBox.GetBindingExpression(TextBox.TextProperty);
             ageInMonthTextBox.Text = child.AgeInMonth.ToString();
             be.UpdateSource();
         }
     }
-    //public class BoolVisibiltyConvert : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        bool checkValue = (bool)value;
-    //        if (checkValue == true)
-    //            return Visibility.Visible;
-    //        else
-    //            return Visibility.Hidden;
-    //    }
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
 }

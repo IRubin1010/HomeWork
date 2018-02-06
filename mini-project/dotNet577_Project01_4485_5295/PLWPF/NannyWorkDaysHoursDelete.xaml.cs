@@ -25,9 +25,10 @@ namespace PLWPF
         {
             if (nanny != null)
                 Nanny = nanny;
-            else
+            else // nanny is null
                 Nanny = new Nanny();
             InitializeComponent();
+            // bind to nanny
             WorkDaysHours.DataContext = Nanny;
         }
     }
