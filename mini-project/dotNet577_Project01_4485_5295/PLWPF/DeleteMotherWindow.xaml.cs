@@ -23,29 +23,29 @@ namespace PLWPF
     {
         IBL bl;
         Mother mother;
-        List<Mother> motherList;
         public DeleteMotherWindow(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
-            motherList = bl.CloneMotherList();
-            list.DataContext = motherList;
-            mother = new Mother();
-            DeleteMother.DataContext = mother;
         }
 
+        // event when select mother
         private void SelectMother(object sender, EventArgs e)
         {
             if (list.Text != null)
             {
+                // get the mother and bind to all fields
                 mother = bl.CloneMotherList().FirstOrDefault(mother => mother.ToString() == list.Text);
                 DeleteMother.DataContext = mother;
                 addressTextBox.Text = mother.Address;
             }
         }
 
+        // event when text changed in search control
         private void textChanged(object sender, EventArgs e)
         {
+            // if text is enpty
+            // clear all fields
             if (list.Text == "")
             {
                 mother = new Mother();
@@ -54,13 +54,14 @@ namespace PLWPF
             }
         }
 
+        // delete mother button click event
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if(mother != null)
             {
                 try
                 {
-                    bl.DeleteMother(mother);
+                    bl.DeleteMother(mother.Clone());
                     Close();
                 }
                 catch (BLException ex)

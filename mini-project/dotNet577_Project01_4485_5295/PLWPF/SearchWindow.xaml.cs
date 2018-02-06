@@ -32,11 +32,14 @@ namespace PLWPF
             bl = Bl;
         }
 
+        // entity selected event
         private void EntitySelected(object sender, SelectionChangedEventArgs e)
         {
             Entity entity = (Entity)(sender as ComboBox).SelectedItem;
             switch (entity)
             {
+                // for each entity set serch control entity
+                // and make frame unvisible (until item is selected in combobox)
                 case Entity.nanny:
                     searchList.Entity = Entity.nanny;
                     searchList.Text = "";
@@ -46,34 +49,34 @@ namespace PLWPF
                     searchList.Entity = Entity.mother;
                     searchList.Text = "";
                     selectedAction.Visibility = Visibility.Hidden;
-                    //selectedAction.Content = new SearchMother(bl);
                     break;
                 case Entity.child:
                     searchList.Entity = Entity.child;
                     searchList.Text = "";
                     selectedAction.Visibility = Visibility.Hidden;
-                    //selectedAction.Content = new SearchChild(bl);
                     break;
                 case Entity.contract:
                     searchList.Entity = Entity.contract;
                     searchList.Text = "";
                     selectedAction.Visibility = Visibility.Hidden;
-                    //selectedAction.Content = new SearchContract(bl);
                     break;
                 default:
                     break;
             }
         }
 
+        // item selected in combobox event
         private void ItemSelected(object sender, EventArgs e)
         {
             Entity entity = (Entity)EntityList.SelectedItem;
             if (searchList.Text != null)
             {
+                // make frame visible
                 selectedAction.Visibility = Visibility.Visible;
+                // for each item selected, get the item
+                // and open the frame with the item 
                 switch (entity)
                 {
-
                     case Entity.nanny:
                         nanny = bl.CloneNannyList().FirstOrDefault(nanny => nanny.ToString() == searchList.Text);
                         selectedAction.Content = new SearchNanny(bl, nanny);
@@ -96,11 +99,14 @@ namespace PLWPF
             }
         }
 
+        // text changed in combobox event
         private void TextChanged(object sender, EventArgs e)
         {
             Entity entity = (Entity)EntityList.SelectedItem;
-            if (searchList.Text != "")
+            if (searchList.Text == "")
             {
+                // for each entity
+                // if no item selected, clear all fields
                 switch (entity)
                 {
                     case Entity.nanny:

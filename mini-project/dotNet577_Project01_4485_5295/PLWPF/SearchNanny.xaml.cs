@@ -29,11 +29,14 @@ namespace PLWPF
             InitializeComponent();
             bl = Bl;
             nanny = Nanny;
+            // bind to nanny
             searchNanny.DataContext = nanny;
         }
 
+        // work days and hours button click
         private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
         {
+            // send to new window to show work days and hours
             new NannyWorkDaysHoursDelete(nanny).Show();
         }
     }

@@ -44,7 +44,7 @@ namespace BE
 
         public Nanny()
         {
-            BirthDate = DateTime.Now;
+            BirthDate = DateTime.Now.AddYears(-18);
             IsWork = new bool[6] { false, false, false, false, false, false };
             WorkHours = new TimeSpan[2][]
             {

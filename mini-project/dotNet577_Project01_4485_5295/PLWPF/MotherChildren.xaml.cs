@@ -23,12 +23,11 @@ namespace PLWPF
     public partial class MotherChildren : Page
     {
         IBL bl;
-        //Mother mother;
         public MotherChildren(IBL Bl, Mother mother)
         {
             InitializeComponent();
             bl = Bl;
-            //this.mother = mother;
+            // bind data grid to children list
             Grouping.DataContext = bl.MotherChildren(mother);
         }
     }

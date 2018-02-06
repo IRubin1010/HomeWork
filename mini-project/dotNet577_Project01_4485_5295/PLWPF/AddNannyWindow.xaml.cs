@@ -30,51 +30,39 @@ namespace PLWPF
             InitializeComponent();
             bl = Bl;
             nanny = new Nanny();
+            // bind nanny
             NannyDeatails.DataContext = nanny;
             nannyAgeTextBox.Text = "";
+            // intialize min age list and bind to min age combobox
             minAgeList = new List<int>() {0, 6, 12, 18, 24, 30};
             minAgeTextBox.DataContext = minAgeList;
-            birthDateDatePicker.DisplayDateEnd = DateTime.Now;
         }
 
-        private void submit_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                nanny.Address = addressTextBox.Text;
-                Console.WriteLine(nanny.Address);
-                Console.WriteLine(nanny);
-                bl.AddNanny(nanny);
-                nanny = bl.FindNanny(nanny.ID);
-                Console.WriteLine(nanny);
-                nanny = new Nanny();
-                NannyDeatails.DataContext = nanny;
-                Close();
-            }
-            catch (BLException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
+        // work days and hours button click event
         private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
         {
+            // open new window to select days and hours
             new NannyWorkDaysHours(nanny).Show();
         }
 
+        // date selected event
         private void DateSelected(object sender, SelectionChangedEventArgs e)
         {
             if (nanny.NannyAge != 0)
             {
+                // update nanny age field in UI
                 BindingExpression be = nannyAgeTextBox.GetBindingExpression(TextBox.TextProperty);
                 nannyAgeTextBox.Text = nanny.NannyAge.ToString();
                 be.UpdateSource();
             }
         }
 
+        // v=event when select min age
         private void MinAgeSelected(object sender, SelectionChangedEventArgs e)
         {
+            // get min age selection
             int minAge = int.Parse(minAgeTextBox.SelectedValue.ToString());
+            // for each min age selction retrun customized list for max age
             switch (minAge)
             {
                 case 0:
@@ -105,11 +93,27 @@ namespace PLWPF
                     break;
             }
         }
+
+        // submit button click event
+        private void submit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // get the address
+                nanny.Address = addressTextBox.Text;
+                bl.AddNanny(nanny.Clone());
+                nanny = new Nanny();
+                NannyDeatails.DataContext = nanny;
+                Close();
+            }
+            catch (BLException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }
-
-
-
 
 
 

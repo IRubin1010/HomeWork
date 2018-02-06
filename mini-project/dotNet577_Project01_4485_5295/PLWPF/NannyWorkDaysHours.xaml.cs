@@ -26,11 +26,13 @@ namespace PLWPF
             InitializeComponent();
             if (nanny != null)
                 Nanny = nanny;
-            else
+            else   // nanny is null 
                 Nanny = new Nanny();
+            // bind to nanny
             WorkDaysHours.DataContext = Nanny;
         }
 
+        // submit button click event 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             Close();
