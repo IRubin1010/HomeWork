@@ -155,9 +155,9 @@
                     <Label Content="Nanny ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
                     <ComboBox x:Name="nannyComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
                     <Label Content="Begin Transection:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
-                    <DatePicker x:Name="beginTransectionDatePicker"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding BeginTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
+                    <DatePicker x:Name="beginTransectionDatePicker" SelectedDateChanged="BeginDateSelected" VerticalAlignment="Center" Width="120" SelectedDate="{Binding BeginTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
                     <Label Content="End Transection:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>
-                    <DatePicker x:Name="endTransectionDatePicker"  VerticalAlignment="Center" Width="120"  Grid.Row="2" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1" SelectedDate="{Binding EndTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                    <DatePicker x:Name="endTransectionDatePicker"  SelectedDateChanged="EndDateSelected" VerticalAlignment="Center" Width="120"  Grid.Row="2" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1" SelectedDate="{Binding EndTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                     <Label Content="Hourly Fee:" Grid.Row="3" Style="{StaticResource LabelStyle}"/>
                     <TextBox x:Name="hourlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding HourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3"/>
                     <Label Content="Monthly Fee:" Grid.Row="4" Style="{StaticResource LabelStyle}"/>

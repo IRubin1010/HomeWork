@@ -665,7 +665,7 @@ namespace DAL
 
         XElement createContract(Contract contract)
         {
-            return new XElement("contract",
+            return new XElement("Contract",
                                  new XElement("ContractNumber", contract.ContractNumber),
                                  new XElement("NannyID", contract.NannyID),
                                  new XElement("ChildID", contract.ChildID),
@@ -775,8 +775,6 @@ namespace DAL
                 contract.Remove();
                 contractXml.saveFile();
             }
-            if (!ContractList().Remove(FindContract(contractNumber)))
-                throw new DALException("contract with contract number: " + contractNumber + " dosn't exsist", "Delete contract");
         }
 
         /// <summary>
@@ -843,7 +841,7 @@ namespace DAL
         public XElement FindContractXml(int? contractNumber)
         {
             contractXml.LoadData();
-            return (from contract in contractXml.Root.Elements("contract")
+            return (from contract in contractXml.Root.Elements("Contract")
                     where int.Parse(contract.Element("ContractNumber").Value) == contractNumber
                     select contract).FirstOrDefault();
         }

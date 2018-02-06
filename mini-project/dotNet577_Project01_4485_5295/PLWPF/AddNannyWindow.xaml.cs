@@ -30,7 +30,8 @@ namespace PLWPF
             nanny = new Nanny();
             NannyDeatails.DataContext = nanny;
             nannyAgeTextBox.Text = "";
-            birthDateDatePicker.DisplayDateEnd = DateTime.Now;
+            DateTime dateTime = DateTime.Now.AddYears(-18);
+            birthDateDatePicker.DisplayDateEnd = dateTime;
         }
 
         private void submit_Click(object sender, RoutedEventArgs e)
