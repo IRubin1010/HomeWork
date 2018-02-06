@@ -23,26 +23,85 @@ namespace PLWPF
     {
         IBL bl;
         Nanny nanny;
+        List<int> maxAgeList;
+        List<int> minAgeList;
         public AddNannyWindow(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
             nanny = new Nanny();
+            // bind nanny
             NannyDeatails.DataContext = nanny;
             nannyAgeTextBox.Text = "";
-            birthDateDatePicker.DisplayDateEnd = DateTime.Now;
+            // intialize min age list and bind to min age combobox
+            minAgeList = new List<int>() {0, 6, 12, 18, 24, 30};
+            minAgeTextBox.DataContext = minAgeList;
         }
 
+        // work days and hours button click event
+        private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
+        {
+            // open new window to select days and hours
+            new NannyWorkDaysHours(nanny).Show();
+        }
+
+        // date selected event
+        private void DateSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (nanny.NannyAge != 0)
+            {
+                // update nanny age field in UI
+                BindingExpression be = nannyAgeTextBox.GetBindingExpression(TextBox.TextProperty);
+                nannyAgeTextBox.Text = nanny.NannyAge.ToString();
+                be.UpdateSource();
+            }
+        }
+
+        // v=event when select min age
+        private void MinAgeSelected(object sender, SelectionChangedEventArgs e)
+        {
+            // get min age selection
+            int minAge = int.Parse(minAgeTextBox.SelectedValue.ToString());
+            // for each min age selction retrun customized list for max age
+            switch (minAge)
+            {
+                case 0:
+                    maxAgeList = new List<int>() { 6, 12, 18, 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 6:
+                    maxAgeList = new List<int>() { 12, 18, 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 12:
+                    maxAgeList = new List<int>() { 18, 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 18:
+                    maxAgeList = new List<int>() { 24, 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 24:
+                    maxAgeList = new List<int>() { 30, 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                case 30:
+                    maxAgeList = new List<int>() { 36 };
+                    maxAgeTextBox.DataContext = maxAgeList;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // submit button click event
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                // get the address
                 nanny.Address = addressTextBox.Text;
-                Console.WriteLine(nanny.Address);
-                Console.WriteLine(nanny);
-                bl.AddNanny(nanny);
-                nanny = bl.FindNanny(nanny.ID);
-                Console.WriteLine(nanny);
+                bl.AddNanny(nanny.Clone());
                 nanny = new Nanny();
                 NannyDeatails.DataContext = nanny;
                 Close();
@@ -53,25 +112,8 @@ namespace PLWPF
             }
         }
 
-        private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
-        {
-            new NannyWorkDaysHours(nanny).Show();
-        }
-
-        private void DateSelected(object sender, SelectionChangedEventArgs e)
-        {
-            if (nanny.NannyAge != 0)
-            {
-                BindingExpression be = nannyAgeTextBox.GetBindingExpression(TextBox.TextProperty);
-                nannyAgeTextBox.Text = nanny.NannyAge.ToString();
-                be.UpdateSource();
-            }
-        }
     }
 }
-
-
-
 
 
 

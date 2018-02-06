@@ -27,12 +27,14 @@ namespace PLWPF
     {
         static string API_KEY = ConfigurationSettings.AppSettings.Get("googleApiKey");
 
+        // Text property 
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
+        // add Text property to be Dependency property
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(AutoCompleteAddressTextBox), new PropertyMetadata(null));
 

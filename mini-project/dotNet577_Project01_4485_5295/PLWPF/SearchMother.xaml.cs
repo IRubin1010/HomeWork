@@ -27,7 +27,9 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Bl;
+            // bind mother details to mother
             searchMother.DataContext = mother;
+            // bind work days and hours grid to mother
             work.DataContext = mother;
         }
     }

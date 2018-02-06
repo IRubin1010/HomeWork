@@ -23,26 +23,28 @@ namespace PLWPF
     {
         IBL bl;
         Child child;
-        List<Child> childList;
         public DeleteChildWindow(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
-            childList = bl.CloneChildList();
-            list.DataContext = childList;
         }
 
+        // event when select child
         private void SelectChild(object sender, EventArgs e)
         {
             if (list.Text != null)
             {
+                // get the child and bind to all fields
                 child = bl.CloneChildList().FirstOrDefault(child => child.ToString() == list.Text);
                 DeleteChild.DataContext = child;
             }
         }
 
+        // event when text changed in search control
         private void textChanged(object sender, EventArgs e)
         {
+            // if text is enpty
+            // clear all fields
             if (list.Text == "")
             {
                 child = new Child();
@@ -50,13 +52,14 @@ namespace PLWPF
             }
         }
 
+        // delete child button click event
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if(child != null)
             {
                 try
                 {
-                    bl.DeleteChild(child);
+                    bl.DeleteChild(child.Clone());
                     Close();
                 }
                 catch (BLException ex)

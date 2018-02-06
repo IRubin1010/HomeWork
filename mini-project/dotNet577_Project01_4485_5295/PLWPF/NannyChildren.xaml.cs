@@ -23,12 +23,11 @@ namespace PLWPF
     public partial class NannyChildren : Page
     {
         IBL bl;
-        Nanny nanny;
-        public NannyChildren(IBL Bl, Nanny Nanny)
+        public NannyChildren(IBL Bl, Nanny nanny)
         {
             InitializeComponent();
             bl = Bl;
-            nanny = Nanny;
+            // bind data grid to children list
             Grouping.DataContext = bl.NannyChildren(nanny);
         }
     }

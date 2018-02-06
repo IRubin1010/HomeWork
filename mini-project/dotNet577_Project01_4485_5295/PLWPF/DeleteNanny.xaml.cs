@@ -23,22 +23,52 @@ namespace PLWPF
     {
         IBL bl;
         Nanny nanny;
-        List<Nanny> nannyList;
         public DeleteNanny(IBL Bl)
         {
             InitializeComponent();
             bl = Bl;
-            nannyList = bl.CloneNannyList();
-            list.DataContext = nannyList;
         }
 
+        // event when select nanny
+        private void SelectNanny(object sender, EventArgs e)
+        {
+            if (list.Text != null)
+            {
+                // get the nanny and bind to all fields
+                nanny = bl.CloneNannyList().FirstOrDefault(nanny => nanny.ToString() == list.Text);
+                NannyToDelete.DataContext = nanny;
+                addressTextBox.Text = nanny.Address;
+            }
+        }
+
+        // event when text changed in search control
+        private void textChanged(object sender, EventArgs e)
+        {
+            // if text is enpty
+            // clear all fields
+            if (list.Text == "")
+            {
+                nanny = new Nanny();
+                NannyToDelete.DataContext = nanny;
+                addressTextBox.Text = nanny.Address;
+            }
+        }
+
+        // work days and hours button clcick event
+        private void WorkDaysHours(object sender, RoutedEventArgs e)
+        {
+            // send to another winndow to see the work days and hours
+            new NannyWorkDaysHoursDelete(nanny).Show();
+        }
+
+        // delete nanny button click event
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if (nanny != null)
             {
                 try
                 {
-                    bl.DeleteNanny(nanny);
+                    bl.DeleteNanny(nanny.Clone());
                     Close();
                 }
                 catch (BLException ex)
@@ -52,29 +82,5 @@ namespace PLWPF
             }
         }
 
-        private void SelectNanny(object sender, EventArgs e)
-        {
-            if (list.Text != null)
-            {
-                nanny = bl.CloneNannyList().FirstOrDefault(nanny => nanny.ToString() == list.Text);
-                NannyToDelete.DataContext = nanny;
-                addressTextBox.Text = nanny.Address;
-            }
-        }
-
-        private void textChanged(object sender, EventArgs e)
-        {
-            if (list.Text == "")
-            {
-                nanny = new Nanny();
-                NannyToDelete.DataContext = nanny;
-                addressTextBox.Text = nanny.Address;
-            }
-        }
-
-        private void WorkDaysHours(object sender, RoutedEventArgs e)
-        {
-            new NannyWorkDaysHoursDelete(nanny).Show();
-        }
     }
 }

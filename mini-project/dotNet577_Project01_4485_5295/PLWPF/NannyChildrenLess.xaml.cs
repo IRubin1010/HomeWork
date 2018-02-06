@@ -27,6 +27,7 @@ namespace PLWPF
         {
             InitializeComponent();
             bl = Bl;
+            // bind data grid to nanny with childen less than list
             Grouping.DataContext = bl.NannyWitheChildrenLessThen(num);
         }
     }

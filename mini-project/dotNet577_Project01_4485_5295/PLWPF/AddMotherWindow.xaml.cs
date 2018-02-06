@@ -28,13 +28,16 @@ namespace PLWPF
             InitializeComponent();
             bl = Bl;
             mother = new Mother();
+            // bind mother
             MotherDetails.DataContext = mother;
         }
 
+        // add mother button click event
         private void AddMother_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                // get address
                 mother.Address = addressTextBox.Text;
                 bl.AddMother(mother);
                 mother = new Mother();
