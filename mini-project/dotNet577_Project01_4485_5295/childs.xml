@@ -101,6 +101,26 @@
     <HaveNanny>false</HaveNanny>
   </Child>
   <Child>
+    <ID>397055103</ID>
+    <MotherID>294337676</MotherID>
+    <FirstName>hila</FirstName>
+    <BirthDate>2016-08-02T00:00:00</BirthDate>
+    <AgeInMonth>18</AgeInMonth>
+    <IsSpecialNeeds>false</IsSpecialNeeds>
+    <SpecialNeeds></SpecialNeeds>
+    <HaveNanny>false</HaveNanny>
+  </Child>
+  <Child>
+    <ID>397054103</ID>
+    <MotherID>294337676</MotherID>
+    <FirstName>michal</FirstName>
+    <BirthDate>2016-08-02T00:00:00</BirthDate>
+    <AgeInMonth>18</AgeInMonth>
+    <IsSpecialNeeds>false</IsSpecialNeeds>
+    <SpecialNeeds></SpecialNeeds>
+    <HaveNanny>false</HaveNanny>
+  </Child>
+  <Child>
     <ID>313260103</ID>
     <MotherID>294355686</MotherID>
     <FirstName>reut</FirstName>

@@ -15,9 +15,9 @@ namespace PLWPF
         public Initialize(IBL Bl)
         {
             ibl = Bl;
-            NannyInitialize();
-            MotherInitialize();
-            ChildInitialize();
+            //NannyInitialize();
+            //MotherInitialize();
+            //ChildInitialize();
             //ContractInitialize();
         }
         void NannyInitialize()

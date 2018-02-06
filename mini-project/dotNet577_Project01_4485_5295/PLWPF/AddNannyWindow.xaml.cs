@@ -35,28 +35,9 @@ namespace PLWPF
             nannyAgeTextBox.Text = "";
             DateTime dateTime = DateTime.Now.AddYears(-18);
             birthDateDatePicker.DisplayDateEnd = dateTime;
-        }
 
-        private void submit_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                nanny.Address = addressTextBox.Text;
-                Console.WriteLine(nanny.Address);
-                Console.WriteLine(nanny);
-                bl.AddNanny(nanny);
-                nanny = bl.FindNanny(nanny.ID);
-                Console.WriteLine(nanny);
-                nanny = new Nanny();
-                NannyDeatails.DataContext = nanny;
-                Close();
-            }
-            catch (BLException ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
             // intialize min age list and bind to min age combobox
-            minAgeList = new List<int>() {0, 6, 12, 18, 24, 30};
+            minAgeList = new List<int>() { 0, 6, 12, 18, 24, 30 };
             minAgeTextBox.DataContext = minAgeList;
         }
 
