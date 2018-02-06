@@ -831,8 +831,8 @@ namespace BL
         public List<Nanny> PotentialMatch(Mother mother, int? id)
         {
             if (mother != null)
-                return CloneNannyList().Where(nanny => PotentialHoursMatch(nanny, mother)
-                    && PotentialDaysMatch(nanny, mother) && IsChildInNannyAge(nanny, id)).ToList();
+                return CloneNannyList().Where(nanny => IsChildInNannyAge(nanny, id) && PotentialDaysMatch(nanny, mother) 
+                    && PotentialHoursMatch(nanny, mother)).ToList();
             else return new List<Nanny>();
         }
 
@@ -848,7 +848,7 @@ namespace BL
                 // go over nanny and mother hours and check the match
                 for (int i = 0; i < 6; i++)
                 {
-                    if ((bool)nanny.IsWork[i])
+                    if ((bool)nanny.IsWork[i] && (bool)mother.NeedNanny[i])
                         if (mother.NeedNannyHours[0][i] < nanny.WorkHours[0][i] || mother.NeedNannyHours[1][i] > nanny.WorkHours[1][i])
                             return false;
                 }
