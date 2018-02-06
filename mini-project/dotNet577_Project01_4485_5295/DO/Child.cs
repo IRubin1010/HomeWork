@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE
+namespace DO
 {
     public class Child
     {
@@ -63,34 +63,5 @@ namespace BE
         {
             return (Child)MemberwiseClone();
         }
-
-        public static explicit operator DO.Child(Child child)
-        {
-            return new DO.Child
-            {
-                ID = child.ID,
-                MotherID = child.MotherID,
-                FirstName = child.FirstName,
-                BirthDate = child.BirthDate,
-                IsSpecialNeeds = child.IsSpecialNeeds,
-                SpecialNeeds = child.SpecialNeeds,
-                HaveNanny = child.HaveNanny
-            };
-        }
-
-        public static explicit operator Child(DO.Child child)
-        {
-            return new Child
-            {
-                ID = child.ID,
-                MotherID = child.MotherID,
-                FirstName = child.FirstName,
-                BirthDate = child.BirthDate,
-                IsSpecialNeeds = child.IsSpecialNeeds,
-                SpecialNeeds = child.SpecialNeeds,
-                HaveNanny = child.HaveNanny
-            };
-        }
-
     }
 }

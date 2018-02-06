@@ -37,7 +37,7 @@ namespace BL
             {
                 string message = NannyValidations(nanny);
                 if (message != null) throw new BLException(message, "AddNanny");
-                dal.AddNanny(nanny.Clone());
+                dal.AddNanny((DO.Nanny)nanny);
             }
             catch (DALException ex)
             {
@@ -129,7 +129,7 @@ namespace BL
                 {
                     string message = NannyValidations(nanny);
                     if (message != null) throw new BLException(message, "UpdateNanny");
-                    dal.UpdateNanny(nanny.Clone());
+                    dal.UpdateNanny((DO.Nanny)nanny);
                 }
                 catch (DALException ex)
                 {
@@ -149,7 +149,7 @@ namespace BL
         public bool FindNanny(Nanny nanny)
         {
             if (nanny != null)
-                return dal.FindNanny(nanny.Clone());
+                return dal.FindNanny((DO.Nanny)nanny);
             else return false;
         }
 
@@ -163,7 +163,7 @@ namespace BL
         /// </remarks>
         public Nanny FindNanny(int? id)
         {
-            Nanny nanny = dal.FindNanny(id);
+            Nanny nanny = (Nanny)dal.FindNanny(id);
             return nanny == null ? null : nanny.Clone();
         }
 
@@ -181,7 +181,7 @@ namespace BL
             {
                 try
                 {
-                    dal.UpdateNannyChildren(nanny, num);
+                    dal.UpdateNannyChildren((DO.Nanny)nanny, num);
                 }
                 catch (DALException ex)
                 {
@@ -221,7 +221,7 @@ namespace BL
                 {
                     string message = MotherValidations(mother);
                     if (message != null) throw new BLException(message, "AddMother");
-                    dal.AddMother(mother.Clone());
+                    dal.AddMother((DO.Mother)mother);
                 }
                 catch (DALException ex)
                 {
@@ -297,7 +297,7 @@ namespace BL
                 {
                     string message = MotherValidations(mother);
                     if (message != null) throw new BLException(message, "UpdateMother");
-                    dal.UpdateMother(mother.Clone());
+                    dal.UpdateMother((DO.Mother)mother);
                 }
                 catch (DALException ex)
                 {
@@ -317,7 +317,7 @@ namespace BL
         public bool FindMother(Mother mother)
         {
             if (mother != null)
-                return dal.FindMother(mother.Clone());
+                return dal.FindMother((DO.Mother)mother);
             else return false;
         }
 
@@ -331,7 +331,7 @@ namespace BL
         /// </remarks>
         public Mother FindMother(int? id)
         {
-            Mother mother = dal.FindMother(id);
+            Mother mother = (Mother)dal.FindMother(id);
             return mother == null ? null : mother.Clone();
         }
 
@@ -364,7 +364,7 @@ namespace BL
                     if (message != null) throw new BLException(message, "AddChild");
                     if (FindMother(child.MotherID) == null)
                         throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
-                    dal.AddChild(child.Clone());
+                    dal.AddChild((DO.Child)child);
                 }
                 catch (DALException ex)
                 {
@@ -439,7 +439,7 @@ namespace BL
                 {
                     string message = ChildValidations(child);
                     if (message != null) throw new BLException(message, "UpdateChild");
-                    dal.UpdateChild(child.Clone());
+                    dal.UpdateChild((DO.Child)child);
                 }
                 catch (DALException ex)
                 {
@@ -460,7 +460,7 @@ namespace BL
         public bool FindChild(Child child)
         {
             if (child != null)
-                return dal.FindChild(child.Clone());
+                return dal.FindChild((DO.Child)child);
             else return false;
         }
 
@@ -474,7 +474,7 @@ namespace BL
         /// </remarks>
         public Child FindChild(int? id)
         {
-            Child child = dal.FindChild(id);
+            Child child = (Child)dal.FindChild(id);
             return child == null ? null : child.Clone();
         }
 
@@ -492,7 +492,7 @@ namespace BL
             {
                 try
                 {
-                    dal.UpdateHaveNanny(child, change);
+                    dal.UpdateHaveNanny((DO.Child)child, change);
                 }
                 catch (DALException ex)
                 {
@@ -555,7 +555,7 @@ namespace BL
                     // update number of nanny's children and that the child has nanny
                     UpdateNannyChildren(nanny, 1);
                     UpdateHaveNanny(child, true);
-                    dal.AddContract(contract.Clone());
+                    dal.AddContract((DO.Contract)contract);
                 }
                 catch (BLException ex)
                 {
@@ -616,8 +616,8 @@ namespace BL
                 try
                 {
                     // update number of nanny's children and that the child has nanny
-                    UpdateNannyChildren(dal.FindNanny(contract.NannyID), -1);
-                    UpdateHaveNanny(dal.FindChild(contract.ChildID), false);
+                    UpdateNannyChildren((Nanny)dal.FindNanny(contract.NannyID), -1);
+                    UpdateHaveNanny((Child)dal.FindChild(contract.ChildID), false);
                     dal.DeleteContract(contractNumber);
                 }
                 catch (BLException ex)
@@ -658,7 +658,7 @@ namespace BL
                     string message = ContractValidations(contract);
                     if (message != null) throw new BLException(message, "updateContract");
                     CalculatePayment(contract);
-                    dal.UpdateContract(contract.Clone());
+                    dal.UpdateContract((DO.Contract)contract);
                 }
                 catch (DALException ex)
                 {
@@ -682,7 +682,7 @@ namespace BL
         public bool FindContract(Contract contract)
         {
             if (contract != null)
-                return dal.FindContract(contract.Clone());
+                return dal.FindContract((DO.Contract)contract);
             else return false;
         }
 
@@ -696,7 +696,7 @@ namespace BL
         /// </remarks>
         public Contract FindContract(int? contractNumber)
         {
-            Contract contract = dal.FindContract(contractNumber);
+            Contract contract = (Contract)dal.FindContract(contractNumber);
             return contract == null ? null : contract.Clone();
         }
 
@@ -776,7 +776,7 @@ namespace BL
         /// </summary>
         public List<Nanny> CloneNannyList()
         {
-            return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
+            return dal.CloneNannyList().Select(nanny => (Nanny)nanny).ToList();
         }
 
         /// <summary>
@@ -784,7 +784,7 @@ namespace BL
         /// </summary>
         public List<Mother> CloneMotherList()
         {
-            return dal.CloneMotherList().Select(mother => mother.Clone()).ToList();
+            return dal.CloneMotherList().Select(mother => (Mother)mother).ToList();
         }
 
         /// <summary>
@@ -792,7 +792,7 @@ namespace BL
         /// </summary>
         public List<Child> CloneChildList()
         {
-            return dal.CloneChildList().Select(child => child.Clone()).ToList();
+            return dal.CloneChildList().Select(child => (Child)child).ToList();
         }
 
         /// <summary>
@@ -800,7 +800,7 @@ namespace BL
         /// </summary>
         public List<Contract> CloneContractList()
         {
-            return dal.CloneContractList().Select(contract => contract.Clone()).ToList();
+            return dal.CloneContractList().Select(contract => (Contract)contract).ToList();
         }
 
         /// <summary>

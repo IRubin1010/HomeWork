@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8D915D8-A30B-4F58-B111-7D6565AC07A7}</ProjectGuid>
+    <ProjectGuid>{80438ABF-6256-4CB7-80EF-F10C3C45287D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BE</RootNamespace>
-    <AssemblyName>BE</AssemblyName>
+    <RootNamespace>DO</RootNamespace>
+    <AssemblyName>DO</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,12 +45,6 @@
     <Compile Include="Mother.cs" />
     <Compile Include="Nanny.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DO\DO.csproj">
-      <Project>{80438abf-6256-4cb7-80ef-f10c3c45287d}</Project>
-      <Name>DO</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

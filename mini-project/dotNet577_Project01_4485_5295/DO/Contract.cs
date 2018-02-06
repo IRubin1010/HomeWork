@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE
+namespace DO
 {
     public class Contract
     {
@@ -23,7 +23,7 @@ namespace BE
         public DateTime EndTransection { get; set; }
         public double distence { get; set; }
         public string Details { get { return "contract number: " + ContractNumber; } }
-       
+
         public Contract()
         {
             BeginTransection = DateTime.Today;
@@ -67,46 +67,6 @@ namespace BE
         public Contract Clone()
         {
             return (Contract)MemberwiseClone();
-        }
-
-        public static explicit operator DO.Contract(Contract contract)
-        {
-            return new DO.Contract
-            {
-                ContractNumber = contract.ContractNumber,
-                MotherID = contract.MotherID,
-                ChildID = contract.ChildID,
-                NannyID = contract.NannyID,
-                IsMeet = contract.IsMeet,
-                IsContractSigned = contract.IsContractSigned,
-                HourlyFee = contract.HourlyFee,
-                MonthlyFee = contract.MonthlyFee,
-                IsPaymentByHour = contract.IsPaymentByHour,
-                FinalPayment = contract.FinalPayment,
-                BeginTransection = contract.BeginTransection,
-                EndTransection = contract.EndTransection,
-                distence = contract.distence,
-            };
-        }
-
-        public static explicit operator Contract(DO.Contract contract)
-        {
-            return new Contract
-            {
-                ContractNumber = contract.ContractNumber,
-                MotherID = contract.MotherID,
-                ChildID = contract.ChildID,
-                NannyID = contract.NannyID,
-                IsMeet = contract.IsMeet,
-                IsContractSigned = contract.IsContractSigned,
-                HourlyFee = contract.HourlyFee,
-                MonthlyFee = contract.MonthlyFee,
-                IsPaymentByHour = contract.IsPaymentByHour,
-                FinalPayment = contract.FinalPayment,
-                BeginTransection = contract.BeginTransection,
-                EndTransection = contract.EndTransection,
-                distence = contract.distence,
-            };
         }
     }
 }

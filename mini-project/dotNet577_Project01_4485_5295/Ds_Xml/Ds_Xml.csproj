@@ -43,5 +43,11 @@
     <Compile Include="DsXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DO\DO.csproj">
+      <Project>{80438abf-6256-4cb7-80ef-f10c3c45287d}</Project>
+      <Name>DO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

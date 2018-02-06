@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE
+namespace DO
 {
     public class Mother
     {
@@ -127,44 +127,6 @@ namespace BE
         public string FullName()
         {
             return FirstName + " " + LastName;
-        }
-
-        public static explicit operator DO.Mother(Mother mother)
-        {
-            return new DO.Mother
-            {
-                ID = mother.ID,
-                LastName = mother.LastName,
-                FirstName = mother.FirstName,
-                PhoneNumber = mother.PhoneNumber,
-                Address = mother.Address,
-                SearchAreaForNanny = mother.SearchAreaForNanny,
-                WantElevator = mother.WantElevator,
-                MinSeniority = mother.MinSeniority,
-                MaxFloor = mother.MaxFloor,
-                NeedNanny = (bool[])mother.NeedNanny.Clone(),
-                NeedNannyHours = (TimeSpan[][])mother.NeedNannyHours.Clone(),
-                Remarks = mother.Remarks
-            };
-        }
-
-        public static explicit operator Mother(DO.Mother mother)
-        {
-            return new Mother
-            {
-                ID = mother.ID,
-                LastName = mother.LastName,
-                FirstName = mother.FirstName,
-                PhoneNumber = mother.PhoneNumber,
-                Address = mother.Address,
-                SearchAreaForNanny = mother.SearchAreaForNanny,
-                WantElevator = mother.WantElevator,
-                MinSeniority = mother.MinSeniority,
-                MaxFloor = mother.MaxFloor,
-                NeedNanny = (bool[])mother.NeedNanny.Clone(),
-                NeedNannyHours = (TimeSpan[][])mother.NeedNannyHours.Clone(),
-                Remarks = mother.Remarks
-            };
         }
     }
 }
