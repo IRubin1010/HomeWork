@@ -35,7 +35,7 @@ namespace BL
         {
             try
             {
-                string message=NannyValidations(nanny);
+                string message = NannyValidations(nanny);
                 if (message != null) throw new BLException(message, "AddNanny");
                 dal.AddNanny(nanny.Clone());
             }
@@ -125,13 +125,16 @@ namespace BL
         {
             if (nanny != null)
             {
-                string message=NannyValidations(nanny);
-                if (message != null) throw new BLException(message, "UpdateNanny");
-                dal.UpdateNanny(nanny.Clone());
-            }
-            catch (DALException ex)
-            {
-                throw new BLException(ex.Message, ex.sender);
+                try
+                {
+                    string message = NannyValidations(nanny);
+                    if (message != null) throw new BLException(message, "UpdateNanny");
+                    dal.UpdateNanny(nanny.Clone());
+                }
+                catch (DALException ex)
+                {
+                    throw new BLException(ex.Message, ex.sender);
+                }
             }
         }
 
@@ -216,7 +219,7 @@ namespace BL
             {
                 try
                 {
-                    string message=MotherValidations(mother);
+                    string message = MotherValidations(mother);
                     if (message != null) throw new BLException(message, "AddMother");
                     dal.AddMother(mother.Clone());
                 }
@@ -290,13 +293,16 @@ namespace BL
         {
             if (mother != null)
             {
-                string message=MotherValidations(mother);
-                if (message != null) throw new BLException(message, "UpdateMother");
-                dal.UpdateMother(mother.Clone());
-            }
-            catch (DALException ex)
-            {
-                throw new BLException(ex.Message, ex.sender);  
+                try
+                {
+                    string message = MotherValidations(mother);
+                    if (message != null) throw new BLException(message, "UpdateMother");
+                    dal.UpdateMother(mother.Clone());
+                }
+                catch (DALException ex)
+                {
+                    throw new BLException(ex.Message, ex.sender);
+                }
             }
         }
 
@@ -351,14 +357,14 @@ namespace BL
         public void AddChild(Child child)
         {
             if (child != null)
-            {  
+            {
                 try
                 {
-                    string message=ChildValidations(child);
-                     if (message != null) throw new BLException(message, "AddChild");
-                     if (FindMother(child.MotherID) == null)
-                    throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
-                dal.AddChild(child.Clone());        
+                    string message = ChildValidations(child);
+                    if (message != null) throw new BLException(message, "AddChild");
+                    if (FindMother(child.MotherID) == null)
+                        throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
+                    dal.AddChild(child.Clone());
                 }
                 catch (DALException ex)
                 {
@@ -429,16 +435,17 @@ namespace BL
         {
             if (child != null)
             {
+                try
+                {
+                    string message = ChildValidations(child);
+                    if (message != null) throw new BLException(message, "UpdateChild");
+                    dal.UpdateChild(child.Clone());
+                }
+                catch (DALException ex)
+                {
+                    throw new BLException(ex.Message, ex.sender);
 
-                string message=ChildValidations(child);
-                if (message != null) throw new BLException(message, "UpdateChild");
-                dal.UpdateChild(child.Clone());
-            }
-            catch (DALException ex)
-            {
-                throw new BLException(ex.Message, ex.sender);
-
-            
+                }
             }
         }
 
@@ -520,8 +527,8 @@ namespace BL
         {
             if (contract != null)
             {
-             string message = ContractValidations(contract);
-            if (message != null) throw new BLException(message, "AddContract");
+                string message = ContractValidations(contract);
+                if (message != null) throw new BLException(message, "AddContract");
                 Mother mother = FindMother(contract.MotherID);
                 Nanny nanny = FindNanny(contract.NannyID);
                 Child child = FindChild(contract.ChildID);
@@ -649,8 +656,8 @@ namespace BL
                 try
                 {
                     string message = ContractValidations(contract);
-                if (message != null) throw new BLException(message, "updateContract");
-                CalculatePayment(contract);
+                    if (message != null) throw new BLException(message, "updateContract");
+                    CalculatePayment(contract);
                     dal.UpdateContract(contract.Clone());
                 }
                 catch (DALException ex)
@@ -769,7 +776,7 @@ namespace BL
         /// </summary>
         public List<Nanny> CloneNannyList()
         {
-                return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
+            return dal.CloneNannyList().Select(nanny => nanny.Clone()).ToList();
         }
 
         /// <summary>
@@ -1050,13 +1057,13 @@ namespace BL
         /// <param name="child">child to check</param>
         public bool IsChildByNanny(Nanny nanny, Child child)
         {
-            if(nanny != null && child != null)
+            if (nanny != null && child != null)
             {
-            foreach (Contract contract in CloneContractList())
-            {
-                if (contract.NannyID == nanny.ID && contract.ChildID == child.ID)
-                    return true;
-            }
+                foreach (Contract contract in CloneContractList())
+                {
+                    if (contract.NannyID == nanny.ID && contract.ChildID == child.ID)
+                        return true;
+                }
             }
             return false;
         }
@@ -1081,8 +1088,8 @@ namespace BL
             if (nanny != null)
             {
                 return (from contract in CloneContractList()
-                                      where contract.NannyID == nanny.ID
-                                      select contract).ToList();
+                        where contract.NannyID == nanny.ID
+                        select contract).ToList();
             }
             else return new List<Contract>();
         }
@@ -1125,15 +1132,15 @@ namespace BL
         /// <param name="contract">contract to calculate the distance</param>
         public int? DistanceBetweenNannyAndMother(Contract contract)
         {
-            if(contract != null)
+            if (contract != null)
             {
-            Mother mother = FindMother(contract.MotherID);
-            string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
-            // the distance function returns meter that's why they divide by 1000
-            int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
-            if (distance == 0)
-                return 1;
-            return (distance + 1);
+                Mother mother = FindMother(contract.MotherID);
+                string address = mother.SearchAreaForNanny != "" ? mother.SearchAreaForNanny : mother.Address;
+                // the distance function returns meter that's why they divide by 1000
+                int? distance = Distance(address, FindNanny(contract.NannyID).Address) / 1000;
+                if (distance == 0)
+                    return 1;
+                return (distance + 1);
             }
             return -1;
         }
