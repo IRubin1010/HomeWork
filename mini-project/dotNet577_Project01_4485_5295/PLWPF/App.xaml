@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:PLWPF"
              StartupUri="splashScreen.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>

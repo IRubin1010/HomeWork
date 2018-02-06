@@ -33,6 +33,9 @@ namespace PLWPF
             // bind nanny
             NannyDeatails.DataContext = nanny;
             nannyAgeTextBox.Text = "";
+            DateTime dateTime = DateTime.Now.AddYears(-18);
+            birthDateDatePicker.DisplayDateEnd = dateTime;
+
             // intialize min age list and bind to min age combobox
             minAgeList = new List<int>() { 0, 6, 12, 18, 24, 30 };
             minAgeTextBox.DataContext = minAgeList;

@@ -33,39 +33,33 @@ namespace BL
         /// </remarks>
         public void AddNanny(Nanny nanny)
         {
-            if (nanny != null)
+            try
             {
-                try
-                {
-                    Valid(nanny);
-                    dal.AddNanny(nanny.Clone());
-                }
-                catch (BLException)
-                {
-                    throw;
-                }
-                catch (DALException ex)
-                {
-                    throw new BLException(ex.Message, ex.sender);
-                }
+                string message = NannyValidations(nanny);
+                if (message != null) throw new BLException(message, "AddNanny");
+                dal.AddNanny(nanny.Clone());
+            }
+            catch (DALException ex)
+            {
+                throw new BLException(ex.Message, ex.sender);
             }
         }
         public enum days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
-        public void Valid(Nanny nanny)
+        public string NannyValidations(Nanny nanny)
         {
             string message = null;
-            if (!nanny.ID.HasValue) message += "ID can not be empty\n";
-            if (string.IsNullOrEmpty(nanny.FirstName)) message += "Must fill the field First name\n";
-            if (string.IsNullOrEmpty(nanny.LastName)) message += "Must fill the field Last name\n";
+            if (!nanny.ID.HasValue) message += "id can't be empty\n";
+            if (string.IsNullOrEmpty(nanny.FirstName)) message += "First name can't be empty\n";
+            if (string.IsNullOrEmpty(nanny.LastName)) message += "Last name can't be empty\n";
             if (nanny.NannyAge < 0 || nanny.NannyAge == null) message += "Invalid birth date";
             if (nanny.NannyAge < 18 && nanny.NannyAge > 0) message += "age is under 18\n";
-            if (string.IsNullOrEmpty(nanny.Address)) message += "Must fill the field Adsress\n";
-            if (!nanny.PhoneNumber.HasValue) message += "Must fill the field PhoneNumber\n";
+            if (string.IsNullOrEmpty(nanny.Address)) message += "Adsress can't be empty\n";
+            if (!nanny.PhoneNumber.HasValue) message += "PhoneNumber can't be empty\n";
             if (nanny.MaxAge < nanny.MinAge) message += "The maximum age can not be greater than the minimum age\n";
             for (int i = 0; i < 6; i++)
                 if (nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
-                    message += "Late start time from end time at day " + ((days)i).ToString() + "\n";
-            if (message != null) throw new BLException(message, "AddNanny");
+                    message += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
+            return message;
         }
         /// <summary>
         /// delete nanny from nanny's DB
@@ -133,6 +127,8 @@ namespace BL
             {
                 try
                 {
+                    string message = NannyValidations(nanny);
+                    if (message != null) throw new BLException(message, "UpdateNanny");
                     dal.UpdateNanny(nanny.Clone());
                 }
                 catch (DALException ex)
@@ -196,6 +192,20 @@ namespace BL
 
         /* mother functions */
 
+        public string MotherValidations(Mother mother)
+        {
+            string message = null;
+            if (!mother.ID.HasValue) message += "id can't be empty\n";
+            if (string.IsNullOrEmpty(mother.FirstName)) message += "First name can't be empty\n";
+            if (string.IsNullOrEmpty(mother.LastName)) message += "Last name can't be empty\n";
+            if (string.IsNullOrEmpty(mother.Address)) message += "Adsress can't be empty\n";
+            if (!mother.PhoneNumber.HasValue) message += "PhoneNumber can't be empty\n";
+            for (int i = 0; i < 6; i++)
+                if (mother.NeedNannyHours[0][i] > mother.NeedNannyHours[1][i])
+                    message += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
+            return message;
+        }
+
         /// <summary>
         /// add mother to mother's DB 
         /// </summary>
@@ -209,6 +219,8 @@ namespace BL
             {
                 try
                 {
+                    string message = MotherValidations(mother);
+                    if (message != null) throw new BLException(message, "AddMother");
                     dal.AddMother(mother.Clone());
                 }
                 catch (DALException ex)
@@ -283,6 +295,8 @@ namespace BL
             {
                 try
                 {
+                    string message = MotherValidations(mother);
+                    if (message != null) throw new BLException(message, "UpdateMother");
                     dal.UpdateMother(mother.Clone());
                 }
                 catch (DALException ex)
@@ -323,6 +337,16 @@ namespace BL
 
         /* child functions */
 
+        public string ChildValidations(Child child)
+        {
+            string message = null;
+            if (!child.ID.HasValue) message += "id can't be empty\n";
+            if (!child.MotherID.HasValue) message += "mother id can't be empty\n";
+            if (string.IsNullOrEmpty(child.FirstName)) message += "First name can't be empty\n";
+            if (child.AgeInMonth < 0 || child.AgeInMonth == null) message += "Invalid birth date\n";
+            return message;
+        }
+
         /// <summary>
         /// add child to child's DB
         /// </summary>
@@ -334,10 +358,12 @@ namespace BL
         {
             if (child != null)
             {
-                if (FindMother(child.MotherID) == null)
-                    throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
                 try
                 {
+                    string message = ChildValidations(child);
+                    if (message != null) throw new BLException(message, "AddChild");
+                    if (FindMother(child.MotherID) == null)
+                        throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
                     dal.AddChild(child.Clone());
                 }
                 catch (DALException ex)
@@ -411,11 +437,14 @@ namespace BL
             {
                 try
                 {
+                    string message = ChildValidations(child);
+                    if (message != null) throw new BLException(message, "UpdateChild");
                     dal.UpdateChild(child.Clone());
                 }
                 catch (DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
+
                 }
             }
         }
@@ -473,6 +502,15 @@ namespace BL
         }
 
         /* contract functions */
+        public string ContractValidations(Contract contract)
+        {
+            string message = null;
+            if (!contract.MotherID.HasValue) message += " mother id can't be empty\n";
+            if (!contract.ChildID.HasValue) message += "child id can't be empty\n";
+            if (!contract.NannyID.HasValue) message += "nanny id can't be empty\n";
+            if (contract.EndTransection < contract.BeginTransection) message += "Contract end date can not be earlier than start date\n";
+            return message;
+        }
 
         /// <summary>
         /// add contract to contract's DB
@@ -489,6 +527,8 @@ namespace BL
         {
             if (contract != null)
             {
+                string message = ContractValidations(contract);
+                if (message != null) throw new BLException(message, "AddContract");
                 Mother mother = FindMother(contract.MotherID);
                 Nanny nanny = FindNanny(contract.NannyID);
                 Child child = FindChild(contract.ChildID);
@@ -615,6 +655,8 @@ namespace BL
             {
                 try
                 {
+                    string message = ContractValidations(contract);
+                    if (message != null) throw new BLException(message, "updateContract");
                     CalculatePayment(contract);
                     dal.UpdateContract(contract.Clone());
                 }
