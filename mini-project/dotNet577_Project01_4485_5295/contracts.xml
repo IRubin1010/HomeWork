@@ -15,20 +15,6 @@
     <EndTransection>2018-03-08T00:00:00</EndTransection>
   </Contract>
   <Contract>
-    <ContractNumber>10000001</ContractNumber>
-    <NannyID>305623395</NannyID>
-    <ChildID>397004103</ChildID>
-    <MotherID>294839286</MotherID>
-    <IsMeet>false</IsMeet>
-    <IsContractSigned>true</IsContractSigned>
-    <HourlyFee>10</HourlyFee>
-    <MonthlyFee>1300</MonthlyFee>
-    <IsPaymentByHour>true</IsPaymentByHour>
-    <FinalPayment>1880</FinalPayment>
-    <BeginTransection>2018-02-08T00:00:00+02:00</BeginTransection>
-    <EndTransection>2018-02-08T00:00:00+02:00</EndTransection>
-  </Contract>
-  <Contract>
     <ContractNumber>10000002</ContractNumber>
     <NannyID>305625295</NannyID>
     <ChildID>397458103</ChildID>
@@ -67,6 +53,34 @@
     <MonthlyFee>2200</MonthlyFee>
     <IsPaymentByHour>true</IsPaymentByHour>
     <FinalPayment>702</FinalPayment>
+    <BeginTransection>2018-02-08T00:00:00+02:00</BeginTransection>
+    <EndTransection>2018-02-08T00:00:00+02:00</EndTransection>
+  </Contract>
+  <Contract>
+    <ContractNumber>10000006</ContractNumber>
+    <NannyID>305623395</NannyID>
+    <ChildID>397004103</ChildID>
+    <MotherID>294839286</MotherID>
+    <IsMeet>false</IsMeet>
+    <IsContractSigned>true</IsContractSigned>
+    <HourlyFee>10</HourlyFee>
+    <MonthlyFee>1300</MonthlyFee>
+    <IsPaymentByHour>true</IsPaymentByHour>
+    <FinalPayment>1880</FinalPayment>
+    <BeginTransection>2018-02-08T00:00:00+02:00</BeginTransection>
+    <EndTransection>2018-02-08T00:00:00+02:00</EndTransection>
+  </Contract>
+  <Contract>
+    <ContractNumber>10000007</ContractNumber>
+    <NannyID>305623395</NannyID>
+    <ChildID>392940383</ChildID>
+    <MotherID>294894786</MotherID>
+    <IsMeet>false</IsMeet>
+    <IsContractSigned>true</IsContractSigned>
+    <HourlyFee>10</HourlyFee>
+    <MonthlyFee>1300</MonthlyFee>
+    <IsPaymentByHour>true</IsPaymentByHour>
+    <FinalPayment>1120</FinalPayment>
     <BeginTransection>2018-02-08T00:00:00+02:00</BeginTransection>
     <EndTransection>2018-02-08T00:00:00+02:00</EndTransection>
   </Contract>

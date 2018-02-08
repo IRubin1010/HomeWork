@@ -500,6 +500,12 @@ namespace DAL
             return list[0];
         }
 
+        public int getContractNumber()
+        {
+            return (int)ContractNumber;
+        }
+
+
         /* list return functions */
 
         /// <summary>

@@ -701,6 +701,11 @@ namespace BL
             return contract == null ? null : contract.Clone();
         }
 
+        public int getContractNumber()
+        {
+            return dal.getContractNumber();
+        }
+
         /// <summary>
         /// clculate the payment for a contract
         /// </summary>
