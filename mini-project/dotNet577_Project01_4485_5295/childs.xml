@@ -8,7 +8,7 @@
     <AgeInMonth>7</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>397004103</ID>
@@ -18,7 +18,7 @@
     <AgeInMonth>8</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>392940383</ID>
@@ -46,16 +46,6 @@
     <FirstName>eti</FirstName>
     <BirthDate>2017-07-28T00:00:00</BirthDate>
     <AgeInMonth>7</AgeInMonth>
-    <IsSpecialNeeds>true</IsSpecialNeeds>
-    <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
-  </Child>
-  <Child>
-    <ID>397449028</ID>
-    <MotherID>294894786</MotherID>
-    <FirstName>aviad</FirstName>
-    <BirthDate>2017-03-15T00:00:00</BirthDate>
-    <AgeInMonth>11</AgeInMonth>
     <IsSpecialNeeds>true</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
     <HaveNanny>false</HaveNanny>
@@ -108,7 +98,7 @@
     <AgeInMonth>18</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>true</HaveNanny>
+    <HaveNanny>false</HaveNanny>
   </Child>
   <Child>
     <ID>397054103</ID>
@@ -118,7 +108,7 @@
     <AgeInMonth>18</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>313260103</ID>
@@ -128,7 +118,7 @@
     <AgeInMonth>15</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>310462203</ID>
@@ -138,7 +128,7 @@
     <AgeInMonth>15</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>310457103</ID>

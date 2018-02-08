@@ -57,7 +57,7 @@ namespace BL
             if (!nanny.PhoneNumber.HasValue) message += "PhoneNumber can't be empty\n";
             if (nanny.MaxAge < nanny.MinAge) message += "The maximum age can not be greater than the minimum age\n";
             for (int i = 0; i < 6; i++)
-                if (nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
+                if (nanny.IsWork[i] && nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
                     message += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
             return message;
         }
@@ -509,6 +509,7 @@ namespace BL
             if (!contract.ChildID.HasValue) message += "child id can't be empty\n";
             if (!contract.NannyID.HasValue) message += "nanny id can't be empty\n";
             if (contract.EndTransection < contract.BeginTransection) message += "Contract end date can not be earlier than start date\n";
+            //if (contract.EndTransection < DateTime.Now) message += "Invalid contract end date - date can not be earlier than today\n";
             return message;
         }
 
@@ -810,16 +811,24 @@ namespace BL
         /// <param name="addressB">the address to calculate to</param>
         public int? Distance(string addressA, string addressB)
         {
-            var drivingDirectionRequest = new DirectionsRequest
+            try
             {
-                TravelMode = TravelMode.Walking,
-                Origin = addressA,
-                Destination = addressB,
-            };
-            DirectionsResponse drivingDirections = GoogleMaps.Directions.Query(drivingDirectionRequest);
-            Route route = drivingDirections.Routes.First();
-            Leg leg = route.Legs.First();
-            return leg.Distance.Value;
+                var drivingDirectionRequest = new DirectionsRequest
+                {
+                    TravelMode = TravelMode.Walking,
+                    Origin = addressA,
+                    Destination = addressB,
+                };
+                DirectionsResponse drivingDirections = GoogleMaps.Directions.Query(drivingDirectionRequest);
+                Route route = drivingDirections.Routes.First();
+                Leg leg = route.Legs.First();
+                return leg.Distance.Value;
+            }
+            catch (Exception)
+            {
+                throw new BLException("Google crashed again !!!", "distance calculation");
+            }
+
         }
 
         /// <summary>
@@ -831,7 +840,7 @@ namespace BL
         public List<Nanny> PotentialMatch(Mother mother, int? id)
         {
             if (mother != null)
-                return CloneNannyList().Where(nanny => IsChildInNannyAge(nanny, id) && PotentialDaysMatch(nanny, mother) 
+                return CloneNannyList().Where(nanny => IsChildInNannyAge(nanny, id) && PotentialDaysMatch(nanny, mother)
                     && PotentialHoursMatch(nanny, mother)).ToList();
             else return new List<Nanny>();
         }
