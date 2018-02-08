@@ -110,5 +110,6 @@
             </ScrollViewer>
         </Grid>
         <Button Content="sort distance" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="15" Click="Sort_CLick"/>
+        <ProgressBar Name="progressBarButton" HorizontalAlignment="Left" Height="10" Margin="58,10.2,0,0" Grid.Row="2" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
