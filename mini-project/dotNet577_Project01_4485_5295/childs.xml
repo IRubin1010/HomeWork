@@ -108,7 +108,7 @@
     <AgeInMonth>18</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>397054103</ID>

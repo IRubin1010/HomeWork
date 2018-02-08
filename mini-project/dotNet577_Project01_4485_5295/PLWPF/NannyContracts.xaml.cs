@@ -30,5 +30,18 @@ namespace PLWPF
             // bind data grid to nanny contracts list
             Grouping.DataContext = bl.NannyContracts(nanny);
         }
+
+        private new void MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("click");
+        }
+
+        private void Row_Click(object sender, MouseButtonEventArgs e)
+        {
+            Contract contract = (Contract)Grouping.SelectedItem;
+            ContractDetails contracWindow = new ContractDetails(bl, contract);
+            contracWindow.Topmost = true;
+            contracWindow.Show();
+        }
     }
 }

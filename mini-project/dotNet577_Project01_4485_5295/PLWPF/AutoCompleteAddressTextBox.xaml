@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:PLWPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid  LostFocus="GridLostFocus">
         <ComboBox x:Name="textComboBox"  SelectionChanged="textComboBox_SelectionChanged"  PreviewKeyUp="textComboBox_PreviewKeyUp"/>
-        <TextBox x:Name="textInput"  
+        <TextBox x:Name="textInput" 
                  TextChanged="textInput_TextChanged"
                  Text="{Binding Text, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, UpdateSourceTrigger=PropertyChanged}" 
             PreviewKeyDown="textInput_PreviewKeyDown" />

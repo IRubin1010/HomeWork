@@ -362,5 +362,12 @@ namespace PLWPF
             }
         }
 
+        private void Row_Click(object sender, MouseButtonEventArgs e)
+        {
+            Nanny nanny = (Nanny)Grouping.SelectedItem;
+            NannyDetails nannyWindow = new NannyDetails(bl, nanny);
+            nannyWindow.Topmost = true;
+            nannyWindow.Show();
+        }
     }
 }

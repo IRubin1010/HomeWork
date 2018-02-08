@@ -45,5 +45,14 @@ namespace PLWPF
         {
             Grouping.DataContext = bl.GruopNannyByChildAge((bool)MaxAge.IsChecked, true);
         }
+
+        private void Row_Click(object sender, MouseButtonEventArgs e)
+        {
+            IGrouping<int?, Nanny> group = (IGrouping<int?, Nanny>)Grouping.SelectedItem;
+            Console.WriteLine(Grouping.SelectedCells.ToList()[1].Item);
+            //NannyDetails nannyWindow = new NannyDetails(bl, nanny);
+            //nannyWindow.Topmost = true;
+            //nannyWindow.Show();
+        }
     }
 }
