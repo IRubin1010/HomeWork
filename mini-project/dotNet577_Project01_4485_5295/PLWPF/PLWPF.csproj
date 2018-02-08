@@ -70,9 +70,14 @@
       <DependentUpon>AutoCompleteAddressTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="BoolVisibiltyConverter.cs" />
-
+    <Compile Include="ChildDetails.xaml.cs">
+      <DependentUpon>ChildDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChildrenWithNoNanny.xaml.cs">
       <DependentUpon>ChildrenWithNoNanny.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContractDetails.xaml.cs">
+      <DependentUpon>ContractDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeleteChildWindow.xaml.cs">
       <DependentUpon>DeleteChildWindow.xaml</DependentUpon>
@@ -105,6 +110,9 @@
     </Compile>
     <Compile Include="MoreOptions.xaml.cs">
       <DependentUpon>MoreOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NannyDetails.xaml.cs">
+      <DependentUpon>NannyDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="NannyValidVactions.xaml.cs">
       <DependentUpon>NannyValidVactions.xaml</DependentUpon>
@@ -165,7 +173,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ChildDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChildrenWithNoNanny.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContractDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MoreOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NannyDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

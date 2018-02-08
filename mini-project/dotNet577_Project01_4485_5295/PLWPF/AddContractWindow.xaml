@@ -179,7 +179,12 @@
             </Grid.RowDefinitions>
             <Label Content="nanny list" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" CanContentScroll="True" HorizontalScrollBarVisibility="Disabled">
-                <DataGrid Name="Grouping" Width="532" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" IsHitTestVisible="False">
+                <DataGrid Name="Grouping" Width="532" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <EventSetter Event="MouseDoubleClick" Handler="Row_Click"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}" Width="80">
                             <DataGridTextColumn.ElementStyle>

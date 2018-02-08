@@ -30,5 +30,13 @@ namespace PLWPF
             // bind child data grid
             Grouping.DataContext = bl.ChildrenWithNoNanny();
         }
+
+        private void Row_Click(object sender, MouseButtonEventArgs e)
+        {
+            Child child = (Child)Grouping.SelectedItem;
+            ChildDetails childWindow = new ChildDetails(bl, child);
+            childWindow.Topmost = true;
+            childWindow.Show();
+        }
     }
 }

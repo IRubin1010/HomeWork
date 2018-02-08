@@ -10,13 +10,19 @@
 
     <Grid Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True" HorizontalScrollBarVisibility="Disabled">
-            <DataGrid Name="Grouping" Width="550" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" IsHitTestVisible="False">
+            <DataGrid Name="Grouping" Width="550" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_Click"/>
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="contract naumber" Binding="{Binding Path=ContractNumber}" Width="110">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <EventSetter Event="PreviewMouseDown" Handler="MouseDown"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>

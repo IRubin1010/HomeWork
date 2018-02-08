@@ -24,7 +24,7 @@
         </Grid>
         <Grid Grid.Row="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="True">
-                <DataGrid Name="Grouping" Width="452" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" IsHitTestVisible="False">
+                <DataGrid Name="Grouping" Width="452" Height="Auto" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="age" Binding="{Binding Path=Key}" Width="50">
                             <DataGridTextColumn.ElementStyle>
@@ -37,9 +37,14 @@
                         <DataGridTemplateColumn Header="ID" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
-                                 IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25" 
+                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" BorderThickness="0"
+                                    IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25" 
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                        <DataGrid.Resources>
+                                            <Style TargetType="{x:Type DataGridRow}">
+                                                <EventSetter Event="MouseDoubleClick" Handler="Row_Click"/>
+                                            </Style>
+                                        </DataGrid.Resources>
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Width="100" Binding="{Binding Path=ID}">
                                                 <DataGridTextColumn.ElementStyle>
@@ -57,7 +62,7 @@
                         <DataGridTemplateColumn Header="first name" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
+                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" BorderThickness="0"
                                   IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>
@@ -77,7 +82,7 @@
                         <DataGridTemplateColumn Header="last name" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
+                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" BorderThickness="0"
                                   IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>
@@ -97,7 +102,7 @@
                         <DataGridTemplateColumn Header="phone number" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" IsHitTestVisible="False" BorderThickness="0"
+                                    <DataGrid Name="list" AutoGenerateColumns="False" ItemsSource="{Binding}" BorderThickness="0"
                                   IsReadOnly="True" HeadersVisibility="None" Width="100" RowHeight="25"
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <DataGrid.Columns>

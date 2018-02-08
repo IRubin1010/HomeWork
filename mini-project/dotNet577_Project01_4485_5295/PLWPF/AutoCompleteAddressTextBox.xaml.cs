@@ -26,6 +26,7 @@ namespace PLWPF
     public partial class AutoCompleteAddressTextBox : UserControl
     {
         static string API_KEY = ConfigurationSettings.AppSettings.Get("googleApiKey");
+        string address;
 
         // Text property 
         public string Text
@@ -92,6 +93,7 @@ namespace PLWPF
             {
                 this.textComboBox.ItemsSource = list;
                 textComboBox.IsDropDownOpen = true;
+                address = list[0];
             }
             else
             {
@@ -133,6 +135,17 @@ namespace PLWPF
 
                 if (this.textComboBox.SelectedIndex == 0)
                     this.textInput.Focus();
+        }
+
+        private void GridLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Text != "")
+            {
+                if (address != Text)
+                {
+                    Text = address;
+                }
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BE;
 using BL;
@@ -18,25 +17,23 @@ using BL;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for NannyChildren.xaml
+    /// Interaction logic for NannyDetails.xaml
     /// </summary>
-    public partial class NannyChildren : Page
+    public partial class NannyDetails : Window
     {
         IBL bl;
-        public NannyChildren(IBL Bl, Nanny nanny)
+        Nanny nanny;
+        public NannyDetails(IBL Bl, Nanny Nanny)
         {
             InitializeComponent();
             bl = Bl;
-            // bind data grid to children list
-            Grouping.DataContext = bl.NannyChildren(nanny);
+            nanny = Nanny;
+            DetailsOfNanny.DataContext = nanny;
         }
 
-        private void Row_Click(object sender, MouseButtonEventArgs e)
+        private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
         {
-            Child child = (Child)Grouping.SelectedItem;
-            ChildDetails childWindow = new ChildDetails(bl, child);
-            childWindow.Topmost = true;
-            childWindow.Show();
+            new NannyWorkDaysHoursDelete(nanny).Show();
         }
     }
 }
