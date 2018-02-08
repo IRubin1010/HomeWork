@@ -319,6 +319,8 @@ namespace PLWPF
                 try
                 {
                     bl.AddContract(contract.Clone());
+                    string message = "The contract was successfully added\n The contract number is: " + (bl.getContractNumber()-1);
+                    MessageBox.Show(message,"Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
                 catch (BLException ex)

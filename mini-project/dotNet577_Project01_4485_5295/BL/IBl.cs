@@ -157,6 +157,7 @@ namespace BL
         /// </summary>
         /// <param name="contract">the contract to calculate the payment for</param>
         void CalculatePayment(Contract contract);
+        int getContractNumber();
 
         // list return functions
 
