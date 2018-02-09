@@ -42,7 +42,7 @@ namespace PLWPF
             child = new Child();
             contract = new Contract();
             // get mother list and bind to mother combobox
-            motherList = bl.CloneMotherList();
+            motherList = bl.MotherWithChilrenWithNoNanny();
             motherComboBox.DataContext = motherList;
             // bind transection date to contract
             beginTransectionDatePicker.DataContext = contract;
@@ -67,6 +67,7 @@ namespace PLWPF
             NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
             // bind nanny list to nanny combobox
+            nannyComboBox.IsEnabled = true;
             nannyComboBox.DataContext = nannyList;
         }
 
@@ -92,6 +93,7 @@ namespace PLWPF
             NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
             // bind nanny list to nanny combobox
+            nannyComboBox.IsEnabled = true;
             nannyComboBox.DataContext = nannyList;
         }
 
@@ -113,11 +115,21 @@ namespace PLWPF
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
         {
             mother = (Mother)(sender as ComboBox).SelectedItem;
+            nannyComboBox.IsEnabled = false;
             if (mother != null)
             {
                 // get mother children and bind to child combobox
-                childList = bl.MotherChildren(mother);
+                childList = bl.MotherChildren(mother).Where(child => child.HaveNanny == false).ToList();
                 childComboBox.DataContext = childList;
+                foreach (var item in RadioGrid.Children)
+                {
+                    RadioButton RB = item as RadioButton;
+                    if (RB != null)
+                    {
+                        RB.IsChecked = false;
+                    }
+                }
+                Grouping.DataContext = null;
             }
         }
 
@@ -125,6 +137,21 @@ namespace PLWPF
         private void ChildSelected(object sender, SelectionChangedEventArgs e)
         {
             child = (Child)(sender as ComboBox).SelectedItem;
+            if (child != null)
+            {
+                foreach (var item in RadioGrid.Children)
+                {
+                    RadioButton RB = item as RadioButton;
+                    if (RB != null)
+                    {
+                        if (RB.IsChecked == true)
+                        {
+                            RB.IsChecked = false;
+                            RB.IsChecked = true;
+                        }
+                    }
+                }
+            }
         }
 
         // event when select manual selection
@@ -140,6 +167,7 @@ namespace PLWPF
             finalPaymentTextBox.Text = "";
             nannyList = null;
             // get nanny list and bind to nanny data grid and nanny combobox
+            nannyComboBox.IsEnabled = true;
             nannyList = bl.CloneNannyList();
             NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
@@ -159,6 +187,7 @@ namespace PLWPF
             finalPaymentTextBox.Text = "";
             nannyList = null;
             // get hourly match nanny list, and bind to nanny data grid and nanny combobox
+            nannyComboBox.IsEnabled = true;
             nannyList = bl.PotentialMatch(mother, child.ID);
             NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
@@ -178,6 +207,7 @@ namespace PLWPF
             finalPaymentTextBox.Text = "";
             nannyList = null;
             // get constraints match nanny list, and bind to nanny data grid and nanny combobox
+            nannyComboBox.IsEnabled = true;
             nannyList = bl.MotherConditions(mother, child.ID);
             NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
@@ -319,8 +349,8 @@ namespace PLWPF
                 try
                 {
                     bl.AddContract(contract.Clone());
-                    string message = "The contract was successfully added\n The contract number is: " + (bl.getContractNumber()-1);
-                    MessageBox.Show(message,"Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    string message = "The contract was successfully added\n The contract number is: " + (bl.getContractNumber() - 1);
+                    MessageBox.Show(message, "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
                 catch (BLException ex)
