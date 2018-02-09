@@ -73,8 +73,15 @@ namespace PLWPF
         // worker thread event
         private void worker_Dowork(object sender, DoWorkEventArgs e)
         {
-            List<object> objList = (List<object>)e.Argument;
-            e.Result = bl.NannysInKMWithConditions((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+            try
+            {
+                List<object> objList = (List<object>)e.Argument;
+                e.Result = bl.NannysInKMWithConditions((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // worker2 complete thread event
@@ -92,7 +99,14 @@ namespace PLWPF
         private void worker2_Dowork(object sender, DoWorkEventArgs e)
         {
             List<object> objList = (List<object>)e.Argument;
-            e.Result = bl.PartialMatch((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+            try
+            {
+                e.Result = bl.PartialMatch((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // event when select mother
@@ -217,7 +231,7 @@ namespace PLWPF
                 // if was format exception of KM textbox
                 catch (Exception)
                 {
-                    MessageBox.Show("KM was in a wrong format, please try again","format exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("KM was in a wrong format, please try again", "format exception", MessageBoxButton.OK, MessageBoxImage.Error);
                     RButton4.IsChecked = false;
                 }
             }
@@ -305,6 +319,8 @@ namespace PLWPF
                 try
                 {
                     bl.AddContract(contract.Clone());
+                    string message = "The contract was successfully added\n The contract number is: " + (bl.getContractNumber()-1);
+                    MessageBox.Show(message,"Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
                 catch (BLException ex)
@@ -349,7 +365,7 @@ namespace PLWPF
                 endTransectionDatePicker.BorderBrush = Brushes.Red;
                 endTransectionDatePicker.ToolTip = "Selecd new date";
             }
-            endTransectionDatePicker.SelectedDate= beginTransectionDatePicker.SelectedDate; 
+            endTransectionDatePicker.SelectedDate = beginTransectionDatePicker.SelectedDate;
             endTransectionDatePicker.DisplayDateStart = beginTransectionDatePicker.SelectedDate;
         }
 
@@ -358,7 +374,7 @@ namespace PLWPF
             if (endTransectionDatePicker.SelectedDate > beginTransectionDatePicker.SelectedDate)
             {
                 endTransectionDatePicker.BorderBrush = beginTransectionDatePicker.BorderBrush;
-                endTransectionDatePicker.ToolTip =null;
+                endTransectionDatePicker.ToolTip = null;
             }
         }
 

@@ -845,6 +845,11 @@ namespace DAL
                     where int.Parse(contract.Element("ContractNumber").Value) == contractNumber
                     select contract).FirstOrDefault();
         }
+        public int getContractNumber()
+        {
+            configXml.LoadData();
+            return int.Parse(configXml.Root.Element("ContractNumber").Value);
+        }
 
         public List<Nanny> CloneNannyList()
         {

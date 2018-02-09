@@ -33,11 +33,17 @@ namespace PLWPF
             Worker.DoWork += Worker_Dowork;
             Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             Worker.RunWorkerAsync(false);
+            Worker.ProgressChanged += Worker_ProgressChanged;
+            Worker.WorkerReportsProgress = true;
         }
 
         // worker complete thread event
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            for (int i = 90; i <= 100; i+=10)
+            {
+                progressBarButton.Value = i;
+            }
             Grouping.DataContext = (IEnumerable<IGrouping<int?, Contract>>)e.Result;
         }
 
@@ -45,7 +51,26 @@ namespace PLWPF
         private void Worker_Dowork(object sender, DoWorkEventArgs e)
         {
             bool order = (bool)e.Argument;
-            e.Result = bl.GroupContractByDistance(order);
+            try
+            {
+                e.Result = bl.GroupContractByDistance(order);
+                for (int i = 0; i < 80; i += 5)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    Worker.ReportProgress(i);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        //worker progress change evet
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            int progress = e.ProgressPercentage;
+            progressBarButton.Value = progress;
         }
 
         // sort button click event
