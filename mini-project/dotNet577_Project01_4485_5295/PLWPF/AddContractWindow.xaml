@@ -118,7 +118,7 @@
                     <Label Content="Child ID:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
                     <ComboBox x:Name="childComboBox" Style="{StaticResource ChildCombobox}" ItemsSource="{Binding}" Grid.Row="1" DisplayMemberPath="NameAndID" SelectionChanged="ChildSelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
                 </Grid>
-                <Grid Name="RadioGrid" Grid.Row="1" Margin="0,10">
+                <Grid x:Name="RadioGrid" Grid.Row="1" Margin="0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -154,7 +154,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="*"  Style="{StaticResource LabelStyle}" Margin="62,0,0,0" Foreground="Red" Grid.Row="0"/>
                     <Label Content="Nanny ID:" Grid.Row="0" Style="{StaticResource LabelStyle}"/>
-                    <ComboBox x:Name="nannyComboBox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
+                    <ComboBox x:Name="nannyComboBox" IsEnabled="False" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding}" Grid.Row="0" DisplayMemberPath="FullNameAndID" SelectionChanged="NannySelected" IsEditable="True" IsTextSearchEnabled="True" TextSearch.TextPath="ID"/>
                     <Label Content="Begin Transection:" Grid.Row="1" Style="{StaticResource LabelStyle}"/>
                     <DatePicker x:Name="beginTransectionDatePicker" SelectedDateChanged="BeginDateSelected" VerticalAlignment="Center" Width="120" SelectedDate="{Binding BeginTransection, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="10,3" HorizontalAlignment="Left" Grid.Column="1"/>
                     <Label Content="End Transection:" Grid.Row="2" Style="{StaticResource LabelStyle}"/>

@@ -706,6 +706,18 @@ namespace BL
             return dal.getContractNumber();
         }
 
+
+        public List<Mother> MotherWithChilrenWithNoNanny()
+        {
+            List<Mother> motherList = new List<Mother>();
+            foreach (Child child in CloneChildList())
+            {
+                if (child.HaveNanny == false)
+                    motherList.Add(FindMother(child.MotherID));
+            }
+            return motherList;
+        }
+
         /// <summary>
         /// clculate the payment for a contract
         /// </summary>

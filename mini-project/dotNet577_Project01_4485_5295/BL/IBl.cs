@@ -159,6 +159,8 @@ namespace BL
         void CalculatePayment(Contract contract);
         int getContractNumber();
 
+        List<Mother> MotherWithChilrenWithNoNanny();
+
         // list return functions
 
         /// <summary>

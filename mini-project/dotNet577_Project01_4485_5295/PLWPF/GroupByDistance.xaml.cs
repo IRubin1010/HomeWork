@@ -32,6 +32,7 @@ namespace PLWPF
             Worker = new BackgroundWorker();
             Worker.DoWork += Worker_Dowork;
             Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            progressBarButton.Visibility = Visibility.Visible;
             Worker.RunWorkerAsync(false);
             Worker.ProgressChanged += Worker_ProgressChanged;
             Worker.WorkerReportsProgress = true;
@@ -44,6 +45,7 @@ namespace PLWPF
             {
                 progressBarButton.Value = i;
             }
+            progressBarButton.Visibility = Visibility.Hidden;
             Grouping.DataContext = (IEnumerable<IGrouping<int?, Contract>>)e.Result;
         }
 
@@ -76,6 +78,8 @@ namespace PLWPF
         // sort button click event
         private void Sort_CLick(object sender, RoutedEventArgs e)
         {
+            progressBarButton.Value = 0;
+            progressBarButton.Visibility = Visibility.Visible;
             Worker.RunWorkerAsync(true);
         }
     }

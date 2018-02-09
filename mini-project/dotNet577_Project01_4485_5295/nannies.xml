@@ -13,7 +13,7 @@
     <Elevator>true</Elevator>
     <Floor />
     <Seniority>10</Seniority>
-    <Children>1</Children>
+    <Children>2</Children>
     <MaxChildren>5</MaxChildren>
     <MinAge>6</MinAge>
     <MaxAge>12</MaxAge>
@@ -199,7 +199,7 @@
     <Elevator>false</Elevator>
     <Floor>0</Floor>
     <Seniority>2</Seniority>
-    <Children>0</Children>
+    <Children>1</Children>
     <MaxChildren>10</MaxChildren>
     <MinAge>12</MinAge>
     <MaxAge>18</MaxAge>
