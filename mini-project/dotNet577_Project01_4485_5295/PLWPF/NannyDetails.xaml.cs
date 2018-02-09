@@ -33,7 +33,9 @@ namespace PLWPF
 
         private void WorkDaysHours_Click(object sender, RoutedEventArgs e)
         {
-            new NannyWorkDaysHoursDelete(nanny).Show();
+            NannyWorkDaysHoursDelete NannyWorkDaysHours = new NannyWorkDaysHoursDelete(nanny);
+            NannyWorkDaysHours.Topmost = true;
+            NannyWorkDaysHours.Show();
         }
     }
 }
