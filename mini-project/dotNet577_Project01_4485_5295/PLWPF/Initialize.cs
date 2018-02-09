@@ -34,6 +34,9 @@ namespace PLWPF
             ibl.AddNanny(Chavi_Horen);
             ibl.AddNanny(BatSheva_Choen);
             ibl.AddNanny(Avigail_Kuk);
+            ibl.AddNanny(Miriam_Harel);
+            ibl.AddNanny(Pnina_Kush);
+            ibl.AddNanny(Hadasa_Weiss);
         }
         void MotherInitialize()
         {
@@ -128,7 +131,7 @@ namespace PLWPF
             IsHourlyFee = false,
             HourlyFee = 12,
             MonthlyFee = 2000,
-            IsWork = new bool[6] { true, true, false, true, true, true },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(8, 00, 0), new TimeSpan(8, 00, 0), new TimeSpan(8, 00, 0), new TimeSpan(8, 00, 0), new TimeSpan(8, 00, 0), new TimeSpan(8, 00, 0) },
@@ -259,17 +262,43 @@ namespace PLWPF
             Seniority = 10,
             Children = 0,
             MaxChildren = 5,
-            MinAge = 12,
-            MaxAge = 18,
+            MinAge = 6,
+            MaxAge = 12,
             IsHourlyFee = true,
             HourlyFee = 10,
             MonthlyFee = 1300,
             IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
            {
-                new TimeSpan[6] { new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0), new TimeSpan(8, 0, 0) },
-                new TimeSpan[6] { new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(13, 30, 0), new TimeSpan(12, 0, 0) }
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(07, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(12, 00, 0) }
            },
+            IsValidVacationDays = true,
+            Recommendations = "",
+        };
+        public Nanny Miriam_Harel = new Nanny
+        {
+            ID = 305623395,
+            LastName = "Harel",
+            FirstName = "Miriam",
+            BirthDate = new DateTime(1982, 7, 16),
+            PhoneNumber = 0543972654,
+            Address = "Ovadya St 6, Bnei Brak",
+            Elevator = true,
+            Seniority = 10,
+            Children = 0,
+            MaxChildren = 5,
+            MinAge = 6,
+            MaxAge = 12,
+            IsHourlyFee = true,
+            HourlyFee = 10,
+            MonthlyFee = 1300,
+            IsWork = new bool[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+          {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(07, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(17, 00, 0), new TimeSpan(17, 00, 0), new TimeSpan(17, 00, 0), new TimeSpan(17, 00, 0), new TimeSpan(17, 00, 0), new TimeSpan(13, 00, 0) }
+          },
             IsValidVacationDays = true,
             Recommendations = "",
         };
@@ -295,7 +324,7 @@ namespace PLWPF
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
-                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0) }
+                new TimeSpan[6] { new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(16, 00, 0), new TimeSpan(13, 00, 0) }
             },
             IsValidVacationDays = true,
             Recommendations = "",
@@ -355,7 +384,60 @@ namespace PLWPF
             IsValidVacationDays = true,
             Recommendations = "",
         };
-
+        public Nanny Pnina_Kush = new Nanny
+        {
+            ID = 305625175,
+            LastName = "Kush",
+            FirstName = "Pnina",
+            BirthDate = new DateTime(1998, 8, 12),
+            PhoneNumber = 0543453834,
+            Address = "Sokolov st 44, Bnei Brak",
+            Elevator = false,
+            Floor = 0,
+            Seniority = 2,
+            Children = 0,
+            MaxChildren = 10,
+            MinAge = 12,
+            MaxAge = 18,
+            IsHourlyFee = true,
+            HourlyFee = 9,
+            MonthlyFee = 2200,
+            IsWork = new bool[6] { true, true, true, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0) }
+            },
+            IsValidVacationDays = true,
+            Recommendations = "",
+        };
+        public Nanny Hadasa_Weiss = new Nanny
+        {
+            ID = 307825175,
+            LastName = "Weiss",
+            FirstName = "Hadasa",
+            BirthDate = new DateTime(1998, 8, 12),
+            PhoneNumber = 0543453834,
+            Address = "Sokolov st 44, Bnei Brak",
+            Elevator = false,
+            Floor = 0,
+            Seniority = 2,
+            Children = 0,
+            MaxChildren = 10,
+            MinAge = 12,
+            MaxAge = 18,
+            IsHourlyFee = true,
+            HourlyFee = 9,
+            MonthlyFee = 2200,
+            IsWork = new bool[6] { true, true, false, true, true, true },
+            WorkHours = new TimeSpan[2][]
+            {
+                new TimeSpan[6] { new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0), new TimeSpan(7, 00, 0) },
+                new TimeSpan[6] { new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0), new TimeSpan(13, 00, 0) }
+            },
+            IsValidVacationDays = true,
+            Recommendations = "",
+        };
         public Nanny Elisheva_Shaked = new Nanny
         {
             ID = 305216295,
@@ -401,7 +483,7 @@ namespace PLWPF
             IsHourlyFee = true,
             HourlyFee = 10,
             MonthlyFee = 1100,
-            IsWork = new bool[6] { false, true, true, true, true, false },
+            IsWork = new bool[6] { true, true, true, true, true, true },
             WorkHours = new TimeSpan[2][]
             {
                 new TimeSpan[6] { new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0), new TimeSpan(7, 30, 0) },
