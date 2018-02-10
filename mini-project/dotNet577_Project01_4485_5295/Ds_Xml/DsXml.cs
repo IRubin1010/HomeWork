@@ -16,6 +16,7 @@ namespace Ds_Xml
         private string rootName { get; set; }
         public XElement Root { get; set; }
         public string filePath { get; set; }
+        // return the location of the file
         public string location()
         {
             string str = Assembly.GetExecutingAssembly().Location;
@@ -24,6 +25,7 @@ namespace Ds_Xml
                 localPath = Path.GetDirectoryName(localPath);
             return (localPath + @"\" + rootName + ".xml");
         }
+        //constractor
         public DsXml(Type type)
         {
             switch (type)

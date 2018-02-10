@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PLWPF
 {
-    
+
     public enum Entity
     {
         nanny,
@@ -14,8 +14,16 @@ namespace PLWPF
         child,
         contract,
     }
+
     public enum Days
-    { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
+    {
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday
+    };
 
 }
 

@@ -21,25 +21,24 @@ namespace BE
         public double FinalPayment { get; set; }
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }
-        public double distence { get; set; }
         public string Details { get { return "contract number: " + ContractNumber; } }
 
+        // constractor
         public Contract()
         {
             BeginTransection = DateTime.Today;
             EndTransection = DateTime.Today;
         }
 
-        //override//
-
+        // override
         public override string ToString()
         {
             return ContractNumber.ToString();
         }
 
-        public string Print()
+        public void Print()
         {
-            return "contract number: " + ContractNumber + '\n' +
+            Console.WriteLine( "contract number: " + ContractNumber + '\n' +
                     "nanny ID: " + NannyID + '\n' +
                     "child ID: " + ChildID + '\n' +
                     "mother ID: " + MotherID + '\n' +
@@ -50,7 +49,7 @@ namespace BE
                     "is payment by hour: " + IsPaymentByHour + '\n' +
                     "final payment: " + FinalPayment + '\n' +
                     "begin transection: " + BeginTransection.ToShortDateString() + '\n' +
-                    "end transection: " + EndTransection.ToShortDateString() + '\n';
+                    "end transection: " + EndTransection.ToShortDateString() + '\n');
         }
         public override bool Equals(object obj)
         {
@@ -69,6 +68,9 @@ namespace BE
             return (Contract)MemberwiseClone();
         }
 
+        /// <summary>
+        /// explicit converter from BE.contract to DO.contract
+        /// </summary>
         public static explicit operator DO.Contract(Contract contract)
         {
             if (contract != null)
@@ -87,12 +89,14 @@ namespace BE
                     FinalPayment = contract.FinalPayment,
                     BeginTransection = contract.BeginTransection,
                     EndTransection = contract.EndTransection,
-                    distence = contract.distence,
                 };
             }
             return null;
         }
 
+        /// <summary>
+        /// explicit converter from DO.contract to BE.contract
+        /// </summary>
         public static explicit operator Contract(DO.Contract contract)
         {
             if (contract != null)
@@ -111,7 +115,6 @@ namespace BE
                     FinalPayment = contract.FinalPayment,
                     BeginTransection = contract.BeginTransection,
                     EndTransection = contract.EndTransection,
-                    distence = contract.distence,
                 };
             }
             return null;

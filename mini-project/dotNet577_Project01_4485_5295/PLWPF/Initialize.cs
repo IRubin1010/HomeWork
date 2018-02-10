@@ -15,6 +15,7 @@ namespace PLWPF
         public Initialize(IBL Bl)
         {
             ibl = Bl;
+          Bracha_Polak.Print();
             //NannyInitialize();
             //MotherInitialize();
             //ChildInitialize();

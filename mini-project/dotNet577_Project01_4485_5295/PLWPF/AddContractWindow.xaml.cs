@@ -115,7 +115,14 @@ namespace PLWPF
         private void MotherSelected(object sender, SelectionChangedEventArgs e)
         {
             mother = (Mother)(sender as ComboBox).SelectedItem;
+            nannyComboBox.SelectedItem = null;
             nannyComboBox.IsEnabled = false;
+            nanny = new Nanny();
+            // bind payment to the new nanny
+            // because in case that select another mother to cleen touse fields
+            hourlyFeeTextBox.DataContext = nanny;
+            monthlyFeeTextBox.DataContext = nanny;
+            isPaymentByHourCheckBox.DataContext = nanny;
             if (mother != null)
             {
                 // get mother children and bind to child combobox

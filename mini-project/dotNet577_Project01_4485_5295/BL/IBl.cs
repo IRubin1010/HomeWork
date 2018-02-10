@@ -157,9 +157,10 @@ namespace BL
         /// </summary>
         /// <param name="contract">the contract to calculate the payment for</param>
         void CalculatePayment(Contract contract);
+        /// <summary>
+        /// return the contract number thet  had sigend last
+        /// </summary>
         int getContractNumber();
-
-        List<Mother> MotherWithChilrenWithNoNanny();
 
         // list return functions
 
@@ -180,7 +181,10 @@ namespace BL
         /// </summary>
         List<Contract> CloneContractList();
 
-
+        /// <summary>
+        /// return list of mothers who have children and the children have no nanny
+        /// </summary>
+        List<Mother> MotherWithChilrenWithNoNanny();
         /// <summary>
         /// calculate the distance between 2 address
         /// </summary>

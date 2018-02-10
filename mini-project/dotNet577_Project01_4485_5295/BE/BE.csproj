@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlException.cs" />
     <Compile Include="Child.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Mother.cs" />

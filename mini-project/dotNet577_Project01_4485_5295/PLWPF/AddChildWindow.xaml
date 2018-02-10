@@ -36,14 +36,6 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Grid.Column" Value="1"/>
         </Style>
-        <Style x:Key="NeedsLabel" TargetType="Label" BasedOn="{StaticResource LabelStyle}">
-            <!--<Setter Property="Visibility" Value="Hidden"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=isSpecialNeedsCheckBox , Path=IsChecked}" Value="True">
-                    <Setter Property="Visibility" Value="Visible"/>
-                </DataTrigger>
-            </Style.Triggers>-->
-        </Style>
         <Style x:Key="NeedsTextBox" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="Visibility" Value="Hidden"/>
             <Style.Triggers>
@@ -109,7 +101,7 @@
                 <TextBox x:Name="ageInMonthTextBox" IsEnabled="False" Text="{Binding AgeInMonth, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Style="{StaticResource TextBoxStyle}"/>
                 <Label Content="Is Special Needs:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
                 <CheckBox x:Name="isSpecialNeedsCheckBox" IsChecked="{Binding IsSpecialNeeds, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Style="{StaticResource CheckBoxStyle}"/>
-                <Label x:Name="specialNeedsLabel" Content="Special Needs:" Grid.Row="7" Visibility="{Binding ElementName=isSpecialNeedsCheckBox, Path=IsChecked,Converter={StaticResource BoolVisibiltyConverter}}" Style="{StaticResource NeedsLabel}"/>
+                <Label x:Name="specialNeedsLabel" Content="Special Needs:" Grid.Row="7" Visibility="{Binding ElementName=isSpecialNeedsCheckBox, Path=IsChecked,Converter={StaticResource BoolVisibiltyConverter}}"/>
                 <TextBox x:Name="specialNeedsTextBox"  Text="{Binding SpecialNeeds, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Style="{StaticResource NeedsTextBox}"/>
             </Grid>
         </Grid>
