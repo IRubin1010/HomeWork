@@ -58,7 +58,6 @@ namespace PLWPF
             {
                 try
                 {
-                    Console.WriteLine(contract.Print());
                     bl.UpdateContract(contract);
                     Close();
                 }

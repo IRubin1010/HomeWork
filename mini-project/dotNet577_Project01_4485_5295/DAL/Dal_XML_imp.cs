@@ -9,6 +9,7 @@ using System.Xml.Linq;
 
 namespace DAL
 {
+    // extention methods for int?
     static class Tools
     {
         public static int? NullOrIntValue(this int? parm, XElement element)
@@ -16,6 +17,7 @@ namespace DAL
             return string.IsNullOrEmpty(element.Value) ? default(int?) : int.Parse(element.Value);
         }
     }
+
     sealed class Dal_XML_imp : IDAL
     {
         DsXml nannyXml;
@@ -40,7 +42,7 @@ namespace DAL
         static readonly IDAL instance = new Dal_XML_imp();
 
         public static IDAL Instance { get { return instance; } }
-        #region nanny function
+
         /* Nanny functions */
 
         /// <summary>
@@ -84,6 +86,11 @@ namespace DAL
                                  new XElement("Recommendations", nanny.Recommendations)
                                );
         }
+        /// <summary>
+        /// return nanny from nanny xml file
+        /// </summary>
+        /// <param name="nanny"></param>
+        /// <remarks>acept xelement nanny</remarks>
         public Nanny GetNanny(XElement nanny)
         {
             return new Nanny()
@@ -226,25 +233,25 @@ namespace DAL
             try
             {
                 nannyXml.LoadData();
-                Nanny Nanny;
-                Nanny = (from nanny in nannyXml.Root.Elements("Nanny")
-                         where Int32.Parse(nanny.Element("ID").Value) == id
-                         select GetNanny(nanny)).FirstOrDefault();
-                return Nanny;
+                return (from nanny in nannyXml.Root.Elements("Nanny")
+                        where Int32.Parse(nanny.Element("ID").Value) == id
+                        select GetNanny(nanny)).FirstOrDefault();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        /// <summary>
+        /// return xelement of nanny with given id
+        /// </summary>
+        /// <param name="id">id of nanny</param>
         XElement FindNannyXml(int? id)
         {
             nannyXml.LoadData();
-            XElement nanny;
-            nanny = (from nannyElment in nannyXml.Root.Elements("Nanny")
+           return (from nannyElment in nannyXml.Root.Elements("Nanny")
                      where Int32.Parse(nannyElment.Element("ID").Value) == id
                      select nannyElment).FirstOrDefault();
-            return nanny;
         }
 
         /// <summary>
@@ -283,8 +290,7 @@ namespace DAL
             }
 
         }
-        #endregion
-        #region mother function
+
         /// <summary>
         /// create an xelement of mother
         /// </summary>
@@ -317,6 +323,11 @@ namespace DAL
                                  new XElement("Remarks", mother.Remarks)
                                  );
         }
+
+        /// <summary>
+        /// return mother from nanny xml file
+        /// </summary>
+        /// <remarks>acept xelement mother</remarks>
         private Mother GetMother(XElement mother)
         {
             return new Mother()
@@ -458,30 +469,33 @@ namespace DAL
             try
             {
                 motherXml.LoadData();
-                Mother Mother;
-                Mother = (from mother in motherXml.Root.Elements()
+               return (from mother in motherXml.Root.Elements()
                           where Int32.Parse(mother.Element("ID").Value) == id
                           select GetMother(mother)).FirstOrDefault();
-                return Mother;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
+        /// <summary>
+        /// return xelement of mother with given id
+        /// </summary>
+        /// <param name="id">id of mother</param>
         XElement FindMotherXml(int? id)
         {
             motherXml.LoadData();
-            XElement mother;
-            mother = (from motherElment in motherXml.Root.Elements("Mother")
+            return (from motherElment in motherXml.Root.Elements("Mother")
                       where Int32.Parse(motherElment.Element("ID").Value) == id
                       select motherElment).FirstOrDefault();
-            return mother;
         }
-        #endregion
         /* Child functions */
 
+        /// <summary>
+        /// create an xelement of child
+        /// </summary>
+        /// <param name="child">the child to create from her the xelement</param>
+        /// <returns>xelement of child</returns>
         XElement creatChild(Child child)
         {
             return new XElement("Child",
@@ -495,6 +509,10 @@ namespace DAL
                                  new XElement("HaveNanny", child.HaveNanny)
                                  );
         }
+        /// <summary>
+        /// return child from child xml file
+        /// </summary>
+        /// <remarks>acept xelement child</remarks>
         private Child GetChild(XElement child)
         {
             return new Child()
@@ -615,11 +633,9 @@ namespace DAL
             try
             {
                 childXml.LoadData();
-                Child Child;
-                Child = (from child in childXml.Root.Elements("Child")
+               return (from child in childXml.Root.Elements("Child")
                          where Int32.Parse(child.Element("ID").Value) == id
                          select GetChild(child)).FirstOrDefault();
-                return Child;
             }
             catch (Exception)
             {
@@ -627,16 +643,16 @@ namespace DAL
             }
         }
 
-
-
+        /// <summary>
+        /// return xelement of child with given id
+        /// </summary>
+        /// <param name="id">id of child</param>
         XElement FindChildXml(int? id)
         {
             childXml.LoadData();
-            XElement child;
-            child = (from childElment in childXml.Root.Elements("Child")
+           return (from childElment in childXml.Root.Elements("Child")
                      where Int32.Parse(childElment.Element("ID").Value) == id
                      select childElment).FirstOrDefault();
-            return child;
         }
 
         /// <summary>
@@ -663,6 +679,11 @@ namespace DAL
 
         /* contract functions */
 
+        /// <summary>
+        /// create an xelement of contract
+        /// </summary>
+        /// <param name="contract">the contract to create from her the xelement</param>
+        /// <returns>xelement of contract</returns>
         XElement createContract(Contract contract)
         {
             return new XElement("Contract",
@@ -680,6 +701,10 @@ namespace DAL
                                  new XElement("EndTransection", contract.EndTransection));
         }
 
+        /// <summary>
+        /// return contract from contract xml file
+        /// </summary>
+        /// <remarks>acept xelement contract</remarks>
         private Contract GetContract(XElement contract)
         {
             return new Contract()
@@ -838,6 +863,10 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// return xelement of contract with given id
+        /// </summary>
+        /// <param name="id">id of contract</param>
         public XElement FindContractXml(int? contractNumber)
         {
             contractXml.LoadData();
@@ -845,12 +874,19 @@ namespace DAL
                     where int.Parse(contract.Element("ContractNumber").Value) == contractNumber
                     select contract).FirstOrDefault();
         }
+
+        /// <summary>
+        /// return the contract number thet  had sigend last
+        /// </summary>
         public int getContractNumber()
         {
             configXml.LoadData();
             return int.Parse(configXml.Root.Element("ContractNumber").Value);
         }
 
+        /// <summary>
+        /// return a list of clone nanny objects
+        /// </summary>
         public List<Nanny> CloneNannyList()
         {
             try
@@ -861,7 +897,9 @@ namespace DAL
             }
             catch { throw; }
         }
-
+        /// <summary>
+        /// return a list of clone mother objects
+        /// </summary>
         public List<Mother> CloneMotherList()
         {
             try
@@ -872,7 +910,9 @@ namespace DAL
             }
             catch { throw; }
         }
-
+        /// <summary>
+        /// return a list of clone child objects
+        /// </summary>
         public List<Child> CloneChildList()
         {
             try
@@ -883,7 +923,9 @@ namespace DAL
             }
             catch { throw; }
         }
-
+        /// <summary>
+        /// return a list of clone contract objects
+        /// </summary>
         public List<Contract> CloneContractList()
         {
             try

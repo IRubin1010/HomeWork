@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
 
-namespace BL
+namespace BE
 {
     [Serializable]
-    public class BLException: Exception, ISerializable
+    public class BLException : Exception, ISerializable
     {
         /// <summary>
         /// the name of the function that throw the exception

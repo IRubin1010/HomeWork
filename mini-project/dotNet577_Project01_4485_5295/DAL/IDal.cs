@@ -152,6 +152,9 @@ namespace DAL
         /// </summary>
         /// <param name="contractNumber">the contract's number that we whant to find</param>
         Contract FindContract(int? contractNumber);
+        /// <summary>
+        /// return the contract number thet  had sigend last
+        /// </summary>
         int getContractNumber();
 
         // list return functions

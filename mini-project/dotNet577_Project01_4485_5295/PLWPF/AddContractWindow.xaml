@@ -133,7 +133,7 @@
                     <Label Content="select Km for distance" Margin="20,0" Grid.Row="3"/>
                     <TextBox Name="KmTextBox" Style="{StaticResource KMTextBox}" Grid.Row="3" Width="50" HorizontalAlignment="Right" Height="20" Margin="20,0"/>
                     <RadioButton Name="RButton4" Content="Filtered by distance from mother" Checked="DistanceChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="4"/>
-                    <RadioButton Name="RButton5" Content="5 best matches" Checked="BestMatchChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="5"/>
+                    <RadioButton Name="RButton5" Content="5 best matches(in nanny age range)" Checked="BestMatchChecked" Style="{StaticResource radioButtonStyle}" Grid.Row="5"/>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">
@@ -165,7 +165,7 @@
                     <TextBox x:Name="monthlyFeeTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding MonthlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4"/>
                     <Label Content="Is Payment By Hour:" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
                     <CheckBox x:Name="isPaymentByHourCheckBox" IsHitTestVisible="False" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsHourlyFee, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5"/>
-                    <Label Content="Is Meet:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
+                    <Label Content="was there a meeting:" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
                     <CheckBox x:Name="isMeetCheckBox" Style="{StaticResource CheckBoxStyle}" IsChecked="{Binding IsMeet, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6"/>
                     <Label Content="month Final Payment:" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
                     <TextBox x:Name="finalPaymentTextBox" IsEnabled="False" Style="{StaticResource TextBoxStyle}" Text="{Binding FinalPayment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7"/>

@@ -8,15 +8,14 @@ namespace BE
 {
     public class Nanny
     {
-        //Properties//
-        //public int? ID { get; set; }
+        // Properties
         private int? id;
         public int? ID { get { return id; } set { if (value >= 100000000 && value <= 999999999) id = value; else { id = 0; throw new ArgumentException("iligell ID"); } } }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string FullNameAndID { get { return FirstName + " " + LastName + " ID: " + ID; } }
         public DateTime BirthDate { get; set; }
-        public int? NannyAge { get { if (DateTime.Today.Year - BirthDate.Year == 0) return null; else return DateTime.Today.Year - BirthDate.Year; } set { } }
+        public int? NannyAge { get { if (DateTime.Today.Year - BirthDate.Year == 0) return 0; else return DateTime.Today.Year - BirthDate.Year; } set { } }
         public int? PhoneNumber { get; set; }
         public string Address { get; set; }
         public bool Elevator { get; set; }
@@ -42,6 +41,7 @@ namespace BE
         public int? FloorValue { get; set; }
         public int? SumValue { get; set; }
 
+        // constractor
         public Nanny()
         {
             BirthDate = DateTime.Now.AddYears(-18);
@@ -51,69 +51,28 @@ namespace BE
                 new TimeSpan[6]{ new TimeSpan(0, 0, 0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) },
                 new TimeSpan[6]{ new TimeSpan(0,0,0), new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) , new TimeSpan(0,0,0) }
             };
-
         }
 
-        //override//
+        //override
         public override string ToString()
         {
             return FullNameAndID;
         }
 
-        public string Print()
+        public void Print()
         {
             string dayWorkHors = "";
             for (int i = 0; i < 6; i++)
             {
-                switch (i)
-                {
-                    case 0:
-                        dayWorkHors += "Sunday: ";
-                        if (IsWork[i] == true)
-                            dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n' + '\t';
-                        else
-                            dayWorkHors += "don't work \n \t";
-                        break;
-                    case 1:
-                        dayWorkHors += "Monday: ";
-                        if (IsWork[i] == true)
-                            dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n' + '\t';
-                        else
-                            dayWorkHors += "don't work \n \t";
-                        break;
-                    case 2:
-                        dayWorkHors += "Tuesday: ";
-                        if (IsWork[i] == true)
-                            dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n' + '\t';
-                        else
-                            dayWorkHors += "don't work \n \t";
-                        break;
-                    case 3:
-                        dayWorkHors += "Wednesday: ";
-                        if (IsWork[i] == true)
-                            dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n' + '\t';
-                        else
-                            dayWorkHors += "don't work \n \t";
-                        break;
-                    case 4:
-                        dayWorkHors += "Thursday: ";
-                        if (IsWork[i] == true)
-                            dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n' + '\t';
-                        else
-                            dayWorkHors += "don't work \n \t";
-                        break;
-                    case 5:
-                        dayWorkHors += "Friday: ";
-                        if (IsWork[i] == true)
-                            dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n';
-                        else
-                            dayWorkHors += "don't work" + '\n';
-                        break;
-                    default:
-                        break;
-                }
+
+                dayWorkHors += ((Days)i).ToString() + ": ";
+                if (IsWork[i] == true)
+                    dayWorkHors += WorkHours[0][i] + " - " + WorkHours[1][i] + '\n' + '\t';
+                else
+                    dayWorkHors += "don't work \n \t";
+
             }
-            return "ID: " + ID + '\n' +
+            Console.WriteLine("ID: " + ID + '\n' +
                     "name: " + FirstName + " " + LastName + '\n' +
                     "birth date: " + BirthDate.ToShortDateString() + '\n' +
                     "age: " + NannyAge + '\n' +
@@ -131,7 +90,7 @@ namespace BE
                     "monthly fee: " + MonthlyFee + '\n' +
                     "day and hours work: \n \t" + dayWorkHors +
                     "valid vacation days: " + IsValidVacationDays + '\n' +
-                    "recomendations: " + Recommendations + '\n';
+                    "recomendations: " + Recommendations + '\n');
         }
         public override bool Equals(object obj)
         {
@@ -159,6 +118,9 @@ namespace BE
             return FirstName + " " + LastName;
         }
 
+        /// <summary>
+        /// explicit converter from BE.nanny to DO.nanny
+        /// </summary>
         public static explicit operator DO.Nanny(Nanny nanny)
         {
             if (nanny != null)
@@ -191,6 +153,9 @@ namespace BE
             return null;
         }
 
+        /// <summary>
+        /// explicit converter DO.nanny from to  BE.nanny
+        /// </summary>
         public static explicit operator Nanny(DO.Nanny nanny)
         {
             if (nanny != null)

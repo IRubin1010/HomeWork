@@ -499,7 +499,9 @@ namespace DAL
             if (list.Count == 0) return null;
             return list[0];
         }
-
+        /// <summary>
+        /// return the contract number thet  had sigend last
+        /// </summary>
         public int getContractNumber()
         {
             return (int)ContractNumber;

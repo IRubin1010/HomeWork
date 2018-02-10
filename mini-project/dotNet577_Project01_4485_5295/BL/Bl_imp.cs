@@ -12,6 +12,8 @@ using System.Threading;
 
 namespace BL
 {
+    public enum Days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
+
     class Bl_imp : IBL
     {
         IDAL dal;
@@ -39,12 +41,16 @@ namespace BL
                 if (message != null) throw new BLException(message, "AddNanny");
                 dal.AddNanny((DO.Nanny)nanny);
             }
-            catch (DALException ex)
+            catch (DO.DALException ex)
             {
                 throw new BLException(ex.Message, ex.sender);
             }
         }
-        public enum days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
+        /// <summary>
+        /// check nanny validations
+        /// </summary>
+        /// <param name="nanny">nanny to check</param>
+        /// <remarks>check validations of all the fields</remarks>
         public string NannyValidations(Nanny nanny)
         {
             string message = null;
@@ -59,9 +65,10 @@ namespace BL
             if (nanny.MaxAge < nanny.MinAge) message += "The maximum age can not be greater than the minimum age\n";
             for (int i = 0; i < 6; i++)
                 if (nanny.IsWork[i] && nanny.WorkHours[0][i] > nanny.WorkHours[1][i])
-                    message += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
+                    message += "start time can't be later then end time at day " + ((Days)i).ToString() + "\n";
             return message;
         }
+
         /// <summary>
         /// delete nanny from nanny's DB
         /// </summary>
@@ -109,7 +116,7 @@ namespace BL
             {
                 throw;
             }
-            catch (DALException ex)
+            catch (DO.DALException ex)
             {
                 throw new BLException(ex.Message, ex.sender);
             }
@@ -132,7 +139,7 @@ namespace BL
                     if (message != null) throw new BLException(message, "UpdateNanny");
                     dal.UpdateNanny((DO.Nanny)nanny);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -164,8 +171,7 @@ namespace BL
         /// </remarks>
         public Nanny FindNanny(int? id)
         {
-            Nanny nanny = (Nanny)dal.FindNanny(id);
-            return nanny == null ? null : nanny.Clone();
+            return (Nanny)dal.FindNanny(id);
         }
 
         /// <summary>
@@ -184,7 +190,7 @@ namespace BL
                 {
                     dal.UpdateNannyChildren((DO.Nanny)nanny, num);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -193,6 +199,11 @@ namespace BL
 
         /* mother functions */
 
+        /// <summary>
+        /// check mother validations
+        /// </summary>
+        /// <param name="mother">mother to check</param>
+        /// <remarks>check validations of all the fields</remarks>
         public string MotherValidations(Mother mother)
         {
             string message = null;
@@ -204,7 +215,7 @@ namespace BL
             if (!mother.PhoneNumber.HasValue) message += "PhoneNumber can't be empty\n";
             for (int i = 0; i < 6; i++)
                 if (mother.NeedNanny[i] && mother.NeedNannyHours[0][i] > mother.NeedNannyHours[1][i])
-                    message += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
+                    message += "start time can't be later then end time at day " + ((Days)i).ToString() + "\n";
             return message;
         }
 
@@ -225,7 +236,7 @@ namespace BL
                     if (message != null) throw new BLException(message, "AddMother");
                     dal.AddMother((DO.Mother)mother);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -278,7 +289,7 @@ namespace BL
             {
                 throw;
             }
-            catch (DALException ex)
+            catch (DO.DALException ex)
             {
                 throw new BLException(ex.Message, ex.sender);
             }
@@ -301,7 +312,7 @@ namespace BL
                     if (message != null) throw new BLException(message, "UpdateMother");
                     dal.UpdateMother((DO.Mother)mother);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -333,17 +344,22 @@ namespace BL
         /// </remarks>
         public Mother FindMother(int? id)
         {
-            Mother mother = (Mother)dal.FindMother(id);
-            return mother == null ? null : mother.Clone();
+            return (Mother)dal.FindMother(id);
         }
 
         /* child functions */
 
+        /// <summary>
+        /// check child validations
+        /// </summary>
+        /// <param name="child">child to check</param>
+        /// <remarks>check validations of all the fields</remarks>
         public string ChildValidations(Child child)
         {
             string message = null;
             if (child.ID < 100000000 || child.ID > 999999999) message += "iligell ID\n";
             if (!child.ID.HasValue) message += "id can't be empty\n";
+            if (child.MotherID < 100000000 || child.MotherID > 999999999) message += "iligell ID\n";
             if (!child.MotherID.HasValue) message += "mother id can't be empty\n";
             if (string.IsNullOrEmpty(child.FirstName)) message += "First name can't be empty\n";
             if (child.AgeInMonth < 0 || child.AgeInMonth == null) message += "Invalid birth date\n";
@@ -369,7 +385,7 @@ namespace BL
                         throw new BLException("mother with ID: " + child.MotherID + " dosn't exsist", "Add Child");
                     dal.AddChild((DO.Child)child);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -421,7 +437,7 @@ namespace BL
             {
                 throw;
             }
-            catch (DALException ex)
+            catch (DO.DALException ex)
             {
                 throw new BLException(ex.Message, ex.sender);
             }
@@ -444,7 +460,7 @@ namespace BL
                     if (message != null) throw new BLException(message, "UpdateChild");
                     dal.UpdateChild((DO.Child)child);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
 
@@ -477,8 +493,7 @@ namespace BL
         /// </remarks>
         public Child FindChild(int? id)
         {
-            Child child = (Child)dal.FindChild(id);
-            return child == null ? null : child.Clone();
+            return (Child)dal.FindChild(id);
         }
 
         /// <summary>
@@ -497,7 +512,7 @@ namespace BL
                 {
                     dal.UpdateHaveNanny((DO.Child)child, change);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -512,7 +527,7 @@ namespace BL
             if (!contract.ChildID.HasValue) message += "child id can't be empty\n";
             if (!contract.NannyID.HasValue) message += "nanny id can't be empty\n";
             if (contract.EndTransection < contract.BeginTransection) message += "Contract end date can not be earlier than start date\n";
-            //if (contract.EndTransection < DateTime.Now) message += "Invalid contract end date - date can not be earlier than today\n";
+            if (contract.EndTransection < DateTime.Now) message += "Invalid contract end date - date can not be earlier than today\n";
             return message;
         }
 
@@ -568,7 +583,7 @@ namespace BL
                         UpdateNannyChildren(nanny, -1);
                     throw;
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     // if fail at UpdateHaveNanny need to reduce back nanny children,
                     // and if fail at AddContract need to reduce back nanny children
@@ -631,7 +646,7 @@ namespace BL
                         UpdateNannyChildren(FindNanny(contract.NannyID), 1);
                     throw;
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     // if fail at UpdateHaveNanny need to increase back nanny children,
                     // and if fail at AddContract need to increase back nanny children
@@ -664,7 +679,7 @@ namespace BL
                     CalculatePayment(contract);
                     dal.UpdateContract((DO.Contract)contract);
                 }
-                catch (DALException ex)
+                catch (DO.DALException ex)
                 {
                     throw new BLException(ex.Message, ex.sender);
                 }
@@ -700,16 +715,20 @@ namespace BL
         /// </remarks>
         public Contract FindContract(int? contractNumber)
         {
-            Contract contract = (Contract)dal.FindContract(contractNumber);
-            return contract == null ? null : contract.Clone();
+            return (Contract)dal.FindContract(contractNumber);
         }
 
+        /// <summary>
+        /// return the contract number thet  had sigend last
+        /// </summary>
         public int getContractNumber()
         {
             return dal.getContractNumber();
         }
 
-
+        /// <summary>
+        /// return list of mothers who have children and the children have no nanny
+        /// </summary>
         public List<Mother> MotherWithChilrenWithNoNanny()
         {
             List<Mother> motherList = new List<Mother>();
@@ -878,7 +897,7 @@ namespace BL
                 // go over nanny and mother hours and check the match
                 for (int i = 0; i < 6; i++)
                 {
-                    if ((bool)nanny.IsWork[i] && (bool)mother.NeedNanny[i])
+                    if (nanny.IsWork[i] && mother.NeedNanny[i])
                         if (mother.NeedNannyHours[0][i] < nanny.WorkHours[0][i] || mother.NeedNannyHours[1][i] > nanny.WorkHours[1][i])
                             return false;
                 }
@@ -979,7 +998,7 @@ namespace BL
         public List<Nanny> NannysInKMWithConditions(Mother mother, int? Km, int? id)
         {
             if (mother != null)
-                return CloneNannyList().Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
+                return MotherConditions(mother, id).Where(nanny => IsNannyInKM(mother, nanny, Km)).ToList();
             else return new List<Nanny>();
         }
 
@@ -1134,7 +1153,7 @@ namespace BL
         }
 
         /// <summary>
-        /// rrturn group of nannys group by the children age
+        /// return group of nannys group by the children age
         /// </summary>
         /// <param name="orderByMaxAge">if to order by max age</param>
         /// <param name="order">if to order at all</param>

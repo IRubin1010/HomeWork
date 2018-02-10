@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Child.cs" />
     <Compile Include="Contract.cs" />
+    <Compile Include="DALException.cs" />
     <Compile Include="Mother.cs" />
     <Compile Include="Nanny.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
