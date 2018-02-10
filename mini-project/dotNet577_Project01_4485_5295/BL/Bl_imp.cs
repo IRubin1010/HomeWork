@@ -716,7 +716,8 @@ namespace BL
             foreach (Child child in CloneChildList())
             {
                 if (child.HaveNanny == false)
-                    motherList.Add(FindMother(child.MotherID));
+                    if (motherList.Exists(mother => mother.ID == child.MotherID) == false)
+                        motherList.Add(FindMother(child.MotherID));
             }
             return motherList;
         }

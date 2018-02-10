@@ -66,30 +66,38 @@ namespace BE
 
         public static explicit operator DO.Child(Child child)
         {
-            return new DO.Child
+            if (child != null)
             {
-                ID = child.ID,
-                MotherID = child.MotherID,
-                FirstName = child.FirstName,
-                BirthDate = child.BirthDate,
-                IsSpecialNeeds = child.IsSpecialNeeds,
-                SpecialNeeds = child.SpecialNeeds,
-                HaveNanny = child.HaveNanny
-            };
+                return new DO.Child
+                {
+                    ID = child.ID,
+                    MotherID = child.MotherID,
+                    FirstName = child.FirstName,
+                    BirthDate = child.BirthDate,
+                    IsSpecialNeeds = child.IsSpecialNeeds,
+                    SpecialNeeds = child.SpecialNeeds,
+                    HaveNanny = child.HaveNanny
+                };
+            }
+            return null;
         }
 
         public static explicit operator Child(DO.Child child)
         {
-            return new Child
+            if (child != null)
             {
-                ID = child.ID,
-                MotherID = child.MotherID,
-                FirstName = child.FirstName,
-                BirthDate = child.BirthDate,
-                IsSpecialNeeds = child.IsSpecialNeeds,
-                SpecialNeeds = child.SpecialNeeds,
-                HaveNanny = child.HaveNanny
-            };
+                return new Child
+                {
+                    ID = child.ID,
+                    MotherID = child.MotherID,
+                    FirstName = child.FirstName,
+                    BirthDate = child.BirthDate,
+                    IsSpecialNeeds = child.IsSpecialNeeds,
+                    SpecialNeeds = child.SpecialNeeds,
+                    HaveNanny = child.HaveNanny
+                };
+            }
+            return null;
         }
 
     }

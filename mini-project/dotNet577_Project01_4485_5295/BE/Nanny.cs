@@ -161,59 +161,66 @@ namespace BE
 
         public static explicit operator DO.Nanny(Nanny nanny)
         {
-           return new DO.Nanny
+            if (nanny != null)
             {
-                ID = nanny.ID,
-                LastName = nanny.LastName,
-                FirstName = nanny.FirstName,
-                BirthDate = nanny.BirthDate,
-                NannyAge = nanny.NannyAge,
-                PhoneNumber = nanny.PhoneNumber,
-                Address = nanny.Address,
-                Elevator = nanny.Elevator,
-                Floor = nanny.Floor,
-                Seniority = nanny.Seniority,
-                Children = nanny.Children,
-                MaxChildren = nanny.MaxChildren,
-                MinAge = nanny.MinAge,
-                MaxAge = nanny.MaxAge,
-                IsHourlyFee = nanny.IsHourlyFee,
-                HourlyFee = nanny.HourlyFee,
-                MonthlyFee = nanny.MonthlyFee,
-                IsWork = (bool[])nanny.IsWork.Clone(),
-                WorkHours = (TimeSpan[][])nanny.WorkHours.Clone(),
-                IsValidVacationDays = nanny.IsValidVacationDays,
-                Recommendations = nanny.Recommendations
-            };
+                return new DO.Nanny
+                {
+                    ID = nanny.ID,
+                    LastName = nanny.LastName,
+                    FirstName = nanny.FirstName,
+                    BirthDate = nanny.BirthDate,
+                    NannyAge = nanny.NannyAge,
+                    PhoneNumber = nanny.PhoneNumber,
+                    Address = nanny.Address,
+                    Elevator = nanny.Elevator,
+                    Floor = nanny.Floor,
+                    Seniority = nanny.Seniority,
+                    Children = nanny.Children,
+                    MaxChildren = nanny.MaxChildren,
+                    MinAge = nanny.MinAge,
+                    MaxAge = nanny.MaxAge,
+                    IsHourlyFee = nanny.IsHourlyFee,
+                    HourlyFee = nanny.HourlyFee,
+                    MonthlyFee = nanny.MonthlyFee,
+                    IsWork = (bool[])nanny.IsWork.Clone(),
+                    WorkHours = (TimeSpan[][])nanny.WorkHours.Clone(),
+                    IsValidVacationDays = nanny.IsValidVacationDays,
+                    Recommendations = nanny.Recommendations
+                };
+            }
+            return null;
         }
 
         public static explicit operator Nanny(DO.Nanny nanny)
         {
-            return new Nanny
+            if (nanny != null)
             {
-                ID = nanny.ID,
-                LastName = nanny.LastName,
-                FirstName = nanny.FirstName,
-                BirthDate = nanny.BirthDate,
-                NannyAge = nanny.NannyAge,
-                PhoneNumber = nanny.PhoneNumber,
-                Address = nanny.Address,
-                Elevator = nanny.Elevator,
-                Floor = nanny.Floor,
-                Seniority = nanny.Seniority,
-                Children = nanny.Children,
-                MaxChildren = nanny.MaxChildren,
-                MinAge = nanny.MinAge,
-                MaxAge = nanny.MaxAge,
-                IsHourlyFee = nanny.IsHourlyFee,
-                HourlyFee = nanny.HourlyFee,
-                MonthlyFee = nanny.MonthlyFee,
-                IsWork = (bool[])nanny.IsWork.Clone(),
-                WorkHours = (TimeSpan[][])nanny.WorkHours.Clone(),
-                IsValidVacationDays = nanny.IsValidVacationDays,
-                Recommendations = nanny.Recommendations
-            };
+                return new Nanny
+                {
+                    ID = nanny.ID,
+                    LastName = nanny.LastName,
+                    FirstName = nanny.FirstName,
+                    BirthDate = nanny.BirthDate,
+                    NannyAge = nanny.NannyAge,
+                    PhoneNumber = nanny.PhoneNumber,
+                    Address = nanny.Address,
+                    Elevator = nanny.Elevator,
+                    Floor = nanny.Floor,
+                    Seniority = nanny.Seniority,
+                    Children = nanny.Children,
+                    MaxChildren = nanny.MaxChildren,
+                    MinAge = nanny.MinAge,
+                    MaxAge = nanny.MaxAge,
+                    IsHourlyFee = nanny.IsHourlyFee,
+                    HourlyFee = nanny.HourlyFee,
+                    MonthlyFee = nanny.MonthlyFee,
+                    IsWork = (bool[])nanny.IsWork.Clone(),
+                    WorkHours = (TimeSpan[][])nanny.WorkHours.Clone(),
+                    IsValidVacationDays = nanny.IsValidVacationDays,
+                    Recommendations = nanny.Recommendations
+                };
+            }
+            return null;
         }
-
     }
 }

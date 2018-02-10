@@ -58,7 +58,7 @@ namespace PLWPF
         private void WorkDaysHours(object sender, RoutedEventArgs e)
         {
             // send to another winndow to see the work days and hours
-            new NannyWorkDaysHoursDelete(nanny).Show();
+            new NannyWorkDaysHoursDelete(nanny).ShowDialog();
         }
 
         // delete nanny button click event
