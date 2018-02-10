@@ -22,7 +22,7 @@ namespace BE
         public DateTime BeginTransection { get; set; }
         public DateTime EndTransection { get; set; }
         public string Details { get { return "contract number: " + ContractNumber; } }
-
+      
         // constractor
         public Contract()
         {
