@@ -35,7 +35,7 @@ namespace PLWPF
         {
             NannyWorkDaysHoursDelete NannyWorkDaysHours = new NannyWorkDaysHoursDelete(nanny);
             NannyWorkDaysHours.Topmost = true;
-            NannyWorkDaysHours.Show();
+            NannyWorkDaysHours.ShowDialog();
         }
     }
 }
