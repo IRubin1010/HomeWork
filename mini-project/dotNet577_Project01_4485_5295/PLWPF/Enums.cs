@@ -14,6 +14,9 @@ namespace PLWPF
         child,
         contract,
     }
+    public enum Days
+    { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
+
 }
 
 

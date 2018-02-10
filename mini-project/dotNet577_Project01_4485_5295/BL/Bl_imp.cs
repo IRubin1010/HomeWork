@@ -48,6 +48,7 @@ namespace BL
         public string NannyValidations(Nanny nanny)
         {
             string message = null;
+            if (nanny.ID < 100000000 || nanny.ID > 999999999) message += "iligell ID\n";
             if (!nanny.ID.HasValue) message += "id can't be empty\n";
             if (string.IsNullOrEmpty(nanny.FirstName)) message += "First name can't be empty\n";
             if (string.IsNullOrEmpty(nanny.LastName)) message += "Last name can't be empty\n";
@@ -195,13 +196,14 @@ namespace BL
         public string MotherValidations(Mother mother)
         {
             string message = null;
+            if (mother.ID < 100000000 || mother.ID > 999999999) message += "iligell ID\n";
             if (!mother.ID.HasValue) message += "id can't be empty\n";
             if (string.IsNullOrEmpty(mother.FirstName)) message += "First name can't be empty\n";
             if (string.IsNullOrEmpty(mother.LastName)) message += "Last name can't be empty\n";
             if (string.IsNullOrEmpty(mother.Address)) message += "Adsress can't be empty\n";
             if (!mother.PhoneNumber.HasValue) message += "PhoneNumber can't be empty\n";
             for (int i = 0; i < 6; i++)
-                if (mother.NeedNannyHours[0][i] > mother.NeedNannyHours[1][i])
+                if (mother.NeedNanny[i] && mother.NeedNannyHours[0][i] > mother.NeedNannyHours[1][i])
                     message += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
             return message;
         }
@@ -340,6 +342,7 @@ namespace BL
         public string ChildValidations(Child child)
         {
             string message = null;
+            if (child.ID < 100000000 || child.ID > 999999999) message += "iligell ID\n";
             if (!child.ID.HasValue) message += "id can't be empty\n";
             if (!child.MotherID.HasValue) message += "mother id can't be empty\n";
             if (string.IsNullOrEmpty(child.FirstName)) message += "First name can't be empty\n";

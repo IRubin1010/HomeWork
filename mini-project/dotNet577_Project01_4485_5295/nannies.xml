@@ -13,7 +13,7 @@
     <Elevator>true</Elevator>
     <Floor />
     <Seniority>10</Seniority>
-    <Children>2</Children>
+    <Children>0</Children>
     <MaxChildren>5</MaxChildren>
     <MinAge>6</MinAge>
     <MaxAge>12</MaxAge>
@@ -199,7 +199,7 @@
     <Elevator>false</Elevator>
     <Floor>0</Floor>
     <Seniority>2</Seniority>
-    <Children>1</Children>
+    <Children>0</Children>
     <MaxChildren>10</MaxChildren>
     <MinAge>12</MinAge>
     <MaxAge>18</MaxAge>
@@ -943,7 +943,7 @@
     <Elevator>false</Elevator>
     <Floor>0</Floor>
     <Seniority>2</Seniority>
-    <Children>3</Children>
+    <Children>0</Children>
     <MaxChildren>10</MaxChildren>
     <MinAge>12</MinAge>
     <MaxAge>18</MaxAge>
@@ -1129,7 +1129,7 @@
     <Elevator>true</Elevator>
     <Floor />
     <Seniority>10</Seniority>
-    <Children>2</Children>
+    <Children>0</Children>
     <MaxChildren>5</MaxChildren>
     <MinAge>6</MinAge>
     <MaxAge>12</MaxAge>
@@ -1394,98 +1394,5 @@
     </WorkHours>
     <IsValidVacationDays>true</IsValidVacationDays>
     <Recommendations></Recommendations>
-  </Nanny>
-  <Nanny>
-    <ID>223432435</ID>
-    <Name>
-      <FirstName>wfvd</FirstName>
-      <LastName>sdfvd</LastName>
-    </Name>
-    <BirthDate>08/02/2000</BirthDate>
-    <NannyAge>18</NannyAge>
-    <PhoneNumber>579</PhoneNumber>
-    <Address>ירושלים, Israel</Address>
-    <Elevator>false</Elevator>
-    <Floor />
-    <Seniority />
-    <Children />
-    <MaxChildren />
-    <MinAge />
-    <MaxAge />
-    <IsHourlyFee>false</IsHourlyFee>
-    <HourlyFee />
-    <MonthlyFee />
-    <IsWork>
-      <day1>false</day1>
-      <day2>false</day2>
-      <day3>false</day3>
-      <day4>false</day4>
-      <day5>false</day5>
-      <day6>false</day6>
-    </IsWork>
-    <WorkHours>
-      <begin>
-        <hour>0</hour>
-        <minute>9</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <end>
-        <hour>0</hour>
-        <minute>8</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-    </WorkHours>
-    <IsValidVacationDays>false</IsValidVacationDays>
-    <Recommendations />
   </Nanny>
 </nannies>
