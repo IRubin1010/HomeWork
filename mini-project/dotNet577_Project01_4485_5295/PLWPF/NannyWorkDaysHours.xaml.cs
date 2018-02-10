@@ -32,14 +32,13 @@ namespace PLWPF
             WorkDaysHours.DataContext = Nanny;
         }
 
-        public enum days { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
         // submit button click event 
         private void submit_Click(object sender, RoutedEventArgs e)
         {
             string messge = null;
             for(int i = 0; i < 6; i++)
                 if (Nanny.IsWork[i] && Nanny.WorkHours[0][i] > Nanny.WorkHours[1][i])
-                    messge += "start time can't be later then end time at day " + ((days)i).ToString() + "\n";
+                    messge += "start time can't be later then end time at day " + ((Days)i).ToString() + "\n";
             if (messge!=null)
                 MessageBox.Show(messge, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             Close();
