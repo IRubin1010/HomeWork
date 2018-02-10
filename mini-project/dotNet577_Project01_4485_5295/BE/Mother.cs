@@ -150,21 +150,25 @@ namespace BE
 
         public static explicit operator Mother(DO.Mother mother)
         {
-            return new Mother
+            if (mother != null)
             {
-                ID = mother.ID,
-                LastName = mother.LastName,
-                FirstName = mother.FirstName,
-                PhoneNumber = mother.PhoneNumber,
-                Address = mother.Address,
-                SearchAreaForNanny = mother.SearchAreaForNanny,
-                WantElevator = mother.WantElevator,
-                MinSeniority = mother.MinSeniority,
-                MaxFloor = mother.MaxFloor,
-                NeedNanny = (bool[])mother.NeedNanny.Clone(),
-                NeedNannyHours = (TimeSpan[][])mother.NeedNannyHours.Clone(),
-                Remarks = mother.Remarks
-            };
+                return new Mother
+                {
+                    ID = mother.ID,
+                    LastName = mother.LastName,
+                    FirstName = mother.FirstName,
+                    PhoneNumber = mother.PhoneNumber,
+                    Address = mother.Address,
+                    SearchAreaForNanny = mother.SearchAreaForNanny,
+                    WantElevator = mother.WantElevator,
+                    MinSeniority = mother.MinSeniority,
+                    MaxFloor = mother.MaxFloor,
+                    NeedNanny = (bool[])mother.NeedNanny.Clone(),
+                    NeedNannyHours = (TimeSpan[][])mother.NeedNannyHours.Clone(),
+                    Remarks = mother.Remarks
+                };
+            }
+            return null;
         }
     }
 }

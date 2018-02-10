@@ -126,7 +126,7 @@ namespace PLWPF
         private void WorkDaysHours(object sender, RoutedEventArgs e)
         {
             // open new window to select days and hours
-            new NannyWorkDaysHours(nanny).Show();
+            new NannyWorkDaysHours(nanny).ShowDialog();
         }
 
         // update button click event
