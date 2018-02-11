@@ -54,17 +54,25 @@ namespace PLWPF
             worker = new BackgroundWorker();
             worker.DoWork += worker_Dowork;
             worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.WorkerReportsProgress = true;
             worker2 = new BackgroundWorker();
             worker2.DoWork += worker2_Dowork;
             worker2.RunWorkerCompleted += worker2_RunWorkerCompleted;
+            worker2.ProgressChanged += worker2_ProgressChanged;
+            worker2.WorkerReportsProgress = true;
         }
 
         // worker complete thread event
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            for (int i = 90; i <= 100; i += 10)
+            {
+                progressbar.Value = i;
+            }
+            progressbar.Visibility = Visibility.Hidden;
             nannyList = (List<Nanny>)e.Result;
             // bind data grid of nanny to nanny list nd make it visible
-            NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
             // bind nanny list to nanny combobox
             nannyComboBox.IsEnabled = true;
@@ -78,6 +86,11 @@ namespace PLWPF
             {
                 List<object> objList = (List<object>)e.Argument;
                 e.Result = bl.NannysInKMWithConditions((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+                for (int i = 0; i < 80; i += 5)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    worker.ReportProgress(i);
+                }
             }
             catch (Exception ex)
             {
@@ -85,12 +98,23 @@ namespace PLWPF
             }
         }
 
+        //worker progress change evet
+        private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            int progress = e.ProgressPercentage;
+            progressbar.Value = progress;
+        }
+
         // worker2 complete thread event
         private void worker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            for (int i = 90; i <= 100; i += 10)
+            {
+                progressbar.Value = i;
+            }
+            progressbar.Visibility = Visibility.Hidden;
             nannyList = (List<Nanny>)e.Result;
             // bind data grid of nanny to nanny list nd make it visible
-            NannyListGrid.Visibility = Visibility.Visible;
             Grouping.DataContext = nannyList;
             // bind nanny list to nanny combobox
             nannyComboBox.IsEnabled = true;
@@ -100,15 +124,27 @@ namespace PLWPF
         // worker2 thread event
         private void worker2_Dowork(object sender, DoWorkEventArgs e)
         {
-            List<object> objList = (List<object>)e.Argument;
             try
             {
+                List<object> objList = (List<object>)e.Argument;
                 e.Result = bl.PartialMatch((Mother)objList[0], (int?)objList[1], (int?)objList[2]);
+                for (int i = 0; i < 80; i += 5)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    worker2.ReportProgress(i);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        //worker progress change evet
+        private void worker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            int progress = e.ProgressPercentage;
+            progressbar.Value = progress;
         }
 
         // event when select mother
@@ -241,11 +277,14 @@ namespace PLWPF
                 var result = MessageBox.Show("No kilometer selected, the default is 1 kilometer", "No kilometer selected", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
+                    NannyListGrid.Visibility = Visibility.Visible;
                     // defalt distance is 1 KM
                     objList.Add(mother);
                     objList.Add(1);
                     objList.Add(child.ID);
                     // run thread
+                    progressbar.Value = 0;
+                    progressbar.Visibility = Visibility.Visible;
                     worker.RunWorkerAsync(objList);
                 }
                 else
@@ -259,10 +298,13 @@ namespace PLWPF
             {
                 try
                 {
+                    NannyListGrid.Visibility = Visibility.Visible;
                     objList.Add(mother);
                     objList.Add(int.Parse(KmTextBox.Text));
                     objList.Add(child.ID);
                     // run thread
+                    progressbar.Value = 0;
+                    progressbar.Visibility = Visibility.Visible;
                     worker.RunWorkerAsync(objList);
                 }
                 // if was format exception of KM textbox
@@ -294,11 +336,14 @@ namespace PLWPF
                 var result = MessageBox.Show("No kilometer selected, the default is 1 kilometer", "No kilometer selected", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.OK)
                 {
+                    NannyListGrid.Visibility = Visibility.Visible;
                     // defalt distance is 1 KM
                     objList.Add(mother);
                     objList.Add(1);
                     objList.Add(child.ID);
                     // run thread
+                    progressbar.Value = 0;
+                    progressbar.Visibility = Visibility.Visible;
                     worker2.RunWorkerAsync(objList);
                 }
                 else
@@ -312,10 +357,13 @@ namespace PLWPF
             {
                 try
                 {
+                    NannyListGrid.Visibility = Visibility.Visible;
                     objList.Add(mother);
                     objList.Add(int.Parse(KmTextBox.Text));
                     objList.Add(child.ID);
                     // run thread
+                    progressbar.Value = 0;
+                    progressbar.Visibility = Visibility.Visible;
                     worker2.RunWorkerAsync(objList);
                 }
                 // if was format exception of KM textbox
