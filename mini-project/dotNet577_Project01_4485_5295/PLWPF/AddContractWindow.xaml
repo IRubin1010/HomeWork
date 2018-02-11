@@ -238,5 +238,6 @@
             <Button Content="submit" Style="{StaticResource ButtonEnable}" Grid.Column="1" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="15" Click="AddContract_Click"/>
             <Button Content="calculat payment" Style="{StaticResource ButtonEnable}" HorizontalAlignment="Center" Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="150" FontSize="15" Click="CalculatePayment_Click"/>
         </Grid>
+        <ProgressBar Name="progressbar" HorizontalAlignment="Left" Visibility="Hidden" Height="25" Margin="178,115,0,0" Grid.Row="2" VerticalAlignment="Top" Width="200"/>
     </Grid>
 </Window>
