@@ -27,6 +27,7 @@ namespace PLWPF
             CultureInfo.CurrentUICulture = CultureInfo.CreateSpecificCulture("he-IL");
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("he-IL");
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CreateSpecificCulture("he-IL");
+
         }
 
         /// <summary>
