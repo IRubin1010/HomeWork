@@ -527,7 +527,7 @@ namespace BL
             if (!contract.ChildID.HasValue) message += "child id can't be empty\n";
             if (!contract.NannyID.HasValue) message += "nanny id can't be empty\n";
             if (contract.EndTransection < contract.BeginTransection) message += "Contract end date can not be earlier than start date\n";
-            if (contract.EndTransection < DateTime.Now) message += "Invalid contract end date - date can not be earlier than today\n";
+            if (contract.EndTransection < DateTime.Now) message += "Invalid contract end date - date can not be earlier or equals than today\n";
             return message;
         }
 

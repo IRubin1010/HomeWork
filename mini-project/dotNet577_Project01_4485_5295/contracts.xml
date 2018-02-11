@@ -2,30 +2,16 @@
 <contracts>
   <Contract>
     <ContractNumber>10000000</ContractNumber>
-    <NannyID>305625295</NannyID>
-    <ChildID>397004103</ChildID>
-    <MotherID>294839286</MotherID>
+    <NannyID>294753857</NannyID>
+    <ChildID>594028499</ChildID>
+    <MotherID>294909286</MotherID>
     <IsMeet>false</IsMeet>
     <IsContractSigned>true</IsContractSigned>
-    <HourlyFee>10</HourlyFee>
-    <MonthlyFee>1300</MonthlyFee>
+    <HourlyFee>12</HourlyFee>
+    <MonthlyFee>1000</MonthlyFee>
     <IsPaymentByHour>true</IsPaymentByHour>
-    <FinalPayment>1880</FinalPayment>
-    <BeginTransection>2018-02-10T00:00:00+02:00</BeginTransection>
-    <EndTransection>2018-02-10T00:00:00+02:00</EndTransection>
-  </Contract>
-  <Contract>
-    <ContractNumber>10000001</ContractNumber>
-    <NannyID>305623395</NannyID>
-    <ChildID>392940383</ChildID>
-    <MotherID>294894786</MotherID>
-    <IsMeet>false</IsMeet>
-    <IsContractSigned>true</IsContractSigned>
-    <HourlyFee>10</HourlyFee>
-    <MonthlyFee>1300</MonthlyFee>
-    <IsPaymentByHour>true</IsPaymentByHour>
-    <FinalPayment>1120</FinalPayment>
-    <BeginTransection>2018-02-10T00:00:00+02:00</BeginTransection>
+    <FinalPayment>1776</FinalPayment>
+    <BeginTransection>2018-02-11T00:00:00+02:00</BeginTransection>
     <EndTransection>2018-02-21T00:00:00</EndTransection>
   </Contract>
 </contracts>

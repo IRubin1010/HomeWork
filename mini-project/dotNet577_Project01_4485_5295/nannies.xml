@@ -9,11 +9,11 @@
     <BirthDate>16/07/1982</BirthDate>
     <NannyAge>36</NannyAge>
     <PhoneNumber>543972654</PhoneNumber>
-    <Address>Ovadya St 6, Bnei Brak</Address>
+    <Address>הר סיני 12, בני ברק, Israel</Address>
     <Elevator>true</Elevator>
     <Floor />
     <Seniority>10</Seniority>
-    <Children>1</Children>
+    <Children>0</Children>
     <MaxChildren>5</MaxChildren>
     <MinAge>6</MinAge>
     <MaxAge>12</MaxAge>
@@ -277,99 +277,6 @@
       </end>
     </WorkHours>
     <IsValidVacationDays>true</IsValidVacationDays>
-    <Recommendations></Recommendations>
-  </Nanny>
-  <Nanny>
-    <ID>303368978</ID>
-    <Name>
-      <FirstName>Ayala</FirstName>
-      <LastName>Zehavi</LastName>
-    </Name>
-    <BirthDate>09/12/1994</BirthDate>
-    <NannyAge>24</NannyAge>
-    <PhoneNumber>543456372</PhoneNumber>
-    <Address>be'eri St 20, Bnei Brak</Address>
-    <Elevator>false</Elevator>
-    <Floor>4</Floor>
-    <Seniority>5</Seniority>
-    <Children>0</Children>
-    <MaxChildren>10</MaxChildren>
-    <MinAge>0</MinAge>
-    <MaxAge>6</MaxAge>
-    <IsHourlyFee>false</IsHourlyFee>
-    <HourlyFee>12</HourlyFee>
-    <MonthlyFee>2000</MonthlyFee>
-    <IsWork>
-      <day1>true</day1>
-      <day2>true</day2>
-      <day3>true</day3>
-      <day4>true</day4>
-      <day5>true</day5>
-      <day6>true</day6>
-    </IsWork>
-    <WorkHours>
-      <begin>
-        <hour>8</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>8</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>8</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>8</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>8</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <begin>
-        <hour>8</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </begin>
-      <end>
-        <hour>17</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>17</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>17</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>17</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>17</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-      <end>
-        <hour>13</hour>
-        <minute>0</minute>
-        <second>0</second>
-      </end>
-    </WorkHours>
-    <IsValidVacationDays>false</IsValidVacationDays>
     <Recommendations></Recommendations>
   </Nanny>
   <Nanny>
@@ -660,7 +567,7 @@
     <BirthDate>22/03/1997</BirthDate>
     <NannyAge>21</NannyAge>
     <PhoneNumber>543448382</PhoneNumber>
-    <Address>Beit Ha-Defus St 21, Jerusalem</Address>
+    <Address>יהושע בן נון 4, בני ברק, Israel</Address>
     <Elevator>false</Elevator>
     <Floor>3</Floor>
     <Seniority>4</Seniority>
@@ -939,7 +846,7 @@
     <BirthDate>12/08/1998</BirthDate>
     <NannyAge>20</NannyAge>
     <PhoneNumber>543453834</PhoneNumber>
-    <Address>Sokolov st 44, Bnei Brak</Address>
+    <Address>החלוצים 17, בני ברק, Israel</Address>
     <Elevator>false</Elevator>
     <Floor>0</Floor>
     <Seniority>2</Seniority>
@@ -1032,7 +939,7 @@
     <BirthDate>07/03/1991</BirthDate>
     <NannyAge>27</NannyAge>
     <PhoneNumber>543473834</PhoneNumber>
-    <Address>Nissenboim St 11, Bnei Brak</Address>
+    <Address>רבי עקיבא 54, בני ברק, Israel</Address>
     <Elevator>true</Elevator>
     <Floor>1</Floor>
     <Seniority>7</Seniority>
@@ -1129,7 +1036,7 @@
     <Elevator>true</Elevator>
     <Floor />
     <Seniority>10</Seniority>
-    <Children>1</Children>
+    <Children>0</Children>
     <MaxChildren>5</MaxChildren>
     <MinAge>6</MinAge>
     <MaxAge>12</MaxAge>
@@ -1218,7 +1125,7 @@
     <BirthDate>12/08/1998</BirthDate>
     <NannyAge>20</NannyAge>
     <PhoneNumber>543453834</PhoneNumber>
-    <Address>Sokolov st 44, Bnei Brak</Address>
+    <Address>בן פתחיה 17, בני ברק, Israel</Address>
     <Elevator>false</Elevator>
     <Floor>0</Floor>
     <Seniority>2</Seniority>
@@ -1311,7 +1218,7 @@
     <BirthDate>12/08/1998</BirthDate>
     <NannyAge>20</NannyAge>
     <PhoneNumber>543453834</PhoneNumber>
-    <Address>Sokolov st 44, Bnei Brak</Address>
+    <Address>מנחם 3, בני ברק, Israel</Address>
     <Elevator>false</Elevator>
     <Floor>0</Floor>
     <Seniority>2</Seniority>
@@ -1393,6 +1300,657 @@
       </end>
     </WorkHours>
     <IsValidVacationDays>true</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>305265695</ID>
+    <Name>
+      <FirstName>Yafit</FirstName>
+      <LastName>Shtain</LastName>
+    </Name>
+    <BirthDate>19/05/1987</BirthDate>
+    <NannyAge>31</NannyAge>
+    <PhoneNumber>543483782</PhoneNumber>
+    <Address>הרב דסלר 5, בני ברק, Israel</Address>
+    <Elevator>false</Elevator>
+    <Floor>2</Floor>
+    <Seniority>6</Seniority>
+    <Children>0</Children>
+    <MaxChildren>4</MaxChildren>
+    <MinAge>0</MinAge>
+    <MaxAge>6</MaxAge>
+    <IsHourlyFee>true</IsHourlyFee>
+    <HourlyFee>15</HourlyFee>
+    <MonthlyFee>1000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>12</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>false</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>294753857</ID>
+    <Name>
+      <FirstName>Diti</FirstName>
+      <LastName>Farkash</LastName>
+    </Name>
+    <BirthDate>04/11/1991</BirthDate>
+    <NannyAge>27</NannyAge>
+    <PhoneNumber>543395033</PhoneNumber>
+    <Address>חבקוק 4, בני ברק, Israel</Address>
+    <Elevator>true</Elevator>
+    <Floor>2</Floor>
+    <Seniority>7</Seniority>
+    <Children>1</Children>
+    <MaxChildren>7</MaxChildren>
+    <MinAge>6</MinAge>
+    <MaxAge>12</MaxAge>
+    <IsHourlyFee>true</IsHourlyFee>
+    <HourlyFee>12</HourlyFee>
+    <MonthlyFee>1000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>false</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>true</IsValidVacationDays>
+    <Recommendations>Clean and tidy place, amazing attitude for children strongly recommends. riky shimon</Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>305637975</ID>
+    <Name>
+      <FirstName>Batya</FirstName>
+      <LastName>Adler</LastName>
+    </Name>
+    <BirthDate>12/08/1998</BirthDate>
+    <NannyAge>20</NannyAge>
+    <PhoneNumber>543453834</PhoneNumber>
+    <Address>הבנים 9, בני ברק, Israel</Address>
+    <Elevator>false</Elevator>
+    <Floor>0</Floor>
+    <Seniority>2</Seniority>
+    <Children>0</Children>
+    <MaxChildren>10</MaxChildren>
+    <MinAge>12</MinAge>
+    <MaxAge>18</MaxAge>
+    <IsHourlyFee>true</IsHourlyFee>
+    <HourlyFee>9</HourlyFee>
+    <MonthlyFee>2000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>true</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>209964295</ID>
+    <Name>
+      <FirstName>lea</FirstName>
+      <LastName>lea_Gans</LastName>
+    </Name>
+    <BirthDate>07/03/1995</BirthDate>
+    <NannyAge>23</NannyAge>
+    <PhoneNumber>543473882</PhoneNumber>
+    <Address>Rabbi Yehuda HaNassi St 27, Bnei Brak</Address>
+    <Elevator>false</Elevator>
+    <Floor>2</Floor>
+    <Seniority>8</Seniority>
+    <Children>0</Children>
+    <MaxChildren>8</MaxChildren>
+    <MinAge>18</MinAge>
+    <MaxAge>24</MaxAge>
+    <IsHourlyFee>false</IsHourlyFee>
+    <HourlyFee>9</HourlyFee>
+    <MonthlyFee>4000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>10</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>12</hour>
+        <minute>30</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>false</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>204265695</ID>
+    <Name>
+      <FirstName>Tamar</FirstName>
+      <LastName>Grinblat</LastName>
+    </Name>
+    <BirthDate>19/05/1987</BirthDate>
+    <NannyAge>31</NannyAge>
+    <PhoneNumber>543483782</PhoneNumber>
+    <Address>אהרונוביץ' 33, בני ברק, Israel</Address>
+    <Elevator>false</Elevator>
+    <Floor>2</Floor>
+    <Seniority>6</Seniority>
+    <Children>0</Children>
+    <MaxChildren>4</MaxChildren>
+    <MinAge>0</MinAge>
+    <MaxAge>6</MaxAge>
+    <IsHourlyFee>true</IsHourlyFee>
+    <HourlyFee>15</HourlyFee>
+    <MonthlyFee>1000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>12</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>false</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>206292758</ID>
+    <Name>
+      <FirstName>Yael</FirstName>
+      <LastName>Adler</LastName>
+    </Name>
+    <BirthDate>12/08/1998</BirthDate>
+    <NannyAge>20</NannyAge>
+    <PhoneNumber>543453834</PhoneNumber>
+    <Address>חנקין 5, בני ברק, Israel</Address>
+    <Elevator>false</Elevator>
+    <Floor>0</Floor>
+    <Seniority>2</Seniority>
+    <Children>0</Children>
+    <MaxChildren>10</MaxChildren>
+    <MinAge>12</MinAge>
+    <MaxAge>18</MaxAge>
+    <IsHourlyFee>true</IsHourlyFee>
+    <HourlyFee>9</HourlyFee>
+    <MonthlyFee>2000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>7</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>16</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>true</IsValidVacationDays>
+    <Recommendations></Recommendations>
+  </Nanny>
+  <Nanny>
+    <ID>303368978</ID>
+    <Name>
+      <FirstName>Ayala</FirstName>
+      <LastName>Zehavi</LastName>
+    </Name>
+    <BirthDate>09/12/1994</BirthDate>
+    <NannyAge>24</NannyAge>
+    <PhoneNumber>543456372</PhoneNumber>
+    <Address>Be'eri St 20, Bnei Brak, Israel</Address>
+    <Elevator>false</Elevator>
+    <Floor>4</Floor>
+    <Seniority>5</Seniority>
+    <Children>0</Children>
+    <MaxChildren>10</MaxChildren>
+    <MinAge>0</MinAge>
+    <MaxAge>6</MaxAge>
+    <IsHourlyFee>false</IsHourlyFee>
+    <HourlyFee>12</HourlyFee>
+    <MonthlyFee>2000</MonthlyFee>
+    <IsWork>
+      <day1>true</day1>
+      <day2>true</day2>
+      <day3>true</day3>
+      <day4>true</day4>
+      <day5>true</day5>
+      <day6>true</day6>
+    </IsWork>
+    <WorkHours>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <begin>
+        <hour>8</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </begin>
+      <end>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+      <end>
+        <hour>13</hour>
+        <minute>0</minute>
+        <second>0</second>
+      </end>
+    </WorkHours>
+    <IsValidVacationDays>false</IsValidVacationDays>
     <Recommendations></Recommendations>
   </Nanny>
 </nannies>
