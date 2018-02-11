@@ -43,22 +43,26 @@ namespace PLWPF
                 case Entity.nanny:
                     searchList.Entity = Entity.nanny;
                     searchList.Text = "";
-                    selectedAction.Visibility = Visibility.Hidden;
+                    selectedAction.Content = new Nannies(bl);
+                    selectedAction.Visibility = Visibility.Visible;
                     break;
                 case Entity.mother:
                     searchList.Entity = Entity.mother;
                     searchList.Text = "";
-                    selectedAction.Visibility = Visibility.Hidden;
+                    selectedAction.Content = new Mothers(bl);
+                    selectedAction.Visibility = Visibility.Visible;
                     break;
                 case Entity.child:
                     searchList.Entity = Entity.child;
                     searchList.Text = "";
-                    selectedAction.Visibility = Visibility.Hidden;
+                    selectedAction.Content = new Children(bl);
+                    selectedAction.Visibility = Visibility.Visible;
                     break;
                 case Entity.contract:
                     searchList.Entity = Entity.contract;
                     searchList.Text = "";
-                    selectedAction.Visibility = Visibility.Hidden;
+                    selectedAction.Content = new Contracts(bl);
+                    selectedAction.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;

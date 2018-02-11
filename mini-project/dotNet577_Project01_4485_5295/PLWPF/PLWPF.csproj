@@ -74,11 +74,17 @@
     <Compile Include="ChildDetails.xaml.cs">
       <DependentUpon>ChildDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Children.xaml.cs">
+      <DependentUpon>Children.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChildrenWithNoNanny.xaml.cs">
       <DependentUpon>ChildrenWithNoNanny.xaml</DependentUpon>
     </Compile>
     <Compile Include="ContractDetails.xaml.cs">
       <DependentUpon>ContractDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Contracts.xaml.cs">
+      <DependentUpon>Contracts.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeleteChildWindow.xaml.cs">
       <DependentUpon>DeleteChildWindow.xaml</DependentUpon>
@@ -99,6 +105,12 @@
     <Compile Include="Initialize.cs" />
     <Compile Include="MotherChildren.xaml.cs">
       <DependentUpon>MotherChildren.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Mothers.xaml.cs">
+      <DependentUpon>Mothers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Nannies.xaml.cs">
+      <DependentUpon>Nannies.xaml</DependentUpon>
     </Compile>
     <Compile Include="NannyChildren.xaml.cs">
       <DependentUpon>NannyChildren.xaml</DependentUpon>
@@ -178,11 +190,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Children.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ChildrenWithNoNanny.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContractDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Contracts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +249,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MotherChildren.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Mothers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Nannies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
