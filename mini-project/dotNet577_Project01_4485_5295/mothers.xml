@@ -8,7 +8,7 @@
     </Name>
     <PhoneNumber>504182088</PhoneNumber>
     <Address>ha-rav mohilever St 8, Bnei Brak</Address>
-    <SearchAreaForNanny>Beit Ha-Defus St 21, Jerusalem</SearchAreaForNanny>
+    <SearchAreaForNanny></SearchAreaForNanny>
     <WantElevator>true</WantElevator>
     <MinSeniority>2</MinSeniority>
     <MaxFloor>3</MaxFloor>
@@ -91,7 +91,7 @@
       <LastName>Levi</LastName>
     </Name>
     <PhoneNumber>504397588</PhoneNumber>
-    <Address>Rabbi Yehuda HaNassi St 49, Bnei Brak</Address>
+    <Address>בן גוריון 41, בני ברק, Israel</Address>
     <SearchAreaForNanny></SearchAreaForNanny>
     <WantElevator>true</WantElevator>
     <MinSeniority>5</MinSeniority>
@@ -423,11 +423,11 @@
   <Mother>
     <ID>294800286</ID>
     <Name>
-      <FirstName>yakov</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Tovi</FirstName>
+      <LastName>Shachak</LastName>
     </Name>
     <PhoneNumber>504183827</PhoneNumber>
-    <Address>gottlieb St 4, Bnei Brak</Address>
+    <Address>הירדן 15, בני ברק, Israel</Address>
     <SearchAreaForNanny></SearchAreaForNanny>
     <WantElevator>false</WantElevator>
     <MinSeniority>5</MinSeniority>
@@ -512,7 +512,7 @@
     </Name>
     <PhoneNumber>504395188</PhoneNumber>
     <Address>sokolow St 34, Bnei Brak</Address>
-    <SearchAreaForNanny></SearchAreaForNanny>
+    <SearchAreaForNanny>הרב שר 3, בני ברק, Israel</SearchAreaForNanny>
     <WantElevator>false</WantElevator>
     <MinSeniority>3</MinSeniority>
     <MaxFloor>5</MaxFloor>
@@ -591,8 +591,8 @@
   <Mother>
     <ID>294337686</ID>
     <Name>
-      <FirstName>hilel</FirstName>
-      <LastName>yeret</LastName>
+      <FirstName>Beili</FirstName>
+      <LastName>Yudkevitz</LastName>
     </Name>
     <PhoneNumber>504395188</PhoneNumber>
     <Address>hafes haim St 14, Bnei Brak</Address>
@@ -679,7 +679,7 @@
       <LastName>Berkovitz</LastName>
     </Name>
     <PhoneNumber>504395188</PhoneNumber>
-    <Address>hafes haim St 14, Bnei Brak</Address>
+    <Address>הרב ריינס 17, בני ברק, Israel</Address>
     <SearchAreaForNanny></SearchAreaForNanny>
     <WantElevator>false</WantElevator>
     <MinSeniority>3</MinSeniority>
@@ -764,7 +764,7 @@
     </Name>
     <PhoneNumber>504395188</PhoneNumber>
     <Address>hafes haim St 14, Bnei Brak</Address>
-    <SearchAreaForNanny></SearchAreaForNanny>
+    <SearchAreaForNanny>רבן גמליאל 9, בני ברק, Israel</SearchAreaForNanny>
     <WantElevator>false</WantElevator>
     <MinSeniority>6</MinSeniority>
     <MaxFloor>2</MaxFloor>
