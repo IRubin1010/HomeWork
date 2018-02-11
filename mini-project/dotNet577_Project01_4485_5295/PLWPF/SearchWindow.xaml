@@ -37,6 +37,6 @@
             <Label Content="select" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="15"/>
             <local:SearchControl x:Name="searchList" Style="{StaticResource SearchControlStyle}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Width="230" Height="25" ItemSelectsd="ItemSelected" TextChanged="TextChanged"/>
         </Grid>
-        <Frame x:Name="selectedAction" Grid.Row="1" Width="510" Height="600" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="selectedAction" Grid.Row="1" Width="550" Height="600" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
