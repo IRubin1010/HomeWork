@@ -18,17 +18,17 @@
     <AgeInMonth>8</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>true</HaveNanny>
+    <HaveNanny>false</HaveNanny>
   </Child>
   <Child>
     <ID>392940383</ID>
     <MotherID>294894786</MotherID>
     <FirstName>roni</FirstName>
-    <BirthDate>2017-06-02T00:00:00</BirthDate>
-    <AgeInMonth>8</AgeInMonth>
+    <BirthDate>2017-05-02T00:00:00</BirthDate>
+    <AgeInMonth>9</AgeInMonth>
     <IsSpecialNeeds>true</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>true</HaveNanny>
+    <HaveNanny>false</HaveNanny>
   </Child>
   <Child>
     <ID>493029984</ID>
@@ -68,7 +68,7 @@
     <AgeInMonth>9</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
-    <HaveNanny>false</HaveNanny>
+    <HaveNanny>true</HaveNanny>
   </Child>
   <Child>
     <ID>397460103</ID>
@@ -114,8 +114,8 @@
     <ID>397054103</ID>
     <MotherID>294337676</MotherID>
     <FirstName>michal</FirstName>
-    <BirthDate>2016-08-02T00:00:00</BirthDate>
-    <AgeInMonth>18</AgeInMonth>
+    <BirthDate>2016-09-02T00:00:00</BirthDate>
+    <AgeInMonth>17</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
     <HaveNanny>false</HaveNanny>
@@ -124,8 +124,8 @@
     <ID>313260103</ID>
     <MotherID>294355686</MotherID>
     <FirstName>reut</FirstName>
-    <BirthDate>2016-11-02T00:00:00</BirthDate>
-    <AgeInMonth>15</AgeInMonth>
+    <BirthDate>2017-11-02T00:00:00</BirthDate>
+    <AgeInMonth>3</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
     <HaveNanny>false</HaveNanny>
@@ -133,9 +133,9 @@
   <Child>
     <ID>310462203</ID>
     <MotherID>294335086</MotherID>
-    <FirstName>naama</FirstName>
-    <BirthDate>2016-11-02T00:00:00</BirthDate>
-    <AgeInMonth>15</AgeInMonth>
+    <FirstName>dodo</FirstName>
+    <BirthDate>2016-05-02T00:00:00</BirthDate>
+    <AgeInMonth>21</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
     <HaveNanny>false</HaveNanny>
@@ -143,11 +143,41 @@
   <Child>
     <ID>310457103</ID>
     <MotherID>294335086</MotherID>
-    <FirstName>naama</FirstName>
-    <BirthDate>2016-11-02T00:00:00</BirthDate>
-    <AgeInMonth>15</AgeInMonth>
+    <FirstName>maten</FirstName>
+    <BirthDate>2017-11-02T00:00:00</BirthDate>
+    <AgeInMonth>3</AgeInMonth>
+    <IsSpecialNeeds>true</IsSpecialNeeds>
+    <SpecialNeeds>Allergic to milk</SpecialNeeds>
+    <HaveNanny>false</HaveNanny>
+  </Child>
+  <Child>
+    <ID>303460103</ID>
+    <MotherID>294800286</MotherID>
+    <FirstName>david</FirstName>
+    <BirthDate>2016-01-02T00:00:00</BirthDate>
+    <AgeInMonth>25</AgeInMonth>
     <IsSpecialNeeds>false</IsSpecialNeeds>
     <SpecialNeeds></SpecialNeeds>
+    <HaveNanny>false</HaveNanny>
+  </Child>
+  <Child>
+    <ID>306240103</ID>
+    <MotherID>294800286</MotherID>
+    <FirstName>yael</FirstName>
+    <BirthDate>2017-05-02T00:00:00</BirthDate>
+    <AgeInMonth>9</AgeInMonth>
+    <IsSpecialNeeds>false</IsSpecialNeeds>
+    <SpecialNeeds></SpecialNeeds>
+    <HaveNanny>false</HaveNanny>
+  </Child>
+  <Child>
+    <ID>300462203</ID>
+    <MotherID>294337686</MotherID>
+    <FirstName>dodo</FirstName>
+    <BirthDate>2016-09-02T00:00:00</BirthDate>
+    <AgeInMonth>17</AgeInMonth>
+    <IsSpecialNeeds>true</IsSpecialNeeds>
+    <SpecialNeeds>Celiac patient</SpecialNeeds>
     <HaveNanny>false</HaveNanny>
   </Child>
 </childs>
