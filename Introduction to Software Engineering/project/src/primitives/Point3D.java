@@ -105,17 +105,27 @@ public class Point3D extends Point2D {
 	 * @param num
 	 * @return new point multiplied by the scalar 
 	 */
-	protected Point3D scalePoint3D(int num) {
+	protected Point3D scalePoint3D(double num) {
 		Point2D point = scalePoint2D(num);
 		return new Point3D(point.getX(),point.getY(),_z.scale(num));
 	} 
 	
 	/**
-	 * multiply point by another point
+	 * multiply point with another point
 	 * @param Point3D other
 	 */
 	public double multiplyPoint3D(Point3D other) {
 		return multiplyPoint2D(other) + _z.multiply(other._z).getValue();
+	}
+	
+	/**
+	 * divide point3D by a scalar
+	 * @param scalar
+	 * @return new point3D divided by the scalar
+	 */
+	protected Point3D scalarDivisionPoint3D(double scalar) {
+		Point2D point = scalarDivisionPoint2D(scalar);
+		return new Point3D(point.getX(),point.getY(),_z.divide(scalar));
 	}
 	
 	public Vector vectorSubtract(Point3D other) {
