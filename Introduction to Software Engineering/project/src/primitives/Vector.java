@@ -90,7 +90,7 @@ public class Vector {
 	 * @param num
 	 * @return Vector multiplied by the scalar
 	 */
-	public Vector scaleVector(int num) {
+	public Vector scaleVector(double num) {
 		return new Vector(_head.scalePoint3D(num));
 	}
 	
@@ -101,5 +101,34 @@ public class Vector {
 	 */
 	public double dotProduct(Vector other) {
 		return _head.multiplyPoint3D(other._head);
+	}
+	
+	/**
+	 * Cross Product Vector with other Vector
+	 * @param other
+	 * @return Vector Cross Producted by the other Vector
+	 */
+	public Vector crossProduct(Vector other) {
+		Coordinate x = _head.getY().multiply(other._head.getZ()).subtract(_head.getZ().multiply(other._head.getY()));
+		Coordinate y = _head.getZ().multiply(other._head.getX()).subtract(_head.getX().multiply(other._head.getZ()));
+		Coordinate z = _head.getX().multiply(other._head.getY()).subtract(_head.getY().multiply(other._head.getX()));
+		return new Vector(x,y,z);
+	}
+	
+	/**
+	 * @return the vector size
+	 */
+	public double size() {
+		Vector vector0 = new Vector(0,0,0);
+		return this._head.distanceFrom(vector0._head);
+	}
+	
+	/**
+	 * normalize the vector
+	 * @return new normalize Vector
+	 */
+	public Vector normalize() {
+		double vectorSize = size();
+		return new Vector(_head.scalarDivisionPoint3D(vectorSize));
 	}
 }

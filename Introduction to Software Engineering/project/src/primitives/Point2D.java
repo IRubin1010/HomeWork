@@ -63,8 +63,7 @@ public class Point2D {
 	/**
 	 * add point to another point
 	 * 
-	 * @param Point2D
-	 *            other
+	 * @param other
 	 * @return new point of adding the two points
 	 */
 	protected Point2D addPoint2D(Point2D other) {
@@ -73,9 +72,7 @@ public class Point2D {
 
 	/**
 	 * sub point from another point
-	 * 
-	 * @param Point2D
-	 *            other
+	 * @param other
 	 * @return new point of Subtract the second point from the first
 	 */
 	protected Point2D subPoint2D(Point2D other) {
@@ -87,16 +84,25 @@ public class Point2D {
 	 * @param num
 	 * @return new point multiplied by the scalar
 	 */
-	protected Point2D scalePoint2D(int num) {
+	protected Point2D scalePoint2D(double num) {
 		return new Point2D(_x.scale(num), _y.scale(num));
 	}
 
 	/**
 	 * multiply point by another point
-	 * @param Point2D other
+	 * @param other
 	 */
-	public double multiplyPoint2D(Point2D other) {
+	protected double multiplyPoint2D(Point2D other) {
 		return _x.multiply(other._x).getValue() + _y.multiply(other._y).getValue();
+	}
+	
+	/**
+	 * divide point2D by a scalar
+	 * @param scalar
+	 * @return new point2D divided by the scalar
+	 */
+	protected Point2D scalarDivisionPoint2D(double scalar) {
+		return new Point2D(_x.divide(scalar),_y.divide(scalar));
 	}
 
 }

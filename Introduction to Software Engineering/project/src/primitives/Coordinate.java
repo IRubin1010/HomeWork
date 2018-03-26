@@ -69,6 +69,12 @@ public class Coordinate {
 		int deltaExp = getExp(num - 1);
 		return deltaExp < ACCURACY ? _coord : _coord * num;
 	}
+	
+	private double _divide(double num) {
+		if(num == 0) throw new IllegalArgumentException("error! can't divide with 0");
+		int deltaExp = getExp(num - 1);
+		return deltaExp < ACCURACY ? _coord : _coord / num;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -105,6 +111,14 @@ public class Coordinate {
 
 	public Coordinate multiply(Coordinate other) {
 		return new Coordinate(_scale(other._coord));
+	}
+	
+	public Coordinate divide(double num) {
+		return new Coordinate(_divide(num));
+	}
+
+	public Coordinate coorDivide(Coordinate other) {
+		return new Coordinate(_divide(other._coord));
 	}
 	
 }
