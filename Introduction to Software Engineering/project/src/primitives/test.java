@@ -1,4 +1,5 @@
 package primitives;
+import geometries.*;
 
 public class test {
 
@@ -18,6 +19,12 @@ public class test {
 			System.out.println(vector.crossProduct(vector2));
 			System.out.println(vector.size());
 			System.out.println(vector2.normalize());
+			System.out.println("------------");
+			Ray ray = new Ray(point3d, vector);
+			System.out.println(ray);
+			Cylinder cylinder = new Cylinder(5,ray,3);
+			System.out.println(cylinder);
+			
 			/*
 			System.out.println(vector.add(vector2));
 			System.out.println(vector.sub(vector2));
