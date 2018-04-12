@@ -1,19 +1,17 @@
-/**
- * 
- */
 package geometries;
-
 import primitives.*;
 
 /**
- * @author itzik yeret
- *
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 public class Plane extends Geometry {
 	
 	private Point3D _point;
 	private Vector _plumb;
 	
+	/***************** Constructors **********************/
+
 	public Plane(Point3D point, Vector plumb) {
 		_point = new Point3D(point);
 		_plumb = new Vector(plumb);
@@ -24,23 +22,17 @@ public class Plane extends Geometry {
 		_plumb = new Vector(other._plumb);
 	}
 
-	/**
-	 * @return the _point
-	 */
+	/***************** Getters ****************************/
+
 	public Point3D getPoint() {
 		return _point;
 	}
 
-	/**
-	 * @return the _plumb
-	 */
 	public Vector getPlumb() {
 		return _plumb;
 	}
 
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
+	/***************** Administration *******************/
 
 	@Override
 	public boolean equals(Object obj) {
@@ -59,6 +51,10 @@ public class Plane extends Geometry {
 		return "Plane: \npoint: " + _point.toString() + " ,plumb: " + _plumb.toString();
 	}
 	
-	
+	/***************** Operations ************************/ 
+
+	public Vector getNormal(Point3D point) {
+		return null;
+	}
 
 }

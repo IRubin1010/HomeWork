@@ -1,17 +1,15 @@
-/**
- * 
- */
 package geometries;
-
 import primitives.*;
 
 /**
- * @author itzik yeret
- *
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 public class Sphere extends RadialGeometry {
 
 	private Point3D _point;
+
+	/***************** Constructors **********************/
 
 	public Sphere(Point3D point, double radius) {
 		super(radius);
@@ -23,17 +21,13 @@ public class Sphere extends RadialGeometry {
 		_point = new Point3D(other._point);
 	}
 
-	/**
-	 * @return the _point
-	 */
+	/***************** Getter ****************************/
+
 	public Point3D getPoint() {
 		return _point;
 	}
 
-	@Override
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
+	/***************** Administration *******************/
 
 	@Override
 	public boolean equals(Object obj) {
@@ -52,5 +46,11 @@ public class Sphere extends RadialGeometry {
 	@Override
 	public String toString() {
 		return "Sphere: \npoint: " + _point.toString() + " ," + super.toString();
+	}
+	
+	/***************** Operations ************************/ 
+
+	public Vector getNormal(Point3D point) {
+		return null;
 	}
 }

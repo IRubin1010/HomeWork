@@ -1,54 +1,38 @@
-/**
- * 
- */
 package primitives;
 
 /**
- * @author itzik yeret
- *
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 public class Vector {
+	
 	private Point3D _head;
 
-	/**
-	 * create new Vector 
-	 * @param double x
-	 * @param double y
-	 * @param double z
-	 */
+	/***************** Constructors **********************/
+	
 	public Vector(double x, double y, double z) {
 		_head = new Point3D(x, y, z);
 	}
 	
-	/**
-	 * create new Vector from Coordinates 
-	 * @param Coordinate x
-	 * @param Coordinate y
-	 * @param Coordinate z
-	 */
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
 		_head = new Point3D(x, y, z);
 	}
 
-	/**
-	 * create new Vector from other Vector
-	 * @param Vector other
-	 */
-	public Vector(Vector other) {
-		_head = new Point3D(other._head);
-	}
-	
-	/**
-	 * create new Vector from 3D point
-	 * @param Point3D other
-	 */
 	public Vector(Point3D other) {
 		_head = new Point3D(other);
 	}
+	
+	public Vector(Vector other) {
+		_head = new Point3D(other._head);
+	}
 
+	/***************** Getter ****************************/
+	
 	public Point3D getVector() {
 		return _head;
 	}
+	
+	/***************** Administration  *******************/
 
 	@Override
 	public boolean equals(Object obj) {
@@ -67,13 +51,15 @@ public class Vector {
 		return "(" + _head.toString().substring(1,_head.toString().length()-1) + ")";
 	}
 	
+	/***************** Operations ************************/ 
+	
 	/**
 	 * add Vector to Vector
 	 * @param Vector other
 	 * @return new Vector of adding both Vectors
 	 */
 	public Vector add(Vector other) {
-		return new Vector(_head.addPoint3D(other._head));
+		return new Vector(_head.add(other._head));
 	}
 	
 	/**
@@ -82,7 +68,7 @@ public class Vector {
 	 * @return new Vector of Subtract the second Vector from the first
 	 */
 	public Vector sub(Vector other) {
-		return new Vector(_head.subPoint3D(other._head));
+		return new Vector(_head.sub(other._head));
 	}
 	
 	/**
@@ -91,7 +77,7 @@ public class Vector {
 	 * @return Vector multiplied by the scalar
 	 */
 	public Vector scaleVector(double num) {
-		return new Vector(_head.scalePoint3D(num));
+		return new Vector(_head.scale(num));
 	}
 	
 	/**
@@ -100,7 +86,7 @@ public class Vector {
 	 * @return Vector Dot Producted by the other Vector
 	 */
 	public double dotProduct(Vector other) {
-		return _head.multiplyPoint3D(other._head);
+		return _head.multiply(other._head);
 	}
 	
 	/**
@@ -120,7 +106,7 @@ public class Vector {
 	 */
 	public double size() {
 		Vector vector0 = new Vector(0,0,0);
-		return this._head.distanceFrom(vector0._head);
+		return _head.distanceFrom(vector0._head);
 	}
 	
 	/**
@@ -129,6 +115,6 @@ public class Vector {
 	 */
 	public Vector normalize() {
 		double vectorSize = size();
-		return new Vector(_head.scalarDivisionPoint3D(vectorSize));
+		return new Vector(_head.scalarDivision(vectorSize));
 	}
 }
