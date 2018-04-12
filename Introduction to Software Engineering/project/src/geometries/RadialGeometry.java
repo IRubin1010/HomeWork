@@ -4,44 +4,35 @@
 package geometries;
 
 import primitives.*;
-import primitives.Vector;
 
 /**
- * @author itzik yeret
- *
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 public class RadialGeometry extends Geometry {
 
 	private double _radius;
-	
+
+	/***************** Constructors **********************/
+
 	public RadialGeometry(double radius) {
+		super();
 		_radius = radius;
 	}
-	
+
 	public RadialGeometry(RadialGeometry other) {
-		_radius = other._radius;
+		super(other);
+		if(other == null) throw new IllegalArgumentException("param can't be null"); 
+			_radius = other._radius;
 	}
-	
+
+	/***************** Getter ****************************/
+
 	public double getRadius() {
 		return _radius;
 	}
 	
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(_radius);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
+	/***************** Administration  *******************/
 
 	@Override
 	public boolean equals(Object obj) {
@@ -57,11 +48,16 @@ public class RadialGeometry extends Geometry {
 
 	@Override
 	public String toString() {
-		if(_radius % 1 == 0) 
-			return "radius: " + (int)_radius;
+		if (_radius % 1 == 0)
+			return "radius: " + (int) _radius;
 		return "radius: " + _radius;
 	}
 	
-	
+	/***************** Operations ************************/ 
+
+	public Vector getNormal(Point3D point) {
+		return null;
+	}
+
 
 }

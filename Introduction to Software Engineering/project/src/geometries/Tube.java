@@ -1,16 +1,15 @@
-/**
- * 
- */
 package geometries;
-
 import primitives.*;
 
 /**
- * @author itzik yeret
- *
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 public class Tube extends RadialGeometry {
+	
 	private Ray _ray;
+
+	/***************** Constructors **********************/
 
 	public Tube(Ray ray, double radius) {
 		super(radius);
@@ -22,18 +21,14 @@ public class Tube extends RadialGeometry {
 		_ray = new Ray(other._ray);
 	}
 
-	/**
-	 * @return the _ray
-	 */
+	/***************** Getter ****************************/
+
 	public Ray getRay() {
 		return _ray;
 	}
 	
-	@Override
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
-	
+	/***************** Administration *******************/
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -51,5 +46,11 @@ public class Tube extends RadialGeometry {
 	@Override
 	public String toString() {
 		return "Tube: \nray: " + _ray.toString() + " ," + super.toString();
+	}
+	
+	/***************** Operations ************************/ 
+
+	public Vector getNormal(Point3D point) {
+		return null;
 	}
 }

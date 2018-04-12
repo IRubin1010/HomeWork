@@ -1,17 +1,15 @@
-/**
- * 
- */
 package geometries;
-
 import primitives.*;
 
 /**
- * @author itzik yeret
- *
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 public class Cylinder extends Tube {
 
 	private double _highet;
+
+	/***************** Constructors **********************/
 
 	public Cylinder(double highet, Ray ray, double radius) {
 		super(ray, radius);
@@ -20,22 +18,17 @@ public class Cylinder extends Tube {
 
 	public Cylinder(Cylinder other) {
 		super(other.getRay() , other.getRadius());
-		
 		_highet = other._highet;
 	}
 
-	/**
-	 * @return the _ray
-	 */
+	/***************** Getter ****************************/
+
 	public double getHighet() {
 		return _highet;
 	}
 	
-	@Override
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
-	
+	/***************** Administration *******************/
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,5 +48,11 @@ public class Cylinder extends Tube {
 		if(_highet % 1 ==0)
 			return "Cylinder: \nhighet: " + (int)_highet + " ," + super.toString().substring(7);
 		return "Cylinder: \nhighet: " + _highet + " " + super.toString().substring(7);
+	}
+	
+	/***************** Operations ************************/ 
+
+	public Vector getNormal(Point3D point) {
+		return null;
 	}
 }

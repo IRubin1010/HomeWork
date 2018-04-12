@@ -12,6 +12,9 @@ public class test {
 			Vector vector = new Vector(4,7,2);
 			System.out.println(vector);
 			Vector vector2 = point3d.toVector();
+			//point3d2 = null;
+			//Vector vector3 = new Vector(point3d2);
+			//System.out.println("======" + vector3);
 			System.out.println(vector2);
 			System.out.println(point3d.vectorSubtract(point3d2));
 			System.out.println(point3d.addVectorToPoint(vector));
