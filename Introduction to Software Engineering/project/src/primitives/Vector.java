@@ -1,5 +1,7 @@
 package primitives;
 
+import org.junit.experimental.theories.Theories;
+
 /**
  * @author itzik yeret 206244485 yeret82088@gmail.com
  * @author meir shimon 305625295 nthr120@gmail.com
@@ -11,14 +13,17 @@ public class Vector {
 	/***************** Constructors **********************/
 	
 	public Vector(double x, double y, double z) {
+		if(x == 0 && y == 0 && z == 0) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 	
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
+		if(new Point3D(x, y, z).equals(Point3D.zeroPoint)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 
 	public Vector(Point3D other) {
+		if(other.equals(Point3D.zeroPoint)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(other);
 	}
 	
@@ -85,7 +90,7 @@ public class Vector {
 	 * @param num
 	 * @return Vector Dot Producted by the other Vector
 	 */
-	public double dotProduct(Vector other) {
+	public Coordinate dotProduct(Vector other) {
 		return _head.multiply(other._head);
 	}
 	
@@ -98,15 +103,18 @@ public class Vector {
 		Coordinate x = _head.getY().multiply(other._head.getZ()).subtract(_head.getZ().multiply(other._head.getY()));
 		Coordinate y = _head.getZ().multiply(other._head.getX()).subtract(_head.getX().multiply(other._head.getZ()));
 		Coordinate z = _head.getX().multiply(other._head.getY()).subtract(_head.getY().multiply(other._head.getX()));
-		return new Vector(x,y,z);
+		try {			
+			return new Vector(x,y,z);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("both vectors are the same");
+		}
 	}
 	
 	/**
 	 * @return the vector size
 	 */
-	public double size() {
-		Vector vector0 = new Vector(0,0,0);
-		return _head.distanceFrom(vector0._head);
+	public Coordinate size() {
+		return _head.distanceFrom(Point3D.zeroPoint);
 	}
 	
 	/**
@@ -114,7 +122,7 @@ public class Vector {
 	 * @return new normalize Vector
 	 */
 	public Vector normalize() {
-		double vectorSize = size();
-		return new Vector(_head.scalarDivision(vectorSize));
+		Coordinate vectorSize = size();
+		return new Vector(_head.scalarDivision(vectorSize.getValue()));
 	}
 }

@@ -6,7 +6,7 @@ import primitives.*;
  * @author itzik yeret 206244485 yeret82088@gmail.com
  * @author meir shimon 305625295 nthr120@gmail.com
  */
-public class Triangle extends Geometry {
+public class Triangle extends Plane {
 
 	private Point3D _p1;
 	private Point3D _p2;
@@ -15,14 +15,14 @@ public class Triangle extends Geometry {
 	/***************** Constructors **********************/
 
 	public Triangle(Point3D p1, Point3D p2, Point3D p3) {
-		super();
+		super(p1, p2, p3);
 		_p1 = new Point3D(p1);
 		_p2 = new Point3D(p2);
 		_p3 = new Point3D(p3);
 	}
 
 	public Triangle(Triangle other) {
-		super();
+		super(other._p1, other._p2, other._p3);
 		_p1 = new Point3D(other._p1);
 		_p2 = new Point3D(other._p2);
 		_p3 = new Point3D(other._p3);
@@ -68,7 +68,4 @@ public class Triangle extends Geometry {
 	
 	/***************** Operations ************************/ 
 
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
 }

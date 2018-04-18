@@ -1,4 +1,5 @@
 package geometries;
+
 import primitives.*;
 
 /**
@@ -11,7 +12,7 @@ public class Sphere extends RadialGeometry {
 
 	/***************** Constructors **********************/
 
-	public Sphere(Point3D point, double radius) {
+	public Sphere(Point3D point, Coordinate radius) {
 		super(radius);
 		_point = new Point3D(point);
 	}
@@ -47,10 +48,13 @@ public class Sphere extends RadialGeometry {
 	public String toString() {
 		return "Sphere: \npoint: " + _point.toString() + " ," + super.toString();
 	}
-	
-	/***************** Operations ************************/ 
 
-	public Vector getNormal(Point3D point) {
-		return null;
+	/***************** Operations ************************/
+
+	public Vector getNormal(Point3D point) throws Exception {
+		if (!(point.distanceFrom(_point).equals(getRadius()))) {
+			throw new Exception("the point is not on the sphere");
+		}
+		return new Vector(point.vectorSubtract(_point)).normalize();
 	}
 }

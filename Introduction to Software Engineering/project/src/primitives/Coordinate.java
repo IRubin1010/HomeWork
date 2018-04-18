@@ -9,6 +9,8 @@ public class Coordinate {
 
 	private double _coord;
 	
+	public static final Coordinate zeroCoordinate = new Coordinate(0);
+	
 	/***************** Constructors **********************/ 
 	
 	public Coordinate(double coord) {

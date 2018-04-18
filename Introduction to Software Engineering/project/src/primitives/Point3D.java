@@ -8,6 +8,8 @@ public class Point3D extends Point2D {
 	
 	private Coordinate _z;
 	
+	public static final Point3D zeroPoint = new Point3D(0,0,0);
+	
 	/***************** Constructors **********************/
 	
 	public Point3D(double x, double y, double z) {
@@ -61,8 +63,12 @@ public class Point3D extends Point2D {
 	 * create a vector from a 3D point
 	 * @return Vector base of the point
 	 */
-	public Vector toVector() {
-		return new Vector(this);
+	public Vector toVector(){
+		try {			
+			return new Vector(this);
+		} catch (IllegalArgumentException e) {
+			throw e;
+		}
 	}
 	
 	/**
@@ -99,8 +105,8 @@ public class Point3D extends Point2D {
 	 * multiply point with another point
 	 * @param Point3D other
 	 */
-	public double multiply(Point3D other) {
-		return super.multiply(other) + _z.multiply(other._z).getValue();
+	public Coordinate multiply(Point3D other) {
+		return super.multiply(other).add(_z.multiply(other._z));
 	}
 	
 	/**
@@ -119,7 +125,11 @@ public class Point3D extends Point2D {
 	 * @return new vector from other point to this point
 	 */
 	public Vector vectorSubtract(Point3D other) {
-		return sub(other).toVector();
+		try {			
+			return sub(other).toVector();
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("both points are the same");
+		}
 	}
 	
 	/**
@@ -136,11 +146,11 @@ public class Point3D extends Point2D {
 	 * @param other
 	 * @return distance
 	 */
-	public double distanceFrom(Point3D other) {
+	public Coordinate distanceFrom(Point3D other) {
 		Point3D point = sub(other);
 		double xPow = Math.pow(point.getX().getValue(),2);
 		double yPow = Math.pow(point.getY().getValue(),2);
 		double zPow = Math.pow(point._z.getValue(),2);
-		return Math.sqrt(xPow + yPow + zPow);
+		return new Coordinate(Math.sqrt(xPow + yPow + zPow));
 	}
 }

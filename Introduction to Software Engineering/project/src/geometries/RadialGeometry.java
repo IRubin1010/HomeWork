@@ -11,11 +11,11 @@ import primitives.*;
  */
 public class RadialGeometry extends Geometry {
 
-	private double _radius;
+	private Coordinate _radius;
 
 	/***************** Constructors **********************/
 
-	public RadialGeometry(double radius) {
+	public RadialGeometry(Coordinate radius) {
 		super();
 		_radius = radius;
 	}
@@ -28,7 +28,7 @@ public class RadialGeometry extends Geometry {
 
 	/***************** Getter ****************************/
 
-	public double getRadius() {
+	public Coordinate getRadius() {
 		return _radius;
 	}
 	
@@ -48,14 +48,12 @@ public class RadialGeometry extends Geometry {
 
 	@Override
 	public String toString() {
-		if (_radius % 1 == 0)
-			return "radius: " + (int) _radius;
 		return "radius: " + _radius;
 	}
 	
 	/***************** Operations ************************/ 
 
-	public Vector getNormal(Point3D point) {
+	public Vector getNormal(Point3D point) throws Exception {
 		return null;
 	}
 

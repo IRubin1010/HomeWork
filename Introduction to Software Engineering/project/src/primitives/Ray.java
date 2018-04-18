@@ -27,7 +27,7 @@ public class Ray {
 		return _point;
 	}
 
-	public Vector grtDirection() {
+	public Vector getDirection() {
 		return _direction;
 	}
 
