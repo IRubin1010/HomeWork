@@ -50,7 +50,14 @@ public class Tube extends RadialGeometry {
 	
 	/***************** Operations ************************/ 
 
-	public Vector getNormal(Point3D point) {
-		return null;
+	public Vector getNormal(Point3D point) throws Exception {
+		Vector PtoPVector = point.vectorSubtract(getRay().getPoint());
+		Vector dotVector = PtoPVector.crossProduct(getRay().getDirection());
+		Coordinate distance = dotVector.size().coordinateDivide(getRay().getDirection().size());
+		if(!distance.equals(getRadius()))
+			throw new Exception("the point is not on the Tube");
+		Vector direction = getRay().getDirection().normalize();
+		direction.scaleVector(Math.sqrt(Math.pow(PtoPVector.size().getValue(),2) - Math.pow(getRadius().getValue(), 2)));
+		return new Vector(PtoPVector.sub(direction));
 	}
 }
