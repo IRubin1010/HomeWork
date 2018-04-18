@@ -11,7 +11,7 @@ public class Tube extends RadialGeometry {
 
 	/***************** Constructors **********************/
 
-	public Tube(Ray ray, double radius) {
+	public Tube(Ray ray, Coordinate radius) {
 		super(radius);
 		_ray = new Ray(ray);
 	}

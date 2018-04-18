@@ -90,8 +90,8 @@ public class Point2D {
 	 * multiply point by another point
 	 * @param other
 	 */
-	protected double multiply(Point2D other) {
-		return _x.multiply(other._x).getValue() + _y.multiply(other._y).getValue();
+	protected Coordinate multiply(Point2D other) {
+		return _x.multiply(other._x).add(_y.multiply(other._y));
 	}
 	
 	/**

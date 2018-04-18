@@ -11,7 +11,7 @@ public class Cylinder extends Tube {
 
 	/***************** Constructors **********************/
 
-	public Cylinder(double highet, Ray ray, double radius) {
+	public Cylinder(double highet, Ray ray, Coordinate radius) {
 		super(ray, radius);
 		_highet = highet;
 	}

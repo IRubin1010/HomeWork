@@ -13,6 +13,6 @@ public abstract class Geometry {
 	public Geometry(Geometry other) {
 	}
 	
-	public abstract Vector getNormal(Point3D point);
+	public abstract Vector getNormal(Point3D point) throws Exception;
 
 }
