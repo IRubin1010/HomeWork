@@ -1,6 +1,5 @@
 package primitives;
 
-import org.junit.experimental.theories.Theories;
 
 /**
  * @author itzik yeret 206244485 yeret82088@gmail.com
@@ -13,7 +12,7 @@ public class Vector {
 	/***************** Constructors **********************/
 	
 	public Vector(double x, double y, double z) {
-		if(x == 0 && y == 0 && z == 0) throw new IllegalArgumentException("vector can't be vector 0");
+		if(new Point3D(x, y, z).equals(Point3D.zeroPoint)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 	
