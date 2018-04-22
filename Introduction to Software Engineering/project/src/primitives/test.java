@@ -42,7 +42,8 @@ public class test {
 			Sphere sphere = new Sphere(new Point3D(0,0,0), new Coordinate(4));
 			
 			System.out.println(sphere.getNormal(new Point3D(4,0,0)));
-			
+			System.out.println("===============================================================");
+			System.out.println(new Vector(1000000000,1000000000,1000000000).add(new Vector(1.00000001,1.000000001,1.000000001)));
 			/*
 			System.out.println(vector.add(vector2));
 			System.out.println(vector.sub(vector2));
