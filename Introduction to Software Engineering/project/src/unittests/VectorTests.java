@@ -7,8 +7,6 @@ import primitives.*;
 
 import static org.junit.Assert.*;
 
-import javax.jws.Oneway;
-
 import org.junit.Test;
 
 /**

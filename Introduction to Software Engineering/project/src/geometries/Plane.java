@@ -1,7 +1,5 @@
 package geometries;
 
-import org.junit.experimental.theories.Theories;
-
 import primitives.*;
 
 /**
