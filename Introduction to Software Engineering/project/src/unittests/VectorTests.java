@@ -55,7 +55,6 @@ public class VectorTests {
 	Vector vector2n = new Vector(-2,3,4);
 	
 	
-	
 	Coordinate coor1 = new Coordinate(1);
 	Coordinate coor1n = new Coordinate(-1);
 	Coordinate coor20 = new Coordinate(20);
@@ -103,6 +102,7 @@ public class VectorTests {
 			fail("expected IllegalArgumentException");
 		} catch (IllegalArgumentException e) {}
 		try {
+//			new Vector(1/26200,1/26200,1/262);
 			new Vector(0.0001,0.0001,0.0001);
 			new Vector(new Coordinate(0.0001),new Coordinate(0.0001),new Coordinate(0.0001));
 			new Vector(new Point3D(0.0001,0.0001,0.0001));
