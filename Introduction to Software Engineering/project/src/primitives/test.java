@@ -1,4 +1,5 @@
 package primitives;
+import elements.Camera;
 import geometries.*;
 
 public class test {
@@ -52,6 +53,21 @@ public class test {
 			System.out.println(vector.scaleVector(3));
 			System.out.println(vector.dotProduct(vector2));
 			*/
+			Vector vup=new Vector(0,-1,0);
+			Vector vto=new Vector(0,0,-1);
+			Point3D pc=new Point3D(0,0,0);
+
+			Camera cam=new Camera(vup, vto, pc);
+			Ray ray1 = cam.constructorRay(3, 3, 3, 3, 100, 150, 150);
+			System.out.println("==================meir============");
+			System.out.println(ray1);
+			System.out.println("==================meir============");
+			Camera camera2=new Camera(new Vector(0,-1,0), new Vector(0,0,1), Point3D.zeroPoint);
+			Ray ray2=camera2.constructorRay(4, 4, 2, 2, 100, 160, 160);
+			Ray rayExpected2=new Ray(Point3D.zeroPoint, new Vector(1.0/26200,1.0/26200,1.0/262));
+			System.out.println(ray2);
+			System.out.println(rayExpected2);
+			System.out.println("==================meir============");
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
