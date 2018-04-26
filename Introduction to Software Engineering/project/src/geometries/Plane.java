@@ -74,12 +74,5 @@ public class Plane extends Geometry {
 
 	public Vector getNormal(Point3D point){
 		return new Vector(_plumb).normalize();
-//		if (point.equals(_point))
-//			return new Vector(_plumb).normalize();
-//		Vector equation = new Vector(point.vectorSubtract(_point));
-//		if (equation.dotProduct(_plumb).equals(Coordinate.zeroCoordinate))
-//			return new Vector(_plumb).normalize();
-//		else
-//			throw new Exception("the point is not on the plane");
 	}
 }

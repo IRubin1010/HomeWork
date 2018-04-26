@@ -52,9 +52,6 @@ public class Sphere extends RadialGeometry {
 	/***************** Operations ************************/
 
 	public Vector getNormal(Point3D point){
-//		if (!(point.distanceFrom(_point).equals(getRadius()))) {
-//			throw new Exception("the point is not on the sphere");
-//		}
 		return new Vector(point.vectorSubtract(_point)).normalize();
 	}
 }
