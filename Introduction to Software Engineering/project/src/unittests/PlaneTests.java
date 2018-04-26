@@ -63,24 +63,6 @@ class PlaneTests {
 		} catch (Exception e) {
 			fail("not expected Exeption");
 		}
-		
-		// normal for points not on the plane
-		try {
-			planeXY.getNormal(new Point3D(2,2,1));
-			fail("not expected Exeption");
-		} catch (Exception e) {}
-		try {
-			planeXZ.getNormal(new Point3D(0,1,0));
-			fail("not expected Exeption");
-		} catch (Exception e) {}
-		try {
-			planeXY.getNormal(new Point3D(1,1,3));
-			fail("not expected Exeption");
-		} catch (Exception e) {}
-		try {
-			crookedPlaneNo0Point.getNormal(new Point3D(0,0,0));
-			fail("not expected Exeption");
-		} catch (Exception e) {}
 	}
 	
 }

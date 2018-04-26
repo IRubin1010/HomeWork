@@ -52,7 +52,4 @@ public class Cylinder extends Tube {
 	
 	/***************** Operations ************************/ 
 
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
 }

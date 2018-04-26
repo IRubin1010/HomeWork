@@ -73,7 +73,7 @@ public class Plane extends Geometry {
 	/***************** Operations ************************/
 
 	public Vector getNormal(Point3D point){
-		return new Vector(_plumb);
+		return new Vector(_plumb).normalize();
 //		if (point.equals(_point))
 //			return new Vector(_plumb).normalize();
 //		Vector equation = new Vector(point.vectorSubtract(_point));
