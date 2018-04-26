@@ -49,5 +49,5 @@ public class CameraTests {
 		Ray rayExpected2=new Ray(Point3D.zeroPoint, new Vector(-Math.sqrt(3)/9,-Math.sqrt(3)/9,5*Math.sqrt(3)/9));
 		assertEquals(ray2, rayExpected2);
 	}
-
+	
 }
