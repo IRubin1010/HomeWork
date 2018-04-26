@@ -44,7 +44,14 @@ public class test {
 			
 			System.out.println(sphere.getNormal(new Point3D(4,0,0)));
 			System.out.println("===============================================================");
-			System.out.println(new Vector(1000000000,1000000000,1000000000).add(new Vector(1.00000001,1.000000001,1.000000001)));
+			//System.out.println(new Vector(1000000000,1000000000,1000000000).add(new Vector(1.00000001,1.000000001,1.000000001)));
+			Ray ray3 = new Ray(new Point3D(0,0,0),new Vector(0,1,0));
+			
+			Tube tube = new Tube(ray3,new Coordinate(2));
+			System.out.println("tube");
+			System.out.println(tube.getNormal(new Point3D(1,1,1)));
+			
+			
 			/*
 			System.out.println(vector.add(vector2));
 			System.out.println(vector.sub(vector2));

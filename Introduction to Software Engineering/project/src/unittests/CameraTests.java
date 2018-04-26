@@ -38,6 +38,7 @@ public class CameraTests {
 	}
 	
 	@Test
+
 	public void testconstructorRay() {
 
 		Camera camera1 = new Camera(new Vector(0,1,0), new Vector(0,0,1),Point3D.zeroPoint);
@@ -177,4 +178,5 @@ public class CameraTests {
 		assertEquals("1,1",littl11,checklittl11);
 
 }
-}
+
+	

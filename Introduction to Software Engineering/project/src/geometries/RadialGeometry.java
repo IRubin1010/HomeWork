@@ -53,7 +53,7 @@ public class RadialGeometry extends Geometry {
 	
 	/***************** Operations ************************/ 
 
-	public Vector getNormal(Point3D point) throws Exception {
+	public Vector getNormal(Point3D point){
 		return null;
 	}
 
