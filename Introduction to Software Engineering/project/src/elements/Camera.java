@@ -23,7 +23,8 @@ public class Camera {
 	/***************** Constructors **********************/
 
 	/**
-	 * @exception if  the vector are not vertical each other               
+	 * @exception if
+	 *                the vector are not vertical each other
 	 */
 	public Camera(Vector vUp, Vector vTo, Point3D pc) {
 		if (!(vUp.dotProduct(vTo).equals(Coordinate.zeroCoordinate))) {
@@ -53,17 +54,26 @@ public class Camera {
 		return _vRight;
 	}
 
-	/***************** Operations ************************/ 
+	/***************** Operations ************************/
 
-	public Ray constructorRay (int Nx, int Ny, int i, int j, double screenDistance, double screenWidth, double screenHight) {
-		Point3D pc=_p0.addVectorToPoint(_vTo.scaleVector(screenDistance));
-		double Ry=screenHight/Ny;
-		double Rx=screenWidth/Nx;
-		double pcX=((double)Nx+1)/2;
-		double pcY=((double)Ny+1)/2;
-		Point3D Pij=pc.addVectorToPoint((_vRight.scaleVector((i-pcX)*Rx)).sub(_vUp.scaleVector((j-pcY)*Ry)));
-		Vector Vij=Pij.vectorSubtract(_p0);
-		Ray ray=new Ray(_p0,Vij.normalize());
+	public Ray constructorRay(int Nx, int Ny, int i, int j, double screenDistance, double screenWidth,
+			double screenHight) {
+		Point3D pc = _p0.addVectorToPoint(_vTo.scaleVector(screenDistance));
+		double Ry = screenHight / Ny;
+		double Rx = screenWidth / Nx;
+		double pcX = ((double) Nx + 1) / 2;
+		double pcY = ((double) Ny + 1) / 2;
+		Point3D Pij;
+		if (pcX != i && pcY != j) {
+			Pij=pc.addVectorToPoint((_vRight.scaleVector((i - pcX) * Rx)).sub(_vUp.scaleVector((j - pcY) * Ry)));
+		} else if (pcX != i) {
+			Pij=pc.addVectorToPoint(_vRight.scaleVector((i - pcX) * Rx));
+		} else if (pcY!=j) {
+			Pij=pc.addVectorToPoint(_vUp.scaleVector(-1 * (j - pcY) * Ry));
+		}
+		else Pij=pc;
+		Vector Vij = Pij.vectorSubtract(_p0);
+		Ray ray = new Ray(_p0, Vij.normalize());
 		return ray;
 	}
 }
