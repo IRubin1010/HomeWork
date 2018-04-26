@@ -7,7 +7,7 @@ import primitives.*;
 /**
  * class to represent camera
  * 
- * @param _pc
+ * @param _p0
  *            center point of the camera
  * @param _vUp
  * @param _vTo
@@ -38,24 +38,51 @@ public class Camera {
 
 	/***************** Getters ****************************/
 
-	public Point3D get_pc() {
+	/**
+	 * @return the _p0
+	 */
+	public Point3D get_p0() {
 		return _p0;
 	}
 
+	/**
+	 * @return the _vUp
+	 */
 	public Vector get_vUp() {
 		return _vUp;
 	}
 
+	/**
+	 * @return the _vTo
+	 */
 	public Vector get_vTo() {
 		return _vTo;
 	}
 
+	/**
+	 * @return the _vRight
+	 */
 	public Vector get_vRight() {
 		return _vRight;
 	}
 
 	/***************** Operations ************************/
 
+	/**
+	 * constructor ray through a pixel
+	 * 
+	 * @param Nx
+	 *            number of pixels across the plane
+	 * @param Ny
+	 *            number of pixels to the height of the plane
+	 * @param i
+	 *            column
+	 * @param j
+	 *            row
+	 * @param screenDistance
+	 * @param screenWidth
+	 * @param screenHight
+	 */
 	public Ray constructorRay(int Nx, int Ny, int i, int j, double screenDistance, double screenWidth,
 			double screenHight) {
 		Point3D pc = _p0.addVectorToPoint(_vTo.scaleVector(screenDistance));
@@ -63,15 +90,11 @@ public class Camera {
 		double Rx = screenWidth / Nx;
 		double pcX = ((double) Nx + 1) / 2;
 		double pcY = ((double) Ny + 1) / 2;
-		Point3D Pij;
-		if (pcX != i && pcY != j) {
-			Pij=pc.addVectorToPoint((_vRight.scaleVector((i - pcX) * Rx)).sub(_vUp.scaleVector((j - pcY) * Ry)));
-		} else if (pcX != i) {
-			Pij=pc.addVectorToPoint(_vRight.scaleVector((i - pcX) * Rx));
-		} else if (pcY!=j) {
-			Pij=pc.addVectorToPoint(_vUp.scaleVector(-1 * (j - pcY) * Ry));
-		}
-		else Pij=pc;
+		Point3D Pij = pc;
+		if (pcX != i)
+			Pij = Pij.addVectorToPoint(_vRight.scaleVector((i - pcX) * Rx));
+		if (pcY != j)
+			Pij = Pij.addVectorToPoint(_vUp.scaleVector((pcY - j) * Ry));
 		Vector Vij = Pij.vectorSubtract(_p0);
 		Ray ray = new Ray(_p0, Vij.normalize());
 		return ray;

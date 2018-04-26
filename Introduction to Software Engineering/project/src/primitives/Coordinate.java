@@ -1,10 +1,12 @@
-package primitives;
-
 /**
  * @author itzik yeret 206244485 yeret82088@gmail.com
  * @author meir shimon 305625295 nthr120@gmail.com
  */
+package primitives;
 
+/**
+ * class to represent Coordinate
+ */
 public class Coordinate {
 
 	private double _coord;
@@ -12,11 +14,19 @@ public class Coordinate {
 	public static final Coordinate zeroCoordinate = new Coordinate(0);
 	
 	/***************** Constructors **********************/ 
-	
+	/**
+	 * constuctor with number
+	 * @param coord  Coordinate value
+	 */
 	public Coordinate(double coord) {
 		_coord = (getExp(coord) < ACCURACY) ? 0.0 : coord;
 	}
-
+	
+	/**
+	 * constuctor from another ray
+	 * @param other 
+	 * @exception if the other = null throw exception
+	 */
 	public Coordinate(Coordinate other) {
 		if(other == null) throw new IllegalArgumentException("param can't be null");
 		_coord = other._coord;
@@ -24,12 +34,18 @@ public class Coordinate {
 	
 	/***************** Getter ****************************/
 	
+	/**
+	 * @return the _coord
+	 */
 	public double getValue() {
 		return _coord;
 	}
 
 	/***************** Administration  *******************/
 	
+	/**
+	 * override equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -42,6 +58,9 @@ public class Coordinate {
 		return (_subtract(other._coord) == 0.0);
 	}
 
+	/**
+	 * override toString
+	 */
 	@Override
 	public String toString() {
 		if (_coord % 1 == 0)
@@ -53,26 +72,56 @@ public class Coordinate {
 	
 	/***************** Operations ************************/ 
 	
+	/**
+	 * sub the other coordinate from this coordinate
+	 * @param other The coordinate they are missing from me
+	 * @return new coordinate 
+	 */
 	public Coordinate subtract(Coordinate other) {
 		return new Coordinate(_subtract(other._coord));
 	}
-
+	
+	/**
+	 * add the other coordinate to this coordinate
+	 * @param other The coordinate they are add from me
+	 * @return new coordinate 
+	 */
 	public Coordinate add(Coordinate other) {
 		return new Coordinate(_add(other._coord));
 	}
-
+	
+	/**
+	 * multiplication of the coordinate in the number
+	 * @param num The number you want to double the coordinate
+	 * @return new coordinate 
+	 */
 	public Coordinate scale(double num) {
 		return new Coordinate(_scale(num));
 	}
 
+	/**
+	 * multiplication coordinate at another Coordinate
+	 * @param other
+	 * @return new coordinate 
+	 */
 	public Coordinate multiply(Coordinate other) {
 		return new Coordinate(_scale(other._coord));
 	}
 	
+	/**
+	 * divide of the coordinate in the number
+	 * @param num The number you want to divide the coordinate
+	 * @return new coordinate 
+	 */
 	public Coordinate divide(double num) {
 		return new Coordinate(_divide(num));
 	}
 
+	/**
+	 * divide of this coordinate in another coordinate
+	 * @param num The coordinate you want to divide the coordinate
+	 * @return new coordinate 
+	 */
 	public Coordinate coordinateDivide(Coordinate other) {
 		return new Coordinate(_divide(other._coord));
 	}
