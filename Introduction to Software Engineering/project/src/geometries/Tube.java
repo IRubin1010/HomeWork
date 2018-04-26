@@ -58,16 +58,5 @@ public class Tube extends RadialGeometry {
 		Coordinate surcharge = PtoPVector.dotProduct(normalRayVector);
 		Vector surchargeVector = normalRayVector.scaleVector(surcharge.getValue());
 		return new Vector(PtoPVector.sub(surchargeVector)).normalize();
-		
-		
-		//getRay().getDirection().scaleVector(PtoPVector.dotProduct(getRay().getDirection()).divide(Math.pow(getRay().getDirection().size().getValue(),2)).getValue());
-		
-//		Vector dotVector = PtoPVector.crossProduct(getRay().getDirection());
-//		Coordinate distance = dotVector.size().coordinateDivide(getRay().getDirection().size());
-//		if(!distance.equals(getRadius()))
-//			throw new Exception("the point is not on the Tube");
-//		Vector direction = getRay().getDirection().normalize();
-//		direction.scaleVector(Math.sqrt(Math.pow(PtoPVector.size().getValue(),2) - Math.pow(getRadius().getValue(), 2)));
-//		return new Vector(PtoPVector.sub(direction));
 	}
 }

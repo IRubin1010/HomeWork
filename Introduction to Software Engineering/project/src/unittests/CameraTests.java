@@ -18,6 +18,13 @@ public class CameraTests {
 	Vector vTo2 = new Vector(0, -3, 2);
 	Point3D pc = new Point3D(1, 1, 1);
 
+	Camera camera1 = new Camera(new Vector(0,1,0), new Vector(0,0,1),Point3D.zeroPoint);
+	Camera camera2 = new Camera(new Vector(0, -1, 0), new Vector(0, 0, -1),Point3D.zeroPoint);
+	Camera camera3 = new Camera(new Vector(0,1,0), new Vector(0,0,-1),Point3D.zeroPoint);
+	
+	/**
+	 * test the Constructor
+	 */
 	@Test
 	public void testConstructor() {
 		try {
@@ -37,11 +44,13 @@ public class CameraTests {
 		}
 	}
 	
+	/**
+	 * test to check constructorRay
+	 */
 	@Test
-
 	public void testconstructorRay() {
 
-		Camera camera1 = new Camera(new Vector(0,1,0), new Vector(0,0,1),Point3D.zeroPoint);
+		// camera 1 test
 		
 		//3X3
 		Ray ray11 = camera1.constructorRay(3, 3, 1, 1, 100, 150, 150);
@@ -109,9 +118,9 @@ public class CameraTests {
 		Ray expectedRay_c43 = new Ray(Point3D.zeroPoint,new Vector(-50,-75,100).normalize());
 		assertEquals("pozitiv up to vectors testing at 4X3 in pixel (4,3)", ray_c43 ,expectedRay_c43);
 		
-
+		
+		// camera 2 test
 		//Negative vectors.
-		Camera camera2 = new Camera(new Vector(0, -1, 0), new Vector(0, 0, -1),Point3D.zeroPoint);
 		
 		//3X3
 		Ray ray1 = camera2.constructorRay(3, 3, 3, 3, 100, 150, 150);
@@ -143,9 +152,8 @@ public class CameraTests {
 		Ray expectedRay_d32 = new Ray(Point3D.zeroPoint,new Vector(-50,0,-100).normalize());
 		assertEquals("negative up to vectors testing at 3X3 in pixel (3,2)", ray_d32 ,expectedRay_d32);
 		
-		
+		//camera 3 test
 		//vTo negative vUp positive
-		Camera camera3 = new Camera(new Vector(0,1,0), new Vector(0,0,-1),Point3D.zeroPoint);
 		
 		//3X4
 		
