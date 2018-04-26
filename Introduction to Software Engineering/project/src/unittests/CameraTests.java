@@ -109,7 +109,7 @@ public class CameraTests {
 		Ray expectedRay_c43 = new Ray(Point3D.zeroPoint,new Vector(-50,-75,100).normalize());
 		assertEquals("pozitiv up to vectors testing at 4X3 in pixel (4,3)", ray_c43 ,expectedRay_c43);
 		
-		//======
+
 		//Negative vectors.
 		Camera camera2 = new Camera(new Vector(0, -1, 0), new Vector(0, 0, -1),Point3D.zeroPoint);
 		
@@ -166,8 +166,6 @@ public class CameraTests {
 		assertEquals("vTo negative vUp positive vectors testing at 3X4 in pixel (4,3)", ray_e43 ,expectedRay_e43);
 				
 		
-		
-		//======
 		Camera littlCam = new Camera(new Vector(0,1,0),new Vector(0,0,1),Point3D.zeroPoint);
 		Ray littl33 = littlCam.constructorRay(3,3, 3, 3, 10, 6, 6);
 		Ray checklittl33 = new Ray(Point3D.zeroPoint, new Vector(-2,-2,10).normalize());
@@ -176,7 +174,7 @@ public class CameraTests {
 		
 		assertEquals("3,3",littl33,checklittl33);
 		assertEquals("1,1",littl11,checklittl11);
-
+	}
 }
 
 	
