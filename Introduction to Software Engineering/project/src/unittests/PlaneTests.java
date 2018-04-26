@@ -1,6 +1,7 @@
 /**
- * 
- */
+* @author itzik yeret 206244485 yeret82088@gmail.com
+* @author meir shimon 305625295 nthr120@gmail.com
+*/
 package unittests;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,8 +12,7 @@ import geometries.*;
 import primitives.*;
 
 /**
-* @author itzik yeret 206244485 yeret82088@gmail.com
-* @author meir shimon 305625295 nthr120@gmail.com
+* plane tests
 */
 class PlaneTests {
 	
@@ -53,16 +53,13 @@ class PlaneTests {
 	
 	@Test
 	public void testGetNormal() {
-		try {
 			assertEquals(XYnormal, planeXY.getNormal(new Point3D(2,2,0))); 
 			assertEquals(XYnormal, planeXY.getNormal(new Point3D(1,0,0))); // normal for the same point as plane point
 			assertEquals(XZnormal, planeXZ.getNormal(new Point3D(1,0,1)));
 			assertEquals(XZnormal, planeXZ.getNormal(new Point3D(0,0,0))); // normal for the same point as plane point, and point 0 
 			assertEquals(crookedPlaneNormal, crookedPlane.getNormal(new Point3D(1,3,4))); // Normal for crooked plane
 			assertEquals(crookedPlaneNo0Point.getNormal(new Point3D(1,1,3)), crookedPlaneNo0PointPlumbConstructor.getNormal(new Point3D(1,2,4))); // check that both normals are the same - same plane
-		} catch (Exception e) {
-			fail("not expected Exeption");
-		}
+
 	}
 	
 }

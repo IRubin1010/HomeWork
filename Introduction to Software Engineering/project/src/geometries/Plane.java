@@ -1,10 +1,13 @@
+/**
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
+ */
 package geometries;
 
 import primitives.*;
 
 /**
- * @author itzik yeret 206244485 yeret82088@gmail.com
- * @author meir shimon 305625295 nthr120@gmail.com
+ * class represent plane
  */
 public class Plane extends Geometry {
 
@@ -12,30 +15,51 @@ public class Plane extends Geometry {
 	private Vector _plumb;
 
 	/***************** Constructors **********************/
-
+	/**
+	 * constructor with 3 points
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
 	public Plane(Point3D x, Point3D y, Point3D z) {
-		try {			
+		try {		
+			// if 2 points are the same point
+			// the vactor substract will be 0
+			// and exception will thrown
 			Vector Vector1 = new Vector(y.vectorSubtract(x));
 			Vector Vector2 = new Vector(z.vectorSubtract(x));
 			try {
+				// if all points are on the same line
+				// cross product will be 0
+				// and exception will thrown 
 				Vector1.crossProduct(Vector2);
 			} catch (IllegalArgumentException e) {
+				// case all points are on the same line
 				throw new IllegalArgumentException("all 3 points are on the same line");
 			}
 			_point = new Point3D(x);
 			_plumb = new Vector(Vector1.crossProduct(Vector2));
 		} catch (IllegalArgumentException e) {
-			////////////////////////////////////////////////////////////////FIX !!!!!!!!!!!!!!!!!!!!!!!
-			if(e.getMessage() == "all 3 points are on the same line") throw new IllegalArgumentException("all 3 points are on the same line");
+			// case 2 points are the same
+			if(e.getMessage() == "all 3 points are on the same line") throw new IllegalArgumentException("all 3 points are on the same line");// FIX
 			throw new IllegalArgumentException("There is 2 same points");
 		}
 	}
 
+	/**
+	 * constructor with point and plumb
+	 * @param point
+	 * @param plumb
+	 */
 	public Plane(Point3D point, Vector plumb) {
 		_point = new Point3D(point);
 		_plumb = new Vector(plumb);
 	}
 
+	/**
+	 * copy constructor 
+	 * @param other
+	 */
 	public Plane(Plane other) {
 		_point = new Point3D(other._point);
 		_plumb = new Vector(other._plumb);
@@ -43,16 +67,25 @@ public class Plane extends Geometry {
 
 	/***************** Getters ****************************/
 
-	public Point3D getPoint() {
+	/**
+	 * @return the _point
+	 */
+	public Point3D get_point() {
 		return _point;
 	}
 
-	public Vector getPlumb() {
+	/**
+	 * @return the _plumb
+	 */
+	public Vector get_plumb() {
 		return _plumb;
 	}
 
 	/***************** Administration *******************/
-
+	
+	/**
+	 * override equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -65,6 +98,9 @@ public class Plane extends Geometry {
 		return _point.equals(other._point) && _plumb.equals(other._plumb);
 	}
 
+	/**
+	 * override toString
+	 */
 	@Override
 	public String toString() {
 		return "Plane: \npoint: " + _point.toString() + " ,plumb: " + _plumb.toString();
@@ -72,14 +108,11 @@ public class Plane extends Geometry {
 
 	/***************** Operations ************************/
 
+	/**
+	 * return normal from a point on the plane
+	 * @param point on the plane
+	 */
 	public Vector getNormal(Point3D point){
 		return new Vector(_plumb).normalize();
-//		if (point.equals(_point))
-//			return new Vector(_plumb).normalize();
-//		Vector equation = new Vector(point.vectorSubtract(_point));
-//		if (equation.dotProduct(_plumb).equals(Coordinate.zeroCoordinate))
-//			return new Vector(_plumb).normalize();
-//		else
-//			throw new Exception("the point is not on the plane");
 	}
 }
