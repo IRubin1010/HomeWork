@@ -52,11 +52,15 @@ public class Tube extends RadialGeometry {
 
 	public Vector getNormal(Point3D point){
 		// formula: surcharge = c = (PtoPVector*rayVector/(|rayVector|)^2)*rayVector
+		Vector rayVector = getRay().getDirection();
 		Vector PtoPVector = point.vectorSubtract(getRay().getPoint());
-		Vector surcharge = getRay().getDirection().scaleVector(PtoPVector.dotProduct(getRay().getDirection()).divide(Math.pow(getRay().getDirection().size().getValue(),2)).getValue());
-		return new Vector(PtoPVector.sub(surcharge)).normalize();
+		Vector normalRayVector = rayVector.normalize();
+		Coordinate surcharge = PtoPVector.dotProduct(normalRayVector);
+		Vector surchargeVector = normalRayVector.scaleVector(surcharge.getValue());
+		return new Vector(PtoPVector.sub(surchargeVector)).normalize();
 		
 		
+		//getRay().getDirection().scaleVector(PtoPVector.dotProduct(getRay().getDirection()).divide(Math.pow(getRay().getDirection().size().getValue(),2)).getValue());
 		
 //		Vector dotVector = PtoPVector.crossProduct(getRay().getDirection());
 //		Coordinate distance = dotVector.size().coordinateDivide(getRay().getDirection().size());
