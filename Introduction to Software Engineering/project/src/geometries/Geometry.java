@@ -29,5 +29,12 @@ public abstract class Geometry {
 	 * @return
 	 */
 	public abstract Vector getNormal(Point3D point);
+	
+	/**
+	 * abstract function find Intersections
+	 * @param ray
+	 * @return point of the intersection
+	 */
+	public abstract Point3D findIntersections(Ray ray);
 
 }
