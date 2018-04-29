@@ -76,6 +76,15 @@ public class RadialGeometry extends Geometry {
 	public Vector getNormal(Point3D point){
 		return null;
 	}
-
+	
+	/**
+	 * abstract function find Intersections
+	 * @param ray
+	 * @return point of the intersection
+	 */
+	@Override
+	public Point3D findIntersections(Ray ray) {
+		return null;
+	}
 
 }

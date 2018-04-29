@@ -17,12 +17,13 @@ public class Plane extends Geometry {
 	/***************** Constructors **********************/
 	/**
 	 * constructor with 3 points
+	 * 
 	 * @param x
 	 * @param y
 	 * @param z
 	 */
 	public Plane(Point3D x, Point3D y, Point3D z) {
-		try {		
+		try {
 			// if 2 points are the same point
 			// the vactor substract will be 0
 			// and exception will thrown
@@ -31,7 +32,7 @@ public class Plane extends Geometry {
 			try {
 				// if all points are on the same line
 				// cross product will be 0
-				// and exception will thrown 
+				// and exception will thrown
 				Vector1.crossProduct(Vector2);
 			} catch (IllegalArgumentException e) {
 				// case all points are on the same line
@@ -41,13 +42,15 @@ public class Plane extends Geometry {
 			_plumb = new Vector(Vector1.crossProduct(Vector2));
 		} catch (IllegalArgumentException e) {
 			// case 2 points are the same
-			if(e.getMessage() == "all 3 points are on the same line") throw new IllegalArgumentException("all 3 points are on the same line");// FIX
+			if (e.getMessage() == "all 3 points are on the same line")
+				throw new IllegalArgumentException("all 3 points are on the same line");// FIX
 			throw new IllegalArgumentException("There is 2 same points");
 		}
 	}
 
 	/**
 	 * constructor with point and plumb
+	 * 
 	 * @param point
 	 * @param plumb
 	 */
@@ -57,7 +60,8 @@ public class Plane extends Geometry {
 	}
 
 	/**
-	 * copy constructor 
+	 * copy constructor
+	 * 
 	 * @param other
 	 */
 	public Plane(Plane other) {
@@ -82,7 +86,7 @@ public class Plane extends Geometry {
 	}
 
 	/***************** Administration *******************/
-	
+
 	/**
 	 * override equals
 	 */
@@ -110,9 +114,50 @@ public class Plane extends Geometry {
 
 	/**
 	 * return normal from a point on the plane
-	 * @param point on the plane
+	 * 
+	 * @param point
+	 *            on the plane
 	 */
-	public Vector getNormal(Point3D point){
+	public Vector getNormal(Point3D point) {
 		return new Vector(_plumb).normalize();
+	}
+
+	/**
+	 * abstract function find Intersections
+	 * @param ray
+	 * @return point of the intersection
+	 */
+	@Override
+	public Point3D findIntersections(Ray ray) {
+		try {
+			// Q0 - P0
+			Vector tVector = _point.vectorSubtract(ray.getPoint());
+			// N * (Q0 - P0)
+			Coordinate tCoordinateNP = _plumb.dotProduct(tVector);
+			if (tCoordinateNP.equals(Coordinate.zeroCoordinate)) {
+				// means the ray point is on the plane
+				return ray.getPoint();
+			}
+			// V * N
+			Coordinate tCoordinateNV = _plumb.dotProduct(ray.getDirection());
+			if (tCoordinateNV.equals(Coordinate.zeroCoordinate)) {
+				// V and N are orthogonal
+				// means the ray is orthogonal to the plane
+				return null; ///////////// CHECK IF NULL OR THROW EXCEPTION/////////////
+			}
+			// t = tCoordinateNP/tCoordinateNV
+			Coordinate t = tCoordinateNP.coordinateDivide(tCoordinateNV);
+			if (t.getValue() > 0 || t.equals(Coordinate.zeroCoordinate)) {
+				// point = P0 + t*V
+				return ray.getPoint().addVectorToPoint(ray.getDirection().scaleVector(t.getValue()));
+			} else {
+				return null; ///////////// CHECK IF NULL OR THROW EXCEPTION/////////////
+			}
+		} catch (IllegalArgumentException e) {
+			// case both points are the same
+			// the sub is vector 0
+			// the intersection is the plane point
+			return new Point3D(_point);
+		}
 	}
 }
