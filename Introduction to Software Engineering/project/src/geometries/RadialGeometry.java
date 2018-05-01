@@ -4,6 +4,8 @@
  */
 package geometries;
 
+import java.util.ArrayList;
+
 import primitives.*;
 
 /**
@@ -83,7 +85,7 @@ public class RadialGeometry extends Geometry {
 	 * @return point of the intersection
 	 */
 	@Override
-	public Point3D findIntersections(Ray ray) {
+	public ArrayList<Point3D> findIntersections(Ray ray) {
 		return null;
 	}
 

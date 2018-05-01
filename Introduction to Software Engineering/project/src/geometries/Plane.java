@@ -4,6 +4,8 @@
  */
 package geometries;
 
+import java.util.ArrayList;
+
 import primitives.*;
 
 /**
@@ -123,36 +125,40 @@ public class Plane extends Geometry {
 	}
 
 	/**
-	 * abstract function find Intersections
+	 * function find Intersections
 	 * @param ray
-	 * @return point of the intersection
+	 * @return list of points of the intersection
 	 */
 	@Override
-	public Point3D findIntersections(Ray ray) {
+	public ArrayList<Point3D> findIntersections(Ray ray) {
 		try {
+			ArrayList<Point3D> list = new ArrayList<Point3D>();
+			Point3D rayPoint = ray.getPoint();
+			Vector rayVector = ray.getDirection();
 			// Q0 - P0
-			Vector tVector = _point.vectorSubtract(ray.getPoint());
+			Vector Q0P0 = _point.vectorSubtract(rayPoint);
 			// N * (Q0 - P0)
-			Coordinate tCoordinateNP = _plumb.dotProduct(tVector);
-			if (tCoordinateNP.equals(Coordinate.zeroCoordinate)) {
+			Coordinate N_dot_Q0P0 = _plumb.dotProduct(Q0P0);
+			if (N_dot_Q0P0.equals(Coordinate.zeroCoordinate)) {
 				// means the ray point is on the plane
 				// no intersection
 				return null;
 			}
 			// V * N
-			Coordinate tCoordinateNV = _plumb.dotProduct(ray.getDirection());
-			if (tCoordinateNV.equals(Coordinate.zeroCoordinate)) {
+			Coordinate VN = _plumb.dotProduct(rayVector);
+			if (VN.equals(Coordinate.zeroCoordinate)) {
 				// V and N are orthogonal
 				// means the ray is parallel to the plane
-				return null; ///////////// CHECK IF NULL OR THROW EXCEPTION/////////////
+				return null; 
 			}
-			// t = tCoordinateNP/tCoordinateNV
-			Coordinate t = tCoordinateNP.coordinateDivide(tCoordinateNV);
-			if (t.getValue() > 0 || t.equals(Coordinate.zeroCoordinate)) {
+			// t = N_dot_Q0P0/VN
+			double t = N_dot_Q0P0.coordinateDivide(VN).getValue();
+			if (t > 0) {
 				// point = P0 + t*V
-				return ray.getPoint().addVectorToPoint(ray.getDirection().scaleVector(t.getValue()));
+				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t)));
+				return list;
 			} else {
-				return null; ///////////// CHECK IF NULL OR THROW EXCEPTION/////////////
+				return null; 
 			}
 		} catch (IllegalArgumentException e) {
 			// case both points are the same
