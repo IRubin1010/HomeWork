@@ -5,7 +5,6 @@
 package geometries;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import primitives.*;
 
@@ -84,19 +83,37 @@ public class Sphere extends RadialGeometry {
 		return new Vector(point.vectorSubtract(_point)).normalize();
 	}
 	
+	/**
+	 * function find Intersections
+	 * @param ray
+	 * @return list of points of the intersection
+	 */
 	public ArrayList<Point3D> findIntersection(Ray ray){
 		ArrayList<Point3D> list = new ArrayList<Point3D>();
 		Point3D rayPoint = ray.getPoint();
-		Vector rayVector = ray.getDirection().normalize();
-		Vector U = _point.vectorSubtract(rayPoint); //////check if the same point
-		double tm = U.dotProduct(rayVector).getValue();
-		double d = Math.sqrt(U.dotProduct(U).getValue() - Math.pow(tm, 2));
-		if(d > getRadius().getValue()) return null;
-		double th = Math.sqrt(Math.pow(getRadius().getValue(), 2) - Math.pow(d, 2));
-		double t1 = tm + th;
-		double t2 = tm - th;
-		if(t1 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
-		if(t2 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
-		return list;
+		Vector rayVector = ray.getDirection();
+		try {			
+			// U = O - P0
+			Vector U = _point.vectorSubtract(rayPoint);
+			// tm = U * V
+			double tm = U.dotProduct(rayVector).getValue();
+			// d = sqrt(|U|^2 - tm^2)
+			double d = Math.sqrt(U.dotProduct(U).getValue() - Math.pow(tm, 2));
+			// if d > 0 - no intersection
+			if(d > getRadius().getValue()) return null;
+			// th = sqrt(r^2 - d^2)
+			double th = Math.sqrt(Math.pow(getRadius().getValue(), 2) - Math.pow(d, 2));
+			double t1 = tm + th;
+			double t2 = tm - th;
+			if(t1 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
+			if(t2 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+			return list;
+		} catch (IllegalArgumentException e) {
+			// case P0 is same as _point
+			// U = 0, tm = 0, d = 0, th = radius
+			// intersection = Po + t*V
+			list.add(_point.addVectorToPoint(rayVector.scaleVector(getRadius().getValue())));
+			return list;
+		}
 	}
 }
