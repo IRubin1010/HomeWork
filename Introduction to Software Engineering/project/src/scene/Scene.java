@@ -7,10 +7,10 @@ package scene;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.*;
 
 import elements.Camera;
-import geometries.Geometries;
-import primitives.Coordinate;
+import geometries.Geometry;
 import primitives.Point3D;
 import primitives.Vector;
 
@@ -21,21 +21,21 @@ public class Scene {
 	
 	private String _name;
 	private Color _color;
-	private List<Geometries> _geometriesList;
+	private List<Geometry> _geometriesList;
 	private Camera _camera;
 	private double _distance;
 	
 	/***************** Constructors **********************/
 
 	/**
-	 * constructor with name
+	 * default constructor with name
 	 * @param name - name of the scene
 	 * put default values Other variables
 	 */
 	public Scene(String name) {
 		this._name=name;
 		this._color=new Color(0,0,0);
-		this._geometriesList=new ArrayList<Geometries>();
+		this._geometriesList=new ArrayList<Geometry>();
 		this._camera=new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0,0,0));
 		this._distance=1;
 	}
@@ -91,7 +91,12 @@ public class Scene {
 	}
 
 	/***************** Operations ************************/
-
-	void addGeometry() 
 	
+	/**
+	 * Add geometry to the scene
+	 * @param geometry - Geometry to add
+	 */
+	public void addGeometry(Geometry geometry) {
+		this._geometriesList.add(geometry);
+	}
 }

@@ -1,5 +1,6 @@
 package unittests;
 
+import scene.Scene;
 import primitives.*;
 import elements.*;
 
@@ -18,6 +19,11 @@ public class CameraTests {
 	Vector vTo2 = new Vector(0, -3, 2);
 	Point3D pc = new Point3D(1, 1, 1);
 
+    Scene scene1 = new Scene("3X3 test");
+    Scene scene2 = new Scene("4X3 test");
+    Scene scene3 = new Scene("4X4 test");
+	Camera camera = new Camera(new Vector(0,-1,0), new Vector(0,0,1),Point3D.zeroPoint);
+	
 	Camera camera1 = new Camera(new Vector(0,1,0), new Vector(0,0,1),Point3D.zeroPoint);
 	Camera camera2 = new Camera(new Vector(0, -1, 0), new Vector(0, 0, -1),Point3D.zeroPoint);
 	Camera camera3 = new Camera(new Vector(0,1,0), new Vector(0,0,-1),Point3D.zeroPoint);
@@ -45,11 +51,21 @@ public class CameraTests {
 	}
 	
 	/**
+	 * test to check constructorRay with Scene
+	 */
+	@Test
+	public void testconstructorRayWithScene() {
+		scene1.set_camera(camera);
+		scene2.set_camera(camera);
+		scene3.set_camera(camera);
+	}
+	
+	/**
 	 * test to check constructorRay
 	 */
 	@Test
 	public void testconstructorRay() {
-
+		
 		// camera 1 test
 		
 		//3X3
