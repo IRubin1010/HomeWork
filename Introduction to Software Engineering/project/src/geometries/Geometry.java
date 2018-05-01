@@ -3,6 +3,8 @@
 * @author meir shimon 305625295 nthr120@gmail.com
 */
 package geometries;
+import java.util.ArrayList;
+
 import primitives.*;
 
 /**
@@ -35,6 +37,6 @@ public abstract class Geometry {
 	 * @param ray
 	 * @return point of the intersection
 	 */
-	public abstract Point3D findIntersections(Ray ray);
+	public abstract ArrayList<Point3D> findIntersections(Ray ray);
 
 }
