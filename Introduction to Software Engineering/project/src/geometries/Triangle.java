@@ -93,5 +93,28 @@ public class Triangle extends Plane {
 	public String toString() {
 		return "Triangle: \n(" + _p1.toString() + "," + _p2.toString() + "," + _p3.toString() + ")";
 	}
+	
+	public Point3D findIntersection(Ray ray) {
+		Point3D planeIntersection = super.findIntersections(ray);
+		if(planeIntersection == null) return null;
+		Point3D P0 = ray.getPoint();		
+			Vector V1 = _p1.vectorSubtract(P0);
+			Vector V2 = _p2.vectorSubtract(P0);
+			Vector V3 = _p3.vectorSubtract(P0);
+			Vector N1 = V1.crossProduct(V2).normalize();
+			Vector N2 = V2.crossProduct(V3).normalize();
+			Vector N3 = V3.crossProduct(V1).normalize();
+			Vector P0P = planeIntersection.vectorSubtract(P0);
+			Coordinate P0PN1 = P0P.dotProduct(N1);
+			Coordinate P0PN2 = P0P.dotProduct(N2);
+			Coordinate P0PN3 = P0P.dotProduct(N3);
+			if(P0PN1.getValue() > 0  && P0PN2.getValue() > 0 && P0PN3.getValue() > 0 
+					|| P0PN1.getValue() < 0  && P0PN2.getValue() < 0 && P0PN3.getValue() < 0) {
+				return planeIntersection;
+			}
+			else {
+				return null;
+			}
+	}
 
 }

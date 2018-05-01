@@ -136,13 +136,14 @@ public class Plane extends Geometry {
 			Coordinate tCoordinateNP = _plumb.dotProduct(tVector);
 			if (tCoordinateNP.equals(Coordinate.zeroCoordinate)) {
 				// means the ray point is on the plane
-				return ray.getPoint();
+				// no intersection
+				return null;
 			}
 			// V * N
 			Coordinate tCoordinateNV = _plumb.dotProduct(ray.getDirection());
 			if (tCoordinateNV.equals(Coordinate.zeroCoordinate)) {
 				// V and N are orthogonal
-				// means the ray is orthogonal to the plane
+				// means the ray is parallel to the plane
 				return null; ///////////// CHECK IF NULL OR THROW EXCEPTION/////////////
 			}
 			// t = tCoordinateNP/tCoordinateNV
@@ -157,7 +158,8 @@ public class Plane extends Geometry {
 			// case both points are the same
 			// the sub is vector 0
 			// the intersection is the plane point
-			return new Point3D(_point);
+			// means - no intersection
+			return null;
 		}
 	}
 }

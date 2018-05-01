@@ -4,6 +4,9 @@
  */
 package geometries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -79,5 +82,21 @@ public class Sphere extends RadialGeometry {
 	public Vector getNormal(Point3D point){
 		// vector from the center point to other point
 		return new Vector(point.vectorSubtract(_point)).normalize();
+	}
+	
+	public ArrayList<Point3D> findIntersection(Ray ray){
+		ArrayList<Point3D> list = new ArrayList<Point3D>();
+		Point3D rayPoint = ray.getPoint();
+		Vector rayVector = ray.getDirection().normalize();
+		Vector U = _point.vectorSubtract(rayPoint); //////check if the same point
+		double tm = U.dotProduct(rayVector).getValue();
+		double d = Math.sqrt(U.dotProduct(U).getValue() - Math.pow(tm, 2));
+		if(d > getRadius().getValue()) return null;
+		double th = Math.sqrt(Math.pow(getRadius().getValue(), 2) - Math.pow(d, 2));
+		double t1 = tm + th;
+		double t2 = tm - th;
+		if(t1 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
+		if(t2 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+		return list;
 	}
 }
