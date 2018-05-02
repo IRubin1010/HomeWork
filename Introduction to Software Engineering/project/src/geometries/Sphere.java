@@ -5,6 +5,7 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import primitives.*;
 
@@ -88,8 +89,8 @@ public class Sphere extends RadialGeometry {
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
-	public ArrayList<Point3D> findIntersection(Ray ray){
-		ArrayList<Point3D> list = new ArrayList<Point3D>();
+	public List<Point3D> findIntersections(Ray ray){
+		List<Point3D> list = new ArrayList<>();
 		Point3D rayPoint = ray.getPoint();
 		Vector rayVector = ray.getDirection();
 		try {			

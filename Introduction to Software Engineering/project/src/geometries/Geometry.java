@@ -4,6 +4,7 @@
 */
 package geometries;
 import java.util.ArrayList;
+import java.util.List;
 
 import primitives.*;
 
@@ -37,6 +38,6 @@ public abstract class Geometry {
 	 * @param ray
 	 * @return point of the intersection
 	 */
-	public abstract ArrayList<Point3D> findIntersections(Ray ray);
+	public abstract List<Point3D> findIntersections(Ray ray);
 
 }

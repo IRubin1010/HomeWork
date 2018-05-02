@@ -54,10 +54,45 @@ public class CameraTests {
 	 * test to check constructorRay with Scene
 	 */
 	@Test
-	public void testconstructorRayWithScene() {
-		scene1.set_camera(camera);
-		scene2.set_camera(camera);
+	public void testConstructorRayWithScene() {
+		scene1.set_camera(camera); scene1.set_distance(100);
+		scene2.set_camera(camera); scene2.set_distance(10);
 		scene3.set_camera(camera);
+		
+		//view 3X3
+		Ray ray11_3X3=scene1.get_camera().constructorRay(3, 3, 1, 1, 100, 150, 150);
+		Ray ray22_3X3=scene1.get_camera().constructorRay(3, 3, 2, 2, 100, 150, 150);
+		Ray ray33_3X3=scene1.get_camera().constructorRay(3, 3, 3, 3, 100, 150, 150);
+		Ray ray12_3X3=scene1.get_camera().constructorRay(3, 3, 1, 2, 100, 150, 150);
+		
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-50,-50,100).normalize()), ray11_3X3);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(0,0,100).normalize()), ray22_3X3);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(50,50,100).normalize()), ray33_3X3);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-50,0,100).normalize()), ray12_3X3);
+		
+		//view 3X4
+		Ray ray11_4X3=scene1.get_camera().constructorRay(4, 3, 1, 1, 10, 12, 15);
+		Ray ray22_4X3=scene1.get_camera().constructorRay(4, 3, 2, 2, 10, 12, 15);
+		Ray ray14_4X3=scene1.get_camera().constructorRay(4, 3, 1, 4, 10, 12, 15);
+		Ray ray23_4X3=scene1.get_camera().constructorRay(4, 3, 2, 3, 10, 12, 15);
+
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-4.5,-5,10).normalize()), ray11_4X3);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-1.5,0,10).normalize()), ray22_4X3);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-4.5,10,10).normalize()), ray14_4X3);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-1.5,5,10).normalize()), ray23_4X3);
+		
+		//view 4X4
+		Ray ray11_4X4=scene1.get_camera().constructorRay(4, 4, 1, 1, 1, 4, 4);
+		Ray ray22_4X4=scene1.get_camera().constructorRay(4, 4, 2, 2, 1, 4, 4);
+		Ray ray23_4X4=scene1.get_camera().constructorRay(4, 4, 2, 3, 1, 4, 4);
+		Ray ray32_4X4=scene1.get_camera().constructorRay(4, 4, 3, 2, 1, 4, 4);
+
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-1.5,-1.5,1).normalize()), ray11_4X4);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-0.5,-0.5,1).normalize()), ray22_4X4);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(-0.5,0.5,1).normalize()), ray23_4X4);
+		assertEquals(new Ray(Point3D.zeroPoint,new Vector(0.5,-0.5,1).normalize()), ray32_4X4);
+
+		
 	}
 	
 	/**
