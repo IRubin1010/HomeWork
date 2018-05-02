@@ -5,13 +5,14 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import primitives.*;
 
 /**
  * class represent Radial Geometry
  */
-public class RadialGeometry extends Geometry {
+public abstract class RadialGeometry extends Geometry {
 
 	private Coordinate _radius;
 
@@ -70,23 +71,23 @@ public class RadialGeometry extends Geometry {
 		return "radius: " + _radius;
 	}
 	
-	/***************** Operations ************************/ 
-
-	/**
-	 * get normal
-	 */
-	public Vector getNormal(Point3D point){
-		return null;
-	}
-	
-	/**
-	 * abstract function find Intersections
-	 * @param ray
-	 * @return point of the intersection
-	 */
-	@Override
-	public ArrayList<Point3D> findIntersections(Ray ray) {
-		return null;
-	}
+//	/***************** Operations ************************/ 
+//
+//	/**
+//	 * get normal
+//	 */
+//	public Vector getNormal(Point3D point){
+//		return null;
+//	}
+//	
+//	/**
+//	 * abstract function find Intersections
+//	 * @param ray
+//	 * @return point of the intersection
+//	 */
+//	@Override
+//	public List<Point3D> findIntersections(Ray ray) {
+//		return null;
+//	}
 
 }

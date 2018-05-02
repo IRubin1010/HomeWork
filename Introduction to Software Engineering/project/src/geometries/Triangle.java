@@ -5,6 +5,7 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import primitives.*;
 
@@ -104,9 +105,9 @@ public class Triangle extends Plane {
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
-	public ArrayList<Point3D> findIntersection(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		// get plane intersection
-		ArrayList<Point3D> planeIntersection = super.findIntersections(ray);
+		List<Point3D> planeIntersection = super.findIntersections(ray);
 		if (planeIntersection == null)
 			return null;
 

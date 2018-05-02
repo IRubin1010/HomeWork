@@ -5,6 +5,7 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import primitives.*;
 
@@ -130,9 +131,9 @@ public class Plane extends Geometry {
 	 * @return list of points of the intersection
 	 */
 	@Override
-	public ArrayList<Point3D> findIntersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		try {
-			ArrayList<Point3D> list = new ArrayList<Point3D>();
+			List<Point3D> list = new ArrayList<Point3D>();
 			Point3D rayPoint = ray.getPoint();
 			Vector rayVector = ray.getDirection();
 			// Q0 - P0
