@@ -101,7 +101,7 @@ public class Sphere extends RadialGeometry {
 			// d = sqrt(|U|^2 - tm^2)
 			double d = Math.sqrt(U.dotProduct(U).getValue() - Math.pow(tm, 2));
 			// if d > 0 - no intersection
-			if(d > getRadius().getValue()) return null;
+			if(d > getRadius().getValue()) return list;
 			// th = sqrt(r^2 - d^2)
 			double th = Math.sqrt(Math.pow(getRadius().getValue(), 2) - Math.pow(d, 2));
 			double t1 = tm + th;
