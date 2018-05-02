@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthStyle;
+
 import org.junit.jupiter.api.Test;
 
 import elements.Camera;
@@ -31,6 +33,7 @@ class SphereTests {
     
 	@Test
 	private List<Point3D> getIntersections(Scene scene, Sphere sphere){
+		System.out.println("===============================================");
 		List<Point3D> list = new ArrayList<>();
 		for(int i = 1 ; i < 4 ;++i) {
 			for (int j = 1; j < 4; ++j) {
@@ -39,6 +42,7 @@ class SphereTests {
 				list.addAll(sphere.findIntersections(r));
 			}
 		}
+		System.out.println("===============================================");
 		return list;
 	}
 	
@@ -49,13 +53,13 @@ class SphereTests {
 	        scene.set_camera(camera);
 	        scene.set_distance(4);
 
-//			//2 points
-//	        Sphere sphere1 = new Sphere(new Point3D(0,0,-7),new Coordinate(1));
-//	        List<Point3D> list1 = getIntersections(scene,sphere1);
-//	        if(list1 != null)
-//	            assertEquals(2,list1.size(),"2 points");
-//			else
-//			    fail("null list");
+			//2 points
+	        Sphere sphere1 = new Sphere(new Point3D(0,0,-7),new Coordinate(1));
+	        List<Point3D> list1 = getIntersections(scene,sphere1);
+	        if(list1 != null)
+	            assertEquals(2,list1.size(),"2 points");
+			else
+			    fail("null list");
 	        //18 points
 	        Sphere sphere2 = new Sphere(new Point3D(0,0,-3),new Coordinate(3));
 	        List<Point3D> list2 = getIntersections(scene,sphere2);
