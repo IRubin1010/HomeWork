@@ -108,8 +108,8 @@ public class Triangle extends Plane {
 	public List<Point3D> findIntersections(Ray ray) {
 		// get plane intersection
 		List<Point3D> planeIntersection = super.findIntersections(ray);
-		if (planeIntersection == null)
-			return null;
+		if (planeIntersection.size() == 0)
+			return planeIntersection;
 
 		Point3D P0 = ray.getPoint();
 		// V1,V2,V3
@@ -129,7 +129,7 @@ public class Triangle extends Plane {
 				|| P0PN1.getValue() < 0 && P0PN2.getValue() < 0 && P0PN3.getValue() < 0) {
 			return planeIntersection;
 		} else {
-			return null;
+			return new ArrayList<Point3D>();
 		}
 	}
 

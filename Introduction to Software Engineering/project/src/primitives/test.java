@@ -104,7 +104,7 @@ public class test {
         for(int i = 1 ; i < 4 ;++i) {
             for (int j = 1; j < 4; ++j) {
                 Ray r = camera.constructorRay(3, 3, i, j, 1, 9, 9);
-                list.addAll((Collection<? extends Point3D>) sphere.findIntersection(r));
+                list.addAll((Collection<? extends Point3D>) sphere.findIntersections((r)));
             }
         }
         return list;
