@@ -132,8 +132,8 @@ public class Plane extends Geometry {
 	 */
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
+		List<Point3D> list = new ArrayList<Point3D>();
 		try {
-			List<Point3D> list = new ArrayList<Point3D>();
 			Point3D rayPoint = ray.getPoint();
 			Vector rayVector = ray.getDirection();
 			// Q0 - P0
@@ -143,14 +143,14 @@ public class Plane extends Geometry {
 			if (N_dot_Q0P0.equals(Coordinate.zeroCoordinate)) {
 				// means the ray point is on the plane
 				// no intersection
-				return null;
+				return list;
 			}
 			// V * N
 			Coordinate VN = _plumb.dotProduct(rayVector);
 			if (VN.equals(Coordinate.zeroCoordinate)) {
 				// V and N are orthogonal
 				// means the ray is parallel to the plane
-				return null; 
+				return list; 
 			}
 			// t = N_dot_Q0P0/VN
 			double t = N_dot_Q0P0.coordinateDivide(VN).getValue();
@@ -159,14 +159,14 @@ public class Plane extends Geometry {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t)));
 				return list;
 			} else {
-				return null; 
+				return list; 
 			}
 		} catch (IllegalArgumentException e) {
 			// case both points are the same
 			// the sub is vector 0
 			// the intersection is the plane point
 			// means - no intersection
-			return null;
+			return list;
 		}
 	}
 }

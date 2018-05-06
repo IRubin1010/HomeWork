@@ -3,6 +3,9 @@
  * @author meir shimon 305625295 nthr120@gmail.com
  */
 package geometries;
+import java.util.ArrayList;
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -91,4 +94,11 @@ public class Tube extends RadialGeometry {
 		Vector surchargeVector = normalRayVector.scaleVector(surcharge.getValue());
 		return new Vector(PtoPVector.sub(surchargeVector)).normalize();
 	}
+
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
