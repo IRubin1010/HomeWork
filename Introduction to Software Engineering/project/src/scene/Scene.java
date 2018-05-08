@@ -10,6 +10,7 @@ import java.util.List;
 import java.lang.*;
 
 import elements.Camera;
+import geometries.Geometries;
 import geometries.Geometry;
 import primitives.Point3D;
 import primitives.Vector;
@@ -20,8 +21,8 @@ import primitives.Vector;
 public class Scene {
 	
 	private String _name;
-	private Color _color;
-	private List<Geometry> _geometriesList;
+	private Color _backGround;
+	private Geometries _geometries;
 	private Camera _camera;
 	private double _distance;
 	
@@ -34,10 +35,22 @@ public class Scene {
 	 */
 	public Scene(String name) {
 		this._name=name;
-		this._color=new Color(0,0,0);
-		this._geometriesList=new ArrayList<Geometry>();
+		this._backGround=new Color(0,0,0);
+		this._geometries=new Geometries();
 		this._camera=new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0,0,0));
 		this._distance=1;
+	}
+	
+	/**
+	 * copy constructor
+	 * @param scene
+	 */
+	public Scene(Scene scene) {
+		_name = scene._name;
+		_backGround = new Color(scene._backGround.getRGB());
+		_geometries = scene._geometries;
+		_camera = new Camera(scene._camera);
+		_distance = scene._distance;
 	}
 
 	/***************** Getters ****************************/
@@ -45,8 +58,8 @@ public class Scene {
 	/**
 	 * @return the _color
 	 */
-	public Color get_color() {
-		return _color;
+	public Color get_backGround() {
+		return _backGround;
 	}
 
 
@@ -65,13 +78,27 @@ public class Scene {
 		return _distance;
 	}
 
+	/**
+	 * @return the _geometriesList
+	 */
+	public ArrayList<Geometry> get_geometries() {
+		return _geometries.getGeometries();
+	}
+	
 	/***************** Setters ****************************/
+
+	/**
+	 * @param _geometriesList the _geometriesList to set
+	 */
+	public void set_geometries(Geometries geometries) {
+		this._geometries = geometries;
+	}
 
 	/**
 	 * @param _color the _color to set
 	 */
-	public void set_color(Color _color) {
-		this._color = _color;
+	public void set_backGround(Color _backGround) {
+		this._backGround = _backGround;
 	}
 
 
@@ -97,6 +124,7 @@ public class Scene {
 	 * @param geometry - Geometry to add
 	 */
 	public void addGeometry(Geometry geometry) {
-		this._geometriesList.add(geometry);
+		this._geometries.getGeometries().add(geometry);
 	}
+
 }
