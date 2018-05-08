@@ -19,17 +19,6 @@ import primitives.Vector;
 import scene.Scene;
 
 class SphereTests {
-
-//	private ArrayList<Point3D> getIntersections(Camera camera, Sphere sphere){
-//        ArrayList<Point3D> list = new ArrayList<Point3D>();
-//        for(int i = 1 ; i < 4 ;++i) {
-//            for (int j = 1; j < 4; ++j) {
-//                Ray r = camera.constructorRay(3, 3, i, j, 1, 9, 9);
-//                list.addAll((Collection<? extends Point3D>) sphere.findIntersection(r));
-//            }
-//        }
-//        return list;
-//    }
     
 	@Test
 	private List<Point3D> getIntersections(Scene scene, Sphere sphere){
@@ -88,27 +77,6 @@ class SphereTests {
 	            assertEquals(0,list5.size(),"0 points");
 	        else
 	            fail("null list");
-
-
 	    }
 	
-	
-	
-//	@Test
-//	void testIntersectionPoints() {
-//		Scene scene1 = new Scene("test");
-//		Camera camera = new Camera(new Vector(0,-1,0), new Vector(0,0,1), new Point3D(0,0,0.5));
-//
-//		Sphere sphere = new Sphere(new Point3D(0,0,-3),new Coordinate(3));
-//		scene1.set_camera(camera);
-//		List<Point3D> list = getIntersections(scene1, sphere);
-//		if(list != null) {
-//			assertEquals(18,list.size());
-//			
-//		}
-//		else {
-//			fail("jkshdfk");
-//		}
-//	}
-
 }
