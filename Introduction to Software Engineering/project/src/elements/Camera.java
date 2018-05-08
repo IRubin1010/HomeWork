@@ -35,6 +35,17 @@ public class Camera {
 		this._vRight = new Vector(vTo.crossProduct(vUp).normalize());
 		this._p0 = pc;
 	}
+	
+	/**
+	 * copy constructor
+	 * @param camera
+	 */
+	public Camera(Camera camera) {
+		_p0 = new Point3D(camera._p0);
+		_vUp = new Vector(camera._vUp);
+		_vTo = new Vector(camera._vTo);
+		_vRight = new Vector(camera._vRight);
+	}
 
 	/***************** Getters ****************************/
 

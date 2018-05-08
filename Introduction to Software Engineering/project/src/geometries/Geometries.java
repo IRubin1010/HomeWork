@@ -21,7 +21,7 @@ public class Geometries extends Geometry {
 	/**
 	 * List hold all the shapes that make up the structure
 	 */
-	private List<Geometry> listShape;
+	private ArrayList<Geometry> listShape;
 	
 	/**
 	 * empty constructor that initializes the list to arrayList
@@ -31,6 +31,14 @@ public class Geometries extends Geometry {
 	}
 	
 	///////////////////Add the copy constructor as needed///////////////////
+	
+	public Geometries(Geometries geometries) {
+		listShape = geometries.getGeometries();
+	}
+	
+	public ArrayList<Geometry> getGeometries() {
+		return new ArrayList<Geometry>(listShape);
+	}
 
 	/**
 	 * override getNoraml

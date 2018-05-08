@@ -3,7 +3,7 @@
 * @author meir shimon 305625295 nthr120@gmail.com
 */
 
-package Renderer;
+package renderer;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
