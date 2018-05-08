@@ -19,6 +19,7 @@ import primitives.Vector;
 import scene.Scene;
 
 class SphereTests {
+
     
 	@Test
 	private List<Point3D> getIntersections(Scene scene, Sphere sphere){

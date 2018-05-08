@@ -6,10 +6,14 @@ package unittests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
+import elements.Camera;
 import geometries.*;
 import primitives.*;
+import scene.Scene;
 
 /**
 * plane tests
@@ -61,5 +65,42 @@ class PlaneTests {
 			assertEquals(crookedPlaneNo0Point.getNormal(new Point3D(1,1,3)), crookedPlaneNo0PointPlumbConstructor.getNormal(new Point3D(1,2,4))); // check that both normals are the same - same plane
 
 	}
+	
+	@Test
+	void testFindIntersections() {
+		ArrayList<Point3D> list = new ArrayList<>();
+		Scene scene = new Scene("test scene");
+        Camera camera = new Camera(new Vector(0,-1,0),new Vector(0,0,-1),new Point3D(0,0,0.5));
+        scene.set_camera(camera);
+        scene.set_distance(4);
+        //1 point
+    	Plane plane1 = new Plane(new Point3D(1,1,1),new Vector(1,1,1));
+        list=getIntersections(scene,plane1);
+        assertEquals(1, list.size());
+        Plane frontOfCamera = new Plane(new Point3D(0, 0,-3),new Vector(new Point3D(0, 0, -1)));
+        //9 points plane in front of camera
+        list=getIntersections(scene,frontOfCamera);
+        assertEquals(9, list.size());
+        //0 points plane contains camera
+        Plane cameraDirection = new Plane(new Point3D(0,0,1),new Vector(new Point3D(1,0,0)));
+        list=getIntersections(scene,cameraDirection);
+        assertEquals(0, list.size());
+        //0 points plane behind camera
+        Plane behindCamera = new Plane(new Point3D(0, 0,1),new Point3D(1,0,1),new Point3D(0,-2,1));
+        list=getIntersections(scene,behindCamera);
+        assertEquals(0, list.size());
+	}
+	
+	
+	private ArrayList<Point3D> getIntersections(Scene scene, Plane plane){
+		ArrayList<Point3D> list = new ArrayList<>();
+        for(int i = 1 ; i < 4 ;++i) {
+            for (int j = 1; j < 4; ++j) {
+                Ray r = scene.get_camera().constructorRay(3, 3, i, j, scene.get_distance(), 9, 9);
+                list.addAll(plane.findIntersections(r));
+            }
+        }
+        return list;
+    }
 	
 }
