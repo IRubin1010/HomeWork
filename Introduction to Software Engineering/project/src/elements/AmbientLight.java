@@ -76,6 +76,7 @@ public class AmbientLight {
 		this._Ka = _Ka;
 	}
 	
+	///////////////////////להכניס לבנאים את המכפלה ליעול קריאות חוזרות//////////////////
 	/**
 	 * get intensity
 	 * @return the ambient light
