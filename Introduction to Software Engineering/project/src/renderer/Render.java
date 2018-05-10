@@ -62,6 +62,7 @@ public class Render {
 	 * @return
 	 */
 	private Point3D getClosestPoint(List<Point3D> intersectionList) {
+		if (intersectionList.size()==0) return null;
 		Point3D cameraPoint = _scene.get_camera().get_p0();
 		Coordinate distance = intersectionList.get(0).distanceFrom(cameraPoint);
 		Point3D closestPoint = intersectionList.get(0);
