@@ -12,12 +12,12 @@ public class Cylinder extends Tube {
 	/***************** Constructors **********************/
 
 	public Cylinder(double highet, Ray ray, Coordinate radius) {
-		super(ray, radius);
+		super(ray, radius, new Color(255,255,255));
 		_highet = highet;
 	}
 
 	public Cylinder(Cylinder other) {
-		super(other.getRay() , other.getRadius());
+		super(other.getRay() , other.getRadius(), new Color(255,255,255));
 		_highet = other._highet;
 	}
 

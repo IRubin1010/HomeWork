@@ -21,9 +21,10 @@ public class Tube extends RadialGeometry {
 	 * constructor with ray and radius
 	 * @param ray
 	 * @param radius
+	 * @param color TODO
 	 */
-	public Tube(Ray ray, Coordinate radius) {
-		super(radius);
+	public Tube(Ray ray, Coordinate radius, Color color) {
+		super(radius,color);
 		_ray = new Ray(ray);
 	}
 
@@ -32,7 +33,7 @@ public class Tube extends RadialGeometry {
 	 * @param other
 	 */
 	public Tube(Tube other) {
-		super(other.getRadius());
+		super(other);
 		_ray = new Ray(other._ray);
 	}
 

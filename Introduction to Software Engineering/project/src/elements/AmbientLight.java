@@ -7,9 +7,8 @@ package elements;
 
 import primitives.Color;
 
-public class AmbientLight {
+public class AmbientLight extends Light{
 
-	Color _color;
 	double _Ka;
 	
 	/***************** Constructors **********************/
@@ -22,8 +21,8 @@ public class AmbientLight {
 	 * @param Ka
 	 */
 	public AmbientLight(double red, double green, double blue, double Ka) {
+		super(new Color(red,green,blue).scale(Ka));
 		_Ka = Ka;
-		_color = new Color(red,green,blue).scale(_Ka);
 	}
 	
 	/**
@@ -32,8 +31,8 @@ public class AmbientLight {
 	 * @param Ka
 	 */
 	public AmbientLight(Color color, double Ka) {
+		super(new Color(color).scale(Ka));
 		_Ka = Ka;
-		_color = new Color(color).scale(_Ka);
 	}
 	
 	/**
@@ -42,8 +41,8 @@ public class AmbientLight {
 	 * @param Ka
 	 */
 	public AmbientLight(java.awt.Color color, double Ka) {
+		super(new Color(color).scale(Ka));
 		_Ka = Ka;
-		_color = new Color(color).scale(_Ka);
 	}
 	
 	/***************** Getters/setters ****************************/

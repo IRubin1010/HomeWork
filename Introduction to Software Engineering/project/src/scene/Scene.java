@@ -4,7 +4,7 @@
 */
 package scene;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
@@ -13,6 +13,7 @@ import elements.AmbientLight;
 import elements.Camera;
 import geometries.Geometries;
 import geometries.Geometry;
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 

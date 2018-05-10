@@ -28,7 +28,7 @@ public class Triangle extends Plane {
 	 * @param p3
 	 */
 	public Triangle(Point3D p1, Point3D p2, Point3D p3) {
-		super(p1, p2, p3);
+		super(p1, p2, p3, new Color(255,255,255));
 		_p1 = new Point3D(p1);
 		_p2 = new Point3D(p2);
 		_p3 = new Point3D(p3);
@@ -40,7 +40,7 @@ public class Triangle extends Plane {
 	 * @param other
 	 */
 	public Triangle(Triangle other) {
-		super(other._p1, other._p2, other._p3);
+		super(other._p1, other._p2, other._p3, new Color(255,255,255));
 		_p1 = new Point3D(other._p1);
 		_p2 = new Point3D(other._p2);
 		_p3 = new Point3D(other._p3);

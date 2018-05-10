@@ -13,10 +13,13 @@ import primitives.*;
 */
 public abstract class Geometry {
 
+	Color _emmission;
+	
 	/**
 	 * constructor
 	 */
-	public Geometry() {
+	public Geometry(Color color) {
+		_emmission = color;
 	}
 	
 	/**
@@ -24,6 +27,11 @@ public abstract class Geometry {
 	 * @param other
 	 */
 	public Geometry(Geometry other) {
+		_emmission = other._emmission;
+	}
+	
+	public Color get_emmission() {
+		return _emmission;
 	}
 	
 	/**
