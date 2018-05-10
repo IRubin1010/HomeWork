@@ -7,6 +7,7 @@ package renderer;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import elements.AmbientLight;
 import geometries.Geometries;
@@ -21,6 +22,8 @@ public class Render {
 	Scene _scene;
 	ImageWriter _imageWriter;
 
+	/***************** Constructor **********************/ 
+
 	/**
 	 * constructor
 	 * 
@@ -32,15 +35,17 @@ public class Render {
 		_imageWriter = new ImageWriter(imageWriter);
 	}
 
+	/***************** Operations ************************/
+
+	/**
+	 * render the image from all geometry objects
+	 */
 	public void renderImage() {
-		for (int i = 0; i < _imageWriter.getNy(); i++) {
-			for (int j = 0; j < _imageWriter.getNx(); j++) {
+		for (int i = 1; i < _imageWriter.getNy(); i++) {
+			for (int j = 1; j < _imageWriter.getNx(); j++) {
 				Ray ray = _scene.get_camera().constructorRay(_imageWriter.getNx(), _imageWriter.getNy(), i, j,
 						_scene.get_distance(), _imageWriter.getWidth(), _imageWriter.getHeight());
-				ArrayList<Point3D> intersectionList = new ArrayList<Point3D>();
-				for (Geometry geometry : _scene.get_geometries()) {
-					intersectionList.addAll(geometry.findIntersections(ray));
-				}
+				List<Point3D> intersectionList = _scene.get_geometries().findIntersections(ray);
 				if (intersectionList.size() == 0) {
 					_imageWriter.writePixel(i, j, _scene.get_backGround());
 				} else {
@@ -51,7 +56,12 @@ public class Render {
 		}
 	}
 
-	private Point3D getClosestPoint(ArrayList<Point3D> intersectionList) {
+	/**
+	 * find the closest object to the camera
+	 * @param intersectionList
+	 * @return
+	 */
+	private Point3D getClosestPoint(List<Point3D> intersectionList) {
 		Point3D cameraPoint = _scene.get_camera().get_p0();
 		Coordinate distance = intersectionList.get(0).distanceFrom(cameraPoint);
 		Point3D closestPoint = intersectionList.get(0);
@@ -65,18 +75,30 @@ public class Render {
 		return closestPoint;
 	}
 
+	/**
+	 * calculate the pixel color 
+	 * @param point
+	 * @return
+	 */
 	private Color calcColor(Point3D point) {
 		return _scene.get_light().getIntensity().getColor();
 	}
 
+	/**
+	 * write the picture
+	 */
 	public void writeToImage() {
 		_imageWriter.writeToimage();
 	}
 
+	/**
+	 * print Grid
+	 * @param interval
+	 */
 	public void printGrid(int interval) {
-		for (int i = 0; i < _imageWriter.getNy() - 1; i++) {
-			for (int j = 0; j < _imageWriter.getNx() - 1; j++) {
-				if ((i + 1) % interval == 0 || (j + 1) % interval == 0) {
+		for (int i = 1; i < _imageWriter.getNy(); i++) {
+			for (int j = 1; j < _imageWriter.getNx() ; j++) {
+				if (i % interval == 0 || j % interval == 0) {
 					_imageWriter.writePixel(j, i, _scene.get_light().getIntensity().getColor());
 				}
 			}

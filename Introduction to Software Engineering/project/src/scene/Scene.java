@@ -32,7 +32,6 @@ public class Scene {
 
 	/**
 	 * default constructor with name
-	 * 
 	 * @param name
 	 *            - name of the scene put default values Other variables
 	 */
@@ -51,7 +50,7 @@ public class Scene {
 	 */
 	public Scene(Scene scene) {
 		_name = scene._name;
-		_backGround = new Color(scene._backGround.getRGB());
+		_backGround = scene._backGround;
 		_geometries = scene._geometries;
 		_camera = new Camera(scene._camera);
 		_distance = scene._distance;
@@ -84,8 +83,8 @@ public class Scene {
 	/**
 	 * @return the _geometriesList
 	 */
-	public ArrayList<Geometry> get_geometries() {
-		return _geometries.getGeometries();
+	public Geometries get_geometries() {
+		return _geometries;
 	}
 
 	/**
@@ -128,16 +127,12 @@ public class Scene {
 		this._distance = _distance;
 	}
 
-	/***************** Operations ************************/
-
 	/**
-	 * Add geometry to the scene
-	 * 
-	 * @param geometry
-	 *            - Geometry to add
+	 * @param _light the _light to set
 	 */
-	public void addGeometry(Geometry geometry) {
-		this._geometries.getGeometries().add(geometry);
+	public void set_light(AmbientLight _light) {
+		this._light = _light;
 	}
 
+	
 }

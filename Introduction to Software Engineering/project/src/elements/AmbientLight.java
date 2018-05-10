@@ -22,8 +22,8 @@ public class AmbientLight {
 	 * @param Ka
 	 */
 	public AmbientLight(double red, double green, double blue, double Ka) {
-		_color = new Color(red,green,blue);
 		_Ka = Ka;
+		_color = new Color(red,green,blue).scale(_Ka);
 	}
 	
 	/**
@@ -32,8 +32,8 @@ public class AmbientLight {
 	 * @param Ka
 	 */
 	public AmbientLight(Color color, double Ka) {
-		_color = new Color(color);
 		_Ka = Ka;
+		_color = new Color(color).scale(_Ka);
 	}
 	
 	/**
@@ -42,8 +42,8 @@ public class AmbientLight {
 	 * @param Ka
 	 */
 	public AmbientLight(java.awt.Color color, double Ka) {
-		_color = new Color(color);
 		_Ka = Ka;
+		_color = new Color(color).scale(_Ka);
 	}
 	
 	/***************** Getters/setters ****************************/
@@ -76,13 +76,12 @@ public class AmbientLight {
 		this._Ka = _Ka;
 	}
 	
-	///////////////////////להכניס לבנאים את המכפלה ליעול קריאות חוזרות//////////////////
 	/**
 	 * get intensity
 	 * @return the ambient light
 	 */
 	public Color getIntensity() {
-		return _color.scale(_Ka);
+		return _color;
 	}
 	
 }

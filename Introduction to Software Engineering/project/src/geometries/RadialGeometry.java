@@ -70,24 +70,5 @@ public abstract class RadialGeometry extends Geometry {
 	public String toString() {
 		return "radius: " + _radius;
 	}
-	
-//	/***************** Operations ************************/ 
-//
-//	/**
-//	 * get normal
-//	 */
-//	public Vector getNormal(Point3D point){
-//		return null;
-//	}
-//	
-//	/**
-//	 * abstract function find Intersections
-//	 * @param ray
-//	 * @return point of the intersection
-//	 */
-//	@Override
-//	public List<Point3D> findIntersections(Ray ray) {
-//		return null;
-//	}
 
 }
