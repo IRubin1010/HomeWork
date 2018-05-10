@@ -37,7 +37,7 @@ public class Geometries extends Geometry {
 	}
 	
 	public ArrayList<Geometry> getGeometries() {
-		return new ArrayList<Geometry>(listShape);
+		return listShape;
 	}
 
 	/**

@@ -23,10 +23,11 @@ public class RenderTest {
 		scene.set_backGround(new Color(0, 0, 0));
 		Geometries geometries = new Geometries();
 		scene.set_geometries(geometries);
-		scene.addGeometry(new Sphere(new Point3D(0, 0, 150), new Coordinate(50)));
+		scene.addGeometry(new Sphere(new Point3D(0, 0, 149), new Coordinate(50)));
 		
 		scene.addGeometry(new Triangle(new Point3D( 100, 0, 149),
 				 							new Point3D(  0, 100, 149),
+				 							
 				 							new Point3D( 100, 100, 149)));
 		
 		scene.addGeometry(new Triangle(new Point3D( 100, 0, 149),
