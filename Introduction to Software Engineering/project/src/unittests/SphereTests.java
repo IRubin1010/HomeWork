@@ -78,27 +78,6 @@ class SphereTests {
 	            assertEquals(0,list5.size(),"0 points");
 	        else
 	            fail("null list");
-
-
 	    }
 	
-	
-	
-//	@Test
-//	void testIntersectionPoints() {
-//		Scene scene1 = new Scene("test");
-//		Camera camera = new Camera(new Vector(0,-1,0), new Vector(0,0,1), new Point3D(0,0,0.5));
-//
-//		Sphere sphere = new Sphere(new Point3D(0,0,-3),new Coordinate(3));
-//		scene1.set_camera(camera);
-//		List<Point3D> list = getIntersections(scene1, sphere);
-//		if(list != null) {
-//			assertEquals(18,list.size());
-//			
-//		}
-//		else {
-//			fail("jkshdfk");
-//		}
-//	}
-
 }
