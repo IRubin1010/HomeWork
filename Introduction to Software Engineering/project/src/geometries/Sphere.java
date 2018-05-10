@@ -107,8 +107,8 @@ public class Sphere extends RadialGeometry {
 			double th = Math.sqrt(Math.pow(getRadius().getValue(), 2) - Math.pow(d, 2));
 			double t1 = tm + th;
 			double t2 = tm - th;
-			if(t1 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
-			if(t2 >= 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+			if(!Coordinate.zeroCoordinate.equals(t1)&& t1 > 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
+			if(!Coordinate.zeroCoordinate.equals(t2)&& t2 > 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
 			return list;
 		} catch (IllegalArgumentException e) {
 			// case P0 is same as _point
