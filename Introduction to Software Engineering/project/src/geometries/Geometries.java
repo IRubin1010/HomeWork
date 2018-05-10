@@ -30,15 +30,32 @@ public class Geometries extends Geometry {
 		this.listShape=new ArrayList<Geometry>();
 	}
 	
-	///////////////////Add the copy constructor as needed///////////////////
-	
+	/**
+	 * copy constructor
+	 * @param geometries
+	 */
 	public Geometries(Geometries geometries) {
 		listShape = geometries.getGeometries();
 	}
 	
+	/***************** Getter ****************************/
+
 	public ArrayList<Geometry> getGeometries() {
 		return listShape;
 	}
+	
+	/***************** Operations ************************/
+
+	/**
+	 * Add geometry to the scene
+	 * 
+	 * @param geometry
+	 *            - Geometry to add
+	 */
+	public void addGeometry(Geometry geometry) {
+		this.listShape.add(geometry);
+	}
+
 
 	/**
 	 * override getNoraml
@@ -54,7 +71,7 @@ public class Geometries extends Geometry {
 	 * @param ray - the ray for which you want the cut points with the shapes
 	 */
 	@Override
-	public ArrayList<Point3D> findIntersections(Ray ray) {
+	public List<Point3D> findIntersections(Ray ray) {
 		ArrayList<Point3D> list = new ArrayList<Point3D>();
 		for(Geometry shape : listShape) {
 			list.addAll(shape.findIntersections(ray));
