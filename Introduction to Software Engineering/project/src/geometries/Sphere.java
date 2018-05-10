@@ -22,9 +22,10 @@ public class Sphere extends RadialGeometry {
 	 * constructor with point and radius
 	 * @param point
 	 * @param radius
+	 * @param color TODO
 	 */
-	public Sphere(Point3D point, Coordinate radius) {
-		super(radius);
+	public Sphere(Point3D point, Coordinate radius, Color color) {
+		super(radius,color);
 		_point = new Point3D(point);
 	}
 
@@ -33,7 +34,7 @@ public class Sphere extends RadialGeometry {
 	 * @param other
 	 */
 	public Sphere(Sphere other) {
-		super(other.getRadius());
+		super(other);
 		_point = new Point3D(other._point);
 	}
 

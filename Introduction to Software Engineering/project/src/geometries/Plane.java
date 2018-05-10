@@ -24,8 +24,10 @@ public class Plane extends Geometry {
 	 * @param x
 	 * @param y
 	 * @param z
+	 * @param color TODO
 	 */
-	public Plane(Point3D x, Point3D y, Point3D z) {
+	public Plane(Point3D x, Point3D y, Point3D z, Color color) {
+		super(color);
 		try {
 			// if 2 points are the same point
 			// the vactor substract will be 0
@@ -56,8 +58,10 @@ public class Plane extends Geometry {
 	 * 
 	 * @param point
 	 * @param plumb
+	 * @param color TODO
 	 */
-	public Plane(Point3D point, Vector plumb) {
+	public Plane(Point3D point, Vector plumb, Color color) {
+		super(color);
 		_point = new Point3D(point);
 		_plumb = new Vector(plumb);
 	}
@@ -68,6 +72,7 @@ public class Plane extends Geometry {
 	 * @param other
 	 */
 	public Plane(Plane other) {
+		super(other);
 		_point = new Point3D(other._point);
 		_plumb = new Vector(other._plumb);
 	}

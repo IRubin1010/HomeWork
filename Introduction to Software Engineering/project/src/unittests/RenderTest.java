@@ -6,7 +6,7 @@ import geometries.*;
 import primitives.*;
 import elements.Camera;
 import scene.Scene;
-import java.awt.Color;
+//import java.awt.Color;
 import renderer.*;
 
 
@@ -109,7 +109,7 @@ public class RenderTest {
 		scene.set_backGround(new Color(0, 0, 0));
 		Geometries geometries = new Geometries();
 		scene.set_geometries(geometries);
-		geometries.addGeometry(new Sphere(new Point3D(0, 0, 150), new Coordinate(66)));
+		geometries.addGeometry(new Sphere(new Point3D(0, 0, 150), new Coordinate(66), new Color(255,255,255)));
 
 		geometries.addGeometry(new Triangle(new Point3D( 150, 0, 149),
 				 							new Point3D(  0, 150, 149),

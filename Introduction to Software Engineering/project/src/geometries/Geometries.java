@@ -7,6 +7,7 @@ package geometries;
 import java.util.ArrayList;
 import java.util.List;
 
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -27,6 +28,7 @@ public class Geometries extends Geometry {
 	 * empty constructor that initializes the list to arrayList
 	 */
 	public Geometries() {
+		super(new Color(0,0,0));
 		this.listShape=new ArrayList<Geometry>();
 	}
 	
@@ -35,6 +37,7 @@ public class Geometries extends Geometry {
 	 * @param geometries
 	 */
 	public Geometries(Geometries geometries) {
+		super(new Color(0,0,0));
 		listShape = geometries.getGeometries();
 	}
 	

@@ -47,7 +47,7 @@ public class Render {
 						_scene.get_distance(), _imageWriter.getWidth(), _imageWriter.getHeight());
 				List<Point3D> intersectionList = _scene.get_geometries().findIntersections(ray);
 				if (intersectionList.size() == 0) {
-					_imageWriter.writePixel(i, j, _scene.get_backGround());
+					_imageWriter.writePixel(i, j, _scene.get_backGround().getColor());
 				} else {
 					Point3D closestPoint = getClosestPoint(intersectionList);
 					_imageWriter.writePixel(i, j, calcColor(closestPoint));

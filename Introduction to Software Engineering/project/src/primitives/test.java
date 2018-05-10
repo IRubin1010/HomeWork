@@ -48,19 +48,19 @@ public class test {
 			System.out.println(traingleNormal);
 			System.out.println("===============================================================");
 			
-			Sphere sphere = new Sphere(new Point3D(0,0,0), new Coordinate(4));
+			Sphere sphere = new Sphere(new Point3D(0,0,0), new Coordinate(4), new Color(255,255,255));
 			
 			System.out.println(sphere.getNormal(new Point3D(4,0,0)));
 			System.out.println("===============================================================");
 			//System.out.println(new Vector(1000000000,1000000000,1000000000).add(new Vector(1.00000001,1.000000001,1.000000001)));
 			Ray ray3 = new Ray(new Point3D(0,0,0),new Vector(0,1,0));
 			
-			Tube tube = new Tube(ray3,new Coordinate(2));
+			Tube tube = new Tube(ray3,new Coordinate(2), new Color(255,255,255));
 			System.out.println("tube");
 			System.out.println(tube.getNormal(new Point3D(1,1,1)));
 			
 			System.out.println("======================findintersection==============================");
-			Sphere sphere1 = new Sphere(new Point3D(0,0,-3),new Coordinate(3));
+			Sphere sphere1 = new Sphere(new Point3D(0,0,-3),new Coordinate(3), new Color(255,255,255));
 			Camera camera1 = new Camera(new Vector(0,-1,0), new Vector(0,0,-1), new Point3D(0,0,100));
 			ArrayList<Point3D> list = getIntersections(camera1, sphere1);
 			for (int i = 0; i < list.size(); i++) {
