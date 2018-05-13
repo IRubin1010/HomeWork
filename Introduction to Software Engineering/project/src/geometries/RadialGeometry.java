@@ -14,7 +14,7 @@ import primitives.*;
  */
 public abstract class RadialGeometry extends Geometry {
 
-	private Coordinate _radius;
+	protected double _radius;
 
 	/***************** Constructors **********************/
 
@@ -22,7 +22,7 @@ public abstract class RadialGeometry extends Geometry {
 	 * constructor with radius
 	 * @param radius
 	 */
-	public RadialGeometry(Coordinate radius,Color color) {
+	public RadialGeometry(double radius,Color color) {
 		super(color);
 		_radius = radius;
 	}
@@ -42,7 +42,7 @@ public abstract class RadialGeometry extends Geometry {
 	/**
 	 * @return the _radius
 	 */
-	public Coordinate getRadius() {
+	public double getRadius() {
 		return _radius;
 	}
 

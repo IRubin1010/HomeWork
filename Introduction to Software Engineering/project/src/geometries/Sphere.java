@@ -20,17 +20,20 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * constructor with point and radius
+	 * 
 	 * @param point
 	 * @param radius
-	 * @param color TODO
+	 * @param color
+	 *            TODO
 	 */
 	public Sphere(Point3D point, Coordinate radius, Color color) {
-		super(radius,color);
+		super(radius, color);
 		_point = new Point3D(point);
 	}
 
 	/**
 	 * copy constructor
+	 * 
 	 * @param other
 	 */
 	public Sphere(Sphere other) {
@@ -78,44 +81,57 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * return normal from a point on the sphere
-	 * @param point on the sphere
+	 * 
+	 * @param point
+	 *            on the sphere
 	 */
-	public Vector getNormal(Point3D point){
+	public Vector getNormal(Point3D point) {
 		// vector from the center point to other point
-		return new Vector(point.vectorSubtract(_point)).normalize();
+		return point.vectorSubtract(_point).normalize();
 	}
-	
+
 	/**
 	 * function find Intersections
+	 * 
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
-	public List<Point3D> findIntersections(Ray ray){
+	public List<Point3D> findIntersections(Ray ray) {
 		List<Point3D> list = new ArrayList<>();
 		Point3D rayPoint = ray.getPoint();
 		Vector rayVector = ray.getDirection();
-		try {			
-			// U = O - P0
-			Vector U = _point.vectorSubtract(rayPoint);
-			// tm = U * V
-			double tm = U.dotProduct(rayVector).getValue();
-			// d = sqrt(|U|^2 - tm^2)
-			double d = Math.sqrt(U.dotProduct(U).getValue() - Math.pow(tm, 2));
-			// if d > 0 - no intersection
-			if(d > getRadius().getValue()) return list;
-			// th = sqrt(r^2 - d^2)
-			double th = Math.sqrt(Math.pow(getRadius().getValue(), 2) - Math.pow(d, 2));
-			double t1 = tm + th;
-			double t2 = tm - th;
-			if(!Coordinate.zeroCoordinate.equals(t1)&& t1 > 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
-			if(!Coordinate.zeroCoordinate.equals(t2)&& t2 > 0) list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
-			return list;
+		Vector u;
+		try {
+			// u = O - P0
+			u = _point.vectorSubtract(rayPoint);
 		} catch (IllegalArgumentException e) {
 			// case P0 is same as _point
 			// U = 0, tm = 0, d = 0, th = radius
 			// intersection = Po + t*V
-			list.add(_point.addVectorToPoint(rayVector.scaleVector(getRadius().getValue())));
+			list.add(_point.addVectorToPoint(rayVector.scaleVector(_radius)));
 			return list;
 		}
+
+		// tm = u * v
+		double tm = u.dotProduct(rayVector);
+		// d = sqrt(|U|^2 - tm^2)
+		double d = Math.sqrt(u.dotProduct(u) - tm * tm);
+		// if d > 0 - no intersection
+		if (d > _radius)
+			return list;
+		// th = sqrt(r^2 - d^2)
+		double th = Math.sqrt(_radius * _radius - d * d);
+		if (Coordinate.ZERO.equals(th)) {
+			if (tm > 0)
+				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(tm)));
+		} else {
+			double t1 = tm + th;
+			double t2 = tm - th;
+			if (t1 > 0)
+				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
+			if (t2 > 0)
+				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+		}
+		return list;
 	}
 }

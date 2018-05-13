@@ -28,7 +28,7 @@ class SphereTests {
 		List<Point3D> list = new ArrayList<>();
 		for(int i = 1 ; i < 4 ;++i) {
 			for (int j = 1; j < 4; ++j) {
-				Ray r = scene.get_camera().constructorRay(3, 3, i, j, scene.get_distance(), 9, 9);
+				Ray r = scene.get_camera().constructRayThroghPixel(3, 3, i, j, scene.get_distance(), 9, 9);
 				System.out.println(r);
 				list.addAll(sphere.findIntersections(r));
 			}

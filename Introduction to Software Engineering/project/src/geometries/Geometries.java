@@ -22,7 +22,7 @@ public class Geometries extends Geometry {
 	/**
 	 * List hold all the shapes that make up the structure
 	 */
-	private ArrayList<Geometry> listShape;
+	private List<Geometry> listShape;
 	
 	/**
 	 * empty constructor that initializes the list to arrayList
@@ -43,7 +43,7 @@ public class Geometries extends Geometry {
 	
 	/***************** Getter ****************************/
 
-	public ArrayList<Geometry> getGeometries() {
+	public List<Geometry> getGeometries() {
 		return listShape;
 	}
 	
@@ -75,7 +75,7 @@ public class Geometries extends Geometry {
 	 */
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
-		ArrayList<Point3D> list = new ArrayList<Point3D>();
+		List<Point3D> list = new ArrayList<Point3D>();
 		for(Geometry shape : listShape) {
 			list.addAll(shape.findIntersections(ray));
 		}

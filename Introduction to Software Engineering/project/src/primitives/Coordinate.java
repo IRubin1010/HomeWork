@@ -11,7 +11,7 @@ public class Coordinate {
 
 	private double _coord;
 	
-	public static final Coordinate zeroCoordinate = new Coordinate(0);
+	public static final Coordinate ZERO = new Coordinate(0);
 	
 	/***************** Constructors **********************/ 
 	/**
@@ -52,6 +52,12 @@ public class Coordinate {
 			return true;
 		if (obj == null)
 			return false;
+		
+		// Can now check any number by:
+		// if (Coordinate.ZERO.equals(any_number)) ...
+		if (obj instanceof Double)
+			return (_subtract((double)obj) == 0.0);
+			
 		if (!(obj instanceof Coordinate))
 			return false;
 		Coordinate other = (Coordinate) obj;

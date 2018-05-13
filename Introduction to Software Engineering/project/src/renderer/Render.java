@@ -41,12 +41,14 @@ public class Render {
 	 * render the image from all geometry objects
 	 */
 	public void renderImage() {
-		for (int i = 1; i < _imageWriter.getNy(); i++) {
-			for (int j = 1; j < _imageWriter.getNx(); j++) {
-				Ray ray = _scene.get_camera().constructorRay(_imageWriter.getNx(), _imageWriter.getNy(), i, j,
+		int Nx = _imageWriter.getNx();
+		int Ny = _imageWriter.getNy();
+		for (int i = 1; i < Ny; i++) {
+			for (int j = 1; j < Nx; j++) {
+				Ray ray = _scene.get_camera().constructRayThroghPixel(Nx, Ny, i, j,
 						_scene.get_distance(), _imageWriter.getWidth(), _imageWriter.getHeight());
 				List<Point3D> intersectionList = _scene.get_geometries().findIntersections(ray);
-				if (intersectionList.size() == 0) {
+				if (intersectionList.isEmpty()) {
 					_imageWriter.writePixel(i, j, _scene.get_backGround().getColor());
 				} else {
 					Point3D closestPoint = getClosestPoint(intersectionList);
@@ -62,17 +64,18 @@ public class Render {
 	 * @return
 	 */
 	private Point3D getClosestPoint(List<Point3D> intersectionList) {
-		if (intersectionList.size()==0) return null;
 		Point3D cameraPoint = _scene.get_camera().get_p0();
-		Coordinate distance = intersectionList.get(0).distanceFrom(cameraPoint);
-		Point3D closestPoint = intersectionList.get(0);
-		for (int i = 1; i < intersectionList.size(); i++) {
-			Coordinate dis = intersectionList.get(i).distanceFrom(cameraPoint);
-			if (dis.getValue() < distance.getValue()) {
+		double distance = Double.MAX_VALUE;
+		Point3D closestPoint = null;
+		
+		for (Point3D point : intersectionList) {
+			double dis = point.distanceFrom(cameraPoint);
+			if (dis < distance) {
 				distance = dis;
-				closestPoint = intersectionList.get(i);
+				closestPoint = point;
 			}
 		}
+		
 		return closestPoint;
 	}
 

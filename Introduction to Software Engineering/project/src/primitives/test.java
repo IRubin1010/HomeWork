@@ -80,13 +80,13 @@ public class test {
 			Point3D pc=new Point3D(0,0,0);
 
 			Camera cam=new Camera(vup, vto, pc);
-			Ray ray1 = cam.constructorRay(3, 3, 3, 3, 100, 150, 150);
+			Ray ray1 = cam.constructRayThroghPixel(3, 3, 3, 3, 100, 150, 150);
 			System.out.println("==================meir============");
 			System.out.println(ray1);
 			System.out.println("==================meir============");
-			Camera camera2=new Camera(new Vector(0,-1,0), new Vector(0,0,1), Point3D.zeroPoint);
-			Ray ray2=camera2.constructorRay(4, 4, 2, 2, 100, 160, 160);
-			Ray rayExpected2=new Ray(Point3D.zeroPoint, new Vector(1.0/26200,1.0/26200,1.0/262));
+			Camera camera2=new Camera(new Vector(0,-1,0), new Vector(0,0,1), Point3D.ZERO);
+			Ray ray2=camera2.constructRayThroghPixel(4, 4, 2, 2, 100, 160, 160);
+			Ray rayExpected2=new Ray(Point3D.ZERO, new Vector(1.0/26200,1.0/26200,1.0/262));
 			System.out.println(ray2);
 			System.out.println(rayExpected2);
 			System.out.println("==================meir============");
@@ -103,7 +103,7 @@ public class test {
         ArrayList<Point3D> list = new ArrayList<Point3D>();
         for(int i = 1 ; i < 4 ;++i) {
             for (int j = 1; j < 4; ++j) {
-                Ray r = camera.constructorRay(3, 3, i, j, 1, 9, 9);
+                Ray r = camera.constructRayThroghPixel(3, 3, i, j, 1, 9, 9);
                 list.addAll((Collection<? extends Point3D>) sphere.findIntersections((r)));
             }
         }
