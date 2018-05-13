@@ -112,25 +112,27 @@ public class Triangle extends Plane {
 			return planeIntersection;
 
 		Point3D P0 = ray.getPoint();
+		
 		// V1,V2,V3
 		Vector V1 = _p1.vectorSubtract(P0);
 		Vector V2 = _p2.vectorSubtract(P0);
 		Vector V3 = _p3.vectorSubtract(P0);
+
 		// N1,N2,N3
-		Vector N1 = V1.crossProduct(V2).normalize();
-		Vector N2 = V2.crossProduct(V3).normalize();
-		Vector N3 = V3.crossProduct(V1).normalize();
+		Vector N1 = V1.crossProduct(V2);
+		Vector N2 = V2.crossProduct(V3);
+		Vector N3 = V3.crossProduct(V1);
+
 		// P0P * Ni
 		Vector P0P = planeIntersection.get(0).vectorSubtract(P0);
-		Coordinate P0PN1 = P0P.dotProduct(N1);
-		Coordinate P0PN2 = P0P.dotProduct(N2);
-		Coordinate P0PN3 = P0P.dotProduct(N3);
-		if (P0PN1.getValue() > 0 && P0PN2.getValue() > 0 && P0PN3.getValue() > 0
-				|| P0PN1.getValue() < 0 && P0PN2.getValue() < 0 && P0PN3.getValue() < 0) {
-			return planeIntersection;
-		} else {
-			return new ArrayList<Point3D>();
-		}
+		double P0PN1 = P0P.dotProduct(N1);
+		double P0PN2 = P0P.dotProduct(N2);
+		double P0PN3 = P0P.dotProduct(N3);
+		if (!(P0PN1 > 0 && P0PN2 > 0 && P0PN3 > 0
+				|| P0PN1 < 0 && P0PN2 < 0 && P0PN3 < 0))
+			planeIntersection.clear();
+
+		return planeIntersection;
 	}
 
 }

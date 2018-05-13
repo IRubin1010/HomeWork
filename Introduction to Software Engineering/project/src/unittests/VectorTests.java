@@ -256,21 +256,21 @@ public class VectorTests {
 	@Test
 	public void testDotProduct() {
 		// 2d vectors orthogonal
-		assertEquals(vectorX.dotProduct(vectorY), Coordinate.zeroCoordinate);
-		assertEquals(vectorX.dotProduct(vectorYn), Coordinate.zeroCoordinate);
-		assertEquals(vectorXn.dotProduct(vectorY), Coordinate.zeroCoordinate);
-		assertEquals(vectorXn.dotProduct(vectorYn), Coordinate.zeroCoordinate);
-		assertEquals(vectorZ.dotProduct(vectorYn), Coordinate.zeroCoordinate);
-		assertEquals(vectorZ.dotProduct(vectorXn), Coordinate.zeroCoordinate);
-		assertEquals(vectorZ.dotProduct(vectorX), Coordinate.zeroCoordinate);
+		assertEquals(vectorX.dotProduct(vectorY), Coordinate.ZERO);
+		assertEquals(vectorX.dotProduct(vectorYn), Coordinate.ZERO);
+		assertEquals(vectorXn.dotProduct(vectorY), Coordinate.ZERO);
+		assertEquals(vectorXn.dotProduct(vectorYn), Coordinate.ZERO);
+		assertEquals(vectorZ.dotProduct(vectorYn), Coordinate.ZERO);
+		assertEquals(vectorZ.dotProduct(vectorXn), Coordinate.ZERO);
+		assertEquals(vectorZ.dotProduct(vectorX), Coordinate.ZERO);
 		
 		// 3d vectors orthogonal
-		assertEquals(vectorXY.dotProduct(vectorZ), Coordinate.zeroCoordinate);
-		assertEquals(vectorXY.dotProduct(vectorZn), Coordinate.zeroCoordinate);
-		assertEquals(vectorYZ.dotProduct(vectorX), Coordinate.zeroCoordinate);
-		assertEquals(vectorYZ.dotProduct(vectorXn), Coordinate.zeroCoordinate);
-		assertEquals(vectorXZ.dotProduct(vectorY), Coordinate.zeroCoordinate);
-		assertEquals(vectorXZ.dotProduct(vectorYn), Coordinate.zeroCoordinate);
+		assertEquals(vectorXY.dotProduct(vectorZ), Coordinate.ZERO);
+		assertEquals(vectorXY.dotProduct(vectorZn), Coordinate.ZERO);
+		assertEquals(vectorYZ.dotProduct(vectorX), Coordinate.ZERO);
+		assertEquals(vectorYZ.dotProduct(vectorXn), Coordinate.ZERO);
+		assertEquals(vectorXZ.dotProduct(vectorY), Coordinate.ZERO);
+		assertEquals(vectorXZ.dotProduct(vectorYn), Coordinate.ZERO);
 		
 		// 3d vectors 45 degree
 		assertEquals(vectorXY.dotProduct(vectorX),coor1);

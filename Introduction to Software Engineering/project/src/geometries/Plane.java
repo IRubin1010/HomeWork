@@ -21,36 +21,35 @@ public class Plane extends Geometry {
 	/**
 	 * constructor with 3 points
 	 * 
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param color TODO
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param color
+	 *            TODO
 	 */
-	public Plane(Point3D x, Point3D y, Point3D z, Color color) {
+	public Plane(Point3D a, Point3D b, Point3D c, Color color) {
 		super(color);
+		Vector vector1, vector2;
 		try {
 			// if 2 points are the same point
 			// the vactor substract will be 0
 			// and exception will thrown
-			Vector Vector1 = new Vector(y.vectorSubtract(x));
-			Vector Vector2 = new Vector(z.vectorSubtract(x));
-			try {
-				// if all points are on the same line
-				// cross product will be 0
-				// and exception will thrown
-				Vector1.crossProduct(Vector2);
-			} catch (IllegalArgumentException e) {
-				// case all points are on the same line
-				throw new IllegalArgumentException("all 3 points are on the same line");
-			}
-			_point = new Point3D(x);
-			_plumb = new Vector(Vector1.crossProduct(Vector2));
+			vector1 = new Vector(b.vectorSubtract(a));
+			vector2 = new Vector(c.vectorSubtract(a));
 		} catch (IllegalArgumentException e) {
 			// case 2 points are the same
-			if (e.getMessage() == "all 3 points are on the same line")
-				throw new IllegalArgumentException("all 3 points are on the same line");// FIX
-			throw new IllegalArgumentException("There is 2 same points");
+			throw new IllegalArgumentException("There are 2 equal points");
 		}
+		try {
+			// if all points are on the same line
+			// cross product will be 0
+			// and exception will thrown
+			_plumb = vector1.crossProduct(vector2).normalize();
+		} catch (IllegalArgumentException e) {
+			// case all points are on the same line
+			throw new IllegalArgumentException("all 3 points are on the same line");
+		}
+		_point = new Point3D(a);
 	}
 
 	/**
@@ -58,12 +57,13 @@ public class Plane extends Geometry {
 	 * 
 	 * @param point
 	 * @param plumb
-	 * @param color TODO
+	 * @param color
+	 *            TODO
 	 */
 	public Plane(Point3D point, Vector plumb, Color color) {
 		super(color);
 		_point = new Point3D(point);
-		_plumb = new Vector(plumb);
+		_plumb = new Vector(plumb).normalize();
 	}
 
 	/**
@@ -127,11 +127,12 @@ public class Plane extends Geometry {
 	 *            on the plane
 	 */
 	public Vector getNormal(Point3D point) {
-		return new Vector(_plumb).normalize();
+		return _plumb;
 	}
 
 	/**
 	 * function find Intersections
+	 * 
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
@@ -143,28 +144,28 @@ public class Plane extends Geometry {
 			Vector rayVector = ray.getDirection();
 			// Q0 - P0
 			Vector Q0P0 = _point.vectorSubtract(rayPoint);
+
+			// V * N
+			double VN = _plumb.dotProduct(rayVector);
+			if (Coordinate.ZERO.equals(VN)) {
+				// V and N are orthogonal
+				// means the ray is parallel to the plane
+				return list;
+			}
+			
 			// N * (Q0 - P0)
-			Coordinate N_dot_Q0P0 = _plumb.dotProduct(Q0P0);
-			if (N_dot_Q0P0.equals(Coordinate.zeroCoordinate)) {
+			double t = _plumb.dotProduct(Q0P0);
+			if (Coordinate.ZERO.equals(t)) {
 				// means the ray point is on the plane
 				// no intersection
 				return list;
 			}
-			// V * N
-			Coordinate VN = _plumb.dotProduct(rayVector);
-			if (VN.equals(Coordinate.zeroCoordinate)) {
-				// V and N are orthogonal
-				// means the ray is parallel to the plane
-				return list; 
-			}
-			// t = N_dot_Q0P0/VN
-			double t = N_dot_Q0P0.coordinateDivide(VN).getValue();
 			if (t > 0) {
 				// point = P0 + t*V
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t)));
 				return list;
 			} else {
-				return list; 
+				return list;
 			}
 		} catch (IllegalArgumentException e) {
 			// case both points are the same

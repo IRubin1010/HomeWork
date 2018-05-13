@@ -7,24 +7,24 @@ import primitives.*;
  */
 public class Cylinder extends Tube {
 
-	private double _highet;
+	private double _height;
 
 	/***************** Constructors **********************/
 
-	public Cylinder(double highet, Ray ray, Coordinate radius) {
+	public Cylinder(double height, Ray ray, Coordinate radius) {
 		super(ray, radius, new Color(255,255,255));
-		_highet = highet;
+		_height = height;
 	}
 
 	public Cylinder(Cylinder other) {
-		super(other.getRay() , other.getRadius(), new Color(255,255,255));
-		_highet = other._highet;
+		super(other);
+		_height = other._height;
 	}
 
 	/***************** Getter ****************************/
 
-	public double getHighet() {
-		return _highet;
+	public double getHeight() {
+		return _height;
 	}
 	
 	/***************** Administration *******************/
@@ -40,14 +40,14 @@ public class Cylinder extends Tube {
 		if(!super.equals(obj))
 			return false;
 		Cylinder other = (Cylinder) obj;
-		return _highet == other._highet;
+		return _height == other._height;
 	}
 
 	@Override
 	public String toString() {
-		if(_highet % 1 ==0)
-			return "Cylinder: \nhighet: " + (int)_highet + " ," + super.toString().substring(7);
-		return "Cylinder: \nhighet: " + _highet + " " + super.toString().substring(7);
+		if(_height % 1 ==0)
+			return "Cylinder: \nhighet: " + (int)_height + " ," + super.toString().substring(7);
+		return "Cylinder: \nhighet: " + _height + " " + super.toString().substring(7);
 	}
 	
 	/***************** Operations ************************/ 

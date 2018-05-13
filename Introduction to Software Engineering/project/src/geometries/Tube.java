@@ -3,6 +3,7 @@
  * @author meir shimon 305625295 nthr120@gmail.com
  */
 package geometries;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,24 +13,27 @@ import primitives.*;
  * class represent tube
  */
 public class Tube extends RadialGeometry {
-	
+
 	private Ray _ray;
 
 	/***************** Constructors **********************/
 
 	/**
 	 * constructor with ray and radius
+	 * 
 	 * @param ray
 	 * @param radius
-	 * @param color TODO
+	 * @param color
+	 *            TODO
 	 */
-	public Tube(Ray ray, Coordinate radius, Color color) {
-		super(radius,color);
+	public Tube(Ray ray, double radius, Color color) {
+		super(radius, color);
 		_ray = new Ray(ray);
 	}
 
 	/**
 	 * copy constructor
+	 * 
 	 * @param other
 	 */
 	public Tube(Tube other) {
@@ -45,7 +49,7 @@ public class Tube extends RadialGeometry {
 	public Ray getRay() {
 		return _ray;
 	}
-	
+
 	/***************** Administration *******************/
 
 	/**
@@ -59,7 +63,7 @@ public class Tube extends RadialGeometry {
 			return false;
 		if (!(obj instanceof Ray))
 			return false;
-		if(!super.equals(obj))
+		if (!super.equals(obj))
 			return false;
 		Tube other = (Tube) obj;
 		return _ray.equals(other._ray);
@@ -72,27 +76,29 @@ public class Tube extends RadialGeometry {
 	public String toString() {
 		return "Tube: \nray: " + _ray.toString() + " ," + super.toString();
 	}
-	
-	/***************** Operations ************************/ 
+
+	/***************** Operations ************************/
 
 	/**
 	 * return normal from a point on the tube
-	 * @param point on the tube
+	 * 
+	 * @param point
+	 *            on the tube
 	 */
-	public Vector getNormal(Point3D point){
-		
+	public Vector getNormal(Point3D point) {
+
 		// formula: surcharge = c = (PtoPVector*rayVector(normalize))*rayVector
-		
+
 		// get ray vector
-		Vector rayVector = getRay().getDirection(); 
-		// vector from center point to point on the tube 
+		Vector rayVector = getRay().getDirection();
+		// vector from center point to point on the tube
 		Vector PtoPVector = point.vectorSubtract(getRay().getPoint());
-		// get ray normalize vector 
+		// get ray normalize vector
 		Vector normalRayVector = rayVector.normalize();
 		// get the surcharge
-		Coordinate surcharge = PtoPVector.dotProduct(normalRayVector);
+		double surcharge = PtoPVector.dotProduct(normalRayVector);
 		// mult ray normalize vector by the surcharge
-		Vector surchargeVector = normalRayVector.scaleVector(surcharge.getValue());
+		Vector surchargeVector = normalRayVector.scaleVector(surcharge);
 		return new Vector(PtoPVector.sub(surchargeVector)).normalize();
 	}
 
@@ -101,5 +107,5 @@ public class Tube extends RadialGeometry {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

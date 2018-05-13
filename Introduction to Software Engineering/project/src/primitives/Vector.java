@@ -12,17 +12,17 @@ public class Vector {
 	/***************** Constructors **********************/
 	
 	public Vector(double x, double y, double z) {
-		if(new Point3D(x, y, z).equals(Point3D.zeroPoint)) throw new IllegalArgumentException("vector can't be vector 0");
+		if(new Point3D(x, y, z).equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 	
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
-		if(new Point3D(x, y, z).equals(Point3D.zeroPoint)) throw new IllegalArgumentException("vector can't be vector 0");
+		if(new Point3D(x, y, z).equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 
 	public Vector(Point3D other) {
-		if(other.equals(Point3D.zeroPoint)) throw new IllegalArgumentException("vector can't be vector 0");
+		if(other.equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(other);
 	}
 	
@@ -89,7 +89,7 @@ public class Vector {
 	 * @param num
 	 * @return Vector Dot Producted by the other Vector
 	 */
-	public Coordinate dotProduct(Vector other) {
+	public double dotProduct(Vector other) {
 		return _head.multiply(other._head);
 	}
 	
@@ -113,7 +113,7 @@ public class Vector {
 	 * @return the vector size
 	 */
 	public Coordinate size() {
-		return _head.distanceFrom(Point3D.zeroPoint);
+		return _head.distanceFrom(Point3D.ZERO);
 	}
 	
 	/**

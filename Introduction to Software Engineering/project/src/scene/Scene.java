@@ -23,8 +23,8 @@ import primitives.Vector;
 public class Scene {
 
 	private String _name;
-	private Color _backGround;
-	private Geometries _geometries;
+	private Color _background;
+	private Geometries _geometries = new Geometries();
 	private Camera _camera;
 	private double _distance;
 	private AmbientLight _light; 
@@ -38,10 +38,7 @@ public class Scene {
 	 */
 	public Scene(String name) {
 		this._name = name;
-		this._backGround = new Color(0, 0, 0);
-		this._geometries = new Geometries();
-		this._camera = new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0));
-		this._distance = 1;
+		this._background = new Color(0, 0, 0);
 		this._light = new AmbientLight(new Color(255, 255, 255), 1);
 	}
 
@@ -51,7 +48,7 @@ public class Scene {
 	 */
 	public Scene(Scene scene) {
 		_name = scene._name;
-		_backGround = scene._backGround;
+		_background = scene._background;
 		_geometries = scene._geometries;
 		_camera = new Camera(scene._camera);
 		_distance = scene._distance;
@@ -64,7 +61,7 @@ public class Scene {
 	 * @return the _color
 	 */
 	public Color get_backGround() {
-		return _backGround;
+		return _background;
 	}
 
 	/**
@@ -109,7 +106,7 @@ public class Scene {
 	 *            the _color to set
 	 */
 	public void set_backGround(Color _backGround) {
-		this._backGround = _backGround;
+		this._background = _backGround;
 	}
 
 	/**
@@ -134,6 +131,5 @@ public class Scene {
 	public void set_light(AmbientLight _light) {
 		this._light = _light;
 	}
-
 	
 }

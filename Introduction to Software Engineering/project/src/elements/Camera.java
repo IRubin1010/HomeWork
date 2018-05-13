@@ -30,7 +30,7 @@ public class Camera {
 	 *                the vector are not vertical each other
 	 */
 	public Camera(Vector vUp, Vector vTo, Point3D pc) {
-		if (!(vUp.dotProduct(vTo).equals(Coordinate.zeroCoordinate))) {
+		if (!Coordinate.ZERO.equals(vUp.dotProduct(vTo))) {
 			throw new IllegalArgumentException("Vectors are not vertical to each other");
 		}
 		this._vUp = vUp.normalize();
@@ -97,7 +97,7 @@ public class Camera {
 	 * @param screenWidth
 	 * @param screenHight
 	 */
-	public Ray constructorRay(int Nx, int Ny, int i, int j, double screenDistance, double screenWidth,
+	public Ray constructRayThroghPixel(int Nx, int Ny, int i, int j, double screenDistance, double screenWidth,
 			double screenHight) {
 		Point3D pc = _p0.addVectorToPoint(_vTo.scaleVector(screenDistance));
 		double Ry = screenHight / Ny;
