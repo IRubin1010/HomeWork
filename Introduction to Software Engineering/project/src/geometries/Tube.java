@@ -14,7 +14,7 @@ import primitives.*;
  */
 public class Tube extends RadialGeometry {
 
-	private Ray _ray;
+	protected Ray _ray;
 
 	/***************** Constructors **********************/
 
@@ -41,42 +41,6 @@ public class Tube extends RadialGeometry {
 		_ray = new Ray(other._ray);
 	}
 
-	/***************** Getter ****************************/
-
-	/**
-	 * @return the _ray
-	 */
-	public Ray getRay() {
-		return _ray;
-	}
-
-	/***************** Administration *******************/
-
-	/**
-	 * override equals
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Ray))
-			return false;
-		if (!super.equals(obj))
-			return false;
-		Tube other = (Tube) obj;
-		return _ray.equals(other._ray);
-	}
-
-	/**
-	 * override toString
-	 */
-	@Override
-	public String toString() {
-		return "Tube: \nray: " + _ray.toString() + " ," + super.toString();
-	}
-
 	/***************** Operations ************************/
 
 	/**
@@ -90,9 +54,9 @@ public class Tube extends RadialGeometry {
 		// formula: surcharge = c = (PtoPVector*rayVector(normalize))*rayVector
 
 		// get ray vector
-		Vector rayVector = getRay().getDirection();
+		Vector rayVector = _ray.getDirection();
 		// vector from center point to point on the tube
-		Vector PtoPVector = point.vectorSubtract(getRay().getPoint());
+		Vector PtoPVector = point.vectorSubtract(_ray.getPoint());
 		// get ray normalize vector
 		Vector normalRayVector = rayVector.normalize();
 		// get the surcharge
@@ -104,7 +68,6 @@ public class Tube extends RadialGeometry {
 
 	@Override
 	public List<Point3D> findIntersections(Ray ray) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

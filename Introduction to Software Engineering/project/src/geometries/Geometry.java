@@ -3,7 +3,6 @@
 * @author meir shimon 305625295 nthr120@gmail.com
 */
 package geometries;
-import java.util.ArrayList;
 import java.util.List;
 
 import primitives.*;
@@ -13,8 +12,10 @@ import primitives.*;
 */
 public abstract class Geometry {
 
-	Color _emmission;
+	protected Color _emmission;
 	
+	/***************** Constructors **********************/
+
 	/**
 	 * constructor
 	 */
@@ -30,10 +31,8 @@ public abstract class Geometry {
 		_emmission = other._emmission;
 	}
 	
-	public Color get_emmission() {
-		return _emmission;
-	}
-	
+	/***************** Operations ************************/ 
+
 	/**
 	 * abstract function get normal
 	 * @param point

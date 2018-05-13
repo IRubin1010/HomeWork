@@ -8,7 +8,7 @@ package elements;
 import primitives.Color;
 
 /**
- * 
+ * abstract class represents light
  *
  */
 public abstract class Light {

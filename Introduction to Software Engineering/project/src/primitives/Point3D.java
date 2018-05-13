@@ -1,8 +1,13 @@
-package primitives;
-
 /**
  * @author itzik yeret 206244485 yeret82088@gmail.com
  * @author meir shimon 305625295 nthr120@gmail.com
+ */
+package primitives;
+
+/**
+ * 
+ * class represents Point3D
+ *
  */
 public class Point3D extends Point2D {
 	
@@ -57,8 +62,6 @@ public class Point3D extends Point2D {
 	
 	/***************** Operations ************************/ 
 	
-	// CHECK ABOUT OVERRIDE METHODES
-	
 	/**
 	 * create a vector from a 3D point
 	 * @return Vector base of the point
@@ -105,7 +108,7 @@ public class Point3D extends Point2D {
 	 * multiply point with another point
 	 * @param Point3D other
 	 */
-	public double multiply(Point3D other) {
+	protected double multiply(Point3D other) {
 		return super.multiply(other).add(_z.multiply(other._z)).getValue();
 	}
 	
@@ -148,9 +151,9 @@ public class Point3D extends Point2D {
 	 */
 	public double distanceFrom(Point3D other) {
 		Point3D point = sub(other);
-		double xPow = Math.pow(point.getX().getValue(),2);
-		double yPow = Math.pow(point.getY().getValue(),2);
-		double zPow = Math.pow(point._z.getValue(),2);
+		double xPow = point.getX().multiply(point.getX()).getValue();
+		double yPow = point.getY().multiply(point.getY()).getValue();
+		double zPow = point._z.multiply(point._z).getValue();
 		return Math.sqrt(xPow + yPow + zPow);
 	}
 }

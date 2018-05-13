@@ -37,38 +37,4 @@ public abstract class RadialGeometry extends Geometry {
 			_radius = other._radius;
 	}
 
-	/***************** Getter ****************************/
-	
-	/**
-	 * @return the _radius
-	 */
-	public double getRadius() {
-		return _radius;
-	}
-
-	/***************** Administration  *******************/
-
-	/**
-	 * override equals
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof RadialGeometry))
-			return false;
-		RadialGeometry other = (RadialGeometry) obj;
-		return _radius == other._radius;
-	}
-
-	/**
-	 * override toString
-	 */
-	@Override
-	public String toString() {
-		return "radius: " + _radius;
-	}
-
 }

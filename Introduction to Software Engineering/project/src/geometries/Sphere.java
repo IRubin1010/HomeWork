@@ -26,8 +26,8 @@ public class Sphere extends RadialGeometry {
 	 * @param color
 	 *            TODO
 	 */
-	public Sphere(Point3D point, Coordinate radius, Color color) {
-		super(radius, color);
+	public Sphere(Point3D point, double radius, Color color) {
+		super(radius,color);
 		_point = new Point3D(point);
 	}
 
@@ -39,42 +39,6 @@ public class Sphere extends RadialGeometry {
 	public Sphere(Sphere other) {
 		super(other);
 		_point = new Point3D(other._point);
-	}
-
-	/***************** Getter ****************************/
-
-	/**
-	 * @return the _point
-	 */
-	public Point3D get_point() {
-		return _point;
-	}
-
-	/***************** Administration *******************/
-
-	/**
-	 * override equals
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Sphere))
-			return false;
-		if (!super.equals(obj))
-			return false;
-		Sphere other = (Sphere) obj;
-		return _point.equals(other._point);
-	}
-
-	/**
-	 * override toString
-	 */
-	@Override
-	public String toString() {
-		return "Sphere: \npoint: " + _point.toString() + " ," + super.toString();
 	}
 
 	/***************** Operations ************************/

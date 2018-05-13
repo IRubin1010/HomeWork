@@ -1,9 +1,13 @@
+/**
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
+ */
 package primitives;
 
 
 /**
- * @author itzik yeret 206244485 yeret82088@gmail.com
- * @author meir shimon 305625295 nthr120@gmail.com
+ * class represents Vector
+ *
  */
 public class Vector {
 	
@@ -21,9 +25,9 @@ public class Vector {
 		_head = new Point3D(x, y, z);
 	}
 
-	public Vector(Point3D other) {
-		if(other.equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
-		_head = new Point3D(other);
+	public Vector(Point3D point) {
+		if(point.equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
+		_head = new Point3D(point);
 	}
 	
 	public Vector(Vector other) {
@@ -112,7 +116,7 @@ public class Vector {
 	/**
 	 * @return the vector size
 	 */
-	public Coordinate size() {
+	public double size() {
 		return _head.distanceFrom(Point3D.ZERO);
 	}
 	
@@ -121,7 +125,7 @@ public class Vector {
 	 * @return new normalize Vector
 	 */
 	public Vector normalize() {
-		Coordinate vectorSize = size();
-		return new Vector(_head.scalarDivision(vectorSize.getValue()));
+		double vectorSize = size();
+		return new Vector(_head.scalarDivision(vectorSize));
 	}
 }
