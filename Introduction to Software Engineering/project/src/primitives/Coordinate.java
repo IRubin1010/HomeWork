@@ -15,7 +15,7 @@ public class Coordinate {
 	
 	/***************** Constructors **********************/ 
 	/**
-	 * constuctor with number
+	 * constructor with number
 	 * @param coord  Coordinate value
 	 */
 	public Coordinate(double coord) {
@@ -23,7 +23,7 @@ public class Coordinate {
 	}
 	
 	/**
-	 * constuctor from another ray
+	 * constructor from another ray
 	 * @param other 
 	 * @exception if the other = null throw exception
 	 */

@@ -60,7 +60,7 @@ public class Scene {
 	/**
 	 * @return the _color
 	 */
-	public Color get_backGround() {
+	public Color get_background() {
 		return _background;
 	}
 
@@ -105,7 +105,7 @@ public class Scene {
 	 * @param _color
 	 *            the _color to set
 	 */
-	public void set_backGround(Color _backGround) {
+	public void set_background(Color _backGround) {
 		this._background = _backGround;
 	}
 

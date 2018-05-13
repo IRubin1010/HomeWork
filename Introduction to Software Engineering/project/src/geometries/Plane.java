@@ -14,8 +14,8 @@ import primitives.*;
  */
 public class Plane extends Geometry {
 
-	private Point3D _point;
-	private Vector _plumb;
+	protected Point3D _point;
+	protected Vector _normal;
 
 	/***************** Constructors **********************/
 	/**
@@ -25,14 +25,13 @@ public class Plane extends Geometry {
 	 * @param b
 	 * @param c
 	 * @param color
-	 *            TODO
 	 */
 	public Plane(Point3D a, Point3D b, Point3D c, Color color) {
 		super(color);
 		Vector vector1, vector2;
 		try {
 			// if 2 points are the same point
-			// the vactor substract will be 0
+			// the vector substract will be 0
 			// and exception will thrown
 			vector1 = new Vector(b.vectorSubtract(a));
 			vector2 = new Vector(c.vectorSubtract(a));
@@ -44,7 +43,7 @@ public class Plane extends Geometry {
 			// if all points are on the same line
 			// cross product will be 0
 			// and exception will thrown
-			_plumb = vector1.crossProduct(vector2).normalize();
+			_normal = vector1.crossProduct(vector2).normalize();
 		} catch (IllegalArgumentException e) {
 			// case all points are on the same line
 			throw new IllegalArgumentException("all 3 points are on the same line");
@@ -63,7 +62,7 @@ public class Plane extends Geometry {
 	public Plane(Point3D point, Vector plumb, Color color) {
 		super(color);
 		_point = new Point3D(point);
-		_plumb = new Vector(plumb).normalize();
+		_normal = new Vector(plumb).normalize();
 	}
 
 	/**
@@ -74,48 +73,7 @@ public class Plane extends Geometry {
 	public Plane(Plane other) {
 		super(other);
 		_point = new Point3D(other._point);
-		_plumb = new Vector(other._plumb);
-	}
-
-	/***************** Getters ****************************/
-
-	/**
-	 * @return the _point
-	 */
-	public Point3D get_point() {
-		return _point;
-	}
-
-	/**
-	 * @return the _plumb
-	 */
-	public Vector get_plumb() {
-		return _plumb;
-	}
-
-	/***************** Administration *******************/
-
-	/**
-	 * override equals
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Plane))
-			return false;
-		Plane other = (Plane) obj;
-		return _point.equals(other._point) && _plumb.equals(other._plumb);
-	}
-
-	/**
-	 * override toString
-	 */
-	@Override
-	public String toString() {
-		return "Plane: \npoint: " + _point.toString() + " ,plumb: " + _plumb.toString();
+		_normal = new Vector(other._normal);
 	}
 
 	/***************** Operations ************************/
@@ -127,7 +85,7 @@ public class Plane extends Geometry {
 	 *            on the plane
 	 */
 	public Vector getNormal(Point3D point) {
-		return _plumb;
+		return _normal;
 	}
 
 	/**
@@ -144,28 +102,28 @@ public class Plane extends Geometry {
 			Vector rayVector = ray.getDirection();
 			// Q0 - P0
 			Vector Q0P0 = _point.vectorSubtract(rayPoint);
-
-			// V * N
-			double VN = _plumb.dotProduct(rayVector);
-			if (Coordinate.ZERO.equals(VN)) {
-				// V and N are orthogonal
-				// means the ray is parallel to the plane
-				return list;
-			}
-			
 			// N * (Q0 - P0)
-			double t = _plumb.dotProduct(Q0P0);
-			if (Coordinate.ZERO.equals(t)) {
+			double N_dot_Q0P0 = _normal.dotProduct(Q0P0);
+			if (Coordinate.ZERO.equals(N_dot_Q0P0)) {
 				// means the ray point is on the plane
 				// no intersection
 				return list;
 			}
+			// V * N
+			double VN = _normal.dotProduct(rayVector);
+			if (Coordinate.ZERO.equals(VN)) {
+				// V and N are orthogonal
+				// means the ray is parallel to the plane
+				return list; 
+			}
+			// t = N_dot_Q0P0/VN
+			double t = N_dot_Q0P0 / VN;
 			if (t > 0) {
 				// point = P0 + t*V
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t)));
 				return list;
 			} else {
-				return list;
+				return list; 
 			}
 		} catch (IllegalArgumentException e) {
 			// case both points are the same

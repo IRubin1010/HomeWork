@@ -17,7 +17,7 @@ public class RenderTest {
 		Scene scene = new Scene("Avi scene");
 		scene.set_camera(new Camera( new Vector(0, -1, 0), new Vector(0, 0, 1),new Point3D(0, 0, 0)));
 		scene.set_distance(100);
-		scene.set_backGround(new Color(135,206,250));
+		scene.set_background(new Color(135,206,250));
 		Geometries geometries = new Geometries();
 		scene.set_geometries(geometries);
 
@@ -106,10 +106,10 @@ public class RenderTest {
 		Scene scene = new Scene("Test scene");
 		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
 		scene.set_distance(100);
-		scene.set_backGround(new Color(0, 0, 0));
+		scene.set_background(new Color(0, 0, 0));
 		Geometries geometries = new Geometries();
 		scene.set_geometries(geometries);
-		geometries.addGeometry(new Sphere(new Point3D(0, 0, 150), new Coordinate(66), new Color(255,255,255)));
+		geometries.addGeometry(new Sphere(new Point3D(0, 0, 150), 66, new Color(255,255,255)));
 
 		geometries.addGeometry(new Triangle(new Point3D( 150, 0, 149),
 				 							new Point3D(  0, 150, 149),

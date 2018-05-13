@@ -22,14 +22,13 @@ public class Geometries extends Geometry {
 	/**
 	 * List hold all the shapes that make up the structure
 	 */
-	private List<Geometry> listShape;
+	private List<Geometry> listShape = new ArrayList<Geometry>();
 	
 	/**
 	 * empty constructor that initializes the list to arrayList
 	 */
 	public Geometries() {
 		super(new Color(0,0,0));
-		this.listShape=new ArrayList<Geometry>();
 	}
 	
 	/**

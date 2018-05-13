@@ -60,12 +60,12 @@ public class VectorTests {
 	Vector vector2n = new Vector(-2,3,4);
 	
 	// coordinates
-	Coordinate coor1 = new Coordinate(1);
-	Coordinate coor1n = new Coordinate(-1);
-	Coordinate coor20 = new Coordinate(20);
-	Coordinate coor16 = new Coordinate(16);
-	Coordinate coor8 = new Coordinate(8);
-	Coordinate sqrt3 = new Coordinate(Math.sqrt(3));
+	Double coor1 = new Double(1);
+	Double coor1n = new Double(-1);
+	Double coor20 = new Double(20);
+	Double coor16 = new Double(16);
+	Double coor8 = new Double(8);
+	Double sqrt3 = Math.sqrt(3);
 	
 
 	/**
@@ -273,35 +273,35 @@ public class VectorTests {
 		assertEquals(vectorXZ.dotProduct(vectorYn), Coordinate.ZERO);
 		
 		// 3d vectors 45 degree
-		assertEquals(vectorXY.dotProduct(vectorX),coor1);
-		assertEquals(vectorXY.dotProduct(vectorY),coor1);
-		assertEquals(vectorXZ.dotProduct(vectorX),coor1);
-		assertEquals(vectorXZ.dotProduct(vectorZ),coor1);
-		assertEquals(vectorYZ.dotProduct(vectorY),coor1);
-		assertEquals(vectorYZ.dotProduct(vectorZ),coor1);
+		assertEquals((Double)vectorXY.dotProduct(vectorX),coor1);
+		assertEquals((Double)vectorXY.dotProduct(vectorY),coor1);
+		assertEquals((Double)vectorXZ.dotProduct(vectorX),coor1);
+		assertEquals((Double)vectorXZ.dotProduct(vectorZ),coor1);
+		assertEquals((Double)vectorYZ.dotProduct(vectorY),coor1);
+		assertEquals((Double)vectorYZ.dotProduct(vectorZ),coor1);
 		
 		// 3d vectors 135 degree
-		assertEquals(vectorXY.dotProduct(vectorXn),coor1n);
-		assertEquals(vectorXY.dotProduct(vectorYn),coor1n);
-		assertEquals(vectorXZ.dotProduct(vectorXn),coor1n);
-		assertEquals(vectorXZ.dotProduct(vectorZn),coor1n);
-		assertEquals(vectorYZ.dotProduct(vectorYn),coor1n);
-		assertEquals(vectorYZ.dotProduct(vectorZn),coor1n);
+		assertEquals((Double)vectorXY.dotProduct(vectorXn),(Double)coor1n);
+		assertEquals((Double)vectorXY.dotProduct(vectorYn),coor1n);
+		assertEquals((Double)vectorXZ.dotProduct(vectorXn),coor1n);
+		assertEquals((Double)vectorXZ.dotProduct(vectorZn),coor1n);
+		assertEquals((Double)vectorYZ.dotProduct(vectorYn),coor1n);
+		assertEquals((Double)vectorYZ.dotProduct(vectorZn),coor1n);
 		
 		// 3d vectors 315 degree
-		assertEquals(vectorX.dotProduct(vectorXnYn), coor1n);
-		assertEquals(vectorY.dotProduct(vectorYnZn), coor1n);
-		assertEquals(vectorZ.dotProduct(vectorXnZn), coor1n);
+		assertEquals((Double)vectorX.dotProduct(vectorXnYn), coor1n);
+		assertEquals((Double)vectorY.dotProduct(vectorYnZn), coor1n);
+		assertEquals((Double)vectorZ.dotProduct(vectorXnZn), coor1n);
 		
 		// 3d vectors 270 degree
-		assertEquals(vectorX.dotProduct(vectorXYn), coor1);
-		assertEquals(vectorY.dotProduct(vectorXY), coor1);
-		assertEquals(vectorZ.dotProduct(vectorYZ), coor1);
+		assertEquals((Double)vectorX.dotProduct(vectorXYn), coor1);
+		assertEquals((Double)vectorY.dotProduct(vectorXY), coor1);
+		assertEquals((Double)vectorZ.dotProduct(vectorYZ), coor1);
 		
 		// 3d vectors 
-		assertEquals(vector1.dotProduct(vector2),coor20);
-		assertEquals(vector1.dotProduct(vector2n),coor16);
-		assertEquals(vector1n.dotProduct(vector2n),coor8);		
+		assertEquals((Double)vector1.dotProduct(vector2),coor20);
+		assertEquals((Double)vector1.dotProduct(vector2n),coor16);
+		assertEquals((Double)vector1n.dotProduct(vector2n),coor8);		
 	}
 	
 	/**
@@ -310,9 +310,9 @@ public class VectorTests {
 	@Test
 	public void testLength() {
 		// 1,1+e,1-e
-		assertEquals(vector_1.size(),sqrt3);
-		assertEquals(vector_1e.size(),sqrt3);
-		assertEquals(vector_1me.size(),sqrt3);
+		assertEquals((Double)vector_1.size(),sqrt3);
+		assertEquals((Double)vector_1e.size(),sqrt3);
+		assertEquals((Double)vector_1me.size(),sqrt3);
 	}
 	
 	/**
@@ -321,12 +321,12 @@ public class VectorTests {
 	@Test
 	public void testNormelize() {
 		// 1,1+e etc.
-		assertEquals(vector_1.normalize().size(),coor1);
-		assertEquals(vector_1e.normalize().size(),coor1);
-		assertEquals(vector_1me.normalize().size(),coor1);
-		assertEquals(vector_1n.normalize().size(),coor1);
-		assertEquals(vector_2.normalize().size(),coor1);
-		assertEquals(vector2.normalize().size(),coor1);
+		assertEquals((Double)vector_1.normalize().size(),coor1);
+		assertEquals((Double)vector_1e.normalize().size(),coor1);
+		assertEquals((Double)vector_1me.normalize().size(),coor1);
+		assertEquals((Double)vector_1n.normalize().size(),coor1);
+		assertEquals((Double)vector_2.normalize().size(),coor1);
+		assertEquals((Double)vector2.normalize().size(),coor1);
 	}
 	
 	/**

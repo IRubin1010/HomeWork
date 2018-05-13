@@ -59,27 +59,6 @@ public class Camera {
 		return _p0;
 	}
 
-	/**
-	 * @return the _vUp
-	 */
-	public Vector get_vUp() {
-		return _vUp;
-	}
-
-	/**
-	 * @return the _vTo
-	 */
-	public Vector get_vTo() {
-		return _vTo;
-	}
-
-	/**
-	 * @return the _vRight
-	 */
-	public Vector get_vRight() {
-		return _vRight;
-	}
-
 	/***************** Operations ************************/
 
 	/**

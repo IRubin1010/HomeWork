@@ -5,6 +5,10 @@
 
 package primitives;
 
+/**
+ * class represents Color
+ *
+ */
 public class Color {
 	
 	double _red;

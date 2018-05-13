@@ -6,7 +6,7 @@ package primitives;
 
 /**
  * 
- * 
+ * class represents Point2D
  *
  */
 public class Point2D {
