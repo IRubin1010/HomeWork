@@ -5,7 +5,9 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import primitives.Color;
 import primitives.Point3D;
@@ -18,28 +20,13 @@ import primitives.Vector;
  * and should deal with the collection of shapes as a single form
  * according to the principle of structural pattern - composite
  */
-public class Geometries extends Geometry {
+public class Geometries implements Intersectable {
 	/**
 	 * List hold all the shapes that make up the structure
 	 */
 	private List<Geometry> listShape = new ArrayList<Geometry>();
 	
-	/**
-	 * empty constructor that initializes the list to arrayList
-	 */
-	public Geometries() {
-		super(new Color(0,0,0));
-	}
-	
-	/**
-	 * copy constructor
-	 * @param geometries
-	 */
-	public Geometries(Geometries geometries) {
-		super(new Color(0,0,0));
-		listShape = geometries.getGeometries();
-	}
-	
+
 	/***************** Getter ****************************/
 
 	public List<Geometry> getGeometries() {
@@ -49,7 +36,7 @@ public class Geometries extends Geometry {
 	/***************** Operations ************************/
 
 	/**
-	 * Add geometry to the scene
+	 * Add geometry to the geometries
 	 * 
 	 * @param geometry
 	 *            - Geometry to add
@@ -58,27 +45,17 @@ public class Geometries extends Geometry {
 		this.listShape.add(geometry);
 	}
 
-
-	/**
-	 * override getNoraml
-	 * @return null because there is no normal to the collection of shapes
-	 */
-	@Override
-	public Vector getNormal(Point3D point) {
-		return null;
-	}
-
 	/**
 	 * override findIntersections
-	 * @param ray - the ray for which you want the cut points with the shapes
+	 * @param ray - the ray for which you want the cut points with the geometry
 	 */
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		List<Point3D> list = new ArrayList<Point3D>();
+	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
+		Map<Geometry, List<Point3D>> intersections = new HashMap<>();
 		for(Geometry shape : listShape) {
-			list.addAll(shape.findIntersections(ray));
+			intersections.putAll(shape.findIntersections(ray));
 		}
-		return list;
+		return intersections;
 	}
 
 }

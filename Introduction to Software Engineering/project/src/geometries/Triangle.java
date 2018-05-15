@@ -5,7 +5,9 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import primitives.*;
 
@@ -26,9 +28,10 @@ public class Triangle extends Plane {
 	 * @param p1
 	 * @param p2
 	 * @param p3
+	 * @param color TODO
 	 */
-	public Triangle(Point3D p1, Point3D p2, Point3D p3) {
-		super(p1, p2, p3, new Color(255,255,255));
+	public Triangle(Point3D p1, Point3D p2, Point3D p3, Color color) {
+		super(p1, p2, p3, color);
 		_p1 = new Point3D(p1);
 		_p2 = new Point3D(p2);
 		_p3 = new Point3D(p3);
@@ -54,9 +57,10 @@ public class Triangle extends Plane {
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
-	public List<Point3D> findIntersections(Ray ray) {
+	///לבדוק שעובד אחרי השינוי, לא בטוח שחישבנתי נכון///////////////
+	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		// get plane intersection
-		List<Point3D> planeIntersection = super.findIntersections(ray);
+		Map<Geometry, List<Point3D>> planeIntersection = super.findIntersections(ray);
 		if (planeIntersection.isEmpty())
 			return planeIntersection;
 
@@ -73,7 +77,7 @@ public class Triangle extends Plane {
 		Vector N3 = V3.crossProduct(V1);
 
 		// P0P * Ni
-		Vector P0P = planeIntersection.get(0).vectorSubtract(P0);
+		Vector P0P = planeIntersection.get(this).get(0).vectorSubtract(P0);
 		double P0PN1 = P0P.dotProduct(N1);
 		double P0PN2 = P0P.dotProduct(N2);
 		double P0PN3 = P0P.dotProduct(N3);

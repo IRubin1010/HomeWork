@@ -5,7 +5,9 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import primitives.*;
 
@@ -60,7 +62,8 @@ public class Sphere extends RadialGeometry {
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
-	public List<Point3D> findIntersections(Ray ray) {
+	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
+		Map<Geometry, List<Point3D>> intersections=new HashMap<>();
 		List<Point3D> list = new ArrayList<>();
 		Point3D rayPoint = ray.getPoint();
 		Vector rayVector = ray.getDirection();
@@ -73,7 +76,8 @@ public class Sphere extends RadialGeometry {
 			// U = 0, tm = 0, d = 0, th = radius
 			// intersection = Po + t*V
 			list.add(_point.addVectorToPoint(rayVector.scaleVector(_radius)));
-			return list;
+				intersections.put(this, list);
+			return intersections;
 		}
 
 		// tm = u * v
@@ -82,7 +86,7 @@ public class Sphere extends RadialGeometry {
 		double d = Math.sqrt(u.dotProduct(u) - tm * tm);
 		// if d > 0 - no intersection
 		if (d > _radius)
-			return list;
+			return intersections;
 		// th = sqrt(r^2 - d^2)
 		double th = Math.sqrt(_radius * _radius - d * d);
 		if (Coordinate.ZERO.equals(th)) {
@@ -96,6 +100,7 @@ public class Sphere extends RadialGeometry {
 			if (t2 > 0)
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
 		}
-		return list;
+		intersections.put(this, list);
+		return intersections;
 	}
 }

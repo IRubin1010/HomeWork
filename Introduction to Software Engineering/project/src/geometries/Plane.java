@@ -5,7 +5,9 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import primitives.*;
 
@@ -92,10 +94,12 @@ public class Plane extends Geometry {
 	 * function find Intersections
 	 * 
 	 * @param ray
-	 * @return list of points of the intersection
+	 * @return Map holds a pair of geometry and list the point of intersection with
+	 *         the geometry
 	 */
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
+		Map<Geometry, List<Point3D>> intersections=new HashMap<>();
 		List<Point3D> list = new ArrayList<Point3D>();
 		try {
 			Point3D rayPoint = ray.getPoint();
@@ -107,30 +111,31 @@ public class Plane extends Geometry {
 			if (Coordinate.ZERO.equals(N_dot_Q0P0)) {
 				// means the ray point is on the plane
 				// no intersection
-				return list;
+				return intersections;
 			}
 			// V * N
 			double VN = _normal.dotProduct(rayVector);
 			if (Coordinate.ZERO.equals(VN)) {
 				// V and N are orthogonal
 				// means the ray is parallel to the plane
-				return list; 
+				return intersections; 
 			}
 			// t = N_dot_Q0P0/VN
 			double t = N_dot_Q0P0 / VN;
 			if (t > 0) {
 				// point = P0 + t*V
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t)));
-				return list;
+				intersections.put(this,list);
+				return intersections;
 			} else {
-				return list; 
+				return intersections; 
 			}
 		} catch (IllegalArgumentException e) {
 			// case both points are the same
 			// the sub is vector 0
 			// the intersection is the plane point
 			// means - no intersection
-			return list;
+			return intersections;
 		}
 	}
 }
