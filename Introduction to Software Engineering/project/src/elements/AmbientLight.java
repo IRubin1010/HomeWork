@@ -56,7 +56,7 @@ public class AmbientLight extends Light{
 	 * @return the ambient light
 	 */
 	public Color getIntensity() {
-		return _color;
+		return new Color(_color);
 	}
 	
 }

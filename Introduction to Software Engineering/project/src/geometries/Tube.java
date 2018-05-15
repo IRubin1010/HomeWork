@@ -6,6 +6,7 @@ package geometries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import primitives.*;
 
@@ -67,7 +68,7 @@ public class Tube extends RadialGeometry {
 	}
 
 	@Override
-	public List<Point3D> findIntersections(Ray ray) {
+	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		return null;
 	}
 

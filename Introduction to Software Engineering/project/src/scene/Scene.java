@@ -39,7 +39,7 @@ public class Scene {
 	public Scene(String name) {
 		this._name = name;
 		this._background = new Color(0, 0, 0);
-		this._light = new AmbientLight(new Color(255, 255, 255), 1);
+		this._light = new AmbientLight(new Color(50, 50, 50), 0.5);
 	}
 
 	/**

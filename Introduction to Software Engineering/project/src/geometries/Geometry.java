@@ -4,13 +4,14 @@
 */
 package geometries;
 import java.util.List;
+import java.util.Map;
 
 import primitives.*;
 
 /**
 * abstract class Geometry 
 */
-public abstract class Geometry {
+public abstract class Geometry implements Intersectable {
 
 	protected Color _emmission;
 	
@@ -31,6 +32,15 @@ public abstract class Geometry {
 		_emmission = other._emmission;
 	}
 	
+	/***************** Getter ****************************/
+
+	/**
+	 * @return the _emmission
+	 */
+	public Color get_emmission() {
+		return _emmission;
+	}
+	
 	/***************** Operations ************************/ 
 
 	/**
@@ -40,11 +50,4 @@ public abstract class Geometry {
 	 */
 	public abstract Vector getNormal(Point3D point);
 	
-	/**
-	 * abstract function find Intersections
-	 * @param ray
-	 * @return point of the intersection
-	 */
-	public abstract List<Point3D> findIntersections(Ray ray);
-
 }
