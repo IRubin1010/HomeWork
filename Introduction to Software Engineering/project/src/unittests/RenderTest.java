@@ -145,41 +145,41 @@ public class RenderTest {
 		
 		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
 											new Point3D(  0, 375, 149),
-											new Point3D(-150, 375, 149), new Color(140,17,17)));
+											new Point3D(-150, 375, 149), new Color(140,17,17), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
 											new Point3D(  0, 525, 149),
-											new Point3D(0, 225, 149),  new Color(140,17,17)));
+											new Point3D(0, 225, 149),  new Color(140,17,17), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
 											new Point3D(  0, 225, 149),
-											new Point3D(-75, 150, 149), new Color(255,0,0)));
+											new Point3D(-75, 150, 149), new Color(255,0,0), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(-10, 187.5, 149),
 											new Point3D(  -10, 215, 149),
-											new Point3D(-37.5, 187.5, 149), new Color(255,0,0)));
+											new Point3D(-37.5, 187.5, 149), new Color(255,0,0), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(0, 375, 149),
 											new Point3D(  75, 375, 149),
-											new Point3D(37.5, 337.5, 149), new Color(0,255,0)));
+											new Point3D(37.5, 337.5, 149), new Color(0,255,0), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(37.5, 375, 149),
 											new Point3D(  112.5, 375, 149),
-											new Point3D(75, 337.5, 149), new Color(0,255,0)));
+											new Point3D(75, 337.5, 149), new Color(0,255,0), new Material(2,3,4)));
 		
 		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
 											new Point3D(  375, -150, 149),
-											new Point3D(375, -375, 149), new Color(75,124,212)));
+											new Point3D(375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
 											new Point3D(  0, -375, 149),
-											new Point3D(375, -375, 149), new Color(75,124,212)));
+											new Point3D(375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
 											new Point3D(  -375, -150, 149),
-											new Point3D(-375, -375, 149), new Color(75,124,212)));
+											new Point3D(-375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
 		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
 											new Point3D(  0, -375, 149),
-											new Point3D(-375, -375, 149), new Color(75,124,212)));
+											new Point3D(-375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
 		
-		geometries.addGeometry(new Sphere(new Point3D(-20, 184, 150), 5, new Color(165,165,165)));
-		geometries.addGeometry(new Sphere(new Point3D(-20, 177, 150), 5, new Color(165,165,165)));
-		geometries.addGeometry(new Sphere(new Point3D(-17, 170, 150), 5, new Color(165,165,165)));
+		geometries.addGeometry(new Sphere(new Point3D(-20, 184, 150), 5, new Color(165,165,165), new Material(2,3,4)));
+		geometries.addGeometry(new Sphere(new Point3D(-20, 177, 150), 5, new Color(165,165,165), new Material(2,3,4)));
+		geometries.addGeometry(new Sphere(new Point3D(-17, 170, 150), 5, new Color(165,165,165), new Material(2,3,4)));
 		
-		geometries.addGeometry(new Sphere(new Point3D(-380, -380, 140), 50, new Color(230,230,0)));
+		geometries.addGeometry(new Sphere(new Point3D(-380, -380, 140), 50, new Color(230,230,0), new Material(2,3,4)));
 
 
 		ImageWriter imageWriter = new ImageWriter("house", 500, 500, 500, 500);

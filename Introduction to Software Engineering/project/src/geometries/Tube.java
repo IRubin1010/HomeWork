@@ -26,9 +26,10 @@ public class Tube extends RadialGeometry {
 	 * @param radius
 	 * @param color
 	 *            TODO
+	 * @param material TODO
 	 */
-	public Tube(Ray ray, double radius, Color color) {
-		super(radius, color);
+	public Tube(Ray ray, double radius, Color color, Material material) {
+		super(radius, color, material);
 		_ray = new Ray(ray);
 	}
 

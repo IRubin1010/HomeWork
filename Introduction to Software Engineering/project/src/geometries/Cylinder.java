@@ -16,7 +16,7 @@ public class Cylinder extends Tube {
 	/***************** Constructors **********************/
 
 	public Cylinder(double height, Ray ray, double radius) {
-		super(ray, radius, new Color(255,255,255));
+		super(ray, radius, new Color(255,255,255), new Material(2,3,4));
 		_height = height;
 	}
 

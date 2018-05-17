@@ -20,16 +20,16 @@ import scene.Scene;
 */
 class PlaneTests {
 	
-	Plane planeXY = new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(1,1,0), new Color(255,255,255));
-	Plane planeXZ = new Plane(new Point3D(0,0,0),new Vector(0,1,0), new Color(255,255,255));
+	Plane planeXY = new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(1,1,0), new Color(255,255,255), new Material(2,3,4));
+	Plane planeXZ = new Plane(new Point3D(0,0,0),new Vector(0,1,0), new Color(255,255,255), new Material(2,3,4));
 	// plane z = x + y
-	Plane crookedPlane = new Plane(new Point3D(0,0,0),new Point3D(1,1,2),new Point3D(1,0,1), new Color(255,255,255));
+	Plane crookedPlane = new Plane(new Point3D(0,0,0),new Point3D(1,1,2),new Point3D(1,0,1), new Color(255,255,255), new Material(2,3,4));
 	// plane z = x + y + 1, there is no point 0
 	// constructor with point and plumb
-	Plane crookedPlaneNo0PointPlumbConstructor = new Plane(new Point3D(0,0,1),new Vector(-1,-1,1), new Color(255,255,255));
+	Plane crookedPlaneNo0PointPlumbConstructor = new Plane(new Point3D(0,0,1),new Vector(-1,-1,1), new Color(255,255,255), new Material(2,3,4));
 	// plane z = x + y + 1, there is no point 0
 	// constructor with 3 points
-	Plane crookedPlaneNo0Point = new Plane(new Point3D(0,0,1),new Point3D(1,0,2),new Point3D(0,1,2), new Color(255,255,255));
+	Plane crookedPlaneNo0Point = new Plane(new Point3D(0,0,1),new Point3D(1,0,2),new Point3D(0,1,2), new Color(255,255,255), new Material(2,3,4));
 	
 	Vector XYnormal = new Vector(0,0,-1);
 	Vector XZnormal = new Vector(0,1,0);
@@ -39,17 +39,17 @@ class PlaneTests {
 	public void testConstructor() {
 		try {
 			// 2 same points
-			new Plane(new Point3D(1,1,1),new Point3D(1,1,1),new Point3D(1,2,3), new Color(255,255,255));
+			new Plane(new Point3D(1,1,1),new Point3D(1,1,1),new Point3D(1,2,3), new Color(255,255,255), new Material(2,3,4));
 			fail("expected Exeption");
 		} catch (Exception e) {}
 		try {
 			// all 3 points are on the same line
-			new Plane(new Point3D(1,1,1),new Point3D(2,2,2),new Point3D(3,3,3), new Color(255,255,255));
+			new Plane(new Point3D(1,1,1),new Point3D(2,2,2),new Point3D(3,3,3), new Color(255,255,255), new Material(2,3,4));
 			fail("expected Exeption");
 		} catch (Exception e) {}
 		try {
-			new Plane(new Point3D(1,1,1),new Point3D(2,1,3),new Point3D(1,2,3), new Color(255,255,255));
-			new Plane(new Point3D(1,1,1),new Vector(1,2,3), new Color(255,255,255));
+			new Plane(new Point3D(1,1,1),new Point3D(2,1,3),new Point3D(1,2,3), new Color(255,255,255), new Material(2,3,4));
+			new Plane(new Point3D(1,1,1),new Vector(1,2,3), new Color(255,255,255), new Material(2,3,4));
 		} catch (Exception e) {
 			fail("not expected Exeption");
 		}
@@ -74,19 +74,19 @@ class PlaneTests {
         scene.set_camera(camera);
         scene.set_distance(4);
         //1 point
-    	Plane plane1 = new Plane(new Point3D(1,1,1),new Vector(1,1,1), new Color(255,255,255));
+    	Plane plane1 = new Plane(new Point3D(1,1,1),new Vector(1,1,1), new Color(255,255,255), new Material(2,3,4));
         list=getIntersections(scene,plane1);
         assertEquals(1, list.size());
-        Plane frontOfCamera = new Plane(new Point3D(0, 0,-3),new Vector(new Point3D(0, 0, -1)), new Color(255,255,255));
+        Plane frontOfCamera = new Plane(new Point3D(0, 0,-3),new Vector(new Point3D(0, 0, -1)), new Color(255,255,255), new Material(2,3,4));
         //9 points plane in front of camera
         list=getIntersections(scene,frontOfCamera);
         assertEquals(9, list.size());
         //0 points plane contains camera
-        Plane cameraDirection = new Plane(new Point3D(0,0,1),new Vector(new Point3D(1,0,0)), new Color(255,255,255));
+        Plane cameraDirection = new Plane(new Point3D(0,0,1),new Vector(new Point3D(1,0,0)), new Color(255,255,255), new Material(2,3,4));
         list=getIntersections(scene,cameraDirection);
         assertEquals(0, list.size());
         //0 points plane behind camera
-        Plane behindCamera = new Plane(new Point3D(0, 0,1),new Point3D(1,0,1),new Point3D(0,-2,1), new Color(255,255,255));
+        Plane behindCamera = new Plane(new Point3D(0, 0,1),new Point3D(1,0,1),new Point3D(0,-2,1), new Color(255,255,255), new Material(2,3,4));
         list=getIntersections(scene,behindCamera);
         assertEquals(0, list.size());
 	}
