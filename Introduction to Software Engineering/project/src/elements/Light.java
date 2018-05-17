@@ -19,13 +19,15 @@ public abstract class Light {
 	 * @param color
 	 */
 	public Light(Color color) {
-		_color = color;
+		_color = new Color(color);
 	}
 	
 	/**
 	 * get intensity
 	 * @return
 	 */
-	public abstract Color getIntensity();
+	public Color getIntensity() {
+		return _color;
+	}
 		
 }

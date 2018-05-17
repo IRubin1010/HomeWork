@@ -49,14 +49,4 @@ public class AmbientLight extends Light{
 		_Ka = Ka;
 	}
 	
-	/***************** Operations ************************/
-
-	/**
-	 * get intensity
-	 * @return the ambient light
-	 */
-	public Color getIntensity() {
-		return new Color(_color);
-	}
-	
 }

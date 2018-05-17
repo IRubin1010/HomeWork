@@ -14,13 +14,15 @@ import primitives.*;
 public abstract class Geometry implements Intersectable {
 
 	protected Color _emmission;
+	protected Material _material;
 	
 	/***************** Constructors **********************/
 
 	/**
 	 * constructor
+	 * @param material TODO
 	 */
-	public Geometry(Color color) {
+	public Geometry(Color color, Material material) {
 		_emmission = color;
 	}
 	
@@ -30,6 +32,7 @@ public abstract class Geometry implements Intersectable {
 	 */
 	public Geometry(Geometry other) {
 		_emmission = other._emmission;
+		_material = other._material;
 	}
 	
 	/***************** Getter ****************************/
@@ -39,6 +42,13 @@ public abstract class Geometry implements Intersectable {
 	 */
 	public Color get_emmission() {
 		return _emmission;
+	}
+	
+	/**
+	 * @return the _material
+	 */
+	public Material get_material() {
+		return _material;
 	}
 	
 	/***************** Operations ************************/ 

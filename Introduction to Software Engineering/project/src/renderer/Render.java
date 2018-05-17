@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 import elements.AmbientLight;
+import elements.LightSource;
 import geometries.Geometries;
 import geometries.Geometry;
 import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Ray;
+import primitives.Vector;
 import scene.Scene;
 
 /**
@@ -102,9 +104,40 @@ public class Render {
 	 * @return
 	 */
 	private primitives.Color calcColor(GeometryPoint point) {
-		primitives.Color color = _scene.get_light().getIntensity();
+		primitives.Color color = new primitives.Color(_scene.get_ambientlight().getIntensity());
 		color = color.add(point.geometry.get_emmission());
+		
+		Vector n = point.geometry.getNormal(point.point);
+		int nShinines = point.geometry.get_material().get_nShininess();
+		double Kd = point.geometry.get_material().get_Kd();
+		double Ks = point.geometry.get_material().get_Ks();
+		for(LightSource lightSource : _scene.get_lights()) {
+			primitives.Color lightIntensity = lightSource.getIntensity(point.point);
+			Vector l = lightSource.getL(point.point);
+			Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0());
+			color.add(calcDiffusive(Kd, l, n, lightIntensity)).add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
+		}
+		
 		return color;
+	}
+	
+	/**
+	 * return the diffusive color
+	 * @param Kd
+	 * @param l
+	 * @param n
+	 * @param lightIntensity
+	 * @return
+	 */
+	private primitives.Color calcDiffusive(double Kd, Vector l, Vector n, primitives.Color lightIntensity) {
+		double angleCos = Math.abs(l.dotProduct(n));
+		return lightIntensity.scale(Kd*angleCos);
+	}
+	
+	private primitives.Color calcSpecular(double Ks, Vector l, Vector n, Vector v,int nShinines, primitives.Color lightIntensity) {
+		Vector r = l.add(n.scaleVector(l.dotProduct(n)*2));
+		double angleCos = Math.pow(Math.abs(r.dotProduct(v)),nShinines);
+		return lightIntensity.scale(Ks*angleCos);
 	}
 
 	/**
@@ -122,7 +155,7 @@ public class Render {
 	public void printGrid(int interval) {
 		int Nx = _imageWriter.getNx();
 		int Ny = _imageWriter.getNy();
-		Color color = _scene.get_light().getIntensity().getColor();
+		Color color = _scene.get_ambientlight().getIntensity().getColor();
 		for (int i = 1; i < Ny; i++) {
 			for (int j = 1; j < Nx; j++) {
 				if (i % interval == 0 || j % interval == 0) {

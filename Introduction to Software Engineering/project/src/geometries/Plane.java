@@ -27,9 +27,10 @@ public class Plane extends Geometry {
 	 * @param b
 	 * @param c
 	 * @param color
+	 * @param material TODO
 	 */
-	public Plane(Point3D a, Point3D b, Point3D c, Color color) {
-		super(color);
+	public Plane(Point3D a, Point3D b, Point3D c, Color color, Material material) {
+		super(color, material);
 		Vector vector1, vector2;
 		try {
 			// if 2 points are the same point
@@ -60,9 +61,10 @@ public class Plane extends Geometry {
 	 * @param plumb
 	 * @param color
 	 *            TODO
+	 * @param material TODO
 	 */
-	public Plane(Point3D point, Vector plumb, Color color) {
-		super(color);
+	public Plane(Point3D point, Vector plumb, Color color, Material material) {
+		super(color, material);
 		_point = new Point3D(point);
 		_normal = new Vector(plumb).normalize();
 	}
