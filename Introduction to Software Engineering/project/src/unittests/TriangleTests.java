@@ -6,11 +6,15 @@ package unittests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import elements.Camera;
+import geometries.Geometry;
 import geometries.Triangle;
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -23,16 +27,15 @@ import scene.Scene;
 class TriangleTests {
 
 	private ArrayList<Point3D> getIntersections(Scene scene, Triangle triangle){
-		System.out.println("===============================================");
 		ArrayList<Point3D> list = new ArrayList<>();
 		for(int i = 1 ; i < 4 ;++i) {
 			for (int j = 1; j < 4; ++j) {
 				Ray r = scene.get_camera().constructRayThroghPixel(3, 3, i, j, scene.get_distance(), 9, 9);
-				System.out.println(r);
-				list.addAll(triangle.findIntersections(r));
+				Map<Geometry, List<Point3D>> map = triangle.findIntersections(r);
+				if(!map.isEmpty())
+					list.addAll(map.get(triangle));
 			}
 		}
-		System.out.println("===============================================");
 		return list;
 	}
 	

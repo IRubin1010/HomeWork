@@ -29,7 +29,7 @@ public class Sphere extends RadialGeometry {
 	 *            TODO
 	 */
 	public Sphere(Point3D point, double radius, Color color) {
-		super(radius,color);
+		super(radius, color);
 		_point = new Point3D(point);
 	}
 
@@ -63,7 +63,7 @@ public class Sphere extends RadialGeometry {
 	 * @return list of points of the intersection
 	 */
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
-		Map<Geometry, List<Point3D>> intersections=new HashMap<>();
+		Map<Geometry, List<Point3D>> intersections = new HashMap<>();
 		List<Point3D> list = new ArrayList<>();
 		Point3D rayPoint = ray.getPoint();
 		Vector rayVector = ray.getDirection();
@@ -76,7 +76,7 @@ public class Sphere extends RadialGeometry {
 			// U = 0, tm = 0, d = 0, th = radius
 			// intersection = Po + t*V
 			list.add(_point.addVectorToPoint(rayVector.scaleVector(_radius)));
-				intersections.put(this, list);
+			intersections.put(this, list);
 			return intersections;
 		}
 
@@ -90,17 +90,22 @@ public class Sphere extends RadialGeometry {
 		// th = sqrt(r^2 - d^2)
 		double th = Math.sqrt(_radius * _radius - d * d);
 		if (Coordinate.ZERO.equals(th)) {
-			if (tm > 0)
+			if (tm > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(tm)));
+				intersections.put(this, list);
+			}
 		} else {
 			double t1 = tm + th;
 			double t2 = tm - th;
-			if (t1 > 0)
+			if (t1 > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
-			if (t2 > 0)
+				intersections.put(this, list);
+			}
+			if (t2 > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+				intersections.put(this, list);
+			}
 		}
-		intersections.put(this, list);
 		return intersections;
 	}
 }
