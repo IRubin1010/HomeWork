@@ -29,6 +29,7 @@ public class Sphere extends RadialGeometry {
 	 *            TODO
 	 * @param material TODO
 	 */
+
 	public Sphere(Point3D point, double radius, Color color, Material material) {
 		super(radius, color, material);
 		_point = new Point3D(point);
@@ -91,15 +92,18 @@ public class Sphere extends RadialGeometry {
 		// th = sqrt(r^2 - d^2)
 		double th = Math.sqrt(_radius * _radius - d * d);
 		if (Coordinate.ZERO.equals(th)) {
-			if (tm > 0)
+			if (tm > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(tm)));
+			}
 		} else {
 			double t1 = tm + th;
 			double t2 = tm - th;
-			if (t1 > 0)
+			if (t1 > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
-			if (t2 > 0)
+			}
+			if (t2 > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+			}
 		}
 		if (!list.isEmpty()) {
 			intersections.put(this, list);

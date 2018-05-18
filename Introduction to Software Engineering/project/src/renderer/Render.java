@@ -85,7 +85,7 @@ public class Render {
 		double minDistance = Double.MAX_VALUE;
 		GeometryPoint closestPoint = new GeometryPoint();
 		for (Map.Entry<Geometry, List<Point3D>> entry : intersectionList.entrySet()) {
-			for (Point3D point : entry.getValue()) {//האם יש צורך בבדיקה של רשימה ריקה וכו 
+			for (Point3D point : entry.getValue()) {
 				double dis = point.distanceFrom(cameraPoint);
 				if (dis < minDistance) {
 					minDistance = dis;
