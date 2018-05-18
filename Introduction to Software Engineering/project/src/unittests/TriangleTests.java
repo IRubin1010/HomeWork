@@ -15,6 +15,7 @@ import elements.Camera;
 import geometries.Geometry;
 import geometries.Triangle;
 import primitives.Color;
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -40,7 +41,7 @@ class TriangleTests {
 	}
 	
 	@Test
-	void testFindIntersections() {
+	public void testFindIntersections() {
 		Scene scene = new Scene("test scene");
         Camera camera = new Camera(new Vector(0,-1,0),new Vector(0,0,-1),new Point3D(0,0,0.5));
         scene.set_camera(camera);
