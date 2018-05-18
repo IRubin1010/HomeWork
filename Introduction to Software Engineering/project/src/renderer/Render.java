@@ -63,7 +63,7 @@ public class Render {
 		for (int i = 1; i < Ny; i++) {
 			for (int j = 1; j < Nx; j++) {
 				Ray ray = _scene.get_camera().constructRayThroghPixel(Nx, Ny, i, j, distance, width, height);
-				Map<Geometry,List<Point3D>> intersectionList = _scene.get_geometries().findIntersections(ray);
+				Map<Geometry, List<Point3D>> intersectionList = _scene.get_geometries().findIntersections(ray);
 				if (intersectionList.isEmpty()) {
 					_imageWriter.writePixel(i, j, _scene.get_background().getColor());
 				} else {
@@ -90,7 +90,7 @@ public class Render {
 				if (dis < minDistance) {
 					minDistance = dis;
 					closestPoint.point = point;
-					closestPoint.geometry=entry.getKey();
+					closestPoint.geometry = entry.getKey();
 				}
 			}
 		}
@@ -106,23 +106,26 @@ public class Render {
 	private primitives.Color calcColor(GeometryPoint point) {
 		primitives.Color color = new primitives.Color(_scene.get_ambientlight().getIntensity());
 		color = color.add(point.geometry.get_emmission());
-		
+
 		Vector n = point.geometry.getNormal(point.point);
 		int nShinines = point.geometry.get_material().get_nShininess();
 		double Kd = point.geometry.get_material().get_Kd();
 		double Ks = point.geometry.get_material().get_Ks();
-		for(LightSource lightSource : _scene.get_lights()) {
-			primitives.Color lightIntensity = lightSource.getIntensity(point.point);
-			Vector l = lightSource.getL(point.point);
-			Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0());
-			color.add(calcDiffusive(Kd, l, n, lightIntensity)).add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
+		if (!(_scene.get_lights()==null)) {
+			for (LightSource lightSource : _scene.get_lights()) {
+				primitives.Color lightIntensity = lightSource.getIntensity(point.point);
+				Vector l = lightSource.getL(point.point);
+				Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0());
+				color.add(calcDiffusive(Kd, l, n, lightIntensity))
+						.add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
+			}
 		}
-		
 		return color;
 	}
-	
+
 	/**
 	 * return the diffusive color
+	 * 
 	 * @param Kd
 	 * @param l
 	 * @param n
@@ -131,13 +134,14 @@ public class Render {
 	 */
 	private primitives.Color calcDiffusive(double Kd, Vector l, Vector n, primitives.Color lightIntensity) {
 		double angleCos = Math.abs(l.dotProduct(n));
-		return lightIntensity.scale(Kd*angleCos);
+		return lightIntensity.scale(Kd * angleCos);
 	}
-	
-	private primitives.Color calcSpecular(double Ks, Vector l, Vector n, Vector v,int nShinines, primitives.Color lightIntensity) {
-		Vector r = l.add(n.scaleVector(l.dotProduct(n)*2));
-		double angleCos = Math.pow(Math.abs(r.dotProduct(v)),nShinines);
-		return lightIntensity.scale(Ks*angleCos);
+
+	private primitives.Color calcSpecular(double Ks, Vector l, Vector n, Vector v, int nShinines,
+			primitives.Color lightIntensity) {
+		Vector r = l.add(n.scaleVector(l.dotProduct(n) * 2));
+		double angleCos = Math.pow(Math.abs(r.dotProduct(v)), nShinines);
+		return lightIntensity.scale(Ks * angleCos);
 	}
 
 	/**
