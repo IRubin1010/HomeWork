@@ -7,15 +7,10 @@ package scene;
 //import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.*;
 
-import elements.AmbientLight;
-import elements.Camera;
-import geometries.Geometries;
-import geometries.Geometry;
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
+import elements.*;
+import geometries.*;
+import primitives.*;
 
 /**
  * class that represents a scene
@@ -27,23 +22,26 @@ public class Scene {
 	private Geometries _geometries = new Geometries();
 	private Camera _camera;
 	private double _distance;
-	private AmbientLight _light; 
+	private AmbientLight _ambientLight;
+	List<LightSource> _lights;
 
 	/***************** Constructors **********************/
 
 	/**
 	 * default constructor with name
+	 * 
 	 * @param name
 	 *            - name of the scene put default values Other variables
 	 */
 	public Scene(String name) {
 		this._name = name;
 		this._background = new Color(0, 0, 0);
-		this._light = new AmbientLight(new Color(150, 150, 150), 0.5);
+		this._ambientLight = new AmbientLight(new Color(50, 50, 50), 0.5);
 	}
 
 	/**
 	 * copy constructor
+	 * 
 	 * @param scene
 	 */
 	public Scene(Scene scene) {
@@ -52,7 +50,7 @@ public class Scene {
 		_geometries = scene._geometries;
 		_camera = new Camera(scene._camera);
 		_distance = scene._distance;
-		_light=scene.get_light();
+		_ambientLight = scene.get_ambientlight();
 	}
 
 	/***************** Getters ****************************/
@@ -88,9 +86,17 @@ public class Scene {
 	/**
 	 * @return the _light
 	 */
-	public AmbientLight get_light() {
-		return _light;
-		}
+	public AmbientLight get_ambientlight() {
+		return _ambientLight;
+	}
+
+	/**
+	 * @return the _lights
+	 */
+	public List<LightSource> get_lights() {
+		return _lights;
+	}
+
 	/***************** Setters ****************************/
 
 	/**
@@ -126,10 +132,19 @@ public class Scene {
 	}
 
 	/**
-	 * @param _light the _light to set
+	 * @param _light
+	 *            the _light to set
 	 */
-	public void set_light(AmbientLight _light) {
-		this._light = _light;
+	public void set_ambientlight(AmbientLight _light) {
+		this._ambientLight = _light;
 	}
-	
+
+	/**
+	 * @param _lights
+	 *            the _lights to set
+	 */
+	public void set_lights(List<LightSource> _lights) {
+		this._lights = _lights;
+	}
+
 }

@@ -21,9 +21,10 @@ public abstract class RadialGeometry extends Geometry {
 	/**
 	 * constructor with radius
 	 * @param radius
+	 * @param material TODO
 	 */
-	public RadialGeometry(double radius,Color color) {
-		super(color);
+	public RadialGeometry(double radius,Color color, Material material) {
+		super(color, material);
 		_radius = radius;
 	}
 

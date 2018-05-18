@@ -27,9 +27,11 @@ public class Sphere extends RadialGeometry {
 	 * @param radius
 	 * @param color
 	 *            TODO
+	 * @param material TODO
 	 */
-	public Sphere(Point3D point, double radius, Color color) {
-		super(radius, color);
+
+	public Sphere(Point3D point, double radius, Color color, Material material) {
+		super(radius, color, material);
 		_point = new Point3D(point);
 	}
 
@@ -92,19 +94,19 @@ public class Sphere extends RadialGeometry {
 		if (Coordinate.ZERO.equals(th)) {
 			if (tm > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(tm)));
-				intersections.put(this, list);
 			}
 		} else {
 			double t1 = tm + th;
 			double t2 = tm - th;
 			if (t1 > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
-				intersections.put(this, list);
 			}
 			if (t2 > 0) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
-				intersections.put(this, list);
 			}
+		}
+		if (!list.isEmpty()) {
+			intersections.put(this, list);
 		}
 		return intersections;
 	}
