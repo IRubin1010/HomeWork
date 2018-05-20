@@ -51,6 +51,7 @@ public class Scene {
 		_camera = new Camera(scene._camera);
 		_distance = scene._distance;
 		_ambientLight = scene.get_ambientlight();
+		_lights = scene.get_lights();
 	}
 
 	/***************** Getters ****************************/

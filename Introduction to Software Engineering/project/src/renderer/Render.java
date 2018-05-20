@@ -62,6 +62,9 @@ public class Render {
 
 		for (int i = 1; i < Ny; i++) {
 			for (int j = 1; j < Nx; j++) {
+				if(i== 250 & j == 250) {
+					System.out.println("asdfr");
+				}
 				Ray ray = _scene.get_camera().constructRayThroghPixel(Nx, Ny, i, j, distance, width, height);
 				Map<Geometry, List<Point3D>> intersectionList = _scene.get_geometries().findIntersections(ray);
 				if (intersectionList.isEmpty()) {
@@ -107,7 +110,7 @@ public class Render {
 		primitives.Color color = new primitives.Color(_scene.get_ambientlight().getIntensity());
 		color = color.add(point.geometry.get_emmission());
 
-		Vector n = point.geometry.getNormal(point.point);
+		Vector n = point.geometry.getNormal(point.point).normalize();
 		int nShinines = point.geometry.get_material().get_nShininess();
 		double Kd = point.geometry.get_material().get_Kd();
 		double Ks = point.geometry.get_material().get_Ks();
@@ -115,9 +118,9 @@ public class Render {
 			for (LightSource lightSource : _scene.get_lights()) {
 				primitives.Color lightIntensity = lightSource.getIntensity(point.point);
 				Vector l = lightSource.getL(point.point);
-				Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0());
-				color.add(calcDiffusive(Kd, l, n, lightIntensity))
-						.add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
+				Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0()).normalize();
+				color.add(calcDiffusive(Kd, l, n, lightIntensity));
+				color.add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
 			}
 		}
 		return color;
@@ -139,7 +142,7 @@ public class Render {
 
 	private primitives.Color calcSpecular(double Ks, Vector l, Vector n, Vector v, int nShinines,
 			primitives.Color lightIntensity) {
-		Vector r = l.add(n.scaleVector(l.dotProduct(n) * 2));
+		Vector r = l.add(n.scaleVector(l.dotProduct(n) * 2)).normalize();
 		double angleCos = Math.pow(Math.abs(r.dotProduct(v)), nShinines);
 		return lightIntensity.scale(Ks * angleCos);
 	}
