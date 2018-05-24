@@ -115,16 +115,19 @@ public class Render {
 		double Kd = point.geometry.get_material().get_Kd();
 		double Ks = point.geometry.get_material().get_Ks();
 		Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0()).normalize();
-		if (!(_scene.get_lights()==null)) {
-		for (LightSource lightSource : _scene.get_lights()) {
-			Vector l = lightSource.getL(point.point);
-			if (n.dotProduct(l) * n.dotProduct(v) > 0) {
-				primitives.Color lightIntensity = lightSource.getIntensity(point.point);
-				color.add(calcDiffusive(Kd, l, n, lightIntensity));
-				color.add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
+		if (!(_scene.get_lights() == null)) {
+			for (LightSource lightSource : _scene.get_lights()) {
+				Vector l = lightSource.getL(point.point);
+				if (n.dotProduct(l) * n.dotProduct(v) > 0) {
+					if (!occluded(l, point)) {
+						primitives.Color lightIntensity = lightSource.getIntensity(point.point);
+						color.add(calcDiffusive(Kd, l, n, lightIntensity));
+						color.add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
+					}
+				}
 			}
 		}
-	}return color;
+		return color;
 
 	}
 
@@ -146,11 +149,11 @@ public class Render {
 			primitives.Color lightIntensity) {
 		Vector r = l.sub(n.scaleVector(l.dotProduct(n) * 2));
 		double vr = r.dotProduct(v);
-		if(vr < 0) {
-		double angleCos = Math.pow(-vr, nShinines);
-		return lightIntensity.scale(Ks * angleCos);
+		if (vr < 0) {
+			double angleCos = Math.pow(-vr, nShinines);
+			return lightIntensity.scale(Ks * angleCos);
 		} else {
-			return lightIntensity.scale(0);
+			return new primitives.Color(0, 0, 0);
 		}
 	}
 
@@ -177,5 +180,27 @@ public class Render {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * occluded
+	 * @param l
+	 * @param point
+	 * @return
+	 */
+	private boolean occluded(Vector l, GeometryPoint point) {
+		Point3D gPoint = point.point;
+		Geometry geometry = point.geometry;
+		Vector lightDirection = l.scaleVector(-1);
+		
+		Vector normal = geometry.getNormal(gPoint);
+		Vector epsVector =normal.scaleVector(normal.dotProduct(lightDirection)>0 ? 2 : -2);
+		Point3D geomtryPoint = gPoint.addVectorToPoint(epsVector);
+		
+		Ray lightRay = new Ray(geomtryPoint, lightDirection);
+		
+		Map<Geometry, List<Point3D>>intersectionPoint = _scene.get_geometries().findIntersections(lightRay);
+		
+		return !intersectionPoint.isEmpty();
 	}
 }
