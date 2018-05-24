@@ -49,4 +49,8 @@ public class AmbientLight extends Light{
 		_Ka = Ka;
 	}
 	
+	public Color getIntensity() {
+		return new Color(_color);
+	}
+	
 }

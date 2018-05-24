@@ -112,40 +112,40 @@ public class Scene {
 	 * @param _color
 	 *            the _color to set
 	 */
-	public void set_background(Color _backGround) {
-		this._background = _backGround;
+	public void set_background(Color backGround) {
+		this._background = backGround;
 	}
 
 	/**
 	 * @param _camera
 	 *            the _camera to set
 	 */
-	public void set_camera(Camera _camera) {
-		this._camera = _camera;
+	public void set_camera(Camera camera) {
+		this._camera = camera;
 	}
 
 	/**
 	 * @param _distance
 	 *            the _distance to set
 	 */
-	public void set_distance(double _distance) {
-		this._distance = _distance;
+	public void set_distance(double distance) {
+		this._distance = distance;
 	}
 
 	/**
 	 * @param _light
 	 *            the _light to set
 	 */
-	public void set_ambientlight(AmbientLight _light) {
-		this._ambientLight = _light;
+	public void set_ambientlight(AmbientLight light) {
+		this._ambientLight = light;
 	}
 
 	/**
 	 * @param _lights
 	 *            the _lights to set
 	 */
-	public void set_lights(List<LightSource> _lights) {
-		this._lights = _lights;
+	public void set_lights(List<LightSource> lights) {
+		this._lights = lights;
 	}
 
 }
