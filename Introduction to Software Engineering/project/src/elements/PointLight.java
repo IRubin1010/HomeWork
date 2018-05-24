@@ -29,7 +29,7 @@ public class PointLight extends Light implements LightSource{
 	public Color getIntensity(Point3D point) {
 		double distanceFromPoint = _position.distanceFrom(point);
 		double k = _Kc + _Ki*distanceFromPoint + _kq*distanceFromPoint*distanceFromPoint;
-		return _color.reduce(k);
+		return getIntensity().reduce(k);
 	}
 	
 	/**

@@ -62,7 +62,7 @@ public class Render {
 
 		for (int i = 1; i < Ny; i++) {
 			for (int j = 1; j < Nx; j++) {
-				if(i== 250 & j == 250) {
+				if (i == 250 & j == 250) {
 					System.out.println("asdfr");
 				}
 				Ray ray = _scene.get_camera().constructRayThroghPixel(Nx, Ny, i, j, distance, width, height);
@@ -108,22 +108,24 @@ public class Render {
 	 */
 	private primitives.Color calcColor(GeometryPoint point) {
 		primitives.Color color = new primitives.Color(_scene.get_ambientlight().getIntensity());
-		color = color.add(point.geometry.get_emmission());
+		color.add(point.geometry.get_emmission());
 
 		Vector n = point.geometry.getNormal(point.point).normalize();
 		int nShinines = point.geometry.get_material().get_nShininess();
 		double Kd = point.geometry.get_material().get_Kd();
 		double Ks = point.geometry.get_material().get_Ks();
+		Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0()).normalize();
 		if (!(_scene.get_lights()==null)) {
-			for (LightSource lightSource : _scene.get_lights()) {
+		for (LightSource lightSource : _scene.get_lights()) {
+			Vector l = lightSource.getL(point.point);
+			if (n.dotProduct(l) * n.dotProduct(v) > 0) {
 				primitives.Color lightIntensity = lightSource.getIntensity(point.point);
-				Vector l = lightSource.getL(point.point);
-				Vector v = point.point.vectorSubtract(_scene.get_camera().get_p0()).normalize();
 				color.add(calcDiffusive(Kd, l, n, lightIntensity));
 				color.add(calcSpecular(Ks, l, n, v, nShinines, lightIntensity));
 			}
 		}
-		return color;
+	}return color;
+
 	}
 
 	/**
@@ -142,9 +144,14 @@ public class Render {
 
 	private primitives.Color calcSpecular(double Ks, Vector l, Vector n, Vector v, int nShinines,
 			primitives.Color lightIntensity) {
-		Vector r = l.add(n.scaleVector(l.dotProduct(n) * 2)).normalize();
-		double angleCos = Math.pow(Math.abs(r.dotProduct(v)), nShinines);
+		Vector r = l.sub(n.scaleVector(l.dotProduct(n) * 2));
+		double vr = r.dotProduct(v);
+		if(vr < 0) {
+		double angleCos = Math.pow(-vr, nShinines);
 		return lightIntensity.scale(Ks * angleCos);
+		} else {
+			return lightIntensity.scale(0);
+		}
 	}
 
 	/**
