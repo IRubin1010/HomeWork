@@ -23,7 +23,7 @@ public class SpotLight extends PointLight {
 	 */
 	public Color getIntensity(Point3D point) {
 		double angelBetweenDirectionAndL = getD(point).dotProduct(getL(point));
-		return super.getIntensity().scale(angelBetweenDirectionAndL);
+		return super.getIntensity(point).scale(angelBetweenDirectionAndL);
 	}
 	
 	/**

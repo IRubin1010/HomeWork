@@ -10,7 +10,7 @@ import primitives.*;
 /**
  *class represents point light
  */
-public class PointLight extends Light {
+public class PointLight extends Light implements LightSource{
 	Point3D _position;
 	double _Kc, _Ki, _kq; 
 	

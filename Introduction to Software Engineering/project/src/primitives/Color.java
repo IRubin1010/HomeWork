@@ -73,7 +73,7 @@ public class Color {
 		_red += color._red;
 		_green += color._green;
 		_blue += color._blue;
-		return this;
+		return new Color(this);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class Color {
 		_red *= num;
 		_green *= num;
 		_blue *= num;
-		return this;
+		return new Color(this);
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class Color {
 		_red /= num;
 		_green /= num;
 		_blue /= num;
-		return this;
+		return new Color(this);
 	}
 	
 	/***************** Helpers ************************/ 

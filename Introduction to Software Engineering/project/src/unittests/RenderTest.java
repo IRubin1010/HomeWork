@@ -2,11 +2,19 @@ package unittests;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import geometries.*;
 import primitives.*;
 import elements.Camera;
+import elements.LightSource;
+import elements.PointLight;
+import elements.SpotLight;
 import scene.Scene;
 //import java.awt.Color;
 import renderer.*;
@@ -136,61 +144,61 @@ public class RenderTest {
 //		render.printGrid(50);
 //		render.writeToImage();
 //	}
-	@Test
-	public void house(){
-		Scene scene = new Scene("Test scene");
-		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
-		scene.set_distance(100);
-		scene.set_background(new Color(255, 255, 255));
-		Geometries geometries = new Geometries();
-		scene.set_geometries(geometries);
-		
-		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
-											new Point3D(  0, 375, 149),
-											new Point3D(-150, 375, 149), new Color(140,17,17), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
-											new Point3D(  0, 525, 149),
-											new Point3D(0, 225, 149),  new Color(140,17,17), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
-											new Point3D(  0, 225, 149),
-											new Point3D(-75, 150, 149), new Color(255,0,0), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(-10, 187.5, 149),
-											new Point3D(  -10, 215, 149),
-											new Point3D(-37.5, 187.5, 149), new Color(255,0,0), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(0, 375, 149),
-											new Point3D(  75, 375, 149),
-											new Point3D(37.5, 337.5, 149), new Color(0,255,0), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(37.5, 375, 149),
-											new Point3D(  112.5, 375, 149),
-											new Point3D(75, 337.5, 149), new Color(0,255,0), new Material(2,3,4)));
-		
-		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
-											new Point3D(  375, -150, 149),
-											new Point3D(375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
-											new Point3D(  0, -375, 149),
-											new Point3D(375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
-											new Point3D(  -375, -150, 149),
-											new Point3D(-375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
-		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
-											new Point3D(  0, -375, 149),
-											new Point3D(-375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
-		
-		geometries.addGeometry(new Sphere(new Point3D(-20, 184, 150), 5, new Color(165,165,165), new Material(2,3,4)));
-		geometries.addGeometry(new Sphere(new Point3D(-20, 177, 150), 5, new Color(165,165,165), new Material(2,3,4)));
-		geometries.addGeometry(new Sphere(new Point3D(-17, 170, 150), 5, new Color(165,165,165), new Material(2,3,4)));
-		
-		geometries.addGeometry(new Sphere(new Point3D(-380, -380, 140), 50, new Color(230,230,0), new Material(2,3,4)));
-
-
-
-		ImageWriter imageWriter = new ImageWriter("house", 500, 500, 500, 500);
-		Render render = new Render(scene, imageWriter);
-		
-		render.renderImage();
-		render.printGrid(50);
-		render.writeToImage();
+//	@Test
+//	public void house(){
+//		Scene scene = new Scene("Test scene");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(100);
+//		scene.set_background(new Color(255, 255, 255));
+//		Geometries geometries = new Geometries();
+//		scene.set_geometries(geometries);
+//		
+//		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
+//											new Point3D(  0, 375, 149),
+//											new Point3D(-150, 375, 149), new Color(140,17,17), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
+//											new Point3D(  0, 525, 149),
+//											new Point3D(0, 225, 149),  new Color(140,17,17), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(-150, 225, 149),
+//											new Point3D(  0, 225, 149),
+//											new Point3D(-75, 150, 149), new Color(255,0,0), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(-10, 187.5, 149),
+//											new Point3D(  -10, 215, 149),
+//											new Point3D(-37.5, 187.5, 149), new Color(255,0,0), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(0, 375, 149),
+//											new Point3D(  75, 375, 149),
+//											new Point3D(37.5, 337.5, 149), new Color(0,255,0), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(37.5, 375, 149),
+//											new Point3D(  112.5, 375, 149),
+//											new Point3D(75, 337.5, 149), new Color(0,255,0), new Material(2,3,4)));
+//		
+//		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
+//											new Point3D(  375, -150, 149),
+//											new Point3D(375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
+//											new Point3D(  0, -375, 149),
+//											new Point3D(375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
+//											new Point3D(  -375, -150, 149),
+//											new Point3D(-375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
+//		geometries.addGeometry(new Triangle(new Point3D(0, -150, 149),
+//											new Point3D(  0, -375, 149),
+//											new Point3D(-375, -375, 149), new Color(75,124,212), new Material(2,3,4)));
+//		
+//		geometries.addGeometry(new Sphere(new Point3D(-20, 184, 150), 5, new Color(165,165,165), new Material(2,3,4)));
+//		geometries.addGeometry(new Sphere(new Point3D(-20, 177, 150), 5, new Color(165,165,165), new Material(2,3,4)));
+//		geometries.addGeometry(new Sphere(new Point3D(-17, 170, 150), 5, new Color(165,165,165), new Material(2,3,4)));
+//		
+//		geometries.addGeometry(new Sphere(new Point3D(-380, -380, 140), 50, new Color(230,230,0), new Material(2,3,4)));
+//
+//
+//
+//		ImageWriter imageWriter = new ImageWriter("house", 500, 500, 500, 500);
+//		Render render = new Render(scene, imageWriter);
+//		
+//		render.renderImage();
+//		render.printGrid(50);
+//		render.writeToImage();
 
 		
 
@@ -224,6 +232,89 @@ public class RenderTest {
 //		} catch (Exception e) {
 //			fail(e.getMessage());
 //		}
+		
+		
+//	}
+	
+	@Test
+	public void pointLightTest() {
+		Scene scene = new Scene("Test light");
+		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+		scene.set_distance(100);
+		scene.set_background(new Color(0,0,0));
+		Geometries geometries = new Geometries();
+		scene.set_geometries(geometries);
+		List<LightSource> lights = new ArrayList<LightSource>();
+		scene.set_lights(lights);
+		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.9,0.8,1000));
+		geometries.addGeometry(sphere);
+		lights.add(new PointLight(new Point3D(5,5,0), 0,0, new Color(255,255,255)));
+		//lights.add(new SpotLight(new Vector(-1,37,33) ,new Point3D(0,0,0), 0,0, new Color(255,255,255)));
+		ImageWriter imageWriter = new ImageWriter("Point light test1", 500, 500, 500, 500);
+		Render testRender = new Render(scene, imageWriter);
+		testRender.renderImage();
+		//testRender.printGrid(50);
+		testRender.writeToImage();
+		//15, 7, 242
+		//255, 222, 10
+		
+//		Sphere sphere = new Sphere( new Point3D(0, 0, 50),40, new Color(241, 6, 151),new Material(0.9,0.8, 5));
+//		geometries.addGeometry(sphere);
+//		//lights.add(new PointLight(new Point3D(5,5,-20), 0,0, new Color(255,255,255)));
+	}
+	
+	@Test
+	public void spotLightTest() {
+		Scene scene = new Scene("Test light");
+		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+		scene.set_distance(100);
+		scene.set_background(new Color(0,0,0));
+		Geometries geometries = new Geometries();
+		scene.set_geometries(geometries);
+		List<LightSource> lights = new ArrayList<LightSource>();
+		scene.set_lights(lights);
+		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.9,0.8,1000));
+		geometries.addGeometry(sphere);
+		//lights.add(new PointLight(new Point3D(5,5,-20), 0,0, new Color(255,255,255)));
+		lights.add(new SpotLight(new Vector(-1,37,33) ,new Point3D(0,0,0), 0,0, new Color(255,255,255)));
+		ImageWriter imageWriter = new ImageWriter("spot light test", 500, 500, 500, 500);
+		Render testRender = new Render(scene, imageWriter);
+		testRender.renderImage();
+		//testRender.printGrid(50);
+		testRender.writeToImage();
+		//15, 7, 242
+		//255, 222, 10
+		
+//		Sphere sphere = new Sphere( new Point3D(0, 0, 50),40, new Color(241, 6, 151),new Material(0.9,0.8, 5));
+//		geometries.addGeometry(sphere);
+//		//lights.add(new PointLight(new Point3D(5,5,-20), 0,0, new Color(255,255,255)));
+	}
+	
+	@Test
+	public void spotLightTest2() {
+		Scene scene = new Scene("Test light");
+		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+		scene.set_distance(100);
+		scene.set_background(new Color(0,0,0));
+		Geometries geometries = new Geometries();
+		scene.set_geometries(geometries);
+		List<LightSource> lights = new ArrayList<LightSource>();
+		scene.set_lights(lights);
+		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.9,0.8,1000));
+		geometries.addGeometry(sphere);
+		//lights.add(new PointLight(new Point3D(5,5,-20), 0,0, new Color(255,255,255)));
+		lights.add(new SpotLight(new Vector(26,26,33) ,new Point3D(0,0,0), 0,0, new Color(255,255,255)));
+		ImageWriter imageWriter = new ImageWriter("spot light test2", 500, 500, 500, 500);
+		Render testRender = new Render(scene, imageWriter);
+		testRender.renderImage();
+		//testRender.printGrid(50);
+		testRender.writeToImage();
+		//15, 7, 242
+		//255, 222, 10
+		
+//		Sphere sphere = new Sphere( new Point3D(0, 0, 50),40, new Color(241, 6, 151),new Material(0.9,0.8, 5));
+//		geometries.addGeometry(sphere);
+//		//lights.add(new PointLight(new Point3D(5,5,-20), 0,0, new Color(255,255,255)));
 	}
 
 }
