@@ -62,9 +62,6 @@ public class Render {
 
 		for (int i = 1; i < Ny; i++) {
 			for (int j = 1; j < Nx; j++) {
-				if (i == 250 & j == 250) {
-					System.out.println("asdfr");
-				}
 				Ray ray = _scene.get_camera().constructRayThroghPixel(Nx, Ny, i, j, distance, width, height);
 				Map<Geometry, List<Point3D>> intersectionList = _scene.get_geometries().findIntersections(ray);
 				if (intersectionList.isEmpty()) {
