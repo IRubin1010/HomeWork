@@ -342,133 +342,162 @@ public class RenderTest {
 //			render.writeToImage();
 //		}
 //
-	@Test
-	public void shadowTest() {
-		Scene scene = new Scene("Test shadow");
-		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
-		scene.set_distance(100);
-		scene.set_background(new Color(0,0,0));
-		Geometries geometries = new Geometries();
-		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.9,0.8,300));
-		Triangle triangle1 = new Triangle(new Point3D(-250,-250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9,0.8, 100));
-		Triangle triangle2 = new Triangle(new Point3D(250,250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9,0.8, 100));
-		geometries.addGeometry(sphere);
-		geometries.addGeometry(triangle1);
-		geometries.addGeometry(triangle2);
-		scene.set_geometries(geometries);
-		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(new SpotLight(new Vector(-25,0,80) ,new Point3D(25,0,0), 0,0, new Color(255,255,255)));
-		scene.set_lights(lights);
-		ImageWriter imageWriter = new ImageWriter("shadow test", 500, 500, 500, 500);
-		Render testRender = new Render(scene, imageWriter);
-		testRender.renderImage();
-		testRender.writeToImage();
-		
-	}
+//	@Test
+//	public void shadowTest() {
+//		Scene scene = new Scene("Test shadow");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(100);
+//		scene.set_background(new Color(0,0,0));
+//		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+//		Geometries geometries = new Geometries();
+//		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.9,0.8,300, 0, 0));
+//		Triangle triangle1 = new Triangle(new Point3D(-250,-250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9,0.8, 100, 0, 0));
+//		Triangle triangle2 = new Triangle(new Point3D(250,250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9,0.8, 100, 0, 0));
+//		geometries.addGeometry(sphere);
+//		geometries.addGeometry(triangle1);
+//		geometries.addGeometry(triangle2);
+//		scene.set_geometries(geometries);
+//		List<LightSource> lights = new ArrayList<LightSource>();
+//		lights.add(new SpotLight(new Vector(-25,0,80) ,new Point3D(25,0,0), 0,0, new Color(255,255,255)));
+//		scene.set_lights(lights);
+//		ImageWriter imageWriter = new ImageWriter("shadow test", 500, 500, 500, 500);
+//		Render testRender = new Render(scene, imageWriter);
+//		testRender.renderImage();
+//		testRender.writeToImage();
+//		
+//	}
+//	
+//	@Test
+//	public void shadowTes1t() {
+//		Scene scene = new Scene("Test shadow1");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(100);
+//		scene.set_background(new Color(0,0,0));
+//		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+//		Geometries geometries = new Geometries();
+//		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.5,0.5,300, 0, 0));
+//		Sphere sphere1 = new Sphere( new Point3D( 0,10, 15),5, new Color(5, 55, 255),new Material(0.35,10,500, 0, 0));
+//		Triangle triangle1 = new Triangle(new Point3D(-250,-250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9, 0.8, 100, 0, 0));
+//		Triangle triangle2 = new Triangle(new Point3D(250,250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9, 0.8, 100, 0, 0));
+//		//Triangle triangle3 = new Triangle(new Point3D(5,7,15),new Point3D(0,0,15),new Point3D(5,-7,15),new Color(252, 252, 75),new Material(0.9, 0.8, 100));
+//		geometries.addGeometry(sphere);
+//		geometries.addGeometry(sphere1);
+//		geometries.addGeometry(triangle1);
+//		geometries.addGeometry(triangle2);
+//		//geometries.addGeometry(triangle3);
+//		scene.set_geometries(geometries);
+//		List<LightSource> lights = new ArrayList<LightSource>();
+//		lights.add(new SpotLight(new Vector(-25,-25,80) ,new Point3D(25,25,0), 0,0, new Color(255,255,255)));
+//		lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,5,-10), 0,0, new Color(255,255,255)));
+//		scene.set_lights(lights);
+//		ImageWriter imageWriter = new ImageWriter("shadow test1", 500, 500, 500, 500);
+//		Render testRender = new Render(scene, imageWriter);
+//		testRender.renderImage();
+//		testRender.writeToImage();
+//		
+//	}
+//	
+//	@Test
+//	public void squareTest() {
+//		Scene scene = new Scene("Test square");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(100);
+//		scene.set_background(new Color(0,0,0));
+//		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+//		Geometries geometries = new Geometries();
+//		Rectangle rectangle = new Rectangle(new Point3D(-250,-250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Point3D(250,250,120),new Color(0,0,0),new Material(0.9, 0.8, 100, 0, 0));
+//		geometries.addGeometry(rectangle);
+//		scene.set_geometries(geometries);
+//		List<LightSource> lights = new ArrayList<LightSource>();
+//		lights.add(new SpotLight(new Vector(-25,-25,80) ,new Point3D(25,25,0), 0,0, new Color(255,255,255)));
+//		lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,5,-10), 0,0, new Color(255,255,255)));
+//		scene.set_lights(lights);
+//		ImageWriter imageWriter = new ImageWriter("square test", 500, 500, 500, 500);
+//		Render testRender = new Render(scene, imageWriter);
+//		testRender.renderImage();
+//		testRender.writeToImage();
+//		
+//	}
+//	
+//	@Test
+//	public void square1Test() {
+//		Scene scene = new Scene("Test square1");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(100);
+//		scene.set_background(new Color(0, 153, 255));
+//		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+//		Geometries geometries = new Geometries();
+//		Triangle triangle1 = new Triangle(new Point3D(-20,-25,60),new Point3D(30,-25,60),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100, 0, 0));
+//		Triangle triangle2 = new Triangle(new Point3D(30,-25,60),new Point3D(50,-50,70),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100, 0, 0));
+//		Triangle triangle3 = new Triangle(new Point3D(50,-50,70),new Point3D(0,-50,70),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100, 0, 0));
+//		Triangle triangle4 = new Triangle(new Point3D(0,-50,70),new Point3D(-20,-25,60),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100, 0, 0));
+//		geometries.addGeometry(triangle1);
+//		geometries.addGeometry(triangle2);
+//		geometries.addGeometry(triangle3);
+//		geometries.addGeometry(triangle4);
+//		Rectangle rectangle = new Rectangle(new Point3D(-800,-250,300),new Point3D(-250,250,0),new Point3D(800,-250,300),new Point3D(250,250,0),new Color(77, 26, 0),new Material(0.2, 0.2, 100, 0, 0));
+//		Rectangle rectangle1 = new Rectangle(new Point3D(-20,-25,60),new Point3D(-20,25,60),new Point3D(30,-25,60),new Point3D(30,25,60),new Color(0, 153, 51),new Material(0.4, 0.4, 100, 0, 0));
+//		Rectangle rectangle2 = new Rectangle(new Point3D(0,-50,70),new Point3D(0,0,70),new Point3D(50,-50,70),new Point3D(50,0,70),new Color(255, 0, 0),new Material(0.4, 0.4, 100, 0, 0));
+//		Rectangle rectangle3= new Rectangle(new Point3D(30,-25,60),new Point3D(30,25,60),new Point3D(50,-50,70),new Point3D(50,0,70),new Color(0, 102, 34),new Material(0.4,0.4, 100, 0, 0));
+//		Rectangle rectangle4= new Rectangle(new Point3D(-20,-25,60),new Point3D(0,-50,70),new Point3D(-20,25,600),new Point3D(0,0,70),new Color(204, 204, 0),new Material(0.4, 0.4, 100, 0, 0));
+//		geometries.addGeometry(rectangle);
+//		geometries.addGeometry(rectangle1);
+//		geometries.addGeometry(rectangle2);
+//		geometries.addGeometry(rectangle3);
+//		geometries.addGeometry(rectangle4);
+//		geometries.addGeometry(new Sphere(new Point3D(440, -440, 140), 50, new Color(230,230,0), new Material(0,0,4, 0, 0)));
+//		scene.set_geometries(geometries);
+//		List<LightSource> lights = new ArrayList<LightSource>();
+//		lights.add(new PointLight(new Point3D(50, -50, -10), 0,0, new Color(255, 255, 100)));
+//		scene.set_lights(lights);
+//		ImageWriter imageWriter = new ImageWriter("square test1234", 500, 500, 500, 500);
+//		Render testRender = new Render(scene, imageWriter);
+//		testRender.renderImage();
+//		testRender.writeToImage();
+//		
+//	}
+//	
+//	@Test
+//	public void planeTest() {
+//		Scene scene = new Scene("Test plane");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(100);
+//		scene.set_background(new Color(0,0,0));
+//		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+//		Geometries geometries = new Geometries();
+//		Plane plane = new Plane(new Point3D(0,200,0), new Vector(0, 1, 0), new Color(200,30,30),new Material(500, 10, 10000, 0, 0));
+//		//Square square = new Square(new Point3D(-250,-250,120),new Point3D(250,250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9, 0.8, 100));
+//		geometries.addGeometry(plane);
+//		scene.set_geometries(geometries);
+//		List<LightSource> lights = new ArrayList<LightSource>();
+//		lights.add(new SpotLight(new Vector(0,201,0) ,new Point3D(0,-50,300), 1,0.01, new Color(255,255,255)));
+//		//lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,5,-10), 0,0, new Color(255,255,255)));
+//		scene.set_lights(lights);
+//		ImageWriter imageWriter = new ImageWriter("plane test", 500, 500, 500, 500);
+//		Render testRender = new Render(scene, imageWriter);
+//		testRender.renderImage();
+//		testRender.writeToImage();
+//		
+//	}
+	
 	
 	@Test
-	public void shadowTes1t() {
-		Scene scene = new Scene("Test shadow1");
+	public void reflectTest() {
+		Scene scene = new Scene("Test reflect");
 		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
 		scene.set_distance(100);
 		scene.set_background(new Color(0,0,0));
+		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
 		Geometries geometries = new Geometries();
-		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(241, 6, 151),new Material(0.5,0.5,300));
-		Sphere sphere1 = new Sphere( new Point3D( 0,10, 15),5, new Color(5, 55, 255),new Material(0.35,10,500));
-		Triangle triangle1 = new Triangle(new Point3D(-250,-250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9, 0.8, 100));
-		Triangle triangle2 = new Triangle(new Point3D(250,250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9, 0.8, 100));
-		//Triangle triangle3 = new Triangle(new Point3D(5,7,15),new Point3D(0,0,15),new Point3D(5,-7,15),new Color(252, 252, 75),new Material(0.9, 0.8, 100));
+		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(0, 19, 86),new Material(500,700,0.5, 0.8, 18));
+		Sphere sphere1 = new Sphere( new Point3D( 0,0, 80),40, new Color(241, 110, 151),new Material(500,700,0.8, 0.2, 18));
 		geometries.addGeometry(sphere);
 		geometries.addGeometry(sphere1);
-		geometries.addGeometry(triangle1);
-		geometries.addGeometry(triangle2);
-		//geometries.addGeometry(triangle3);
 		scene.set_geometries(geometries);
 		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(new SpotLight(new Vector(-25,-25,80) ,new Point3D(25,25,0), 0,0, new Color(255,255,255)));
-		lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,5,-10), 0,0, new Color(255,255,255)));
+		lights.add(new SpotLight(new Vector(-35,-35,100) ,new Point3D(15,15,-10), 10,0.1, new Color(241, 60, 151)));
 		scene.set_lights(lights);
-		ImageWriter imageWriter = new ImageWriter("shadow test1", 500, 500, 500, 500);
-		Render testRender = new Render(scene, imageWriter);
-		testRender.renderImage();
-		testRender.writeToImage();
-		
-	}
-	
-	@Test
-	public void squareTest() {
-		Scene scene = new Scene("Test square");
-		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
-		scene.set_distance(100);
-		scene.set_background(new Color(0,0,0));
-		Geometries geometries = new Geometries();
-		Square square = new Square(new Point3D(-250,-250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Point3D(250,250,120),new Color(0,0,0),new Material(0.9, 0.8, 100));
-		geometries.addGeometry(square);
-		scene.set_geometries(geometries);
-		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(new SpotLight(new Vector(-25,-25,80) ,new Point3D(25,25,0), 0,0, new Color(255,255,255)));
-		lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,5,-10), 0,0, new Color(255,255,255)));
-		scene.set_lights(lights);
-		ImageWriter imageWriter = new ImageWriter("square test", 500, 500, 500, 500);
-		Render testRender = new Render(scene, imageWriter);
-		testRender.renderImage();
-		testRender.writeToImage();
-		
-	}
-	
-	@Test
-	public void square1Test() {
-		Scene scene = new Scene("Test square1");
-		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
-		scene.set_distance(100);
-		scene.set_background(new Color(0, 153, 255));
-		Geometries geometries = new Geometries();
-		Triangle triangle1 = new Triangle(new Point3D(-20,-25,60),new Point3D(30,-25,60),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100));
-		Triangle triangle2 = new Triangle(new Point3D(30,-25,60),new Point3D(50,-50,70),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100));
-		Triangle triangle3 = new Triangle(new Point3D(50,-50,70),new Point3D(0,-50,70),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100));
-		Triangle triangle4 = new Triangle(new Point3D(0,-50,70),new Point3D(-20,-25,60),new Point3D(12,-60,65),new Color(255, 0, 0),new Material(0.15,0.15, 100));
-		geometries.addGeometry(triangle1);
-		geometries.addGeometry(triangle2);
-		geometries.addGeometry(triangle3);
-		geometries.addGeometry(triangle4);
-		Square square = new Square(new Point3D(-800,-250,300),new Point3D(-250,250,0),new Point3D(800,-250,300),new Point3D(250,250,0),new Color(77, 26, 0),new Material(0.2, 0.2, 100));
-		Square square1 = new Square(new Point3D(-20,-25,60),new Point3D(-20,25,60),new Point3D(30,-25,60),new Point3D(30,25,60),new Color(0, 153, 51),new Material(0.4, 0.4, 100));
-		Square square2 = new Square(new Point3D(0,-50,70),new Point3D(0,0,70),new Point3D(50,-50,70),new Point3D(50,0,70),new Color(255, 0, 0),new Material(0.4, 0.4, 100));
-		Square square3= new Square(new Point3D(30,-25,60),new Point3D(30,25,60),new Point3D(50,-50,70),new Point3D(50,0,70),new Color(0, 102, 34),new Material(0.4,0.4, 100));
-		Square square4= new Square(new Point3D(-20,-25,60),new Point3D(0,-50,70),new Point3D(-20,25,600),new Point3D(0,0,70),new Color(204, 204, 0),new Material(0.4, 0.4, 100));
-		geometries.addGeometry(square);
-		geometries.addGeometry(square1);
-		geometries.addGeometry(square2);
-		geometries.addGeometry(square3);
-		geometries.addGeometry(square4);
-		geometries.addGeometry(new Sphere(new Point3D(440, -440, 140), 50, new Color(230,230,0), new Material(0,0,4)));
-		scene.set_geometries(geometries);
-		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(new PointLight(new Point3D(50, -50, -10), 0,0, new Color(255, 255, 100)));
-		scene.set_lights(lights);
-		ImageWriter imageWriter = new ImageWriter("square test1", 500, 500, 500, 500);
-		Render testRender = new Render(scene, imageWriter);
-		testRender.renderImage();
-		testRender.writeToImage();
-		
-	}
-	
-	@Test
-	public void planeTest() {
-		Scene scene = new Scene("Test plane");
-		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
-		scene.set_distance(100);
-		scene.set_background(new Color(0,0,0));
-		Geometries geometries = new Geometries();
-		Plane plane = new Plane(new Point3D(0,200,0), new Vector(0, 1, 0), new Color(200,30,30),new Material(500, 10, 10000));
-		//Square square = new Square(new Point3D(-250,-250,120),new Point3D(250,250,120),new Point3D(-250,250,120),new Point3D(250,-250,120),new Color(0,0,0),new Material(0.9, 0.8, 100));
-		geometries.addGeometry(plane);
-		scene.set_geometries(geometries);
-		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(new SpotLight(new Vector(0,201,0) ,new Point3D(0,-50,300), 1,0.01, new Color(255,255,255)));
-		//lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,5,-10), 0,0, new Color(255,255,255)));
-		scene.set_lights(lights);
-		ImageWriter imageWriter = new ImageWriter("plane test", 500, 500, 500, 500);
+		ImageWriter imageWriter = new ImageWriter("reflect test", 500, 500, 500, 500);
 		Render testRender = new Render(scene, imageWriter);
 		testRender.renderImage();
 		testRender.writeToImage();

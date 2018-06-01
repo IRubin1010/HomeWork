@@ -17,12 +17,12 @@ import primitives.Vector;
  * @author itzik yeret
  *
  */
-public class Square extends Geometry {
+public class Rectangle extends Geometry {
 
 	Triangle triangle1;
 	Triangle triangle2;
 
-	public Square(Point3D a, Point3D b, Point3D c, Point3D d, Color color, Material material) {
+	public Rectangle(Point3D a, Point3D b, Point3D c, Point3D d, Color color, Material material) {
 		super(color, material);
 		triangle1 = new Triangle(a, b, c, color, material);
 		triangle2 = new Triangle(d, b, c, color, material);
