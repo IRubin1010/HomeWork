@@ -98,10 +98,10 @@ public class Sphere extends RadialGeometry {
 		} else {
 			double t1 = tm + th;
 			double t2 = tm - th;
-			if (t1 > 0) {
+			if (t1 > 0 && !Coordinate.ZERO.equals(t1)) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
 			}
-			if (t2 > 0) {
+			if (t2 > 0 && !Coordinate.ZERO.equals(t2)) {
 				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
 			}
 		}
