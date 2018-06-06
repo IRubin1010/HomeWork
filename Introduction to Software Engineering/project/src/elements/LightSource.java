@@ -4,8 +4,6 @@
 */
 package elements;
 
-import java.awt.Point;
-
 import primitives.*;
 
 /**

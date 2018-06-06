@@ -10,12 +10,17 @@ import primitives.*;
  * class represents spot light
  */
 public class SpotLight extends PointLight {
+	
 	Vector _direction;
 	
+	/***************** Constructor **********************/
+
 	public SpotLight(Vector direction, Point3D position, double Ki, double Kq, Color color) {
 		super(position, Ki, Kq, color);
 		_direction = new Vector(direction);
 	}
+
+	/***************** Operations ************************/
 
 	/**
 	 * get intensity
@@ -32,7 +37,7 @@ public class SpotLight extends PointLight {
 	 * @return Vector from light position to the point on the geometry 
 	 */
 	public Vector getL(Point3D point) {
-		return new Vector(point.vectorSubtract(_position)).normalize();
+		return point.vectorSubtract(_position).normalize();
 	}
 	
 	/**

@@ -1,18 +1,16 @@
 package unittests;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
 //import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import geometries.*;
 import primitives.*;
 import elements.AmbientLight;
 import elements.Camera;
+import elements.DirectionalLight;
 import elements.LightSource;
 import elements.PointLight;
 import elements.SpotLight;
@@ -489,8 +487,8 @@ public class RenderTest {
 		scene.set_background(new Color(0,0,0));
 		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
 		Geometries geometries = new Geometries();
-		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(0, 19, 86),new Material(500,700,0.5, 0.8, 18));
-		Sphere sphere1 = new Sphere( new Point3D( 0,0, 80),40, new Color(241, 110, 151),new Material(500,700,0.8, 0.2, 18));
+		Sphere sphere = new Sphere( new Point3D(0, 0, 80),60, new Color(0, 19, 86),new Material(500,700,18, 0.5, 0.8));
+		Sphere sphere1 = new Sphere( new Point3D( 0,0, 80),40, new Color(241, 110, 151),new Material(500,700,18, 0.8, 0.2));
 		geometries.addGeometry(sphere);
 		geometries.addGeometry(sphere1);
 		scene.set_geometries(geometries);
@@ -503,5 +501,117 @@ public class RenderTest {
 		testRender.writeToImage();
 		
 	}
+	
+	@Test
+	public void reflectTest1() {
+		Scene scene = new Scene("Test reflect1");
+		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0,0,1), new Point3D(0, 0, 0)));
+		scene.set_distance(300);
+		scene.set_background(new Color(0,0,0));
+		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+		Geometries geometries = new Geometries();
+		Sphere sphere = new Sphere( new Point3D(0, 0, 1000),300, new Color(0, 19, 86),new Material(500,700,18, 0.5, 0.8));
+		Sphere sphere1 = new Sphere( new Point3D( 0,0,1500),150, new Color(241, 110, 151),new Material(500,700,18, 0.8, 0.2));
+		//Rectangle rectangle = new Rectangle(new Point3D(500,500,200), new Point3D(500,-500,200), new Point3D(-500,500,200), new Point3D(-500,-500,200), new Color(0,0,0), new Material(400, 0, 100, 0.8, 0.8));
+		Triangle triangle = new Triangle(new Point3D(2000, -1000, 1500), new Point3D(-1000,  2000, 1500), new Point3D(700,  700, 375), new Color(0,0,0), new Material(600, 0, 100, 0.8, 0.8));
+		Triangle triangle1 = new Triangle(new Point3D( 2000, -1000, 1500), new Point3D(-1000,  2000, 1500), new Point3D(-1000, -1000, 1500), new Color(0,0,0), new Material(600, 0, 100, 0.8, 0.8));
+		geometries.addGeometry(sphere);
+		geometries.addGeometry(sphere1);
+		geometries.addGeometry(triangle);
+		geometries.addGeometry(triangle1);
+		//geometries.addGeometry(rectangle);
+		scene.set_geometries(geometries);
+		List<LightSource> lights = new ArrayList<LightSource>();
+		lights.add(new SpotLight(new Vector(0,0,1) ,new Point3D(0,0,0), 5,0, new Color(241, 60, 151)));
+		scene.set_lights(lights);
+		ImageWriter imageWriter = new ImageWriter("reflect test123", 500, 500, 500, 500);
+		Render testRender = new Render(scene, imageWriter);
+		testRender.renderImage();
+		testRender.writeToImage();
+		
+	}
+	
+	@Test
+	void testReflect() {
+		Scene scene = new Scene("Test");
+		scene.set_ambientlight(new AmbientLight(new Color(0, 0, 0), 2));
+		scene.set_background(new Color(0, 0, 0));
+		scene.set_camera(new Camera( new Vector(0, -1, 0), new Vector(0, 0, -1), new Point3D(0, 0, 0)));
+		scene.set_distance(200);
+		Geometries geometries = new Geometries();
+		Plane p = new Plane(new Point3D(0, 1, -50), new Vector(0, -1, 0), new Color(40, 40, 62), new Material(100, 10, 100, 0.9, 0));
+		geometries.addGeometry(p);
+
+		List<LightSource> lights = new ArrayList<LightSource>();
+		SpotLight spot = new SpotLight(new Vector(0, -1, 0), new Point3D(0, 0, -200), 0.2,0, new Color(100, 100, 100));
+		lights.add(spot);
+		scene.set_geometries(geometries);
+		Sphere sphere = new Sphere(new Point3D(0, -100, -200),45,  new Color(23, 23, 46), new Material(30, 0.2, 100, 0.9, 0));
+		geometries.addGeometry(sphere);
+		PointLight pointL = new PointLight( new Point3D(-70, -150, -180), 0.1, 0.01,new Color(150, 0, 0));
+		lights.add(pointL);
+		scene.set_lights(lights);
+		ImageWriter imageWriter = new ImageWriter("Test_reflected", 500, 500, 500, 500);
+		Render render = new Render(scene, imageWriter);
+		render.renderImage();
+		render.writeToImage();
+
+	}
+	
+	
+//	@Test
+//	public void recursiveTest3(){
+//		Scene scene = new Scene("recTest");
+//		scene.set_camera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+//		scene.set_distance(300);
+//		
+//		Sphere sphere = new Sphere( new Point3D(0, 0, 1000),300,new Color(0, 0, 100),new Material(0, 0, 20, 0, 0.5));
+//		//sphere.setShininess(20);
+//		//sphere.setEmmission(new Color(0, 0, 100));
+//		//sphere.setKt(0.5);
+//		//scene.addGeometry(sphere);
+//		
+//		Sphere sphere2 = new Sphere( new Point3D(0, 0, 1000),150,new Color(100, 20, 20),new Material(0, 0, 20, 0, 0));
+////		sphere2.setShininess(20);
+////		sphere2.setEmmission(new Color(100, 20, 20));
+////		sphere2.setKt(0);
+//		//scene.addGeometry(sphere2);
+//		
+//		Triangle triangle = new Triangle(new Point3D(  2000, -1000, 1500),
+//				 						 new Point3D( -1000,  2000, 1500),
+//				 						 new Point3D(  700,  700, 375), new Color(20, 20, 20),new Material(0, 0, 0, 1, 0) );
+//		
+//		Triangle triangle2 = new Triangle(new Point3D(  2000, -1000, 1500),
+//										  new Point3D( -1000,  2000, 1500),
+//										  new Point3D( -1000, -1000, 1500), new Color(20, 20, 20),new Material(0, 0, 0, 0.5, 0));
+//		
+////		triangle.setEmmission(new Color(20, 20, 20));
+////		triangle2.setEmmission(new Color(20, 20, 20));
+////		triangle.setKr(1);
+////		triangle2.setKr(0.5);
+////		scene.addGeometry(triangle);
+////		scene.addGeometry(triangle2);
+//		Geometries geometries = new Geometries();
+//		geometries.addGeometry(sphere);
+//		geometries.addGeometry(sphere2);
+//		geometries.addGeometry(triangle);
+//		geometries.addGeometry(triangle2);
+//		List<LightSource> lights = new ArrayList<LightSource>();
+//		lights.add(new SpotLight(new Vector(-2, -2, -3),  new Point3D(200, 200, -150), 
+//				     0.00001, 0.000005,new Color(255, 100, 100)));
+//		scene.set_geometries(geometries);
+//		scene.set_lights(lights);
+//		scene.set_background(new Color(0,0,0));
+//		scene.set_ambientlight(new AmbientLight(new Color(50, 50, 50), 0.5));
+//		ImageWriter imageWriter = new ImageWriter("Recursive Test 3", 500, 500, 500, 500);
+//		
+//		Render render = new Render( scene,imageWriter);
+//		
+//		render.renderImage();
+//		render.writeToImage();
+//		
+//	}
+	
+	
 	
 }

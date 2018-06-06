@@ -11,9 +11,12 @@ import primitives.*;
  *class represents point light
  */
 public class PointLight extends Light implements LightSource{
+	
 	Point3D _position;
 	double _Kc, _Ki, _kq; 
 	
+	/***************** Constructor **********************/
+
 	public PointLight(Point3D position, double Ki, double Kq, Color color) {
 		super(color);
 		_position = new Point3D(position);
@@ -22,6 +25,8 @@ public class PointLight extends Light implements LightSource{
 		_kq = Kq;
 	}
 	
+	/***************** Operations ************************/
+
 	/**
 	 * get intensity
 	 * @return the ambient light
@@ -38,7 +43,7 @@ public class PointLight extends Light implements LightSource{
 	 * @return Vector from light position to the point on the geometry 
 	 */
 	public Vector getL(Point3D point) {
-		return new Vector(point.vectorSubtract(_position)).normalize();
+		return point.vectorSubtract(_position).normalize();
 	}
 	
 	/**

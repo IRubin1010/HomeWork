@@ -12,8 +12,11 @@ import primitives.Color;
  *
  */
 public abstract class Light {
+	
 	protected Color _color;
 	
+	/***************** Constructor **********************/
+
 	/**
 	 * copy constructor
 	 * @param color
@@ -22,6 +25,8 @@ public abstract class Light {
 		_color = new Color(color);
 	}
 	
+	/***************** Operations ************************/
+
 	/**
 	 * get intensity
 	 * @return

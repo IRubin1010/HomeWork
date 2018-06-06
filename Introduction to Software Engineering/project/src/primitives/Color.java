@@ -15,6 +15,9 @@ public class Color {
 	double _green;
 	double _blue;
 	
+	public static final Color BLACK = new Color(0,0,0);
+	public static final Color WHITE = new Color(255,255,255);
+	
 	/***************** Constructors **********************/
 
 	/**
@@ -73,7 +76,7 @@ public class Color {
 		_red += color._red;
 		_green += color._green;
 		_blue += color._blue;
-		return new Color(this);
+		return this;
 	}
 	
 	/**

@@ -14,6 +14,8 @@ import primitives.Ray;
  * interface to hold the intersectable geometries
  */
 public interface Intersectable {
+
+	
 	/**
 	 * get the intersection with the geometry
 	 * 

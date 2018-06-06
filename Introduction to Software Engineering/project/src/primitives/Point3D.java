@@ -17,17 +17,33 @@ public class Point3D extends Point2D {
 	
 	/***************** Constructors **********************/
 	
+	/**
+	 * constructor with 3 double parameters
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
 	public Point3D(double x, double y, double z) {
 		super(x,y);
 		_z = new Coordinate(z);
 	}
 	
+	/**
+	 * constructor with 3 coordinate parameters
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
 	public Point3D(Coordinate x, Coordinate y, Coordinate z) {
 		super(x,y);
 		if(z == null) throw new IllegalArgumentException("param can't be null");
 		_z = new Coordinate(z);
 	}
 	
+	/**
+	 * copy constructor
+	 * @param other
+	 */
 	public Point3D(Point3D other) {
 		super(other);
 		_z = new Coordinate(other._z);
@@ -35,12 +51,19 @@ public class Point3D extends Point2D {
 	
 	/***************** Getter ****************************/
 	
+	/**
+	 * getZ
+	 * @return z
+	 */
 	public Coordinate getZ() {
 		return _z;
 	}
 
 	/***************** Administration  *******************/
 	
+	/**
+	 * override equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(obj == null)
@@ -55,6 +78,9 @@ public class Point3D extends Point2D {
 		return _z.equals(other._z);
 	}
 	
+	/**
+	 * override toString
+	 */
 	@Override
 	public String toString() {
 		return super.toString().substring(0,super.toString().length() -1) + ',' + _z.toString() + "]";

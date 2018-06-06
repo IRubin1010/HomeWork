@@ -10,12 +10,22 @@ import primitives.*;
  * class represents Directional light
  */
 public class DirectionalLight extends Light implements LightSource{
+	
 	Vector _direction;
 
+	/***************** Constructors **********************/
+
+	/**
+	 * constructor
+	 * @param direction
+	 * @param color
+	 */
 	public DirectionalLight(Vector direction, Color color) {
 		super(color);
 		_direction = new Vector(direction);
 	}
+
+	/***************** Operations ************************/
 
 	/**
 	 * get intensity
