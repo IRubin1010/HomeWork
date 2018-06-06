@@ -1,12 +1,12 @@
 /**
- * 
+ * @author itzik yeret 206244485 yeret82088@gmail.com
+ * @author meir shimon 305625295 nthr120@gmail.com
  */
 package geometries;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import primitives.Color;
 import primitives.Material;
 import primitives.Point3D;
@@ -14,24 +14,36 @@ import primitives.Ray;
 import primitives.Vector;
 
 /**
- * @author itzik yeret
- *
+ * class represents rectangle
  */
 public class Rectangle extends Geometry {
 
 	Triangle triangle1;
 	Triangle triangle2;
 
+	/***************** Constructors **********************/
+
+	/**
+	 * constructor 
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param d
+	 * @param color
+	 * @param material
+	 */
 	public Rectangle(Point3D a, Point3D b, Point3D c, Point3D d, Color color, Material material) {
 		super(color, material);
 		triangle1 = new Triangle(a, b, c, color, material);
 		triangle2 = new Triangle(d, b, c, color, material);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see geometries.Intersectable#findIntersections(primitives.Ray)
+	/***************** Operations ************************/
+
+	/**
+	 * function find Intersections
+	 * @param ray
+	 * @return list of points of the intersection
 	 */
 	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
@@ -49,10 +61,9 @@ public class Rectangle extends Geometry {
 		return intersection;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see geometries.Geometry#getNormal(primitives.Point3D)
+	/**
+	 * return normal from a point on the plane
+	 * @param point
 	 */
 	@Override
 	public Vector getNormal(Point3D point) {

@@ -47,35 +47,35 @@ class SphereTests {
 	        scene.set_distance(4);
 
 			//2 points
-	        Sphere sphere1 = new Sphere(new Point3D(0,0,-7),1, new Color(255,255,255), new Material(2,3,4, 0, 0));
+	        Sphere sphere1 = new Sphere(new Point3D(0,0,-7),1, new Color(255,255,255), new Material(2,3,0, 4, 0));
 	        List<Point3D> list1 = getIntersections(scene,sphere1);
 	        if(list1 != null)
 	            assertEquals(2,list1.size(),"2 points");
 			else
 			    fail("null list");
 	        //18 points
-	        Sphere sphere2 = new Sphere(new Point3D(0,0,-3),3, new Color(255,255,255), new Material(2,3,4, 0, 0));
+	        Sphere sphere2 = new Sphere(new Point3D(0,0,-3),3, new Color(255,255,255), new Material(2,3,0, 4, 0));
 	        List<Point3D> list2 = getIntersections(scene,sphere2);
 	        if(list2!=null)
 	            assertEquals(18,list2.size(),"18 points");
 	        else
 	            fail("null list");
 	        //10 points
-	        Sphere sphere3 = new Sphere(new Point3D(0,0,-3),2.5, new Color(255,255,255), new Material(2,3,4, 0, 0));
+	        Sphere sphere3 = new Sphere(new Point3D(0,0,-3),2.5, new Color(255,255,255), new Material(2,3,0, 4, 0));
 	        List<Point3D> list3 = getIntersections(scene,sphere3);
 	        if(list3!=null)
 	            assertEquals(10,list3.size(),"10 points");
 	        else
 	            fail("null list");
 	        //9 points
-	        Sphere sphere4 = new Sphere(new Point3D(0,0,0),3, new Color(255,255,255), new Material(2,3,4, 0, 0));
+	        Sphere sphere4 = new Sphere(new Point3D(0,0,0),3, new Color(255,255,255), new Material(2,3,0, 4, 0));
 	        List<Point3D> list4 = getIntersections(scene,sphere4);
 	        if(list4!=null)
 	            assertEquals(9,list4.size(),"9 points");
 	        else
 	            fail("null list");
 	        //0 points
-	        Sphere sphere5 = new Sphere(new Point3D(0,0,5),3, new Color(255,255,255), new Material(2,3,4, 0, 0));
+	        Sphere sphere5 = new Sphere(new Point3D(0,0,5),3, new Color(255,255,255), new Material(2,3,0, 4, 0));
 	        List<Point3D> list5 = getIntersections(scene,sphere5);
 	        if(list5!=null)
 	            assertEquals(0,list5.size(),"0 points");

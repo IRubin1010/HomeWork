@@ -4,11 +4,8 @@
  */
 package geometries;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import primitives.*;
 
 /**
@@ -24,12 +21,11 @@ public class Triangle extends Plane {
 
 	/**
 	 * constructor with 3 points
-	 * 
 	 * @param p1
 	 * @param p2
 	 * @param p3
-	 * @param color TODO
-	 * @param material TODO
+	 * @param color 
+	 * @param material 
 	 */
 	public Triangle(Point3D p1, Point3D p2, Point3D p3, Color color, Material material) {
 		super(p1, p2, p3, color,material);
@@ -40,7 +36,6 @@ public class Triangle extends Plane {
 
 	/**
 	 * copy constructor
-	 * 
 	 * @param other
 	 */
 	public Triangle(Triangle other) {
@@ -54,11 +49,9 @@ public class Triangle extends Plane {
 
 	/**
 	 * function find Intersections
-	 * 
 	 * @param ray
 	 * @return list of points of the intersection
 	 */
-	///לבדוק שעובד אחרי השינוי, לא בטוח שחישבנתי נכון///////////////
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		// get plane intersection
 		Map<Geometry, List<Point3D>> planeIntersection = super.findIntersections(ray);

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import primitives.*;
 
 /**
@@ -26,8 +25,7 @@ public class Sphere extends RadialGeometry {
 	 * @param point
 	 * @param radius
 	 * @param color
-	 *            TODO
-	 * @param material TODO
+	 * @param material 
 	 */
 
 	public Sphere(Point3D point, double radius, Color color, Material material) {
@@ -37,7 +35,6 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * copy constructor
-	 * 
 	 * @param other
 	 */
 	public Sphere(Sphere other) {
@@ -49,9 +46,7 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * return normal from a point on the sphere
-	 * 
 	 * @param point
-	 *            on the sphere
 	 */
 	public Vector getNormal(Point3D point) {
 		// vector from the center point to other point
@@ -60,7 +55,6 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * function find Intersections
-	 * 
 	 * @param ray
 	 * @return list of points of the intersection
 	 */

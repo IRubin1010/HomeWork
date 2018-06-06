@@ -20,9 +20,9 @@ public class Plane extends Geometry {
 	protected Vector _normal;
 
 	/***************** Constructors **********************/
+	
 	/**
 	 * constructor with 3 points
-	 * 
 	 * @param a
 	 * @param b
 	 * @param c
@@ -56,22 +56,19 @@ public class Plane extends Geometry {
 
 	/**
 	 * constructor with point and plumb
-	 * 
 	 * @param point
 	 * @param plumb
 	 * @param color
-	 *            TODO
-	 * @param material TODO
+	 * @param material
 	 */
-	public Plane(Point3D point, Vector plumb, Color color, Material material) {
+	public Plane(Point3D point, Vector normal, Color color, Material material) {
 		super(color, material);
 		_point = new Point3D(point);
-		_normal = new Vector(plumb).normalize();
+		_normal = new Vector(normal).normalize();
 	}
 
 	/**
 	 * copy constructor
-	 * 
 	 * @param other
 	 */
 	public Plane(Plane other) {
@@ -84,9 +81,7 @@ public class Plane extends Geometry {
 
 	/**
 	 * return normal from a point on the plane
-	 * 
 	 * @param point
-	 *            on the plane
 	 */
 	public Vector getNormal(Point3D point) {
 		return _normal;
@@ -94,7 +89,6 @@ public class Plane extends Geometry {
 
 	/**
 	 * function find Intersections
-	 * 
 	 * @param ray
 	 * @return Map holds a pair of geometry and list the point of intersection with
 	 *         the geometry

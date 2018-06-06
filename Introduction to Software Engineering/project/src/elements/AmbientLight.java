@@ -9,7 +9,6 @@ import primitives.Color;
 
 /**
  * class represents ambient light
- *
  */
 public class AmbientLight extends Light{
 
@@ -18,7 +17,7 @@ public class AmbientLight extends Light{
 	/***************** Constructors **********************/
 	
 	/**
-	 * constructor with 4 parameters
+	 * constructor with 4 double parameters
 	 * @param red
 	 * @param green
 	 * @param blue
@@ -49,6 +48,12 @@ public class AmbientLight extends Light{
 		_Ka = Ka;
 	}
 	
+	/***************** Operations ************************/
+
+	/**
+	 * get intensity
+	 * @return
+	 */
 	public Color getIntensity() {
 		return new Color(_color);
 	}
