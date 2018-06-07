@@ -4,10 +4,8 @@
  */
 package geometries;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import primitives.*;
 
 /**
@@ -25,8 +23,7 @@ public class Tube extends RadialGeometry {
 	 * @param ray
 	 * @param radius
 	 * @param color
-	 *            TODO
-	 * @param material TODO
+	 * @param material 
 	 */
 	public Tube(Ray ray, double radius, Color color, Material material) {
 		super(radius, color, material);
@@ -35,7 +32,6 @@ public class Tube extends RadialGeometry {
 
 	/**
 	 * copy constructor
-	 * 
 	 * @param other
 	 */
 	public Tube(Tube other) {
@@ -47,9 +43,7 @@ public class Tube extends RadialGeometry {
 
 	/**
 	 * return normal from a point on the tube
-	 * 
 	 * @param point
-	 *            on the tube
 	 */
 	public Vector getNormal(Point3D point) {
 
@@ -68,6 +62,11 @@ public class Tube extends RadialGeometry {
 		return new Vector(PtoPVector.sub(surchargeVector)).normalize();
 	}
 
+	/**
+	 * function find Intersections
+	 * @param ray
+	 * @return list of points of the intersection
+	 */
 	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		return null;

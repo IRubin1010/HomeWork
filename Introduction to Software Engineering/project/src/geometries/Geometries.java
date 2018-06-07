@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
-import primitives.Vector;
+
 
 /**
  * Class represent a collection of shapes
@@ -21,6 +19,7 @@ import primitives.Vector;
  * according to the principle of structural pattern - composite
  */
 public class Geometries implements Intersectable {
+	
 	/**
 	 * List hold all the shapes that make up the structure
 	 */
@@ -29,6 +28,10 @@ public class Geometries implements Intersectable {
 
 	/***************** Getter ****************************/
 
+	/**
+	 * get list of geometries
+	 * @return
+	 */
 	public List<Geometry> getGeometries() {
 		return listShape;
 	}
@@ -37,7 +40,6 @@ public class Geometries implements Intersectable {
 
 	/**
 	 * Add geometry to the geometries
-	 * 
 	 * @param geometry
 	 *            - Geometry to add
 	 */

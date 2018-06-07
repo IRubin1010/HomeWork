@@ -3,62 +3,62 @@
 * @author meir shimon 305625295 nthr120@gmail.com
 */
 package geometries;
-import java.util.List;
-import java.util.Map;
 
 import primitives.*;
 
 /**
-* abstract class Geometry 
-*/
+ * abstract class Geometry
+ */
 public abstract class Geometry implements Intersectable {
 
 	protected Color _emmission;
 	protected Material _material;
-	
+
 	/***************** Constructors **********************/
 
 	/**
 	 * constructor
-	 * @param material TODO
+	 * @param color
+	 * @param material
 	 */
 	public Geometry(Color color, Material material) {
 		_emmission = color;
 		_material = material;
 	}
-	
+
 	/**
-	 * copy constructor 
+	 * copy constructor
 	 * @param other
 	 */
 	public Geometry(Geometry other) {
 		_emmission = other._emmission;
 		_material = other._material;
 	}
-	
+
 	/***************** Getter ****************************/
 
 	/**
-	 * @return the _emmission
+	 * @return the emmission
 	 */
-	public Color get_emmission() {
+	public Color getEmmission() {
 		return _emmission;
 	}
-	
+
 	/**
-	 * @return the _material
+	 * @return the material
 	 */
-	public Material get_material() {
+	public Material getMaterial() {
 		return _material;
 	}
-	
-	/***************** Operations ************************/ 
+
+	/***************** Operations ************************/
 
 	/**
 	 * abstract function get normal
+	 * 
 	 * @param point
 	 * @return
 	 */
 	public abstract Vector getNormal(Point3D point);
-	
+
 }

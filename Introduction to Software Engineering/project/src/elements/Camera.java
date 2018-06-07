@@ -1,4 +1,3 @@
-
 /**
 * @author itzik yeret 206244485 yeret82088@gmail.com
 * @author meir shimon 305625295 nthr120@gmail.com
@@ -9,9 +8,7 @@ import primitives.*;
 
 /**
  * class to represent camera
- * 
- * @param _p0
- *            center point of the camera
+ * @param _p0 center point of the camera
  * @param _vUp
  * @param _vTo
  * @param _vRight
@@ -26,10 +23,13 @@ public class Camera {
 	/***************** Constructors **********************/
 
 	/**
-	 * @exception if
-	 *                the vector are not vertical each other
+	 * constructor
+	 * @param vUp
+	 * @param vTo
+	 * @param pc
 	 */
 	public Camera(Vector vUp, Vector vTo, Point3D pc) {
+		// if the vector are not vertical each other
 		if (!Coordinate.ZERO.equals(vUp.dotProduct(vTo))) {
 			throw new IllegalArgumentException("Vectors are not vertical to each other");
 		}
@@ -53,9 +53,9 @@ public class Camera {
 	/***************** Getters ****************************/
 
 	/**
-	 * @return the _p0
+	 * @return the p0
 	 */
-	public Point3D get_p0() {
+	public Point3D getP0() {
 		return _p0;
 	}
 
@@ -89,7 +89,7 @@ public class Camera {
 		if (pcY != j)
 			Pij = Pij.addVectorToPoint(_vUp.scaleVector((pcY - j) * Ry));
 		Vector Vij = Pij.vectorSubtract(_p0);
-		Ray ray = new Ray(_p0, Vij.normalize());
+		Ray ray = new Ray(_p0, Vij);
 		return ray;
 	}
 }

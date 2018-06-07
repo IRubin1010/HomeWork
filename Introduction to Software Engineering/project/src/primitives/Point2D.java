@@ -4,6 +4,8 @@
  */
 package primitives;
 
+import javax.security.auth.x500.X500Principal;
+
 /**
  * 
  * class represents Point2D
@@ -16,17 +18,31 @@ public class Point2D {
 
 	/***************** Constructors **********************/
 	
+	/**
+	 * constructor with 2 double parameters
+	 * @param x
+	 * @param y
+	 */
 	public Point2D(double x, double y) {
 		_x = new Coordinate(x);
 		_y = new Coordinate(y);
 	}
 
+	/**
+	 * constructor with 2 Coordinate parameters
+	 * @param x
+	 * @param y
+	 */
 	public Point2D(Coordinate x, Coordinate y) {
 		if(x == null || y == null) throw new IllegalArgumentException("param can't be null"); 
 		_x = new Coordinate(x);
 		_y = new Coordinate(y);
 	}
 
+	/**
+	 * copy constructor
+	 * @param other
+	 */
 	public Point2D(Point2D other) {
 		if(other == null) throw new IllegalArgumentException("param can't be null"); 
 		_x = new Coordinate(other._x);
@@ -35,16 +51,27 @@ public class Point2D {
 
 	/***************** Getters ****************************/
 	
+	/**
+	 * getX
+	 * @return x
+	 */
 	public Coordinate getX() {
 		return _x;
 	}
 
+	/**
+	 * getY
+	 * @return y
+	 */
 	public Coordinate getY() {
 		return _y;
 	}
 
 	/***************** Administration  *******************/
 	
+	/**
+	 * override equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
@@ -57,6 +84,9 @@ public class Point2D {
 		return _x.equals(other._x) && _y.equals(other._y);
 	}
 
+	/**
+	 * override toString
+	 */
 	@Override
 	public String toString() {
 		return "[" + _x.toString() + ',' + _y.toString() + "]";
@@ -67,28 +97,28 @@ public class Point2D {
 	/**
 	 * add point to another point
 	 * @param other
-	 * @return new point of adding the two points
+	 * @return point added by other point
 	 */
 	protected Point2D add(Point2D other) {
-		return new Point2D(_x.add(other._x), _y.add(other._y));
+		return new Point2D(_x.add(other.getX()),_y.add(other.getY()));
 	}
 
 	/**
 	 * sub point from another point
 	 * @param other
-	 * @return new point of Subtract the second point from the first
+	 * @return point of Subtract the second point from the first
 	 */
 	protected Point2D sub(Point2D other) {
-		return new Point2D(_x.subtract(other._x), _y.subtract(other._y));
+		return new Point2D(_x.subtract(other._x),_y.subtract(other._y));
 	}
 
 	/**
 	 * multiply point by scalar
 	 * @param num
-	 * @return new point multiplied by the scalar
+	 * @return point multiplied by the scalar
 	 */
 	protected Point2D scale(double num) {
-		return new Point2D(_x.scale(num), _y.scale(num));
+		return new Point2D(_x.scale(num),_y.scale(num));
 	}
 
 	/**
@@ -96,7 +126,7 @@ public class Point2D {
 	 * @param other
 	 */
 	protected Coordinate multiply(Point2D other) {
-		return _x.multiply(other._x).add(_y.multiply(other._y));
+		return new Coordinate(_x.multiply(other._x).add(_y.multiply(other._y)));
 	}
 	
 	/**

@@ -15,33 +15,60 @@ public class Vector {
 
 	/***************** Constructors **********************/
 	
+	/**
+	 * constructor with 3 double parameters
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
 	public Vector(double x, double y, double z) {
 		if(new Point3D(x, y, z).equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 	
+	/**
+	 * constructor with 3 coordinate parameters
+	 * @param x
+	 * @param y
+	 * @param z
+	 */
 	public Vector(Coordinate x, Coordinate y, Coordinate z) {
 		if(new Point3D(x, y, z).equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(x, y, z);
 	}
 
+	/**
+	 * constructor with point parameter
+	 * @param point
+	 */
 	public Vector(Point3D point) {
 		if(point.equals(Point3D.ZERO)) throw new IllegalArgumentException("vector can't be vector 0");
 		_head = new Point3D(point);
 	}
 	
+	/**
+	 * copy constructor
+	 * @param other
+	 */
 	public Vector(Vector other) {
 		_head = new Point3D(other._head);
 	}
 
 	/***************** Getter ****************************/
 	
+	/**
+	 * getVector
+	 * @return vector
+	 */
 	public Point3D getVector() {
 		return _head;
 	}
 	
 	/***************** Administration  *******************/
 
+	/**
+	 * overrode equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)
@@ -54,6 +81,9 @@ public class Vector {
 		return _head.equals(other._head);
 	}
 	
+	/**
+	 * override toString
+	 */
 	@Override
 	public String toString() {
 		return "(" + _head.toString().substring(1,_head.toString().length()-1) + ")";

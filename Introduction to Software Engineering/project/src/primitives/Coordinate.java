@@ -11,7 +11,7 @@ public class Coordinate {
 
 	private double _coord;
 	
-	public static final Coordinate ZERO = new Coordinate(0);
+	public static final Coordinate ZERO = new Coordinate(0.0);
 	
 	/***************** Constructors **********************/ 
 	/**
@@ -144,8 +144,8 @@ public class Coordinate {
 	}
 		
 	private double _subtract(double other) {
-		int otherExp = getExp(other);
-		int thisExp = getExp(_coord);
+		int otherExp = (other == 0.0) ? 0 : getExp(other);
+		int thisExp = (_coord == 0.0) ? 0 : getExp(_coord);
 		// if other is too small relatively to our coordinate return the original
 		// coordinate
 

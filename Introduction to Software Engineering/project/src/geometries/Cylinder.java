@@ -7,7 +7,6 @@ import primitives.*;
 
 /**
  * class represents Cylinder
- *
  */
 public class Cylinder extends Tube {
 
@@ -15,11 +14,21 @@ public class Cylinder extends Tube {
 
 	/***************** Constructors **********************/
 
+	/**
+	 * constructor
+	 * @param height
+	 * @param ray
+	 * @param radius
+	 */
 	public Cylinder(double height, Ray ray, double radius) {
-		super(ray, radius, new Color(255,255,255), new Material(2,3,4));
+		super(ray, radius, new Color(255,255,255), new Material(2,3,4, 0, 0));
 		_height = height;
 	}
 
+	/**
+	 * copy constructor
+	 * @param other
+	 */
 	public Cylinder(Cylinder other) {
 		super(other);
 		_height = other._height;
