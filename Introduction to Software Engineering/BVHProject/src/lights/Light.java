@@ -3,7 +3,7 @@
 * @author meir shimon 305625295 nthr120@gmail.com
 */
 
-package elements;
+package lights;
 
 import primitives.Color;
 
@@ -18,8 +18,8 @@ public abstract class Light {
 	/***************** Constructor **********************/
 
 	/**
-	 * copy constructor
-	 * @param color
+	 * constructor
+	 * @param color the color of the light
 	 */
 	public Light(Color color) {
 		_color = new Color(color);
@@ -28,8 +28,8 @@ public abstract class Light {
 	/***************** Operations ************************/
 
 	/**
-	 * get intensity
-	 * @return
+	 * get the intensity of the light
+	 * @return the real intensity 
 	 */
 	public Color getIntensity() {
 		return new Color(_color);

@@ -2,7 +2,7 @@
 * @author itzik yeret 206244485 yeret82088@gmail.com
 * @author meir shimon 305625295 nthr120@gmail.com
 */
-package elements;
+package lights;
 
 import primitives.*;
 
@@ -15,6 +15,14 @@ public class SpotLight extends PointLight {
 	
 	/***************** Constructor **********************/
 
+	/**
+	 * Constructor
+	 * @param direction direction of the spot
+	 * @param position position of the light in scene
+	 * @param Kl linear factor
+	 * @param Kq quadratic factor
+	 * @param color of the light
+	 */
 	public SpotLight(Vector direction, Point3D position, double Ki, double Kq, Color color) {
 		super(position, Ki, Kq, color);
 		_direction = new Vector(direction);
@@ -22,30 +30,30 @@ public class SpotLight extends PointLight {
 
 	/***************** Operations ************************/
 
-	/**
-	 * get intensity
-	 * @return the ambient light
+	/* (non-Javadoc)
+	 * @see lights.PointLight#getIntensity(primitives.Point3D)
 	 */
+	@Override
 	public Color getIntensity(Point3D point) {
 		double angelBetweenDirectionAndL = getD(point).dotProduct(getL(point));
 		return super.getIntensity(point).scale(angelBetweenDirectionAndL);
 	}
 	
-	/**
-	 * get L
-	 * @param point
-	 * @return Vector from light position to the point on the geometry 
+	/* (non-Javadoc)
+	 * @see lights.PointLight#getL(primitives.Point3D)
 	 */
+	@Override
 	public Vector getL(Point3D point) {
 		return point.vectorSubtract(_position).normalize();
 	}
-	
-	/**
-	 * get direction
-	 * @param point
-	 * @return vector of the light direction
+
+	/* (non-Javadoc)
+	 * @see lights.PointLight#getD(primitives.Point3D)
 	 */
+	@Override
 	public Vector getD(Point3D point) {
 		return new Vector(_direction).normalize();
 	}
+
+	
 }
