@@ -584,7 +584,7 @@ public class RenderTest {
 		List<LightSource> lights = new ArrayList<LightSource>();
 		lights.add(new SpotLight(new Vector(-35, -35, 100), new Point3D(15, 15, -10), 10, 0, new Color(241, 60, 151)));																									// 151
 		scene.setLights(lights);
-		ImageWriter imageWriter = new ImageWriter("reflect test", 500, 500, 500, 500);
+		ImageWriter imageWriter = new ImageWriter("BVHreflect test", 500, 500, 500, 500);
 		Render testRender = new Render(scene, imageWriter);
 		testRender.renderImage();
 		testRender.writeToImage();
@@ -604,18 +604,18 @@ public class RenderTest {
 		Triangle triangle = new Triangle(new Point3D(500, 500, 200), new Point3D(500, -500, 200),
 				new Point3D(-500, 500, 200), new Color(0, 0, 0), new Material(1000, 500, 10, 1, 1));
 		Triangle triangle1 = new Triangle(new Point3D(-60, -60, 30), new Point3D(500, -500, 200),
-				new Point3D(-500, 500, 200), new Color(0, 0, 0), new Material(1000, 500, 10, 1, 1));
+				new Point3D(-500, 500, 200), new Color(0, 0, 0), new Material(700, 500, 10, 1, 1));
 		geometries.addGeometry(sphere);
 		geometries.addGeometry(sphere1);
 		geometries.addGeometry(triangle);
 		geometries.addGeometry(triangle1);
 		scene.setGeometries(geometries);
 		List<LightSource> lights = new ArrayList<LightSource>();
-		lights.add(new SpotLight(new Vector(-35, -35, 100), new Point3D(15, 15, -10), 10, 0, new Color(241, 60, 151)));// 241,
+		lights.add(new SpotLight(new Vector(-35, -35, 100), new Point3D(15, 15, -10), 10, 0, new Color(255,255,255)));// 241,
 																														// 60,
 																														// 151
 		scene.setLights(lights);
-		ImageWriter imageWriter = new ImageWriter("reflect test123", 500, 500, 500, 500);
+		ImageWriter imageWriter = new ImageWriter("BVHreflect test123", 500, 500, 500, 500);
 		Render testRender = new Render(scene, imageWriter);
 		testRender.renderImage();
 		testRender.writeToImage();
@@ -644,7 +644,7 @@ public class RenderTest {
 		PointLight pointL = new PointLight(new Point3D(-70, -150, -180), 0.1, 0.01, new Color(150, 0, 0));
 		lights.add(pointL);
 		scene.setLights(lights);
-		ImageWriter imageWriter = new ImageWriter("Test_reflected", 500, 500, 500, 500);
+		ImageWriter imageWriter = new ImageWriter("BVHTest_reflected", 500, 500, 500, 500);
 		Render render = new Render(scene, imageWriter);
 		render.renderImage();
 		render.writeToImage();

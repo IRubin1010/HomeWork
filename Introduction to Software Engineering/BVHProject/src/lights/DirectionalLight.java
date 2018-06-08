@@ -2,7 +2,7 @@
 * @author itzik yeret 206244485 yeret82088@gmail.com
 * @author meir shimon 305625295 nthr120@gmail.com
 */
-package elements;
+package lights;
 
 import primitives.*;
 
@@ -17,8 +17,8 @@ public class DirectionalLight extends Light implements LightSource{
 
 	/**
 	 * constructor
-	 * @param direction
-	 * @param color
+	 * @param direction direction of the light
+	 * @param color the color of the light
 	 */
 	public DirectionalLight(Vector direction, Color color) {
 		super(color);
@@ -27,30 +27,40 @@ public class DirectionalLight extends Light implements LightSource{
 
 	/***************** Operations ************************/
 
-	/**
-	 * get intensity
-	 * @return the direction light
+	/* (non-Javadoc)
+	 * @see lights.LightSource#getIntensity(primitives.Point3D)
 	 */
+	@Override
 	public Color getIntensity(Point3D point) {
-		return new Color(_color);
+		return getIntensity();
 	}
-	
-	/**
-	 * get L
-	 * @param point
-	 * @return Vector from light position to the point on the geometry 
+
+	/* (non-Javadoc)
+	 * @see lights.LightSource#getL(primitives.Point3D)
 	 */
+	@Override
 	public Vector getL(Point3D point) {
 		return new Vector(_direction).normalize();
 	}
-	
-	/**
-	 * get direction
-	 * @param point
-	 * @return vector of the light direction
+
+	/* (non-Javadoc)
+	 * @see lights.LightSource#getD(primitives.Point3D)
 	 */
+	@Override
 	public Vector getD(Point3D point) {
 		return new Vector(_direction).normalize();
 	}
 
+	/* (non-Javadoc)
+	 * @see lights.LightSource#getDistance(primitives.Point3D)
+	 */
+	@Override
+	public double getDistance(Point3D point) {
+		return Double.MAX_VALUE;
+	}
+
+
+
 }
+
+
