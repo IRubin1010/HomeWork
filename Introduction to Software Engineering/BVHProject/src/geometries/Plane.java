@@ -14,7 +14,7 @@ import primitives.*;
 /**
  * class represent plane
  */
-public class Plane extends Geometry {
+public abstract class Plane extends Geometry {
 
 	protected Point3D _point;
 	protected Vector _normal;
@@ -129,6 +129,48 @@ public class Plane extends Geometry {
 			// the intersection is the plane point
 			// means - no intersection
 			return intersections;
+		}
+	}
+	
+	/**
+	 * return the minimum number between 3 number
+	 * @param n1
+	 * @param n2
+	 * @param n3
+	 * @return the minimum number
+	 */
+	protected double getMin(double n1, double n2, double n3) {
+		if(n1 > n2) {
+			if(n2 > n3)
+				return n3;
+			else
+				return n2;
+		}else {
+			if(n1 > n3)
+				return n3;
+			else
+				return n1;
+		}
+	}
+	
+	/**
+	 * return the maximum number between 3 number
+	 * @param n1
+	 * @param n2
+	 * @param n3
+	 * @return the maximum number
+	 */
+	protected double getMax(double n1, double n2, double n3) {
+		if(n1 > n2) {
+			if(n3 > n1)
+				return n3;
+			else
+				return n1;
+		}else {
+			if(n3 > n2)
+				return n3;
+			else
+				return n2;
 		}
 	}
 

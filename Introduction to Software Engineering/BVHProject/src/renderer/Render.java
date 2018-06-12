@@ -70,6 +70,9 @@ public class Render {
 		// calculate the color for each pixel
 		for (int i = 1; i < Ny; i++) {
 			for (int j = 1; j < Nx; j++) {
+				if(i == 250 & j == 250) {
+					System.out.println("hjlj");
+				}
 
 				// calculate the ray from the camera through the pixel
 				Ray ray = _scene.getCamera().constructRayThroughPixel(Nx, Ny, i, j, distance, width, height);
@@ -172,7 +175,7 @@ public class Render {
 
 		Ray reflectedRay = constructReflectedRay(n, v, point.point);
 		GeometryPoint reflectedPoint = findClosestIntersection(reflectedRay);
-		if (reflectedPoint.geometry != null) {
+		if (reflectedPoint.geometry != null && reflectedPoint.geometry.getMaterial().getKr() != 0) {
 			Color reflectedLight = calcColor(reflectedPoint, reflectedRay, level - 1, k * kr).scale(kr);
 			color.add(reflectedLight);
 		}

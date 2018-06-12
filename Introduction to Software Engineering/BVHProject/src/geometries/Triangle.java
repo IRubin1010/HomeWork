@@ -6,6 +6,7 @@ package geometries;
 
 import java.util.List;
 import java.util.Map;
+
 import primitives.*;
 
 /**
@@ -32,6 +33,7 @@ public class Triangle extends Plane {
 		_p1 = new Point3D(a);
 		_p2 = new Point3D(b);
 		_p3 = new Point3D(c);
+		setMinMax();
 	}
 
 	/**
@@ -43,6 +45,7 @@ public class Triangle extends Plane {
 		_p1 = new Point3D(other._p1);
 		_p2 = new Point3D(other._p2);
 		_p3 = new Point3D(other._p3);
+		setMinMax();
 	}
 
 	/***************** Operations ************************/
@@ -80,5 +83,36 @@ public class Triangle extends Plane {
 
 		return planeIntersection;
 	}
+
+	/* (non-Javadoc)
+	 * @see geometries.BoundinBox#calcMinMax()
+	 */
+	@Override
+	protected void setMinMax() {
+		
+		double p1X = _p1.getX().getValue();
+		double p1Y = _p1.getY().getValue();
+		double p1Z = _p1.getZ().getValue();
+		
+		double p2X = _p2.getX().getValue();
+		double p2Y = _p2.getY().getValue();
+		double p2Z = _p2.getZ().getValue();
+		
+		double p3X = _p3.getX().getValue();
+		double p3Y = _p3.getY().getValue();
+		double p3Z = _p3.getZ().getValue();
+		
+		minX = getMin(p1X, p2X, p3X);
+		maxX = getMax(p1X, p2X, p3X);
+		
+		minY = getMin(p1Y, p2Y, p3Y);
+		maxY = getMax(p1Y, p2Y, p3Y);
+		
+		minZ = getMin(p1Z, p2Z, p3Z);
+		maxZ = getMax(p1Z, p2Z, p3Z);
+	}
+	
+	
+	
 
 }

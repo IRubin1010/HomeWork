@@ -70,5 +70,14 @@ public class Tube extends RadialGeometry {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see geometries.BoundinBox#setMinMax()
+	 */
+	@Override
+	protected void setMinMax() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

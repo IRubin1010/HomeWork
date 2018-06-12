@@ -576,7 +576,7 @@ public class RenderTest {
 		Sphere sphere1 = new Sphere(new Point3D(0, 0, 80), 40, new Color(247, 59, 165),
 				new Material(300, 700, 18, 0.8, 0.2));
 		Rectangle rectangle = new Rectangle(new Point3D(300, 300, 150), new Point3D(300, -300, 150),
-				new Point3D(-300, 300, 150), new Color(0, 0, 0), new Material(2000, 500, 10, 1, 1));
+				new Point3D(-300, 300, 150), new Point3D(-300,-300,150), new Color(0, 0, 0), new Material(2000, 500, 10, 0, 0));
 		geometries.addGeometry(sphere);
 		geometries.addGeometry(sphere1);
 		geometries.addGeometry(rectangle);
@@ -630,9 +630,9 @@ public class RenderTest {
 		scene.setCamera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, -1), new Point3D(0, 0, 0)));
 		scene.setDistance(200);
 		Geometries geometries = new Geometries();
-		Plane p = new Plane(new Point3D(0, 1, -50), new Vector(0, -1, 0), new Color(40, 40, 62),
-				new Material(100, 10, 100, 0.9, 0));
-		geometries.addGeometry(p);
+//		Plane p = new Plane(new Point3D(0, 1, -50), new Vector(0, -1, 0), new Color(40, 40, 62),
+//				new Material(100, 10, 100, 0.9, 0));
+//		geometries.addGeometry(p);
 
 		List<LightSource> lights = new ArrayList<LightSource>();
 		SpotLight spot = new SpotLight(new Vector(0, -1, 0), new Point3D(0, 0, -200), 0.2, 0, new Color(100, 100, 100));

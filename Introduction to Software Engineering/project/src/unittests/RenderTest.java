@@ -709,5 +709,56 @@ public class RenderTest {
 	// render.writeToImage();
 	//
 	// }
-
+	
+	@Test
+	void BVHtest() {
+		Geometries g1 = new Geometries();
+		Scene scene = new Scene("Test BVH");
+		scene.setCamera(new Camera(new Vector(0, -1, 0), new Vector(0, 0, 1), new Point3D(0, 0, 0)));
+		scene.setDistance(100);
+		scene.setBackground(new Color(0, 0, 0));
+		scene.setAmbientLight(new AmbientLight(new Color(50, 50, 50), 0.5));
+		Sphere sphere1 = new Sphere(new Point3D(70, 70, 80), 30, new Color(0, 19, 86),
+				new Material(400, 500, 18, 0.7, 0.12));
+		Sphere sphere11 = new Sphere(new Point3D(70, 70, 80), 20, new Color(247, 59, 165),
+				new Material(300, 700, 18, 0.8, 0.2));
+		Sphere sphere2 = new Sphere(new Point3D(-70, -70, 80), 30, new Color(0, 19, 86),
+				new Material(400, 500, 18, 0.7, 0.12));
+		Sphere sphere22 = new Sphere(new Point3D(-70, -70, 80), 20, new Color(247, 59, 165),
+				new Material(300, 700, 18, 0.8, 0.2));
+		Sphere sphere3 = new Sphere(new Point3D(70, -70, 80), 30, new Color(0, 19, 86),
+				new Material(400, 500, 18, 0.7, 0.12));
+		Sphere sphere33 = new Sphere(new Point3D(70, -70, 80), 20, new Color(247, 59, 165),
+				new Material(300, 700, 18, 0.8, 0.2));
+		Sphere sphere4 = new Sphere(new Point3D(-70, 70, 80), 30, new Color(0, 19, 86),
+				new Material(400, 500, 18, 0.7, 0.12));
+		Sphere sphere44 = new Sphere(new Point3D(-70, 70, 80), 20, new Color(247, 59, 165),
+				new Material(300, 700, 18, 0.8, 0.2));
+		Sphere sphere5 = new Sphere(new Point3D(0, 0, 80), 30, new Color(0, 19, 86),
+				new Material(400, 500, 18, 0.7, 0.12));
+		Sphere sphere55 = new Sphere(new Point3D(0, 0, 80), 20, new Color(247, 59, 165),
+				new Material(300, 700, 18, 0.8, 0.2));
+		Rectangle rectangle = new Rectangle(new Point3D(300, 300, 150), new Point3D(300, -300, 150),
+				new Point3D(-300, 300, 150), new Color(0, 0, 0),
+				new Material(2000, 500, 10, 0, 0));
+		g1.addGeometry(rectangle);
+		g1.addGeometry(sphere1);
+		g1.addGeometry(sphere11);
+		g1.addGeometry(sphere2);
+		g1.addGeometry(sphere22);
+		g1.addGeometry(sphere3);
+		g1.addGeometry(sphere33);
+		g1.addGeometry(sphere4);
+		g1.addGeometry(sphere44);
+		g1.addGeometry(sphere5);
+		g1.addGeometry(sphere55);
+		scene.setGeometries(g1);
+		List<LightSource> lights = new ArrayList<LightSource>();
+		lights.add(new SpotLight(new Vector(-35, -35, 100), new Point3D(15, 15, -10), 10, 0, new Color(241, 60, 151))); // 151
+		scene.setLights(lights);
+		ImageWriter imageWriter = new ImageWriter("BVH test", 500, 500, 500, 500);
+		Render testRender = new Render(scene, imageWriter);
+		testRender.renderImage();
+		testRender.writeToImage();
+	}
 }
