@@ -31,6 +31,7 @@ public class Sphere extends RadialGeometry {
 	public Sphere(Point3D point, double radius, Color color, Material material) {
 		super(radius, color, material);
 		_point = new Point3D(point);
+		setMinMax();
 	}
 
 	/**
@@ -40,6 +41,7 @@ public class Sphere extends RadialGeometry {
 	public Sphere(Sphere other) {
 		super(other);
 		_point = new Point3D(other._point);
+		setMinMax();
 	}
 
 	/***************** Operations ************************/
@@ -102,6 +104,23 @@ public class Sphere extends RadialGeometry {
 			intersections.put(this, list);
 		}
 		return intersections;
+	}
+
+	/* (non-Javadoc)
+	 * @see geometries.BoundinBox#setMinMax()
+	 */
+	@Override
+	protected void setMinMax() {
+		
+		minX = _point.getX().getValue() - _radius;
+		maxX = _point.getX().getValue() + _radius;
+		
+		minY = _point.getY().getValue() - _radius;
+		maxY = _point.getY().getValue() + _radius;
+		
+		minZ = _point.getZ().getValue() - _radius;
+		maxZ = _point.getZ().getValue() + _radius;
+		
 	}
 	
 
