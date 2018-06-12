@@ -20,10 +20,10 @@ public class Tube extends RadialGeometry {
 	/**
 	 * constructor with ray and radius
 	 * 
-	 * @param ray
-	 * @param radius
-	 * @param color
-	 * @param material 
+	 * @param ray ray of the tube
+	 * @param radius radius of the tube
+	 * @param color emission color of the tube
+	 * @param material material of the tube
 	 */
 	public Tube(Ray ray, double radius, Color color, Material material) {
 		super(radius, color, material);
@@ -32,7 +32,7 @@ public class Tube extends RadialGeometry {
 
 	/**
 	 * copy constructor
-	 * @param other
+	 * @param other tube
 	 */
 	public Tube(Tube other) {
 		super(other);
@@ -41,10 +41,10 @@ public class Tube extends RadialGeometry {
 
 	/***************** Operations ************************/
 
-	/**
-	 * return normal from a point on the tube
-	 * @param point
+	/* (non-Javadoc)
+	 * @see geometries.Geometry#getNormal(primitives.Point3D)
 	 */
+	@Override
 	public Vector getNormal(Point3D point) {
 
 		// formula: surcharge = c = (PtoPVector*rayVector(normalize))*rayVector
@@ -62,14 +62,13 @@ public class Tube extends RadialGeometry {
 		return new Vector(PtoPVector.sub(surchargeVector)).normalize();
 	}
 
-	/**
-	 * function find Intersections
-	 * @param ray
-	 * @return list of points of the intersection
+	/* (non-Javadoc)
+	 * @see geometries.Intersectable#findIntersections(primitives.Ray)
 	 */
 	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		return null;
 	}
 
+	
 }

@@ -3,7 +3,7 @@
 * @author meir shimon 305625295 nthr120@gmail.com
 */
 
-package elements;
+package lights;
 
 import primitives.Color;
 
@@ -21,7 +21,7 @@ public class AmbientLight extends Light{
 	 * @param red
 	 * @param green
 	 * @param blue
-	 * @param Ka
+	 * @param Ka factor of light
 	 */
 	public AmbientLight(double red, double green, double blue, double Ka) {
 		super(new Color(red,green,blue).scale(Ka));
@@ -31,31 +31,11 @@ public class AmbientLight extends Light{
 	/**
 	 * constructor with Color and Ka
 	 * @param color
-	 * @param Ka
+	 * @param Ka factor of light
 	 */
 	public AmbientLight(Color color, double Ka) {
 		super(new Color(color).scale(Ka));
 		_Ka = Ka;
-	}
-	
-	/**
-	 * constructor with java.awt.Color and Ka
-	 * @param color
-	 * @param Ka
-	 */
-	public AmbientLight(java.awt.Color color, double Ka) {
-		super(new Color(color).scale(Ka));
-		_Ka = Ka;
-	}
-	
-	/***************** Operations ************************/
-
-	/**
-	 * get intensity
-	 * @return
-	 */
-	public Color getIntensity() {
-		return new Color(_color);
 	}
 	
 }

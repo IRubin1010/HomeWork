@@ -23,11 +23,11 @@ public class Plane extends Geometry {
 	
 	/**
 	 * constructor with 3 points
-	 * @param a
-	 * @param b
-	 * @param c
-	 * @param color
-	 * @param material TODO
+	 * @param a point a
+	 * @param b point b
+	 * @param c point c 
+	 * @param color emission color of the plane
+	 * @param material material of the plane
 	 */
 	public Plane(Point3D a, Point3D b, Point3D c, Color color, Material material) {
 		super(color, material);
@@ -55,11 +55,11 @@ public class Plane extends Geometry {
 	}
 
 	/**
-	 * constructor with point and plumb
-	 * @param point
-	 * @param plumb
-	 * @param color
-	 * @param material
+	 * constructor with point and normal
+	 * @param point point on the plane
+	 * @param normal normal to the plane
+	 * @param color emission color of the plane
+	 * @param material material of the plane
 	 */
 	public Plane(Point3D point, Vector normal, Color color, Material material) {
 		super(color, material);
@@ -69,7 +69,7 @@ public class Plane extends Geometry {
 
 	/**
 	 * copy constructor
-	 * @param other
+	 * @param other plane
 	 */
 	public Plane(Plane other) {
 		super(other);
@@ -78,20 +78,17 @@ public class Plane extends Geometry {
 	}
 
 	/***************** Operations ************************/
-
-	/**
-	 * return normal from a point on the plane
-	 * @param point
+	
+	/* (non-Javadoc)
+	 * @see geometries.Geometry#getNormal(primitives.Point3D)
 	 */
+	@Override
 	public Vector getNormal(Point3D point) {
 		return _normal;
 	}
 
-	/**
-	 * function find Intersections
-	 * @param ray
-	 * @return Map holds a pair of geometry and list the point of intersection with
-	 *         the geometry
+	/* (non-Javadoc)
+	 * @see geometries.Intersectable#findIntersections(primitives.Ray)
 	 */
 	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
@@ -134,4 +131,7 @@ public class Plane extends Geometry {
 			return intersections;
 		}
 	}
+
+	
+
 }

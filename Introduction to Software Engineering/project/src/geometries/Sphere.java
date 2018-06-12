@@ -22,10 +22,10 @@ public class Sphere extends RadialGeometry {
 	/**
 	 * constructor with point and radius
 	 * 
-	 * @param point
-	 * @param radius
-	 * @param color
-	 * @param material 
+	 * @param point the middle point of the sphere
+	 * @param radius the radius of the sphere
+	 * @param color emission color of the sphere
+	 * @param material material of the sphere
 	 */
 
 	public Sphere(Point3D point, double radius, Color color, Material material) {
@@ -35,7 +35,7 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * copy constructor
-	 * @param other
+	 * @param other sphere
 	 */
 	public Sphere(Sphere other) {
 		super(other);
@@ -43,21 +43,20 @@ public class Sphere extends RadialGeometry {
 	}
 
 	/***************** Operations ************************/
-
-	/**
-	 * return normal from a point on the sphere
-	 * @param point
+	
+	/* (non-Javadoc)
+	 * @see geometries.Geometry#getNormal(primitives.Point3D)
 	 */
+	@Override
 	public Vector getNormal(Point3D point) {
 		// vector from the center point to other point
 		return point.vectorSubtract(_point).normalize();
 	}
 
-	/**
-	 * function find Intersections
-	 * @param ray
-	 * @return list of points of the intersection
+	/* (non-Javadoc)
+	 * @see geometries.Intersectable#findIntersections(primitives.Ray)
 	 */
+	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		Map<Geometry, List<Point3D>> intersections = new HashMap<>();
 		List<Point3D> list = new ArrayList<>();
@@ -104,4 +103,6 @@ public class Sphere extends RadialGeometry {
 		}
 		return intersections;
 	}
+	
+
 }

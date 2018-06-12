@@ -21,22 +21,22 @@ public class Triangle extends Plane {
 
 	/**
 	 * constructor with 3 points
-	 * @param p1
-	 * @param p2
-	 * @param p3
-	 * @param color 
-	 * @param material 
+	 * @param a point a
+	 * @param b point b
+	 * @param c point c
+	 * @param color emission color of the triangle
+	 * @param material material of the triangle
 	 */
-	public Triangle(Point3D p1, Point3D p2, Point3D p3, Color color, Material material) {
-		super(p1, p2, p3, color,material);
-		_p1 = new Point3D(p1);
-		_p2 = new Point3D(p2);
-		_p3 = new Point3D(p3);
+	public Triangle(Point3D a, Point3D b, Point3D c, Color color, Material material) {
+		super(a, b, c, color,material);
+		_p1 = new Point3D(a);
+		_p2 = new Point3D(b);
+		_p3 = new Point3D(c);
 	}
 
 	/**
 	 * copy constructor
-	 * @param other
+	 * @param other triangle
 	 */
 	public Triangle(Triangle other) {
 		super(other);
@@ -44,14 +44,13 @@ public class Triangle extends Plane {
 		_p2 = new Point3D(other._p2);
 		_p3 = new Point3D(other._p3);
 	}
-	
+
 	/***************** Operations ************************/
 
-	/**
-	 * function find Intersections
-	 * @param ray
-	 * @return list of points of the intersection
+	/* (non-Javadoc)
+	 * @see geometries.Plane#findIntersections(primitives.Ray)
 	 */
+	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		// get plane intersection
 		Map<Geometry, List<Point3D>> planeIntersection = super.findIntersections(ray);

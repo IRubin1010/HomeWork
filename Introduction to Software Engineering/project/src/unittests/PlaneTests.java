@@ -73,8 +73,8 @@ class PlaneTests {
 		ArrayList<Point3D> list = new ArrayList<>();
 		Scene scene = new Scene("test scene");
         Camera camera = new Camera(new Vector(0,-1,0),new Vector(0,0,-1),new Point3D(0,0,0.5));
-        scene.set_camera(camera);
-        scene.set_distance(4);
+        scene.setCamera(camera);
+        scene.setDistance(4);
         //1 point
     	Plane plane1 = new Plane(new Point3D(1,1,1),new Vector(1,1,1), new Color(255,255,255), new Material(2,3,4, 0, 0));
         list=getIntersections(scene,plane1);
@@ -98,7 +98,7 @@ class PlaneTests {
 		ArrayList<Point3D> list = new ArrayList<>();
         for(int i = 1 ; i < 4 ;++i) {
             for (int j = 1; j < 4; ++j) {
-                Ray r = scene.get_camera().constructRayThroghPixel(3, 3, i, j, scene.get_distance(), 9, 9);
+                Ray r = scene.getCamera().constructRayThroughPixel(3, 3, i, j, scene.getDistance(), 9, 9);
                 Map<Geometry, List<Point3D>> map = plane.findIntersections(r);
 				if(!map.isEmpty())
 					list.addAll(map.get(plane));

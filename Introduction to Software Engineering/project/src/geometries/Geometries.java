@@ -30,7 +30,7 @@ public class Geometries implements Intersectable {
 
 	/**
 	 * get list of geometries
-	 * @return
+	 * @return the geometries list
 	 */
 	public List<Geometry> getGeometries() {
 		return listShape;
@@ -40,16 +40,14 @@ public class Geometries implements Intersectable {
 
 	/**
 	 * Add geometry to the geometries
-	 * @param geometry
-	 *            - Geometry to add
+	 * @param geometry Geometry to add
 	 */
 	public void addGeometry(Geometry geometry) {
 		this.listShape.add(geometry);
 	}
 
-	/**
-	 * override findIntersections
-	 * @param ray - the ray for which you want the cut points with the geometry
+	/* (non-Javadoc)
+	 * @see geometries.Intersectable#findIntersections(primitives.Ray)
 	 */
 	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
@@ -59,5 +57,8 @@ public class Geometries implements Intersectable {
 		}
 		return intersections;
 	}
+
+	
+	
 
 }
