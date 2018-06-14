@@ -91,7 +91,7 @@ public class Camera {
 		if (pcY != j)
 			Pij = Pij.addVectorToPoint(_vUp.scaleVector((pcY - j) * Ry));
 		Vector Vij = Pij.vectorSubtract(_p0);
-		Ray ray = new Ray(_p0, Vij);
+		Ray ray = new Ray(Pij, Vij);
 		return ray;
 	}
 }
