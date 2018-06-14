@@ -175,7 +175,7 @@ public class Render {
 
 		Ray reflectedRay = constructReflectedRay(n, v, point.point);
 		GeometryPoint reflectedPoint = findClosestIntersection(reflectedRay);
-		if (reflectedPoint.geometry != null && reflectedPoint.geometry.getMaterial().getKr() != 0) {
+		if (reflectedPoint.geometry != null) {
 			Color reflectedLight = calcColor(reflectedPoint, reflectedRay, level - 1, k * kr).scale(kr);
 			color.add(reflectedLight);
 		}
