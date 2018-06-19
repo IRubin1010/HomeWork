@@ -22,10 +22,14 @@ public class Sphere extends RadialGeometry {
 	/**
 	 * constructor with point and radius
 	 * 
-	 * @param point the middle point of the sphere
-	 * @param radius the radius of the sphere
-	 * @param color emission color of the sphere
-	 * @param material material of the sphere
+	 * @param point
+	 *            the middle point of the sphere
+	 * @param radius
+	 *            the radius of the sphere
+	 * @param color
+	 *            emission color of the sphere
+	 * @param material
+	 *            material of the sphere
 	 */
 
 	public Sphere(Point3D point, double radius, Color color, Material material) {
@@ -36,7 +40,9 @@ public class Sphere extends RadialGeometry {
 
 	/**
 	 * copy constructor
-	 * @param other sphere
+	 * 
+	 * @param other
+	 *            sphere
 	 */
 	public Sphere(Sphere other) {
 		super(other);
@@ -45,8 +51,10 @@ public class Sphere extends RadialGeometry {
 	}
 
 	/***************** Operations ************************/
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see geometries.Geometry#getNormal(primitives.Point3D)
 	 */
 	@Override
@@ -55,73 +63,79 @@ public class Sphere extends RadialGeometry {
 		return point.vectorSubtract(_point).normalize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see geometries.Intersectable#findIntersections(primitives.Ray)
 	 */
 	@Override
 	public Map<Geometry, List<Point3D>> findIntersections(Ray ray) {
 		Map<Geometry, List<Point3D>> intersections = new HashMap<>();
-		List<Point3D> list = new ArrayList<>();
-		Point3D rayPoint = ray.getPoint();
-		Vector rayVector = ray.getDirection();
-		Vector u;
-		try {
-			// u = O - P0
-			u = _point.vectorSubtract(rayPoint);
-		} catch (IllegalArgumentException e) {
-			// case P0 is same as _point
-			// U = 0, tm = 0, d = 0, th = radius
-			// intersection = Po + t*V
-			list.add(_point.addVectorToPoint(rayVector.scaleVector(_radius)));
-			intersections.put(this, list);
-			return intersections;
-		}
+		if (isIntersectedBox(ray)) {
+			List<Point3D> list = new ArrayList<>();
+			Point3D rayPoint = ray.getPoint();
+			Vector rayVector = ray.getDirection();
+			Vector u;
+			try {
+				// u = O - P0
+				u = _point.vectorSubtract(rayPoint);
+			} catch (IllegalArgumentException e) {
+				// case P0 is same as _point
+				// U = 0, tm = 0, d = 0, th = radius
+				// intersection = Po + t*V
+				list.add(_point.addVectorToPoint(rayVector.scaleVector(_radius)));
+				intersections.put(this, list);
+				return intersections;
+			}
 
-		// tm = u * v
-		double tm = u.dotProduct(rayVector);
-		// d = sqrt(|U|^2 - tm^2)
-		double d = Math.sqrt(u.dotProduct(u) - tm * tm);
-		// if d > 0 - no intersection
-		if (d > _radius)
-			return intersections;
-		// th = sqrt(r^2 - d^2)
-		double th = Math.sqrt(_radius * _radius - d * d);
-		if (Coordinate.ZERO.equals(th)) {
-			if (tm > 0) {
-				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(tm)));
+			// tm = u * v
+			double tm = u.dotProduct(rayVector);
+			// d = sqrt(|U|^2 - tm^2)
+			double d = Math.sqrt(u.dotProduct(u) - tm * tm);
+			// if d > 0 - no intersection
+			if (d > _radius)
+				return intersections;
+			// th = sqrt(r^2 - d^2)
+			double th = Math.sqrt(_radius * _radius - d * d);
+			if (Coordinate.ZERO.equals(th)) {
+				if (tm > 0) {
+					list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(tm)));
+				}
+			} else {
+				double t1 = tm + th;
+				double t2 = tm - th;
+				if (t1 > 0 && !Coordinate.ZERO.equals(t1)) {
+					list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
+				}
+				if (t2 > 0 && !Coordinate.ZERO.equals(t2)) {
+					list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
+				}
 			}
-		} else {
-			double t1 = tm + th;
-			double t2 = tm - th;
-			if (t1 > 0 && !Coordinate.ZERO.equals(t1)) {
-				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t1)));
+			if (!list.isEmpty()) {
+				intersections.put(this, list);
 			}
-			if (t2 > 0 && !Coordinate.ZERO.equals(t2)) {
-				list.add(rayPoint.addVectorToPoint(rayVector.scaleVector(t2)));
-			}
-		}
-		if (!list.isEmpty()) {
-			intersections.put(this, list);
 		}
 		return intersections;
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see geometries.BoundinBox#setMinMax()
 	 */
 	@Override
 	protected void setMinMax() {
-		
+
 		minX = _point.getX().getValue() - _radius;
 		maxX = _point.getX().getValue() + _radius;
-		
+
 		minY = _point.getY().getValue() - _radius;
 		maxY = _point.getY().getValue() + _radius;
-		
+
 		minZ = _point.getZ().getValue() - _radius;
 		maxZ = _point.getZ().getValue() + _radius;
-		
+
 	}
-	
 
 }
