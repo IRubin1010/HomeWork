@@ -1,15 +1,31 @@
 import java.util.Date;
 
 public abstract class CommunityMember implements CommunityRightsAndObligations {
-        private int ID;
-        private Jender jender;
-        private String name;
-        private String address;
-        private Date birthDay;
-        private float numOfToraHours;
-        private float numOfWorkHours;
-        private float amountGemachUtilization;
-        private Volunteering volunteering;
+    private int ID;
+    private Gender gender;
+    private String name;
+    private String address;
+    private Date birthday;
+    private float numOfToraHours;
+    private float numOfWorkHours;
+    private float salary;
+    private float amountGemachUtilization;
+    private Volunteering volunteering;
+
+    public CommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering) throws CommunityExeption {
+        float numOfBusyHours = numOfToraHours + numOfWorkHours;
+        if(numOfBusyHours > 112 || numOfBusyHours < 112) throw new CommunityExeption("number of busy hours is not אwo thirds of the week hours");
+        this.ID = ID;
+        this.gender = gender;
+        this.name = name;
+        this.address = address;
+        this.birthday = birthday;
+        this.numOfToraHours = numOfToraHours;
+        this.numOfWorkHours = numOfWorkHours;
+        this.salary = salary;
+        this.amountGemachUtilization = amountGemachUtilization;
+        this.volunteering = volunteering;
+    }
 
     public int getID() {
         return ID;
@@ -19,12 +35,12 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
         this.ID = ID;
     }
 
-    public Jender getJender() {
-        return jender;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setJender(Jender jender) {
-        this.jender = jender;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getName() {
@@ -43,12 +59,12 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
         this.address = address;
     }
 
-    public Date getBirthDay() {
-        return birthDay;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public float getNumOfToraHours() {
@@ -67,6 +83,14 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
         this.numOfWorkHours = numOfWorkHours;
     }
 
+    public float getSalary() {
+        return salary;
+    }
+
+    public void setSalary(float salary) {
+        this.salary = salary;
+    }
+
     public float getAmountGemachUtilization() {
         return amountGemachUtilization;
     }
@@ -81,6 +105,11 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
 
     public void setVolunteering(Volunteering volunteering) {
         this.volunteering = volunteering;
+    }
+
+    public int baseCommunityTax(){
+        if(salary > 10000) return 1000;
+        return 500;
     }
 }
 
