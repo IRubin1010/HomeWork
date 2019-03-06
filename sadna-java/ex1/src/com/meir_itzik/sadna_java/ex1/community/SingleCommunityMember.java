@@ -1,9 +1,16 @@
+package com.meir_itzik.sadna_java.ex1.community;
+
+import com.meir_itzik.sadna_java.ex1.enums.Gender;
+import com.meir_itzik.sadna_java.ex1.enums.Volunteering;
+import com.meir_itzik.sadna_java.ex1.exceptions.CommunityException;
+
 import java.util.Date;
 
-public class SingelCommunityMember extends CommunityMember {
+
+public class SingleCommunityMember extends CommunityMember {
     private int educationYears;
 
-    public SingelCommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering, int educationYears) throws CommunityExeption {
+    public SingleCommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering, int educationYears) throws CommunityException {
         super(ID, gender, name, address, birthday, numOfToraHours, numOfWorkHours, salary, amountGemachUtilization, volunteering);
         this.educationYears = educationYears;
     }

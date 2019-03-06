@@ -1,3 +1,5 @@
+package com.meir_itzik.sadna_java.ex1.community;
+
 public interface CommunityRightsAndObligations {
     /**
      * @return the community tax that community member should pay

@@ -1,3 +1,9 @@
+package com.meir_itzik.sadna_java.ex1.community;
+
+import com.meir_itzik.sadna_java.ex1.enums.Gender;
+import com.meir_itzik.sadna_java.ex1.enums.Volunteering;
+import com.meir_itzik.sadna_java.ex1.exceptions.CommunityException;
+
 import java.util.Date;
 
 public abstract class CommunityMember implements CommunityRightsAndObligations {
@@ -12,9 +18,10 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
     private float amountGemachUtilization;
     private Volunteering volunteering;
 
-    public CommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering) throws CommunityExeption {
+    //TODO create const variable for 2/3 hours of the week
+    public CommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering) throws CommunityException {
         float numOfBusyHours = numOfToraHours + numOfWorkHours;
-        if(numOfBusyHours > 112 || numOfBusyHours < 112) throw new CommunityExeption("number of busy hours is not אwo thirds of the week hours");
+        if(numOfBusyHours > 112 || numOfBusyHours < 112) throw new CommunityException("number of busy hours is not אwo thirds of the week hours");
         this.ID = ID;
         this.gender = gender;
         this.name = name;
