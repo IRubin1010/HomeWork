@@ -17,11 +17,11 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
     private float salary;
     private float amountGemachUtilization;
     private Volunteering volunteering;
+    static final int TOTAL_HOURS = 112;
 
-    //TODO create const variable for 2/3 hours of the week
     public CommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering) throws CommunityException {
         float numOfBusyHours = numOfToraHours + numOfWorkHours;
-        if(numOfBusyHours > 112 || numOfBusyHours < 112) throw new CommunityException("number of busy hours is not אwo thirds of the week hours");
+        if(numOfBusyHours != TOTAL_HOURS) throw new CommunityException("number of busy hours is not two thirds of the week hours");
         this.ID = ID;
         this.gender = gender;
         this.name = name;
@@ -118,6 +118,12 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
         if(salary > 10000) return 1000;
         return 500;
     }
+
+    @Override
+    public String toString(){
+        return "\n\nName: " + this.name + "\nGender: " + gender + "\nID: " + ID + "\nAddress: " + address + "\nBirthday" + birthday +"\nNum of tora hours: " + numOfToraHours +"\nNum of work hours: " + numOfWorkHours + "\nSalary: " + salary + "\nAmount gemach utilization: " + amountGemachUtilization +"\nVolunteering: " +volunteering;
+    }
+
 }
 
 

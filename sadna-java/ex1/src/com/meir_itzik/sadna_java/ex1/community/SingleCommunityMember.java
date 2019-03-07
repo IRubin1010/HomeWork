@@ -29,7 +29,7 @@ public class SingleCommunityMember extends CommunityMember {
     @Override
     public int monthlyCommunityTax() {
         float numOfToraHours = this.getNumOfToraHours();
-        if(numOfToraHours > 8) return 0;
+        if(numOfToraHours > 100) return 0;
         return this.baseCommunityTax();
     }
 
@@ -49,5 +49,10 @@ public class SingleCommunityMember extends CommunityMember {
         Gender memberGender = this.getGender();
         if(memberGender == Gender.MALE) return 30;
         return 20;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\nEducationYears: " +educationYears;
     }
 }

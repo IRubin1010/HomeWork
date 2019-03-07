@@ -38,7 +38,7 @@ public class MarriedCommunityMember extends CommunityMember {
     @Override
     public int monthlyCommunityTax() {
         float numOfToraHours = this.getNumOfToraHours();
-        if(numOfToraHours > 8) return 0;
+        if(numOfToraHours > 100) return 0;
         int memberTax = this.baseCommunityTax();
         int assumption = this.getNumOfKidsUnder18() * 25;
         return assumption > memberTax ? 0 : memberTax - assumption;
@@ -68,5 +68,10 @@ public class MarriedCommunityMember extends CommunityMember {
         Gender memberGender = this.getGender();
         if(memberGender == Gender.MALE) return 25;
         return 15;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\nPartnerID: " +partnerID + "\nNumber of kids under 18: " + numOfKidsUnder18;
     }
 }
