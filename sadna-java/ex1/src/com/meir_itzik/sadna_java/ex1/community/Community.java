@@ -39,7 +39,6 @@ public class Community {
         volunteerHours.put(Volunteering.PHYSICAL, 0);
         volunteerHours.put(Volunteering.MUSICAL, 0);
         for (CommunityMember member: communityMembers) {
-            Integer i = 0;
             switch (member.getVolunteering()){
                 case SPIRITUAL:
                     volunteerHours.put(Volunteering.SPIRITUAL, volunteerHours.get(Volunteering.SPIRITUAL) + member.recommendedMonthlyVolunteerHours());
