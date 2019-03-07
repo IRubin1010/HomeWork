@@ -32,6 +32,7 @@ public class Community {
         return maxAmountFromGemach - gemachUtilizedAmount;
     }
 
+    //TODO itzik I can remove the i vairable?
     public List<Integer> communityVolunteerHours(){
         Map<Volunteering, Integer> volunteerHours = new HashMap<>();
         volunteerHours.put(Volunteering.SPIRITUAL, 0);
