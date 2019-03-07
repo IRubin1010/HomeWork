@@ -10,6 +10,22 @@ public class MarriedCommunityMember extends CommunityMember {
     private int partnerID;
     private int numOfKidsUnder18;
 
+    /**
+     * Constructor
+     * @param ID member id
+     * @param gender member gender
+     * @param name member name
+     * @param address member address
+     * @param birthday member birthday
+     * @param numOfToraHours member number of Tora hours in month
+     * @param numOfWorkHours member number of work hours in month
+     * @param salary member salary
+     * @param amountGemachUtilization member amount utilized from Gemach
+     * @param volunteering member kind of volunteering
+     * @param partnerID member partner id
+     * @param numOfKidsUnder18 member number of kids under 18
+     * @throws CommunityException
+     */
     public MarriedCommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering, int partnerID, int numOfKidsUnder18) throws CommunityException {
         super(ID, gender, name, address, birthday, numOfToraHours, numOfWorkHours, salary, amountGemachUtilization, volunteering);
         this.partnerID = partnerID;
