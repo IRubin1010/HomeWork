@@ -16,7 +16,7 @@ import primitives.Ray;
  * should deal with the collection of shapes as a single form according to the
  * principle of structural pattern - composite
  */
-public class Geometries extends BoundinBox implements Intersectable {
+public class Geometries extends BoundinBox {
 
 	/**
 	 * List hold all the shapes that make up the structure

@@ -9,7 +9,7 @@ import primitives.*;
 /**
  * abstract class Geometry
  */
-public abstract class Geometry extends BoundinBox implements Intersectable {
+public abstract class Geometry extends BoundinBox {
 
 	protected Color _emission;
 	protected Material _material;
