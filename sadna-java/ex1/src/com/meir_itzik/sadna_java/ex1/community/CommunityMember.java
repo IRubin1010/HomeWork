@@ -17,8 +17,22 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
     private float salary;
     private float amountGemachUtilization;
     private Volunteering volunteering;
-    static final int TOTAL_HOURS = 112;
+    private static final int TOTAL_HOURS = 112;
 
+    /**
+     * Constructor
+     * @param ID member id
+     * @param gender member gender
+     * @param name member name
+     * @param address member address
+     * @param birthday member birthday
+     * @param numOfToraHours member number of Tora hours in month
+     * @param numOfWorkHours member number of work hours in month
+     * @param salary member salary
+     * @param amountGemachUtilization member amount utilized from Gemach
+     * @param volunteering member kind of volunteering
+     * @throws CommunityException
+     */
     public CommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering) throws CommunityException {
         float numOfBusyHours = numOfToraHours + numOfWorkHours;
         if(numOfBusyHours != TOTAL_HOURS) throw new CommunityException("number of busy hours is not two thirds of the week hours");
