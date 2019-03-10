@@ -3,4 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="appBtnColor">#59FF9904</color>
+    <color name="appColor">#FF9904</color>
 </resources>
