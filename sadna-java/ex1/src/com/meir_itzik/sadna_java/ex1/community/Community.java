@@ -2,22 +2,31 @@ package com.meir_itzik.sadna_java.ex1.community;
 
 import com.meir_itzik.sadna_java.ex1.enums.Volunteering;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Community {
 
     public List<CommunityMember> communityMembers;
 
+    /**
+     * default constructor
+     */
     public Community() {
         this.communityMembers = new ArrayList<>();
     }
 
+    /**
+     * adds a community member
+     * @param communityMember member
+     */
     public void addCommunityMember(CommunityMember communityMember){
         communityMembers.add(communityMember);
     }
 
+    /**
+     * calculate the total tax can be receive from the community in a month
+     * @return the total tax
+     */
     public int monthlyTotalComunityTax(){
         int totalTax = 0;
         for (CommunityMember member: communityMembers) {
@@ -26,13 +35,21 @@ public class Community {
         return totalTax;
     }
 
+    /**
+     * request for Gemach for a member
+     * @param communityMember member
+     * @return the amount the member can get from Gemach
+     */
     public float gemachRequest(CommunityMember communityMember){
         int maxAmountFromGemach = communityMember.maxAmountFromGemach();
         float gemachUtilizedAmount = communityMember.getAmountGemachUtilization();
         return maxAmountFromGemach - gemachUtilizedAmount;
     }
 
-    //TODO itzik I can remove the i vairable?
+    /**
+     * calculate the hours of volunteering of the community
+     * @return list of the hours sorted by the kind of the volunteering
+     */
     public List<Integer> communityVolunteerHours(){
         Map<Volunteering, Integer> volunteerHours = new HashMap<>();
         volunteerHours.put(Volunteering.SPIRITUAL, 0);

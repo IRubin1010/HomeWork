@@ -10,6 +10,21 @@ import java.util.Date;
 public class SingleCommunityMember extends CommunityMember {
     private int educationYears;
 
+    /**
+     * Constructor
+     * @param ID member id
+     * @param gender member gender
+     * @param name member name
+     * @param address member address
+     * @param birthday member birthday
+     * @param numOfToraHours member number of Tora hours in month
+     * @param numOfWorkHours member number of work hours in month
+     * @param salary member salary
+     * @param amountGemachUtilization member amount utilized from Gemach
+     * @param volunteering member kind of volunteering
+     * @param educationYears member number of education years
+     * @throws CommunityException
+     */
     public SingleCommunityMember(int ID, Gender gender, String name, String address, Date birthday, float numOfToraHours, float numOfWorkHours, float salary, float amountGemachUtilization, Volunteering volunteering, int educationYears) throws CommunityException {
         super(ID, gender, name, address, birthday, numOfToraHours, numOfWorkHours, salary, amountGemachUtilization, volunteering);
         this.educationYears = educationYears;
