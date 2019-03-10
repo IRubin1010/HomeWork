@@ -17,6 +17,7 @@ public abstract class CommunityMember implements CommunityRightsAndObligations {
     private float salary;
     private float amountGemachUtilization;
     private Volunteering volunteering;
+  
     private static final int TOTAL_HOURS = 112;
 
     /**
