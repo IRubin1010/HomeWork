@@ -45,7 +45,8 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:autofillHints="@string/prompt_name"/>
+                    android:backgroundTint="@color/appColor"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -61,7 +62,8 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:autofillHints="@string/prompt_email"/>
+                    android:backgroundTint="@color/appColor"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 

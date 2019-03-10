@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setBackgroundDrawableResource(R.drawable.tttt);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
