@@ -15,4 +15,11 @@ public class Travel {
     Status status;
     Passenger passenger;
 
+    public Travel(String source, String destination, Date start, Status status, Passenger passenger) {
+        this.source = source;
+        this.destination = destination;
+        this.start = start;
+        this.status = status;
+        this.passenger = passenger;
+    }
 }
