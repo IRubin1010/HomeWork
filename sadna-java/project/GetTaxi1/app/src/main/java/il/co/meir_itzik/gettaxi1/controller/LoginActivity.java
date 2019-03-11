@@ -21,8 +21,10 @@ import il.co.meir_itzik.gettaxi1.R;
 public class LoginActivity extends AppCompatActivity {
 
     // UI references.
+    private EditText mFirstNameView;
+    private EditText mLastNameView;
     private EditText mEmailView;
-    private EditText mNameView;
+
     private View mProgressView;
     private View mLoginFormView;
 
@@ -32,9 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setBackgroundDrawableResource(R.drawable.tttt);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        mFirstNameView = findViewById(R.id.first_name);
+        mLastNameView = findViewById(R.id.last_name);
         mEmailView = findViewById(R.id.email);
-
-        mNameView = findViewById(R.id.name);
 
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -66,19 +68,27 @@ public class LoginActivity extends AppCompatActivity {
     private void attemptLogin() {
 
         // Reset errors.
+        mFirstNameView.setError(null);
+        mLastNameView.setError(null);
         mEmailView.setError(null);
-        mNameView.setError(null);
 
         // Store values at the time of the login attempt.
+        String firstName = mFirstNameView.getText().toString();
+        String lastName = mLastNameView.getText().toString();
         String email = mEmailView.getText().toString();
-        String name = mNameView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        if(TextUtils.isEmpty(name)){
-            mNameView.setError(getString(R.string.error_field_required));
-            focusView = mNameView;
+        if(TextUtils.isEmpty(firstName)){
+            mFirstNameView.setError(getString(R.string.error_field_required));
+            focusView = mFirstNameView;
+            cancel = true;
+        }
+
+        if(TextUtils.isEmpty(lastName)){
+            mFirstNameView.setError(getString(R.string.error_field_required));
+            focusView = mFirstNameView;
             cancel = true;
         }
 
