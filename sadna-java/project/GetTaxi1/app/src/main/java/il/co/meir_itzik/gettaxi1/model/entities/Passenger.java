@@ -4,15 +4,13 @@ public class Passenger {
     private String firstName;
     private String lastName;
     private String email;
-    private String ID;
     private String phoneNumber;
     private String CreditNumber;
 
-    public Passenger(String firstName, String lastName, String email, String ID, String phoneNumber, String creditNumber) {
+    public Passenger(String firstName, String lastName, String email, String phoneNumber, String creditNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.ID = ID;
         this.phoneNumber = phoneNumber;
         CreditNumber = creditNumber;
     }
@@ -45,14 +43,6 @@ public class Passenger {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
     }
 
     public String getPhoneNumber() {
