@@ -42,5 +42,13 @@ public class Validation {
         return creditCard != null && (creditCard.length() == 12 || creditCard.length() == 9);
     }
 
+    public static boolean isIdEmpty(String id) {
+        return id != null && id.isEmpty();
+    }
+
+    public static boolean isIdValid(String id) {
+        return id != null && (id.length() == 9);
+    }
+
 
 }
