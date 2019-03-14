@@ -1,15 +1,19 @@
 package il.co.meir_itzik.gettaxi1.model.entities;
 
-public class Passenger {
+import java.io.Serializable;
+
+public class Passenger implements Serializable {
     private String firstName;
     private String lastName;
+    private String id;
     private String email;
     private String phoneNumber;
     private String CreditNumber;
 
-    public Passenger(String firstName, String lastName, String email, String phoneNumber, String creditNumber) {
+    public Passenger(String firstName, String lastName, String id, String email, String phoneNumber, String creditNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
         CreditNumber = creditNumber;
@@ -35,6 +39,14 @@ public class Passenger {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
