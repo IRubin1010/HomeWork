@@ -12,16 +12,16 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.TimeZone;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
+import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
@@ -30,13 +30,15 @@ import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 public class TravelDetailsNoRegistration extends Fragment {
 
-    EditText fromView, destinationView, timeView;
-    String from, destination, time,  comment, date;
+    EditText fromView, destinationView, timeView, commentView;
+    String from, destination, time = "",  comment, date;
     int hour, minute;
     Button orderBtn, cancelBtn;
     View focusView = null, progressView;
+    TextView clearTimeView;
     Passenger passenger;
     DataSource DB = BackendFactory.getDatasource();
+    Travel travel;
 
 
     public TravelDetailsNoRegistration() {
@@ -55,6 +57,8 @@ public class TravelDetailsNoRegistration extends Fragment {
 
         fromView = view.findViewById(R.id.from);
         destinationView = view.findViewById(R.id.destination);
+        commentView = view.findViewById(R.id.comment);
+        clearTimeView = view.findViewById(R.id.clear_time);
 
         timeView = view.findViewById(R.id.time);
         timeView.setInputType(InputType.TYPE_NULL);
@@ -78,6 +82,7 @@ public class TravelDetailsNoRegistration extends Fragment {
                         else date = "today";
                         time = date + " at " + chosenHour + ":" + chosenMinute;
                         timeView.setText(time);
+                        clearTimeView.setVisibility(View.VISIBLE);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 timePicker.setTitle("Select Time");
@@ -86,11 +91,28 @@ public class TravelDetailsNoRegistration extends Fragment {
             }
         });
 
+        clearTimeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(time.equals("")){
+                    clearTimeView.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    timeView.setText("");
+                    time = "";
+                    clearTimeView.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
         cancelBtn = view.findViewById(R.id.cancel);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 emptyFields();
+//                PassengerDetailsNoRegistration p = new PassengerDetailsNoRegistration();
+//                p.emptyFields();
+//                getFragmentManager().findFragmentById(R.id.details_form).;
                 getFragmentManager().popBackStack();
             }
         });
@@ -110,6 +132,7 @@ public class TravelDetailsNoRegistration extends Fragment {
         fromView.setText("");
         destinationView.setText("");
         timeView.setText("");
+        commentView.setText("");
     }
 
     private void orderTravel(){
@@ -119,6 +142,7 @@ public class TravelDetailsNoRegistration extends Fragment {
 
         from = fromView.getText().toString();
         destination = destinationView.getText().toString();
+        comment = commentView.getText().toString();
 
         Boolean cancel = false;
 
@@ -140,38 +164,44 @@ public class TravelDetailsNoRegistration extends Fragment {
             Calendar c = Calendar.getInstance();
             c.set(Calendar.HOUR, hour);
             c.set(Calendar.MINUTE, minute);
-            Travel travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger);
-            View view = getActivity().getCurrentFocus();
-            if (view != null) {
-                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-            progressView.setVisibility(View.VISIBLE);
-            // make user the user cannot touch the screen
-            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            DB.addPassenger(passenger);
-            DB.addTravel(travel);
-            long delayInMillis = 2000;
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
+            travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger);
+
+            new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
+
                 @Override
-                public void run() {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressView.setVisibility(View.INVISIBLE);
-                            emptyFields();
-                            Toast.makeText(getActivity().getApplicationContext(), "your order has been accepted", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                public void onPreExecute() {
+                    View view = getActivity().getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    progressView.setVisibility(View.VISIBLE);
                 }
-            }, delayInMillis);
-            // release the screen
-            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            /**
-             * end
-             */
+
+                @Override
+                public Void doInBackground() {
+                    // make that the user cannot touch the screen
+                    DB.addPassenger(passenger);
+                    DB.addTravel(travel);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                public void onPostExecute() {
+                    progressView.setVisibility(View.INVISIBLE);
+                    emptyFields();
+                    Toast.makeText(getActivity().getApplicationContext(), "your order has been accepted", Toast.LENGTH_SHORT).show();
+                    getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    getFragmentManager().popBackStack();
+                }
+            }).execute();
         }
 
     }

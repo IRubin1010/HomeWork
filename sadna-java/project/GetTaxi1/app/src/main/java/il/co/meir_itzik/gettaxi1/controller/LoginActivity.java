@@ -53,7 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         mNoRegistration.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent main = new Intent(LoginActivity.this, NoRegistrationOrder.class);
+                Intent main = new Intent(LoginActivity.this, MainApp.class);
+                main.putExtra("fragment","noRegister");
                 startActivity(main);
             }
         });

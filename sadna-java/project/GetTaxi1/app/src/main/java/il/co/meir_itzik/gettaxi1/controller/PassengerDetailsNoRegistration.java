@@ -61,7 +61,7 @@ public class PassengerDetailsNoRegistration extends Fragment {
         return view;
     }
 
-    private void emptyFields(){
+    public void emptyFields(){
         firstNameView.setText("");
         lastNameView.setText("");
         idView.setText("");
@@ -74,42 +74,6 @@ public class PassengerDetailsNoRegistration extends Fragment {
         initEditTextErrors();
         getData();
         if(isDataValid()){
-            /**
-             * this code is just for display the progress bar for 2 seconds
-             */
-//            View view = getActivity().getCurrentFocus();
-//            if (view != null) {
-//                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//            }
-//            progressView.setVisibility(View.VISIBLE);
-//            // make user the user cannot touch the screen
-//            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-//                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//            Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-//            DB.addPassenger(passenger);
-//            //Travel travel = new Travel(from, destination, new Date(), Travel.Status.OPEN, passenger);
-//            //DB.addTravel(travel);
-//            long delayInMillis = 2000;
-//            Timer timer = new Timer();
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            progressView.setVisibility(View.INVISIBLE);
-//                            emptyFields();
-//                            Toast.makeText(getActivity().getApplicationContext(), "your order has been accepted", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            }, delayInMillis);
-//            // release the screen
-//            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//            /**
-//             * end
-//             */
             Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
 //            DB.addPassenger(passenger);
             Fragment travelFragment = new TravelDetailsNoRegistration();
