@@ -26,4 +26,9 @@ public class ListDB implements DataSource{
         passengerList.add(passenger);
         return true;
     }
+
+    @Override
+    public Boolean isPassengerExist(Passenger passenger) {
+        return passengerList.contains(passenger);
+    }
 }
