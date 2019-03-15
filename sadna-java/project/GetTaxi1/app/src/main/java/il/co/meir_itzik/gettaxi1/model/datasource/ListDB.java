@@ -6,7 +6,7 @@ import java.util.List;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 
-public class ListDB implements DataSource {
+public class ListDB implements DataSource{
     private List<Passenger> passengerList;
     private List<Travel> travelList;
 
