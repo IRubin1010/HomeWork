@@ -72,4 +72,13 @@ public class Passenger implements Serializable {
     public void setCreditNumber(String creditNumber) {
         CreditNumber = creditNumber;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Passenger)) return false;
+        Passenger p = (Passenger)obj;
+        return p.getFirstName().equals(firstName)
+                && p.getLastName().equals(lastName)
+                && p.getId().equals(id);
+    }
 }

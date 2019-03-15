@@ -183,7 +183,7 @@ public class TravelDetailsNoRegistration extends Fragment {
                 @Override
                 public Void doInBackground() {
                     // make that the user cannot touch the screen
-                    DB.addPassenger(passenger);
+                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
                     DB.addTravel(travel);
                     try {
                         Thread.sleep(3000);
