@@ -9,5 +9,6 @@ public interface DataSource{
     Boolean addTravel(Travel travel);
     Boolean addPassenger(Passenger passenger);
     Boolean isPassengerExist(Passenger passenger);
+    Boolean isTravelExist(Travel travel);
 
 }
