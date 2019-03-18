@@ -18,22 +18,18 @@ import il.co.meir_itzik.gettaxi1.R;
 
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
-/**
- * A login screen that offers login via email/password.
- */
 public class LoginActivity extends AppCompatActivity {
 
-    // UI references.
     private EditText mFirstNameView;
     private EditText mLastNameView;
     private EditText mEmailView;
 
     private View mProgressView;
-    private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO check if the user is logged in go to user order page
         getWindow().setBackgroundDrawableResource(R.drawable.taxi);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -59,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
@@ -112,9 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            //showProgress(true);
+            // TODO need to access DB to check if the user exist then go to user order page
             View view = this.getCurrentFocus();
             if (view != null) {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -123,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             mProgressView.setVisibility(View.VISIBLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            long delayInMillis = 2000;
+            long delayInMillis = 1000;
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -132,7 +125,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }, delayInMillis);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            Intent main = new Intent(this, Main.class);
+            Intent main = new Intent(LoginActivity.this, MainApp.class);
+            main.putExtra("fragment","Registration");
+            main.putExtra("fName", firstName);
+            main.putExtra("lName", lastName);
+            main.putExtra("email", email);
             startActivity(main);
         }
     }

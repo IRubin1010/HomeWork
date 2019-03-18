@@ -14,15 +14,26 @@ public class MainApp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (savedInstanceState == null) {
             String fragment = getIntent().getExtras().getString("fragment");
             switch (fragment){
-                case "":
+                case "Registration":
+                    String firstName = getIntent().getExtras().getString("fName");
+                    String lastName = getIntent().getExtras().getString("lName");
+                    String email = getIntent().getExtras().getString("email");
+                    Bundle b = new Bundle();
+                    b.putString("fName", firstName);
+                    b.putString("lName", lastName);
+                    b.putString("email", email);
+                    RegistrationDetails f1= new RegistrationDetails();
+                    f1.setArguments(b);
+                    fragmentTransaction.add(R.id.fragment_container, f1);
+                    fragmentTransaction.commit();
                     break;
                     default:
-                        PassengerDetailsNoRegistration f1= new PassengerDetailsNoRegistration();
-                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.add(R.id.fragment_container, f1);
+                        PassengerDetailsNoRegistration f2= new PassengerDetailsNoRegistration();
+                        fragmentTransaction.add(R.id.fragment_container, f2);
                         fragmentTransaction.commit();
             }
         }
