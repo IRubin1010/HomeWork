@@ -68,7 +68,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:hint="Credit Card"
-                android:inputType="numberSigned"
+                android:inputType="phone"
                 android:drawableStart="@drawable/ic_credit_card_black_24dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                     />
 
                 <Button
-                    android:id="@+id/order"
+                    android:id="@+id/next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

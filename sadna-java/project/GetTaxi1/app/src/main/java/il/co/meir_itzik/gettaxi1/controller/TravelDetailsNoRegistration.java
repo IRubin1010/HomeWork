@@ -110,9 +110,6 @@ public class TravelDetailsNoRegistration extends Fragment {
             @Override
             public void onClick(View v) {
                 emptyFields();
-//                PassengerDetailsNoRegistration p = new PassengerDetailsNoRegistration();
-//                p.emptyFields();
-//                getFragmentManager().findFragmentById(R.id.details_form).;
                 getFragmentManager().popBackStack();
             }
         });
@@ -184,7 +181,7 @@ public class TravelDetailsNoRegistration extends Fragment {
                 public Void doInBackground() {
                     // make that the user cannot touch the screen
                     if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
-                    if(DB.isTravelExist(travel)) return null; // TODO add toast to sya the travel already exist
+                    if(DB.isTravelExist(travel)) return null; // TODO add toast to say the travel already exist
                     DB.addTravel(travel);
                     try {
                         Thread.sleep(3000);

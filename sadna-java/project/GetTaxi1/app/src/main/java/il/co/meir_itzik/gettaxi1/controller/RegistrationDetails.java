@@ -1,30 +1,35 @@
 package il.co.meir_itzik.gettaxi1.controller;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
+import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
+public class RegistrationDetails extends Fragment {
 
-public class PassengerDetailsNoRegistration extends Fragment {
-
-    EditText firstNameView, lastNameView, idView, phoneNumberView, emailView, creditCardView;
-    String firstName, lastName, id, phoneNumber, email, creditCard;
-    View focusView = null;
-    Button nextBtn, cancelBtn;
+    EditText idView, phoneNumberView, creditCardView;
+    String firstName, lastName, id, email, phoneNumber, creditCard;
+    View focusView = null, progressView;
+    Button registerBtn, cancelBtn;
     DataSource DB = BackendFactory.getDatasource();
+    Passenger passenger;
 
-    public PassengerDetailsNoRegistration() {
+    public RegistrationDetails() {
         // Required empty public constructor
     }
 
@@ -33,14 +38,18 @@ public class PassengerDetailsNoRegistration extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_passenger_details_no_registration, container, false);
-        firstNameView = view.findViewById(R.id.first_name);
-        lastNameView = view.findViewById(R.id.last_name);
+        View view = inflater.inflate(R.layout.fragment_registration_details, container, false);
+
+        firstName = getArguments().getString("fName");
+        lastName = getArguments().getString("lName");
+        email = getArguments().getString("email");
+
+        progressView = getActivity().findViewById(R.id.order_progress);
+
         idView = view.findViewById(R.id.id);
         phoneNumberView = view.findViewById(R.id.phone_number);
-        emailView = view.findViewById(R.id.email);
         creditCardView = view.findViewById(R.id.credit_card);
-        nextBtn = view.findViewById(R.id.next);
+        registerBtn = view.findViewById(R.id.register);
         cancelBtn = view.findViewById(R.id.cancel);
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -50,45 +59,70 @@ public class PassengerDetailsNoRegistration extends Fragment {
             }
         });
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextClick();
+                register();
             }
         });
         return view;
+
     }
 
-    private void emptyFields(){
-        firstNameView.setText("");
-        lastNameView.setText("");
-        idView.setText("");
-        phoneNumberView.setText("");
-        emailView.setText("");
-        creditCardView.setText("");
-    }
-
-    private void nextClick(){
+    private void register(){
         initEditTextErrors();
         getData();
         if(isDataValid()){
-            Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-            Fragment travelFragment = new TravelDetailsNoRegistration();
-            Bundle b = new Bundle();
-            b.putSerializable("passenger", passenger);
-            travelFragment.setArguments(b);
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, travelFragment).addToBackStack(null).commit();
+            passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
+            new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
+
+                @Override
+                public void onPreExecute() {
+                    View view = getActivity().getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    progressView.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public Void doInBackground() {
+                    // make that the user cannot touch the screen
+                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                public void onPostExecute() {
+                    progressView.setVisibility(View.INVISIBLE);
+                    emptyFields();
+                    Toast.makeText(getActivity().getApplicationContext(), "accept", Toast.LENGTH_SHORT).show();
+                    getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    // TODO after registration save passenger to SP and go to user order page
+                }
+            }).execute();
         }else {
             focusView.requestFocus();
         }
     }
 
+    private void emptyFields(){
+        idView.setText("");
+        phoneNumberView.setText("");
+        creditCardView.setText("");
+    }
+
     private void initEditTextErrors(){
-        setError(firstNameView, null);
-        setError(lastNameView, null);
         setError(idView, null);
         setError(phoneNumberView, null);
-        setError(emailView, null);
         setError(creditCardView, null);
     }
 
@@ -97,26 +131,13 @@ public class PassengerDetailsNoRegistration extends Fragment {
     }
 
     private void getData(){
-        firstName = firstNameView.getText().toString();
-        lastName = lastNameView.getText().toString();
         id = idView.getText().toString();
         phoneNumber = phoneNumberView.getText().toString();
-        email = emailView.getText().toString();
         creditCard = creditCardView.getText().toString();
     }
 
     private Boolean isDataValid(){
         boolean isValid = true;
-        if(Validation.isFirstNameEmpty(firstName)){
-            setError(firstNameView, getString(R.string.error_field_required));
-            focusView = firstNameView;
-            isValid = false;
-        }
-        if(Validation.isLastNameEmpty(lastName)){
-            setError(lastNameView, getString(R.string.error_field_required));
-            focusView = lastNameView;
-            isValid = false;
-        }
         if(Validation.isIdEmpty(id)){
             setError(idView, getString(R.string.error_field_required));
             focusView = idView;
@@ -135,15 +156,6 @@ public class PassengerDetailsNoRegistration extends Fragment {
             focusView = phoneNumberView;
             isValid = false;
         }
-        if(Validation.isEmailEmpty(email)){
-            setError(emailView, getString(R.string.error_field_required));
-            focusView = emailView;
-            isValid = false;
-        }else if(!Validation.isEmailValid(email)){
-            setError(emailView, getString(R.string.error_invalid_email));
-            focusView = emailView;
-            isValid = false;
-        }
         if(Validation.isCreditCardEmpty(creditCard)){
             setError(creditCardView, getString(R.string.error_field_required));
             focusView = creditCardView;
@@ -155,5 +167,6 @@ public class PassengerDetailsNoRegistration extends Fragment {
         }
         return isValid;
     }
+
 
 }
