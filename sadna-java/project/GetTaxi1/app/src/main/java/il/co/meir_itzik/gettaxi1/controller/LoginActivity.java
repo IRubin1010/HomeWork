@@ -16,6 +16,9 @@ import java.util.TimerTask;
 
 import il.co.meir_itzik.gettaxi1.R;
 
+import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
+import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
+import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmailView;
 
     private View mProgressView;
+
+    DataSource DB = BackendFactory.getDatasource();
+
+    Boolean isPassengerExist = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +79,9 @@ public class LoginActivity extends AppCompatActivity {
         mEmailView.setError(null);
 
         // Store values at the time of the login attempt.
-        String firstName = mFirstNameView.getText().toString();
-        String lastName = mLastNameView.getText().toString();
-        String email = mEmailView.getText().toString();
+        final String firstName = mFirstNameView.getText().toString();
+        final String lastName = mLastNameView.getText().toString();
+        final String email = mEmailView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -103,34 +110,46 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // TODO need to access DB to check if the user exist then go to user order page
-            View view = this.getCurrentFocus();
-            if (view != null) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-            mProgressView.setVisibility(View.VISIBLE);
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            long delayInMillis = 1000;
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
+            new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
                 @Override
-                public void run() {
-                    mProgressView.setVisibility(View.INVISIBLE);
+                public void onPreExecute() {
+                    View view = getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    mProgressView.setVisibility(View.VISIBLE);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
-            }, delayInMillis);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            Intent main = new Intent(LoginActivity.this, MainApp.class);
-            main.putExtra("fragment","Registration");
-            main.putExtra("fName", firstName);
-            main.putExtra("lName", lastName);
-            main.putExtra("email", email);
-            startActivity(main);
+
+                @Override
+                public Void doInBackground() {
+                    isPassengerExist = DB.isPassengerExist(firstName, lastName, email);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                public void onPostExecute() {
+                    mProgressView.setVisibility(View.INVISIBLE);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    if(!isPassengerExist){
+                        Intent main = new Intent(LoginActivity.this, MainApp.class);
+                        main.putExtra("fragment","Registration");
+                        main.putExtra("fName", firstName);
+                        main.putExtra("lName", lastName);
+                        main.putExtra("email", email);
+                        startActivity(main);
+                    }
+                }
+            }).execute();
         }
     }
 
