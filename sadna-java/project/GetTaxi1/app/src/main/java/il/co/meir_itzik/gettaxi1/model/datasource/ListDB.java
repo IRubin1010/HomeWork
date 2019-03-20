@@ -33,6 +33,14 @@ public class ListDB implements DataSource{
     }
 
     @Override
+    public Boolean isPassengerExist(String fName, String lName, String email) {
+        for (Passenger p: passengerList) {
+            if(p.getFirstName().equals(fName) && p.getLastName().equals(lName) && p.getEmail().equals(email)) return true;
+        }
+        return false;
+    }
+
+    @Override
     public Boolean isTravelExist(Travel travel) {
         return travelList.contains(travel);
     }

@@ -9,6 +9,7 @@ public interface DataSource{
     Boolean addTravel(Travel travel);
     Boolean addPassenger(Passenger passenger);
     Boolean isPassengerExist(Passenger passenger);
+    Boolean isPassengerExist(String fName, String lName, String email);
     Boolean isTravelExist(Travel travel);
 
 }
