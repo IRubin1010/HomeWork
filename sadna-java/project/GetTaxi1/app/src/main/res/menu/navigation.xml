@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_new_travel"
+        android:icon="@drawable/ic_new_travel"
+        android:title="@string/title_new_travel" />
+
+    <item
+        android:id="@+id/navigation_travels"
+        android:icon="@drawable/ic_travels"
+        android:title="@string/title_travels" />
+
+</menu>
