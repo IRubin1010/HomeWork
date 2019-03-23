@@ -2,6 +2,8 @@ package il.co.meir_itzik.gettaxi1.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,10 +35,18 @@ public class LoginActivity extends AppCompatActivity {
 
     Boolean isPassengerExist = null;
 
+    SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isLogeIn = prefs.getBoolean("loggedIn",false);
+        if(isLogeIn){
+            Intent intent = new Intent(this, RegisteredActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
         super.onCreate(savedInstanceState);
-        // TODO check if the user is logged in go to user order page
         getWindow().setBackgroundDrawableResource(R.drawable.taxi);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -65,12 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         mProgressView = findViewById(R.id.login_progress);
     }
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
 
         // Reset errors.

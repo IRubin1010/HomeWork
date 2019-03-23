@@ -2,7 +2,10 @@ package il.co.meir_itzik.gettaxi1.controller;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
@@ -28,6 +33,7 @@ public class RegistrationDetails extends Fragment {
     Button registerBtn, cancelBtn;
     DataSource DB = BackendFactory.getDatasource();
     Passenger passenger;
+    SharedPreferences prefs;
 
     public RegistrationDetails() {
         // Required empty public constructor
@@ -39,6 +45,8 @@ public class RegistrationDetails extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registration_details, container, false);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         firstName = getArguments().getString("fName");
         lastName = getArguments().getString("lName");
@@ -65,8 +73,8 @@ public class RegistrationDetails extends Fragment {
                 register();
             }
         });
-        return view;
 
+        return view;
     }
 
     private void register(){
@@ -90,8 +98,11 @@ public class RegistrationDetails extends Fragment {
 
                 @Override
                 public Void doInBackground() {
-                    // make that the user cannot touch the screen
                     if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
+                    Gson gson = new Gson();
+                    String pasJson = gson.toJson(passenger);
+                    prefs.edit().putString("passenger", pasJson).apply();
+                    prefs.edit().putBoolean("loggedIn", true).apply();
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
@@ -103,9 +114,10 @@ public class RegistrationDetails extends Fragment {
                 @Override
                 public void onPostExecute() {
                     progressView.setVisibility(View.INVISIBLE);
-                    emptyFields();
-                    Toast.makeText(getActivity().getApplicationContext(), "accept", Toast.LENGTH_SHORT).show();
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    Intent intent = new Intent(getActivity(), RegisteredActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                     // TODO after registration save passenger to SP and go to user order page
                 }
             }).execute();
