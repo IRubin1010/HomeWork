@@ -23,6 +23,13 @@ public class Travel {
         this.passenger = passenger;
     }
 
+    public Travel(String source, String destination, Date start, Status status) {
+        this.source = source;
+        this.destination = destination;
+        this.start = start;
+        this.status = status;
+    }
+
     public String getSource() {
         return source;
     }

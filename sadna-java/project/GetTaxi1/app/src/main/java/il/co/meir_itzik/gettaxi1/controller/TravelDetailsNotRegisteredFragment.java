@@ -20,36 +20,45 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 import il.co.meir_itzik.gettaxi1.R;
+import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
+import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
+import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 
-public class TravelDetailsRegistered extends Fragment {
+public class TravelDetailsNotRegisteredFragment extends Fragment {
 
     EditText fromView, destinationView, timeView, commentView;
     String from, destination, time = "",  comment, date;
     int hour, minute;
-    Button orderBtn;
+    Button orderBtn, cancelBtn;
     View focusView = null, progressView;
     TextView clearTimeView;
+    Passenger passenger;
+    DataSource DB = BackendFactory.getDatasource();
+    Travel travel;
 
-    public TravelDetailsRegistered(){
 
+    public TravelDetailsNotRegisteredFragment() {
+        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_travel_details_registered, container, false);
+        View view =  inflater.inflate(R.layout.fragment_travel_details_not_registered, container, false);
 
-        progressView = getActivity().findViewById(R.id.order_progress);
+        // get passenger
+        passenger = (Passenger)getArguments().getSerializable("passenger");
+
+        progressView = getActivity().findViewById(R.id.progress);
 
         fromView = view.findViewById(R.id.from);
         destinationView = view.findViewById(R.id.destination);
         commentView = view.findViewById(R.id.comment);
-        clearTimeView = view.findViewById(R.id.clear_time);
 
         timeView = view.findViewById(R.id.time);
         timeView.setInputType(InputType.TYPE_NULL);
@@ -82,6 +91,7 @@ public class TravelDetailsRegistered extends Fragment {
             }
         });
 
+        clearTimeView = view.findViewById(R.id.clear_time);
         clearTimeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +106,15 @@ public class TravelDetailsRegistered extends Fragment {
             }
         });
 
+        cancelBtn = view.findViewById(R.id.cancel);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emptyFields();
+                getFragmentManager().popBackStack();
+                //TODO check if can clear the parent fields
+            }
+        });
 
         orderBtn = view.findViewById(R.id.order);
         orderBtn.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +163,7 @@ public class TravelDetailsRegistered extends Fragment {
             Calendar c = Calendar.getInstance();
             c.set(Calendar.HOUR, hour);
             c.set(Calendar.MINUTE, minute);
-            //travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger);
+            travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger);
 
             new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
 
@@ -163,14 +182,14 @@ public class TravelDetailsRegistered extends Fragment {
                 @Override
                 public Void doInBackground() {
                     // make that the user cannot touch the screen
-//                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
-//                    if(DB.isTravelExist(travel)) return null; // TODO add toast to say the travel already exist
-//                    DB.addTravel(travel);
-//                    try {
-//                        Thread.sleep(3000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
+                    if(DB.isTravelExist(travel)) return null; // TODO add toast to say the travel already exist
+                    DB.addTravel(travel);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     return null;
                 }
 
@@ -186,5 +205,4 @@ public class TravelDetailsRegistered extends Fragment {
         }
 
     }
-
 }

@@ -25,7 +25,7 @@ import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
-public class RegistrationDetails extends Fragment {
+public class RegistrationDetailsFragment extends Fragment {
 
     EditText idView, phoneNumberView, creditCardView;
     String firstName, lastName, id, email, phoneNumber, creditCard;
@@ -35,14 +35,13 @@ public class RegistrationDetails extends Fragment {
     Passenger passenger;
     SharedPreferences prefs;
 
-    public RegistrationDetails() {
+    public RegistrationDetailsFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registration_details, container, false);
 
@@ -52,7 +51,7 @@ public class RegistrationDetails extends Fragment {
         lastName = getArguments().getString("lName");
         email = getArguments().getString("email");
 
-        progressView = getActivity().findViewById(R.id.order_progress);
+        progressView = getActivity().findViewById(R.id.progress);
 
         idView = view.findViewById(R.id.id);
         phoneNumberView = view.findViewById(R.id.phone_number);
@@ -115,10 +114,9 @@ public class RegistrationDetails extends Fragment {
                 public void onPostExecute() {
                     progressView.setVisibility(View.INVISIBLE);
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    Intent intent = new Intent(getActivity(), RegisteredActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    // TODO after registration save passenger to SP and go to user order page
+                    Intent registered = new Intent(getActivity(), RegisteredActivity.class);
+                    registered.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(registered);
                 }
             }).execute();
         }else {

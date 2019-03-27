@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="420dp"
-    tools:context=".controller.PassengerDetailsNoRegistration">
+    tools:context=".controller.PassengerDetailsNotRegisteredFragment">
 
         <LinearLayout
             android:id="@+id/details_form"
