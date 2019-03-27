@@ -13,66 +13,66 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import com.google.gson.Gson;
 
 import il.co.meir_itzik.gettaxi1.R;
 
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
+import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText mFirstNameView;
-    private EditText mLastNameView;
-    private EditText mEmailView;
-
+    private EditText mFirstNameView, mLastNameView, mEmailView;
     private View mProgressView;
-
-    DataSource DB = BackendFactory.getDatasource();
-
-    Boolean isPassengerExist = null;
-
-    SharedPreferences prefs;
+    private DataSource DB = BackendFactory.getDatasource();
+    private Passenger passenger = null;
+    private SharedPreferences prefs;
+    private Button mEmailSignInBtn, mNoRegistrationBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // check if the user is already logged in
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isLogeIn = prefs.getBoolean("loggedIn",false);
         if(isLogeIn){
             Intent intent = new Intent(this, RegisteredActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            //TODO need to check if needed to get the user from SP
         }
+
+        // if the user is not logged in
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawableResource(R.drawable.taxi);
         setContentView(R.layout.activity_login);
+
         // Set up the login form.
         mFirstNameView = findViewById(R.id.first_name);
         mLastNameView = findViewById(R.id.last_name);
         mEmailView = findViewById(R.id.email);
 
-        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mEmailSignInBtn = findViewById(R.id.email_sign_in_btn);
+        mEmailSignInBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
 
-        Button mNoRegistration = findViewById(R.id.no_registration);
-        mNoRegistration.setOnClickListener(new OnClickListener() {
+        mNoRegistrationBtn = findViewById(R.id.no_registration_btn);
+        mNoRegistrationBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent main = new Intent(LoginActivity.this, MainApp.class);
-                main.putExtra("fragment","noRegister");
-                startActivity(main);
+                Intent appBasic = new Intent(LoginActivity.this, AppBasicActivity.class);
+                appBasic.putExtra("fragment","noRegister");
+                startActivity(appBasic);
             }
         });
 
-        mProgressView = findViewById(R.id.login_progress);
+        mProgressView = findViewById(R.id.progress);
     }
 
     private void attemptLogin() {
@@ -116,9 +116,12 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
+            // run DB action to check if the user exist or a new user
             new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
+
                 @Override
                 public void onPreExecute() {
+                    // lock the screen and show progress bar until finish
                     View view = getCurrentFocus();
                     if (view != null) {
                         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -131,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public Void doInBackground() {
-                    isPassengerExist = DB.isPassengerExist(firstName, lastName, email);
+                    passenger = DB.isPassengerExist(firstName, lastName, email);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -142,15 +145,28 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onPostExecute() {
+                    // unlock screen and hide progress bar
                     mProgressView.setVisibility(View.INVISIBLE);
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    if(!isPassengerExist){
-                        Intent main = new Intent(LoginActivity.this, MainApp.class);
-                        main.putExtra("fragment","Registration");
-                        main.putExtra("fName", firstName);
-                        main.putExtra("lName", lastName);
-                        main.putExtra("email", email);
-                        startActivity(main);
+
+                    // new user
+                    if(passenger == null){
+                        Intent appBasic = new Intent(LoginActivity.this, AppBasicActivity.class);
+                        appBasic.putExtra("fragment","Registration");
+                        appBasic.putExtra("fName", firstName);
+                        appBasic.putExtra("lName", lastName);
+                        appBasic.putExtra("email", email);
+                        startActivity(appBasic);
+                    }
+                    else{
+                        Gson gson = new Gson();
+                        String pasJson = gson.toJson(passenger);
+                        prefs.edit().putString("passenger", pasJson).apply();
+                        prefs.edit().putBoolean("loggedIn",true).apply();
+
+                        Intent registered = new Intent(LoginActivity.this, RegisteredActivity.class);
+                        registered.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(registered);
                     }
                 }
             }).execute();

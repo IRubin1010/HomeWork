@@ -18,7 +18,7 @@
             android:label="@string/title_activity_registered"
             android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <activity
-            android:name=".controller.MainApp"
+            android:name=".controller.AppBasicActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".controller.LoginActivity"

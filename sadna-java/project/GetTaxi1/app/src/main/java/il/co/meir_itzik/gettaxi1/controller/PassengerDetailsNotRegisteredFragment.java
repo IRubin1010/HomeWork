@@ -1,6 +1,7 @@
 package il.co.meir_itzik.gettaxi1.controller;
 
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
@@ -16,7 +18,7 @@ import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 
-public class PassengerDetailsNoRegistration extends Fragment {
+public class PassengerDetailsNotRegisteredFragment extends Fragment {
 
     EditText firstNameView, lastNameView, idView, phoneNumberView, emailView, creditCardView;
     String firstName, lastName, id, phoneNumber, email, creditCard;
@@ -24,7 +26,7 @@ public class PassengerDetailsNoRegistration extends Fragment {
     Button nextBtn, cancelBtn;
     DataSource DB = BackendFactory.getDatasource();
 
-    public PassengerDetailsNoRegistration() {
+    public PassengerDetailsNotRegisteredFragment() {
         // Required empty public constructor
     }
 
@@ -33,7 +35,8 @@ public class PassengerDetailsNoRegistration extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_passenger_details_no_registration, container, false);
+        View view = inflater.inflate(R.layout.fragment_passenger_details_not_registered, container, false);
+
         firstNameView = view.findViewById(R.id.first_name);
         lastNameView = view.findViewById(R.id.last_name);
         idView = view.findViewById(R.id.id);
@@ -73,7 +76,7 @@ public class PassengerDetailsNoRegistration extends Fragment {
         getData();
         if(isDataValid()){
             Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-            Fragment travelFragment = new TravelDetailsNoRegistration();
+            Fragment travelFragment = new TravelDetailsNotRegisteredFragment();
             Bundle b = new Bundle();
             b.putSerializable("passenger", passenger);
             travelFragment.setArguments(b);

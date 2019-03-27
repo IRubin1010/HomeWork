@@ -2,7 +2,9 @@ package il.co.meir_itzik.gettaxi1.controller;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -28,37 +32,39 @@ import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 
-public class TravelDetailsNoRegistration extends Fragment {
+public class TravelDetailsRegisteredFragment extends Fragment {
 
     EditText fromView, destinationView, timeView, commentView;
     String from, destination, time = "",  comment, date;
     int hour, minute;
-    Button orderBtn, cancelBtn;
+    Button orderBtn;
     View focusView = null, progressView;
     TextView clearTimeView;
-    Passenger passenger;
     DataSource DB = BackendFactory.getDatasource();
+    Passenger passenger;
+    SharedPreferences prefs;
     Travel travel;
 
+    public TravelDetailsRegisteredFragment(){
 
-    public TravelDetailsNoRegistration() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_travel_details_no_registration, container, false);
+        View view =  inflater.inflate(R.layout.fragment_travel_details_registered, container, false);
 
-        passenger = (Passenger)getArguments().getSerializable("passenger");
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String passengerStr = prefs.getString("passenger","");
+        Gson gson = new Gson();
+        passenger = gson.fromJson(passengerStr, Passenger.class);
 
-        progressView = getActivity().findViewById(R.id.order_progress);
+        progressView = getActivity().findViewById(R.id.progress);
 
         fromView = view.findViewById(R.id.from);
         destinationView = view.findViewById(R.id.destination);
         commentView = view.findViewById(R.id.comment);
-        clearTimeView = view.findViewById(R.id.clear_time);
 
         timeView = view.findViewById(R.id.time);
         timeView.setInputType(InputType.TYPE_NULL);
@@ -91,6 +97,7 @@ public class TravelDetailsNoRegistration extends Fragment {
             }
         });
 
+        clearTimeView = view.findViewById(R.id.clear_time);
         clearTimeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,14 +112,6 @@ public class TravelDetailsNoRegistration extends Fragment {
             }
         });
 
-        cancelBtn = view.findViewById(R.id.cancel);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emptyFields();
-                getFragmentManager().popBackStack();
-            }
-        });
 
         orderBtn = view.findViewById(R.id.order);
         orderBtn.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +179,6 @@ public class TravelDetailsNoRegistration extends Fragment {
                 @Override
                 public Void doInBackground() {
                     // make that the user cannot touch the screen
-                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
                     if(DB.isTravelExist(travel)) return null; // TODO add toast to say the travel already exist
                     DB.addTravel(travel);
                     try {
@@ -197,10 +195,10 @@ public class TravelDetailsNoRegistration extends Fragment {
                     emptyFields();
                     Toast.makeText(getActivity().getApplicationContext(), "your order has been accepted", Toast.LENGTH_SHORT).show();
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    getFragmentManager().popBackStack();
                 }
             }).execute();
         }
 
     }
+
 }

@@ -27,10 +27,10 @@ public class RegisteredActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_travels:
-                    selectedFragment = new Travels();
+                    selectedFragment = new TravelsFragment();
                     break;
                 case R.id.navigation_new_travel:
-                    selectedFragment = new TravelDetailsRegistered();
+                    selectedFragment = new TravelDetailsRegisteredFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
@@ -50,15 +50,16 @@ public class RegisteredActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 prefs.edit().putBoolean("loggedIn", false).apply();
-                Intent i = new Intent(RegisteredActivity.this, LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+                prefs.edit().remove("passenger").apply();
+                Intent login = new Intent(RegisteredActivity.this, LoginActivity.class);
+                login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(login);
             }
         });
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TravelDetailsRegistered()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TravelDetailsRegisteredFragment()).commit();
     }
 
 }
