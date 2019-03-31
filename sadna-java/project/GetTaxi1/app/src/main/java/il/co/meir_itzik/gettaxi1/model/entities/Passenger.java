@@ -25,6 +25,10 @@ public class Passenger implements Serializable {
         this.email = email;
     }
 
+    public Passenger(){
+
+    }
+
     public String getFirstName() {
         return firstName;
     }

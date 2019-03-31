@@ -1,15 +1,20 @@
 package il.co.meir_itzik.gettaxi1.controller;
 
 
+import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
@@ -22,7 +27,7 @@ public class PassengerDetailsNotRegisteredFragment extends Fragment {
 
     EditText firstNameView, lastNameView, idView, phoneNumberView, emailView, creditCardView;
     String firstName, lastName, id, phoneNumber, email, creditCard;
-    View focusView = null;
+    View focusView = null, progressView;
     Button nextBtn, cancelBtn;
     DataSource DB = BackendFactory.getDatasource();
 
@@ -45,6 +50,8 @@ public class PassengerDetailsNotRegisteredFragment extends Fragment {
         creditCardView = view.findViewById(R.id.credit_card);
         nextBtn = view.findViewById(R.id.next);
         cancelBtn = view.findViewById(R.id.cancel);
+
+        progressView = getActivity().findViewById(R.id.progress);
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,12 +82,48 @@ public class PassengerDetailsNotRegisteredFragment extends Fragment {
         initEditTextErrors();
         getData();
         if(isDataValid()){
-            Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-            Fragment travelFragment = new TravelDetailsNotRegisteredFragment();
-            Bundle b = new Bundle();
-            b.putSerializable("passenger", passenger);
-            travelFragment.setArguments(b);
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, travelFragment).addToBackStack(null).commit();
+
+            final Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
+
+            DB.addPassenger(passenger, new DataSource.RunAction<Passenger>() {
+                @Override
+                public void onPreExecute() {
+                    View view = getActivity().getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    progressView.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onSuccess(Passenger obj) {
+
+                }
+
+                @Override
+                public void onFailure(Passenger obj, Exception e) {
+                    Toast toast = Toast.makeText(getContext(), "failed to get passenger details" + e.getMessage(), Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.RED);
+                    toast.show();
+                }
+
+                @Override
+                public void onPostExecute() {
+                    progressView.setVisibility(View.INVISIBLE);
+                    emptyFields();
+                    getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    Fragment travelFragment = new TravelDetailsNotRegisteredFragment();
+                    Bundle b = new Bundle();
+                    b.putSerializable("passenger", passenger);
+                    travelFragment.setArguments(b);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, travelFragment).addToBackStack(null).commit();
+                }
+            });
+
         }else {
             focusView.requestFocus();
         }
@@ -124,7 +167,7 @@ public class PassengerDetailsNotRegisteredFragment extends Fragment {
             setError(idView, getString(R.string.error_field_required));
             focusView = idView;
             isValid = false;
-        }else if(!Validation.isCreditCardValid(id)){
+        }else if(!Validation.isIdValid(id)){
             setError(idView, getString(R.string.error_invalid_id));
             focusView = idView;
             isValid = false;
