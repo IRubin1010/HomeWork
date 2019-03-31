@@ -4,6 +4,7 @@ package il.co.meir_itzik.gettaxi1.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -14,13 +15,13 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
-import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
@@ -41,7 +42,7 @@ public class RegistrationDetailsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registration_details, container, false);
 
@@ -76,13 +77,13 @@ public class RegistrationDetailsFragment extends Fragment {
         return view;
     }
 
-    private void register(){
+    private void register() {
         initEditTextErrors();
         getData();
-        if(isDataValid()){
+        if (isDataValid()) {
             passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-            new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
 
+            DB.addPassenger(passenger, new DataSource.RunAction<Passenger>() {
                 @Override
                 public void onPreExecute() {
                     View view = getActivity().getCurrentFocus();
@@ -93,84 +94,93 @@ public class RegistrationDetailsFragment extends Fragment {
                     getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     progressView.setVisibility(View.VISIBLE);
+
                 }
 
                 @Override
-                public Void doInBackground() {
-                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
+                public void onSuccess(Passenger obj) {
                     Gson gson = new Gson();
                     String pasJson = gson.toJson(passenger);
                     prefs.edit().putString("passenger", pasJson).apply();
                     prefs.edit().putBoolean("loggedIn", true).apply();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-
-                @Override
-                public void onPostExecute() {
                     progressView.setVisibility(View.INVISIBLE);
+
+                    Toast toast = Toast.makeText(getContext(), "registered successfully", Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.GREEN);
+                    toast.show();
+
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     Intent registered = new Intent(getActivity(), RegisteredActivity.class);
                     registered.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(registered);
                 }
-            }).execute();
-        }else {
+
+                @Override
+                public void onFailure(Passenger obj, Exception e) {
+                    Toast toast = Toast.makeText(getContext(), "failed to get registration details" + e.getMessage(), Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.RED);
+                    toast.show();
+                }
+
+                @Override
+                public void onPostExecute() {
+
+                }
+            });
+        } else {
             focusView.requestFocus();
         }
     }
 
-    private void emptyFields(){
+    private void emptyFields() {
         idView.setText("");
         phoneNumberView.setText("");
         creditCardView.setText("");
     }
 
-    private void initEditTextErrors(){
+    private void initEditTextErrors() {
         setError(idView, null);
         setError(phoneNumberView, null);
         setError(creditCardView, null);
     }
 
-    private void setError(EditText view, String error){
+    private void setError(EditText view, String error) {
         view.setError(error);
     }
 
-    private void getData(){
+    private void getData() {
         id = idView.getText().toString();
         phoneNumber = phoneNumberView.getText().toString();
         creditCard = creditCardView.getText().toString();
     }
 
-    private Boolean isDataValid(){
+    private Boolean isDataValid() {
         boolean isValid = true;
-        if(Validation.isIdEmpty(id)){
+        if (Validation.isIdEmpty(id)) {
             setError(idView, getString(R.string.error_field_required));
             focusView = idView;
             isValid = false;
-        }else if(!Validation.isCreditCardValid(id)){
+        } else if (!Validation.isCreditCardValid(id)) {
             setError(idView, getString(R.string.error_invalid_id));
             focusView = idView;
             isValid = false;
         }
-        if(Validation.isPhoneNumberEmpty(phoneNumber)){
+        if (Validation.isPhoneNumberEmpty(phoneNumber)) {
             setError(phoneNumberView, getString(R.string.error_field_required));
             focusView = phoneNumberView;
             isValid = false;
-        }else if(!Validation.isPhoneNumberValid(phoneNumber)){
+        } else if (!Validation.isPhoneNumberValid(phoneNumber)) {
             setError(phoneNumberView, getString(R.string.error_invalid_phone_number));
             focusView = phoneNumberView;
             isValid = false;
         }
-        if(Validation.isCreditCardEmpty(creditCard)){
+        if (Validation.isCreditCardEmpty(creditCard)) {
             setError(creditCardView, getString(R.string.error_field_required));
             focusView = creditCardView;
             isValid = false;
-        }else if(!Validation.isCreditCardValid(creditCard)){
+        } else if (!Validation.isCreditCardValid(creditCard)) {
             setError(creditCardView, getString(R.string.error_invalid_credit_card));
             focusView = creditCardView;
             isValid = false;

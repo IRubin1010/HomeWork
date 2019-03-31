@@ -1,5 +1,6 @@
 package il.co.meir_itzik.gettaxi1.model.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Travel {
@@ -28,6 +29,10 @@ public class Travel {
         this.destination = destination;
         this.start = start;
         this.status = status;
+    }
+
+    public Travel(){
+
     }
 
     public String getSource() {
@@ -86,5 +91,9 @@ public class Travel {
                 && destination.equals(t.getDestination())
                 && start.equals(t.getStart())
                 && passenger.equals(t.getPassenger());
+    }
+
+    public String getKey(){
+        return getSource() + "-" + getDestination() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
     }
 }

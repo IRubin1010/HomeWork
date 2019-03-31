@@ -2,6 +2,7 @@ package il.co.meir_itzik.gettaxi1.controller;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -21,7 +22,6 @@ import java.util.TimeZone;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
-import il.co.meir_itzik.gettaxi1.model.backend.RunDbActionAsync;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
@@ -39,6 +39,7 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
     Passenger passenger;
     DataSource DB = BackendFactory.getDatasource();
     Travel travel;
+    boolean isTimeSelected = false;
 
 
     public TravelDetailsNotRegisteredFragment() {
@@ -82,6 +83,9 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
                         else date = "today";
                         time = date + " at " + chosenHour + ":" + chosenMinute;
                         timeView.setText(time);
+                        isTimeSelected = true;
+                        hour = selectedHour;
+                        minute = selectedMinute;
                         clearTimeView.setVisibility(View.VISIBLE);
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -95,14 +99,12 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
         clearTimeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(time.equals("")){
-                    clearTimeView.setVisibility(View.INVISIBLE);
-                }
-                else{
+                if(!time.equals("")){
                     timeView.setText("");
                     time = "";
-                    clearTimeView.setVisibility(View.INVISIBLE);
                 }
+                clearTimeView.setVisibility(View.INVISIBLE);
+                isTimeSelected = false;
             }
         });
 
@@ -112,7 +114,6 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
             public void onClick(View v) {
                 emptyFields();
                 getFragmentManager().popBackStack();
-                //TODO check if can clear the parent fields
             }
         });
 
@@ -160,13 +161,19 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
         if(cancel){
             focusView.requestFocus();
         }else{
-            Calendar c = Calendar.getInstance();
-            c.set(Calendar.HOUR, hour);
-            c.set(Calendar.MINUTE, minute);
+            Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Jerusalem"));
+            if(isTimeSelected){
+                c.set(Calendar.HOUR_OF_DAY, hour);
+                c.set(Calendar.MINUTE, minute);
+                if(date.equals("tomorrow")){
+                    c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
+                }
+            }
             travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger);
+            //TODO add comment to travel
 
-            new RunDbActionAsync(new RunDbActionAsync.AsyncRunner() {
 
+            DB.addTravel(travel, new DataSource.RunAction<Travel>() {
                 @Override
                 public void onPreExecute() {
                     View view = getActivity().getCurrentFocus();
@@ -180,28 +187,29 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
                 }
 
                 @Override
-                public Void doInBackground() {
-                    // make that the user cannot touch the screen
-                    if(!DB.isPassengerExist(passenger)) DB.addPassenger(passenger);
-                    if(DB.isTravelExist(travel)) return null; // TODO add toast to say the travel already exist
-                    DB.addTravel(travel);
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
+                public void onSuccess(Travel obj) {
+                    Toast toast = Toast.makeText(getContext(), "your order has been accepted", Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.GREEN);
+                    toast.show();
+                }
+
+                @Override
+                public void onFailure(Travel obj, Exception e) {
+                    Toast toast = Toast.makeText(getContext(), "failed to get Travel details" + e.getMessage(), Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.RED);
+                    toast.show();
                 }
 
                 @Override
                 public void onPostExecute() {
                     progressView.setVisibility(View.INVISIBLE);
                     emptyFields();
-                    Toast.makeText(getActivity().getApplicationContext(), "your order has been accepted", Toast.LENGTH_SHORT).show();
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     getFragmentManager().popBackStack();
                 }
-            }).execute();
+            });
         }
 
     }
