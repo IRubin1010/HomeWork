@@ -16,13 +16,7 @@ public class Passenger implements Serializable {
         this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        CreditNumber = creditNumber;
-    }
-
-    public Passenger(String firstName, String lastName, String email){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+        this.CreditNumber = creditNumber;
     }
 
     public Passenger(){
