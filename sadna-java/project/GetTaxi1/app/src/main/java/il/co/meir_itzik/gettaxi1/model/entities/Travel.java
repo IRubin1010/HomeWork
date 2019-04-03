@@ -15,20 +15,15 @@ public class Travel {
     private Date end;
     private Status status;
     private Passenger passenger;
+    private String comment;
 
-    public Travel(String source, String destination, Date start, Status status, Passenger passenger) {
+    public Travel(String source, String destination, Date start, Status status, Passenger passenger, String comment) {
         this.source = source;
         this.destination = destination;
         this.start = start;
         this.status = status;
         this.passenger = passenger;
-    }
-
-    public Travel(String source, String destination, Date start, Status status) {
-        this.source = source;
-        this.destination = destination;
-        this.start = start;
-        this.status = status;
+        this.comment = comment;
     }
 
     public Travel(){
@@ -81,6 +76,14 @@ public class Travel {
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override

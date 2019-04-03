@@ -167,7 +167,7 @@ public class TravelDetailsRegisteredFragment extends Fragment {
                     c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
                 }
             }
-            travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger);
+            travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger, comment);
             //TODO add comment to travel
 
             DB.addTravel(travel, new DataSource.RunAction<Travel>() {
