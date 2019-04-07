@@ -19,7 +19,8 @@
             android:layout_marginBottom="5dp"
             android:hint="ID"
             android:inputType="phone"
-            android:drawableStart="@drawable/ic_person_black_24dp"/>
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawablePadding="10dp"/>
 
         <EditText
             android:id="@+id/phone_number"
@@ -29,7 +30,8 @@
             android:layout_marginBottom="5dp"
             android:hint="Phone Number"
             android:inputType="phone"
-            android:drawableStart="@drawable/ic_phone_black_24dp"/>
+            android:drawableStart="@drawable/ic_phone_black_24dp"
+            android:drawablePadding="10dp"/>
 
         <EditText
             android:id="@+id/credit_card"
@@ -39,7 +41,8 @@
             android:layout_marginBottom="5dp"
             android:hint="Credit Card"
             android:inputType="phone"
-            android:drawableStart="@drawable/ic_credit_card_black_24dp"/>
+            android:drawableStart="@drawable/ic_credit_card_black_24dp"
+            android:drawablePadding="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

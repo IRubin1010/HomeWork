@@ -2,6 +2,7 @@ package il.co.meir_itzik.gettaxi1.controller;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,8 @@ import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class TravelDetailsNotRegisteredFragment extends Fragment {
 
@@ -40,7 +43,8 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
     DataSource DB = BackendFactory.getDatasource();
     Travel travel;
     boolean isTimeSelected = false;
-
+    private static final int FROM_MAP_REQUEST = 1;
+    private static final int DESTINATION_MAP_REQUEST = 2;
 
     public TravelDetailsNotRegisteredFragment() {
         // Required empty public constructor
@@ -60,6 +64,22 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
         fromView = view.findViewById(R.id.from);
         destinationView = view.findViewById(R.id.destination);
         commentView = view.findViewById(R.id.comment);
+
+        fromView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(getActivity(), MapsActivity.class);
+                startActivityForResult(map, FROM_MAP_REQUEST);
+            }
+        });
+
+        destinationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(getActivity(), MapsActivity.class);
+                startActivityForResult(map,DESTINATION_MAP_REQUEST);
+            }
+        });
 
         timeView = view.findViewById(R.id.time);
         timeView.setInputType(InputType.TYPE_NULL);
@@ -212,5 +232,18 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
             });
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FROM_MAP_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                fromView.setText(data.getStringExtra("location"));
+            }
+        }else if(requestCode == DESTINATION_MAP_REQUEST){
+            if (resultCode == RESULT_OK) {
+                destinationView.setText(data.getStringExtra("location"));
+            }
+        }
     }
 }

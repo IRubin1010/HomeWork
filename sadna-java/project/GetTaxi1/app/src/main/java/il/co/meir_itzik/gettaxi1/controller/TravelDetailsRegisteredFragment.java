@@ -2,6 +2,7 @@ package il.co.meir_itzik.gettaxi1.controller;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,9 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -30,6 +29,8 @@ import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class TravelDetailsRegisteredFragment extends Fragment {
@@ -45,6 +46,8 @@ public class TravelDetailsRegisteredFragment extends Fragment {
     SharedPreferences prefs;
     Travel travel;
     boolean isTimeSelected = false;
+    private static final int FROM_MAP_REQUEST = 1;
+    private static final int DESTINATION_MAP_REQUEST = 2;
 
     public TravelDetailsRegisteredFragment(){
 
@@ -66,6 +69,22 @@ public class TravelDetailsRegisteredFragment extends Fragment {
         fromView = view.findViewById(R.id.from);
         destinationView = view.findViewById(R.id.destination);
         commentView = view.findViewById(R.id.comment);
+
+        fromView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(getActivity(), MapsActivity.class);
+                startActivityForResult(map, FROM_MAP_REQUEST);
+            }
+        });
+
+        destinationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(getActivity(), MapsActivity.class);
+                startActivityForResult(map,DESTINATION_MAP_REQUEST);
+            }
+        });
 
         timeView = view.findViewById(R.id.time);
         timeView.setInputType(InputType.TYPE_NULL);
@@ -168,7 +187,6 @@ public class TravelDetailsRegisteredFragment extends Fragment {
                 }
             }
             travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger, comment);
-            //TODO add comment to travel
 
             DB.addTravel(travel, new DataSource.RunAction<Travel>() {
                 @Override
@@ -210,4 +228,16 @@ public class TravelDetailsRegisteredFragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == FROM_MAP_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                fromView.setText(data.getStringExtra("location"));
+            }
+        }else if(requestCode == DESTINATION_MAP_REQUEST){
+            if (resultCode == RESULT_OK) {
+                destinationView.setText(data.getStringExtra("location"));
+            }
+        }
+    }
 }

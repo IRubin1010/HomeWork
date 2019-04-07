@@ -104,7 +104,8 @@ public class FireBase implements DataSource{
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                action.onFailure(null, new Exception(databaseError.getMessage()));
+                action.onPostExecute();
             }
         });
     }
