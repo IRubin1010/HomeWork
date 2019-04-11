@@ -19,7 +19,8 @@
                 android:layout_marginBottom="5dp"
                 android:hint="First Name"
                 android:inputType="textPersonName"
-                android:drawableStart="@drawable/ic_person_black_24dp"/>
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="10dp"/>
 
             <EditText
                 android:id="@+id/last_name"
@@ -29,7 +30,8 @@
                 android:layout_marginBottom="5dp"
                 android:hint="Last Name"
                 android:inputType="textPersonName"
-                android:drawableStart="@drawable/ic_person_black_24dp"/>
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="10dp"/>
 
             <EditText
                 android:id="@+id/id"
@@ -39,7 +41,8 @@
                 android:layout_marginBottom="5dp"
                 android:hint="ID"
                 android:inputType="phone"
-                android:drawableStart="@drawable/ic_person_black_24dp"/>
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawablePadding="10dp"/>
 
             <EditText
                 android:id="@+id/phone_number"
@@ -49,7 +52,8 @@
                 android:layout_marginBottom="5dp"
                 android:hint="Phone Number"
                 android:inputType="phone"
-                android:drawableStart="@drawable/ic_phone_black_24dp"/>
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:drawablePadding="10dp"/>
 
             <EditText
                 android:id="@+id/email"
@@ -59,7 +63,8 @@
                 android:layout_marginBottom="5dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:drawableStart="@drawable/ic_email_black_24dp"/>
+                android:drawableStart="@drawable/ic_email_black_24dp"
+                android:drawablePadding="10dp"/>
 
             <EditText
                 android:id="@+id/credit_card"
@@ -69,7 +74,8 @@
                 android:layout_marginBottom="5dp"
                 android:hint="Credit Card"
                 android:inputType="phone"
-                android:drawableStart="@drawable/ic_credit_card_black_24dp"/>
+                android:drawableStart="@drawable/ic_credit_card_black_24dp"
+                android:drawablePadding="10dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

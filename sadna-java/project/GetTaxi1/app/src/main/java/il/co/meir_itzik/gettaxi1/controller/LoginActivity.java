@@ -23,6 +23,7 @@ import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
+import il.co.meir_itzik.gettaxi1.model.utils.LocationPermissionsService;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,8 +36,13 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
         // check if the user is already logged in
+
+        if(!LocationPermissionsService.checkLocationPermission(this)){
+            LocationPermissionsService.showPermissionDialog(this);
+        }
+
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isLogeIn = prefs.getBoolean("loggedIn",false);
         if(isLogeIn){
@@ -46,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // if the user is not logged in
-        super.onCreate(savedInstanceState);
+        //super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawableResource(R.drawable.taxi);
         setContentView(R.layout.activity_login);
 

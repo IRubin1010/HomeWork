@@ -45,6 +45,8 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:backgroundTint="@color/appColor"
+                    android:drawableStart="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="10dp"
                     />
 
             </android.support.design.widget.TextInputLayout>
@@ -62,6 +64,8 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:backgroundTint="@color/appColor"
+                    android:drawableStart="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="10dp"
                     />
 
             </android.support.design.widget.TextInputLayout>
@@ -79,6 +83,8 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:backgroundTint="@color/appColor"
+                    android:drawableStart="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="10dp"
                     />
 
             </android.support.design.widget.TextInputLayout>
