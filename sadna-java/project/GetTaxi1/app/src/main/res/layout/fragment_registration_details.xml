@@ -2,47 +2,47 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="420dp"
-    tools:context=".controller.PassengerDetailsNoRegistration">
+    android:layout_height="match_parent"
+    tools:context=".controller.PassengerDetailsNotRegisteredFragment">
 
     <LinearLayout
-        android:id="@+id/order_form"
+        android:id="@+id/details_form"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/from"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:hint="From"
-            android:inputType="textPersonName"
-            android:drawableStart="@drawable/ic_google_maps"/>
-
-        <EditText
-            android:id="@+id/destination"
+            android:id="@+id/id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:hint="Destination"
-            android:inputType="textPersonName"
-            android:drawableStart="@drawable/ic_google_maps"/>
+            android:hint="ID"
+            android:inputType="phone"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawablePadding="10dp"/>
 
         <EditText
-            android:id="@+id/time"
+            android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:clickable="true"
-            android:hint="Time (optional)"
-            android:inputType="none"
-            android:focusable="false"
-            android:drawableStart="@drawable/ic_access_time_black_24dp"/>
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:drawableStart="@drawable/ic_phone_black_24dp"
+            android:drawablePadding="10dp"/>
 
+        <EditText
+            android:id="@+id/credit_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Credit Card"
+            android:inputType="phone"
+            android:drawableStart="@drawable/ic_credit_card_black_24dp"
+            android:drawablePadding="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,14 +63,14 @@
                 />
 
             <Button
-                android:id="@+id/order"
+                android:id="@+id/register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_button"
-                android:text="Order" />
+                android:text="register" />
 
         </LinearLayout>
 

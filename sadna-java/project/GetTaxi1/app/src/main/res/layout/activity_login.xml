@@ -13,7 +13,7 @@
 
     <!-- Login progress -->
     <ProgressBar
-        android:id="@+id/login_progress"
+        android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
@@ -45,6 +45,8 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:backgroundTint="@color/appColor"
+                    android:drawableStart="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="10dp"
                     />
 
             </android.support.design.widget.TextInputLayout>
@@ -62,6 +64,8 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:backgroundTint="@color/appColor"
+                    android:drawableStart="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="10dp"
                     />
 
             </android.support.design.widget.TextInputLayout>
@@ -79,12 +83,14 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:backgroundTint="@color/appColor"
+                    android:drawableStart="@drawable/ic_email_black_24dp"
+                    android:drawablePadding="10dp"
                     />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/email_sign_in_btn"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +102,7 @@
                 android:background="@drawable/rounded_button"/>
 
             <Button
-                android:id="@+id/no_registration"
+                android:id="@+id/no_registration_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/action_no_registration"

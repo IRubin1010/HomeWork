@@ -39,7 +39,7 @@ public class Validation {
     }
 
     public static boolean isCreditCardValid(String creditCard) {
-        return creditCard != null && (creditCard.length() == 12 || creditCard.length() == 9);
+        return creditCard != null && (creditCard.length() == 16 || creditCard.length() == 9);
     }
 
     public static boolean isIdEmpty(String id) {

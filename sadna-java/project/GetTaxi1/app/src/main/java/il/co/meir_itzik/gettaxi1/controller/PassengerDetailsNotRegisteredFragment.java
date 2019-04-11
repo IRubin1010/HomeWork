@@ -1,13 +1,20 @@
 package il.co.meir_itzik.gettaxi1.controller;
 
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
@@ -16,15 +23,15 @@ import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
 
 
-public class PassengerDetailsNoRegistration extends Fragment {
+public class PassengerDetailsNotRegisteredFragment extends Fragment {
 
     EditText firstNameView, lastNameView, idView, phoneNumberView, emailView, creditCardView;
     String firstName, lastName, id, phoneNumber, email, creditCard;
-    View focusView = null;
+    View focusView = null, progressView;
     Button nextBtn, cancelBtn;
     DataSource DB = BackendFactory.getDatasource();
 
-    public PassengerDetailsNoRegistration() {
+    public PassengerDetailsNotRegisteredFragment() {
         // Required empty public constructor
     }
 
@@ -33,17 +40,18 @@ public class PassengerDetailsNoRegistration extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_passenger_details_no_registration, container, false);
+        View view = inflater.inflate(R.layout.fragment_passenger_details_not_registered, container, false);
+
         firstNameView = view.findViewById(R.id.first_name);
         lastNameView = view.findViewById(R.id.last_name);
         idView = view.findViewById(R.id.id);
         phoneNumberView = view.findViewById(R.id.phone_number);
         emailView = view.findViewById(R.id.email);
         creditCardView = view.findViewById(R.id.credit_card);
-        nextBtn = view.findViewById(R.id.order);
+        nextBtn = view.findViewById(R.id.next);
         cancelBtn = view.findViewById(R.id.cancel);
-//        detailsView = view.findViewById(R.id.details_form);
-//        progressView = getActivity().findViewById(R.id.order_progress);
+
+        progressView = getActivity().findViewById(R.id.progress);
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +63,7 @@ public class PassengerDetailsNoRegistration extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendOrder();
+                nextClick();
             }
         });
         return view;
@@ -70,53 +78,52 @@ public class PassengerDetailsNoRegistration extends Fragment {
         creditCardView.setText("");
     }
 
-    private void sendOrder(){
+    private void nextClick(){
         initEditTextErrors();
         getData();
         if(isDataValid()){
-            /**
-             * this code is just for display the progress bar for 2 seconds
-             */
-//            View view = getActivity().getCurrentFocus();
-//            if (view != null) {
-//                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//            }
-//            progressView.setVisibility(View.VISIBLE);
-//            // make user the user cannot touch the screen
-//            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-//                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//            Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-//            DB.addPassenger(passenger);
-//            //Travel travel = new Travel(from, destination, new Date(), Travel.Status.OPEN, passenger);
-//            //DB.addTravel(travel);
-//            long delayInMillis = 2000;
-//            Timer timer = new Timer();
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            progressView.setVisibility(View.INVISIBLE);
-//                            emptyFields();
-//                            Toast.makeText(getActivity().getApplicationContext(), "your order has been accepted", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            }, delayInMillis);
-//            // release the screen
-//            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//            /**
-//             * end
-//             */
-            Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
-//            DB.addPassenger(passenger);
-            Fragment travelFragment = new TravelDetailsNoRegistration();
-            Bundle b = new Bundle();
-            b.putSerializable("passenger", passenger);
-            travelFragment.setArguments(b);
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, travelFragment).addToBackStack(null).commit();
+
+            final Passenger passenger = new Passenger(firstName, lastName, id, email, phoneNumber, creditCard);
+
+            DB.addPassenger(passenger, new DataSource.RunAction<Passenger>() {
+                @Override
+                public void onPreExecute() {
+                    View view = getActivity().getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    progressView.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onSuccess(Passenger obj) {
+
+                }
+
+                @Override
+                public void onFailure(Passenger obj, Exception e) {
+                    Toast toast = Toast.makeText(getContext(), "failed to get passenger details" + e.getMessage(), Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.RED);
+                    toast.show();
+                }
+
+                @Override
+                public void onPostExecute() {
+                    progressView.setVisibility(View.INVISIBLE);
+                    emptyFields();
+                    getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    Fragment travelFragment = new TravelDetailsNotRegisteredFragment();
+                    Bundle b = new Bundle();
+                    b.putSerializable("passenger", passenger);
+                    travelFragment.setArguments(b);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, travelFragment).addToBackStack(null).commit();
+                }
+            });
+
         }else {
             focusView.requestFocus();
         }
@@ -160,7 +167,7 @@ public class PassengerDetailsNoRegistration extends Fragment {
             setError(idView, getString(R.string.error_field_required));
             focusView = idView;
             isValid = false;
-        }else if(!Validation.isCreditCardValid(id)){
+        }else if(!Validation.isIdValid(id)){
             setError(idView, getString(R.string.error_invalid_id));
             focusView = idView;
             isValid = false;

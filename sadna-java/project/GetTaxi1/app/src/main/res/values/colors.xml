@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="appBtnColor">#59FF9904</color>
     <color name="appColor">#FF9904</color>
+    <color name="floatButtonColor">#DCDDDD</color>
+    <color name="myLocationButtonColor">#60E9EBEB</color>
 </resources>

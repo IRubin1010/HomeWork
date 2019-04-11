@@ -16,13 +16,11 @@ public class Passenger implements Serializable {
         this.id = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        CreditNumber = creditNumber;
+        this.CreditNumber = creditNumber;
     }
 
-    public Passenger(String firstName, String lastName, String email){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public Passenger(){
+
     }
 
     public String getFirstName() {
@@ -71,5 +69,14 @@ public class Passenger implements Serializable {
 
     public void setCreditNumber(String creditNumber) {
         CreditNumber = creditNumber;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Passenger)) return false;
+        Passenger p = (Passenger)obj;
+        return p.getFirstName().equals(firstName)
+                && p.getLastName().equals(lastName)
+                && p.getId().equals(id);
     }
 }
