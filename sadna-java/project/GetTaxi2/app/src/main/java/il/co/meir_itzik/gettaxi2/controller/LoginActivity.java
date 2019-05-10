@@ -1,75 +1,72 @@
 package il.co.meir_itzik.gettaxi2.controller;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.Toast;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
+import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
+import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.model.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.model.utils.Validation;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
-/**
- * A login screen that offers login via email/password.
- */
 public class LoginActivity extends AppCompatActivity {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
-    private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-
     // UI references.
-    private TextInputEditText mEmailView;
-    private TextInputEditText mPasswordView;
+    private AppCompatEditText mEmailET;
+    private AppCompatEditText mPasswordET;
     private View mProgressView;
-    private View mLoginFormView;
+    private TextView mRegisterTextView;
+    private Button mSignInButton;
+    private CheckBox mRememberMeCB;
+    private SharedPreferencesService prefs;
+    private DataSource DB = BackendFactory.getDatasource();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        prefs = new SharedPreferencesService(this);
+        if (prefs.isLoggedIn()) {
+            Intent main = new Intent(LoginActivity.this, MainActivity.class);
+            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(main);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mEmailView =  findViewById(R.id.email);
 
-        mPasswordView = findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        // Set up the login form.
+        mRegisterTextView = findViewById(R.id.register_link);
+        mRegisterTextView.setPaintFlags(mRegisterTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mRegisterTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent register = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(register);
+            }
+        });
+        mEmailET = findViewById(R.id.email_edit_text);
+
+        mPasswordET = findViewById(R.id.password_edit_text);
+        mPasswordET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -80,75 +77,149 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mEmailSignInButton =  findViewById(R.id.sign_in_btn);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mSignInButton = findViewById(R.id.sign_in_btn);
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        mProgressView = findViewById(R.id.progress_bar);
+        mRememberMeCB = findViewById(R.id.remember_check_box);
     }
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        mEmailET.setError(null);
+        mPasswordET.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String email = mEmailET.getText().toString();
+        final String password = mPasswordET.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+        if (Validation.isPasswordEmpty(password)) {
+            mPasswordET.setError(getString(R.string.error_field_required));
+            focusView = mPasswordET;
+            cancel = true;
+        } else if (!Validation.isPasswordValid(password)) {
+            mPasswordET.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordET;
             cancel = true;
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+        if (Validation.isEmailEmpty(email)) {
+            mEmailET.setError(getString(R.string.error_field_required));
+            focusView = mEmailET;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+        } else if (!Validation.isEmailValid(email)) {
+            mEmailET.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailET;
             cancel = true;
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
+            DB.isDriverExistByEmailAndPassword(email, password, new DataSource.RunAction<Boolean>() {
+                Intent intent = null;
+                boolean isExist = false;
 
+                @Override
+                public void onPreExecute() {
+                    View view = getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                    mProgressView.setVisibility(View.VISIBLE);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                }
+
+                @Override
+                public void onSuccess(Boolean exist) {
+                    if (!exist) {
+                        new AlertDialog.Builder(LoginActivity.this, R.style.CustomDialog)
+                                .setMessage("incorrect Email or Password")
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                })
+                                .show();
+                    } else {
+                        isExist = true;
+                        DB.getDriverByEmailAndPassword(email, password, new DataSource.RunAction<Driver>() {
+                            @Override
+                            public void onPreExecute() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(Driver driver) {
+                                if (mRememberMeCB.isChecked()) {
+                                    prefs.setLoggedIn(true);
+                                    prefs.putDriver(driver);
+                                }
+                                intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            }
+
+                            @Override
+                            public void onFailure(Driver obj, Exception e) {
+                                Toast toast = Toast.makeText(LoginActivity.this, "failed to get driver from FireBase" + e.getMessage(), Toast.LENGTH_SHORT);
+                                TextView v = toast.getView().findViewById(android.R.id.message);
+                                v.setTextColor(Color.RED);
+                                toast.show();
+                            }
+
+                            @Override
+                            public void onPostExecute() {
+                                mProgressView.setVisibility(View.INVISIBLE);
+                                clearFields();
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                if (intent != null)
+                                    startActivity(intent);
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(Boolean exist, Exception e) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "failed to connect to FireBase" + e.getMessage(), Toast.LENGTH_SHORT);
+                    TextView v = toast.getView().findViewById(android.R.id.message);
+                    v.setTextColor(Color.RED);
+                    toast.show();
+                }
+
+                @Override
+                public void onPostExecute() {
+                    if (!isExist) {
+                        mProgressView.setVisibility(View.INVISIBLE);
+                        clearFields();
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    }
+                }
+            });
         }
     }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+    private void clearFields() {
+        mEmailET.setText("");
+        mPasswordET.setText("");
     }
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
-
-
 }
 

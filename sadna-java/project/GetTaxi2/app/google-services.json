@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "860969773425",
+    "firebase_url": "https://gettaxi-6873e.firebaseio.com",
+    "project_id": "gettaxi-6873e",
+    "storage_bucket": "gettaxi-6873e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860969773425:android:e39796f7d4ccdeff",
+        "android_client_info": {
+          "package_name": "il.co.meir_itzik.gettaxi1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860969773425-u99gqqnkv8sgai27c3tuccdsi7ir9e4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "il.co.meir_itzik.gettaxi1",
+            "certificate_hash": "2ecf88832241c7fb8083e5bc817d6544701cb532"
+          }
+        },
+        {
+          "client_id": "860969773425-crj4996bh9baqeg02en4b5d202tbqsq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ9lfHmoT6rCCIeIcEnrpQ0CWuddu4Oeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860969773425-crj4996bh9baqeg02en4b5d202tbqsq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860969773425:android:d54ddfd8f6c61b1d",
+        "android_client_info": {
+          "package_name": "il.co.meir_itzik.gettaxi2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860969773425-q8q9u6gnm40bl260c7qf82ahc9h6l7dh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "il.co.meir_itzik.gettaxi2",
+            "certificate_hash": "2ecf88832241c7fb8083e5bc817d6544701cb532"
+          }
+        },
+        {
+          "client_id": "860969773425-ol65a2j6ra0slkuighpek6ge5pq4c4eq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "il.co.meir_itzik.gettaxi2",
+            "certificate_hash": "0c4e36a3ce3cd424b3d307144d369e745f99792a"
+          }
+        },
+        {
+          "client_id": "860969773425-crj4996bh9baqeg02en4b5d202tbqsq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ9lfHmoT6rCCIeIcEnrpQ0CWuddu4Oeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860969773425-crj4996bh9baqeg02en4b5d202tbqsq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#FFC50C</color>
     <color name="colorPrimaryDark">#E5B009</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#32DFD1</color>
     <color name="back">#FFF</color>
     <color name="loginColor">#4D2196F3</color>
 
@@ -10,5 +10,5 @@
     <color name="transpernt">#00000000</color>
     <color name="editText">#DADADA</color>
     <color name="textColor">#6E6E6E</color>
-
+    <color name="black">#000</color>
 </resources>
