@@ -29,6 +29,12 @@ public class SharedPreferencesService {
         this.prefs.edit().putString("driver", driverJson).apply();
     }
 
+    public Driver getDriver(){
+        String driverStr = this.prefs.getString("driver","");
+        Driver driver = gson.fromJson(driverStr, Driver.class);
+        return  driver;
+    }
+
     public void deleteDriver(){
         this.prefs.edit().remove("driver").apply();
     }
