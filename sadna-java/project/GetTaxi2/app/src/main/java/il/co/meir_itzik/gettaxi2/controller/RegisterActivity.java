@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,13 +53,24 @@ public class RegisterActivity extends AppCompatActivity {
         mCreditCardET = findViewById(R.id.credit_card);
         mPasswordET = findViewById(R.id.password);
 
+        mPasswordET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                    register();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         mProgressView = findViewById(R.id.progress_bar);
 
         mRegisterBtn = findViewById(R.id.register_btn);
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Register();
+                register();
             }
         });
 
@@ -81,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordET.setText("");
     }
 
-    private void Register(){
+    private void register(){
         firstName = mFitNameET.getText().toString();
         lastName = mLastNameET.getText().toString();
         id = mIdET.getText().toString();
