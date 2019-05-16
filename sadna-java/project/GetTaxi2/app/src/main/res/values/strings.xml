@@ -11,7 +11,23 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="error_invalid_id">This id is invalid</string>
+    <string name="error_invalid_phone_number">This phone number is invalid</string>
+    <string name="error_invalid_credit_card">This credit card number is invalid</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="login">Login</string>
+    <string name="email_str">Email</string>
+    <string name="password_str">Password</string>
+    <string name="remember_me_str">Remember me</string>
+    <string name="sign_in_sr">SIGN IN</string>
+    <string name="sign_in_with_google_str">Sign in with google</string>
+    <string name="sign_up_str">Don\'t have an account? Sign Up</string>
+    <string name="registration_details_str">registration details</string>
+    <string name="first_name_str">First Name</string>
+    <string name="last_name_str">Last Name</string>
+    <string name="id_str">ID</string>
+    <string name="phone_number_str">Phone Number</string>
+    <string name="credit_card_str">Credit Card</string>
+    <string name="cancel_str">CANCEL</string>
+    <string name="register_str">Register</string>
 </resources>
