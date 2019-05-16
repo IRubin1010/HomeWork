@@ -21,7 +21,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
@@ -39,16 +42,17 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox mRememberMeCB;
     private SharedPreferencesService prefs;
     private DataSource DB = BackendFactory.getDatasource();
+    private AuthService AS = BackendFactory.getAuthService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         prefs = new SharedPreferencesService(this);
-        if (prefs.isLoggedIn()) {
-            Intent main = new Intent(LoginActivity.this, MainActivity.class);
-            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(main);
-        }
+//        if (prefs.isLoggedIn()) {
+//            Intent main = new Intent(LoginActivity.this, MainActivity.class);
+//            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(main);
+//        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -126,87 +130,69 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            DB.isDriverExistByEmailAndPassword(email, password, new DataSource.RunAction<Boolean>() {
-                Intent intent = null;
-                boolean isExist = false;
 
+            View view = getCurrentFocus();
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+            mProgressView.setVisibility(View.VISIBLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+            AS.signInUserWithEmailAndPassword(email, password, new AuthService.RunAction<FirebaseUser>() {
                 @Override
-                public void onPreExecute() {
-                    View view = getCurrentFocus();
-                    if (view != null) {
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    }
-                    mProgressView.setVisibility(View.VISIBLE);
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                public void onSuccess(FirebaseUser user) {
+                    DB.getDriver(email.replace(".","|"), new DataSource.RunAction<Driver>() {
+                        Intent main;
+                        @Override
+                        public void onPreExecute() {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Driver driver) {
+                            if (mRememberMeCB.isChecked()) {
+                                prefs.setLoggedIn(true);
+                                prefs.putDriver(driver);
+                            }
+                            main = new Intent(LoginActivity.this, MainActivity.class);
+                            main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        }
+
+                        @Override
+                        public void onFailure(Driver obj, Exception e) {
+                            Toast toast = Toast.makeText(LoginActivity.this, "failed to get driver from FireBase" + e.getMessage(), Toast.LENGTH_SHORT);
+                            TextView v = toast.getView().findViewById(android.R.id.message);
+                            v.setTextColor(Color.RED);
+                            toast.show();
+                        }
+
+                        @Override
+                        public void onPostExecute() {
+                            mProgressView.setVisibility(View.INVISIBLE);
+                            clearFields();
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            if (main != null)
+                                startActivity(main);
+                        }
+                    });
                 }
 
                 @Override
-                public void onSuccess(Boolean exist) {
-                    if (!exist) {
-                        new AlertDialog.Builder(LoginActivity.this, R.style.CustomDialog)
-                                .setMessage("incorrect Email or Password")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                })
-                                .show();
-                    } else {
-                        isExist = true;
-                        DB.getDriverByEmailAndPassword(email, password, new DataSource.RunAction<Driver>() {
-                            @Override
-                            public void onPreExecute() {
-
-                            }
-
-                            @Override
-                            public void onSuccess(Driver driver) {
-                                if (mRememberMeCB.isChecked()) {
-                                    prefs.setLoggedIn(true);
-                                    prefs.putDriver(driver);
+                public void onFailure(FirebaseUser obj, String msg) {
+                    new AlertDialog.Builder(LoginActivity.this, R.style.CustomDialog)
+                            .setMessage("incorrect Email or Password")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
                                 }
-                                intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            }
-
-                            @Override
-                            public void onFailure(Driver obj, Exception e) {
-                                Toast toast = Toast.makeText(LoginActivity.this, "failed to get driver from FireBase" + e.getMessage(), Toast.LENGTH_SHORT);
-                                TextView v = toast.getView().findViewById(android.R.id.message);
-                                v.setTextColor(Color.RED);
-                                toast.show();
-                            }
-
-                            @Override
-                            public void onPostExecute() {
-                                mProgressView.setVisibility(View.INVISIBLE);
-                                clearFields();
-                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                                if (intent != null)
-                                    startActivity(intent);
-                            }
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(Boolean exist, Exception e) {
-                    Toast toast = Toast.makeText(LoginActivity.this, "failed to connect to FireBase" + e.getMessage(), Toast.LENGTH_SHORT);
-                    TextView v = toast.getView().findViewById(android.R.id.message);
-                    v.setTextColor(Color.RED);
-                    toast.show();
-                }
-
-                @Override
-                public void onPostExecute() {
-                    if (!isExist) {
-                        mProgressView.setVisibility(View.INVISIBLE);
-                        clearFields();
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    }
+                            })
+                            .show();
+                    mProgressView.setVisibility(View.INVISIBLE);
+                    clearFields();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 }
             });
         }

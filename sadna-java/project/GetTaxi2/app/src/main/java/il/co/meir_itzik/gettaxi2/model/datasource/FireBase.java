@@ -44,13 +44,7 @@ public class FireBase implements DataSource {
         });
     }
 
-    @Override
-    public void getDriverByEmailAndPassword(String email, String password, RunAction<Driver> action) {
-        getDriverByKey(email + "-" + password, action);
-
-    }
-
-    private void getDriverByKey(String key, final RunAction<Driver> action){
+    public void getDriver(String key, final RunAction<Driver> action){
         action.onPreExecute();
         drivers.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

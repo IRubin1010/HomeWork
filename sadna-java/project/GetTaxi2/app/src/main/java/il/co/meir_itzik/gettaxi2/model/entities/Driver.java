@@ -78,6 +78,6 @@ public class Driver {
     }
 
     public String getKey(){
-        return email + "-" + password;
+        return email.replace(".","|");
     }
 }

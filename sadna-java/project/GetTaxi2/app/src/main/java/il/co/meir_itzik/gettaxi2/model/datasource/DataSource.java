@@ -14,7 +14,7 @@ public interface DataSource {
 
     void isDriverExistByEmailAndPassword(String email, String password, RunAction<Boolean> action);
 
-    void getDriverByEmailAndPassword(String email, String password, RunAction<Driver> action);
+    void getDriver(String key, RunAction<Driver> action);
 
     void addDriver(Driver driver, RunAction<Driver> action);
 }
