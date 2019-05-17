@@ -150,6 +150,7 @@ public class TravelDetailsRegisteredFragment extends Fragment {
         destinationView.setText("");
         timeView.setText("");
         commentView.setText("");
+        clearTimeView.setVisibility(View.INVISIBLE);
     }
 
     private void orderTravel(){
@@ -161,7 +162,7 @@ public class TravelDetailsRegisteredFragment extends Fragment {
         destination = destinationView.getText().toString();
         comment = commentView.getText().toString();
 
-        Boolean cancel = false;
+        boolean cancel = false;
 
         if(Validation.isFromAddressEmpty(from)){
             fromView.setError(getString(R.string.error_field_required));
