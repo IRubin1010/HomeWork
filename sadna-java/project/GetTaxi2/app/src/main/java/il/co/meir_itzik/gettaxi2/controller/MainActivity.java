@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(login);
 
         }
-        fragmentTransaction.replace(R.id.nav_fragment, selectedFragment).commit();
+        if (selectedFragment!=null)
+            fragmentTransaction.replace(R.id.nav_fragment, selectedFragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
