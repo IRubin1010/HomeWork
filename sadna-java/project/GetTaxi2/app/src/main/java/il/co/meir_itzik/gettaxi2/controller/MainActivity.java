@@ -13,17 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import il.co.meir_itzik.gettaxi2.BottomSheetDialog;
+import il.co.meir_itzik.gettaxi2.controller.fragments.OpenTravelsFragment;
 import il.co.meir_itzik.gettaxi2.R;
-import il.co.meir_itzik.gettaxi2.controller.fragments.Tempfre;
 import il.co.meir_itzik.gettaxi2.controller.fragments.DashboardFragment;
+import il.co.meir_itzik.gettaxi2.dummy.DummyContent;
 import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.model.utils.SharedPreferencesService;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OpenTravelsFragment.OnListFragmentInteractionListener, BottomSheetDialog.BottomSheetListener {
 
     private SharedPreferencesService prefs;
     private AuthService AS = BackendFactory.getAuthService();
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             selectedFragment = new DashboardFragment();
         } else if (id == R.id.nav_gallery) {
-            selectedFragment = new Tempfre();
+            selectedFragment = new OpenTravelsFragment();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
@@ -121,5 +124,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        //Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheet");
+    }
+
+
+    @Override
+    public void onButtonClicked(String text) {
+        Toast.makeText(this, "bottom clicked", Toast.LENGTH_SHORT).show();
     }
 }

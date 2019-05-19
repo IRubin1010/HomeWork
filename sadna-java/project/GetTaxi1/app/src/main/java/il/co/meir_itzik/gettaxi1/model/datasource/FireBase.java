@@ -12,7 +12,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
@@ -20,20 +19,33 @@ import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 
 public class FireBase implements DataSource{
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference travels = database.getReference("Travels");
-    DatabaseReference passengers = database.getReference("Passengers");
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference travelsByPassengers = database.getReference("TravelsByPassengers");
+    private DatabaseReference passengers = database.getReference("Passengers");
+    private DatabaseReference travels = database.getReference("Travels");
 
     @Override
     public void addTravel(final Travel travel, final RunAction<Travel> action) {
         action.onPreExecute();
-        DatabaseReference pasTravels = travels.child(travel.getPassenger().getEmail());
-        String key = travel.getKey();
+        DatabaseReference pasTravels = travelsByPassengers.child(travel.getPassenger().getEmail().replace('.','|'));
+        final String key = travel.getKey();
         pasTravels.child(key).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                action.onSuccess(travel);
-                action.onPostExecute();
+                travels.child(travel.getPassenger().getEmail().replace('.','|') +'-' + key).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        action.onSuccess(travel);
+                        action.onPostExecute();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        action.onFailure(travel, e);
+                        action.onPostExecute();
+                    }
+                });
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -47,7 +59,7 @@ public class FireBase implements DataSource{
     @Override
     public void addPassenger(final Passenger passenger, final RunAction<Passenger> action) {
         action.onPreExecute();
-        String key = passenger.getEmail();
+        String key = passenger.getEmail().replace('.','|');
         passengers.child(key).setValue(passenger).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -86,8 +98,8 @@ public class FireBase implements DataSource{
     @Override
     public void getTravels(Passenger passenger, final RunAction<ArrayList<Travel>> action) {
         action.onPreExecute();
-        //Query query = travels.orderByChild("passenger/email").equalTo(passenger.getEmail());
-        Query query = travels.child(passenger.getEmail()).orderByChild("start/time").limitToLast(10);
+        //Query query = travelsByPassengers.orderByChild("passenger/email").equalTo(passenger.getEmail());
+        Query query = travelsByPassengers.child(passenger.getEmail().replace('.','|')).orderByChild("start/time").limitToLast(10);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -96,8 +108,8 @@ public class FireBase implements DataSource{
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     Travel t = snapshot.getValue(Travel.class);
                     l.add(t);
-                    Collections.reverse(l);
                 }
+                Collections.reverse(l);
                 action.onSuccess(l);
                 action.onPostExecute();
             }
