@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // run DB action to check if the user exist or a new user
 
-            DB.getPassenger(email, new DataSource.RunAction<Passenger>() {
+            DB.getPassenger(email.replace('.','|'), new DataSource.RunAction<Passenger>() {
                 Intent i = null;
                 @Override
                 public void onPreExecute() {
@@ -171,7 +171,8 @@ public class LoginActivity extends AppCompatActivity {
                 public void onPostExecute() {
                     mProgressView.setVisibility(View.INVISIBLE);
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    startActivity(i);
+                    if(i != null)
+                        startActivity(i);
                 }
             });
 
