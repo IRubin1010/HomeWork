@@ -1,8 +1,7 @@
-package il.co.meir_itzik.gettaxi2;
+package il.co.meir_itzik.gettaxi2.utils.swipeContoller;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
@@ -12,12 +11,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
 
+import il.co.meir_itzik.gettaxi2.R;
+
 import static android.support.v7.widget.helper.ItemTouchHelper.*;
 
 enum ButtonsState {
     GONE,
-    LEFT_VISIBLE,
-    RIGHT_VISIBLE
+    VISIBLE,
 }
 
 
@@ -69,11 +69,9 @@ public class SwipeController extends ItemTouchHelper.Callback {
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         if (actionState == ACTION_STATE_SWIPE) {
             if (buttonShowedState != ButtonsState.GONE) {
-                if (buttonShowedState == ButtonsState.LEFT_VISIBLE) dX = Math.max(dX, buttonWidth);
-                if (buttonShowedState == ButtonsState.RIGHT_VISIBLE) dX = Math.min(dX, -buttonWidth);
+                if (buttonShowedState == ButtonsState.VISIBLE) dX = Math.max(dX, buttonWidth);
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            }
-            else {
+            } else {
                 setTouchListener(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
         }
@@ -90,8 +88,7 @@ public class SwipeController extends ItemTouchHelper.Callback {
             public boolean onTouch(View v, MotionEvent event) {
                 swipeBack = event.getAction() == MotionEvent.ACTION_CANCEL || event.getAction() == MotionEvent.ACTION_UP;
                 if (swipeBack) {
-                    if (dX < -buttonWidth) buttonShowedState = ButtonsState.RIGHT_VISIBLE;
-                    else if (dX > buttonWidth) buttonShowedState  = ButtonsState.LEFT_VISIBLE;
+                    if (dX > buttonWidth) buttonShowedState = ButtonsState.VISIBLE;
 
                     if (buttonShowedState != ButtonsState.GONE) {
                         setTouchDownListener(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -131,12 +128,7 @@ public class SwipeController extends ItemTouchHelper.Callback {
                     swipeBack = false;
 
                     if (buttonsActions != null && buttonInstance != null && buttonInstance.contains(event.getX(), event.getY()) && event.getX() < 300 && event.getX() > 40) {
-                        if (buttonShowedState == ButtonsState.LEFT_VISIBLE) {
-                            buttonsActions.onLeftClicked(viewHolder.getAdapterPosition());
-                        }
-                        else if (buttonShowedState == ButtonsState.RIGHT_VISIBLE) {
-                            buttonsActions.onRightClicked(viewHolder.getAdapterPosition());
-                        }
+                        buttonsActions.onLeftClicked(viewHolder.getAdapterPosition());
                     }
                     buttonShowedState = ButtonsState.GONE;
                     currentItemViewHolder = null;
@@ -153,7 +145,6 @@ public class SwipeController extends ItemTouchHelper.Callback {
     }
 
     private void drawButtons(Canvas c, RecyclerView.ViewHolder viewHolder) {
-        float buttonWidthWithoutPadding = buttonWidth - 20;
         float corners = 16;
 
         View itemView = viewHolder.itemView;
@@ -164,18 +155,10 @@ public class SwipeController extends ItemTouchHelper.Callback {
         c.drawRoundRect(leftButton, corners, corners, p);
         drawText("ACCEPT TRAVEL", c, leftButton, p);
 
-//        RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-//        p.setColor(Color.RED);
-//        c.drawRoundRect(rightButton, corners, corners, p);
-//        drawText("DELETE", c, rightButton, p);
-
         buttonInstance = null;
-        if (buttonShowedState == ButtonsState.LEFT_VISIBLE) {
+        if (buttonShowedState == ButtonsState.VISIBLE) {
             buttonInstance = leftButton;
         }
-//        else if (buttonShowedState == ButtonsState.RIGHT_VISIBLE) {
-//            buttonInstance = rightButton;
-//        }
     }
 
     private void drawText(String text, Canvas c, RectF button, Paint p) {
@@ -185,10 +168,8 @@ public class SwipeController extends ItemTouchHelper.Callback {
         p.setTextSize(textSize);
         String[] t = text.split(" ");
 
-        float textWidth = p.measureText(text);
-        c.drawText(t[0], 80, button.centerY()+(textSize/2) - 35, p);
-        c.drawText(t[1], 80, button.centerY()+(textSize/2) + 35, p);
-        //button.centerY()+(textSize/2)
+        c.drawText(t[0], 80, button.centerY() + (textSize / 2) - 35, p);
+        c.drawText(t[1], 80, button.centerY() + (textSize / 2) + 35, p);
     }
 
     public void onDraw(Canvas c) {
