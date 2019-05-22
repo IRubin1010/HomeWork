@@ -12,22 +12,26 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import il.co.meir_itzik.gettaxi2.BottomSheetDialog;
+import com.google.gson.Gson;
+
+import il.co.meir_itzik.gettaxi2.model.entities.Travel;
+import il.co.meir_itzik.gettaxi2.utils.BottomSheetDialog;
 import il.co.meir_itzik.gettaxi2.controller.fragments.OpenTravelsFragment;
 import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.controller.fragments.DashboardFragment;
-import il.co.meir_itzik.gettaxi2.dummy.DummyContent;
 import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
-import il.co.meir_itzik.gettaxi2.model.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OpenTravelsFragment.OnListFragmentInteractionListener, BottomSheetDialog.BottomSheetListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OpenTravelsFragment.OnListFragmentInteractionListener{
 
+    private Gson gson = new Gson();
     private SharedPreferencesService prefs;
     private AuthService AS = BackendFactory.getAuthService();
 
@@ -127,16 +131,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Travel travel) {
         //Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        String TravelJson = gson.toJson(travel);
+        Bundle b = new Bundle();
+        b.putString("travel", TravelJson);
+        bottomSheetDialog.setArguments(b);
         bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheet");
     }
 
-
-    @Override
-    public void onButtonClicked(String text) {
-        Toast.makeText(this, "bottom clicked", Toast.LENGTH_SHORT).show();
-    }
 }

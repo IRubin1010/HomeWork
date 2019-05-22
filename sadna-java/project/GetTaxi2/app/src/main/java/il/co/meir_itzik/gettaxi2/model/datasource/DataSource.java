@@ -1,6 +1,9 @@
 package il.co.meir_itzik.gettaxi2.model.datasource;
 
+import java.util.ArrayList;
+
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.model.entities.Travel;
 
 public interface DataSource {
     interface RunAction<T>{
@@ -17,4 +20,8 @@ public interface DataSource {
     void getDriver(String key, RunAction<Driver> action);
 
     void addDriver(Driver driver, RunAction<Driver> action);
+
+    void getOpenTravels(RunAction<ArrayList<Travel>> action);
+
+    void updateTravelStatus(Travel travel, Travel.Status status, RunAction<Travel> action);
 }

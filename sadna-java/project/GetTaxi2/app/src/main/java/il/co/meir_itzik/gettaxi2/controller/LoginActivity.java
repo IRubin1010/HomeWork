@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
@@ -28,8 +27,8 @@ import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
-import il.co.meir_itzik.gettaxi2.model.utils.SharedPreferencesService;
-import il.co.meir_itzik.gettaxi2.model.utils.Validation;
+import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.utils.Validation;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -162,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Driver obj, Exception e) {
-                            Toast toast = Toast.makeText(LoginActivity.this, "failed to get driver from FireBase" + e.getMessage(), Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(LoginActivity.this, "failed to get driver from FireBase: " + e.getMessage(), Toast.LENGTH_SHORT);
                             TextView v = toast.getView().findViewById(android.R.id.message);
                             v.setTextColor(Color.RED);
                             toast.show();

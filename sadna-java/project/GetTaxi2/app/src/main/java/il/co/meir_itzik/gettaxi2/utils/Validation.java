@@ -1,4 +1,4 @@
-package il.co.meir_itzik.gettaxi2.model.utils;
+package il.co.meir_itzik.gettaxi2.utils;
 
 public class Validation {
 
