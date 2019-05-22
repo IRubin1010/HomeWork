@@ -25,8 +25,8 @@ import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
-import il.co.meir_itzik.gettaxi2.model.utils.SharedPreferencesService;
-import il.co.meir_itzik.gettaxi2.model.utils.Validation;
+import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.utils.Validation;
 
 public class RegisterActivity extends AppCompatActivity {
 

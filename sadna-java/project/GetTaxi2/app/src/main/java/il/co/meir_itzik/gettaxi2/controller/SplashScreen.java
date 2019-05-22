@@ -7,7 +7,7 @@ import android.os.Bundle;
 import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
-import il.co.meir_itzik.gettaxi2.model.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 
 public class SplashScreen extends AppCompatActivity {
 

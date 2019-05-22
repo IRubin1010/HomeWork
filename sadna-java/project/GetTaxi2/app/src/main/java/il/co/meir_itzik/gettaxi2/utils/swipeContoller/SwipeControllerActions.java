@@ -1,4 +1,4 @@
-package il.co.meir_itzik.gettaxi2;
+package il.co.meir_itzik.gettaxi2.utils.swipeContoller;
 
 public abstract class SwipeControllerActions {
 
