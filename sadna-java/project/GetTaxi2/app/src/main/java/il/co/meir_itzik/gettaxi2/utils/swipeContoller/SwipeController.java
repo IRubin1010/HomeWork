@@ -1,4 +1,4 @@
-package il.co.meir_itzik.gettaxi2;
+package il.co.meir_itzik.gettaxi2.utils.swipeContoller;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
+
+import il.co.meir_itzik.gettaxi2.R;
 
 import static android.support.v7.widget.helper.ItemTouchHelper.*;
 
