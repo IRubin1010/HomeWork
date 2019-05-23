@@ -107,10 +107,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_dashboard) {
             // Handle the camera action
             selectedFragment = new DashboardFragment();
+            setTitle("Dashboard");
         } else if (id == R.id.nav_open_travels) {
             selectedFragment = new OpenTravelsFragment();
+            setTitle("Open Travels");
         } else if (id == R.id.nav_my_travels) {
             selectedFragment = new MyTravelsFragment();
+            setTitle("My Travels");
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_log_out) {

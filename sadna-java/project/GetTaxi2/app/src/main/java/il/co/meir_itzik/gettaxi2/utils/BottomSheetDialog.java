@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.AppCompatImageView;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +33,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
     private TextView fromStreet, fromCity, destinationStreet, destinationCity, time, name, phone, email, comment;
     private Button acceptTravelBtn;
     private DataSource DB = BackendFactory.getDatasource();
-    private AppCompatImageView dialPhone, sendSms, sendEmail;
+    private AppCompatImageView dialPhone, sendSms, sendEmail, addPassenger;
     private Passenger passenger;
     //private BottomSheetListener mListener;
 
@@ -55,6 +57,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         comment = v.findViewById(R.id.comment);
         acceptTravelBtn = v.findViewById(R.id.accept_travel_btn);
         dialPhone = v.findViewById(R.id.dial_phone);
+        addPassenger = v.findViewById(R.id.add_passenger);
         sendSms = v.findViewById(R.id.send_sms);
         sendEmail = v.findViewById(R.id.send_email);
 
@@ -104,6 +107,27 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
                     public void onPostExecute() {
                     }
                 });
+            }
+        });
+
+        addPassenger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!PermissionsService.isContactPermissionsGranted(getContext())) {
+                    PermissionsService.requestContactPermissions(getActivity());
+                }
+                if (PermissionsService.isContactPermissionsGranted(getContext())) {
+                    Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                    intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                    intent
+                            .putExtra(ContactsContract.Intents.Insert.NAME,passenger.getFirstName() + " " + passenger.getLastName())
+                            .putExtra(ContactsContract.Intents.Insert.PHONE,passenger.getPhoneNumber())
+                            .putExtra(ContactsContract.Intents.Insert.EMAIL,passenger.getEmail())
+                            .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,ContactsContract.CommonDataKinds.Phone.TYPE_WORK)
+                            .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE,ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                            ;
+                    startActivity(intent);
+                }
             }
         });
 
