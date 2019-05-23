@@ -47,11 +47,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         prefs = new SharedPreferencesService(this);
-//        if (prefs.isLoggedIn()) {
-//            Intent main = new Intent(LoginActivity.this, MainActivity.class);
-//            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(main);
-//        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -153,8 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                         public void onSuccess(Driver driver) {
                             if (mRememberMeCB.isChecked()) {
                                 prefs.setLoggedIn(true);
-                                prefs.putDriver(driver);
                             }
+                            prefs.putDriver(driver);
                             main = new Intent(LoginActivity.this, MainActivity.class);
                             main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         }

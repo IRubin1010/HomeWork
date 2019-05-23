@@ -123,4 +123,31 @@ public class FireBase implements DataSource {
             }
         });
     }
+
+    @Override
+    public void getMyTravels(final RunAction<ArrayList<Travel>> action) {
+        action.onPreExecute();
+        travels.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Travel> travelsList = new ArrayList<>();
+                for (DataSnapshot item: dataSnapshot.getChildren()){
+                    Travel travel = item.getValue(Travel.class);
+                    if(travel.getStatus() != Travel.Status.OPEN){
+
+                        travelsList.add(travel);
+                    }
+                }
+                action.onSuccess(travelsList);
+                action.onPostExecute();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                action.onFailure(null, new Exception(databaseError.getMessage()));
+                action.onPostExecute();
+            }
+        });
+    }
+
 }
