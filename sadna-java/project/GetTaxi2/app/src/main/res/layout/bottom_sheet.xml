@@ -163,35 +163,29 @@
                     android:tint="@color/colorAccent" />
 
             </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/rl_3"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Who"
-                    android:textColor="@color/textColor" />
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="John doe"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/rl_3"
+                    >
                     <LinearLayout
                         android:id="@+id/ll_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Who"
+                            android:textColor="@color/textColor" />
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="John doe"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -233,6 +227,16 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_marginEnd="30dp">
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/add_passenger"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginTop="25dp"
+                                android:layout_marginStart="47dp"
+                                android:src="@drawable/ic_add_passenger"
+                                android:tint="@color/colorAccent"
+                                android:clickable="true"/>
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -271,10 +275,9 @@
 
 
                     </RelativeLayout>
+
                 </RelativeLayout>
-
-            </LinearLayout>
-
+            
         </RelativeLayout>
 
         <View

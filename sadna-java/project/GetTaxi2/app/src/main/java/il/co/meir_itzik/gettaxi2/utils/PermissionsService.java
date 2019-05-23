@@ -8,6 +8,17 @@ import android.support.v4.app.ActivityCompat;
 
 public class PermissionsService {
 
+    public static boolean isContactPermissionsGranted(final Context context) {
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CONTACTS) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public static void requestContactPermissions(Activity activity) {
+        ActivityCompat.requestPermissions(
+                activity,
+                new String[]{Manifest.permission.WRITE_CONTACTS,},
+                99);
+    }
+
     public static boolean isCallPermissionsGranted(final Context context) {
         return ActivityCompat.checkSelfPermission(context, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
     }
