@@ -1,5 +1,6 @@
 package il.co.meir_itzik.gettaxi2.controller.fragments;
 
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,27 +22,27 @@ import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
+import il.co.meir_itzik.gettaxi2.utils.TravelItemRecyclerViewAdapter;
 import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeController;
 import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeControllerActions;
-import il.co.meir_itzik.gettaxi2.utils.TravelItemRecyclerViewAdapter;
 
 
-public class OpenTravelsFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MyTravelsFragment extends Fragment {
+
 
     private int mColumnCount = 1;
     private DataSource DB = BackendFactory.getDatasource();
     private RecyclerView recyclerView;
 
-    private OnListFragmentInteractionListener mListener;
+    private OpenTravelsFragment.OnListFragmentInteractionListener mListener;
 
-    public OpenTravelsFragment() {
+    public MyTravelsFragment() {
+        // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +59,7 @@ public class OpenTravelsFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            DB.getOpenTravels(new DataSource.RunAction<ArrayList<Travel>>() {
+            DB.getMyTravels(new DataSource.RunAction<ArrayList<Travel>>() {
                 @Override
                 public void onPreExecute() {
 
@@ -69,11 +70,11 @@ public class OpenTravelsFragment extends Fragment {
 
                     final TravelItemRecyclerViewAdapter adapter = new TravelItemRecyclerViewAdapter(travels, mListener);
                     recyclerView.setAdapter(adapter);
-                    final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.OPEN_TRAVELS ,new SwipeControllerActions() {
+                    final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.MY_TRAVELS ,new SwipeControllerActions() {
                         @Override
                         public void onLeftClicked(int position) {
                             Travel travel = adapter.mValues.get(position);
-                            DB.updateTravelStatus(travel, Travel.Status.IN_PROGRESS, new DataSource.RunAction<Travel>() {
+                            DB.updateTravelStatus(travel, Travel.Status.FINISH, new DataSource.RunAction<Travel>() {
                                 @Override
                                 public void onPreExecute() {
 
@@ -81,7 +82,7 @@ public class OpenTravelsFragment extends Fragment {
 
                                 @Override
                                 public void onSuccess(Travel obj) {
-                                    Toast toast = Toast.makeText(getActivity(), "Travel accepted successfully", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(getActivity(), "Travel finished successfully", Toast.LENGTH_SHORT);
                                     TextView v = toast.getView().findViewById(android.R.id.message);
                                     v.setTextColor(Color.GREEN);
                                     toast.show();
@@ -89,7 +90,7 @@ public class OpenTravelsFragment extends Fragment {
 
                                 @Override
                                 public void onFailure(Travel obj, Exception e) {
-                                    Toast toast = Toast.makeText(getActivity(), "failed to accept travel", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(getActivity(), "failed to finish travel", Toast.LENGTH_SHORT);
                                     TextView v = toast.getView().findViewById(android.R.id.message);
                                     v.setTextColor(Color.RED);
                                     toast.show();
@@ -137,8 +138,8 @@ public class OpenTravelsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof OpenTravelsFragment.OnListFragmentInteractionListener) {
+            mListener = (OpenTravelsFragment.OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -156,4 +157,5 @@ public class OpenTravelsFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Travel item);
     }
+
 }

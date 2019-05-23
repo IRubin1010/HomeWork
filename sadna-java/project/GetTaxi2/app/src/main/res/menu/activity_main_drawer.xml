@@ -9,13 +9,13 @@
             android:icon="@drawable/ic_dashboard"
             android:title="Dashboard" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_open_travels"
+            android:icon="@drawable/ic_open_travels"
             android:title="Open Travels" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_my_travels"
+            android:icon="@drawable/ic_my_travels"
+            android:title="My Travels" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
