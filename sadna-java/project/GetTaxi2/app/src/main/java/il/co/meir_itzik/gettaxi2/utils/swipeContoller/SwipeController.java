@@ -12,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.model.entities.Travel;
+import il.co.meir_itzik.gettaxi2.utils.TravelItemRecyclerViewAdapter;
 
 import static android.support.v7.widget.helper.ItemTouchHelper.*;
 
@@ -22,6 +24,11 @@ enum ButtonsState {
 
 
 public class SwipeController extends ItemTouchHelper.Callback {
+
+    public enum CallerFragment {
+        OPEN_TRAVELS,
+        MY_TRAVELS
+    }
 
     private boolean swipeBack = false;
     private ButtonsState buttonShowedState = ButtonsState.GONE;
@@ -36,13 +43,22 @@ public class SwipeController extends ItemTouchHelper.Callback {
 
     private Context context;
 
-    public SwipeController(SwipeControllerActions buttonsActions, Context context) {
+    private CallerFragment caller;
+
+    private RecyclerView recyclerView;
+
+    public SwipeController(CallerFragment caller, SwipeControllerActions buttonsActions, Context context) {
         this.buttonsActions = buttonsActions;
         this.context = context;
+        this.caller = caller;
     }
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+        this.recyclerView = recyclerView;
+        if (((TravelItemRecyclerViewAdapter) recyclerView.getAdapter()).mValues.get(viewHolder.getAdapterPosition()).getStatus() == Travel.Status.FINISH) {
+            return makeMovementFlags(0, 0);
+        }
         return makeMovementFlags(0, RIGHT);
     }
 
@@ -79,6 +95,7 @@ public class SwipeController extends ItemTouchHelper.Callback {
         if (buttonShowedState == ButtonsState.GONE) {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
+
         currentItemViewHolder = viewHolder;
     }
 
@@ -149,11 +166,19 @@ public class SwipeController extends ItemTouchHelper.Callback {
 
         View itemView = viewHolder.itemView;
         Paint p = new Paint();
+//        int position = viewHolder.getAdapterPosition();
+//        viewHolder.get
+
 
         RectF leftButton = new RectF(itemView.getLeft(), itemView.getTop(), itemView.getRight(), itemView.getBottom());
         p.setColor(ContextCompat.getColor(context, R.color.colorPrimary));
         c.drawRoundRect(leftButton, corners, corners, p);
-        drawText("ACCEPT TRAVEL", c, leftButton, p);
+        if (caller == CallerFragment.OPEN_TRAVELS) {
+            drawText("ACCEPT TRAVEL", c, leftButton, p);
+        } else {
+            drawText("FINISH TRAVEL", c, leftButton, p);
+        }
+
 
         buttonInstance = null;
         if (buttonShowedState == ButtonsState.VISIBLE) {
@@ -177,5 +202,7 @@ public class SwipeController extends ItemTouchHelper.Callback {
             drawButtons(c, currentItemViewHolder);
         }
     }
+
+
 }
 

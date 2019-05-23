@@ -23,5 +23,7 @@ public interface DataSource {
 
     void getOpenTravels(RunAction<ArrayList<Travel>> action);
 
+    void getMyTravels(RunAction<ArrayList<Travel>> action);
+
     void updateTravelStatus(Travel travel, Travel.Status status, RunAction<Travel> action);
 }

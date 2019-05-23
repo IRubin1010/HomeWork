@@ -1,9 +1,12 @@
 package il.co.meir_itzik.gettaxi2.utils;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import il.co.meir_itzik.gettaxi2.R;
@@ -35,8 +38,23 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
         holder.mItem = mValues.get(position);
         Travel travel = mValues.get(position);
         holder.mTimeView.setText(new SimpleDateFormat("dd/MM/yyyy  -  HH:mm").format(travel.getStart().getTime()));
-        holder.mFromView.setText(mValues.get(position).getSource());
-        holder.mDestinationView.setText(mValues.get(position).getDestination());
+        holder.mFromView.setText(travel.getSource());
+        holder.mDestinationView.setText(travel.getDestination());
+
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(8);
+
+        if(travel.getStatus() == Travel.Status.FINISH){
+            drawable.setStroke(1, Color.RED);
+        }
+        else if(travel.getStatus() == Travel.Status.IN_PROGRESS){
+            drawable.setStroke(1, Color.GREEN);
+        }
+        if(travel.getStatus() != Travel.Status.OPEN){
+            holder.mLlView.setBackground(drawable);
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +76,7 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
         private final TextView mFromView;
         private final TextView mDestinationView;
         private final TextView mTimeView;
+        private final LinearLayout mLlView;
         private Travel mItem;
 
         public ViewHolder(View view) {
@@ -66,6 +85,7 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
             mFromView = (TextView) view.findViewById(R.id.from);
             mDestinationView = (TextView) view.findViewById(R.id.to);
             mTimeView = (TextView) view.findViewById(R.id.time);
+            mLlView = (LinearLayout) view.findViewById(R.id.item_ll);
         }
 
     }

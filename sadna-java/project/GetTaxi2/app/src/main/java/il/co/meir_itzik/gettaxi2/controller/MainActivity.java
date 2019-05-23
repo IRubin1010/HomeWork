@@ -12,12 +12,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import il.co.meir_itzik.gettaxi2.controller.fragments.MyTravelsFragment;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
 import il.co.meir_itzik.gettaxi2.utils.BottomSheetDialog;
 import il.co.meir_itzik.gettaxi2.controller.fragments.OpenTravelsFragment;
@@ -108,10 +107,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_dashboard) {
             // Handle the camera action
             selectedFragment = new DashboardFragment();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_open_travels) {
             selectedFragment = new OpenTravelsFragment();
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_my_travels) {
+            selectedFragment = new MyTravelsFragment();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_log_out) {
