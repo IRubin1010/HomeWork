@@ -1,6 +1,5 @@
 package il.co.meir_itzik.gettaxi2.utils;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,21 +24,24 @@ import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi2.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
+import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 
 public class BottomSheetDialog extends BottomSheetDialogFragment {
     private Travel travel;
     private Gson gson = new Gson();
     private TextView fromStreet, fromCity, destinationStreet, destinationCity, time, name, phone, email, comment;
-    private Button acceptTravelBtn;
+    private Button btn;
     private DataSource DB = BackendFactory.getDatasource();
     private AppCompatImageView dialPhone, sendSms, sendEmail, addPassenger;
     private Passenger passenger;
-    //private BottomSheetListener mListener;
+    private TravelListCaller caller;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_sheet, container, false);
+
+        caller = TravelListCaller.valueOf(getArguments().getString("caller"));
 
         String travelJson = getArguments().getString("travel");
         travel = gson.fromJson(travelJson, Travel.class);
@@ -55,7 +56,14 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         phone = v.findViewById(R.id.phone);
         email = v.findViewById(R.id.email);
         comment = v.findViewById(R.id.comment);
-        acceptTravelBtn = v.findViewById(R.id.accept_travel_btn);
+
+        btn = v.findViewById(R.id.sheet_btn);
+        if(travel.getStatus() == Travel.Status.FINISH){
+            btn.setVisibility(View.INVISIBLE);
+        }else if(caller == TravelListCaller.MY_TRAVELS){
+            btn.setText("FINISH TRAVEL");
+        }
+
         dialPhone = v.findViewById(R.id.dial_phone);
         addPassenger = v.findViewById(R.id.add_passenger);
         sendSms = v.findViewById(R.id.send_sms);
@@ -77,36 +85,67 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         email.setText(passenger.getEmail());
         comment.setText(travel.getComment());
 
-        acceptTravelBtn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DB.updateTravelStatus(travel, Travel.Status.IN_PROGRESS, new DataSource.RunAction<Travel>() {
-                    @Override
-                    public void onPreExecute() {
+                if(caller == TravelListCaller.OPEN_TRAVELS) {
+                    DB.updateTravelStatus(travel, Travel.Status.IN_PROGRESS, new DataSource.RunAction<Travel>() {
+                        @Override
+                        public void onPreExecute() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onSuccess(Travel obj) {
-                        Toast toast = Toast.makeText(getActivity(), "Travel accepted successfully", Toast.LENGTH_SHORT);
-                        TextView v = toast.getView().findViewById(android.R.id.message);
-                        v.setTextColor(Color.GREEN);
-                        toast.show();
-                        dismiss();
-                    }
+                        @Override
+                        public void onSuccess(Travel obj) {
+                            Toast toast = Toast.makeText(getActivity(), "Travel accepted successfully", Toast.LENGTH_SHORT);
+                            TextView v = toast.getView().findViewById(android.R.id.message);
+                            v.setTextColor(Color.GREEN);
+                            toast.show();
+                            dismiss();
+                        }
 
-                    @Override
-                    public void onFailure(Travel obj, Exception e) {
-                        Toast toast = Toast.makeText(getActivity(), "failed to accept travel", Toast.LENGTH_SHORT);
-                        TextView v = toast.getView().findViewById(android.R.id.message);
-                        v.setTextColor(Color.RED);
-                        toast.show();
-                    }
+                        @Override
+                        public void onFailure(Travel obj, Exception e) {
+                            Toast toast = Toast.makeText(getActivity(), "failed to accept travel", Toast.LENGTH_SHORT);
+                            TextView v = toast.getView().findViewById(android.R.id.message);
+                            v.setTextColor(Color.RED);
+                            toast.show();
+                        }
 
-                    @Override
-                    public void onPostExecute() {
-                    }
-                });
+                        @Override
+                        public void onPostExecute() {
+                        }
+                    });
+                }else if(caller == TravelListCaller.MY_TRAVELS){
+                    DB.updateTravelStatus(travel, Travel.Status.FINISH, new DataSource.RunAction<Travel>() {
+                        @Override
+                        public void onPreExecute() {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Travel obj) {
+                            Toast toast = Toast.makeText(getActivity(), "Travel finished successfully", Toast.LENGTH_SHORT);
+                            TextView v = toast.getView().findViewById(android.R.id.message);
+                            v.setTextColor(Color.GREEN);
+                            toast.show();
+                            dismiss();
+                        }
+
+                        @Override
+                        public void onFailure(Travel obj, Exception e) {
+                            Toast toast = Toast.makeText(getActivity(), "failed to finish travel", Toast.LENGTH_SHORT);
+                            TextView v = toast.getView().findViewById(android.R.id.message);
+                            v.setTextColor(Color.RED);
+                            toast.show();
+                        }
+
+                        @Override
+                        public void onPostExecute() {
+
+                        }
+                    });
+                }
             }
         });
 

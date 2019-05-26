@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -26,9 +27,11 @@ import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
+import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OpenTravelsFragment.OnListFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, onListItemClickListener {
 
     private Gson gson = new Gson();
     private SharedPreferencesService prefs;
@@ -133,15 +136,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(Travel travel) {
-        //Toast.makeText(this, "toast", Toast.LENGTH_SHORT).show();
-
+    public void onListItemClick(Travel travel, TravelListCaller caller) {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
         String TravelJson = gson.toJson(travel);
         Bundle b = new Bundle();
         b.putString("travel", TravelJson);
+        b.putString("caller", caller.toString());
         bottomSheetDialog.setArguments(b);
         bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheet");
     }
-
 }
