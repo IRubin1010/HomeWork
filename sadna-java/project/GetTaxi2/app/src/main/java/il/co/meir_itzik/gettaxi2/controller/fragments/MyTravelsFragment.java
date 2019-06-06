@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.utils.FilterDialog;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
@@ -41,6 +44,7 @@ public class MyTravelsFragment extends Fragment {
 
     private onListItemClickListener mListener;
 
+    private AppCompatImageView filter;
     public MyTravelsFragment() {
         // Required empty public constructor
     }
@@ -136,6 +140,11 @@ public class MyTravelsFragment extends Fragment {
         return view;
     }
 
+    private void showEditDialog() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FilterDialog editNameDialogFragment = FilterDialog.newInstance("Some Title");
+        editNameDialogFragment.show(fm, "fragment_edit_name");
+    }
 
     @Override
     public void onAttach(Context context) {

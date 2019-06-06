@@ -52,6 +52,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "860969773425-vjg8dengjfhlnma5q5evbuij7u707g1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "il.co.meir_itzik.gettaxi2",
+            "certificate_hash": "43502d362a1cfb5d47e5fd1f9a03ae4fbddfec44"
+          }
+        },
+        {
           "client_id": "860969773425-q8q9u6gnm40bl260c7qf82ahc9h6l7dh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
