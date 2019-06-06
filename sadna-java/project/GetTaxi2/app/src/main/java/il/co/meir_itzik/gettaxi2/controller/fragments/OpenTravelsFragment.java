@@ -18,6 +18,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
@@ -36,6 +38,10 @@ public class OpenTravelsFragment extends Fragment {
 
     private onListItemClickListener mListener;
 
+    private SharedPreferencesService prefs;
+
+    private Driver driver;
+
     public OpenTravelsFragment() {
     }
 
@@ -53,6 +59,10 @@ public class OpenTravelsFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
+
+            prefs = new SharedPreferencesService(getActivity());
+            driver = prefs.getDriver();
+
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -75,7 +85,9 @@ public class OpenTravelsFragment extends Fragment {
                         @Override
                         public void onLeftClicked(int position) {
                             Travel travel = adapter.mValues.get(position);
-                            DB.updateTravelStatus(travel, Travel.Status.IN_PROGRESS, new DataSource.RunAction<Travel>() {
+                            travel.setDriver(driver);
+                            travel.setStatus(Travel.Status.IN_PROGRESS);
+                            DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
                                 @Override
                                 public void onPreExecute() {
 

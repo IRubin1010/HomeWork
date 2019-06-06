@@ -190,7 +190,6 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
                 }
             }
             travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger, comment);
-            //TODO add comment to travel
 
 
             DB.addTravel(travel, new DataSource.RunAction<Travel>() {
