@@ -16,6 +16,8 @@ public class Travel {
     private Status status;
     private Passenger passenger;
     private String comment;
+    private Driver driver;
+    private String price;
 
     public Travel(String source, String destination, Date start, Status status, Passenger passenger, String comment) {
         this.source = source;
@@ -24,6 +26,8 @@ public class Travel {
         this.status = status;
         this.passenger = passenger;
         this.comment = comment;
+        this.driver = null;
+        this.price = null;
     }
 
     public Travel(){
@@ -86,6 +90,22 @@ public class Travel {
         this.comment = comment;
     }
 
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof Travel))return false;
@@ -98,5 +118,9 @@ public class Travel {
 
     public String getKey(){
         return getSource() + "-" + getDestination() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
+    }
+
+    public String getTravelsKey(){
+        return getPassenger().getKey() + "-" + getSource() + "-" + getDestination() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
     }
 }

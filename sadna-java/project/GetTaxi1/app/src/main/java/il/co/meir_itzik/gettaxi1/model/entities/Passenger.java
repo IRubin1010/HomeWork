@@ -79,4 +79,8 @@ public class Passenger implements Serializable {
                 && p.getLastName().equals(lastName)
                 && p.getId().equals(id);
     }
+
+    public String getKey(){
+        return getEmail().replace('.','|');
+    }
 }

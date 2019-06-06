@@ -91,7 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String add = autoCompleteEditText.getText().toString();
                 if (add.equals("") && isLocationFromSearch) locationStr = null;
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("location", locationStr);
+                returnIntent.putExtra("location", locationStr.replace("/", " "));
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
