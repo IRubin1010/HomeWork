@@ -1,4 +1,4 @@
-package il.co.meir_itzik.gettaxi2.utils;
+package il.co.meir_itzik.gettaxi2.utils.travelList;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import il.co.meir_itzik.gettaxi2.R;
-import il.co.meir_itzik.gettaxi2.controller.fragments.OpenTravelsFragment.OnListFragmentInteractionListener;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
 
 import java.text.SimpleDateFormat;
@@ -19,11 +18,13 @@ import java.util.List;
 public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelItemRecyclerViewAdapter.ViewHolder> {
 
     public final List<Travel> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final onListItemClickListener mListener;
+    private final TravelListCaller mCaller;
 
-    public TravelItemRecyclerViewAdapter(List<Travel> items, OnListFragmentInteractionListener listener) {
+    public TravelItemRecyclerViewAdapter(List<Travel> items, onListItemClickListener listener, TravelListCaller caller) {
         mValues = items;
         mListener = listener;
+        mCaller = caller;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListItemClick(holder.mItem, mCaller);
                 }
             }
         });

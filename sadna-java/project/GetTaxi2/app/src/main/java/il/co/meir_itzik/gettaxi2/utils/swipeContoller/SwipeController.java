@@ -13,7 +13,7 @@ import android.view.View;
 
 import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
-import il.co.meir_itzik.gettaxi2.utils.TravelItemRecyclerViewAdapter;
+import il.co.meir_itzik.gettaxi2.utils.travelList.TravelItemRecyclerViewAdapter;
 
 import static android.support.v7.widget.helper.ItemTouchHelper.*;
 
