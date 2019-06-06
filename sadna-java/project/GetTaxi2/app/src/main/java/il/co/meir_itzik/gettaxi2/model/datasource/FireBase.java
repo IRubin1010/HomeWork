@@ -21,34 +21,9 @@ public class FireBase implements DataSource {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference drivers = database.getReference("Drivers");
     DatabaseReference travels = database.getReference("Travels");
+    DatabaseReference pasTravels = database.getReference("TravelsByPassengers");
 
     @Override
-    public void isDriverExist(Driver driver, final RunAction<Boolean> action) {
-        isDriverExistByKey(driver.getKey(), action);
-    }
-
-    @Override
-    public void isDriverExistByEmailAndPassword(String email, String password, final RunAction<Boolean> action) {
-        isDriverExistByKey(email + "-" + password, action);
-    }
-
-    private void isDriverExistByKey(String key, final RunAction<Boolean> action){
-        action.onPreExecute();
-        drivers.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                action.onSuccess(dataSnapshot.exists());
-                action.onPostExecute();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                action.onFailure(null, new Exception(databaseError.getMessage()));
-                action.onPostExecute();
-            }
-        });
-    }
-
     public void getDriver(String key, final RunAction<Driver> action){
         action.onPreExecute();
         drivers.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,13 +82,24 @@ public class FireBase implements DataSource {
     }
 
     @Override
-    public void updateTravelStatus(final Travel travel, Travel.Status status, final RunAction<Travel> action) {
+    public void updateTravel(final Travel travel, final RunAction<Travel> action) {
         action.onPreExecute();
-        travels.child(travel.getPassenger().getEmail().replace('.','|') +'-' + travel.getKey()).child("status").setValue(status).addOnSuccessListener(new OnSuccessListener<Void>() {
+        travels.child(travel.getTravelsKey()).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                action.onSuccess(travel);
-                action.onPostExecute();
+                pasTravels.child(travel.getPassenger().getKey()).child(travel.getKey()).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        action.onSuccess(travel);
+                        action.onPostExecute();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        action.onFailure(travel, new Exception(e.getMessage()));
+                        action.onPostExecute();
+                    }
+                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -125,7 +111,7 @@ public class FireBase implements DataSource {
     }
 
     @Override
-    public void getMyTravels(final RunAction<ArrayList<Travel>> action) {
+    public void getMyTravels(final Driver driver, final RunAction<ArrayList<Travel>> action) {
         action.onPreExecute();
         travels.addValueEventListener(new ValueEventListener() {
             @Override
@@ -133,9 +119,11 @@ public class FireBase implements DataSource {
                 ArrayList<Travel> travelsList = new ArrayList<>();
                 for (DataSnapshot item: dataSnapshot.getChildren()){
                     Travel travel = item.getValue(Travel.class);
-                    if(travel.getStatus() != Travel.Status.OPEN){
+                    if(travel.getDriver() != null){
+                        if(travel.getStatus() != Travel.Status.OPEN && travel.getDriver().getEmail().equals(driver.getEmail())){
 
-                        travelsList.add(travel);
+                            travelsList.add(travel);
+                        }
                     }
                 }
                 action.onSuccess(travelsList);
