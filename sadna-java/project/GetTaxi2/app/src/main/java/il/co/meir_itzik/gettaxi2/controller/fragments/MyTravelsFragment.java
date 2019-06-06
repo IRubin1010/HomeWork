@@ -19,10 +19,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
+import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
-import il.co.meir_itzik.gettaxi2.utils.TravelItemRecyclerViewAdapter;
+import il.co.meir_itzik.gettaxi2.utils.travelList.TravelItemRecyclerViewAdapter;
 import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeController;
 import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeControllerActions;
 
@@ -37,7 +39,7 @@ public class MyTravelsFragment extends Fragment {
     private DataSource DB = BackendFactory.getDatasource();
     private RecyclerView recyclerView;
 
-    private OpenTravelsFragment.OnListFragmentInteractionListener mListener;
+    private onListItemClickListener mListener;
 
     public MyTravelsFragment() {
         // Required empty public constructor
@@ -68,7 +70,7 @@ public class MyTravelsFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<Travel> travels) {
 
-                    final TravelItemRecyclerViewAdapter adapter = new TravelItemRecyclerViewAdapter(travels, mListener);
+                    final TravelItemRecyclerViewAdapter adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.MY_TRAVELS);
                     recyclerView.setAdapter(adapter);
                     final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.MY_TRAVELS ,new SwipeControllerActions() {
                         @Override
@@ -138,11 +140,11 @@ public class MyTravelsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OpenTravelsFragment.OnListFragmentInteractionListener) {
-            mListener = (OpenTravelsFragment.OnListFragmentInteractionListener) context;
+        if (context instanceof onListItemClickListener) {
+            mListener = (onListItemClickListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement onListItemClickListener");
         }
     }
 
@@ -150,12 +152,6 @@ public class MyTravelsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(Travel item);
     }
 
 }
