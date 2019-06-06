@@ -13,17 +13,13 @@ public interface DataSource {
         void onPostExecute();
     }
 
-    void isDriverExist(Driver driver, RunAction<Boolean> action);
-
-    void isDriverExistByEmailAndPassword(String email, String password, RunAction<Boolean> action);
-
     void getDriver(String key, RunAction<Driver> action);
 
     void addDriver(Driver driver, RunAction<Driver> action);
 
     void getOpenTravels(RunAction<ArrayList<Travel>> action);
 
-    void getMyTravels(RunAction<ArrayList<Travel>> action);
+    void getMyTravels(Driver driver, RunAction<ArrayList<Travel>> action);
 
-    void updateTravelStatus(Travel travel, Travel.Status status, RunAction<Travel> action);
+    void updateTravel(Travel travel, RunAction<Travel> action);
 }

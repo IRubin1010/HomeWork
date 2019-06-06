@@ -89,7 +89,8 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 if(caller == TravelListCaller.OPEN_TRAVELS) {
-                    DB.updateTravelStatus(travel, Travel.Status.IN_PROGRESS, new DataSource.RunAction<Travel>() {
+                    travel.setStatus(Travel.Status.IN_PROGRESS);
+                    DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
                         @Override
                         public void onPreExecute() {
 
@@ -117,7 +118,8 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
                         }
                     });
                 }else if(caller == TravelListCaller.MY_TRAVELS){
-                    DB.updateTravelStatus(travel, Travel.Status.FINISH, new DataSource.RunAction<Travel>() {
+                    travel.setStatus(Travel.Status.FINISH);
+                    DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
                         @Override
                         public void onPreExecute() {
 

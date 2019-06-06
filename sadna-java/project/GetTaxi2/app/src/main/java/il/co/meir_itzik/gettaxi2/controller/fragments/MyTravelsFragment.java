@@ -21,6 +21,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 import il.co.meir_itzik.gettaxi2.utils.FilterDialog;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
@@ -37,12 +39,15 @@ import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeControllerActions;
  */
 public class MyTravelsFragment extends Fragment {
 
-
     private int mColumnCount = 1;
     private DataSource DB = BackendFactory.getDatasource();
     private RecyclerView recyclerView;
 
     private onListItemClickListener mListener;
+
+    private SharedPreferencesService prefs;
+
+    private Driver driver;
 
     private AppCompatImageView filter;
     public MyTravelsFragment() {
@@ -58,6 +63,10 @@ public class MyTravelsFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
+
+            prefs = new SharedPreferencesService(getActivity());
+            driver = prefs.getDriver();
+
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -65,7 +74,7 @@ public class MyTravelsFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            DB.getMyTravels(new DataSource.RunAction<ArrayList<Travel>>() {
+            DB.getMyTravels(driver, new DataSource.RunAction<ArrayList<Travel>>() {
                 @Override
                 public void onPreExecute() {
 
@@ -80,7 +89,8 @@ public class MyTravelsFragment extends Fragment {
                         @Override
                         public void onLeftClicked(int position) {
                             Travel travel = adapter.mValues.get(position);
-                            DB.updateTravelStatus(travel, Travel.Status.FINISH, new DataSource.RunAction<Travel>() {
+                            travel.setStatus(Travel.Status.FINISH);
+                            DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
                                 @Override
                                 public void onPreExecute() {
 

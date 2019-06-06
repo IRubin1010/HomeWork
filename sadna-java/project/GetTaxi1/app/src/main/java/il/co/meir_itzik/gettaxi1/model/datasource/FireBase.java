@@ -27,12 +27,12 @@ public class FireBase implements DataSource{
     @Override
     public void addTravel(final Travel travel, final RunAction<Travel> action) {
         action.onPreExecute();
-        DatabaseReference pasTravels = travelsByPassengers.child(travel.getPassenger().getEmail().replace('.','|'));
+        DatabaseReference pasTravels = travelsByPassengers.child(travel.getPassenger().getKey());
         final String key = travel.getKey();
         pasTravels.child(key).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                travels.child(travel.getPassenger().getEmail().replace('.','|') +'-' + key).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                travels.child(travel.getTravelsKey()).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         action.onSuccess(travel);
@@ -59,7 +59,7 @@ public class FireBase implements DataSource{
     @Override
     public void addPassenger(final Passenger passenger, final RunAction<Passenger> action) {
         action.onPreExecute();
-        String key = passenger.getEmail().replace('.','|');
+        String key = passenger.getKey();
         passengers.child(key).setValue(passenger).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -99,7 +99,7 @@ public class FireBase implements DataSource{
     public void getTravels(Passenger passenger, final RunAction<ArrayList<Travel>> action) {
         action.onPreExecute();
         //Query query = travelsByPassengers.orderByChild("passenger/email").equalTo(passenger.getEmail());
-        Query query = travelsByPassengers.child(passenger.getEmail().replace('.','|')).orderByChild("start/time").limitToLast(10);
+        Query query = travelsByPassengers.child(passenger.getKey()).orderByChild("start/time").limitToLast(10);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -6,22 +6,20 @@ public class Driver {
     private String email;
     private String ID;
     private String phoneNumber;
-    private String CreditNumber;
+    private String creditNumber;
+    private String password;
 
-    public Driver(String firstName, String lastName, String email, String ID, String phoneNumber, String creditNumber) {
+    public Driver(String firstName, String lastName, String email, String ID, String phoneNumber, String creditNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.ID = ID;
         this.phoneNumber = phoneNumber;
-        CreditNumber = creditNumber;
+        this.creditNumber = creditNumber;
+        this.password = password;
     }
 
-    public Driver(String firstName, String lastName, String email){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
+    public Driver(){}
 
     public String getFirstName() {
         return firstName;
@@ -64,10 +62,22 @@ public class Driver {
     }
 
     public String getCreditNumber() {
-        return CreditNumber;
+        return creditNumber;
     }
 
     public void setCreditNumber(String creditNumber) {
-        CreditNumber = creditNumber;
+        creditNumber = creditNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getKey(){
+        return email.replace(".","|");
     }
 }
