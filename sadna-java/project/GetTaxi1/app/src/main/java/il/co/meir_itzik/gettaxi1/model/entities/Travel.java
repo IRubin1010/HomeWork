@@ -1,5 +1,6 @@
 package il.co.meir_itzik.gettaxi1.model.entities;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +19,7 @@ public class Travel {
     private String comment;
     private Driver driver;
     private String price;
+    private Timestamp timestamp;
 
     public Travel(String source, String destination, Date start, Status status, Passenger passenger, String comment) {
         this.source = source;
@@ -28,6 +30,7 @@ public class Travel {
         this.comment = comment;
         this.driver = null;
         this.price = null;
+        this.timestamp = null;
     }
 
     public Travel(){
@@ -104,6 +107,14 @@ public class Travel {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override

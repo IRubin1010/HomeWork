@@ -1,5 +1,6 @@
 package il.co.meir_itzik.gettaxi2.model.datasource;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -11,10 +12,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import il.co.meir_itzik.gettaxi2.model.Authentication.Firebase;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
+import il.co.meir_itzik.gettaxi2.utils.TravelCheckService;
 
 public class FireBase implements DataSource {
 
@@ -138,4 +142,25 @@ public class FireBase implements DataSource {
         });
     }
 
+    @Override
+    public void getTravelsByTimestamp(Timestamp from, Timestamp to, final RunAction<ArrayList<Travel>> action) {
+        action.onPreExecute();
+        travels.orderByChild("timestamp/time").startAt(from.getTime()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Travel> travels = new ArrayList<>();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    travels.add(ds.getValue(Travel.class));
+                }
+                action.onSuccess(travels);
+                action.onPostExecute();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                action.onFailure(null, databaseError.toException());
+                action.onPostExecute();
+            }
+        });
+    }
 }

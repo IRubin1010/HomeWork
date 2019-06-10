@@ -1,6 +1,10 @@
 package il.co.meir_itzik.gettaxi2.controller;
 
+import android.app.ActivityManager;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +31,8 @@ import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
+import il.co.meir_itzik.gettaxi2.utils.TravelBroadcastReceiver;
+import il.co.meir_itzik.gettaxi2.utils.TravelCheckService;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 
@@ -40,7 +46,23 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String fragment = getIntent().getStringExtra("fragment");
+        if(fragment != null && fragment.equals("openTravels")){
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            Fragment f = new OpenTravelsFragment();
+            setTitle("Open Travels");
+            fragmentTransaction.replace(R.id.nav_fragment, f).commit();
+        }
+
         setContentView(R.layout.activity_main);
+
+        if(!isMyServiceRunning(TravelCheckService.class))
+            startService(new Intent(MainActivity.this, TravelCheckService.class));
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.deleteNotificationChannel("my_channel_01");
 
         prefs = new SharedPreferencesService(this);
         Driver driver = prefs.getDriver();
@@ -144,5 +166,15 @@ public class MainActivity extends AppCompatActivity
         b.putString("caller", caller.toString());
         bottomSheetDialog.setArguments(b);
         bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheet");
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
