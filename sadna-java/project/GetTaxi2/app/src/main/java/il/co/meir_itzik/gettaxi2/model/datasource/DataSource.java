@@ -1,5 +1,6 @@
 package il.co.meir_itzik.gettaxi2.model.datasource;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
@@ -22,4 +23,6 @@ public interface DataSource {
     void getMyTravels(Driver driver, RunAction<ArrayList<Travel>> action);
 
     void updateTravel(Travel travel, RunAction<Travel> action);
+
+    void getTravelsByTimestamp(Timestamp from, Timestamp to ,RunAction<ArrayList<Travel>> action);
 }
