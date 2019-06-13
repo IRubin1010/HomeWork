@@ -19,6 +19,7 @@ import il.co.meir_itzik.gettaxi2.model.entities.Travel;
 public class TravelBroadcastReceiver extends BroadcastReceiver {
 
     Gson gson = new Gson();
+    private static int notificationNumber = 1;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -32,26 +33,41 @@ public class TravelBroadcastReceiver extends BroadcastReceiver {
 
             PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            String CHANNEL_ID = "my_channel_01";// The id of the channel.
-            CharSequence name = "my_channel";// The user-visible name of the channel.
+            String CHANNEL_ID = "channel";// The id of the channel.
+            CharSequence name = "channel";// The user-visible name of the channel.
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
 
             NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
+                    new NotificationCompat.Builder(context, CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher_taxi_round)
-                            .setContentTitle("new travel was added")
-                            .setContentText("from: " + travel.getSource())
-                            .setChannelId(CHANNEL_ID);
-            mBuilder.setContentIntent(contentIntent);
-            mBuilder.setDefaults(Notification.DEFAULT_SOUND);
-            mBuilder.setAutoCancel(true);
+                            .setContentTitle("New Travel")
+                            .setContentText("from:   " + travel.getSource())
+                            .setContentIntent(contentIntent)
+                            .setDefaults(Notification.DEFAULT_SOUND)
+                            .setGroup("GROUP");
+                            //.setStyle(new NotificationCompat.InboxStyle()
+                                    //.addLine("from:  " + travel.getSource())
+                                    //.addLine("to:  " + travel.getDestination())
+                                    //.setSummaryText("new travel where ordered"));
+
+            Notification summaryNotification = new NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.ic_launcher_taxi_round)
+                    .setStyle(new NotificationCompat.InboxStyle()
+                            .setSummaryText("new travels where ordered"))
+                    .setGroup("GROUP")
+                    .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
+                    .setGroupSummary(true)
+                    .build();
+
             NotificationManager mNotificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.createNotificationChannel(mChannel);
-            mNotificationManager.notify(1, mBuilder.build());
-            Toast toast = Toast.makeText(context, "got travel from broadcast", Toast.LENGTH_SHORT);
-            toast.show();
+
+            mNotificationManager.notify(notificationNumber++, mBuilder.build());
+            mNotificationManager.notify(0, summaryNotification);
+//            Toast toast = Toast.makeText(context, "got travel from broadcast", Toast.LENGTH_SHORT);
+//            toast.show();
         }
     }
 }

@@ -143,7 +143,7 @@ public class FireBase implements DataSource {
     }
 
     @Override
-    public void getTravelsByTimestamp(Timestamp from, Timestamp to, final RunAction<ArrayList<Travel>> action) {
+    public void getTravelsByTimestamp(Timestamp from, final RunAction<ArrayList<Travel>> action) {
         action.onPreExecute();
         travels.orderByChild("timestamp/time").startAt(from.getTime()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

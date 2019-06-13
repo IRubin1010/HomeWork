@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -17,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -31,7 +29,6 @@ import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
-import il.co.meir_itzik.gettaxi2.utils.TravelBroadcastReceiver;
 import il.co.meir_itzik.gettaxi2.utils.TravelCheckService;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
@@ -42,27 +39,20 @@ public class MainActivity extends AppCompatActivity
     private Gson gson = new Gson();
     private SharedPreferencesService prefs;
     private AuthService AS = BackendFactory.getAuthService();
+    private Fragment f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        String fragment = getIntent().getStringExtra("fragment");
-        if(fragment != null && fragment.equals("openTravels")){
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            Fragment f = new OpenTravelsFragment();
-            setTitle("Open Travels");
-            fragmentTransaction.replace(R.id.nav_fragment, f).commit();
-        }
-
         setContentView(R.layout.activity_main);
 
+        // check that service is running, if not rerunning
         if(!isMyServiceRunning(TravelCheckService.class))
             startService(new Intent(MainActivity.this, TravelCheckService.class));
 
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.deleteNotificationChannel("my_channel_01");
+        mNotificationManager.deleteNotificationChannel("channel");
 
         prefs = new SharedPreferencesService(this);
         Driver driver = prefs.getDriver();
@@ -83,10 +73,18 @@ public class MainActivity extends AppCompatActivity
         TextView navEmail = (TextView) headerView.findViewById(R.id.nav_mail);
         navEmail.setText(driver.getEmail());
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        DashboardFragment f1= new DashboardFragment();
-        fragmentTransaction.add(R.id.nav_fragment, f1).commit();
 
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        String fragment = getIntent().getStringExtra("fragment");
+        if(fragment != null && fragment.equals("openTravels")){
+            f = new OpenTravelsFragment();
+            setTitle("Open Travels");
+        }else{
+            f = new DashboardFragment();
+            setTitle("Dashboard");
+        }
+        fragmentTransaction.replace(R.id.nav_fragment, f).commit();
     }
 
     @Override
@@ -99,45 +97,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment selectedFragment = null;
 
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        f = null;
         if (id == R.id.nav_dashboard) {
             // Handle the camera action
-            selectedFragment = new DashboardFragment();
+            f = new DashboardFragment();
             setTitle("Dashboard");
         } else if (id == R.id.nav_open_travels) {
-            selectedFragment = new OpenTravelsFragment();
+            f = new OpenTravelsFragment();
             setTitle("Open Travels");
         } else if (id == R.id.nav_my_travels) {
-            selectedFragment = new MyTravelsFragment();
+            f = new MyTravelsFragment();
             setTitle("My Travels");
         } else if (id == R.id.nav_manage) {
 
@@ -149,8 +125,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(login);
 
         }
-        if (selectedFragment!=null)
-            fragmentTransaction.replace(R.id.nav_fragment, selectedFragment).commit();
+        if (f!=null)
+            fragmentTransaction.replace(R.id.nav_fragment, f).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

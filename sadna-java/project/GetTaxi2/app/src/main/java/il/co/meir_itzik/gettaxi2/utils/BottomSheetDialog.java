@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
+import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
@@ -35,17 +36,22 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
     private AppCompatImageView dialPhone, sendSms, sendEmail, addPassenger;
     private Passenger passenger;
     private TravelListCaller caller;
+    private SharedPreferencesService prefs;
+    private Driver driver;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_sheet, container, false);
 
+        prefs = new SharedPreferencesService(getActivity());
+
         caller = TravelListCaller.valueOf(getArguments().getString("caller"));
 
         String travelJson = getArguments().getString("travel");
         travel = gson.fromJson(travelJson, Travel.class);
         passenger = travel.getPassenger();
+        driver = prefs.getDriver();
 
         fromStreet = v.findViewById(R.id.from_street);
         fromCity = v.findViewById(R.id.from_city);
@@ -89,6 +95,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 if(caller == TravelListCaller.OPEN_TRAVELS) {
+                    travel.setDriver(driver);
                     travel.setStatus(Travel.Status.IN_PROGRESS);
                     DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
                         @Override
@@ -165,8 +172,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
                             .putExtra(ContactsContract.Intents.Insert.PHONE,passenger.getPhoneNumber())
                             .putExtra(ContactsContract.Intents.Insert.EMAIL,passenger.getEmail())
                             .putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,ContactsContract.CommonDataKinds.Phone.TYPE_WORK)
-                            .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE,ContactsContract.CommonDataKinds.Email.TYPE_WORK)
-                            ;
+                            .putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE,ContactsContract.CommonDataKinds.Email.TYPE_WORK);
                     startActivity(intent);
                 }
             }
