@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.datasource.DataSource;
@@ -38,10 +37,7 @@ public class TravelCheckService extends Service {
             public void run() {
                 Log.i(TAG, "Service running");
                 checkForNewTravels();
-                Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(timestamp.getTime());
-                cal.add(Calendar.SECOND, 10);
-                timestamp = new Timestamp(cal.getTime().getTime());
+                timestamp = new Timestamp(System.currentTimeMillis());
                 handler.postDelayed(this, 10000);
             }
         }, 10000);
@@ -52,7 +48,7 @@ public class TravelCheckService extends Service {
 
     private void checkForNewTravels() {
         final ArrayList<Travel> travels = new ArrayList<>();
-        DB.getTravelsByTimestamp(timestamp, new Timestamp(1560164363600L), new DataSource.RunAction<ArrayList<Travel>>() {
+        DB.getTravelsByTimestamp(timestamp, new DataSource.RunAction<ArrayList<Travel>>() {
             @Override
             public void onPreExecute() {
 
