@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -29,6 +30,7 @@ public class FireBase implements DataSource{
         action.onPreExecute();
         DatabaseReference pasTravels = travelsByPassengers.child(travel.getPassenger().getKey());
         final String key = travel.getKey();
+        travel.setTimestamp(new Timestamp(System.currentTimeMillis()));
         pasTravels.child(key).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
