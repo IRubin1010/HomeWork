@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="il.co.meir_itzik.gettaxi2.OpenTravelsFragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".controller.fragments.OpenTravelsFragment"
-    tools:listitem="@layout/fragment_travel_item"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:layout_marginTop="58dp"
-    android:clipToPadding="false"
-    android:overScrollMode="never"/>
+    >
+
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:padding="2dp"
+        android:queryHint="Search...." />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="il.co.meir_itzik.gettaxi2.OpenTravelsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".controller.fragments.OpenTravelsFragment"
+        tools:listitem="@layout/fragment_travel_item"
+        android:clipToPadding="false"
+        android:overScrollMode="never"/>
+</LinearLayout>
+
+    <!--android:background="@drawable/search_view_border"-->

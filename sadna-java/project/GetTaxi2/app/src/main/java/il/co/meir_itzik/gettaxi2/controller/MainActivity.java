@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_open_travels) {
             selectedFragment = new OpenTravelsFragment();
             setTitle("Open Travels");
+
         } else if (id == R.id.nav_my_travels) {
             selectedFragment = new MyTravelsFragment();
             setTitle("My Travels");

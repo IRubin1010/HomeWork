@@ -58,7 +58,7 @@ public class MyTravelsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_open_travels, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_travels, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -66,7 +66,8 @@ public class MyTravelsFragment extends Fragment {
 
             prefs = new SharedPreferencesService(getActivity());
             driver = prefs.getDriver();
-
+            filter = getActivity().findViewById(R.id.filter);
+            filter.setVisibility(View.VISIBLE);
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -114,12 +115,17 @@ public class MyTravelsFragment extends Fragment {
 
                                 @Override
                                 public void onPostExecute() {
-
                                 }
                             });
                         }
                     }, getActivity());
 
+                    filter.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            showEditDialog();
+                        }
+                    });
                     ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
                     itemTouchhelper.attachToRecyclerView(recyclerView);
 
@@ -171,6 +177,7 @@ public class MyTravelsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        filter.setVisibility(View.INVISIBLE);
     }
 
 }
