@@ -16,9 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_taxi_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".controller.AdditionalDetailsActivity"></activity>
         <activity
             android:name=".controller.MainActivity"
-            android:label=""></activity>
+            android:label="" />
         <activity
             android:name=".controller.LoginActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -30,13 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".utils.TravelBroadcastReceiver">
             <intent-filter>
-                <action android:name="il.co.meir_itzik.gettaxi.NEW_TRAVEL"/>
+                <action android:name="il.co.meir_itzik.gettaxi.NEW_TRAVEL" />
             </intent-filter>
         </receiver>
-        <service android:name=".utils.TravelCheckService"
-            android:exported="false"/>
+
+        <service
+            android:name=".utils.TravelCheckService"
+            android:exported="false" />
     </application>
 
 </manifest>

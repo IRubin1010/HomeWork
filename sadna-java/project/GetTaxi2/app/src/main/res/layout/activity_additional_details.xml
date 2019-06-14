@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".controller.AdditionalDetailsActivity"
+    android:orientation="horizontal">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="serif"
+                        android:text="@string/few_more_details_str"
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        android:textStyle="bold|italic" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/image_details_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_details"
+                        android:tint="@color/colorAccent" />
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/image_view1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/linear_layout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-20dp"
+                    android:rotation="45"
+                    android:src="@drawable/square" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_view1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="30dp">
+
+                    <RelativeLayout
+                        android:id="@+id/relative_layout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/relative_layout2"
+                        android:layout_marginTop="15dp">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/image_view_user_icon3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_person_black_24dp"
+                            android:tint="@color/colorAccent" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/id"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="@+id/image_view_user_icon3"
+                            android:layout_toEndOf="@+id/image_view_user_icon3"
+                            android:background="@color/editText"
+                            android:hint="@string/id_str"
+                            android:inputType="number"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:textSize="15sp" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relative_layout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/relative_layout3"
+                        android:layout_marginTop="15dp">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/image_view_phone_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_phone_black_24dp"
+                            android:tint="@color/colorAccent" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="@+id/image_view_phone_icon"
+                            android:layout_toEndOf="@+id/image_view_phone_icon"
+                            android:background="@color/editText"
+                            android:hint="@string/phone_number_str"
+                            android:inputType="number"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:textSize="15sp" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relative_layout5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/relative_layout4"
+                        android:layout_marginTop="15dp">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/image_view_credit_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_credit_card_black_24dp"
+                            android:tint="@color/colorAccent" />
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/credit_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="@+id/image_view_credit_icon"
+                            android:layout_toEndOf="@+id/image_view_credit_icon"
+                            android:background="@color/editText"
+                            android:hint="@string/credit_card_str"
+                            android:inputType="number"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:textSize="15sp" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/relative_layout5"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="25dp">
+
+                        <android.support.design.button.MaterialButton
+                            android:id="@+id/finish"
+                            style="@style/ButtonStyle"
+                            android:layout_width="200dp"
+                            android:layout_height="50dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/finish_str" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </android.support.design.card.MaterialCardView>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
