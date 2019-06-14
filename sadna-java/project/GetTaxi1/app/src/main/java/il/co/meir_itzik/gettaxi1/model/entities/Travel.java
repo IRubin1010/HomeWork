@@ -19,7 +19,7 @@ public class Travel {
     private String comment;
     private Driver driver;
     private String price;
-    private Timestamp timestamp;
+    private String timestamp;
 
     public Travel(String source, String destination, Date start, Status status, Passenger passenger, String comment) {
         this.source = source;
@@ -109,11 +109,11 @@ public class Travel {
         this.price = price;
     }
 
-    public Timestamp getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

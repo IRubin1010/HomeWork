@@ -20,8 +20,16 @@ public class SharedPreferencesService {
         this.prefs.edit().putBoolean("loggedIn",loggedIn).apply();
     }
 
+    public void setGoogleLoggedIn(boolean loggedIn){
+        this.prefs.edit().putBoolean("googleLoggedIn",loggedIn).apply();
+    }
+
     public boolean isLoggedIn(){
         return this.prefs.getBoolean("loggedIn",false);
+    }
+
+    public boolean isGoogleLoggedIn(){
+        return this.prefs.getBoolean("googleLoggedIn",false);
     }
 
     public void putDriver(Driver driver){
@@ -38,5 +46,6 @@ public class SharedPreferencesService {
     public void deleteDriver(){
         this.prefs.edit().remove("driver").apply();
     }
+
 
 }

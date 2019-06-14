@@ -30,7 +30,7 @@ public class FireBase implements DataSource{
         action.onPreExecute();
         DatabaseReference pasTravels = travelsByPassengers.child(travel.getPassenger().getKey());
         final String key = travel.getKey();
-        travel.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        travel.setTimestamp(Long.toString(new Timestamp(System.currentTimeMillis()).getTime()));
         pasTravels.child(key).setValue(travel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -100,7 +100,6 @@ public class FireBase implements DataSource{
     @Override
     public void getTravels(Passenger passenger, final RunAction<ArrayList<Travel>> action) {
         action.onPreExecute();
-        //Query query = travelsByPassengers.orderByChild("passenger/email").equalTo(passenger.getEmail());
         Query query = travelsByPassengers.child(passenger.getKey()).orderByChild("start/time").limitToLast(10);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
