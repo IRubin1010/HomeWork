@@ -145,7 +145,7 @@ public class FireBase implements DataSource {
     @Override
     public void getTravelsByTimestamp(Timestamp from, final RunAction<ArrayList<Travel>> action) {
         action.onPreExecute();
-        travels.orderByChild("timestamp/time").startAt(from.getTime()).addListenerForSingleValueEvent(new ValueEventListener() {
+        travels.orderByChild("timestamp").startAt(Long.toString(from.getTime())).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Travel> travels = new ArrayList<>();
