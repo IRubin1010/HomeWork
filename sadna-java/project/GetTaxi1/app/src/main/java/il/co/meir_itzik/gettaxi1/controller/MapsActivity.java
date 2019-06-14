@@ -58,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         geocoder = new Geocoder(this, Locale.getDefault());
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyBH9TpbwrEAa43xKsSrLr3qm-hcMWn5iFA");
+            Places.initialize(getApplicationContext(), "");
         }
 
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
