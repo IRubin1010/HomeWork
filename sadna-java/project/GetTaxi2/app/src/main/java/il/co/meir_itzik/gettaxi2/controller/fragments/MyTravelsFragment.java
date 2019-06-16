@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.utils.LocationService;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 import il.co.meir_itzik.gettaxi2.utils.FilterDialog;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
@@ -42,7 +43,7 @@ import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeControllerActions;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyTravelsFragment extends Fragment {
+public class MyTravelsFragment extends Fragment implements LocationService.onLocationChangedListener {
 
     private int mColumnCount = 1;
     private DataSource DB = BackendFactory.getDatasource();
@@ -54,7 +55,8 @@ public class MyTravelsFragment extends Fragment {
 
     private Driver driver;
 
-    private AppCompatImageView filter;
+    private LocationService locationService;
+
     public MyTravelsFragment() {
         // Required empty public constructor
     }
@@ -65,6 +67,8 @@ public class MyTravelsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_travels, container, false);
         setHasOptionsMenu(true);
+
+        locationService = new LocationService(getContext(), getActivity());
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -88,7 +92,7 @@ public class MyTravelsFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<Travel> travels) {
 
-                    adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.MY_TRAVELS);
+                    adapter = new TravelItemRecyclerViewAdapter(getContext(), travels, mListener, TravelListCaller.MY_TRAVELS, locationService);
                     recyclerView.setAdapter(adapter);
                     final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.MY_TRAVELS ,new SwipeControllerActions() {
                         @Override
@@ -192,6 +196,12 @@ public class MyTravelsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onLocationChanged() {
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 }

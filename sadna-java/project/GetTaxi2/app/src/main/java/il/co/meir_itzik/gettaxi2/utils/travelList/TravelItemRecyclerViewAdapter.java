@@ -1,8 +1,13 @@
 package il.co.meir_itzik.gettaxi2.utils.travelList;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import il.co.meir_itzik.gettaxi2.R;
-import il.co.meir_itzik.gettaxi2.controller.fragments.OpenTravelsFragment;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
+import il.co.meir_itzik.gettaxi2.utils.LocationService;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +31,16 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
     private List<Travel> travelFullList;
     private final onListItemClickListener mListener;
     private final TravelListCaller mCaller;
+    private final LocationService mLocationService;
+    private Geocoder geocoder;
 
-    public TravelItemRecyclerViewAdapter(List<Travel> items, onListItemClickListener listener, TravelListCaller caller) {
+    public TravelItemRecyclerViewAdapter(Context context, List<Travel> items, onListItemClickListener listener, TravelListCaller caller, LocationService locationService) {
         mValues = items;
         travelFullList = new ArrayList<>(items);
         mListener = listener;
         mCaller = caller;
+        mLocationService = locationService;
+        geocoder = new Geocoder(context);
     }
 
     @Override
@@ -91,11 +101,28 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(travelFullList);
             } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
+                int filterPattern = Integer.parseInt(constraint.toString());
+
+                Location driverLocation = mLocationService.getLocation();
 
                 for (Travel item : travelFullList) {
-                    if (item.getDestination().toLowerCase().startsWith(filterPattern)) {
-                        filteredList.add(item);
+                    Location itemLocation = new Location("itemLocation");
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocationName(item.getSource(), 5);
+                        if(addresses == null || addresses.size() == 0){
+                            continue;
+                        }
+                        Address loc = addresses.get(0);
+                        itemLocation.setLatitude(loc.getLatitude());
+                        itemLocation.setLongitude(loc.getLongitude());
+                        float a = driverLocation.distanceTo(itemLocation);
+                        if (driverLocation.distanceTo(itemLocation)/1000 <= filterPattern) {
+                            filteredList.add(item);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("adapter", "can not get location from travel");
                     }
                 }
             }

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.utils.LocationService;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
@@ -39,7 +40,7 @@ import il.co.meir_itzik.gettaxi2.utils.swipeContoller.SwipeControllerActions;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelItemRecyclerViewAdapter;
 
 
-public class OpenTravelsFragment extends Fragment {
+public class OpenTravelsFragment extends Fragment implements LocationService.onLocationChangedListener {
 
     private int mColumnCount = 1;
     private DataSource DB = BackendFactory.getDatasource();
@@ -51,6 +52,8 @@ public class OpenTravelsFragment extends Fragment {
     private SharedPreferencesService prefs;
 
     private Driver driver;
+
+    private LocationService locationService;
 
     public OpenTravelsFragment() {
     }
@@ -66,6 +69,9 @@ public class OpenTravelsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_open_travels, container, false);
+
+        locationService = new LocationService(getContext(), getActivity());
+
         setHasOptionsMenu(true);
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -89,7 +95,7 @@ public class OpenTravelsFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<Travel> travels) {
 
-                    adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.OPEN_TRAVELS);
+                    adapter = new TravelItemRecyclerViewAdapter(getContext(), travels, mListener, TravelListCaller.OPEN_TRAVELS, locationService);
                     recyclerView.setAdapter(adapter);
                     final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.OPEN_TRAVELS ,new SwipeControllerActions() {
                         @Override
@@ -198,4 +204,9 @@ public class OpenTravelsFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onLocationChanged() {
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
 }
