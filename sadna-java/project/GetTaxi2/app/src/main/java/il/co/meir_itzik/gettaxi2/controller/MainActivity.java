@@ -38,13 +38,14 @@ import il.co.meir_itzik.gettaxi2.controller.fragments.DashboardFragment;
 import il.co.meir_itzik.gettaxi2.model.Authentication.AuthService;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
+import il.co.meir_itzik.gettaxi2.utils.LocationService;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
 import il.co.meir_itzik.gettaxi2.utils.TravelCheckService;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, onListItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, onListItemClickListener{
 
     private Gson gson = new Gson();
     private SharedPreferencesService prefs;
@@ -106,31 +107,6 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
-/*    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.filter_menu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (android.support.v7.widget.SearchView) searchItem.getActionView();
-
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        return true;
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -212,4 +188,13 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
     }
+
+    @Override
+    protected void onStop() {
+        if(prefs.isGoogleLoggedIn()){
+            googleLogout();
+        }
+        super.onStop();
+    }
+
 }
