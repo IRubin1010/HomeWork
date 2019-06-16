@@ -1,5 +1,7 @@
 package il.co.meir_itzik.gettaxi2.controller.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,10 +10,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ActionMenuView;
+import android.widget.ActionMenuView.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +44,7 @@ public class OpenTravelsFragment extends Fragment {
     private int mColumnCount = 1;
     private DataSource DB = BackendFactory.getDatasource();
     private RecyclerView recyclerView;
+    private TravelItemRecyclerViewAdapter adapter;
 
     private onListItemClickListener mListener;
 
@@ -51,18 +61,18 @@ public class OpenTravelsFragment extends Fragment {
 
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_open_travels, container, false);
-
+        setHasOptionsMenu(true);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
 
             prefs = new SharedPreferencesService(getActivity());
             driver = prefs.getDriver();
-
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -79,7 +89,7 @@ public class OpenTravelsFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<Travel> travels) {
 
-                    final TravelItemRecyclerViewAdapter adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.OPEN_TRAVELS);
+                    adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.OPEN_TRAVELS);
                     recyclerView.setAdapter(adapter);
                     final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.OPEN_TRAVELS ,new SwipeControllerActions() {
                         @Override
@@ -145,6 +155,29 @@ public class OpenTravelsFragment extends Fragment {
 
         }
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.filter_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (android.support.v7.widget.SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
 

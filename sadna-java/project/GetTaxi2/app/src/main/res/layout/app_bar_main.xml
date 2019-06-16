@@ -17,15 +17,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_marginStart="305dp"
-                android:id="@+id/filter"
-                android:src="@drawable/ic_filter_list"
-                android:tint="@color/white"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
-                android:clickable="true"
-                android:visibility="invisible"/>
         </android.support.v7.widget.Toolbar>
 
 

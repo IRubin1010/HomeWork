@@ -11,10 +11,15 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +47,7 @@ public class MyTravelsFragment extends Fragment {
     private int mColumnCount = 1;
     private DataSource DB = BackendFactory.getDatasource();
     private RecyclerView recyclerView;
-
+    private TravelItemRecyclerViewAdapter adapter;
     private onListItemClickListener mListener;
 
     private SharedPreferencesService prefs;
@@ -59,6 +64,7 @@ public class MyTravelsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_travels, container, false);
+        setHasOptionsMenu(true);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -66,8 +72,6 @@ public class MyTravelsFragment extends Fragment {
 
             prefs = new SharedPreferencesService(getActivity());
             driver = prefs.getDriver();
-            filter = getActivity().findViewById(R.id.filter);
-            filter.setVisibility(View.VISIBLE);
             recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -84,7 +88,7 @@ public class MyTravelsFragment extends Fragment {
                 @Override
                 public void onSuccess(ArrayList<Travel> travels) {
 
-                    final TravelItemRecyclerViewAdapter adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.MY_TRAVELS);
+                    adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.MY_TRAVELS);
                     recyclerView.setAdapter(adapter);
                     final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.MY_TRAVELS ,new SwipeControllerActions() {
                         @Override
@@ -120,12 +124,6 @@ public class MyTravelsFragment extends Fragment {
                         }
                     }, getActivity());
 
-                    filter.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            showEditDialog();
-                        }
-                    });
                     ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
                     itemTouchhelper.attachToRecyclerView(recyclerView);
 
@@ -156,10 +154,27 @@ public class MyTravelsFragment extends Fragment {
         return view;
     }
 
-    private void showEditDialog() {
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FilterDialog editNameDialogFragment = FilterDialog.newInstance("Some Title");
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.filter_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (android.support.v7.widget.SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -177,7 +192,6 @@ public class MyTravelsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        filter.setVisibility(View.INVISIBLE);
     }
 
 }
