@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
@@ -21,6 +22,11 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 
 import il.co.meir_itzik.gettaxi2.controller.fragments.MyTravelsFragment;
@@ -73,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.nav_name);
-        navUsername.setText(driver.getFirstName() + " " + driver.getFirstName());
+        navUsername.setText(driver.getFirstName() + " " + driver.getLastName());
         TextView navEmail = (TextView) headerView.findViewById(R.id.nav_mail);
         navEmail.setText(driver.getEmail());
 
@@ -149,6 +155,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_log_out) {
             AS.logout();
+            if(prefs.isGoogleLoggedIn()) {
+                prefs.setGoogleLoggedIn(false);
+                googleLogout();
+            }
             prefs.setLoggedIn(false);
             Intent login = new Intent(MainActivity.this, LoginActivity.class);
             login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -182,5 +192,24 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return false;
+    }
+
+    private void googleLogout(){
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        GoogleSignInClient mGoogleSignInClient;
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                    }
+                });
     }
 }
