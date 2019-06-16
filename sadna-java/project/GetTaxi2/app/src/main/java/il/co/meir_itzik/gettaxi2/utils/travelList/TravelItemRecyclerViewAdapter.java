@@ -6,23 +6,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import il.co.meir_itzik.gettaxi2.R;
+import il.co.meir_itzik.gettaxi2.controller.fragments.OpenTravelsFragment;
 import il.co.meir_itzik.gettaxi2.model.entities.Travel;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelItemRecyclerViewAdapter.ViewHolder> {
+public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelItemRecyclerViewAdapter.ViewHolder> implements Filterable {
 
     public final List<Travel> mValues;
+    private List<Travel> travelFullList;
     private final onListItemClickListener mListener;
     private final TravelListCaller mCaller;
 
     public TravelItemRecyclerViewAdapter(List<Travel> items, onListItemClickListener listener, TravelListCaller caller) {
         mValues = items;
+        travelFullList = new ArrayList<>(items);
         mListener = listener;
         mCaller = caller;
     }
@@ -72,6 +78,42 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
         return mValues.size();
     }
 
+    @Override
+    public  Filter getFilter() {
+        return travelFilter;
+    }
+
+    private Filter travelFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Travel> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(travelFullList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Travel item : travelFullList) {
+                    if (item.getDestination().toLowerCase().startsWith(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mValues.clear();
+            mValues.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
         private final TextView mFromView;
@@ -90,4 +132,5 @@ public class TravelItemRecyclerViewAdapter extends RecyclerView.Adapter<TravelIt
         }
 
     }
+
 }
