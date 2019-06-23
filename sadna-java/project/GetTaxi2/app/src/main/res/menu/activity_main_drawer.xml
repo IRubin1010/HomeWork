@@ -16,10 +16,10 @@
             android:id="@+id/nav_my_travels"
             android:icon="@drawable/ic_my_travels"
             android:title="My Travels" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+        <!--<item-->
+            <!--android:id="@+id/nav_manage"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Tools" />-->
 
         <item
             android:id="@+id/nav_log_out"

@@ -27,8 +27,8 @@ public class TravelListAdapter extends ArrayAdapter<Travel> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String from = getItem(position).getSource();
-        String to = getItem(position).getDestination();
+        String from = getItem(position).getSource().getAddress();
+        String to = getItem(position).getDestination().getAddress();
         Date date = getItem(position).getStart();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);

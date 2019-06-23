@@ -47,7 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng defaultLocation = new LatLng(32.090968, 34.822695);
     private boolean isLocationFromSearch = false;
     private Geocoder geocoder;
-    private List<Address> addresses;
+    private LatLng latLng;
 
 
     @Override
@@ -79,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onError(Status status) {
                 locationStr = null;
+                latLng = null;
             }
 
 
@@ -90,8 +91,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 String add = autoCompleteEditText.getText().toString();
                 if (add.equals("") && isLocationFromSearch) locationStr = null;
+                if(locationStr != null) locationStr = locationStr.replace("/", " ");
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("location", locationStr.replace("/", " "));
+                returnIntent.putExtra("location", locationStr);
+                returnIntent.putExtra("LatLng", latLng);
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
@@ -164,11 +167,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         marker = mMap.addMarker(new MarkerOptions().position(location));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18));
         locationStr = getAddress(location);
+        latLng = new LatLng(location.latitude,location.longitude);
         autoCompleteEditText.setHint(locationStr);
     }
 
     private String getAddress(LatLng location) {
         try {
+            List<Address> addresses;
             addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1);
             String address = addresses.get(0).getAddressLine(0);
             return address;

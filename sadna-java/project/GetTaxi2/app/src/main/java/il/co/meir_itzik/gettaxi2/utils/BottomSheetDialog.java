@@ -75,11 +75,11 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         sendSms = v.findViewById(R.id.send_sms);
         sendEmail = v.findViewById(R.id.send_email);
 
-        String fromS = travel.getSource().split(",")[0];
-        String fromC = travel.getSource().substring(fromS.length() + 2);
+        String fromS = travel.getSource().getAddress().split(",")[0];
+        String fromC = travel.getSource().getAddress().substring(fromS.length() + 2);
 
-        String toS = travel.getDestination().split(",")[0];
-        String toC = travel.getDestination().substring(toS.length() + 2);
+        String toS = travel.getDestination().getAddress().split(",")[0];
+        String toC = travel.getDestination().getAddress().substring(toS.length() + 2);
 
         fromStreet.setText(fromS);
         fromCity.setText(fromC);

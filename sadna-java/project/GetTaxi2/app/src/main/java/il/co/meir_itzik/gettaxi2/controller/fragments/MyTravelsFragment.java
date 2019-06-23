@@ -1,13 +1,13 @@
 package il.co.meir_itzik.gettaxi2.controller.fragments;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +29,6 @@ import il.co.meir_itzik.gettaxi2.R;
 import il.co.meir_itzik.gettaxi2.model.entities.Driver;
 import il.co.meir_itzik.gettaxi2.utils.LocationService;
 import il.co.meir_itzik.gettaxi2.utils.SharedPreferencesService;
-import il.co.meir_itzik.gettaxi2.utils.FilterDialog;
 import il.co.meir_itzik.gettaxi2.utils.travelList.TravelListCaller;
 import il.co.meir_itzik.gettaxi2.utils.travelList.onListItemClickListener;
 import il.co.meir_itzik.gettaxi2.model.backend.BackendFactory;
@@ -57,6 +56,8 @@ public class MyTravelsFragment extends Fragment implements LocationService.onLoc
 
     private LocationService locationService;
 
+    private View view;
+
     public MyTravelsFragment() {
         // Required empty public constructor
     }
@@ -68,92 +69,16 @@ public class MyTravelsFragment extends Fragment implements LocationService.onLoc
         View view = inflater.inflate(R.layout.fragment_my_travels, container, false);
         setHasOptionsMenu(true);
 
-        locationService = new LocationService(getContext(), getActivity());
+        locationService = new LocationService(getContext(), this);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-
-            prefs = new SharedPreferencesService(getActivity());
-            driver = prefs.getDriver();
-            recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            this.view = view;
+            if(locationService.checkPermissions()){
+                initView();
+            }else{
+                locationService.askPermissions();
             }
-
-            DB.getMyTravels(driver, new DataSource.RunAction<ArrayList<Travel>>() {
-                @Override
-                public void onPreExecute() {
-
-                }
-
-                @Override
-                public void onSuccess(ArrayList<Travel> travels) {
-
-                    adapter = new TravelItemRecyclerViewAdapter(getContext(), travels, mListener, TravelListCaller.MY_TRAVELS, locationService);
-                    recyclerView.setAdapter(adapter);
-                    final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.MY_TRAVELS ,new SwipeControllerActions() {
-                        @Override
-                        public void onLeftClicked(int position) {
-                            Travel travel = adapter.mValues.get(position);
-                            travel.setStatus(Travel.Status.FINISH);
-                            DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
-                                @Override
-                                public void onPreExecute() {
-
-                                }
-
-                                @Override
-                                public void onSuccess(Travel obj) {
-                                    Toast toast = Toast.makeText(getActivity(), "Travel finished successfully", Toast.LENGTH_SHORT);
-                                    TextView v = toast.getView().findViewById(android.R.id.message);
-                                    v.setTextColor(Color.GREEN);
-                                    toast.show();
-                                }
-
-                                @Override
-                                public void onFailure(Travel obj, Exception e) {
-                                    Toast toast = Toast.makeText(getActivity(), "failed to finish travel", Toast.LENGTH_SHORT);
-                                    TextView v = toast.getView().findViewById(android.R.id.message);
-                                    v.setTextColor(Color.RED);
-                                    toast.show();
-                                }
-
-                                @Override
-                                public void onPostExecute() {
-                                }
-                            });
-                        }
-                    }, getActivity());
-
-                    ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-                    itemTouchhelper.attachToRecyclerView(recyclerView);
-
-                    recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-                        @Override
-                        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-                            swipeController.onDraw(c);
-                        }
-                    });
-                }
-
-                @Override
-                public void onFailure(ArrayList<Travel> obj, Exception e) {
-                    Toast toast = Toast.makeText(getActivity(), "failed to get travels from FireBase: " + e.getMessage(), Toast.LENGTH_SHORT);
-                    TextView v = toast.getView().findViewById(android.R.id.message);
-                    v.setTextColor(Color.RED);
-                    toast.show();
-                }
-
-                @Override
-                public void onPostExecute() {
-
-                }
-            });
-
-
         }
         return view;
     }
@@ -166,6 +91,8 @@ public class MyTravelsFragment extends Fragment implements LocationService.onLoc
         SearchView searchView = (android.support.v7.widget.SearchView) searchItem.getActionView();
 
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setQueryHint("insert distance");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -204,4 +131,92 @@ public class MyTravelsFragment extends Fragment implements LocationService.onLoc
         adapter.notifyDataSetChanged();
     }
 
+    private void initView(){
+        Context context = view.getContext();
+
+        prefs = new SharedPreferencesService(getActivity());
+        driver = prefs.getDriver();
+        recyclerView = (RecyclerView) view;
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        }
+
+        DB.getMyTravels(driver, new DataSource.RunAction<ArrayList<Travel>>() {
+            @Override
+            public void onPreExecute() {
+
+            }
+
+            @Override
+            public void onSuccess(ArrayList<Travel> travels) {
+
+                adapter = new TravelItemRecyclerViewAdapter(travels, mListener, TravelListCaller.MY_TRAVELS, locationService);
+                recyclerView.setAdapter(adapter);
+                final SwipeController swipeController = new SwipeController(SwipeController.CallerFragment.MY_TRAVELS ,new SwipeControllerActions() {
+                    @Override
+                    public void onLeftClicked(int position) {
+                        Travel travel = adapter.mValues.get(position);
+                        travel.setStatus(Travel.Status.FINISH);
+                        DB.updateTravel(travel, new DataSource.RunAction<Travel>() {
+                            @Override
+                            public void onPreExecute() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(Travel obj) {
+                                Toast toast = Toast.makeText(getActivity(), "Travel finished successfully", Toast.LENGTH_SHORT);
+                                TextView v = toast.getView().findViewById(android.R.id.message);
+                                v.setTextColor(Color.GREEN);
+                                toast.show();
+                            }
+
+                            @Override
+                            public void onFailure(Travel obj, Exception e) {
+                                Toast toast = Toast.makeText(getActivity(), "failed to finish travel", Toast.LENGTH_SHORT);
+                                TextView v = toast.getView().findViewById(android.R.id.message);
+                                v.setTextColor(Color.RED);
+                                toast.show();
+                            }
+
+                            @Override
+                            public void onPostExecute() {
+                            }
+                        });
+                    }
+                }, getActivity());
+
+                ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+                itemTouchhelper.attachToRecyclerView(recyclerView);
+
+                recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                    @Override
+                    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                        swipeController.onDraw(c);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(ArrayList<Travel> obj, Exception e) {
+                Toast toast = Toast.makeText(getActivity(), "failed to get travels from FireBase: " + e.getMessage(), Toast.LENGTH_SHORT);
+                TextView v = toast.getView().findViewById(android.R.id.message);
+                v.setTextColor(Color.RED);
+                toast.show();
+            }
+
+            @Override
+            public void onPostExecute() {
+
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(locationService.checkPermissions())
+            initView();
+    }
 }

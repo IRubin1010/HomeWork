@@ -127,9 +127,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_travels) {
             f = new MyTravelsFragment();
             setTitle("My Travels");
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_log_out) {
+        }
+//        else if (id == R.id.nav_manage) {
+//
+//        }
+        else if (id == R.id.nav_log_out) {
             AS.logout();
             if(prefs.isGoogleLoggedIn()) {
                 prefs.setGoogleLoggedIn(false);

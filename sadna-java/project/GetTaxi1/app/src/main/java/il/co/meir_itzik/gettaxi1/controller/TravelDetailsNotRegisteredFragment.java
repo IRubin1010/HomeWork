@@ -18,12 +18,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import il.co.meir_itzik.gettaxi1.R;
 import il.co.meir_itzik.gettaxi1.model.backend.BackendFactory;
 import il.co.meir_itzik.gettaxi1.model.datasource.DataSource;
+import il.co.meir_itzik.gettaxi1.model.entities.AddressLocation;
 import il.co.meir_itzik.gettaxi1.model.entities.Passenger;
 import il.co.meir_itzik.gettaxi1.model.entities.Travel;
 import il.co.meir_itzik.gettaxi1.model.utils.Validation;
@@ -42,6 +45,8 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
     Passenger passenger;
     DataSource DB = BackendFactory.getDatasource();
     Travel travel;
+    LatLng fromLatLng;
+    LatLng toLatLng;
     boolean isTimeSelected = false;
     private static final int FROM_MAP_REQUEST = 1;
     private static final int DESTINATION_MAP_REQUEST = 2;
@@ -189,7 +194,9 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
                     c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
                 }
             }
-            travel = new Travel(from, destination, c.getTime(), Travel.Status.OPEN, passenger, comment);
+            AddressLocation fromAddress = new AddressLocation(from, fromLatLng);
+            AddressLocation destinationAddress = new AddressLocation(destination, toLatLng);
+            travel = new Travel(fromAddress, destinationAddress, c.getTime(), Travel.Status.OPEN, passenger, comment);
 
 
             DB.addTravel(travel, new DataSource.RunAction<Travel>() {
@@ -238,10 +245,12 @@ public class TravelDetailsNotRegisteredFragment extends Fragment {
         if (requestCode == FROM_MAP_REQUEST) {
             if (resultCode == RESULT_OK) {
                 fromView.setText(data.getStringExtra("location"));
+                fromLatLng = data.getExtras().getParcelable("LatLng");
             }
         }else if(requestCode == DESTINATION_MAP_REQUEST){
             if (resultCode == RESULT_OK) {
                 destinationView.setText(data.getStringExtra("location"));
+                toLatLng = data.getExtras().getParcelable("LatLng");
             }
         }
     }
