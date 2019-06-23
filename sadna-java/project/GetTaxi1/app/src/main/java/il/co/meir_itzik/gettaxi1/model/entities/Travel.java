@@ -1,5 +1,10 @@
 package il.co.meir_itzik.gettaxi1.model.entities;
 
+import android.location.Location;
+import android.support.v4.app.Fragment;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,18 +15,19 @@ public class Travel {
         IN_PROGRESS,
         FINISH
     }
-    private String source;
-    private String destination;
+
+    private AddressLocation source;
+    private AddressLocation destination;
     private Date start;
     private Date end;
     private Status status;
     private Passenger passenger;
     private String comment;
     private Driver driver;
-    private String price;
+    private float price;
     private String timestamp;
 
-    public Travel(String source, String destination, Date start, Status status, Passenger passenger, String comment) {
+    public Travel(AddressLocation source, AddressLocation destination, Date start, Status status, Passenger passenger, String comment) {
         this.source = source;
         this.destination = destination;
         this.start = start;
@@ -29,27 +35,33 @@ public class Travel {
         this.passenger = passenger;
         this.comment = comment;
         this.driver = null;
-        this.price = null;
         this.timestamp = null;
+        Location from = new Location("from");
+        from.setLatitude(source.getLatitude());
+        from.setLongitude(source.getLongitude());
+        Location to = new Location("to");
+        to.setLatitude(destination.getLatitude());
+        to.setLongitude(destination.getLongitude());
+        price = from.distanceTo(to) / 1000 * 20;
     }
 
     public Travel(){
 
     }
 
-    public String getSource() {
+    public AddressLocation getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(AddressLocation source) {
         this.source = source;
     }
 
-    public String getDestination() {
+    public AddressLocation getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(AddressLocation destination) {
         this.destination = destination;
     }
 
@@ -101,11 +113,11 @@ public class Travel {
         this.driver = driver;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -128,10 +140,10 @@ public class Travel {
     }
 
     public String getKey(){
-        return getSource() + "-" + getDestination() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
+        return getSource().getAddress() + "-" + getDestination().getAddress() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
     }
 
     public String getTravelsKey(){
-        return getPassenger().getKey() + "-" + getSource() + "-" + getDestination() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
+        return getPassenger().getKey() + "-" + getSource().getAddress() + "-" + getDestination().getAddress() +"-" + new SimpleDateFormat("dd:MM:yyyy-HH:mm").format(getStart().getTime());
     }
 }

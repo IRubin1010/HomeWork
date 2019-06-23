@@ -42,14 +42,10 @@ public class TravelBroadcastReceiver extends BroadcastReceiver {
                     new NotificationCompat.Builder(context, CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher_taxi_round)
                             .setContentTitle("New Travel")
-                            .setContentText("from:   " + travel.getSource())
+                            .setContentText("from:   " + travel.getSource().getAddress())
                             .setContentIntent(contentIntent)
                             .setDefaults(Notification.DEFAULT_SOUND)
                             .setGroup("GROUP");
-                            //.setStyle(new NotificationCompat.InboxStyle()
-                                    //.addLine("from:  " + travel.getSource())
-                                    //.addLine("to:  " + travel.getDestination())
-                                    //.setSummaryText("new travel where ordered"));
 
             Notification summaryNotification = new NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.mipmap.ic_launcher_taxi_round)
@@ -66,8 +62,6 @@ public class TravelBroadcastReceiver extends BroadcastReceiver {
 
             mNotificationManager.notify(notificationNumber++, mBuilder.build());
             mNotificationManager.notify(0, summaryNotification);
-//            Toast toast = Toast.makeText(context, "got travel from broadcast", Toast.LENGTH_SHORT);
-//            toast.show();
         }
     }
 }
