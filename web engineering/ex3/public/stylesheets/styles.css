@@ -1,5 +1,32 @@
-.test {
-  font-size: x-large;
-  padding-left: 70px; }
+.navbar-custom {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important; }
+  .navbar-custom .brand-font {
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: xx-large; }
+  .navbar-custom div form button {
+    width: 100px; }
+
+.pl-6 {
+  padding-left: 4rem !important; }
+
+.pr-6 {
+  padding-right: 4rem !important; }
+
+.footer {
+  margin-bottom: 0;
+  background-color: #343a40 !important;
+  color: #212529 !important;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+  .footer div {
+    padding-top: 0px !important; }
+  .footer h6 {
+    color: white; }
+  .footer p {
+    color: white;
+    font-size: smaller;
+    margin-bottom: 0px; }
 
 /*# sourceMappingURL=styles.css.map */
