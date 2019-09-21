@@ -1,46 +1,73 @@
 $spacer: 1rem !default;
 
-.navbar-custom{
+.navbar-custom {
   padding-left: ($spacer * 4) !important;
   padding-right: ($spacer * 4) !important;
-  .brand-font{
+
+  .brand-font {
     font-family: Impact, Charcoal, sans-serif;
     font-size: xx-large;
   }
-  div{
-    form{
-      button{
+
+  div {
+    form {
+      button {
         width: 100px;
       }
     }
   }
 }
 
-.pl-6{
-  padding-left: ($spacer * 4) !important;
-}
+//.pl-6{
+//  padding-left: ($spacer * 4) !important;
+//}
+//
+//.pr-6{
+//  padding-right: ($spacer * 4) !important;
+//}
 
-.pr-6{
-  padding-right: ($spacer * 4) !important;
-}
-
-.footer{
+.footer {
   margin-bottom: 0;
   background-color: #343a40 !important;
   color: #212529 !important;
   height: auto;
   padding-top: 10px;
   padding-bottom: 10px;
-  div{
+
+  div {
     padding-top: 0px !important;
   }
-  h6{
+
+  h6 {
     color: white;
   }
-  p{
+
+  p {
     color: white;
     font-size: smaller;
     margin-bottom: 0px;
+  }
+}
+
+.fp-header {
+  $imgsize: 160px;
+
+  div {
+    img {
+      width: 100%;
+      height: $imgsize;
+    }
+
+    h1 {
+      font-family: Impact, Charcoal, sans-serif;
+      font-size: 60px;
+      margin-bottom: 0px;
+    }
+
+    h2 {
+      font-size: 35px;
+      margin-bottom: 0px;
+    }
   }
 }
 
