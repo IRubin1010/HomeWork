@@ -1,10 +1,15 @@
-$(document).ready(function () {
+$(document).ready(async function () {
     let hash = location.hash;
     if (hash !== "") {
-        console.log(hash);
         let replacedHash = hash.replace('#', '');
-        console.log(replacedHash);
+
+        if(replacedHash === "stores"){
+            await loadStores();
+            return;
+        }
+
         $("#middle-page").load(replacedHash + ".ejs");
+
     }
 });
 
@@ -18,15 +23,26 @@ $(document).ready(function () {
     );
 });
 
+$(document).ready(function () {
+    $('a[href="#stores"]').on("click", loadStores);
+});
+
+
+async function loadStores() {
+    let res = await fetch("/stores");
+    let resJson = await res.json();
+    let page = resJson.page;
+    let stores = resJson.stores;
+    $("#middle-page").load(page);
+    let template = await $.get('templates/store.ejs');
+    $.tmpl(template, stores).appendTo("#stores-cards");
+}
+
 
 $(document).ready(async function () {
     let productsCategory = await fetch("/productsCategory");
     let productsCategoryJson = await productsCategory.json();
-    console.log("got data");
-    console.log(productsCategoryJson);
     let template = await $.get('templates/productsCategory.ejs');
-    console.log("done");
-    console.log(template);
     $.tmpl(template, productsCategoryJson).appendTo("#products-category-cards");
 });
 

@@ -66,24 +66,28 @@ $spacer: 1rem !default;
   }
 }
 
-.card-description{
-  div{
-    div{
-      img{
+.card-description {
+  div {
+    div {
+      img {
         width: 100%;
       }
     }
-    div{
-      div{
-        h2{
+
+    div {
+      div {
+        h2 {
           margin-top: 50px;
           margin-bottom: 30px;
           text-align: center;
         }
-        p{
+
+        p {
           text-align: center;
+          margin-bottom: 0px;
         }
-        #p1{
+
+        #p1 {
           margin-bottom: 10px;
         }
       }
@@ -91,9 +95,57 @@ $spacer: 1rem !default;
   }
 }
 
-.mission{
+.store-description {
+  div {
+    div {
+      img {
+        width: 100%;
+      }
+    }
+    div {
+      div {
+        h2 {
+          margin-top: 20px;
+          margin-bottom: 10px;
+          text-align: center;
+          font-family: Impact, Charcoal, sans-serif;
+          color: #305c65;
+        }
+
+        div {
+          p {
+            padding-left: 100px;
+            text-align: left;
+            margin-bottom: 0px;
+
+            span {
+              font-weight: bold;
+            }
+          }
+
+          div {
+            table {
+              margin-left: 130px;
+
+              tbody {
+                tr {
+                  td {
+                    padding-right: 15px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mission {
   padding: 30px;
-  h1{
+
+  h1 {
     margin: auto;
     text-align: center;
     font-size: 50px;
@@ -101,7 +153,8 @@ $spacer: 1rem !default;
     color: #305c65;
     padding-bottom: 30px;
   }
-  p{
+
+  p {
     margin: auto;
     text-align: center;
     font-family: sans-serif;
@@ -109,7 +162,8 @@ $spacer: 1rem !default;
     font-size: 25px;
     padding-bottom: 20px;
   }
-  h2{
+
+  h2 {
     margin: auto;
     text-align: center;
     font-family: sans-serif;
@@ -118,15 +172,18 @@ $spacer: 1rem !default;
   }
 }
 
-.who-we-are{
-  margin:40px auto;
+.who-we-are {
+  margin: 40px auto;
   width: 600px;
-  h2{
+
+  h2 {
     text-align: center;
   }
-  .row{
+
+  .row {
     margin-top: 20px;
     width: auto;
   }
 }
+
 

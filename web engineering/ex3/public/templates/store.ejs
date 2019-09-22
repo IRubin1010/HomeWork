@@ -1,0 +1,55 @@
+<div class="col mb-5">
+    <div class="card store-description">
+        <div class="row no-gutters">
+            <div class="col-7" id="map">
+                <iframe src="${mapFrame}" width="100%" height="100%" frameborder="0" style="border:0;"
+                        allowfullscreen=""></iframe>
+            </div>
+            <div class="col-5">
+                <div class="card-block px-2" style="margin-bottom: 20px">
+                    <h2 class="card-title pt-2 pl-3 pr-3">${storeName}</h2>
+                    <div>
+                        <p class="card-text"><span>address: </span>${address}</p>
+                        <p class="card-text"><span>phone number: </span>${phone}</p>
+                        <p class="card-text"><span>open hours: </span></p>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>sunday</td>
+                                    <td>${open.Sunday.from} - ${open.Sunday.until}</td>
+                                </tr>
+                                <tr>
+                                    <td>monday</td>
+                                    <td>${open.Monday.from} - ${open.Monday.until}</td>
+                                </tr>
+                                <tr>
+                                    <td>tuesday</td>
+                                    <td>${open.Tuesday.from} - ${open.Tuesday.until}</td>
+                                </tr>
+                                <tr>
+                                    <td>wednesday</td>
+                                    <td>${open.Wednesday.from} - ${open.Wednesday.until}</td>
+                                </tr>
+                                <tr>
+                                    <td>thursday</td>
+                                    <td>${open.Thursday.from} - ${open.Thursday.until}</td>
+                                </tr>
+                                <tr>
+                                    <td>friday</td>
+                                    <td>${open.Friday.from} - ${open.Friday.until}</td>
+                                </tr>
+
+                            </table>
+<!--                            <p class="card-text">sunday: ${open.Sunday.from} - ${open.Sunday.until}</p>-->
+<!--                            <p class="card-text">monday: ${open.Monday.from} - ${open.Monday.until}</p>-->
+<!--                            <p class="card-text">tuesday: ${open.Tuesday.from} - ${open.Tuesday.until}</p>-->
+<!--                            <p class="card-text">wednesday: ${open.Wednesday.from} - ${open.Wednesday.until}</p>-->
+<!--                            <p class="card-text">thursday: ${open.Thursday.from} - ${open.Thursday.until}</p>-->
+<!--                            <p class="card-text">friday: ${open.Friday.from} - ${open.Friday.until}</p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

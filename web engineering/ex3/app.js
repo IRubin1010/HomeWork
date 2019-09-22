@@ -4,7 +4,8 @@ let path = require('path');
 //require routs
 let indexRouter = require('./routes/index');
 let aboutRouter = require('./routes/about');
-let productsCategory = require('./routes/productsCategory');
+let storesRouter = require('./routes/stores');
+let productsCategoryRouter = require('./routes/productsCategory');
 
 
 let app = express();
@@ -20,7 +21,8 @@ app.use(express.static(path.join(__dirname, 'data')));
 // set routs
 app.use('/', indexRouter);
 app.use('/about', aboutRouter);
-app.use('/productsCategory', productsCategory);
+app.use('/productsCategory', productsCategoryRouter);
+app.use('/stores', storesRouter);
 
 
 app.listen(3000, function(){

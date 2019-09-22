@@ -22,5 +22,11 @@
     "p1": "We have all kind of Meat.",
     "p2": "all of our Meat are fresh, clean and tasty.",
     "image": "meat.png"
+  },
+  {
+    "category": "Cheese",
+    "p1": "We have all kind of Cheese.",
+    "p2": "all of our Cheese are fresh, clean and tasty.",
+    "image": "cheese.png"
   }
 ]
