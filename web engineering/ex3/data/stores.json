@@ -1,12 +1,68 @@
 [
   {
-    "storeName": "aaa",
-    "address": "aaaa",
-    "phone": "123456789"
+    "storeName": "SuperStore",
+    "address": "sokolov 44 Beni Brak",
+    "phone": "03-1234567",
+    "active": true,
+    "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.204845918268!2d34.83593028528619!3d32.09074892596658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4a26bf39d737%3A0xd06a51ae3218554c!2z16HXlden15XXnNeV15EgNDQsINeR16DXmSDXkdeo16c!5e0!3m2!1siw!2sil!4v1569155044573!5m2!1siw!2sil",
+    "open": {
+      "Sunday": {
+        "from": "7 AM",
+        "until": "9 PM"
+      },
+      "Monday": {
+        "from": "7 AM",
+        "until": "9 PM"
+      },
+      "Tuesday": {
+        "from": "7 AM",
+        "until": "9 PM"
+      },
+      "Wednesday": {
+        "from": "7 AM",
+        "until": "10 PM"
+      },
+      "Thursday": {
+        "from": "7 AM",
+        "until": "12 PM"
+      },
+      "Friday": {
+        "from": "7 AM",
+        "until": "3 PM"
+      }
+    }
   },
   {
-    "storeName": "bbb",
-    "address": "bbbb",
-    "phone": "987654321"
+    "storeName": "SuperStore",
+    "address": "rines 14 Beni Brak",
+    "phone": "03-7654321",
+    "active": true,
+    "mapFrame": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.3172087515673!2d34.84266768528621!3d32.087711526118625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4a1f55b7c9a9%3A0x32547b7adbc8f6a2!2z15TXqNeRINeo15nXmdeg16EgMTQsINeR16DXmSDXkdeo16c!5e0!3m2!1siw!2sil!4v1569155504274!5m2!1siw!2sil",
+    "open": {
+      "Sunday": {
+        "from": "7 AM",
+        "until": "9 PM"
+      },
+      "Monday": {
+        "from": "7 AM",
+        "until": "9 PM"
+      },
+      "Tuesday": {
+        "from": "7 AM",
+        "until": "9 PM"
+      },
+      "Wednesday": {
+        "from": "7 AM",
+        "until": "10 PM"
+      },
+      "Thursday": {
+        "from": "7 AM",
+        "until": "12 PM"
+      },
+      "Friday": {
+        "from": "7 AM",
+        "until": "3 PM"
+      }
+    }
   }
 ]
