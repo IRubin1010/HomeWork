@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Vegetables",
+    "p1": "We have all kind of Vegetables.",
+    "p2": "all of our Vegetables are fresh, clean and tasty.",
+    "image": "vegetables.png"
+  },
+  {
+    "category": "Fruits",
+    "p1": "We have all kind of Fruits.",
+    "p2": "all of our Fruits are fresh, clean and tasty.",
+    "image": "fruits.png"
+  },
+  {
+    "category": "Bread",
+    "p1": "We have all kind of Bread.",
+    "p2": "all of our Bread are fresh, clean and tasty.",
+    "image": "bread.png"
+  },
+  {
+    "category": "Meat",
+    "p1": "We have all kind of Meat.",
+    "p2": "all of our Meat are fresh, clean and tasty.",
+    "image": "meat.png"
+  }
+]

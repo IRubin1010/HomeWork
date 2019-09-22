@@ -23,15 +23,62 @@
     font-size: smaller;
     margin-bottom: 0px; }
 
-.fp-header div img {
-  width: 100%;
-  height: 160px; }
-.fp-header div h1 {
-  font-family: Impact, Charcoal, sans-serif;
-  font-size: 60px;
-  margin-bottom: 0px; }
-.fp-header div h2 {
-  font-size: 35px;
-  margin-bottom: 0px; }
+.fp-header {
+  margin-bottom: 40px; }
+  .fp-header div img {
+    width: 100%;
+    height: 160px; }
+  .fp-header div h1 {
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 60px;
+    margin-bottom: 0;
+    color: #305c65; }
+  .fp-header div h2 {
+    font-size: 35px;
+    margin-bottom: 0;
+    color: #305c65; }
+
+.card-description div div img {
+  width: 100%; }
+.card-description div div div h2 {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  text-align: center; }
+.card-description div div div p {
+  text-align: center; }
+.card-description div div div #p1 {
+  margin-bottom: 10px; }
+
+.mission {
+  padding: 30px; }
+  .mission h1 {
+    margin: auto;
+    text-align: center;
+    font-size: 50px;
+    font-family: "Arial Black";
+    color: #305c65;
+    padding-bottom: 30px; }
+  .mission p {
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    padding-bottom: 20px; }
+  .mission h2 {
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #305c65; }
+
+.who-we-are {
+  margin: 40px auto;
+  width: 600px; }
+  .who-we-are h2 {
+    text-align: center; }
+  .who-we-are .row {
+    margin-top: 20px;
+    width: auto; }
 
 /*# sourceMappingURL=styles.css.map */
