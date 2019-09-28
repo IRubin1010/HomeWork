@@ -2,12 +2,10 @@ $(document).ready(async function () {
     let hash = location.hash;
     if (hash !== "") {
         let replacedHash = hash.replace('#', '');
-
         if(replacedHash === "stores"){
             await loadStores();
             return;
         }
-
         $("#middle-page").load(replacedHash + ".ejs");
 
     }
@@ -34,7 +32,7 @@ async function loadStores() {
     let page = resJson.page;
     let stores = resJson.stores;
     $("#middle-page").load(page);
-    let template = await $.get('templates/store.ejs');
+    let template = await jQuery.get('templates/store.ejs');
     $.tmpl(template, stores).appendTo("#stores-cards");
 }
 
@@ -42,8 +40,9 @@ async function loadStores() {
 $(document).ready(async function () {
     let productsCategory = await fetch("/productsCategory");
     let productsCategoryJson = await productsCategory.json();
-    let template = await $.get('templates/productsCategory.ejs');
+    let template = await jQuery.get('templates/productsCategory.ejs');
     $.tmpl(template, productsCategoryJson).appendTo("#products-category-cards");
 });
+
 
 // $( "#middle-page" ).load( "<%= page %>" );
