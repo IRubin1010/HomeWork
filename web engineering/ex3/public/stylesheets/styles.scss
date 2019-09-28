@@ -186,4 +186,64 @@ $spacer: 1rem !default;
   }
 }
 
+.modal-brand{
+  $imgsize: 85px;
+  div {
+    padding-right: 5px;
+    img {
+      width: 100%;
+      height: $imgsize;
+    }
+
+    h1 {
+      font-family: Impact, Charcoal, sans-serif;
+      font-size: 30px;
+      margin-bottom: 0;
+      color: #305c65;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 0;
+      color: #305c65;
+    }
+  }
+}
+
+.modal-header{
+  border-bottom: 0 !important;
+  padding-bottom: 5px !important;
+}
+
+.modal-body{
+  padding-top: 10px !important;
+}
+
+.form-group{
+  margin-bottom: 0 !important;
+}
+.modal-footer{
+  border-top: 0 !important;
+  justify-content: center !important;
+  .btn-submit{
+    background-color: #305c65;
+    color: #8fcf69;
+    margin-left: 13px !important;
+    &:focus{
+      box-shadow: 0 0 0 0.2rem rgba(143, 207, 105, 0.45);
+    }
+  }
+  .btn-secondary{
+    margin-right: 13px !important;
+  }
+  .btn{
+    width: 120px !important;
+  }
+}
+
+.form-control:focus {
+  border-color: #305c65;
+  box-shadow: 0 0 0 0.2rem rgba(48, 92, 101, 0.45);
+}
+
 
