@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-    <a class="navbar-brand brand-font" href="/">
+    <a class="navbar-brand brand-font" href="/" rel="keep-params">
         <img src="images/brand-logo.png" width="60px" height="60px">
         SuperStore</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -15,10 +16,19 @@
                 <a class="nav-link" id="nav-stores" href="#stores">Our stores</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#exampleModal">LOG IN</button>
-        </form>
+        <% if (userRole !== undefined) { %>
+            <form class="form-inline my-2 my-lg-0">
+                <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" id="logout">LOG OUT
+                </button>
+            </form>
+        <% } else { %>
+            <form class="form-inline my-2 my-lg-0">
+                <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" data-toggle="modal"
+                        data-target="#exampleModal">LOG IN
+                </button>
+            </form>
+        <% } %>
     </div>
 
-    <% include loginModal%>
+    <% include loginModal %>
 </nav>
