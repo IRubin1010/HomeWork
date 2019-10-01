@@ -1,13 +1,11 @@
 let express = require('express');
 let router = express.Router();
-let users = require('../data/users');
+let authService = require('../BL/authService');
 
 router.post('/', function(req, res){
     let userName = req.body.userName;
     let password = req.body.password;
-    let user = users.filter(user => {
-        return user.userName === userName && user.password === password
-    })[0];
+    let user = authService.getUser(userName, password);
     if(user !== undefined){
         res.send('OK');
     }else{
