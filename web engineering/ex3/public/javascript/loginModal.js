@@ -28,7 +28,9 @@ $(document).ready(function(){
             }
         }
         else{
-            let url = location + `?userName=${userName}&password=${password}`;
+            let hash = window.location.hash;
+            let path = location.pathname;
+            let url = path + `?userName=${userName}&password=${password}` + hash;
             location = url;
             $('#exampleModal').modal('hide');
         }
