@@ -16,6 +16,7 @@ router.get('/', function (req, res) {
         }
     }
     res.render(`pages/index`, {
+        middlePage: "firstPage.ejs",
         userRole: userRole
     })
 });

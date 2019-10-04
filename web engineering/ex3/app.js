@@ -24,7 +24,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 // set folders
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views/partials')));
-app.use(express.static(path.join(__dirname, 'data')));
 
 // set routs
 app.use('/', indexRouter);
