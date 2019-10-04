@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <% include ../partials/head %>
+    <%- include(`../partials/head`); -%>
 </head>
 <body>
 <div class="cover">
@@ -15,17 +15,17 @@
 </div>
 
 <header>
-    <% include ../partials/header %>
+    <%- include(`../partials/header`); -%>
 </header>
 
 <main class="main">
     <div id="middle-page">
-        <% include ../partials/firstPage %>
+        <%- include(`../partials/${middlePage}`); -%>
     </div>
 </main>
 
 <footer>
-    <% include ../partials/footer %>
+    <%- include(`../partials/footer`); -%>
 </footer>
 
 </body>

@@ -24,3 +24,14 @@ $(document).ready(async function () {
         }
     })
 });
+
+$(document).ready(async function () {
+    let searchParams = new URLSearchParams(window.location.search);
+    if(searchParams.has('userName')){
+        let userName = searchParams.get('userName');
+        $('#logout-btn').before(`<h5 class="header-user-name">${userName}</h5>`)
+
+    }
+});
+
+
