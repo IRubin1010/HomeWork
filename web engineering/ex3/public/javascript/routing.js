@@ -7,6 +7,10 @@ $(document).ready(async function () {
             await loadStores();
             return;
         }
+        if (replacedHash === "products") {
+            await loadProducts();
+            return;
+        }
         $("#middle-page").load(replacedHash + ".ejs");
     } else {
         $(".cover").show();
@@ -51,4 +55,23 @@ async function loadStores() {
     }, 1500);
 }
 
+// get products page by clicking on products
+$(document).ready(function(){
+    $('a[href="#products"]').on("click", loadProducts);
+})
 
+
+// get products content
+async function loadProducts() {
+    $(".cover").show();
+    let res = await fetch("/products");
+    let resJson = await res.json();
+    let products = resJson.products;
+    let middlePage = resJson.middlePage;
+    $("#middle-page").load(middlePage);
+    let template = await jQuery.get('templates/productsCatalog.ejs');
+    setTimeout(function () {
+        $.tmpl(template, products).appendTo("#products-cards");
+        $(".cover").hide();
+    }, 1500);
+}

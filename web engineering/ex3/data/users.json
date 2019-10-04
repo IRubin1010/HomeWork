@@ -2,11 +2,13 @@
   {
     "userName": "itzik",
     "password": "1234",
-    "role": "client"
+    "role": "client",
+    "state": "active"
   },
   {
     "userName": "meir",
     "password": "1234",
-    "role": "client"
+    "role": "client",
+    "state": "deleted"
   }
 ]

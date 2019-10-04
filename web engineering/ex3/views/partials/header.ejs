@@ -15,6 +15,11 @@
             <li class="nav-item active">
                 <a class="nav-link" id="nav-stores" href="#stores">Our stores</a>
             </li>
+            <% if (userRole !== undefined) { %>
+            <li class="nav-item active">
+                <a class="nav-link" id="nav-products" href="#products">Products</a>
+            </li>
+            <% } %>
         </ul>
         <% if (userRole !== undefined) { %>
             <form class="form-inline my-2 my-lg-0" id="logout-btn">
