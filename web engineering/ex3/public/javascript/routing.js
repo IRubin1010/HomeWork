@@ -66,12 +66,17 @@ async function loadProducts() {
     $(".cover").show();
     let res = await fetch("/products");
     let resJson = await res.json();
-    let products = resJson.products;
+    let bread = resJson.bread;
+    let cheese = resJson.cheese;
     let middlePage = resJson.middlePage;
     $("#middle-page").load(middlePage);
     let template = await jQuery.get('templates/productsCatalog.ejs');
     setTimeout(function () {
-        $.tmpl(template, products).appendTo("#products-cards");
+        $.tmpl(template, cheese).appendTo("#products-Vegetables");
+        $.tmpl(template, bread).appendTo("#products-Bread");
+        $.tmpl(template, cheese).appendTo("#products-Fruits");
+        $.tmpl(template, cheese).appendTo("#products-Meat");
+        $.tmpl(template, cheese).appendTo("#products-Cheese");
         $(".cover").hide();
     }, 1500);
 }

@@ -1,11 +1,14 @@
 let express = require('express');
 let router = express.Router();
-let products = require('../data/productsCatalog');
+let bread = require('../data/products/bread');
+let cheese = require('../data/products/cheese');
+
 
 router.get('/', function(req, res){
     res.json({
         middlePage: "products.ejs",
-        products: products
+        bread: bread,
+        cheese: cheese,
     })
 });
 
