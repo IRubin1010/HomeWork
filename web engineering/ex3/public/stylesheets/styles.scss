@@ -1,5 +1,3 @@
-$spacer: 1rem !default;
-
 html {
   position: relative;
   min-height: 100%;
@@ -16,8 +14,8 @@ html {
   z-index: 10;
 
   // set nav padding
-  padding-left: ($spacer * 4) !important;
-  padding-right: ($spacer * 4) !important;
+  padding-left: 2vmax !important;
+  padding-right: 2vmax !important;
 
   // logo font
   .brand-font {
@@ -79,31 +77,34 @@ html {
 }
 
 .partial-page-header {
-  $imgsize: 160px;
-  margin-bottom: 40px;
+  margin-bottom: 3vmax;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
 
-  div {
     img {
-      width: 100%;
-      height: $imgsize;
+      width: 10vmax;
+      height: 10vmax;
+      float: left;
+    }
+    div{
+      padding-left: 1.5vmax;
+      h1 {
+        font-family: Impact, Charcoal, sans-serif;
+        font-size: calc(10px + 4vw); //60px;
+        margin-bottom: 0;
+        color: #305c65;
+      }
+      h2 {
+        font-size: calc(10px + 2vw); //35px;
+        margin-bottom: 0;
+        color: #305c65;
+      }
     }
 
-    h1 {
-      font-family: Impact, Charcoal, sans-serif;
-      font-size: 60px;
-      margin-bottom: 0;
-      color: #305c65;
-    }
-
-    h2 {
-      font-size: 35px;
-      margin-bottom: 0;
-      color: #305c65;
-    }
-  }
 }
 
-.card-description {
+.products-category-description {
   div {
     div {
       img {
@@ -114,14 +115,17 @@ html {
     div {
       div {
         h2 {
-          margin-top: 50px;
-          margin-bottom: 30px;
+          margin-top: 5vmax;
+          margin-bottom: 2vmax;
           text-align: center;
+          font-size: 2vmax;
+          font-weight: 700;
         }
 
         p {
           text-align: center;
           margin-bottom: 0px;
+          font-size: 1.45vmax;
         }
 
         #p1 {
@@ -133,6 +137,7 @@ html {
 }
 
 .store-description {
+  margin-bottom: 2vmax;
   div {
     div {
       img {
@@ -140,21 +145,24 @@ html {
       }
     }
     div {
+      .card-block{
+        margin-top: 1.5vmax;
+        margin-bottom: 1.5vmax;
+      }
       div {
         h2 {
-          margin-top: 20px;
-          margin-bottom: 10px;
+          margin-bottom: .75vmax;
           text-align: center;
           font-family: Impact, Charcoal, sans-serif;
           color: #305c65;
+          font-size: 2vmax;
         }
 
         div {
           p {
-            padding-left: 100px;
-            text-align: left;
+            text-align: center;
             margin-bottom: 0px;
-
+            font-size: 1.2vmax;
             span {
               font-weight: bold;
             }
@@ -162,12 +170,13 @@ html {
 
           div {
             table {
-              margin-left: 130px;
-
+              margin-left: auto;
+              margin-right: auto;
               tbody {
                 tr {
                   td {
-                    padding-right: 15px;
+                    font-size: 1.2vmax;
+                    padding-right: 5px;
                   }
                 }
               }
@@ -180,12 +189,10 @@ html {
 }
 
 .mission {
-  padding: 30px;
-
   h1 {
     margin: auto;
     text-align: center;
-    font-size: 50px;
+    font-size: 4vmax;
     font-family: "Arial Black";
     color: #305c65;
     padding-bottom: 30px;
@@ -196,11 +203,12 @@ html {
     text-align: center;
     font-family: sans-serif;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 2vmax;
     padding-bottom: 20px;
   }
 
   h2 {
+    font-size: 3vmax;
     margin: auto;
     text-align: center;
     font-family: sans-serif;
@@ -210,16 +218,40 @@ html {
 }
 
 .who-we-are {
-  margin: 40px auto;
-  width: 600px;
 
   h2 {
     text-align: center;
+    font-size: 2.5vmax;
   }
 
   .row {
     margin-top: 20px;
     width: auto;
+    justify-content: center;
+
+    .card{
+      margin-bottom: 1vmax;
+
+      .card-body{
+        padding-left: 1.5vmax;
+        padding-right: 1.5vmax;
+      }
+
+      .card-title{
+        margin-bottom: 1.5vmax;
+      }
+
+      h3{
+        font-size: 2vmax;
+      }
+
+      p{
+        font-size: 1.5vmax;
+        margin-bottom: 0;
+      }
+
+    }
+
   }
 }
 
