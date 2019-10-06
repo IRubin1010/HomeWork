@@ -2,13 +2,16 @@
 $(document).ready(async function () {
     let hash = location.hash;
     if (hash !== "") {
+        console.log(hash);
         let replacedHash = hash.replace('#', '');
+        console.log(replacedHash);
         if (replacedHash === "stores") {
             await loadStores();
             return;
         }
-        if (replacedHash === "products") {
+        if (replacedHash.startsWith("products")){
             await loadProducts();
+            window.location.hash;
             return;
         }
         $("#middle-page").load(replacedHash + ".ejs");
@@ -28,17 +31,17 @@ $(document).ready(async function () {
 $(document).ready(function () {
     $('a[href="#about"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
-            let res = await fetch("/about");
-            let resJson = await res.json();
-            let middlePage = resJson.middlePage;
-            $("#middle-page").load(middlePage);
-        }
+        let res = await fetch("/about");
+        let resJson = await res.json();
+        let middlePage = resJson.middlePage;
+        $("#middle-page").load(middlePage);
+    }
     );
 });
 
 // get stores page by clicking on stores
 $(document).ready(function () {
-    $('a[href="#stores"]').on("click", async function(){
+    $('a[href="#stores"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
         await loadStores();
     });
@@ -60,10 +63,12 @@ async function loadStores() {
 }
 
 // get products page by clicking on products
-$(document).ready(function(){
-    $('a[href="#products"]').on("click", loadProducts);
+$(document).ready(function () {
+    $('a[href="#products"]').on("click", async function(){
+        $('.navbar-collapse').collapse('hide');
+        await loadProducts();
+    });
 })
-
 
 // get products content
 async function loadProducts() {
