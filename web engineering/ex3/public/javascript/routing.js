@@ -23,6 +23,7 @@ $(document).ready(async function () {
 // get about page by clicking on about
 $(document).ready(function () {
     $('a[href="#about"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
             let res = await fetch("/about");
             let resJson = await res.json();
             let middlePage = resJson.middlePage;
@@ -33,7 +34,10 @@ $(document).ready(function () {
 
 // get stores page by clicking on stores
 $(document).ready(function () {
-    $('a[href="#stores"]').on("click", loadStores);
+    $('a[href="#stores"]').on("click", async function(){
+        $('.navbar-collapse').collapse('hide');
+        await loadStores();
+    });
 });
 
 // get stores content
