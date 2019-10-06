@@ -2,16 +2,13 @@
 $(document).ready(async function () {
     let hash = location.hash;
     if (hash !== "") {
-        console.log(hash);
         let replacedHash = hash.replace('#', '');
-        console.log(replacedHash);
         if (replacedHash === "stores") {
             await loadStores();
             return;
         }
-        if (replacedHash.startsWith("products")){
+        if (replacedHash.startsWith("products")) {
             await loadProducts();
-            window.location.hash;
             return;
         }
         $("#middle-page").load(replacedHash + ".ejs");
@@ -30,12 +27,12 @@ $(document).ready(async function () {
 // get about page by clicking on about
 $(document).ready(function () {
     $('a[href="#about"]').on("click", async function () {
-        $('.navbar-collapse').collapse('hide');
-        let res = await fetch("/about");
-        let resJson = await res.json();
-        let middlePage = resJson.middlePage;
-        $("#middle-page").load(middlePage);
-    }
+            $('.navbar-collapse').collapse('hide');
+            let res = await fetch("/about");
+            let resJson = await res.json();
+            let middlePage = resJson.middlePage;
+            $("#middle-page").load(middlePage);
+        }
     );
 });
 
@@ -56,7 +53,7 @@ async function loadStores() {
     let middlePage = resJson.middlePage;
     $("#middle-page").load(middlePage);
     let template = await jQuery.get('templates/store.ejs');
-    setTimeout(function () {
+    await setTimeout(function () {
         $.tmpl(template, stores).appendTo("#stores-cards");
         $(".cover").hide();
     }, 1500);
@@ -64,11 +61,11 @@ async function loadStores() {
 
 // get products page by clicking on products
 $(document).ready(function () {
-    $('a[href="#products"]').on("click", async function(){
+    $('a[href="#products"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
         await loadProducts();
     });
-})
+});
 
 // get products content
 async function loadProducts() {
@@ -80,12 +77,79 @@ async function loadProducts() {
     let middlePage = resJson.middlePage;
     $("#middle-page").load(middlePage);
     let template = await jQuery.get('templates/productsCatalog.ejs');
-    setTimeout(function () {
+    await setTimeout(function () {
         $.tmpl(template, cheese).appendTo("#products-Vegetables");
         $.tmpl(template, bread).appendTo("#products-Bread");
         $.tmpl(template, cheese).appendTo("#products-Fruits");
         $.tmpl(template, cheese).appendTo("#products-Meat");
         $.tmpl(template, cheese).appendTo("#products-Cheese");
+        setTimeout(function(){
+            scrollToHash();
+        }, 1);
         $(".cover").hide();
     }, 1500);
 }
+
+$(document).ready(function () {
+    $('a[href="#products-vegetables"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        if(window.location.hash.startsWith("#products")){
+            scrollToHash();
+        }else{
+            await loadProducts();
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('a[href="#products-fruits"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        if(window.location.hash.startsWith("#products")){
+            scrollToHash();
+        }else{
+            await loadProducts();
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('a[href="#products-bread"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        if(window.location.hash.startsWith("#products")){
+            scrollToHash();
+        }else{
+            await loadProducts();
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('a[href="#products-meat"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        if(window.location.hash.startsWith("#products")){
+            scrollToHash();
+        }else{
+            await loadProducts();
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('a[href="#products-cheese"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        if(window.location.hash.startsWith("#products")){
+            scrollToHash();
+        }else{
+            await loadProducts();
+        }
+    });
+});
+
+function scrollToHash() {
+    let id = window.location.hash.replace('#', '');
+    document.getElementById(id).scrollIntoView();
+}
+
+
+
+

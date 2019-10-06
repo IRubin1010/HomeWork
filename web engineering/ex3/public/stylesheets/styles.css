@@ -147,6 +147,10 @@ html {
       font-size: 1.5vmax;
       margin-bottom: 0; }
 
+.anchor {
+  position: relative;
+  top: -100px; }
+
 .modal-brand div {
   padding-right: 5px; }
   .modal-brand div img {
@@ -286,10 +290,5 @@ html {
     -webkit-transform: perspective(140px) rotateY(180deg);
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
-
-  .anchor{
-    position: relative;
-    top: -100px;
-  }
 
 /*# sourceMappingURL=styles.css.map */

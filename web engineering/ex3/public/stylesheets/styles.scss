@@ -255,6 +255,11 @@ html {
   }
 }
 
+.anchor{
+  position: relative;
+  top: -100px;
+}
+
 .modal-brand{
   $imgsize: 85px;
   div {
