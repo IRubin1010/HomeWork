@@ -147,6 +147,10 @@ html {
       font-size: 1.5vmax;
       margin-bottom: 0; }
 
+.anchor {
+  position: relative;
+  top: -100px; }
+
 .modal-brand div {
   padding-right: 5px; }
   .modal-brand div img {

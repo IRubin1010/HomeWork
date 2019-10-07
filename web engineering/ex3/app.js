@@ -8,6 +8,7 @@ let aboutRouter = require('./routes/about');
 let storesRouter = require('./routes/stores');
 let authRouter = require('./routes/auth');
 let productsCategoryRouter = require('./routes/productsCategory');
+let products = require('./routes/products');
 
 
 let app = express();
@@ -31,6 +32,7 @@ app.use('/about', aboutRouter);
 app.use('/productsCategory', productsCategoryRouter);
 app.use('/stores', storesRouter);
 app.use('/auth', authRouter);
+app.use('/products', products);
 
 
 app.listen(3000, function(){
