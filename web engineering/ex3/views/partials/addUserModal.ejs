@@ -1,0 +1,57 @@
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-brand row">
+                    <div class="col-4">
+                        <img src="images/brand-logo.png">
+                    </div>
+                    <div class="align-self-center">
+                        <h1>SuperStore</h1>
+                        <h2>Add User</h2>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="add-user-name" class="col-form-label">User Name</label>
+                        <input type="text" class="form-control" id="add-user-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-user-password" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="add-user-password">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-user-mail" class="col-form-label">Email</label>
+                        <input type="email" class="form-control" id="add-user-mail">
+                    </div>
+                    <% if (userRole === "administrator") { %>
+                        <div class="form-group">
+                            <label for="add-user-role" class="col-form-label">Role</label>
+                            <select class="form-control" id="add-user-role">
+                                <option selected value="client">Client</option>
+                                <option value="worker">Worker</option>
+                                <option value="administrator">Administrator</option>
+                            </select>
+                        </div>
+                    <% } else if (userRole === "worker") { %>
+                        <div class="form-group">
+                            <label for="add-user-role" class="col-form-label">Role</label>
+                            <select class="form-control" id="add-user-role">
+                                <option selected value="client">Client</option>
+                            </select>
+                        </div>
+                    <% } %>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-submit" id="btn-add-user">Add User</button>
+            </div>
+        </div>
+    </div>
+</div>

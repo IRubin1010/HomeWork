@@ -1,0 +1,41 @@
+<% if (userRole === "administrator" || userRole === "worker") { %>
+    <div class="users-plus-icon" style="margin-top: -2vmax;">
+        <i class="fa fa-plus-circle" onclick="addUserModal()"></i>
+    </div>
+<% } %>
+<div class="users-table">
+    <table class="table table-hover table-responsive-xl">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <% if (userRole === "administrator") { %>
+                <th scope="col">Password</th>
+            <% } %>
+            <th scope="col">Mail</th>
+            <th scope="col">Role</th>
+            <% if (userRole === "administrator") { %>
+                <th scope="col">State</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            <% } %>
+        </tr>
+        </thead>
+        <tbody id="users-data">
+        <% users.forEach(function (d) { %>
+            <tr id="users-table-row">
+                <td><%- d.userName %></td>
+                <% if(userRole === "administrator") { %>
+                    <td><%- d.password %></td>
+                <% } %>
+                <td><%- d.mail %></td>
+                <td><%- d.role %></td>
+                <% if(userRole === "administrator") { %>
+                    <td><%- d.state %></td>
+                    <td class="pencil-icon users-table-icon" id="delete-user"><i class="fa fa-pencil" onclick="editUser(this)"></i></td>
+                    <td class="delete-icon users-table-icon" id="edit-user"><i class="fa fa-trash" onclick="deleteUser(this)"></i></td>
+                <% } %>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>

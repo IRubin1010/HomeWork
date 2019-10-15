@@ -11,7 +11,6 @@ $(document).ready(function(){
         let modal = $("#exampleModal");
         let userName = modal.find('#user-name').val();
         let password = modal.find('#password').val();
-        console.log(`user name: ${userName}, password: ${password}`);
         let res = await fetch("/auth", {
             method: 'POST',
             headers: {

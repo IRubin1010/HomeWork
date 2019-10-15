@@ -197,6 +197,28 @@ html {
   border-color: #305c65;
   box-shadow: 0 0 0 0.2rem rgba(48, 92, 101, 0.45); }
 
+.users-data .users-plus-icon {
+  text-align: end;
+  margin-bottom: 10px;
+  font-size: 28px; }
+.users-data .users-table {
+  overflow-x: auto; }
+  .users-data .users-table .table-responsive-xl {
+    display: table;
+    margin-bottom: 0; }
+  .users-data .users-table #users-table-row .users-table-icon {
+    width: 40px; }
+    .users-data .users-table #users-table-row .users-table-icon i {
+      display: none; }
+  .users-data .users-table #users-table-row .pencil-icon {
+    padding-right: .25rem; }
+  .users-data .users-table #users-table-row .delete-icon {
+    padding-left: .25rem; }
+  .users-data .users-table #users-table-row:hover .users-table-icon i {
+    display: block; }
+  .users-data .users-table #users-table-row:hover td {
+    vertical-align: sub; }
+
 .cover {
   display: none;
   position: fixed;
