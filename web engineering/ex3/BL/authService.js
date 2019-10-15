@@ -1,14 +1,17 @@
-let users = require('../data/users');
+let userService = require('./usersService');
 
+module.exports.getUserRole = async function(userName, password){
+    let userRole = undefined;
+    if (userName !== undefined && password !== undefined) {
+        let user = await userService.getUser(userName, password);
+        if (user !== undefined) {
+            userRole = user.role;
+        }
+    }
+    return userRole;
+};
 
-let state = {
-    Active : 'active',
-    Deleted : 'deleted'
-}
-
-module.exports.getUser = function(userName, password){
-    let user = users.filter(user => {
-        return user.userName === userName && user.password === password && user.state === state.Active
-    })[0];
-    return user;
+module.exports.authorizeUser = async function (userName, password) {
+    let user = await userService.getUser(userName, password);
+    return user !== undefined;
 };

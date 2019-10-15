@@ -2,12 +2,42 @@
   {
     "userName": "itzik",
     "password": "1234",
+    "mail": "itzik@gmail.com",
     "role": "client",
     "state": "active"
   },
   {
     "userName": "meir",
     "password": "1234",
+    "mail": "meir@gmail.com",
+    "role": "client",
+    "state": "deleted"
+  },
+  {
+    "userName": "yeret",
+    "password": "9876",
+    "mail": "yeret@gmail.com",
+    "role": "administrator",
+    "state": "active"
+  },
+  {
+    "userName": "shimon",
+    "password": "6789",
+    "mail": "shimon@gmail.com",
+    "role": "worker",
+    "state": "active"
+  },
+  {
+    "userName": "aaa",
+    "password": "aaa",
+    "mail": "a@a",
+    "role": "client",
+    "state": "deleted"
+  },
+  {
+    "userName": "bbb",
+    "password": "bbb",
+    "mail": "b@b",
     "role": "client",
     "state": "deleted"
   }

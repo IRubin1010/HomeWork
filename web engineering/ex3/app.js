@@ -8,7 +8,8 @@ let aboutRouter = require('./routes/about');
 let storesRouter = require('./routes/stores');
 let authRouter = require('./routes/auth');
 let productsCategoryRouter = require('./routes/productsCategory');
-let products = require('./routes/products');
+let productsRouter = require('./routes/products');
+let usersRouter = require('./routes/users');
 
 
 let app = express();
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 // set folders
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views/partials')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
 
 // set routs
 app.use('/', indexRouter);
@@ -32,7 +34,8 @@ app.use('/about', aboutRouter);
 app.use('/productsCategory', productsCategoryRouter);
 app.use('/stores', storesRouter);
 app.use('/auth', authRouter);
-app.use('/products', products);
+app.use('/products', productsRouter);
+app.use('/users', usersRouter);
 
 
 app.listen(3000, function(){

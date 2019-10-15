@@ -324,6 +324,48 @@ html {
   box-shadow: 0 0 0 0.2rem rgba(48, 92, 101, 0.45);
 }
 
+.users-data{
+  .users-plus-icon{
+    text-align: end;
+    margin-bottom: 10px;
+    font-size: 28px;
+  }
+  .users-table{
+    overflow-x: auto;
+    .table-responsive-xl{
+      display: table;
+      margin-bottom: 0;
+    }
+    #users-table-row{
+      .users-table-icon{
+        width: 40px;
+        i{
+          display: none;
+        }
+      }
+      .pencil-icon{
+        padding-right: .25rem;
+      }
+      .delete-icon{
+        padding-left: .25rem;
+      }
+      &:hover{
+        .users-table-icon{
+          i{
+            display: block;
+          }
+        }
+        td{
+          vertical-align: sub;
+        }
+      }
+    }
+  }
+}
+
+
+
+
 
 .cover{
   display: none;

@@ -11,6 +11,10 @@ $(document).ready(async function () {
             await loadProducts();
             return;
         }
+        if(replacedHash === "administration"){
+            await loadUsers();
+            return;
+        }
         $("#middle-page").load(replacedHash + ".ejs");
     } else {
         $(".cover").show();
@@ -70,6 +74,13 @@ $(document).ready(function () {
 // get products content
 async function loadProducts() {
     $(".cover").show();
+
+    let userRole = await getUserRole();
+    if(userRole === undefined){
+        $(".cover").hide();
+        return;
+    }
+
     let res = await fetch("/products");
     let resJson = await res.json();
     let bread = resJson.bread;
@@ -85,7 +96,7 @@ async function loadProducts() {
         $.tmpl(template, cheese).appendTo("#products-Cheese");
         setTimeout(function(){
             scrollToHash();
-        }, 1);
+        }, 50);
         $(".cover").hide();
     }, 1500);
 }
@@ -149,6 +160,70 @@ function scrollToHash() {
     let id = window.location.hash.replace('#', '');
     document.getElementById(id).scrollIntoView();
 }
+
+$(document).ready(async function () {
+    $('a[href="#administration"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        await loadUsers();
+    });
+});
+
+async function loadUsers() {
+    $(".cover").show();
+    let userRole = await getUserRole();
+    let resJson;
+    if(userRole === undefined || userRole === "client"){
+        $(".cover").hide();
+        return;
+    }else if(userRole === "administrator"){
+        let res = await fetch("/users/administratorData");
+        resJson = await res.json();
+    }else if(userRole === "worker"){
+        let res = await fetch("/users/workerData");
+        resJson = await res.json();
+    }
+    let users = resJson.users;
+    let middlePage = resJson.middlePage;
+    let templatePage = resJson.template;
+
+    $("#middle-page").load(middlePage);
+
+    let template = await jQuery.get(`templates/${templatePage}`);
+    let compiledTemplate = ejs.compile(template, {});
+
+    let data = {
+        users : users,
+        userRole: userRole
+    };
+
+    let html = compiledTemplate(data);
+    await setTimeout(function () {
+        $("#users").html(html);
+        $(".cover").hide();
+    }, 1500);
+}
+
+async function getUserRole() {
+    let search = new URLSearchParams(window.location.search);
+    let userName = search.get("userName");
+    let password = search.get("password");
+    let res = await fetch("/auth/userRole", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userName : userName,
+            password : password
+        })
+    });
+    let resJson = await res.json();
+    if(res.status !== 200){
+        return undefined;
+    }
+    return resJson.userRole;
+}
+
 
 
 
