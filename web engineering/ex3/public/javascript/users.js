@@ -1,3 +1,7 @@
+async function refreshUsers(){
+    await loadUsers();
+}
+
 async function addUserModal() {
     $('#addUserModal').modal('show');
 }

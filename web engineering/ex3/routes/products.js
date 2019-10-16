@@ -7,8 +7,10 @@ let fruits = require('../data/products/fruits');
 let meat = require('../data/products/meat');
 
 router.get('/', function(req, res){
+
     res.json({
         middlePage: "products.ejs",
+        template: "productsCatalog.ejs",
         bread: bread,
         cheese: cheese,
         vegetables: vegetables,

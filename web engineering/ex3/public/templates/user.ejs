@@ -1,5 +1,6 @@
 <% if (userRole === "administrator" || userRole === "worker") { %>
     <div class="users-plus-icon" style="margin-top: -2vmax;">
+        <i class="fa fa-repeat" onclick="refreshUsers()"></i>
         <i class="fa fa-plus-circle" onclick="addUserModal()"></i>
     </div>
 <% } %>
