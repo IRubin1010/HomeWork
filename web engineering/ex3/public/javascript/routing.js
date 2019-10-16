@@ -97,14 +97,17 @@ async function loadProducts() {
     let resJson = await res.json();
     let bread = resJson.bread;
     let cheese = resJson.cheese;
+    let vegetables = resJson.vegetables;
+    let fruits = resJson.fruits;
+    let meat = resJson.meat;
     let middlePage = resJson.middlePage;
     $("#middle-page").load(middlePage);
     let template = await jQuery.get('templates/productsCatalog.ejs');
     await setTimeout(function () {
-        $.tmpl(template, cheese).appendTo("#products-Vegetables");
+        $.tmpl(template, vegetables).appendTo("#products-Vegetables");
         $.tmpl(template, bread).appendTo("#products-Bread");
-        $.tmpl(template, cheese).appendTo("#products-Fruits");
-        $.tmpl(template, cheese).appendTo("#products-Meat");
+        $.tmpl(template, fruits).appendTo("#products-Fruits");
+        $.tmpl(template, meat).appendTo("#products-Meat");
         $.tmpl(template, cheese).appendTo("#products-Cheese");
         setTimeout(function(){
             scrollToHash();

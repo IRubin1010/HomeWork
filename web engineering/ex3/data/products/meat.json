@@ -1,0 +1,17 @@
+[
+    {
+        "description": "Entrecote",
+        "price": "150",
+        "image": "meat_antirkot.Png"
+    },
+    {
+        "description": "Muscle meat",
+        "price": "98",
+        "image": "meat_Buffalo_Short_Ribs.png"
+    },
+    {
+        "description": "Shoulder 5",
+        "price": "105",
+        "image": "meat_sholder5.png"
+    }
+]
