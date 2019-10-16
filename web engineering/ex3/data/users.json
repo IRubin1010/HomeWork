@@ -7,13 +7,6 @@
     "state": "active"
   },
   {
-    "userName": "meir",
-    "password": "1234",
-    "mail": "meir@gmail.com",
-    "role": "client",
-    "state": "deleted"
-  },
-  {
     "userName": "yeret",
     "password": "9876",
     "mail": "yeret@gmail.com",
@@ -38,13 +31,6 @@
     "userName": "bbb",
     "password": "bbb",
     "mail": "b@b",
-    "role": "client",
-    "state": "deleted"
-  },
-  {
-    "userName": "meir",
-    "password": "1234",
-    "mail": "m@m",
     "role": "client",
     "state": "active"
   }

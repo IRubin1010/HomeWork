@@ -1,0 +1,12 @@
+[
+    {
+        "description": "Culifllower",
+        "price": "7.9",
+        "image": "vegetables_culifllower.png"
+    },
+    {
+        "description": "Cabbage",
+        "price": "3.5",
+        "image": "vegetables_cabbage.png"
+    }
+]
