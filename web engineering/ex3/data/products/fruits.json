@@ -1,0 +1,17 @@
+[
+    {
+        "description": "Black berries",
+        "price": "2.9",
+        "image": "fruits_black_berries.png"
+    },
+    {
+        "description": "Grage fruit",
+        "price": "6.9",
+        "image": "fruits_grage_fruit.png"
+    },
+    {
+        "description": "Raspberry",
+        "price": "6.9",
+        "image": "fruits_raspberry.png"
+    }
+]

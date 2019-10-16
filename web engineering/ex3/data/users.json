@@ -7,13 +7,6 @@
     "state": "active"
   },
   {
-    "userName": "meir",
-    "password": "1234",
-    "mail": "meir@gmail.com",
-    "role": "client",
-    "state": "deleted"
-  },
-  {
     "userName": "yeret",
     "password": "9876",
     "mail": "yeret@gmail.com",
@@ -24,7 +17,7 @@
     "userName": "shimon",
     "password": "6789",
     "mail": "shimon@gmail.com",
-    "role": "worker",
+    "role": "administrator",
     "state": "active"
   },
   {
@@ -39,6 +32,6 @@
     "password": "bbb",
     "mail": "b@b",
     "role": "client",
-    "state": "deleted"
+    "state": "active"
   }
 ]
