@@ -24,7 +24,7 @@
     "userName": "shimon",
     "password": "6789",
     "mail": "shimon@gmail.com",
-    "role": "worker",
+    "role": "administrator",
     "state": "active"
   },
   {
@@ -40,5 +40,12 @@
     "mail": "b@b",
     "role": "client",
     "state": "deleted"
+  },
+  {
+    "userName": "meir",
+    "password": "1234",
+    "mail": "m@m",
+    "role": "client",
+    "state": "active"
   }
 ]

@@ -71,6 +71,18 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+$('body').on('click','div[id=products]',async function(){
+    $('.navbar-collapse').collapse('hide');
+    if(window.location.hash.startsWith("#products")){
+        scrollToHash();
+    }else{
+        await loadProducts();
+    };
+});
+});
+
+
 // get products content
 async function loadProducts() {
     $(".cover").show();
