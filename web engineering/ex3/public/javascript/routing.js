@@ -11,7 +11,7 @@ $(document).ready(async function () {
             await loadProducts();
             return;
         }
-        if(replacedHash === "administration"){
+        if (replacedHash === "administration") {
             await loadUsers();
             return;
         }
@@ -72,14 +72,15 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-$('body').on('click','div[id=products]',async function(){
-    $('.navbar-collapse').collapse('hide');
-    if(window.location.hash.startsWith("#products")){
-        scrollToHash();
-    }else{
-        await loadProducts();
-    };
-});
+    $('body').on('click', 'div[id=products]', async function () {
+        $('.navbar-collapse').collapse('hide');
+        if (window.location.hash.startsWith("#products")) {
+            scrollToHash();
+        } else {
+            await loadProducts();
+        }
+        ;
+    });
 });
 
 
@@ -88,30 +89,59 @@ async function loadProducts() {
     $(".cover").show();
 
     let userRole = await getUserRole();
-    if(userRole === undefined){
+    if (userRole === undefined) {
         $(".cover").hide();
         return;
     }
 
     let res = await fetch("/products");
     let resJson = await res.json();
+
+    let middlePage = resJson.middlePage;
+    let templatePage = resJson.template;
+    $("#middle-page").load(middlePage);
+
+    let template = await jQuery.get(`templates/${templatePage}`);
+    let compiledTemplate = ejs.compile(template, {});
+
     let bread = resJson.bread;
     let cheese = resJson.cheese;
     let vegetables = resJson.vegetables;
     let fruits = resJson.fruits;
     let meat = resJson.meat;
-    let middlePage = resJson.middlePage;
-    $("#middle-page").load(middlePage);
-    let template = await jQuery.get('templates/productsCatalog.ejs');
+
+    let data = {
+        data: [
+            {
+                category: "Vegetables",
+                products: vegetables
+            },
+            {
+                category: "Fruits",
+                products: fruits
+            },
+            {
+                category: "Bread",
+                products: bread
+            },
+            {
+                category: "Meat",
+                products: meat
+            },
+            {
+                category: "Cheese",
+                products: cheese
+            }
+        ]
+    };
+
+    let html = compiledTemplate(data);
+
     await setTimeout(function () {
-        $.tmpl(template, vegetables).appendTo("#products-Vegetables");
-        $.tmpl(template, bread).appendTo("#products-Bread");
-        $.tmpl(template, fruits).appendTo("#products-Fruits");
-        $.tmpl(template, meat).appendTo("#products-Meat");
-        $.tmpl(template, cheese).appendTo("#products-Cheese");
-        setTimeout(function(){
+        $("#products-cards").html(html);
+        setTimeout(function () {
             scrollToHash();
-        }, 50);
+        }, 100);
         $(".cover").hide();
     }, 1500);
 }
@@ -119,9 +149,9 @@ async function loadProducts() {
 $(document).ready(function () {
     $('a[href="#products-vegetables"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
-        if(window.location.hash.startsWith("#products")){
+        if (window.location.hash.startsWith("#products")) {
             scrollToHash();
-        }else{
+        } else {
             await loadProducts();
         }
     });
@@ -130,9 +160,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('a[href="#products-fruits"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
-        if(window.location.hash.startsWith("#products")){
+        if (window.location.hash.startsWith("#products")) {
             scrollToHash();
-        }else{
+        } else {
             await loadProducts();
         }
     });
@@ -141,9 +171,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('a[href="#products-bread"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
-        if(window.location.hash.startsWith("#products")){
+        if (window.location.hash.startsWith("#products")) {
             scrollToHash();
-        }else{
+        } else {
             await loadProducts();
         }
     });
@@ -152,9 +182,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('a[href="#products-meat"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
-        if(window.location.hash.startsWith("#products")){
+        if (window.location.hash.startsWith("#products")) {
             scrollToHash();
-        }else{
+        } else {
             await loadProducts();
         }
     });
@@ -163,9 +193,9 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('a[href="#products-cheese"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
-        if(window.location.hash.startsWith("#products")){
+        if (window.location.hash.startsWith("#products")) {
             scrollToHash();
-        }else{
+        } else {
             await loadProducts();
         }
     });
@@ -187,13 +217,13 @@ async function loadUsers() {
     $(".cover").show();
     let userRole = await getUserRole();
     let resJson;
-    if(userRole === undefined || userRole === "client"){
+    if (userRole === undefined || userRole === "client") {
         $(".cover").hide();
         return;
-    }else if(userRole === "administrator"){
+    } else if (userRole === "administrator") {
         let res = await fetch("/users/administratorData");
         resJson = await res.json();
-    }else if(userRole === "worker"){
+    } else if (userRole === "worker") {
         let res = await fetch("/users/workerData");
         resJson = await res.json();
     }
@@ -207,7 +237,7 @@ async function loadUsers() {
     let compiledTemplate = ejs.compile(template, {});
 
     let data = {
-        users : users,
+        users: users,
         userRole: userRole
     };
 
@@ -228,12 +258,12 @@ async function getUserRole() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            userName : userName,
-            password : password
+            userName: userName,
+            password: password
         })
     });
     let resJson = await res.json();
-    if(res.status !== 200){
+    if (res.status !== 200) {
         return undefined;
     }
     return resJson.userRole;
