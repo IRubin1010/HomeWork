@@ -4,17 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{77790D3D-0CE4-46CB-87C8-E92D5EC7171D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InformationKiosk.BL</RootNamespace>
-    <AssemblyName>InformationKiosk.BL</AssemblyName>
+    <ProjectGuid>{9F7C353E-2C2F-4583-9915-9C41B7390B6C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>InformationKiosk.Test</RootNamespace>
+    <AssemblyName>InformationKiosk.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,9 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministratorService.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InformationKiosk.BL\InformationKiosk.BL.csproj">
+      <Project>{77790d3d-0ce4-46cb-87c8-e92d5ec7171d}</Project>
+      <Name>InformationKiosk.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InformationKiosk.DAL\InformationKiosk.DAL.csproj">
+      <Project>{e6880cdf-cf52-4759-ae9b-49135d6c1c2f}</Project>
+      <Name>InformationKiosk.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InformationKiosk.DataProtocol\InformationKiosk.DataProtocol.csproj">
+      <Project>{d2444f8b-e83e-4e77-a2c7-08a916db7ce3}</Project>
+      <Name>InformationKiosk.DataProtocol</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
