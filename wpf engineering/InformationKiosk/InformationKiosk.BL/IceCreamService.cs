@@ -3,6 +3,7 @@ using InformationKiosk.DAL.Repositories;
 using InformationKiosk.DataProtocol;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace InformationKiosk.BL
             nutritionsService = new NutritionsService();
         }
 
-        public async Task AddIceCreamAsync(Administrator admin ,Store store, string name, string description, int score, int iceCreamNutritionId)
+        public async Task AddIceCreamAsync(Administrator admin ,Store store, string name, string description, int score, int iceCreamNutritionId, Bitmap img)
         {
             var nutritions = await nutritionsService.GetNutritionsInformationAsync(iceCreamNutritionId);
             var iceCream = new IceCream()
@@ -29,7 +30,8 @@ namespace InformationKiosk.BL
                 Name = name,
                 Description = description,
                 Score = score,
-                Nutrients = nutritions
+                Nutrients = nutritions,
+                Img = img
             };
 
             await iceCreamRepository.AddIceCreamAsync(admin, store, iceCream);

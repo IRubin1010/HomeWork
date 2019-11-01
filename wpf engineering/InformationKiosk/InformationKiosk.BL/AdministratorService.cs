@@ -18,13 +18,17 @@ namespace InformationKiosk.BL
             administratorRepository = new AdministratorRepository();
         }
 
-        public async Task<Administrator> AddAdministratorcAsync(string firstName, string lastName, string email, string password)
+        public async Task<Administrator> AddAdministratorcAsync(Administrator admin, string firstName, string lastName, string email, string password)
         {
+            if(GetAdministratorAsync(email, password) != null)
+            {
+                throw new ArgumentException("administator already exist");
+            }
             if (!validator.ValidateEmail(email) || !validator.ValidatePasswordLength(password))
             {
                 throw new ArgumentException();
             }
-            var admin = new Administrator()
+            var newAdmin = new Administrator()
             {
                 Id = Guid.NewGuid(),
                 FirstName = firstName,
@@ -33,9 +37,34 @@ namespace InformationKiosk.BL
                 Password = password
             };
 
-            await administratorRepository.AddAdministratorAsync(admin);
+            await administratorRepository.AddAdministratorAsync(admin, newAdmin);
 
-            return admin;
+            return newAdmin;
+        }
+
+        public async Task<Administrator> AddNewAdministratorcAsync(string firstName, string lastName, string email, string password)
+        {
+            if (!validator.ValidateEmail(email) || !validator.ValidatePasswordLength(password))
+            {
+                throw new ArgumentException();
+            }
+            var newAdmin = new Administrator()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                Password = password
+            };
+
+            await administratorRepository.AddNewAdministratorAsync(newAdmin);
+
+            return newAdmin;
+        }
+
+        public async Task<Administrator> GetAdministratorAsync(string email, string password)
+        {
+            return await administratorRepository.GetAdministratorAsync(email, password);
         }
     }
 }
