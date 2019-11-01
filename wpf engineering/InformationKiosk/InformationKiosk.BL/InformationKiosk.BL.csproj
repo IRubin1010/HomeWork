@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InformationKiosk.BL</RootNamespace>
     <AssemblyName>InformationKiosk.BL</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,8 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministratorService.cs" />
+    <Compile Include="IceCreamService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="searchService.cs" />
     <Compile Include="Validator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InformationKiosk.DAL\InformationKiosk.DAL.csproj">
+      <Project>{E6880CDF-CF52-4759-AE9B-49135D6C1C2F}</Project>
+      <Name>InformationKiosk.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InformationKiosk.DataProtocol\InformationKiosk.DataProtocol.csproj">
+      <Project>{D2444F8B-E83E-4E77-A2C7-08A916DB7CE3}</Project>
+      <Name>InformationKiosk.DataProtocol</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

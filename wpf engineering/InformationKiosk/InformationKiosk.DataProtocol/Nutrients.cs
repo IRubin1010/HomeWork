@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InformationKiosk.DataProtocol
 {
-    public class Administrator
+    public class Nutrients
     {
         [Key]
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public float Energy { get; set; }
+        public float Protein { get; set; }
+        public float Fats { get; set; }
+
+        [Required]
+        public IceCream IceCream { get; set; }
     }
 }
