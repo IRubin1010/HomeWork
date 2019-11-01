@@ -12,7 +12,7 @@ namespace InformationKiosk.DAL.HttpServices
 {
     public class NutritionsService
     {
-        private static readonly String API_KEY = "vTSmnaKUAdhjUfTW1qxFxixciJPdUH8nMmrsdf5c";
+        private static readonly String API_KEY = "Zde2nKnxVYuaFO6UnEbX601aSRoZCaZdcAPtW3SN";
         private List<string> nutrientIds = new List<string>(){"208", "203", "204"};
 
         public async Task<Nutrients> GetNutritionsInformationAsync(int productID)
