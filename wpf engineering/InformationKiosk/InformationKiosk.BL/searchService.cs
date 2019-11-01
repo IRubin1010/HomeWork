@@ -11,31 +11,32 @@ namespace InformationKiosk.BL
     public class searchService
     {
         private StoreRepository storeRepository;
-        private IceCreamRepository iceCreamRepository;
+        private IceCreamService iceCreamService;
         public searchService()
         {
             storeRepository = new StoreRepository();
-            iceCreamRepository = new IceCreamRepository();
+            iceCreamService = new IceCreamService();
         }
 
-        public  async Task<List<IceCream>> GetIceCreamsByMaxScoreAsync()
+        public async Task<Dictionary<IceCream, Store>> GetIceCreamsByMaxScoreAsync()
         {
-            var icecreams = await iceCreamRepository.GetIceCreamsAsync();
-            var maxScore =  icecreams.Select(i => i.Score).Max();
-            return icecreams.Where(i => i.Score == maxScore).ToList();
+            return await EnrichIceCreams(await iceCreamService.GetIceCreamsByMaxScoreAsync());
+
         }
 
-        public async Task<List<IceCream>> GetIceCreamsByLowScoreAsync()
+        public async Task<Dictionary<IceCream, Store>> GetIceCreamsByLowScoreAsync()
         {
-            var icecream = await iceCreamRepository.GetIceCreamsAsync();
-            var lowScore = icecream.Select(i => i.Score).Max();
-            return icecream.Where(i => i.Score == lowScore).ToList();
+            return await EnrichIceCreams(await iceCreamService.GetIceCreamsByLowScoreAsync());
         }
 
-        public async Task<Dictionary<IceCream,Store>> GetIceCreamByDescription(string description)
+        public async Task<Dictionary<IceCream, Store>> GetIceCreamByDescription(string description)
         {
-            var iceCreams = new Dictionary<IceCream, Store>();
-            var iceCreamsList= await iceCreamRepository.GetIceCreamsByDescrption(description);
+            return await EnrichIceCreams(await iceCreamService.GetIceCreamByDescription(description));
+        }
+
+        private async Task<Dictionary<IceCream, Store>> EnrichIceCreams(List<IceCream> iceCreamsList)
+        {
+            Dictionary<IceCream, Store> iceCreams = new Dictionary<IceCream, Store>();
             foreach (var icecream in iceCreamsList)
             {
                 var store = await storeRepository.GetStoreAsync(icecream.StoreId);

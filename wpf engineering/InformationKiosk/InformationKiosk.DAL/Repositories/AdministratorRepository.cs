@@ -18,16 +18,16 @@ namespace InformationKiosk.DAL.Repositories
             }
         }
 
-        public async Task AddAdministratorAsync(Administrator admin, Administrator administratorToAdd)
+        public async Task AddAdministratorAsync( Administrator administratorToAdd)
         {
-            if (await IsAdministratorAsync(admin))
-            {
+            //if (await IsAdministratorAsync(admin))
+            //{
                 using (var db = new AppDbContext())
                 {
                     db.Administrators.Add(administratorToAdd);
                     await db.SaveChangesAsync();
                 }
-            }
+            //}
         }
     }
 }

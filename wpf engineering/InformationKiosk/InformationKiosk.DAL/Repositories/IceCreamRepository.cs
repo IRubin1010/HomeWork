@@ -34,7 +34,8 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return (await db.Stores.Include(s => s.IceCreams).FirstOrDefaultAsync(s => s.Id == store.Id)).IceCreams;
+                var a = (await db.Stores.Where(s => s.Id == store.Id).Include(s => s.IceCreams.Select(b => b.Nutrients)).FirstOrDefaultAsync()).IceCreams;
+                return a;
             }
         }
 
@@ -42,7 +43,7 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return await db.IceCreams.ToListAsync();
+                return await db.IceCreams.Include(i => i.Nutrients).ToListAsync();
             }
         }
 
@@ -50,7 +51,7 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return await db.IceCreams.Where(i => i.Description.Contains(description)).ToListAsync();
+                return await db.IceCreams.Where(i => i.Description.Contains(description)).Include(i => i.Nutrients).ToListAsync();
             }
         }
     }
