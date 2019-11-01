@@ -1,4 +1,5 @@
 ﻿using InformationKiosk.BL;
+using InformationKiosk.DAL.HttpServices;
 using InformationKiosk.DAL.Repositories;
 using InformationKiosk.DataProtocol;
 using System;
@@ -16,11 +17,17 @@ namespace InformationKiosk.Test
             addData().ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
+        public static async Task GetNutritions()
+        {
+            var nutritionsService = new NutritionsService();
+            var nut = await nutritionsService.GetNutritionsInformationAsync(19095);
+        }
+
         public static async Task addData()
         {
             var admiService = new AdministratorService();
             var storService = new StoreRepository();
-            var icecreamService = new IceCreamRepository();
+            var icecreamService = new IceCreamService();
 
             var admin = await admiService.AddAdministratorcAsync("Meir", "Shimon", "meshimon@microsoft.com", "123456");
             
@@ -35,21 +42,21 @@ namespace InformationKiosk.Test
 
             await storService.AddStoreAsync(admin, store);
 
-            var icecream1 = new IceCream
-            {
-                Id = Guid.NewGuid(),
-                Score = 1,
-                Description = "1",
-            };
-            var icecream2 = new IceCream
-            {
-                Id = Guid.NewGuid(),
-                Score = 2,
-                Description = "2",
-            };
+            //var icecream1 = new IceCream
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Score = 1,
+            //    Description = "1",
+            //};
+            //var icecream2 = new IceCream
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Score = 2,
+            //    Description = "2",
+            //};
 
-            await icecreamService.AddIceCreamAsync(admin, store, icecream1);
-            await icecreamService.AddIceCreamAsync(admin, store, icecream2);
+            await icecreamService.AddIceCreamAsync(admin, store, "Vanila IceCream", "", 3, 19095);
+            await icecreamService.AddIceCreamAsync(admin, store, "Strawberry IceCream", "", 4, 19271);
 
             var dbStore = await storService.GetStoreAsync(store);
             var dbStores = await storService.GetStoresAsync();

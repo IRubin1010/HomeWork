@@ -12,13 +12,17 @@ namespace InformationKiosk.DataProtocol
     {
         [Key]
         public Guid Id { get; set; }
-        public int Score { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
+        public int Score { get; set; }
+        
         //public Image Img { get; set; } TODO
 
         public Guid StoreId { get; set; }
         public Store Store { get; set; }
-        
+
+        public Nutrients Nutrients { get; set; }
+
 
     }
 }
