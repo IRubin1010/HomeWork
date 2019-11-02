@@ -46,6 +46,7 @@
     <Compile Include="AdministratorService.cs" />
     <Compile Include="IceCreamService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReviewService.cs" />
     <Compile Include="searchService.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
