@@ -24,21 +24,11 @@ namespace InformationKiosk.DataProtocol
         {
             get
             {
-                using (var stream = new MemoryStream())
-                {
-                    using (var a = new Bitmap(Img))
-                    {
-                        a.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        return stream.ToArray();
-                    }
-                }
+                return ImageByteHelper.ImageToByte(Img);
             }
             set
             {
-                using (var ms = new MemoryStream(value))
-                {
-                    Img = new Bitmap(ms);
-                }
+                Img = ImageByteHelper.ByteToImage(value);
             }
         }
 
