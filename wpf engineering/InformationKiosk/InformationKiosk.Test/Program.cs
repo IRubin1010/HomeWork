@@ -30,6 +30,7 @@ namespace InformationKiosk.Test
             var admiService = new AdministratorService();
             var storService = new StoreRepository();
             var icecreamService = new IceCreamService();
+            var reviewService = new ReviewService();
 
             //var admin = await admiService.GetAdministratorAsync("meshimon@microsoft.com", "123456");
             var admin = await admiService.AddNewAdministratorcAsync("Meir", "Shimon", "meshimon@microsoft.com", "123456");
@@ -41,7 +42,7 @@ namespace InformationKiosk.Test
                 Address = "adress",
                 PhoneNumber = "phoneNumber",
                 Website = "http://localhost:3000",
-                Img = ConvertToBitmap("C:\\Users\\itziky\\Downloads\\gettyimages-166017058-612x612.jpg"),
+                Img = ConvertToBitmap("C:\\Users\\meir\\Downloads\\8eb5e48828b5a90b57a7fc6402b49055.jpg"),
                 IceCreams = new List<IceCream>()
             };
 
@@ -60,9 +61,13 @@ namespace InformationKiosk.Test
             //    Description = "2",
             //};
 
-            var img = ConvertToBitmap("C:\\Users\\itziky\\Downloads\\gettyimages-166017058-612x612.jpg");
-            await icecreamService.AddIceCreamAsync(admin, store, "Vanila IceCream", "", 3, 19095, img);
-            await icecreamService.AddIceCreamAsync(admin, store, "Strawberry IceCream", "", 4, 19271, img);
+            var img = ConvertToBitmap("C:\\Users\\meir\\Downloads\\8eb5e48828b5a90b57a7fc6402b49055.jpg");
+            await icecreamService.AddIceCreamAsync(admin, store, "Vanila IceCream", "", 5, 19095, img);
+            await icecreamService.AddIceCreamAsync(admin, store, "Strawberry IceCream", "", 5, 19271, img);
+
+            var iceCreams = await icecreamService.GetIceCreamsAsync(store);
+            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 2);
+            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 4);
 
             var dbStore = await storService.GetStoreAsync(store);
             var dbStores = await storService.GetStoresAsync();

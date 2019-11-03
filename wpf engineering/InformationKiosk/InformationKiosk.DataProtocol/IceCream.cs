@@ -47,6 +47,7 @@ namespace InformationKiosk.DataProtocol
 
         public Nutrients Nutrients { get; set; }
 
+        public List<Reviews> Reviews { get; set; }
 
     }
 }
