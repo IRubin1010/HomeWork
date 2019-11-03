@@ -27,6 +27,10 @@ namespace InformationKiosk.Test
 
         public static async Task addData()
         {
+
+            var localDir = Directory.GetCurrentDirectory().Replace("InformationKiosk.Test\\bin\\Debug", "");
+            var imgPath = localDir + "gettyimages-166017058-612x612.jpg";
+
             var admiService = new AdministratorService();
             var storService = new StoreRepository();
             var icecreamService = new IceCreamService();
@@ -42,7 +46,7 @@ namespace InformationKiosk.Test
                 Address = "adress",
                 PhoneNumber = "phoneNumber",
                 Website = "http://localhost:3000",
-                Img = ConvertToBitmap("C:\\Users\\meir\\Downloads\\8eb5e48828b5a90b57a7fc6402b49055.jpg"),
+                Img = ConvertToBitmap(imgPath),
                 IceCreams = new List<IceCream>()
             };
 
@@ -61,13 +65,13 @@ namespace InformationKiosk.Test
             //    Description = "2",
             //};
 
-            var img = ConvertToBitmap("C:\\Users\\meir\\Downloads\\8eb5e48828b5a90b57a7fc6402b49055.jpg");
+            var img = ConvertToBitmap(imgPath);
             await icecreamService.AddIceCreamAsync(admin, store, "Vanila IceCream", "", 5, 19095, img);
             await icecreamService.AddIceCreamAsync(admin, store, "Strawberry IceCream", "", 5, 19271, img);
 
             var iceCreams = await icecreamService.GetIceCreamsAsync(store);
-            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 2);
-            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 4);
+            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 2, img);
+            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 4, img);
 
             var dbStore = await storService.GetStoreAsync(store);
             var dbStores = await storService.GetStoresAsync();

@@ -2,6 +2,7 @@
 using InformationKiosk.DataProtocol;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,13 @@ namespace InformationKiosk.BL
             reviewsRepository = new ReviewsRepository();
         }
 
-        public async Task AddReviewToIceCreamAsync(IceCream iceCream, string description, int score/*, Bitmap img*/)
+        public async Task AddReviewToIceCreamAsync(IceCream iceCream, string description, int score, Bitmap img)
         {
             var review = new Reviews
             {
                 Description = description,
-                Score = score
+                Score = score,
+                Img = img
             };
 
             await reviewsRepository.AddReviewToIceCreamAsync(iceCream, review);
