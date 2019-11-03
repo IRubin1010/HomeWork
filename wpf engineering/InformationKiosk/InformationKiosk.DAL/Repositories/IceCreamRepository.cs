@@ -47,11 +47,31 @@ namespace InformationKiosk.DAL.Repositories
             }
         }
 
+        public async Task<IceCream> GetIceCreamAsync(IceCream iceCream)
+        {
+            using (var db = new AppDbContext())
+            {
+                return await db.IceCreams.FirstOrDefaultAsync(i => i.Id == iceCream.Id);
+            }
+        }
+
         public async Task<List<IceCream>> GetIceCreamsByDescrption(string description)
         {
             using (var db = new AppDbContext())
             {
                 return await db.IceCreams.Where(i => i.Description.Contains(description)).Include(i => i.Nutrients).ToListAsync();
+            }
+        }
+
+        public async Task UpdateScoreAsync(IceCream iceCream)
+        {
+            using (var db = new AppDbContext())
+            {
+                var iceCreamDB = await db.IceCreams.Include(i => i.Reviews).FirstOrDefaultAsync(i => i.Id == iceCream.Id);
+                var sumScore = iceCreamDB.Reviews.Sum(x => x.Score);
+                var newScore = sumScore / iceCreamDB.Reviews.Count;
+                iceCreamDB.Score = newScore;
+                await db.SaveChangesAsync();
             }
         }
     }
