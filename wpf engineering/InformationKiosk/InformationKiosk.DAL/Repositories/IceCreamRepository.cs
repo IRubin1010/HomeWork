@@ -68,8 +68,7 @@ namespace InformationKiosk.DAL.Repositories
             using (var db = new AppDbContext())
             {
                 var iceCreamDB = await db.IceCreams.Include(i => i.Reviews).FirstOrDefaultAsync(i => i.Id == iceCream.Id);
-                var sumScore = iceCreamDB.Reviews.Sum(x => x.Score);
-                var newScore = sumScore / iceCreamDB.Reviews.Count;
+                var newScore = iceCreamDB.Reviews.Sum(x => x.Score)/ iceCreamDB.Reviews.Count;
                 iceCreamDB.Score = newScore;
                 await db.SaveChangesAsync();
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,6 @@ namespace InformationKiosk.DataProtocol
                 Img = ImageByteHelper.ByteToImage(value);
             }
         }
-
         public Guid IceCreamId { get; set; }
         public IceCream IceCream { get; set; }
     }
