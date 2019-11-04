@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InformationKiosk.DAL.HttpServices
 {
-    class ImaggaService
+    public class ImaggaService
     {
         public async Task<bool> IsImageContainsItem(string imageUrl, string item)
         {
