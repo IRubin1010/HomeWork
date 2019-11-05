@@ -1,7 +1,7 @@
 ﻿using InformationKiosk.BL;
 using InformationKiosk.DAL.HttpServices;
 using InformationKiosk.DAL.Repositories;
-using InformationKiosk.DataProtocol;
+using InformationKiosk.BE;
 using System;
 using System.Collections.Generic;
 using System.Linq;

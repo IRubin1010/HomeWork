@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InformationKiosk.DataProtocol
+namespace InformationKiosk.BE
 {
-    public class Reviews
+    public class IceCream
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-
         public int Score { get; set; }
 
         [NotMapped]
@@ -31,7 +27,13 @@ namespace InformationKiosk.DataProtocol
                 Img = ImageByteHelper.ByteToImage(value);
             }
         }
-        public Guid IceCreamId { get; set; }
-        public IceCream IceCream { get; set; }
+
+        public Guid StoreId { get; set; }
+        public Store Store { get; set; }
+
+        public Nutrients Nutrients { get; set; }
+
+        public List<Reviews> Reviews { get; set; }
+
     }
 }

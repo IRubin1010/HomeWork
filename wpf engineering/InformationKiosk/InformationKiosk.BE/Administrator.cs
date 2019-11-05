@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InformationKiosk.DataProtocol
+namespace InformationKiosk.BE
 {
     public class Administrator
     {

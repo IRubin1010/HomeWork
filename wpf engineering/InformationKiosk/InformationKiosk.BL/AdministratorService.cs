@@ -1,9 +1,6 @@
-﻿using InformationKiosk.DAL.Repositories;
-using InformationKiosk.DataProtocol;
+﻿using InformationKiosk.BE;
+using InformationKiosk.DAL.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InformationKiosk.BL

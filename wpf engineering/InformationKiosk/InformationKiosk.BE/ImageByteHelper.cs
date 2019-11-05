@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InformationKiosk.DataProtocol
+namespace InformationKiosk.BE
 {
     public static class ImageByteHelper
     {
@@ -16,7 +11,7 @@ namespace InformationKiosk.DataProtocol
             {
                 using (var a = new Bitmap(img))
                 {
-                    a.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    a.Save(stream, ImageFormat.Jpeg);
                     return stream.ToArray();
                 }
             }

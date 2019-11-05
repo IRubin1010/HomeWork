@@ -1,7 +1,7 @@
-﻿using InformationKiosk.DataProtocol;
+﻿using InformationKiosk.BE;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +34,12 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                var a = (await db.Stores.Where(s => s.Id == store.Id).Include(s => s.IceCreams.Select(b => b.Nutrients)).FirstOrDefaultAsync()).IceCreams;
+                var a = (await db.Stores.Where(s => s.Id == store.Id)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Nutrients)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Reviews)
+                        .FirstOrDefaultAsync()).IceCreams;
                 return a;
             }
         }
