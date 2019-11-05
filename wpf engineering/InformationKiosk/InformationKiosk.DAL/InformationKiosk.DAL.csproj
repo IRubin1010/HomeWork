@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpServices\ImaggaService.cs" />
     <Compile Include="HttpServices\NutritionsService.cs" />
     <Compile Include="Repositories\AdministratorRepository.cs" />
     <Compile Include="AppDbContext.cs" />
