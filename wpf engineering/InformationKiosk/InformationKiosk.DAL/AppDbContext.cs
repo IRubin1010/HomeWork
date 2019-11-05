@@ -13,6 +13,7 @@ namespace InformationKiosk.DAL
     {
         public AppDbContext() : base()
         {
+            this.Database.EnsureCreated();
         }
 
         public DbSet<Store> Stores { get; set; }
