@@ -35,6 +35,7 @@ namespace InformationKiosk.Test
             var storService = new StoreRepository();
             var icecreamService = new IceCreamService();
             var reviewService = new ReviewService();
+            var imaggaService = new ImaggaService();
 
             //var admin = await admiService.GetAdministratorAsync("meshimon@microsoft.com", "123456");
             var admin = await admiService.AddNewAdministratorcAsync("Meir", "Shimon", "meshimon@microsoft.com", "123456");
@@ -68,6 +69,9 @@ namespace InformationKiosk.Test
             var img = ConvertToBitmap(imgPath);
             await icecreamService.AddIceCreamAsync(admin, store, "Vanila IceCream", "", 5, 19095, img);
             await icecreamService.AddIceCreamAsync(admin, store, "Strawberry IceCream", "", 5, 19271, img);
+
+            var x = await imaggaService.IsImageContainsItem("https://www.benjerry.co.il/app/uploads/2016/03/56ea8a8d9ba7a_1458211469.png", "ice cream");
+
 
             var iceCreams = await icecreamService.GetIceCreamsAsync(store);
             await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 2, img);
