@@ -1,6 +1,7 @@
 ﻿using InformationKiosk.BE;
 using InformationKiosk.DAL.Repositories;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace InformationKiosk.BL
