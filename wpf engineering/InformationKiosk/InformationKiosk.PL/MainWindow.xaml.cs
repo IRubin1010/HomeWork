@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InformationKiosk.PL.Nevigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,21 @@ namespace InformationKiosk.PL
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window , INevigator
     {
+        public NevigatorCommand Nevigator { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+
+            NevigatorCommand nevigatorCommand = Application.Current.Resources["NevigatorCommand"] as NevigatorCommand;
+            nevigatorCommand.Nevigator = this;
+        }
+
+        public void NevigateTo(UserControl control)
+        {
+            ControlPlaceHolder.Children.Clear();
+            ControlPlaceHolder.Children.Add(control);
         }
     }
 }

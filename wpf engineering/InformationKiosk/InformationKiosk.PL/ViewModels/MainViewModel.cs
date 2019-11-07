@@ -15,17 +15,19 @@ namespace InformationKiosk.PL.ViewModels
         private readonly AdministratorService _adminService;
         private Administrator _admin = new Administrator();
         public RelayCommand AddUserCommand { get; set; }
+        public RelayCommand Manage { get; set; }
         public MainViewModel()
         {
             _adminService = new AdministratorService();
             AddUserCommand = new RelayCommand(
                 () => AddAdmin(),
                 () => true,
-                true
-                );
+                true);
+            //Manage = new RelayCommand(
+            //    () => )
         }
 
-        public async Task AddAdmin()
+        public async void AddAdmin()
         {
             try
             {
