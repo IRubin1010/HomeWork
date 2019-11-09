@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InformationKiosk.DataProtocol
+namespace InformationKiosk.BE
 {
     public class Store
     {
         [Key]
         public Guid Id { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
         
         [NotMapped]
@@ -36,7 +32,7 @@ namespace InformationKiosk.DataProtocol
         {
             get
             {
-                return this.WebsiteUri.AbsoluteUri;
+                return this.WebsiteUri?.AbsoluteUri;
             }
             set
             {

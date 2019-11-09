@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InformationKiosk.DataProtocol
+namespace InformationKiosk.BE
 {
     public static class ImageByteHelper
     {
         public static byte[] ImageToByte(Bitmap img)
         {
+            if(img == null)
+            {
+                return null;
+            }
             using (var stream = new MemoryStream())
             {
-                using (var a = new Bitmap(img))
+                using (var i = new Bitmap(img))
                 {
-                    a.Save(stream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    i.Save(stream, ImageFormat.Jpeg);
                     return stream.ToArray();
                 }
             }
@@ -24,6 +23,10 @@ namespace InformationKiosk.DataProtocol
 
         public static Bitmap ByteToImage(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
             using (var ms = new MemoryStream(bytes))
             {
                 return new Bitmap(ms);
