@@ -15,6 +15,7 @@ namespace InformationKiosk.PL.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ManageViewModel>();
         }
 
         public MainViewModel Main
@@ -22,6 +23,14 @@ namespace InformationKiosk.PL.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public ManageViewModel Manage
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ManageViewModel>();
             }
         }
     }

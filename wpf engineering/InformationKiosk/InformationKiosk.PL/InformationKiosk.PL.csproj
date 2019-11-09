@@ -167,6 +167,7 @@
     <Compile Include="Controls\ManageControl.xaml.cs">
       <DependentUpon>ManageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BitmapToImageConverter.cs" />
     <Compile Include="Nevigation\INevigator.cs" />
     <Compile Include="Nevigation\NevigatorCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

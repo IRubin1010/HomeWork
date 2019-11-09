@@ -44,14 +44,27 @@ namespace InformationKiosk.Test
             var store = new Store
             {
                 Id = Guid.NewGuid(),
-                Address = "adress",
-                PhoneNumber = "phoneNumber",
+                Name = "stroe1",
+                Address = "adress1",
+                PhoneNumber = "phoneNumber1",
+                Website = "http://localhost:3000",
+                Img = ConvertToBitmap(imgPath),
+                IceCreams = new List<IceCream>()
+            };
+
+            var store2 = new Store
+            {
+                Id = Guid.NewGuid(),
+                Name = "store2",
+                Address = "adress2",
+                PhoneNumber = "phoneNumber2",
                 Website = "http://localhost:3000",
                 Img = ConvertToBitmap(imgPath),
                 IceCreams = new List<IceCream>()
             };
 
             await storService.AddStoreAsync(admin, store);
+            await storService.AddStoreAsync(admin, store2);
 
             //var icecream1 = new IceCream
             //{

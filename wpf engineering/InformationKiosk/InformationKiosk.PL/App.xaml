@@ -4,11 +4,13 @@
              xmlns:local="clr-namespace:InformationKiosk.PL"
              xmlns:vm="clr-namespace:InformationKiosk.PL.ViewModels"
              xmlns:Nevigation="clr-namespace:InformationKiosk.PL.Nevigation"
+             xmlns:Converters="clr-namespace:InformationKiosk.PL.Converters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="ViewModelLocator" />
             <Nevigation:NevigatorCommand x:Key="NevigatorCommand"/>
+            <Converters:BitmapToImageConverter x:Key="BitmapToImageConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

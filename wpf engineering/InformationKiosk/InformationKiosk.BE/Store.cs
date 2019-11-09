@@ -10,6 +10,7 @@ namespace InformationKiosk.BE
     {
         [Key]
         public Guid Id { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
         
         [NotMapped]
@@ -31,7 +32,7 @@ namespace InformationKiosk.BE
         {
             get
             {
-                return this.WebsiteUri.AbsoluteUri;
+                return this.WebsiteUri?.AbsoluteUri;
             }
             set
             {

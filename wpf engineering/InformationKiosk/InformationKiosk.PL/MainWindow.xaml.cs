@@ -32,8 +32,9 @@ namespace InformationKiosk.PL
 
         public void NevigateTo(UserControl control)
         {
-            ControlPlaceHolder.Children.Clear();
-            ControlPlaceHolder.Children.Add(control);
+            BaseGrid.Children.Remove(MainWindowGrid);
+            //ControlPlaceHolder.Children.Clear();
+            BaseGrid.Children.Add(control);
         }
     }
 }

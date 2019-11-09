@@ -7,11 +7,15 @@ namespace InformationKiosk.BE
     {
         public static byte[] ImageToByte(Bitmap img)
         {
+            if(img == null)
+            {
+                return null;
+            }
             using (var stream = new MemoryStream())
             {
-                using (var a = new Bitmap(img))
+                using (var i = new Bitmap(img))
                 {
-                    a.Save(stream, ImageFormat.Jpeg);
+                    i.Save(stream, ImageFormat.Jpeg);
                     return stream.ToArray();
                 }
             }
@@ -19,6 +23,10 @@ namespace InformationKiosk.BE
 
         public static Bitmap ByteToImage(byte[] bytes)
         {
+            if (bytes == null)
+            {
+                return null;
+            }
             using (var ms = new MemoryStream(bytes))
             {
                 return new Bitmap(ms);
