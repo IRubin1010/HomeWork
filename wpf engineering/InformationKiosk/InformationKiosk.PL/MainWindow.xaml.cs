@@ -26,7 +26,7 @@ namespace InformationKiosk.PL
         {
             InitializeComponent();
 
-            NevigatorCommand nevigatorCommand = Application.Current.Resources["NevigatorCommand"] as NevigatorCommand;
+            NevigatorCommand nevigatorCommand = Resources["NevigatorCommand"] as NevigatorCommand;
             nevigatorCommand.Nevigator = this;
         }
 

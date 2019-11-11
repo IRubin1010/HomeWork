@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using InformationKiosk.BE;
 using InformationKiosk.BL;
+using InformationKiosk.PL.Nevigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +16,6 @@ namespace InformationKiosk.PL.ViewModels
     {
         private StoreService storeService;
 
-        public RelayCommand<Store> ShowDetailCommand { get; set; }
         public ManageViewModel() :base()
         {
             storeService = new StoreService();
@@ -46,20 +46,12 @@ namespace InformationKiosk.PL.ViewModels
                 initStores();
             }
 
-            ShowDetailCommand = new RelayCommand<Store>(param => this.ShowDetails(param));
-
         }
 
         public async void initStores()
         {
             var a  = new ObservableCollection<Store>( await Task.Run(() => storeService.GetStoresAsync()));
             Stores = a;
-        }
-
-        public void ShowDetails(Store obj)
-        {
-            //var a = obj as Store;
-            Console.WriteLine("aaaa");
         }
 
 
@@ -79,6 +71,24 @@ namespace InformationKiosk.PL.ViewModels
                 }
                 _stores = value;
                 RaisePropertyChanged(nameof(Stores));
+            }
+        }
+
+        private Store _selectedStore = null;
+        public Store SelectedStore
+        {
+            get
+            {
+                return _selectedStore;
+            }
+            set
+            {
+                if (_selectedStore == value)
+                {
+                    return;
+                }
+                _selectedStore = value;
+                RaisePropertyChanged(nameof(SelectedStore));
             }
         }
         #endregion

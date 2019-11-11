@@ -31,7 +31,7 @@ namespace InformationKiosk.DAL.Repositories
         {
             using(var db = new AppDbContext())
             {
-                return await db.Stores.ToListAsync();
+                return await db.Stores.Include(s => s.IceCreams).ToListAsync();
             }
         }
 

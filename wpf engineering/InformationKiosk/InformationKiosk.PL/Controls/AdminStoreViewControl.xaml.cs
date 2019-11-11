@@ -1,4 +1,5 @@
-﻿using InformationKiosk.PL.Nevigation;
+﻿using InformationKiosk.BE;
+using InformationKiosk.PL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +18,15 @@ using System.Windows.Shapes;
 namespace InformationKiosk.PL.Controls
 {
     /// <summary>
-    /// Interaction logic for Manage.xaml
+    /// Interaction logic for AdminStoreViewControl.xaml
     /// </summary>
-    public partial class ManageControl : UserControl, INevigator
+    public partial class AdminStoreViewControl : UserControl
     {
-        public ManageControl()
+        public AdminStoreViewControl(object param)
         {
             InitializeComponent();
-            NevigatorCommand nevigatorCommand = Resources["NevigatorCommand"] as NevigatorCommand;
-            nevigatorCommand.Nevigator = this;
-        }
-
-        public void NevigateTo(UserControl control)
-        {
-            ControlPlaceHolder.Children.Clear();
-            ControlPlaceHolder.Children.Add(control);
+            var store = param as Store;
+            (DataContext as AdminStoreViewViewModel).Store = store;
         }
     }
 }
