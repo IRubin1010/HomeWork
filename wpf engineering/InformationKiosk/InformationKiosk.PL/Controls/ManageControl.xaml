@@ -17,83 +17,87 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="700"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <materialDesign:Card Grid.Column="0" Margin="20,20,0,0" Height="500">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <ListView x:Name="Stores" ItemsSource="{Binding Stores}" SelectedItem="{Binding SelectedStore}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}" >
-                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridView.Columns>
-                                <GridViewColumn Width="120" Header="Name">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Name}" TextAlignment="Left" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Width="130" Header="Address">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Address}" TextAlignment="Left" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Width="150" Header="PhoneNumber">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding PhoneNumber}" TextAlignment="Left" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Width="150" Header="Website">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Website}" TextAlignment="Left" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Width="100" Header="Image">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Height="50"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView.Columns>
-                        </GridView>
-                    </ListView.View>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{StaticResource NevigatorCommand}" >
-                                <i:InvokeCommandAction.CommandParameter>
-                                    <Nevigation:NevigationCommandParameters NevigationTarget="AdminStoreView" Parameter="{Binding Source={StaticResource ViewModelLocator}, Path=Manage.SelectedStore, Mode=TwoWay}"/>
-                                </i:InvokeCommandAction.CommandParameter>
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ListView>
-            </Grid>
-        </materialDesign:Card>
-        <!--<materialDesign:Card Grid.Column="1" Margin="30,20,30,0" Height="500" Width="440">
+    <materialDesign:DialogHost Identifier="ManageRootDialog">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <materialDesign:Card Grid.Column="0" Margin="20,20,0,0" Height="500">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="Stores" ItemsSource="{Binding Stores}" SelectedItem="{Binding SelectedStore}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}" >
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Width="120" Header="Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" TextAlignment="Left" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="130" Header="Address">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Address}" TextAlignment="Left" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150" Header="PhoneNumber">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding PhoneNumber}" TextAlignment="Left" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150" Header="Website">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Website}" TextAlignment="Left" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" Header="Image">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Height="50"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{StaticResource NevigatorCommand}" >
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <Nevigation:NevigationCommandParameters NevigationTarget="AdminStoreView" Parameter="{Binding Source={StaticResource ViewModelLocator}, Path=Manage.SelectedStore, Mode=TwoWay}"/>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                    <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Command="{Binding RunAddStoreDialogCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10 0 0 13">
+                        <materialDesign:PackIcon Kind="Plus" />
+                    </Button>
+                </Grid>
+            </materialDesign:Card>
+            <!--<materialDesign:Card Grid.Column="1" Margin="30,20,30,0" Height="500" Width="440">
         </materialDesign:Card>-->
-        <TextBlock Grid.Row="1" Text="{Binding ElementName=Stores, Path=SelectedIndex}"/>
-        <Grid Name="ControlPlaceHolder" Grid.Column="1" Margin="30,20,30,0" Width="440" Height="500" VerticalAlignment="Top"/>
-    </Grid>
+            <Grid Name="ControlPlaceHolder" Grid.Column="1" Margin="30,20,30,0" Width="440" Height="500" VerticalAlignment="Top"/>
+        </Grid>
+    </materialDesign:DialogHost>
 </UserControl>

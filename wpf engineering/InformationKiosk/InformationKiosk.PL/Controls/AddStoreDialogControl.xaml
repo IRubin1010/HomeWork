@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="InformationKiosk.PL.Controls.AddStoreDialogControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InformationKiosk.PL.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:validation="clr-namespace:InformationKiosk.PL.Validation"
+             mc:Ignorable="d" 
+             Height="370" Width="500"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=AddStoreDialog}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBox materialDesign:HintAssist.Hint="Name" Width="180" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                    <TextBox.Text>
+                        <Binding Path="Name" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox materialDesign:HintAssist.Hint="Address" Width="180" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                    <TextBox.Text>
+                        <Binding Path="Address" UpdateSourceTrigger="LostFocus">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox materialDesign:HintAssist.Hint="Phone Number" Width="180" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                    <TextBox.Text>
+                        <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox materialDesign:HintAssist.Hint="Website" Width="180" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                    <TextBox.Text>
+                        <Binding Path="Website" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                <!--<validation:IsUriValidationRule ValidatesOnTargetUpdated="True"/>-->
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Button Content="LOAD IMAGE" Margin="0 15 0 0"  Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding LoadImageCommand}"/>
+            </StackPanel>
+            <Image Grid.Column="1" Width="250" Height="150" Stretch="Fill" HorizontalAlignment="Right" Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0 10 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="ADD STORE" Command="{Binding AddStoreCommand}" Margin="20"/>
+            <Button Grid.Column="1" Content="CANCEL" Command="{Binding CancelCommand}" Margin="20"/>
+        </Grid>
+    </Grid>
+</UserControl>

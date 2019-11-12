@@ -16,6 +16,7 @@ namespace InformationKiosk.PL.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null) return null;
             MemoryStream ms = new MemoryStream();
             using (var i = new Bitmap((Bitmap)value))
             {

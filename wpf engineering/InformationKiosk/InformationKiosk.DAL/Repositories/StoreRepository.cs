@@ -8,28 +8,19 @@ namespace InformationKiosk.DAL.Repositories
 {
     public class StoreRepository
     {
-        private AdministratorRepository administratorRepository;
 
-        public StoreRepository()
+        public async Task AddStoreAsync(Store store)
         {
-            administratorRepository = new AdministratorRepository();
-        }
-
-        public async Task AddStoreAsync(Administrator administrator, Store store)
-        {
-            if (await administratorRepository.IsAdministratorAsync(administrator))
+            using (var db = new AppDbContext())
             {
-                using (var db = new AppDbContext())
-                {
-                    db.Stores.Add(store);
-                    await db.SaveChangesAsync();
-                }
+                db.Stores.Add(store);
+                await db.SaveChangesAsync();
             }
         }
 
         public async Task<List<Store>> GetStoresAsync()
         {
-            using(var db = new AppDbContext())
+            using (var db = new AppDbContext())
             {
                 return await db.Stores.Include(s => s.IceCreams).ToListAsync();
             }

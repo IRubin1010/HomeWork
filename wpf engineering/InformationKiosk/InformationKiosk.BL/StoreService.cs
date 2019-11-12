@@ -21,5 +21,10 @@ namespace InformationKiosk.BL
         {
             return await storeRepository.GetStoresAsync();
         }
+
+        public async Task AddStoreAsync(Store store)
+        {
+            await storeRepository.AddStoreAsync(store);
+        }
     }
 }

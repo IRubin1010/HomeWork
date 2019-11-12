@@ -17,6 +17,7 @@ namespace InformationKiosk.PL.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ManageViewModel>();
             SimpleIoc.Default.Register<AdminStoreViewViewModel>();
+            SimpleIoc.Default.Register<AddStoreDialogViewModel>();
         }
 
         public MainViewModel Main
@@ -40,6 +41,14 @@ namespace InformationKiosk.PL.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<AdminStoreViewViewModel>();
+            }
+        }
+
+        public AddStoreDialogViewModel AddStoreDialog
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddStoreDialogViewModel>();
             }
         }
     }

@@ -2,7 +2,9 @@
 using GalaSoft.MvvmLight.Command;
 using InformationKiosk.BE;
 using InformationKiosk.BL;
+using InformationKiosk.PL.Controls;
 using InformationKiosk.PL.Nevigation;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,10 +17,12 @@ namespace InformationKiosk.PL.ViewModels
     public class ManageViewModel : ViewModelBase
     {
         private StoreService storeService;
+        public RelayCommand RunAddStoreDialogCommand { get; set; }
 
         public ManageViewModel() :base()
         {
             storeService = new StoreService();
+            RunAddStoreDialogCommand = new RelayCommand(AddStoreDialog,() => true,true);
 
             if (IsInDesignMode)
             {
@@ -50,8 +54,19 @@ namespace InformationKiosk.PL.ViewModels
 
         public async void initStores()
         {
-            var a  = new ObservableCollection<Store>( await Task.Run(() => storeService.GetStoresAsync()));
-            Stores = a;
+            Stores = new ObservableCollection<Store>( await Task.Run(() => storeService.GetStoresAsync()));
+        }
+
+        public async void AddStoreDialog()
+        {
+            var view = new AddStoreDialogControl();
+            var result = await DialogHost.Show(view, "ManageRootDialog");
+            if(result != null)
+            {
+                var store = result as Store;
+                await Task.Run(() => storeService.AddStoreAsync(store));
+                Stores = new ObservableCollection<Store>(await Task.Run(() => storeService.GetStoresAsync()));
+            }
         }
 
 

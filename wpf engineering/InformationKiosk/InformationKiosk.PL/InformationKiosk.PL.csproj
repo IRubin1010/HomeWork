@@ -164,6 +164,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AddStoreDialogControl.xaml.cs">
+      <DependentUpon>AddStoreDialogControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AdminStoreViewControl.xaml.cs">
       <DependentUpon>AdminStoreViewControl.xaml</DependentUpon>
     </Compile>
@@ -174,10 +177,17 @@
     <Compile Include="Nevigation\INevigator.cs" />
     <Compile Include="Nevigation\NevigationCommandParameters.cs" />
     <Compile Include="Nevigation\NevigatorCommand.cs" />
+    <Compile Include="Validation\IsUriValidationRule.cs" />
+    <Compile Include="Validation\NotEmptyValidationRule.cs" />
+    <Compile Include="ViewModels\AddStoreDialogViewModel.cs" />
     <Compile Include="ViewModels\AdminStoreViewViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Controls\AddStoreDialogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AdminStoreViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
