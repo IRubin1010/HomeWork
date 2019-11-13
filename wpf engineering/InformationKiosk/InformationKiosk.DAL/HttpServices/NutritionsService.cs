@@ -17,7 +17,7 @@ namespace InformationKiosk.DAL.HttpServices
 
         public async Task<Nutrients> GetNutritionsInformationAsync(int productID)
         {
-            string url = "https://api.nal.usda.gov/ndb/V2/";
+            string url = "https://api.nal.usda.gov/ndb/V2/"; //https://fdc.nal.usda.gov/
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(url);

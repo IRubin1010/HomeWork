@@ -12,6 +12,7 @@ namespace InformationKiosk.PL.Nevigation
     public enum NevigationTargets
     {
         Manage,
+        AdminStoreView
     }
 
     public class NevigatorCommand : ICommand
@@ -27,11 +28,12 @@ namespace InformationKiosk.PL.Nevigation
 
         public void Execute(object parameter)
         {
-            if(parameter is string)
+            if(parameter is NevigationCommandParameters)
             {
-                if(Enum.TryParse(parameter as string, out NevigationTargets nevigationTarget))
+                var param = parameter as NevigationCommandParameters;
+                if(Enum.TryParse(param.NevigationTarget, out NevigationTargets nevigationTarget))
                 {
-                    var uc = GetControl(nevigationTarget);
+                    var uc = GetControl(nevigationTarget, param.Parameter);
                     if (uc != null)
                     {
                         Nevigator?.NevigateTo(uc);
@@ -48,7 +50,7 @@ namespace InformationKiosk.PL.Nevigation
             }
         }
 
-        public UserControl GetControl(NevigationTargets target)
+        public UserControl GetControl(NevigationTargets target, object parameter)
         {
             UserControl userControl = null;
 
@@ -56,6 +58,9 @@ namespace InformationKiosk.PL.Nevigation
             {
                 case NevigationTargets.Manage:
                     userControl = new ManageControl();
+                    break;
+                case NevigationTargets.AdminStoreView:
+                    userControl = new AdminStoreViewControl(parameter);
                     break;
                 default:
                     break;

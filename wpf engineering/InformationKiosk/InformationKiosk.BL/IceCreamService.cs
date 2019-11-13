@@ -21,20 +21,11 @@ namespace InformationKiosk.BL
             nutritionsService = new NutritionsService();
         }
 
-        public async Task AddIceCreamAsync(Administrator admin ,Store store, string name, string description, int score, int iceCreamNutritionId, Bitmap img)
+        public async Task AddIceCreamAsync(Store store, IceCream iceCream)
         {
-            var nutritions = await nutritionsService.GetNutritionsInformationAsync(iceCreamNutritionId);
-            var iceCream = new IceCream()
-            {
-                Id = Guid.NewGuid(),
-                Name = name,
-                Description = description,
-                Score = score,
-                Nutrients = nutritions,
-                Img = img
-            };
-
-            await iceCreamRepository.AddIceCreamAsync(admin, store, iceCream);
+            var nutritions = await nutritionsService.GetNutritionsInformationAsync(iceCream.NutritionId);
+            iceCream.Nutrients = nutritions;
+            await iceCreamRepository.AddIceCreamAsync(store, iceCream);
         }
 
         public async Task<List<IceCream>> GetIceCreamsAsync(Store store)

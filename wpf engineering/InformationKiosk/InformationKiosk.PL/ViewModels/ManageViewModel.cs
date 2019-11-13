@@ -2,6 +2,9 @@
 using GalaSoft.MvvmLight.Command;
 using InformationKiosk.BE;
 using InformationKiosk.BL;
+using InformationKiosk.PL.Controls;
+using InformationKiosk.PL.Nevigation;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,53 +16,32 @@ namespace InformationKiosk.PL.ViewModels
 {
     public class ManageViewModel : ViewModelBase
     {
-        private StoreService storeService;
+        private readonly StoreService storeService;
+        public RelayCommand RunAddStoreDialogCommand { get; set; }
 
-        public RelayCommand<Store> ShowDetailCommand { get; set; }
-        public ManageViewModel() :base()
+        public ManageViewModel() : base()
         {
             storeService = new StoreService();
-
-            if (IsInDesignMode)
-            {
-                Stores = new ObservableCollection<Store>()
-                {
-                    new Store()
-                    {
-                        Id = Guid.NewGuid(),
-                        Address = "qqq"
-                    },
-                    new Store()
-                    {
-                        Id = Guid.NewGuid(),
-                        Address = "aaa"
-                    },
-                    new Store()
-                    {
-                        Id = Guid.NewGuid(),
-                        Address = "zzz"
-                    }
-                };
-            }
-            else
-            {
-                initStores();
-            }
-
-            ShowDetailCommand = new RelayCommand<Store>(param => this.ShowDetails(param));
+            RunAddStoreDialogCommand = new RelayCommand(AddStoreDialog, () => true, true);
+            initStores();
 
         }
 
         public async void initStores()
         {
-            var a  = new ObservableCollection<Store>( await Task.Run(() => storeService.GetStoresAsync()));
-            Stores = a;
+            Stores = new ObservableCollection<Store>(await Task.Run(() => storeService.GetStoresAsync()));
         }
 
-        public void ShowDetails(Store obj)
+        public async void AddStoreDialog()
         {
-            //var a = obj as Store;
-            Console.WriteLine("aaaa");
+            var view = new AddStoreDialogControl();
+            var result = await DialogHost.Show(view, "ManageRootDialog");
+            if (result != null)
+            {
+                var store = result as Store;
+                await Task.Run(() => storeService.AddStoreAsync(store));
+                Stores = new ObservableCollection<Store>(await Task.Run(() => storeService.GetStoresAsync()));
+            }
         }
 
 
@@ -73,12 +55,30 @@ namespace InformationKiosk.PL.ViewModels
             }
             set
             {
-                if(_stores == value)
+                if (_stores == value)
                 {
                     return;
                 }
                 _stores = value;
                 RaisePropertyChanged(nameof(Stores));
+            }
+        }
+
+        private Store _selectedStore = null;
+        public Store SelectedStore
+        {
+            get
+            {
+                return _selectedStore;
+            }
+            set
+            {
+                if (_selectedStore == value)
+                {
+                    return;
+                }
+                _selectedStore = value;
+                RaisePropertyChanged(nameof(SelectedStore));
             }
         }
         #endregion

@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InformationKiosk.PL"
+        xmlns:Nevigation="clr-namespace:InformationKiosk.PL.Nevigation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="1000"
+        Title="MainWindow" Height="600" Width="1200"
         DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=Main}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Nevigation:NevigatorCommand x:Key="NevigatorCommand"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid Name="BaseGrid">
         <Grid Name="MainWindowGrid" Margin="50, 30">
             <Grid.ColumnDefinitions>
@@ -16,7 +24,11 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Manage" HorizontalAlignment="Left" Command="{StaticResource NevigatorCommand}" CommandParameter="Manage" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedButton}" Width="100"/>
+            <Button Grid.Row="0" Content="Manage" HorizontalAlignment="Left" Command="{StaticResource NevigatorCommand}" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedButton}" Width="100">
+                <Button.CommandParameter>
+                    <Nevigation:NevigationCommandParameters NevigationTarget="Manage"/>
+                </Button.CommandParameter>
+            </Button>
         </Grid>
         
         <!--<Button Grid.Row="1" Content="Add User" Command="{Binding AddUserCommand}" HorizontalAlignment="Left" Margin="249,133,0,0" VerticalAlignment="Top" Width="150"/>
