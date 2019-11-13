@@ -1,51 +1,52 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InformationKiosk.BE;
-using MaterialDesignThemes.Wpf;
+using InformationKiosk.PL.Helpers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using MaterialDesignThemes.Wpf;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Drawing;
-using InformationKiosk.PL.Helpers;
 
 namespace InformationKiosk.PL.ViewModels
 {
-    public class AddStoreDialogViewModel : ViewModelBase
+    public class AddIceCreamDialogViewModel : ViewModelBase
     {
-        public RelayCommand AddStoreCommand { get; set; }
+        public RelayCommand AddIceCreamCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand LoadImageCommand { get; set; }
 
-        public AddStoreDialogViewModel()
+        public AddIceCreamDialogViewModel()
         {
-            AddStoreCommand = new RelayCommand(CloseDialog, CanCloseDialog, true);
+            AddIceCreamCommand = new RelayCommand(CloseDialog, CanCloseDialog, true);
             CancelCommand = new RelayCommand(CancelDialog, () => true, true);
             LoadImageCommand = new RelayCommand(LoadImage, () => true, true);
         }
 
         private void CloseDialog()
-        { 
-            var store = new Store()
+        {
+            var iceCream = new IceCream()
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
-                Address = Address,
-                PhoneNumber = PhoneNumber,
-                Website = Website,
+                Description = Description,
+                Score = Score,
                 Img = Img,
-                IceCreams = new List<IceCream>()
+                NutritionId = NutritionId
             };
             ClearFeilds();
-            DialogHost.CloseDialogCommand.Execute(store, null);
+            DialogHost.CloseDialogCommand.Execute(iceCream, null);
         }
 
         private bool CanCloseDialog()
         {
             return Name.Length > 0
-                && Address.Length > 0
-                && PhoneNumber.Length > 0
-                && Website.Length > 0
-                && Img != null;
+                && Description.Length > 0
+                && Img != null
+                && NutritionId > 0;
         }
 
         private void CancelDialog()
@@ -70,13 +71,13 @@ namespace InformationKiosk.PL.ViewModels
         private void ClearFeilds()
         {
             Name = "";
-            Address = "";
-            PhoneNumber = "";
-            Website = "";
+            Description = "";
+            Score = 0;
             Img = null;
+            NutritionId = 0;
         }
 
-        #region bindings fields
+        #region Binding fields
         private string _name = "";
         public string Name
         {
@@ -92,64 +93,64 @@ namespace InformationKiosk.PL.ViewModels
                 }
                 _name = value;
                 RaisePropertyChanged(nameof(Name));
-                AddStoreCommand.RaiseCanExecuteChanged();
+                AddIceCreamCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private string _address = "";
-        public string Address
+        private string _description = "";
+        public string Description
         {
             get
             {
-                return _address;
+                return _description;
             }
             set
             {
-                if (_address == value)
+                if (_description == value)
                 {
                     return;
                 }
-                _address = value;
-                RaisePropertyChanged(nameof(Address));
-                AddStoreCommand.RaiseCanExecuteChanged();
+                _description = value;
+                RaisePropertyChanged(nameof(Description));
+                AddIceCreamCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private string _phoneNumber = "";
-        public string PhoneNumber
+        private int _score = 0;
+        public int Score
         {
             get
             {
-                return _phoneNumber;
+                return _score;
             }
             set
             {
-                if (_phoneNumber == value)
+                if (_score == value)
                 {
                     return;
                 }
-                _phoneNumber = value;
-                RaisePropertyChanged(nameof(PhoneNumber));
-                AddStoreCommand.RaiseCanExecuteChanged();
+                _score = value;
+                RaisePropertyChanged(nameof(Score));
+                AddIceCreamCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private string _website = "";
-        public string Website
+        private int _nutritionId = 0;
+        public int NutritionId
         {
             get
             {
-                return _website;
+                return _nutritionId;
             }
             set
             {
-                if (_website == value)
+                if (_nutritionId == value)
                 {
                     return;
                 }
-                _website = value;
-                RaisePropertyChanged(nameof(Website));
-                AddStoreCommand.RaiseCanExecuteChanged();
+                _nutritionId = value;
+                RaisePropertyChanged(nameof(NutritionId));
+                AddIceCreamCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -168,11 +169,9 @@ namespace InformationKiosk.PL.ViewModels
                 }
                 _img = value;
                 RaisePropertyChanged(nameof(Img));
-                AddStoreCommand.RaiseCanExecuteChanged();
+                AddIceCreamCommand.RaiseCanExecuteChanged();
             }
         }
         #endregion
-
-        
     }
 }

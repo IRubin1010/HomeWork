@@ -1,5 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using InformationKiosk.BE;
+using InformationKiosk.BL;
+using InformationKiosk.PL.Controls;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,23 +16,25 @@ namespace InformationKiosk.PL.ViewModels
 {
     public class AdminStoreViewViewModel : ViewModelBase
     {
+        private readonly IceCreamService iceCreamService;
+        public RelayCommand RunAddIceCreamDialogCommand { get; set; }
 
         public AdminStoreViewViewModel()
         {
-            if (IsInDesignMode)
+            iceCreamService = new IceCreamService();
+            RunAddIceCreamDialogCommand = new RelayCommand(AddIceCreamDialog, () => true, true);
+        }
+
+        public async void AddIceCreamDialog()
+        {
+            var view = new AddIceCreamDialogControl();
+            var result = await DialogHost.Show(view, "ManageRootDialog");
+            if (result != null)
             {
-                var localDir = Directory.GetCurrentDirectory().Replace("InformationKiosk.Test\\bin\\Debug", "");
-                var imgPath = localDir + "gettyimages-166017058-612x612.jpg";
-                Store = new Store
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "stroe1",
-                    Address = "adress1",
-                    PhoneNumber = "phoneNumber1",
-                    Website = "http://localhost:3000",
-                    Img = ConvertToBitmap(imgPath),
-                    IceCreams = new List<IceCream>()
-                };
+                var iceCream = result as IceCream;
+                await Task.Run(() => iceCreamService.AddIceCreamAsync(Store, iceCream));
+                Store.IceCreams = await Task.Run(() => iceCreamService.GetIceCreamsAsync(Store));
+                RaisePropertyChanged(nameof(Store));
             }
         }
 

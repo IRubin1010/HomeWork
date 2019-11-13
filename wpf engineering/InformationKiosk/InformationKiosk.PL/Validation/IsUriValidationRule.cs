@@ -13,7 +13,7 @@ namespace InformationKiosk.PL.Validation
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             return !string.IsNullOrWhiteSpace((value ?? "").ToString()) && !isValidUri(value.ToString())
-           ? new ValidationResult(false, "Field must be in valid URI format.")
+           ? new ValidationResult(false, "Value must be in valid URI format.")
            : ValidationResult.ValidResult;
         }
 

@@ -13,6 +13,7 @@ namespace InformationKiosk.BE
         public string Name { get; set; }
         public string Description { get; set; }
         public int Score { get; set; }
+        public int NutritionId { get; set; }
 
         [NotMapped]
         public Bitmap Img { get; set; }

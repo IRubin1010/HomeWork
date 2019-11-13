@@ -14,7 +14,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="160"/>
                     <RowDefinition Height="25"/>
-                    <RowDefinition/>
+                    <RowDefinition />
                     <!--<RowDefinition Height="50"/>-->
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
@@ -32,34 +32,36 @@
                 </Grid>
                 <Separator Grid.Row="1" BorderBrush="LightGray" BorderThickness="5" Margin="30, 10"/>
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
-                <ItemsControl ItemsSource="{Binding Store.IceCreams}" HorizontalAlignment="Center">
-                    <ItemsControl.ItemTemplate >
-                        <DataTemplate>
-                            <materialDesign:Card Width="180" Margin="10">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="130" />
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Height="130" Width="180" Stretch="UniformToFill" />
-                                    <StackPanel Grid.Row="1" Margin="8 8 8 8">
+                    <ItemsControl ItemsSource="{Binding Store.IceCreams}" HorizontalAlignment="Center">
+                        <ItemsControl.ItemTemplate >
+                            <DataTemplate>
+                                <materialDesign:Card Width="180" Margin="10">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="130" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Height="130" Width="180" Stretch="UniformToFill" />
+                                        <StackPanel Grid.Row="1" Margin="8 8 8 8">
                                             <TextBlock FontWeight="Bold" Text="{Binding Name}" FontSize="15" Margin="0,0,0,5"/>
                                             <TextBlock TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Center" Margin="0,0,0,6"/>
                                             <materialDesign:RatingBar Value="{Binding Score}" IsReadOnly="True"/>
                                         </StackPanel>
-                                </Grid>
-                            </materialDesign:Card>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </ScrollViewer>
-                <!--<Button Grid.Row="3" Content="{Binding Store.Name}"/>-->
+                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Command="{Binding RunAddIceCreamDialogCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10 0 0 13">
+                    <materialDesign:PackIcon Kind="Plus" />
+                </Button>
             </Grid>
             
             

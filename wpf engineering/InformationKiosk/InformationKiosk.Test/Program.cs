@@ -64,8 +64,8 @@ namespace InformationKiosk.Test
                 IceCreams = new List<IceCream>()
             };
 
-            await storService.AddStoreAsync(admin, store);
-            await storService.AddStoreAsync(admin, store2);
+            await storService.AddStoreAsync(store);
+            await storService.AddStoreAsync(store2);
 
             //var icecream1 = new IceCream
             //{
@@ -82,11 +82,35 @@ namespace InformationKiosk.Test
 
             var img = ConvertToBitmap(imgPath);
             var iceCreamVanilaImg = localDir + "ice-cream-vanila-1.jpg";
-            await icecreamService.AddIceCreamAsync(admin, store, "Vanila IceCream", "nice iceCream", 5, 19095, ConvertToBitmap(iceCreamVanilaImg));
+            var iceCream1 = new IceCream()
+            {
+                Name = "Vanila IceCream",
+                Description = "nice iceCream",
+                Score = 5,
+                NutritionId = 19095,
+                Img = ConvertToBitmap(iceCreamVanilaImg)
+            };
+            await icecreamService.AddIceCreamAsync(store, iceCream1);
             var iceCreamStrawberryImg = localDir + "ice-cream-strawberry-1.jpg";
-            await icecreamService.AddIceCreamAsync(admin, store, "Strawberry IceCream", "good iceCream", 5, 19271, ConvertToBitmap(iceCreamStrawberryImg));
+            var iceCream2 = new IceCream()
+            {
+                Name = "Strawberry IceCream",
+                Description = "good iceCream",
+                Score = 5,
+                NutritionId = 19271,
+                Img = ConvertToBitmap(iceCreamStrawberryImg)
+            };
+            await icecreamService.AddIceCreamAsync(store, iceCream2);
             var iceCreamChocolateImg = localDir + "ice-cream-chocolate-1.jpg";
-            await icecreamService.AddIceCreamAsync(admin, store, "Chocolate IceCream", "best iceCream", 5, 19270, ConvertToBitmap(iceCreamChocolateImg));
+            var iceCream3 = new IceCream()
+            {
+                Name = "Chocolate IceCream",
+                Description = "best iceCream",
+                Score = 5,
+                NutritionId = 19270,
+                Img = ConvertToBitmap(iceCreamChocolateImg)
+            };
+            await icecreamService.AddIceCreamAsync(store, iceCream3);
 
             var x = await imaggaService.IsImageContainsItem("https://www.benjerry.co.il/app/uploads/2016/03/56ea8a8d9ba7a_1458211469.png", "ice cream");
 

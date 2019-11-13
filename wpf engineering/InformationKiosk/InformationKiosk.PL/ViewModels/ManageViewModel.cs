@@ -16,52 +16,27 @@ namespace InformationKiosk.PL.ViewModels
 {
     public class ManageViewModel : ViewModelBase
     {
-        private StoreService storeService;
+        private readonly StoreService storeService;
         public RelayCommand RunAddStoreDialogCommand { get; set; }
 
-        public ManageViewModel() :base()
+        public ManageViewModel() : base()
         {
             storeService = new StoreService();
-            RunAddStoreDialogCommand = new RelayCommand(AddStoreDialog,() => true,true);
-
-            if (IsInDesignMode)
-            {
-                Stores = new ObservableCollection<Store>()
-                {
-                    new Store()
-                    {
-                        Id = Guid.NewGuid(),
-                        Address = "qqq"
-                    },
-                    new Store()
-                    {
-                        Id = Guid.NewGuid(),
-                        Address = "aaa"
-                    },
-                    new Store()
-                    {
-                        Id = Guid.NewGuid(),
-                        Address = "zzz"
-                    }
-                };
-            }
-            else
-            {
-                initStores();
-            }
+            RunAddStoreDialogCommand = new RelayCommand(AddStoreDialog, () => true, true);
+            initStores();
 
         }
 
         public async void initStores()
         {
-            Stores = new ObservableCollection<Store>( await Task.Run(() => storeService.GetStoresAsync()));
+            Stores = new ObservableCollection<Store>(await Task.Run(() => storeService.GetStoresAsync()));
         }
 
         public async void AddStoreDialog()
         {
             var view = new AddStoreDialogControl();
             var result = await DialogHost.Show(view, "ManageRootDialog");
-            if(result != null)
+            if (result != null)
             {
                 var store = result as Store;
                 await Task.Run(() => storeService.AddStoreAsync(store));
@@ -80,7 +55,7 @@ namespace InformationKiosk.PL.ViewModels
             }
             set
             {
-                if(_stores == value)
+                if (_stores == value)
                 {
                     return;
                 }

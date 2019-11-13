@@ -17,16 +17,13 @@ namespace InformationKiosk.DAL.Repositories
             administratorRepository = new AdministratorRepository();
         }
 
-        public async Task AddIceCreamAsync(Administrator administrator, Store store, IceCream iceCream)
+        public async Task AddIceCreamAsync(Store store, IceCream iceCream)
         {
-            if (await administratorRepository.IsAdministratorAsync(administrator))
+            using (var db = new AppDbContext())
             {
-                using (var db = new AppDbContext())
-                {
-                    var dbStore = await db.Stores.Include(s => s.IceCreams).Where(s => s.Id == store.Id).FirstOrDefaultAsync();
-                    dbStore.IceCreams.Add(iceCream);
-                    await db.SaveChangesAsync();
-                }
+                var dbStore = await db.Stores.Include(s => s.IceCreams).Where(s => s.Id == store.Id).FirstOrDefaultAsync();
+                dbStore.IceCreams.Add(iceCream);
+                await db.SaveChangesAsync();
             }
         }
 
@@ -73,7 +70,7 @@ namespace InformationKiosk.DAL.Repositories
             using (var db = new AppDbContext())
             {
                 var iceCreamDB = await db.IceCreams.Include(i => i.Reviews).FirstOrDefaultAsync(i => i.Id == iceCream.Id);
-                var newScore = iceCreamDB.Reviews.Sum(x => x.Score)/ iceCreamDB.Reviews.Count;
+                var newScore = iceCreamDB.Reviews.Sum(x => x.Score) / iceCreamDB.Reviews.Count;
                 iceCreamDB.Score = newScore;
                 await db.SaveChangesAsync();
             }

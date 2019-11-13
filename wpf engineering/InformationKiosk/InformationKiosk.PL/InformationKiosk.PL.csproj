@@ -99,6 +99,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -164,6 +167,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AddIceCreamDialogControl.xaml.cs">
+      <DependentUpon>AddIceCreamDialogControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AddStoreDialogControl.xaml.cs">
       <DependentUpon>AddStoreDialogControl.xaml</DependentUpon>
     </Compile>
@@ -174,16 +180,23 @@
       <DependentUpon>ManageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BitmapToImageConverter.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Nevigation\INevigator.cs" />
     <Compile Include="Nevigation\NevigationCommandParameters.cs" />
     <Compile Include="Nevigation\NevigatorCommand.cs" />
     <Compile Include="Validation\IsUriValidationRule.cs" />
     <Compile Include="Validation\NotEmptyValidationRule.cs" />
+    <Compile Include="Validation\NumberValidationRule.cs" />
+    <Compile Include="ViewModels\AddIceCreamDialogViewModel.cs" />
     <Compile Include="ViewModels\AddStoreDialogViewModel.cs" />
     <Compile Include="ViewModels\AdminStoreViewViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Controls\AddIceCreamDialogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AddStoreDialogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
