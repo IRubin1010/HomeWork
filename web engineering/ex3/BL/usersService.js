@@ -70,6 +70,19 @@ module.exports.updateUser = async function (updatedUser) {
     }
 };
 
+module.exports.validetUser = async function (userToVlidate) {
+    try{
+        let users = await getUsersData();
+        let user = users.filter(user => {
+            return user.userName === userToVlidate.userName && user.password === userToVlidate.password 
+        })[0];
+        return user;
+    }catch (err) {
+        console.log(err);
+        return false;
+    }
+};
+
 async function getUsersData() {
     let fileData = await fsPromise.readFile('./data/users.json','utf-8');
     let users = JSON.parse(fileData);
