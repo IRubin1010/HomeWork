@@ -3,7 +3,7 @@
     "userName": "itzik",
     "password": "1234",
     "mail": "itzik@gmail.com",
-    "role": "client",
+    "role": "worker",
     "state": "active"
   },
   {
@@ -14,23 +14,9 @@
     "state": "active"
   },
   {
-    "userName": "shimon",
-    "password": "6789",
-    "mail": "shimon@gmail.com",
-    "role": "administrator",
-    "state": "active"
-  },
-  {
-    "userName": "aaa",
-    "password": "aaa",
-    "mail": "a@a",
-    "role": "client",
-    "state": "deleted"
-  },
-  {
-    "userName": "bbb",
-    "password": "bbb",
-    "mail": "b@b",
+    "userName": "mosh",
+    "password": "rand",
+    "mail": "moshe@gmail.com",
     "role": "client",
     "state": "active"
   }

@@ -35,14 +35,20 @@ router.post('/add', async function(req, res){
 
     let user = req.body.user;
 
-    let isUserAdded = await usersService.addUser(user);
+    let isValidUser = await usersService.validetUser(user);
 
-    if(!isUserAdded){
-        res.sendStatus(500);
-    }else{
-        res.sendStatus(200);
+    if(isValidUser !== undefined){
+        res.sendStatus(403);
     }
+    else {
+        let isUserAdded = await usersService.addUser(user);
 
+        if(!isUserAdded){
+            res.sendStatus(500);
+        }else{
+            res.sendStatus(200);
+        }
+    }
 });
 
 router.post('/delete', async function(req, res){
