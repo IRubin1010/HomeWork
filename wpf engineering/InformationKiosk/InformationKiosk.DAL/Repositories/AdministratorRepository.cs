@@ -35,11 +35,11 @@ namespace InformationKiosk.DAL.Repositories
             }
         }
 
-        public async Task<Administrator> GetAdministratorAsync(string email, string password)
+        public async Task<Administrator> GetAdministratorAsync(string userName, string password)
         {
             using (var db = new AppDbContext())
             {
-                return await db.Administrators.FirstOrDefaultAsync(a => a.Email == email && a.Password == password);
+                return await db.Administrators.FirstOrDefaultAsync(a => a.FirstName == userName && a.Password == password);
             }
         }
     }

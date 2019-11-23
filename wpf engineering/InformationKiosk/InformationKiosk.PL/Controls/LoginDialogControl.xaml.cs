@@ -1,5 +1,4 @@
-﻿using InformationKiosk.BE;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace InformationKiosk.PL.Controls
 {
     /// <summary>
-    /// Interaction logic for AddIceCreamDialogControl.xaml
+    /// Interaction logic for LoginDialogControl.xaml
     /// </summary>
-    public partial class AddIceCreamDialogControl : UserControl
+    public partial class LoginDialogControl : UserControl
     {
-        public AddIceCreamDialogControl()
+        public LoginDialogControl()
         {
             InitializeComponent();
         }

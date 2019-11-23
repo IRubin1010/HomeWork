@@ -14,6 +14,15 @@ namespace InformationKiosk.PL.Nevigation
     {
         public static readonly DependencyProperty ParameterProperty = DependencyProperty.Register("Parameter", typeof(object), typeof(NevigationCommandParameters), new FrameworkPropertyMetadata(null));
 
+        public NevigationCommandParameters()
+        {
+        }
+
+        public NevigationCommandParameters(string nevigationTarget)
+        {
+            NevigationTarget = nevigationTarget;
+        }
+
         public object Parameter
         {
             get

@@ -2,6 +2,9 @@
 using GalaSoft.MvvmLight.Command;
 using InformationKiosk.BE;
 using InformationKiosk.BL;
+using InformationKiosk.PL.Controls;
+using InformationKiosk.PL.Nevigation;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,44 +15,22 @@ namespace InformationKiosk.PL.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly AdministratorService _adminService;
-        private Administrator _admin = new Administrator();
-        public RelayCommand AddUserCommand { get; set; }
+        //public RelayCommand<INevigator> RunLoginDialogCommand { get; set; }
         public MainViewModel()
         {
-            _adminService = new AdministratorService();
-            AddUserCommand = new RelayCommand(AddAdmin, () => true, true);
+            //RunLoginDialogCommand = new RelayCommand<INevigator>(LoginDialog, (nevigator) => true, true);
         }
 
-        public async void AddAdmin()
-        {
-            try
-            {
-                _admin = await _adminService.AddNewAdministratorcAsync("admin", "admin", "admin@admin.com", "123456").ConfigureAwait(false);
-                UserName = _admin.FirstName;
-            }
-            catch(Exception e)
-            {
-                UserName = "exception";
-            }
-        }
-
-        private string _userName = null;
-        public string UserName
-        {
-            get
-            {
-                return _admin.FirstName;
-            }
-            set
-            {
-                if (_userName == value)
-                {
-                    return;
-                }
-                _admin.FirstName = value;
-                RaisePropertyChanged("UserName");
-            }
-        }
+        //public async void LoginDialog(INevigator nevigator)
+        //{
+        //    var view = new LoginDialogControl();
+        //    var result = await DialogHost.Show(view, "LoginDialog");
+        //    if (result != null && (result as bool?) == true)
+        //    {
+        //        var nevigatorCommand = new NevigatorCommand();
+        //        nevigatorCommand.Nevigator = nevigator;
+        //        nevigatorCommand.Execute(new NevigationCommandParameters("Manage"));
+        //    }
+        //}
     }
 }

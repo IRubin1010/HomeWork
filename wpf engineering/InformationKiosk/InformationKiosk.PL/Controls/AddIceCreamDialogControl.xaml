@@ -7,11 +7,12 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:validation="clr-namespace:InformationKiosk.PL.Validation"
              mc:Ignorable="d" 
-             Height="340" Width="500"
+             Height="auto" Width="500"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=AddIceCreamDialog}">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid>
@@ -53,7 +54,8 @@
             </StackPanel>
             <Image Grid.Column="1" Width="250" Height="150" Stretch="Fill" HorizontalAlignment="Right" Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="0 10 0 0">
+        <Label Grid.Row="1" Margin="0 20 0 0" Content="something went wrong please try again" HorizontalContentAlignment="Center" Foreground="Red" Visibility="{Binding IsError, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Grid Grid.Row="2" Margin="0 10 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

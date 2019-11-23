@@ -60,9 +60,9 @@ namespace InformationKiosk.BL
             return newAdmin;
         }
 
-        public async Task<Administrator> GetAdministratorAsync(string email, string password)
+        public async Task<Administrator> GetAdministratorAsync(string userName, string password)
         {
-            return await administratorRepository.GetAdministratorAsync(email, password);
+            return await administratorRepository.GetAdministratorAsync(userName, password);
         }
     }
 }

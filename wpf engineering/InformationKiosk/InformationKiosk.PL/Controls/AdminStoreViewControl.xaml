@@ -22,7 +22,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="1" VerticalAlignment="Top" Source="{Binding Store.Img, Converter={StaticResource BitmapToImageConverter}}"/>
+                    <Image Grid.Column="1" VerticalAlignment="Top" Source="{Binding Store.Img, Converter={StaticResource BitmapToImageConverter}}" Margin="0 10 0 0"/>
                     <StackPanel Grid.Column="0" Margin="20">
                         <Label x:Name="Name" Content="{Binding Store.Name}" FontSize="20" Margin="0,0,0,5"/>
                         <Label x:Name="Address" Content="{Binding Store.Address}" />
@@ -59,7 +59,7 @@
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </ScrollViewer>
-                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Command="{Binding RunAddIceCreamDialogCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10 0 0 13">
+                <Button Grid.Row="2" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Command="{Binding RunAddIceCreamDialogCommand}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10 0 0 13" ToolTip="Add Ice Cream">
                     <materialDesign:PackIcon Kind="Plus" />
                 </Button>
             </Grid>

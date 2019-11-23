@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="ViewModelLocator" />
             <Converters:BitmapToImageConverter x:Key="BitmapToImageConverter"/>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

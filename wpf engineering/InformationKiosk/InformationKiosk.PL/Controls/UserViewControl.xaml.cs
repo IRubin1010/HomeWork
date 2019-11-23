@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace InformationKiosk.PL.Controls
 {
     /// <summary>
-    /// Interaction logic for Manage.xaml
+    /// Interaction logic for UserViewControl.xaml
     /// </summary>
-    public partial class ManageControl : UserControl, INevigator
+    public partial class UserViewControl : UserControl, INevigator
     {
-        public ManageControl()
+        public UserViewControl()
         {
             InitializeComponent();
             NevigatorCommand nevigatorCommand = Resources["NevigatorCommand"] as NevigatorCommand;
@@ -30,17 +30,11 @@ namespace InformationKiosk.PL.Controls
 
         public void NevigateTo(UserControl control)
         {
-            if(control.Name == "UserView")
-            {
-                var mainWindow = (MainWindow)Window.GetWindow(this);
-                mainWindow.BaseGrid.Children.Clear();
-                mainWindow.BaseGrid.Children.Add(control);
-            }
-            else
-            {
-                ControlPlaceHolder.Children.Clear();
-                ControlPlaceHolder.Children.Add(control);
-            }
+            var mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.BaseGrid.Children.Clear();
+            //BaseGrid.Children.Remove(MainWindowGrid);
+            //ControlPlaceHolder.Children.Clear();
+            mainWindow.BaseGrid.Children.Add(control);
         }
     }
 }

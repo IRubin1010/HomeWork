@@ -39,7 +39,7 @@ namespace InformationKiosk.PL.ViewModels
             if (result != null)
             {
                 var store = result as Store;
-                await Task.Run(() => storeService.AddStoreAsync(store));
+                //await Task.Run(() => storeService.AddStoreAsync(store));
                 Stores = new ObservableCollection<Store>(await Task.Run(() => storeService.GetStoresAsync()));
             }
         }
