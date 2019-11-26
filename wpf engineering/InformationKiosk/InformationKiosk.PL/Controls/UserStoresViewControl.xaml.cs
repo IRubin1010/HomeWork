@@ -14,26 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InformationKiosk.PL
+namespace InformationKiosk.PL.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserStoresViewControl.xaml
     /// </summary>
-    public partial class MainWindow : Window , INevigator
+    public partial class UserStoresViewControl : UserControl , INevigator
     {
-        public NevigatorCommand Nevigator { get; set; }
-        public MainWindow()
+        public UserStoresViewControl()
         {
             InitializeComponent();
-
             NevigatorCommand nevigatorCommand = Resources["NevigatorCommand"] as NevigatorCommand;
             nevigatorCommand.Nevigator = this;
         }
 
         public void NevigateTo(UserControl control)
         {
-            BaseGrid.Children.Clear();
-            BaseGrid.Children.Add(control);
+            ((ContentControl)Parent).Content = control;
         }
     }
 }

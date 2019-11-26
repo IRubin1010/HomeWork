@@ -22,7 +22,12 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return await db.Stores.Include(s => s.IceCreams).ToListAsync();
+                return await db.Stores
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Nutrients)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Reviews)
+                    .ToListAsync();
             }
         }
 

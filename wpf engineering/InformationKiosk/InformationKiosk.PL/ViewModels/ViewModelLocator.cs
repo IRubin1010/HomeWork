@@ -21,6 +21,10 @@ namespace InformationKiosk.PL.ViewModels
             SimpleIoc.Default.Register<AddIceCreamDialogViewModel>();
             SimpleIoc.Default.Register<LoginDialogViewModel>();
             SimpleIoc.Default.Register<UserViewViewModel>();
+            SimpleIoc.Default.Register<UserStoresViewViewModel>();
+            SimpleIoc.Default.Register<UserIceCreamViewViewModel>();
+            SimpleIoc.Default.Register<UserStoreViewViewModel>();
+            SimpleIoc.Default.Register<RateDialogViewModel>();
         }
 
         public MainViewModel Main
@@ -75,7 +79,50 @@ namespace InformationKiosk.PL.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<UserViewViewModel>();
+                var uc = ServiceLocator.Current.GetInstance<UserViewViewModel>();
+                return uc;
+            }
+        }
+
+        public UserStoresViewViewModel UserStoresView
+        {
+            get
+            {
+                var uc = ServiceLocator.Current.GetInstance<UserStoresViewViewModel>();
+                uc.initStores();
+                return uc;
+            }
+        }
+
+        public UserStoresViewViewModel UserStoresViewNoInit
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UserStoresViewViewModel>();
+            }
+        }
+
+        public UserIceCreamViewViewModel UserIceCreamsView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UserIceCreamViewViewModel>();
+            }
+        }
+
+        public UserStoreViewViewModel UserStoreView
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UserStoreViewViewModel>();
+            }
+        }
+
+        public RateDialogViewModel RateDialog
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RateDialogViewModel>();
             }
         }
     }

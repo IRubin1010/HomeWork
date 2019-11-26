@@ -30,11 +30,16 @@ namespace InformationKiosk.PL.Controls
 
         public void NevigateTo(UserControl control)
         {
-            var mainWindow = (MainWindow)Window.GetWindow(this);
-            mainWindow.BaseGrid.Children.Clear();
-            //BaseGrid.Children.Remove(MainWindowGrid);
-            //ControlPlaceHolder.Children.Clear();
-            mainWindow.BaseGrid.Children.Add(control);
+            if (control.Name == "UserStoresView")
+            {
+                UserViewsControls.Content = control;
+            }
+            else
+            {
+                var mainWindow = (MainWindow)Window.GetWindow(this);
+                mainWindow.BaseGrid.Children.Clear();
+                mainWindow.BaseGrid.Children.Add(control);
+            }
         }
     }
 }

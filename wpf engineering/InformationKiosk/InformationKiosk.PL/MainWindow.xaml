@@ -17,7 +17,7 @@
             <Nevigation:NevigatorCommand x:Key="NevigatorCommand"/>
         </ResourceDictionary>
     </Window.Resources>
-    <materialDesign:DialogHost Identifier="LoginDialog">
+    <materialDesign:DialogHost Identifier="DialogPlaceHolder">
         <Grid Name="BaseGrid">
             <Controls:UserViewControl />
         </Grid>

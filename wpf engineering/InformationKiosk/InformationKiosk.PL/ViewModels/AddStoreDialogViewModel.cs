@@ -67,17 +67,22 @@ namespace InformationKiosk.PL.ViewModels
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
-        private void LoadImage()
+        private async void LoadImage()
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
+            Bitmap img = null;
+            await Task.Run(() =>
             {
-                Img = ImageHelper.ConvertToBitmap(new Uri(op.FileName));
-            }
+                OpenFileDialog op = new OpenFileDialog();
+                op.Title = "Select a picture";
+                op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                  "Portable Network Graphic (*.png)|*.png";
+                if (op.ShowDialog() == true)
+                {
+                    img = ImageHelper.ConvertToBitmap(new Uri(op.FileName));
+                }
+            });
+            Img = img;
         }
 
         private void ClearFeilds()

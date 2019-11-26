@@ -13,7 +13,9 @@ namespace InformationKiosk.PL.Nevigation
     {
         Manage,
         AdminStoreView,
-        UserView
+        UserView,
+        UserStoresView,
+        UserStoreView
     }
 
     public class NevigatorCommand : ICommand
@@ -65,6 +67,12 @@ namespace InformationKiosk.PL.Nevigation
                     break;
                 case NevigationTargets.UserView:
                     userControl = new UserViewControl();
+                    break;
+                case NevigationTargets.UserStoresView:
+                    userControl = new UserStoresViewControl();
+                    break;
+                case NevigationTargets.UserStoreView:
+                    userControl = new UserStoreViewControl(parameter);
                     break;
                 default:
                     break;
