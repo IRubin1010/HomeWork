@@ -9,6 +9,7 @@ using System.Drawing;
 using InformationKiosk.PL.Helpers;
 using System.Threading.Tasks;
 using InformationKiosk.BL;
+using BingMapsRESTToolkit;
 
 namespace InformationKiosk.PL.ViewModels
 {
@@ -28,12 +29,20 @@ namespace InformationKiosk.PL.ViewModels
         }
 
         private async void CloseDialog()
-        { 
+        {
+            var location = new SimpleWaypoint(Address);
+            await SimpleWaypoint.TryGeocodeWaypoints(new List<SimpleWaypoint>() { location }, "AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo");
             var store = new Store()
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
-                Address = Address,
+                Location = new StoreLocation()
+                {
+                    Id = Guid.NewGuid(),
+                    Address = location.Address,
+                    longitude = location.Coordinate.Longitude,
+                    latitude = location.Coordinate.Latitude
+                },
                 PhoneNumber = PhoneNumber,
                 Website = Website,
                 Img = Img,

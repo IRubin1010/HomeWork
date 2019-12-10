@@ -28,13 +28,13 @@ $(document).ready(function () {
                 state: "active"
             };
 
-            let res = await fetch("/users/add", {
+            let res = await fetch("/users/add" + window.location.search, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    user: user
+                    user: user,
                 })
             });
 
@@ -69,7 +69,7 @@ async function deleteUser(caller) {
     let tableRow = $(caller).closest('tr');
     let user = getUserFromRow(tableRow);
 
-    let res = await fetch("/users/delete", {
+    let res = await fetch("/users/delete" + window.location.search, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ $(document).ready(function () {
             state: state
         };
 
-        let res = await fetch("/users/update", {
+        let res = await fetch("/users/update" + window.location.search, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

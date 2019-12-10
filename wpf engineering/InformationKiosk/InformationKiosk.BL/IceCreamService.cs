@@ -33,6 +33,16 @@ namespace InformationKiosk.BL
             return await iceCreamRepository.GetIceCreamsAsync(store);
         }
 
+        public async Task<IceCream> GetIceCreamAsync(Guid iceCreamId)
+        {
+            return await iceCreamRepository.GetIceCreamAsync(iceCreamId);
+        }
+
+        public async Task<List<IceCream>> GetIceCreamsAsync()
+        {
+            return await iceCreamRepository.GetIceCreamsAsync();
+        }
+
         public async Task<List<IceCream>> GetIceCreamsByMaxScoreAsync()
         {
             var icecreams = await iceCreamRepository.GetIceCreamsAsync();

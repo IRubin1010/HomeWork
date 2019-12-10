@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div align="center">
+            <h2>המשתלה המרכז להזמנת פרחים</h2>
+            <form method="get" action="http://localhost:8080/OrderConfirmation"> 
+                <input list="flowerLists" name="flowerList">
+                    <datalist id= flowerLists>
+                        <option value="כלנית">
+                        <option value="רקפת">
+                        <option value="סיגלית">
+                        <option value="ורד">
+                        <option value="שושנה">
+                    </datalist>
+                    בחר פרח שברצונך להזמין מהרשימה<br>
+                    <input type="number" name="amount">
+                    נא להזין כמות רצויה<br>
+                    <input type="text" name="adress">
+                    כתובת למשלוח:<br>
+                    <input list="PackingColors" name="PackingColor">
+                    <datalist id= PackingColors>
+                        <option value="אדום">
+                        <option value="כחול">
+                        <option value="לבן">
+                    </datalist>
+                    צבע אריזה: <br>
+                    <br>
+                    <input type="submit">
+                </form>
+        </div>
+    </body>
+</html>

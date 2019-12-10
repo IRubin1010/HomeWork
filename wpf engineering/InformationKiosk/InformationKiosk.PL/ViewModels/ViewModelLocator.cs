@@ -22,9 +22,11 @@ namespace InformationKiosk.PL.ViewModels
             SimpleIoc.Default.Register<LoginDialogViewModel>();
             SimpleIoc.Default.Register<UserViewViewModel>();
             SimpleIoc.Default.Register<UserStoresViewViewModel>();
-            SimpleIoc.Default.Register<UserIceCreamViewViewModel>();
+            SimpleIoc.Default.Register<UserIceCreamsViewViewModel>();
             SimpleIoc.Default.Register<UserStoreViewViewModel>();
             SimpleIoc.Default.Register<RateDialogViewModel>();
+            SimpleIoc.Default.Register<UserIceCreamViewViewModel>();
+            SimpleIoc.Default.Register<SearchViewModel>();
         }
 
         public MainViewModel Main
@@ -79,8 +81,7 @@ namespace InformationKiosk.PL.ViewModels
         {
             get
             {
-                var uc = ServiceLocator.Current.GetInstance<UserViewViewModel>();
-                return uc;
+                return ServiceLocator.Current.GetInstance<UserViewViewModel>();
             }
         }
 
@@ -88,21 +89,23 @@ namespace InformationKiosk.PL.ViewModels
         {
             get
             {
-                var uc = ServiceLocator.Current.GetInstance<UserStoresViewViewModel>();
+                var uc = new UserStoresViewViewModel(); 
                 uc.initStores();
                 return uc;
             }
         }
 
-        public UserStoresViewViewModel UserStoresViewNoInit
+        public UserIceCreamsViewViewModel UserIceCreamsView
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<UserStoresViewViewModel>();
+                var uc = new UserIceCreamsViewViewModel();
+                uc.initIceCreams();
+                return uc;
             }
         }
 
-        public UserIceCreamViewViewModel UserIceCreamsView
+        public UserIceCreamViewViewModel UserIceCreamView
         {
             get
             {
@@ -122,7 +125,17 @@ namespace InformationKiosk.PL.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<RateDialogViewModel>();
+                var uc = ServiceLocator.Current.GetInstance<RateDialogViewModel>();
+                uc.init();
+                return uc;
+            }
+        }
+
+        public SearchViewModel Search
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SearchViewModel>();
             }
         }
     }

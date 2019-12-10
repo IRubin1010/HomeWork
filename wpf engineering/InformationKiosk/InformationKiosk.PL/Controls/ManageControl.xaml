@@ -60,7 +60,7 @@
                                         <GridViewColumn Width="130" Header="Address">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding Address}" TextAlignment="Left" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Location.Address}" TextAlignment="Left" VerticalAlignment="Center"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -90,11 +90,7 @@
                             </ListView.View>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDoubleClick">
-                                    <i:InvokeCommandAction Command="{StaticResource NevigatorCommand}" >
-                                        <i:InvokeCommandAction.CommandParameter>
-                                            <Nevigation:NevigationCommandParameters NevigationTarget="AdminStoreView" Parameter="{Binding Source={StaticResource ViewModelLocator}, Path=Manage.SelectedStore, Mode=TwoWay}"/>
-                                        </i:InvokeCommandAction.CommandParameter>
-                                    </i:InvokeCommandAction>
+                                    <i:InvokeCommandAction Command="{StaticResource NevigatorCommand}" CommandParameter="{Binding NevigationCommandParameter}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ListView>

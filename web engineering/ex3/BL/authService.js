@@ -1,6 +1,6 @@
 let userService = require('./usersService');
 
-module.exports.getUserRole = async function(userName, password){
+getUserRole = async function(userName, password){
     let userRole = undefined;
     if (userName !== undefined && password !== undefined) {
         let user = await userService.getUser(userName, password);
@@ -11,7 +11,31 @@ module.exports.getUserRole = async function(userName, password){
     return userRole;
 };
 
-module.exports.authorizeUser = async function (userName, password) {
+authorizeUser = async function (userName, password) {
     let user = await userService.getUser(userName, password);
     return user !== undefined;
 };
+
+module.exports.checkAdmin = async function(req, res, next){
+    if (await getUserRole(req.query.userName, req.query.password) === "administrator")
+        next();
+    else
+        res.json({error: "not authorized"});
+};
+
+module.exports.checkWorker = async (req, res, next) => {
+    if (await getUserRole(req.query.userName, req.query.password) === "worker")
+        next();
+    else
+        res.json({error: "not authorized"});
+};
+
+module.exports.checkLoggedIn = async (req, res, next) => {
+    if (await authorizeUser(req.query.userName, req.query.password))
+        next();
+    else
+        res.json({error: "not logged in"});
+}
+
+module.exports.getUserRole = getUserRole;
+module.exports.authorizeUser = authorizeUser;

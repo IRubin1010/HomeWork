@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using InformationKiosk.BE;
 using InformationKiosk.BL;
+using InformationKiosk.PL.Nevigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -63,7 +64,30 @@ namespace InformationKiosk.PL.ViewModels
                     return;
                 }
                 _selectedStore = value;
+                NevigationCommandParameter = new NevigationCommandParameters()
+                {
+                    NevigationTarget = "UserStoreView",
+                    Parameter = _selectedStore
+                };
                 RaisePropertyChanged(nameof(SelectedStore));
+            }
+        }
+
+        private NevigationCommandParameters _nevigationCommandParametes = null;
+        public NevigationCommandParameters NevigationCommandParameter
+        {
+            get
+            {
+                return _nevigationCommandParametes;
+            }
+            set
+            {
+                if (_nevigationCommandParametes == value)
+                {
+                    return;
+                }
+                _nevigationCommandParametes = value;
+                RaisePropertyChanged(nameof(NevigationCommandParameter));
             }
         }
         #endregion

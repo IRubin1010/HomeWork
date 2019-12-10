@@ -34,6 +34,14 @@ namespace InformationKiosk.PL.Controls
             {
                 UserViewsControls.Content = control;
             }
+            else if (control.Name == "UserIceCreamsView")
+            {
+                UserViewsControls.Content = control;
+            }
+            else if (control.Name == "Search")
+            {
+                UserViewsControls.Content = control;
+            }
             else
             {
                 var mainWindow = (MainWindow)Window.GetWindow(this);

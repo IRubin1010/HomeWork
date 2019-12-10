@@ -13,8 +13,8 @@ namespace InformationKiosk.DAL.HttpServices
     {
         public async Task<bool> IsImageContainsItem(string imageUrl, string item)
         {
-            string apiKey = "acc_c4ce731bb14dcf7";
-            string apiSecret = "8d833fd35787d0450fc558d13451d0f2";
+            string apiKey = "acc_800d837796a799b";
+            string apiSecret = "c0951db577672beb1d8493df67c282d2";
             List<string> labelList = new List<string>();
             string basicAuthValue = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", apiKey, apiSecret)));
 
@@ -32,7 +32,7 @@ namespace InformationKiosk.DAL.HttpServices
                     JObject jobject = JObject.Parse(result);
 
                     labelList = (from t in jobject["result"]["tags"]
-                                 where (double)t["confidence"] > 70
+                                 where (double)t["confidence"] > 40
                                  select (string)t["tag"]["en"]).ToList();
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,8 +12,9 @@ namespace InformationKiosk.BE
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
         
+        public StoreLocation Location { get; set; }
+
         [NotMapped]
         public Bitmap Img { get; set; } 
         public byte[] ImgAsBytes 
@@ -43,5 +45,24 @@ namespace InformationKiosk.BE
         [NotMapped]
         public Uri WebsiteUri { get; set; }
 
+    }
+
+    public class StoreLocation
+    {
+        public Guid Id { get; set; }
+
+        public string Address { get; set; }
+        public double longitude { get; set; }
+        public double latitude { get; set; }
+
+        public Location Location
+        {
+            get
+            {
+                return new Location(latitude, longitude);
+            }
+        }
+
+        public Guid StoreId { get; set; }
     }
 }

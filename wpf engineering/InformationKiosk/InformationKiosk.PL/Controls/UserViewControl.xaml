@@ -40,13 +40,19 @@
                         <TextBlock Text="Stores" />
                     </StackPanel>
                 </Button>
-                <Button Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                <Button Command="{StaticResource NevigatorCommand}" Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                    <Button.CommandParameter>
+                        <Nevigation:NevigationCommandParameters NevigationTarget="UserIceCreamsView"/>
+                    </Button.CommandParameter>
                     <StackPanel >
                         <materialDesign:PackIcon Kind="IceCream" Height="30" Width="30" HorizontalAlignment="Center"/>
                         <TextBlock Text="Ice Creams" />
                     </StackPanel>
                 </Button>
-                <Button Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                <Button Command="{StaticResource NevigatorCommand}" Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                    <Button.CommandParameter>
+                        <Nevigation:NevigationCommandParameters NevigationTarget="SearchView"/>
+                    </Button.CommandParameter>
                     <StackPanel >
                         <materialDesign:PackIcon Kind="Search" Height="30" Width="30" HorizontalAlignment="Center"/>
                         <TextBlock Text="Search" />

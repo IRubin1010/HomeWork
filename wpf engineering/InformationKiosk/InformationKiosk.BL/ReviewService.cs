@@ -1,5 +1,6 @@
 ﻿using InformationKiosk.BE;
 using InformationKiosk.DAL.Repositories;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -14,16 +15,14 @@ namespace InformationKiosk.BL
             reviewsRepository = new ReviewsRepository();
         }
 
-        public async Task AddReviewToIceCreamAsync(IceCream iceCream, string description, int score, Bitmap img)
+        public async Task AddReviewToIceCreamAsync(IceCream iceCream, Review review)
         {
-            var review = new Reviews
-            {
-                Description = description,
-                Score = score,
-                Img = img
-            };
-
             await reviewsRepository.AddReviewToIceCreamAsync(iceCream, review);
+        }
+
+        public async Task<List<Review>> GetIceCreamReviews(IceCream iceCream)
+        {
+            return await reviewsRepository.GetIceCreamReviewsAsync(iceCream);
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace InformationKiosk.BE
 {
-    public class Reviews
+    public class Review
     {
         [Key]
         public int Id { get; set; }

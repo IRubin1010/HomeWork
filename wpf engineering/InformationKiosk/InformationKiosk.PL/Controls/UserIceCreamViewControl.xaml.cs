@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InformationKiosk.BE;
+using InformationKiosk.PL.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,13 @@ namespace InformationKiosk.PL.Controls
     /// </summary>
     public partial class UserIceCreamViewControl : UserControl
     {
-        public UserIceCreamViewControl()
+        public UserIceCreamViewControl(object param)
         {
             InitializeComponent();
+            var store = param as IceCream;
+            (DataContext as UserIceCreamViewViewModel).IceCream = store;
         }
+
+
     }
 }
