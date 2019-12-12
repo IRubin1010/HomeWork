@@ -1,18 +1,21 @@
 let userService = require('./usersService');
+let userRepository = require('../repositories/userRepository');
 
 getUserRole = async function(userName, password){
     let userRole = undefined;
     if (userName !== undefined && password !== undefined) {
-        let user = await userService.getUser(userName, password);
+        let user = await userRepository.getUser(userName, password);
+        console.log(`getUserRole: userName:${userName} password:${password}: user:${user}, userRole:${user.role}`);
         if (user !== undefined) {
             userRole = user.role;
+            console.log("userRole: " + userRole);
         }
     }
     return userRole;
 };
 
 authorizeUser = async function (userName, password) {
-    let user = await userService.getUser(userName, password);
+    let user = await userRepository.getUser(userName, password);
     return user !== undefined;
 };
 

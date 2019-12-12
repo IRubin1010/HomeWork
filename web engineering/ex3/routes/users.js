@@ -1,12 +1,13 @@
 let express = require('express');
 let router = express.Router();
+let userRepository = require('../repositories/userRepository');
 let usersService = require('../BL/usersService');
 let authService = require('../BL/authService');
 
 router.use(authService.checkLoggedIn);
 
 router.get('/administratorData', authService.checkAdmin, async function (req, res) {
-    let users = await usersService.getUsers();
+    let users = await userRepository.getUsers();
     res.json({
         middlePage: "users.ejs",
         users: users,
@@ -41,7 +42,7 @@ router.post('/add', authService.checkAdmin, async function (req, res) {
     if (isValidUser !== undefined) {
         res.sendStatus(403);
     } else {
-        let isUserAdded = await usersService.addUser(user);
+        let isUserAdded = await userRepository.adduser(user);
 
         if (!isUserAdded) {
             res.sendStatus(500);
@@ -55,7 +56,7 @@ router.post('/delete', authService.checkAdmin, async function (req, res) {
 
     let user = req.body.user;
 
-    let isUserDeleted = await usersService.deleteUser(user);
+    let isUserDeleted = await userRepository.deleteUser(user);
 
     if (!isUserDeleted) {
         res.sendStatus(500);
