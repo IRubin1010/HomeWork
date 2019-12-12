@@ -1,8 +1,11 @@
 let express = require('express');
 let router = express.Router();
 let usersService = require('../BL/usersService');
+let authService = require('../BL/authService');
 
-router.get('/administratorData', async function(req, res){
+router.use(authService.checkLoggedIn);
+
+router.get('/administratorData', authService.checkAdmin, async function (req, res) {
     let users = await usersService.getUsers();
     res.json({
         middlePage: "users.ejs",
@@ -11,10 +14,10 @@ router.get('/administratorData', async function(req, res){
     })
 });
 
-router.get('/workerData', async function(req, res){
+router.get('/workerData', authService.checkWorker, async function (req, res) {
 
     let users = await usersService.getUsers();
-    let filteredUsers = users.filter(user =>{
+    let filteredUsers = users.filter(user => {
         return user.state === "active";
     }).map(user => {
         let returnUser = {
@@ -31,49 +34,46 @@ router.get('/workerData', async function(req, res){
     })
 });
 
-router.post('/add', async function(req, res){
+router.post('/add', authService.checkAdmin, async function (req, res) {
 
     let user = req.body.user;
-
     let isValidUser = await usersService.validetUser(user);
-
-    if(isValidUser !== undefined){
+    if (isValidUser !== undefined) {
         res.sendStatus(403);
-    }
-    else {
+    } else {
         let isUserAdded = await usersService.addUser(user);
 
-        if(!isUserAdded){
+        if (!isUserAdded) {
             res.sendStatus(500);
-        }else{
+        } else {
             res.sendStatus(200);
         }
     }
 });
 
-router.post('/delete', async function(req, res){
+router.post('/delete', authService.checkAdmin, async function (req, res) {
 
     let user = req.body.user;
 
     let isUserDeleted = await usersService.deleteUser(user);
 
-    if(!isUserDeleted){
+    if (!isUserDeleted) {
         res.sendStatus(500);
-    }else{
+    } else {
         res.sendStatus(200);
     }
 });
 
 
-router.post('/update', async function(req, res){
+router.post('/update', authService.checkAdmin, async function (req, res) {
 
     let updatedUser = req.body.updatedUser;
 
     let isUserUpdated = await usersService.updateUser(updatedUser);
 
-    if(!isUserUpdated){
+    if (!isUserUpdated) {
         res.sendStatus(500);
-    }else{
+    } else {
         res.sendStatus(200);
     }
 });

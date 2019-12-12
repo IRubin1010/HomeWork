@@ -28,11 +28,12 @@ namespace InformationKiosk.PL.ViewModels
         public async void AddIceCreamDialog()
         {
             var view = new AddIceCreamDialogControl();
+            ((AddIceCreamDialogViewModel)view.DataContext).Store = Store;
             var result = await DialogHost.Show(view, "ManageRootDialog");
             if (result != null)
             {
                 var iceCream = result as IceCream;
-                await Task.Run(() => iceCreamService.AddIceCreamAsync(Store, iceCream));
+                //await Task.Run(() => iceCreamService.AddIceCreamAsync(Store, iceCream));
                 Store.IceCreams = await Task.Run(() => iceCreamService.GetIceCreamsAsync(Store));
                 RaisePropertyChanged(nameof(Store));
             }

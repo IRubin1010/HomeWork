@@ -7,36 +7,58 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using InformationKiosk.PL.Helpers;
+using System.Threading.Tasks;
+using InformationKiosk.BL;
+using BingMapsRESTToolkit;
 
 namespace InformationKiosk.PL.ViewModels
 {
     public class AddStoreDialogViewModel : ViewModelBase
     {
+        private readonly StoreService storeService;
         public RelayCommand AddStoreCommand { get; set; }
         public RelayCommand CancelCommand { get; set; }
         public RelayCommand LoadImageCommand { get; set; }
 
         public AddStoreDialogViewModel()
         {
+            storeService = new StoreService();
             AddStoreCommand = new RelayCommand(CloseDialog, CanCloseDialog, true);
             CancelCommand = new RelayCommand(CancelDialog, () => true, true);
             LoadImageCommand = new RelayCommand(LoadImage, () => true, true);
         }
 
-        private void CloseDialog()
-        { 
+        private async void CloseDialog()
+        {
+            var location = new SimpleWaypoint(Address);
+            await SimpleWaypoint.TryGeocodeWaypoints(new List<SimpleWaypoint>() { location }, "AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo");
             var store = new Store()
             {
                 Id = Guid.NewGuid(),
                 Name = Name,
-                Address = Address,
+                Location = new StoreLocation()
+                {
+                    Id = Guid.NewGuid(),
+                    Address = location.Address,
+                    longitude = location.Coordinate.Longitude,
+                    latitude = location.Coordinate.Latitude
+                },
                 PhoneNumber = PhoneNumber,
                 Website = Website,
                 Img = Img,
                 IceCreams = new List<IceCream>()
             };
-            ClearFeilds();
-            DialogHost.CloseDialogCommand.Execute(store, null);
+            try
+            {
+                await Task.Run(() => storeService.AddStoreAsync(store));
+                ClearFeilds();
+                DialogHost.CloseDialogCommand.Execute(store, null);
+            }
+            catch(Exception ex)
+            {
+                IsError = true;
+            }
+            
         }
 
         private bool CanCloseDialog()
@@ -54,17 +76,22 @@ namespace InformationKiosk.PL.ViewModels
             DialogHost.CloseDialogCommand.Execute(null, null);
         }
 
-        private void LoadImage()
+        private async void LoadImage()
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
+            Bitmap img = null;
+            await Task.Run(() =>
             {
-                Img = ImageHelper.ConvertToBitmap(new Uri(op.FileName));
-            }
+                OpenFileDialog op = new OpenFileDialog();
+                op.Title = "Select a picture";
+                op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                  "Portable Network Graphic (*.png)|*.png";
+                if (op.ShowDialog() == true)
+                {
+                    img = ImageHelper.ConvertToBitmap(new Uri(op.FileName));
+                }
+            });
+            Img = img;
         }
 
         private void ClearFeilds()
@@ -91,6 +118,10 @@ namespace InformationKiosk.PL.ViewModels
                     return;
                 }
                 _name = value;
+                if(IsError == true)
+                {
+                    IsError = false;
+                }
                 RaisePropertyChanged(nameof(Name));
                 AddStoreCommand.RaiseCanExecuteChanged();
             }
@@ -110,6 +141,10 @@ namespace InformationKiosk.PL.ViewModels
                     return;
                 }
                 _address = value;
+                if (IsError == true)
+                {
+                    IsError = false;
+                }
                 RaisePropertyChanged(nameof(Address));
                 AddStoreCommand.RaiseCanExecuteChanged();
             }
@@ -129,6 +164,10 @@ namespace InformationKiosk.PL.ViewModels
                     return;
                 }
                 _phoneNumber = value;
+                if (IsError == true)
+                {
+                    IsError = false;
+                }
                 RaisePropertyChanged(nameof(PhoneNumber));
                 AddStoreCommand.RaiseCanExecuteChanged();
             }
@@ -148,6 +187,10 @@ namespace InformationKiosk.PL.ViewModels
                     return;
                 }
                 _website = value;
+                if (IsError == true)
+                {
+                    IsError = false;
+                }
                 RaisePropertyChanged(nameof(Website));
                 AddStoreCommand.RaiseCanExecuteChanged();
             }
@@ -167,12 +210,35 @@ namespace InformationKiosk.PL.ViewModels
                     return;
                 }
                 _img = value;
+                if (IsError == true)
+                {
+                    IsError = false;
+                }
                 RaisePropertyChanged(nameof(Img));
+                AddStoreCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private bool _isError = false;
+        public bool IsError
+        {
+            get
+            {
+                return _isError;
+            }
+            set
+            {
+                if (_isError == value)
+                {
+                    return;
+                }
+                _isError = value;
+                RaisePropertyChanged(nameof(IsError));
                 AddStoreCommand.RaiseCanExecuteChanged();
             }
         }
         #endregion
 
-        
+
     }
 }

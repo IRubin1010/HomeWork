@@ -22,15 +22,13 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return await db.Stores.Include(s => s.IceCreams).ToListAsync();
-            }
-        }
-
-        public async Task<Store> GetStoreAsync(Store store)
-        {
-            using (var db = new AppDbContext())
-            {
-                return await db.Stores.Include(s => s.IceCreams).FirstOrDefaultAsync(s => s.Id == store.Id);
+                return await db.Stores
+                    .Include(s => s.Location)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Nutrients)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Reviews)
+                    .ToListAsync();
             }
         }
 
@@ -38,7 +36,13 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return await db.Stores.FirstOrDefaultAsync(s => s.Id == storeId);
+                return await db.Stores
+                    .Include(s => s.Location)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Nutrients)
+                    .Include(s => s.IceCreams)
+                        .ThenInclude(i => i.Reviews)
+                    .FirstOrDefaultAsync(s => s.Id == storeId);
             }
         }
     }

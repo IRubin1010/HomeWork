@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- views/index.ejs -->
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body class="container">
+    <header>
+        <% include ../partials/header %>
+    </header>
+    <main>
+        </ul>
+        <div class="row" >
+            <% students.forEach(function(student) { %>
+            <div class="col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-header pt-3 pb-2">
+                            <h5 class="card-title"><%= student.firstName %> <%= student.lastName%></h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">phone: <%= student.phone %></p>
+                        <p class="card-text">education: <%= student.ed %></p>
+                        <p class="card-text">Send mail: <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=<%= student.mail %>" target="_blank"><%= student.mail %></a></p>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </main>
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+</body>
+
+</html>

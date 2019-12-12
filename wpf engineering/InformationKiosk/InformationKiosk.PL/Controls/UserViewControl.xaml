@@ -1,0 +1,74 @@
+﻿<UserControl x:Name="UserView"
+             x:Class="InformationKiosk.PL.Controls.UserViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Nevigation="clr-namespace:InformationKiosk.PL.Nevigation"
+             xmlns:Controls="clr-namespace:InformationKiosk.PL.Controls"
+             mc:Ignorable="d" 
+             Height="650" Width="1190"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=UserView}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Nevigation:NevigatorCommand x:Key="NevigatorCommand"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Background="#512da8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button VerticalAlignment="Top" Margin="15" Height="28" Width="28" Command="{Binding RunLoginDialogCommand}" CommandParameter="{Binding ElementName=UserView}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Left">
+                <materialDesign:PackIcon Kind="SettingsOutline" Height="18" Width="18" />
+            </Button>
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 -50 0 0">
+                <Button Command="{StaticResource NevigatorCommand}" Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                    <Button.CommandParameter>
+                        <Nevigation:NevigationCommandParameters NevigationTarget="UserStoresView"/>
+                    </Button.CommandParameter>
+                    <StackPanel >
+                        <materialDesign:PackIcon Kind="Store" Height="30" Width="30" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Stores" />
+                    </StackPanel>
+                </Button>
+                <Button Command="{StaticResource NevigatorCommand}" Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                    <Button.CommandParameter>
+                        <Nevigation:NevigationCommandParameters NevigationTarget="UserIceCreamsView"/>
+                    </Button.CommandParameter>
+                    <StackPanel >
+                        <materialDesign:PackIcon Kind="IceCream" Height="30" Width="30" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Ice Creams" />
+                    </StackPanel>
+                </Button>
+                <Button Command="{StaticResource NevigatorCommand}" Margin="0 10" Background="#9575cd" Width="120" Padding="0 10" Height="auto" Style="{StaticResource MaterialDesignRaisedLightButton}" materialDesign:ButtonAssist.CornerRadius="5">
+                    <Button.CommandParameter>
+                        <Nevigation:NevigationCommandParameters NevigationTarget="SearchView"/>
+                    </Button.CommandParameter>
+                    <StackPanel >
+                        <materialDesign:PackIcon Kind="Search" Height="30" Width="30" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Search" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <materialDesign:ColorZone Content="{Binding Header}" FontWeight="Bold" FontSize="50" Foreground="White" Height="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{DynamicResource PrimaryHueMidBrush}"/>
+            <ContentControl x:Name="UserViewsControls" Grid.Row="1">
+                <Controls:UserStoresViewControl />
+            </ContentControl>
+        </Grid>
+    </Grid>
+</UserControl>

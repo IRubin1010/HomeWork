@@ -5,6 +5,9 @@ let cheese = require('../data/products/cheese');
 let vegetables = require('../data/products/vegetables');
 let fruits = require('../data/products/fruits');
 let meat = require('../data/products/meat');
+let authService = require('../BL/authService');
+
+router.use(authService.checkLoggedIn);
 
 router.get('/', function(req, res){
 

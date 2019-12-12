@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="InformationKiosk.PL.Controls.LoginDialogControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InformationKiosk.PL.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:InformationKiosk.PL.Helpers"
+             xmlns:validation="clr-namespace:InformationKiosk.PL.Validation"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=LoginDialog}"
+             mc:Ignorable="d" 
+             Height="450" Width="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Command="{Binding CancelCommand}" Style="{DynamicResource MaterialDesignToolButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Height="24" Width="24">
+            <materialDesign:PackIcon Kind="WindowClose"/>
+        </Button>
+        <materialDesign:PackIcon Grid.Row="0" Kind="Lock" Margin="0 0 0 -20" Foreground="{DynamicResource PrimaryHueMidBrush}" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="1">
+            <TextBox Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" materialDesign:HintAssist.Hint="User Name" Margin="20 10">
+                <TextBox.Text>
+                    <Binding Path="UserName" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <PasswordBox helpers:PasswordHelper.Attach="True"  Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Password" Margin="20 10">
+                <helpers:PasswordHelper.Password>
+                    <Binding Path="Password" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </helpers:PasswordHelper.Password>
+            </PasswordBox>
+        </StackPanel>
+        <Label Grid.Row="2" Margin="0 20 0 10" Content="User Name or Password are incorrect" HorizontalContentAlignment="Center" Foreground="Red" Visibility="{Binding IsIncorrectCredentials, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Button Grid.Row="3" Content="LOG IN" Command="{Binding LoginCommand}" VerticalAlignment="Center" Width="250"/>
+    </Grid>
+</UserControl>

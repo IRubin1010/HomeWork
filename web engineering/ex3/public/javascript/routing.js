@@ -94,7 +94,7 @@ async function loadProducts() {
         return;
     }
 
-    let res = await fetch("/products");
+    let res = await fetch("/products" + window.location.search);
     let resJson = await res.json();
 
     let middlePage = resJson.middlePage;
@@ -215,16 +215,17 @@ $(document).ready(async function () {
 
 async function loadUsers() {
     $(".cover").show();
+    let search = new URLSearchParams(window.location.search);
     let userRole = await getUserRole();
     let resJson;
     if (userRole === undefined || userRole === "client") {
         $(".cover").hide();
         return;
     } else if (userRole === "administrator") {
-        let res = await fetch("/users/administratorData");
+        let res = await fetch("/users/administratorData" + window.location.search);
         resJson = await res.json();
     } else if (userRole === "worker") {
-        let res = await fetch("/users/workerData");
+        let res = await fetch("/users/workerData" + window.location.search);
         resJson = await res.json();
     }
     let users = resJson.users;

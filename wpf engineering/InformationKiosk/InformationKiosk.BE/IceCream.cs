@@ -34,7 +34,7 @@ namespace InformationKiosk.BE
 
         public Nutrients Nutrients { get; set; }
 
-        public List<Reviews> Reviews { get; set; }
+        public List<Review> Reviews { get; set; }
 
     }
 }

@@ -31,13 +31,14 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                var a = (await db.Stores.Where(s => s.Id == store.Id)
+                return (await db.Stores
+                    .Include(s => s.Location)
+                    .Where(s => s.Id == store.Id)
                     .Include(s => s.IceCreams)
                         .ThenInclude(i => i.Nutrients)
                     .Include(s => s.IceCreams)
                         .ThenInclude(i => i.Reviews)
                         .FirstOrDefaultAsync()).IceCreams;
-                return a;
             }
         }
 
@@ -45,7 +46,12 @@ namespace InformationKiosk.DAL.Repositories
         {
             using (var db = new AppDbContext())
             {
-                return await db.IceCreams.Include(i => i.Nutrients).ToListAsync();
+                return await db.IceCreams
+                    .Include(i => i.Nutrients)
+                    .Include(i => i.Reviews)
+                    .Include(i => i.Store)
+                        .ThenInclude(s => s.Location)
+                    .ToListAsync();
             }
         }
 
@@ -54,6 +60,19 @@ namespace InformationKiosk.DAL.Repositories
             using (var db = new AppDbContext())
             {
                 return await db.IceCreams.FirstOrDefaultAsync(i => i.Id == iceCream.Id);
+            }
+        }
+
+        public async Task<IceCream> GetIceCreamAsync(Guid iceCreamId)
+        {
+            using (var db = new AppDbContext())
+            {
+                return await db.IceCreams
+                    .Include(i => i.Nutrients)
+                    .Include(i => i.Reviews)
+                    .Include(i => i.Store)
+                        .ThenInclude(s => s.Location)
+                    .FirstOrDefaultAsync(i => i.Id == iceCreamId);
             }
         }
 

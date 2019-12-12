@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
+using BingMapsRESTToolkit;
 
 namespace InformationKiosk.Test
 {
@@ -41,24 +42,40 @@ namespace InformationKiosk.Test
             var admin = await admiService.AddNewAdministratorcAsync("Meir", "Shimon", "meshimon@microsoft.com", "123456");
 
             var store1Img = localDir + "ice-cream-store-1.jpg";
+            var store1Location = new SimpleWaypoint("Rabi Akiva 100, Bne Brak, Tel Aviv, Israel");
+            await SimpleWaypoint.TryGeocodeWaypoints(new List<SimpleWaypoint>() { store1Location }, "AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo");
             var store = new Store
             {
                 Id = Guid.NewGuid(),
-                Name = "stroe1",
-                Address = "adress1",
-                PhoneNumber = "phoneNumber1",
+                Name = "Ice Creams",
+                Location = new StoreLocation()
+                {
+                    Id = Guid.NewGuid(),
+                    Address = store1Location.Address,
+                    longitude = store1Location.Coordinate.Longitude,
+                    latitude = store1Location.Coordinate.Latitude
+                },
+                PhoneNumber = "0722366058",
                 Website = "http://localhost:3000",
                 Img = ConvertToBitmap(store1Img),
                 IceCreams = new List<IceCream>()
             };
-
+            
             var store2Img = localDir + "ice-cream-store-2.jpg";
+            var store2Location = new SimpleWaypoint("Hazon Ish 50, Bne Brak, Tel Aviv 51511, Israel");
+            await SimpleWaypoint.TryGeocodeWaypoints(new List<SimpleWaypoint>() { store2Location }, "AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo");
             var store2 = new Store
             {
                 Id = Guid.NewGuid(),
-                Name = "store2",
-                Address = "adress2",
-                PhoneNumber = "phoneNumber2",
+                Name = "icei",
+                Location = new StoreLocation()
+                {
+                    Id = Guid.NewGuid(),
+                    Address = store2Location.Address,
+                    longitude = store2Location.Coordinate.Longitude,
+                    latitude = store2Location.Coordinate.Latitude
+                },
+                PhoneNumber = "0504178966",
                 Website = "http://localhost:3000",
                 Img = ConvertToBitmap(store2Img),
                 IceCreams = new List<IceCream>()
@@ -116,10 +133,20 @@ namespace InformationKiosk.Test
 
 
             var iceCreams = await icecreamService.GetIceCreamsAsync(store);
-            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 2, img);
-            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], "Good ice cream", 4, img);
+            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], new Review()
+            {
+                Description = "Good ice cream",
+                Score = 2,
+                Img = img
+            });
+            await reviewService.AddReviewToIceCreamAsync(iceCreams[0], new Review()
+            {
+                Description = "very Good ice cream",
+                Score = 4,
+                Img = img
+            });
 
-            var dbStore = await storService.GetStoreAsync(store);
+            var dbStore = await storService.GetStoreAsync(store.Id);
             var dbStores = await storService.GetStoresAsync();
 
             var storeIcecreams = await icecreamService.GetIceCreamsAsync(store);
