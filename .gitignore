@@ -288,3 +288,5 @@ __pycache__/
 *.xsd.cs
 
 web engineering/ex3/package-lock.json
+
+compilers/venv/
