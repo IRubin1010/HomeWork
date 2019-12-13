@@ -2,6 +2,7 @@
 const debug = require("debug")("mongo:model");
 const mongo = require('mongoose');
 let user = require('./user');
+let product = require('./product')
 
 
 let db = mongo.createConnection();
@@ -17,5 +18,6 @@ let db = mongo.createConnection();
 debug('Pending to DB connection');
 
 user(db);
+product(db);
 
 module.exports = model => db.model(model);

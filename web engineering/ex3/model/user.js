@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 module.exports = function(db) {
     let userSchema = Schema(
         {
-            userName: { type: String, required: true, unique: true },
+            userName: { type: String, required: true },
             password: { type: String, required: true, maxlength: [8, 'Too long password'], minlength: [4, 'Too short password'] },
             role: { type: String, enum: ['administrator', 'worker', 'client'] },
             mail: {type: String},
