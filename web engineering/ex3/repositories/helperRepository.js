@@ -1,4 +1,4 @@
-var fs = require("fs");
+let fs = require("fs");
 let breadMock = require('../data/products/bread');
 let cheeseMock = require('../data/products/cheese');
 let fruitMock = require('../data/products/fruits');
@@ -14,10 +14,11 @@ let productDB = require('../model')('product');
 module.exports.initDB = async () => {
     console.log("--------initDB---------");
     try {
-        let breads = await productRepository.getBreads();
-        if (breads[0] === undefined) {
+        let products = await productRepository.getProducts();
+        if (products === undefined || products[0] === undefined) {
             await initProductsDB();
         }
+
         let users = await userRepository.getUsers();
         if (users[0] === undefined) {
             await this.initUsersDb();
@@ -25,30 +26,33 @@ module.exports.initDB = async () => {
     } catch (err) {
         console.log(err);
     }
+    console.log("--------finish initDB---------");
 };
 
 async function initProductsDB() {
-    console.log("--------initProductsDB---------");
-    breadMock.forEach(async bread => {
 
-        let fileContent = await fs.readFileSync(elem.src);
+    let allProducts = breadMock.concat(cheeseMock, fruitMock, meatMock, vegetablesMock);
+
+    let dbProducts = allProducts.map(async product => {
+        let productImagePath = `public/images/products/${product.image}`;
+        let fileContent = await fs.readFileSync(productImagePath);
         let encodeFile = fileContent.toString('base64');
         let image = {
             contentType: 'image/png',
             data: new Buffer(encodeFile, 'base64')
         };
 
-        let dbBread = {
-
-            description: bread.description,
-            price: bread.price,
+        let dbProduct = {
+            description: product.description,
+            price: product.price,
             image: image,
-            catagory: image.catagory
+            catagory: product.catagory
         };
-
-        await productDB.CREATE(dbBread);
+        return await productDB.CREATE(dbProduct);
     });
-};
+
+    await Promise.all(dbProducts);
+}
 
 module.exports.initUsersDb = async () => {
     console.log("--------initUsersDb---------");

@@ -2,31 +2,37 @@
     {
         "description": "Abondance cheese",
         "price": "10",
-        "image": "cheese_abondance2.png"
+        "image": "cheese_abondance2.png",
+        "catagory": "cheese"
     },
     {
         "description": "Agedmimolette cheese",
         "price": "20",
-        "image": "cheese_agedmimolette.png"
+        "image": "cheese_agedmimolette.png",
+        "catagory": "cheese"
     },
     {
         "description": "Alisios cheese",
         "price": "5",
-        "image": "cheese_alisios.png"
+        "image": "cheese_alisios.png",
+        "catagory": "cheese"
     },
     {        
         "description": "British butter cheese",
         "price": "12",
-        "image": "cheese_british_butter.png"
+        "image": "cheese_british_butter.png",
+        "catagory": "cheese"
     },
     {
         "description": "Artisan raw milk manchego cheese",
         "price": "25",
-        "image": "cheese_Artisan_Raw_Milk_Manchego.png"
+        "image": "cheese_Artisan_Raw_Milk_Manchego.png",
+        "catagory": "cheese"
     },
     {
         "description": "Reggianito cheese",
         "price": "30",
-        "image": "cheese_reggianito.png"
+        "image": "cheese_reggianito.png",
+        "catagory": "cheese"
     }
 ]

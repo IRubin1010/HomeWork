@@ -1,23 +1,22 @@
 let productDb = require('../model')('product');
 
-module.exports.getProducts = async () => {
-    console.log("--------tProducts---------");
+async function getProducts(){
     try {
-        let products = await productDb.find({}).exec();
-        return products;
+        return await productDb.find({}).exec();
     }catch (err) {
         console.log(err);
         return [];
     }
-};
+}
 
-module.exports.getBreads = async () => {
-    console.log("--------getBreads---------");
+async function getBreads(){
     try{
-        let breads = await productDb.find({catagory: 'bread'}).exec();
-        return breads;
+        return await productDb.find({catagory: 'bread'}).exec();
     } catch(err) {
         console.log (err);
         return [];
     }
-};
+}
+
+module.exports.getBreads = getBreads;
+module.exports.getProducts = getProducts;

@@ -24,7 +24,7 @@ module.exports = function(db) {
             {
                 description: product.description,
                 price: product.price,
-                image: product.image.toString('base64'),
+                image: product.image,
                 catagory: product.catagory
             }
         );

@@ -2,16 +2,19 @@
     {
         "description": "Black berries",
         "price": "2.9",
-        "image": "fruits_black_berries.png"
+        "image": "fruits_black_berries.png",
+        "catagory": "fruits"
     },
     {
         "description": "Grage fruit",
         "price": "6.9",
-        "image": "fruits_grage_fruit.png"
+        "image": "fruits_grage_fruit.png",
+        "catagory": "fruits"
     },
     {
         "description": "Raspberry",
         "price": "6.9",
-        "image": "fruits_raspberry.png"
+        "image": "fruits_raspberry.png",
+        "catagory": "fruits"
     }
 ]
