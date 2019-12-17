@@ -27,11 +27,15 @@ def compile_vm_to_hack(file_to_compile):
 def parse_vm_to_hack(file_to_parse_name, output_file_name):
     with open(file_to_parse_name, 'r') as input_file:
         with open(output_file_name, 'w') as output_file:
+
+            output_file.write("//bootstrap\n")
+            output_file.write(commands.stack_init_commands)
+
             for line in input_file:
+                command = line.split()
+
                 if line.startswith("//") or command == []:
                     continue
-
-                command = line.split()
 
                 if "//" in command:
                     command = command[0:command.index("//")]
@@ -40,7 +44,13 @@ def parse_vm_to_hack(file_to_parse_name, output_file_name):
                 command_length = len(command)
 
                 if command_length == 1:
-                    arithmetic
+                    arithmetic_command = command[0]
+                    if arithmetic_command == "add":
+                        output_file.write("\n//add\n")
+                        output_file.write(commands.stack_binary_arithmetic_command.format(operator="+"))
+                    elif arithmetic_command == "sub":
+                        output_file.write("\n//sub\n")
+                        output_file.write(commands.stack_binary_arithmetic_command.format(operator="-"))
 
 
 
