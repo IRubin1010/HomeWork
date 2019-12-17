@@ -6,10 +6,12 @@ let vegetables = require('../data/products/vegetables');
 let fruits = require('../data/products/fruits');
 let meat = require('../data/products/meat');
 let authService = require('../BL/authService');
+let productRepository = require('../repositories/productRepository');
 
-router.use(authService.checkLoggedIn);
 
-router.get('/', function(req, res){
+router.get('/',  function(req, res){
+    //let bread =  productRepository.getBreads();
+    router.use(authService.checkLoggedIn);
 
     res.json({
         middlePage: "products.ejs",

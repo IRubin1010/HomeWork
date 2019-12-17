@@ -9,7 +9,7 @@ let db = mongo.createConnection();
 
 (async () => {
     try {
-        await db.openUri('mongodb://localhost/flower-shop-web-demo', { useFindAndModify: false });
+        await db.openUri('mongodb://localhost:37017/Meir-Demo', { useFindAndModify: false });
     } catch (err) {
         debug(`Error while trying connecting to mongo DB: ${err}`);
     }

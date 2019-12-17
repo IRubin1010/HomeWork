@@ -25,9 +25,13 @@ module.exports.getUsers = async () => {
 
 module.exports.getUser = async function (userName, password) {
     try{
-        let user = await userDb.find({userName: userName, password: password, state: "active"}).exec();
+        let user = await userDb.findOne({userName: userName, password: password, state: "active"}).exec();
+        console.log("-------------------------------");
+
         console.log(user);
-        return user[0]._doc;
+        console.log(user.userName);
+
+        return user;
     }catch (err) {
         console.log(err);
         return undefined;
@@ -47,7 +51,7 @@ module.exports.deleteUser = async (userToDelete) => {
 module.exports.updateUser = async (user) => {
     try{
     let fieldsToUpdate = { role: user.role, mail: user.mail , state: user.state  };
-    await userDb.findOneAndUpdate({ userName: user.userName , password: user.password }, fieldsToUpdate, { new: true });
+    await userDb.findOneAndUpdate({ userName: user.userName , password: user.password }, fieldsToUpdate, { new: true }).exec();
     return true;
     }catch (err) {
         console.log(err);
@@ -57,8 +61,8 @@ module.exports.updateUser = async (user) => {
 
 module.exports.validetUser = async function (userToVlidate) {
     try {
-        let user =  await userDb.find({username: userToVlidate.userName, password: userToVlidate.password}).exec();
-        return user[0];
+        let user =  await userDb.findOne({username: userToVlidate.userName, password: userToVlidate.password}).exec();
+        return user;
     }catch (err) {
         console.log(err);
         return false;

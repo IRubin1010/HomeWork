@@ -19,11 +19,12 @@ module.exports = function(db) {
     );
 
     productSchema.statics.CREATE = async function(product) {
+
         return this.create(
             {
                 description: product.description,
                 price: product.price,
-                image: product.image,
+                image: product.image.toString('base64'),
                 catagory: product.catagory
             }
         );
