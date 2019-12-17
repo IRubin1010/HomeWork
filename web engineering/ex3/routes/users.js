@@ -17,7 +17,7 @@ router.get('/administratorData', authService.checkAdmin, async function (req, re
 
 router.get('/workerData', authService.checkWorker, async function (req, res) {
 
-    let users = await usersService.getUsers();
+    let users = await userRepository.getUsers();
     let filteredUsers = users.filter(user => {
         return user.state === "active";
     }).map(user => {
@@ -35,15 +35,14 @@ router.get('/workerData', authService.checkWorker, async function (req, res) {
     })
 });
 
-router.post('/add', authService.checkAdmin, async function (req, res) {
+router.post('/add', authService.checkAdminOrWorker, async function (req, res) {
 
     let user = req.body.user;
-    let isValidUser = await usersService.validetUser(user);
-    if (isValidUser !== undefined) {
+    let isNotValidUser = await userRepository.validetUser(user);
+    if (isNotValidUser !== undefined) {
         res.sendStatus(403);
     } else {
         let isUserAdded = await userRepository.adduser(user);
-
         if (!isUserAdded) {
             res.sendStatus(500);
         } else {
@@ -70,7 +69,7 @@ router.post('/update', authService.checkAdmin, async function (req, res) {
 
     let updatedUser = req.body.updatedUser;
 
-    let isUserUpdated = await usersService.updateUser(updatedUser);
+    let isUserUpdated = await userRepository.updateUser(updatedUser);
 
     if (!isUserUpdated) {
         res.sendStatus(500);
