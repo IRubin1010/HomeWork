@@ -1,5 +1,5 @@
 # set SP to 256 - the beginning of the stack
-stack_init_commands = "@256\nD=A\n@sp\nM=D\n"
+stack_init_commands = "@256\nD=A\n@SP\nM=D\n"
 # 1. @256  -- load value 256 to A - begin of stack
 # 2. D=A   -- put 256 in register D
 # 3. @SP   -- SP to A
@@ -150,8 +150,8 @@ stack_unary_arithmetic_command = "@SP\nA=M\nA=A-1\nM={operator}M\n"
 
 # compare arithmetic (comparers are JGT,JLT,JEQ)
 stuck_compare_arithmetic_command = "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@LABEL_{x}\nD;{" \
-                                   "comparer}\n@SP\nA=M-1\nM=0\n@END_{y}\n0;JMP\n(LABEL_{x})\n@SP\nA=M-1\nM=-1\n(" \
-                                   "END_{y})\n "
+                                   "comparer}\n@SP\nA=M-1\nM=0\n@END_{x}\n0;JMP\n(LABEL_{x})\n@SP\nA=M-1\nM=-1\n(" \
+                                   "END_{x})\n "
 # 1. @SP          -- load SP
 # 2. M=M-1        -- reduce SP tp previous cell in stack (SP--)
 # 3. A=M          -- A = M[SP]
@@ -163,10 +163,10 @@ stuck_compare_arithmetic_command = "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@LABEL_{
 # 9. @SP          -- else - load SP
 # 10. A=M-1       -- A = M[SP]
 # 11. M=0         -- M[M[SP]] = 0 - false
-# 12. @END_{y}    -- load end into A
+# 12. @END_{x}    -- load end into A
 # 13. 0;JMP       -- jump to end
 # 14. (LABEL_{x}) -- definition of label
 # 15. @SP         -- load SP
 # 16. A=M-1       -- A = M[SP]
 # 17. M=-1        -- M[M[SP]] = 1 - true
-# 18. (END_{y})	  -- end label
+# 18. (END_{x})	  -- end label
