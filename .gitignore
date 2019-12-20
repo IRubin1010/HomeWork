@@ -290,3 +290,5 @@ __pycache__/
 web engineering/ex3/package-lock.json
 
 compilers/venv/
+
+jack-compiler/venv/
