@@ -1,0 +1,28 @@
+    <div class="users-plus-icon" style="margin-top: -2vmax;">
+        <i class="fa fa-repeat" onclick="refreshUsers()"></i>
+        <i class="fa fa-plus-circle" onclick="addUserModal()"></i>
+    </div>
+<div class="users-table">
+    <table class="table table-hover table-responsive-xl">
+        <thead>
+        <tr>
+            <th scope="col">Product image</th>
+            <th scope="col" style="padding-left: 50px;">description</th>
+            <th scope="col">price</th>
+            <th scope="col">catagory</th>
+        </tr>
+        </thead>
+        <tbody id="products-data">
+        <% products.forEach(function (d) { %>
+            <tr id="users-table-row">
+                <td style="width: 15%;"><img src="data:image/png;base64, <%- d.image %>" style="max-height:100%; max-width:100%"></td>
+                <td style="padding-left: 50px;"><%- d.description %></td>
+                <td><%- d.price %></td>
+                <td><%- d.catagory %></td>
+                <td class="pencil-icon users-table-icon" id="edit-product"><i class="fa fa-pencil" onclick="editProduct(this)"></i></td>
+                <td class="delete-icon users-table-icon" id="edit-user"><i class="fa fa-trash" onclick="deleteUser(this)"></i></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
