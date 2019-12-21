@@ -1,12 +1,11 @@
 let express = require('express');
 let router = express.Router();
-//let bread = require('../data/products/bread');
-let cheese = require('../data/products/cheese');
-let vegetables = require('../data/products/vegetables');
-let fruits = require('../data/products/fruits');
-let meat = require('../data/products/meat');
 let authService = require('../BL/authService');
 let productRepository = require('../repositories/productRepository');
+var multer = require('multer');
+var fs = require("fs");
+const download = require('image-downloader');
+let path = './public/images';
 
 router.use(authService.checkLoggedIn);
 
@@ -35,6 +34,78 @@ router.get('/productsData', async function (req, res) {
         template: "productManage.ejs"
     });
 });
+
+var uploadImgHandler = multer({
+    storage: multer.diskStorage
+        ({
+            destination: function (req, file, callback) {
+                callback(null, path);
+            },
+            filename: function (req, file, callback) {
+                callback(null, file.originalname);
+            }
+        })
+}).single('product-image');
+
+router.post('/add', authService.checkAdminOrWorker,uploadImgHandler, async function (req, res) {
+    try {
+        let url = req.body.product.imageUrl;
+        let product = req.body.product;
+        let isNotValidProduct = await productRepository.validetProduct(product);
+        if (isNotValidProduct !== null) {
+            res.sendStatus(403);
+        } else {
+            imageTempPath = await downloadImage({ url: url, dest: path })
+            let mimetype = 'image/jpeg';
+            try {
+                await saveImage(imageTempPath, req.body.product, mimetype, res);
+                res.status(200).send('OK');
+            } catch (err) {
+                console.log('ERROR: ' + err.message);
+                res.status(500).send('ERROR');
+            } finally {
+                // Remove image from images folder
+                fs.unlinkSync(imageTempPath);
+            }
+        }
+    } catch (err) { // TODO: send the error message and show it to the user...
+        console.log(err.message)
+        res.status(500).send(err.message);
+    }
+});
+
+const downloadImage = async (options) => {
+    try {
+        const { filename, image } = await download.image(options);
+        console.log(`Downloading image: ${filename} finish successfully.`);
+        return filename;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const saveImage = async (tempPath, details, mimetype, res) => {
+    let fileContent = fs.readFileSync(tempPath);
+    let encodeFile = fileContent.toString('base64');
+    let image = {
+        contentType: mimetype,
+        data: new Buffer(encodeFile, 'base64')
+    };
+
+    let product = {
+        description: details.description,
+        price: details.price,
+        image: image,
+        catagory: details.catagory
+    };
+
+    let isProductAdded = await productRepository.addProduct(product);
+    if(!isProductAdded){
+        res.sendStatus(500);
+    } else {
+        res.sendStatus(200);
+    }
+};
 
 router.post('/update', authService.checkAdminOrWorker, async function (req, res) {
 

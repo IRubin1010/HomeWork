@@ -1,0 +1,54 @@
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel"
+    aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-brand row">
+                    <div class="col-4">
+                        <img src="images/brand-logo.png">
+                    </div>
+                    <div class="align-self-center">
+                        <h1>SuperStore</h1>
+                        <h2>Add Product</h2>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="add-product-description" class="col-form-label">Description</label>
+                        <input type="text" class="form-control" id="add-product-description">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-product-price" class="col-form-label">Price</label>
+                        <input type="text" class="form-control" id="add-product-price">
+                    </div>
+                    <div class="form-group">
+                        <label for="add-product-catagory" class="col-form-label" id="meir">Catagory</label>
+                        <select class="form-control" id="add-product-catagory">
+                            <option value="bread">Bread</option>
+                            <option value="cheese">Cheese</option>
+                            <option value="meat">Meat</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="vegetables">Vegetables</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-product-imageUrl" class="col-form-label">URL to download image</label>
+                        <input type="text" class="form-control" id="add-product-imageUrl">
+                    </div>
+                    <div class="form-group files">
+                        <input type="file" id="add-product-image" name="product-img" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-submit" id="btn-add-product">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>

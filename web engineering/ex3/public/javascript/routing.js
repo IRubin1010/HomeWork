@@ -257,11 +257,11 @@ $(document).ready(async function () {
     $('a[href="#Manage-Products"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
         console.log("Manage-Products")
-        await loadProducts();
+        await loadManageProducts();
     });
 });
 
-async function loadProducts() {
+async function loadManageProducts() {
     $(".cover").show();
     let userRole = await getUserRole();
     let resJson;

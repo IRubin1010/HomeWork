@@ -1,3 +1,67 @@
+async function refreshProducts() {
+    await loadProducts();
+}
+
+async function addProductModal() {
+    $('#addProductModal').modal('show');
+    removeErrMsg();
+
+}
+
+$(document).ready(function () {
+    $('#btn-add-product').on("click", async function () {
+        let modal = $("#addProductModal");
+        let description = modal.find('#add-product-description').val();
+        let price = modal.find('#add-product-price').val();
+        let catagory = modal.find('#add-product-catagory').val();
+        let imageUrl = modal.find('#add-product-imageUrl').val();
+
+        if (description === "" || price === "" || catagory === "") {
+            removeErrMsg();
+            $(".modal-body").prepend(`<p style="color: red" id="errMsg">One or more of the fields is empty. All fields must be filled in</p>`);
+        } else {
+            let product = {
+                description: description,
+                price: price,
+                catagory: catagory,
+                imageUrl: imageUrl
+            };
+
+            let res = await fetch("/products/add" + window.location.search, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    product: product,
+                })
+            });
+
+            if (res.status === 403) {
+                removeErrMsg();
+                $(".modal-body").prepend(`<p style="color: red" id="errMsg">The product already exists in the system</p>`);
+            } else {
+                if (res.status !== 200) {
+                    if (!$("#errMsg").length) {
+                        $(".modal-body").prepend(`<p style="color: red" id="errMsg">an error has occurred please try again</p>`);
+                    }
+                } else {
+                    $('#exampleModal').modal('hide');
+                    window.location.reload();
+                }
+            }
+        }
+    })
+});
+
+// empty modal before exit
+$(document).ready(function () {
+    $('#addProductModal').on('hide.bs.modal', function () {
+        $(".form-control").val('');
+        removeErrMsg()
+    })
+});
+
 
 function editProduct(caller) {
 

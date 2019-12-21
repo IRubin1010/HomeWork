@@ -3,7 +3,7 @@ let productDb = require('../model')('product');
 
 async function getProducts(){
     try {
-        let dbProducts =  await productDb.find({}).exec();
+        let dbProducts =  await productDb.find({}).sort('catagory').exec();
         let products = dbProducts.map( product => {
             return {
                 description: product.description,
@@ -37,6 +37,16 @@ async function getBreads(){
     }
 }
 
+async function addProduct (product){
+    try{
+    let createdProduct = await productDb.CREATE(product);
+    console.log(`A new product created: ${createdProduct}`);
+    return true;
+    }catch (err) {
+        console.log(err);
+        return false;
+    }
+};
 
 async function updateProduct (product){
     try{
@@ -49,6 +59,20 @@ async function updateProduct (product){
     }
 };
 
+async function validetProduct (productToVlidate) {
+    try {
+        let product =  await productDb.findOne({description: productToVlidate.description}).exec();
+        return product;
+    }catch (err) {
+        console.log(err);
+        return false;
+    }
+};
+
+module.exports.validetProduct = validetProduct;
+module.exports.addProduct = addProduct;
 module.exports.getBreads = getBreads;
 module.exports.getProducts = getProducts;
 module.exports.updateProduct = updateProduct;
+
+

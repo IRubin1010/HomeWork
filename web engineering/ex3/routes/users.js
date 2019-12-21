@@ -39,7 +39,7 @@ router.post('/add', authService.checkAdminOrWorker, async function (req, res) {
 
     let user = req.body.user;
     let isNotValidUser = await userRepository.validetUser(user);
-    if (isNotValidUser !== undefined) {
+    if (isNotValidUser !== null) {
         res.sendStatus(403);
     } else {
         let isUserAdded = await userRepository.adduser(user);
