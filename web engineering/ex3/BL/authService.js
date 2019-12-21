@@ -5,7 +5,7 @@ getUserRole = async function(userName, password){
     let userRole = undefined;
     if (userName !== undefined && password !== undefined) {
         let user = await userRepository.getUser(userName, password);
-        if (user !== undefined) {
+        if (user !== undefined && user !== null) {
             userRole = user.role;
         }
     }

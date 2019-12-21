@@ -3,11 +3,11 @@ function editProduct(caller) {
 
     let tableRow = $(caller).closest('tr');
     let product = getProductFromRow(tableRow);
-    
+
     $("#edit-product-description").val(product.description);
     $("#edit-product-price").val(product.price);
-    $("#edit-product-image").val(product.image);
     $("#edit-product-catagory").val(product.catagory);
+    $("#edit-product-image").attr("src", product.image);
 
     $('#editProductModal').modal('show');
 }
@@ -62,9 +62,17 @@ function getProductFromRow(row) {
     let productFieldsArray = [ "image", "description", "price", "catagory"];
 
     row.find('td').each(function (i) {
-        let field = $(this).text();
-        if (field !== "") {
-            product[productFieldsArray[i]] = field;
+        let img = $(this).find("img:first");
+        if(img.length > 0)
+        {
+            let imgSource = img[0].src;
+            product[productFieldsArray[i]] = imgSource;
+        }
+        else{
+            let field = $(this).text();
+            if (field !== "") {
+                product[productFieldsArray[i]] = field;
+            }
         }
 
     });

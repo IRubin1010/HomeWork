@@ -26,10 +26,6 @@ module.exports.getUsers = async () => {
 module.exports.getUser = async function (userName, password) {
     try{
         let user = await userDb.findOne({userName: userName, password: password, state: "active"}).exec();
-        console.log("-------------------------------");
-
-        console.log(user);
-        console.log(user.userName);
 
         return user;
     }catch (err) {
