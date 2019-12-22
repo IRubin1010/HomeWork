@@ -149,7 +149,7 @@ stack_unary_arithmetic_command = "@SP\nA=M\nA=A-1\nM={operator}M\n"
 # 7. M={operator}M -- M[SP - 1] = op M[SP - 1] (where op is -,!)
 
 # compare arithmetic (comparers are JGT,JLT,JEQ)
-stuck_compare_arithmetic_command = "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@LABEL_{x}\nD;{" \
+stack_compare_arithmetic_command = "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@LABEL_{x}\nD;{" \
                                    "comparer}\n@SP\nA=M-1\nM=0\n@END_{x}\n0;JMP\n(LABEL_{x})\n@SP\nA=M-1\nM=-1\n(" \
                                    "END_{x})\n "
 # 1. @SP          -- load SP
