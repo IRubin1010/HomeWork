@@ -76,10 +76,10 @@ def tokenize_directory(directory_to_tokenize):
 
 
 def tokenize_file(file_to_tokenize_path_name):
-    file_name_path_name = file_to_tokenize_path_name[:-5] + "_T.xml"
+    output_file_path_name = file_to_tokenize_path_name[:-5] + "_T.xml"
 
     with open(file_to_tokenize_path_name, 'r') as input_file:
-        with open(file_name_path_name, 'w') as output_file:
+        with open(output_file_path_name, 'w') as output_file:
             output_file.write("<tokens>\n")
             for line in input_file:
 
