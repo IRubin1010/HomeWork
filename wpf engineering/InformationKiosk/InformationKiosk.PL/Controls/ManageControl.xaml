@@ -8,7 +8,6 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:Nevigation="clr-namespace:InformationKiosk.PL.Nevigation"
              mc:Ignorable="d" 
-             Height="650" Width="1200"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=Manage}">
 
     <UserControl.Resources>
@@ -20,7 +19,7 @@
     <materialDesign:DialogHost Identifier="ManageRootDialog">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Command="{StaticResource NevigatorCommand}" Style="{DynamicResource MaterialDesignToolButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Height="50" Width="50" ToolTip="Logout">
@@ -32,10 +31,10 @@
             <Label Content="Manage Stores" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="700"/>
+                    <ColumnDefinition Width="850"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <materialDesign:Card Grid.Column="0" Margin="20,20,0,0" Height="500">
+                <materialDesign:Card Grid.Column="0" Margin="20,20,0,0" Height="650">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -50,28 +49,28 @@
                             <ListView.View>
                                 <GridView>
                                     <GridView.Columns>
-                                        <GridViewColumn Width="120" Header="Name">
+                                        <GridViewColumn Width="130" Header="Name">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding Name}" TextAlignment="Left" VerticalAlignment="Center"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Width="130" Header="Address">
+                                        <GridViewColumn Width="230" Header="Address">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding Location.Address}" TextAlignment="Left" VerticalAlignment="Center"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Width="150" Header="PhoneNumber">
+                                        <GridViewColumn Width="160" Header="PhoneNumber">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding PhoneNumber}" TextAlignment="Left" VerticalAlignment="Center"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Width="150" Header="Website">
+                                        <GridViewColumn Width="160" Header="Website">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding Website}" TextAlignment="Left" VerticalAlignment="Center"/>
@@ -99,7 +98,7 @@
                         </Button>
                     </Grid>
                 </materialDesign:Card>
-                <Grid Name="ControlPlaceHolder" Grid.Column="1" Margin="30,20,30,0" Width="440" Height="500" VerticalAlignment="Top"/>
+                <Grid Name="ControlPlaceHolder" Grid.Column="1" Margin="30,20,30,0" Width="600" Height="650" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
     </materialDesign:DialogHost>

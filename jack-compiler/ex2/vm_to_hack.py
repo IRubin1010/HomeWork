@@ -1,30 +1,48 @@
 import os
-import ex1.hack_commands as commands
-import ex1.helpers as helpers
+import ex2.hack_commands as commands
+import ex2.helpers as helpers
 
+compare_arithmetic_label_counter = 0
+return_address_counter = 0
 
-def compile_vm_to_hack(file_to_compile):
-    if os.path.isfile(file_to_compile):
-        file_splitted = os.path.splitext(file_to_compile)
+def compile_vm_to_hack(file_or_directory_to_compile):
+    if os.path.isfile(file_or_directory_to_compile):
+        file_splitted = os.path.splitext(file_or_directory_to_compile)
         if file_splitted[1] == ".vm":
             file_name = file_splitted[0]
-            output_file = "{}.asm".format(file_name)
-            parse_vm_to_hack(file_to_compile, output_file)
+            output_file_name = "{}.asm".format(file_name)
+            output_file = open(output_file_name, 'w')
+            output_file.write("//bootstrap\n")
+            output_file.write(commands.stack_init_commands)
+            output_file.close()
+            parse_vm_to_hack(file_or_directory_to_compile, output_file_name)
         else:
-            print("file {} is not a .vm file".format(file_to_compile))
+            print("file {} is not a .vm file".format(file_or_directory_to_compile))
+
+    elif os.path.isdir(file_or_directory_to_compile):
+        output_file_name = "{path}\\{file_name}.asm".format(path=file_or_directory_to_compile,
+                                                            file_name=os.path.basename(file_or_directory_to_compile))
+        output_file = open(output_file_name, 'w')
+        output_file.write("//bootstrap\n")
+        output_file.write(commands.stack_init_commands)
+        output_file.close()
+        for file in os.listdir(file_or_directory_to_compile):
+            file_splitted = os.path.splitext(file)
+            if file_splitted[1] == ".vm":
+                print("converting:  " + file_or_directory_to_compile + '\\' + file)
+                parse_vm_to_hack(file_or_directory_to_compile + '\\' + file, output_file_name)
     else:
-        print("no such file{}".format(file_to_compile))
+        print("no such file or directory {}".format(file_or_directory_to_compile))
 
 
 def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
-    compare_arithmetic_label_counter = 0
     file_name = os.path.basename(file_to_parse_name_path)[:-3]
 
-    with open(file_to_parse_name_path, 'r') as input_file:
-        with open(output_file_name_path, 'w') as output_file:
+    global compare_arithmetic_label_counter
+    global return_address_counter
 
-            output_file.write("//bootstrap\n")
-            output_file.write(commands.stack_init_commands)
+    with open(file_to_parse_name_path, 'r') as input_file:
+        with open(output_file_name_path, 'a') as output_file:
 
             for line in input_file:
                 command = line.split()
@@ -83,6 +101,32 @@ def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
                         output_file.write("\n//not\n")
                         output_file.write(commands.stack_unary_arithmetic_command.format(operator="!"))
 
+                    elif arithmetic_command == "return":
+                        output_file.write("\n//return\n")
+                        output_file.write(commands.return_command)
+
+                    else:
+                        raise Exception("syntax error at {}.".format(formatted_command))
+
+                elif command_length == 2:
+                    command_name = command[0]
+                    command_parameter = command[1]
+
+                    if command_name == "label":
+                        output_file.write("\n//{}\n".format(formatted_command))
+                        output_file.write(
+                            commands.label_by_file_name_command.format(file_name=file_name, label_name=command_parameter))
+
+                    elif command_name == "goto":
+                        output_file.write("\n//{}\n".format(formatted_command))
+                        output_file.write(
+                            commands.go_to_label_by_file_name_command.format(file_name=file_name, label_name=command_parameter))
+
+                    elif command_name == "if-goto":
+                        output_file.write("\n//{}\n".format(formatted_command))
+                        output_file.write(
+                            commands.if_go_to_label_command.format(file_name=file_name, label_name=command_parameter))
+
                     else:
                         raise Exception("syntax error at {}.".format(formatted_command))
 
@@ -114,11 +158,11 @@ def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
 
                         elif command_type == 'pointer':
 
-                            if command_parameter == 0:
+                            if command_parameter == "0":
                                 output_file.write("\n//{}\n".format(formatted_command))
                                 output_file.write(commands.stack_push_pointer_0_command)
 
-                            elif command_parameter == 1:
+                            elif command_parameter == "1":
                                 output_file.write("\n//{}\n".format(formatted_command))
                                 output_file.write(commands.stack_push_pointer_1_command)
 
@@ -151,11 +195,11 @@ def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
 
                         elif command_type == 'pointer':
 
-                            if command_parameter == 0:
+                            if command_parameter == "0":
                                 output_file.write("\n//{}\n".format(formatted_command))
                                 output_file.write(commands.stack_pop_pointer_0_command)
 
-                            elif command_parameter == 1:
+                            elif command_parameter == "1":
                                 output_file.write("\n//{}\n".format(formatted_command))
                                 output_file.write(commands.stack_pop_pointer_1_command)
 
@@ -165,6 +209,20 @@ def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
                         else:
                             raise Exception("syntax error at {}.".format(formatted_command))
 
+                    elif command_name == "function":
+                        function_name = command_type
+                        output_file.write("\n//{}\n".format(formatted_command))
+                        output_file.write(commands.function_command.format(function_name=function_name,
+                                                                           number_of_local_variables=command_parameter))
+
+                    elif command_name == "call":
+                        function_name = command_type
+                        output_file.write("\n//{}\n".format(formatted_command))
+                        output_file.write(commands.call_command.format(function_name=function_name,
+                                                                       x=return_address_counter,
+                                                                       function_number_of_arguments=command_parameter))
+                        return_address_counter += 1
+
                     else:
                         raise Exception("syntax error at {}.".format(formatted_command))
 
@@ -172,4 +230,4 @@ def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
                     raise Exception("syntax error at {}.".format(formatted_command))
 
 
-compile_vm_to_hack(os.getcwd() + "\\tests\\MemoryAccess\\BasicTest\\BasicTest.vm")
+compile_vm_to_hack(os.getcwd() + "\\tests\\ProgramFlow\\BasicLoop")

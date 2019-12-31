@@ -9,7 +9,6 @@
              xmlns:Nevigation="clr-namespace:InformationKiosk.PL.Nevigation"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
-             Height="530" Width="1020"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=Search}">
 
     <UserControl.Resources>
@@ -20,18 +19,18 @@
 
     <Grid Background="White" Margin="0 -13 0 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="230"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0"  Background="#f5f5f5">
-            <StackPanel Orientation="Vertical" Margin="10 15">
-                <TextBox Text="{Binding SearchIceCreamText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" MaxWidth="180" materialDesign:HintAssist.Hint="Ice Cream Name" Margin="0 30 0 0"/>
-                <Label Content="Filters" Margin="-4 40 0 5" FontSize="20"/>
+            <StackPanel Orientation="Vertical" Margin="10 75 10 0">
+                <TextBox Text="{Binding SearchIceCreamText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" MaxWidth="220" materialDesign:HintAssist.Hint="Ice Cream Name" Margin="0 30 0 0"/>
+                <Label Content="Filters" Margin="-4 60 0 5" FontSize="20"/>
                 <StackPanel Orientation="Horizontal">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="70" Height="1" Margin="0 0 5 0 "/>
-                    <Label Content="Fat" />
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="75" Height="1" Margin="5 0 0 0"/>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="80" Height="1" Margin="0 0 5 0 "/>
+                    <Label Content="Fat" FontSize="15"/>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="92" Height="1" Margin="5 0 0 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                     <CheckBox x:Name="FatCheckBox" IsChecked="{Binding FatChecked}" Margin="0 0 0 0"/>
@@ -48,10 +47,10 @@
                 </StackPanel>
                 <Slider x:Name="FatSlider" IsSnapToTickEnabled="True"  TickFrequency="5" Orientation="Horizontal" Minimum="0" Maximum="500" Value="{Binding FatSliderValue}" IsEnabled="{Binding ElementName=FatCheckBox, Path=IsChecked}"/>
 
-                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="60" Height="1" Margin="0 0 5 0 "/>
-                    <Label Content="Protein" />
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="65" Height="1" Margin="5 0 0 0"/>
+                <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="75" Height="1" Margin="0 0 5 0 "/>
+                    <Label Content="Protein" FontSize="15"/>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="85" Height="1" Margin="5 0 0 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                     <CheckBox x:Name="ProteinCheckBox" IsChecked="{Binding ProteinChecked}" Margin="0 0 0 0"/>
@@ -68,10 +67,10 @@
                 </StackPanel>
                 <Slider x:Name="ProteinSlider" IsSnapToTickEnabled="True"  TickFrequency="5" Orientation="Horizontal" Minimum="0" Maximum="500" Value="{Binding ProteinSliderValue}" IsEnabled="{Binding ElementName=ProteinCheckBox, Path=IsChecked}"/>
 
-                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="60" Height="1" Margin="0 0 5 0 "/>
-                    <Label Content="Eergy" />
-                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="65" Height="1" Margin="5 0 0 0"/>
+                <StackPanel Orientation="Horizontal" Margin="0 40 0 0">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="75" Height="1" Margin="0 0 5 0 "/>
+                    <Label Content="Energy" FontSize="15"/>
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="85" Height="1" Margin="5 0 0 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                     <CheckBox x:Name="EergyCheckBox" IsChecked="{Binding EnergyChecked}" Margin="0 0 0 0"/>
@@ -104,29 +103,29 @@
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Width="350" Margin="15" Height="180" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Stretch">
+                    <materialDesign:Card Width="470" Margin="15" Height="200" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="170"/>
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Image Margin="10" Stretch="UniformToFill" Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Height="130"/>
+                            <Image Margin="10" Stretch="UniformToFill" Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Height="170"/>
                             <StackPanel Grid.Column="1" Margin="10 10">
-                                <Label Content="{Binding Name}" FontSize="20" Margin="0 5"/>
+                                <Label Content="{Binding Name}" FontSize="23" FontWeight="DemiBold" Margin="0 5 0 15"/>
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Width="20" Height="20" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="FileDocument"/>
                                         <TextBlock TextWrapping="Wrap" Text="{Binding Description}" FontSize="16" Margin="7 0 0 10"/>
                                     </StackPanel>
                                     <materialDesign:RatingBar Grid.Row="1" Value="{Binding Score, Mode=TwoWay}" Margin="0 0 0 5"/>
-                                    <Label Content="Nutrients in 100g" FontSize="15" FontWeight="DemiBold" Margin="0 0 0 -7"/>
+                                    <Label Content="Nutrients in 100g" FontSize="18" FontWeight="DemiBold" Margin="0 0 0 -7"/>
                                     <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
-                                        <Label Content="Energy:" FontSize="11"/>
-                                        <Label Content="{Binding Nutrients.Energy}" FontSize="11"/>
-                                        <Label Content="Fats:" FontSize="11"/>
-                                        <Label Content="{Binding Nutrients.Fats}" FontSize="11"/>
-                                        <Label Content="Protein:" FontSize="11"/>
-                                        <Label Content="{Binding Nutrients.Protein}" FontSize="11"/>
+                                        <Label Content="Energy:" FontSize="15"/>
+                                        <Label Content="{Binding Nutrients.Energy}" FontSize="15"/>
+                                        <Label Content="Fats:" FontSize="15"/>
+                                        <Label Content="{Binding Nutrients.Fats}" FontSize="15"/>
+                                        <Label Content="Protein:" FontSize="15"/>
+                                        <Label Content="{Binding Nutrients.Protein}" FontSize="15"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
