@@ -35,30 +35,39 @@ router.get('/productsData', async function (req, res) {
     });
 });
 
-var uploadImgHandler = multer({
-    storage: multer.diskStorage
-        ({
-            destination: function (req, file, callback) {
-                callback(null, path);
-            },
-            filename: function (req, file, callback) {
-                callback(null, file.originalname);
-            }
-        })
-}).single('product-image');
+let storage = multer.memoryStorage();
+let upload = multer({ storage: storage });
 
-router.post('/add', authService.checkAdminOrWorker,uploadImgHandler, async function (req, res) {
+
+router.post('/add',upload.single('myImage'), async function (req, res) {
     try {
-        let url = req.body.product.imageUrl;
-        let product = req.body.product;
+        let body = req.body;
+        let url = body.ImageUrl;
+        let file = req.file;
+
+        //let url = req.body.product.imageUrl;
+        //let file = req.body.product.imageFile;
+        let product = {
+            description: body.Description,
+            price: body.Price,
+            catagory: body.Catagory,
+
+        }
         let isNotValidProduct = await productRepository.validetProduct(product);
         if (isNotValidProduct !== null) {
             res.sendStatus(403);
         } else {
-            imageTempPath = await downloadImage({ url: url, dest: path })
-            let mimetype = 'image/jpeg';
+            let imageTempPath = file && file.buffer;
+            if (file === undefined || file === ''){
+                imageTempPath = await downloadImage({ url: url, dest: path })
+            }
+             //If no file has been uploaded - try downloading from URL.
+            !file && (imageTempPath = await downloadImage({ url: url, dest: path }));
+            let mimetype = file ? file.mimetype : 'image/jpeg';
+
+           //let mimetype = 'image/jpeg';
             try {
-                await saveImage(imageTempPath, req.body.product, mimetype, res);
+                await saveImage(imageTempPath, product, mimetype, res,file);
                 res.status(200).send('OK');
             } catch (err) {
                 console.log('ERROR: ' + err.message);
@@ -84,8 +93,13 @@ const downloadImage = async (options) => {
     }
 };
 
-const saveImage = async (tempPath, details, mimetype, res) => {
-    let fileContent = fs.readFileSync(tempPath);
+const saveImage = async (tempPath, details, mimetype, res,file) => {
+    let fileContent;
+    if (file === undefined) {
+        fileContent = fs.readFileSync(tempPath);
+    }else{
+        fileContent = tempPath;
+    }
     let encodeFile = fileContent.toString('base64');
     let image = {
         contentType: mimetype,
