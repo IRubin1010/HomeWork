@@ -2,21 +2,25 @@
     {
         "description": "Grain & Flax",
         "price": "10",
-        "image": "Bread_Grain+Village.png"
+        "image": "Bread_Grain+Village.png",
+        "catagory": "bread"
     },
     {
         "description": "Small Valley Miche",
         "price": "20",
-        "image": "bread_Small+Valley+Miche.png"
+        "image": "bread_Small+Valley+Miche.png",
+        "catagory": "bread"
     },
     {
         "description": "C’ville Sourdough",
         "price": "5",
-        "image": "bread_Cville+Sourdough.png"
+        "image": "bread_Cville+Sourdough.png",
+        "catagory": "bread"
     },
     {        
         "description": "Gluten-Free Bread",
         "price": "12",
-        "image": "bread_Gluten+Free+Bread.png"
+        "image": "bread_Gluten+Free+Bread.png",
+        "catagory": "bread"
     }
 ]

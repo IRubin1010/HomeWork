@@ -2,11 +2,13 @@
     {
         "description": "Culifllower",
         "price": "7.9",
-        "image": "vegetables_culifllower.png"
+        "image": "vegetables_culifllower.png",
+        "catagory": "vegetables"
     },
     {
         "description": "Cabbage",
         "price": "3.5",
-        "image": "vegetables_cabbage.png"
+        "image": "vegetables_cabbage.png",
+        "catagory": "vegetables"
     }
 ]

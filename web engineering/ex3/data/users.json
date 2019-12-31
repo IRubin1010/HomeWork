@@ -18,6 +18,6 @@
     "password": "rand",
     "mail": "moshe@gmail.com",
     "role": "client",
-    "state": "active"
+    "state": "deleted"
   }
 ]

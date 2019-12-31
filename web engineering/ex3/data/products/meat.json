@@ -2,16 +2,19 @@
     {
         "description": "Entrecote",
         "price": "150",
-        "image": "meat_antirkot.Png"
+        "image": "meat_antirkot.Png",
+        "catagory": "meat"
     },
     {
         "description": "Muscle meat",
         "price": "98",
-        "image": "meat_Buffalo_Short_Ribs.png"
+        "image": "meat_Buffalo_Short_Ribs.png",
+        "catagory": "meat"
     },
     {
         "description": "Shoulder 5",
         "price": "105",
-        "image": "meat_sholder5.png"
+        "image": "meat_sholder5.png",
+        "catagory": "meat"
     }
 ]

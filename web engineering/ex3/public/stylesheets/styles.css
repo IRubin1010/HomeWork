@@ -221,6 +221,8 @@ html {
     display: block; }
   .users-data .users-table #users-table-row:hover td {
     vertical-align: sub; }
+    .users-data .users-table #users-table-row td {
+      vertical-align: sub; }
 
 .cover {
   display: none;

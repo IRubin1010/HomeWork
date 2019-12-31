@@ -32,8 +32,15 @@
             </li>
             <% } %>
             <% if (userRole === "administrator" || userRole === "worker") { %>
-                <li class="nav-item active">
-                    <a class="nav-link" id="nav-stores" href="#administration">Administration</a>
+                <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Administration
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#Manage-People">Manage People</a>
+                        <a class="dropdown-item" href="#Manage-Products">Manage Products</a>
+                    </div>
                 </li>
             <% } %>
         </ul>
