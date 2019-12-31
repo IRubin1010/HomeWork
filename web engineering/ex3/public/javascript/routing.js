@@ -11,8 +11,12 @@ $(document).ready(async function () {
             await loadProducts();
             return;
         }
-        if (replacedHash === "administration") {
+        if (replacedHash === "Manage-People") {
             await loadUsers();
+            return;
+        }
+        if (replacedHash === "Manage-Products") {
+            await loadProducts();
             return;
         }
         $("#middle-page").load(replacedHash + ".ejs");
@@ -207,15 +211,15 @@ function scrollToHash() {
 }
 
 $(document).ready(async function () {
-    $('a[href="#administration"]').on("click", async function () {
+    $('a[href="#Manage-People"]').on("click", async function () {
         $('.navbar-collapse').collapse('hide');
+        console.log("manage people")
         await loadUsers();
     });
 });
 
 async function loadUsers() {
     $(".cover").show();
-    let search = new URLSearchParams(window.location.search);
     let userRole = await getUserRole();
     let resJson;
     if (userRole === undefined || userRole === "client") {
@@ -245,6 +249,46 @@ async function loadUsers() {
     let html = compiledTemplate(data);
     await setTimeout(function () {
         $("#users").html(html);
+        $(".cover").hide();
+    }, 1500);
+}
+
+$(document).ready(async function () {
+    $('a[href="#Manage-Products"]').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+        console.log("Manage-Products")
+        await loadManageProducts();
+    });
+});
+
+async function loadManageProducts() {
+    $(".cover").show();
+    let userRole = await getUserRole();
+    let resJson;
+    if (userRole === undefined || userRole === "client") {
+        $(".cover").hide();
+        return;
+    } else {
+        let res = await fetch("/products/productsData" + window.location.search);
+        resJson = await res.json();
+    }
+    let products = resJson.products;
+    let middlePage = resJson.middlePage;
+    let templatePage = resJson.template;
+
+    $("#middle-page").load(middlePage);
+
+    let template = await jQuery.get(`templates/${templatePage}`);
+    let compiledTemplate = ejs.compile(template, {});
+
+    console.log(products)
+    let data = {
+        products: products,
+    };
+
+    let html = compiledTemplate(data);
+    await setTimeout(function () {
+        $("#productsManage").html(html);
         $(".cover").hide();
     }, 1500);
 }
