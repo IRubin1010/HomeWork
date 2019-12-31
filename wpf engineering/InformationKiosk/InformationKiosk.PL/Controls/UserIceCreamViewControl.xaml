@@ -7,21 +7,16 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
-             Height="530" Width="1020"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=UserIceCreamView}">
     <Grid>
-        <!--<Grid.RowDefinitions >
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <materialDesign:Card Width="230" Height="470" VerticalAlignment="Top" Margin="20 20 0 0">
+        <materialDesign:Card Width="300" Height="630" Margin="25 25 0 0" >
             <StackPanel Margin="15 0 15 0">
-                <Image Source="{Binding IceCream.Store.Img, Converter={StaticResource BitmapToImageConverter}}" Height="140"  Margin="0 15 0 10" Stretch="Fill" HorizontalAlignment="Left"/>
-                <Label Content="{Binding IceCream.Store.Name}" FontSize="30"/>
+                <Image Source="{Binding IceCream.Store.Img, Converter={StaticResource BitmapToImageConverter}}" Height="200"  Margin="0 15 0 10" Stretch="Fill" HorizontalAlignment="Left"/>
+                <Label Content="{Binding IceCream.Store.Name}" FontSize="30" Margin="0 0 0 20" FontWeight="DemiBold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -32,53 +27,53 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="Map" VerticalAlignment="Center"/>
-                    <Label Grid.Column="1" Content="{Binding IceCream.Store.Location.Address}" FontSize="12" Margin="7 0 0 0"/>
-                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="1" Kind="TelephoneInTalk" VerticalAlignment="Center"/>
-                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding IceCream.Store.PhoneNumber}" FontSize="12" Margin="7 0 0 0"/>
-                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Kind="InsertLink" VerticalAlignment="Top"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding IceCream.Store.Website}" TextWrapping="WrapWithOverflow" FontSize="12" ToolTip="{Binding IceCream.Store.Website}" Margin="12 0 0 0"/>
+                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="Map" VerticalAlignment="Center" Width="20" Height="20"/>
+                    <Label Grid.Column="1" Content="{Binding IceCream.Store.Location.Address}" FontSize="16" Margin="7 0 0 0"/>
+                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="1" Kind="TelephoneInTalk" VerticalAlignment="Center" Width="20" Height="20"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding IceCream.Store.PhoneNumber}" FontSize="16" Margin="7 0 0 0"/>
+                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Kind="InsertLink" VerticalAlignment="Top" Width="20" Height="20"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding IceCream.Store.Website}" TextWrapping="WrapWithOverflow" FontSize="16" ToolTip="{Binding IceCream.Store.Website}" Margin="12 0 0 0"/>
                 </Grid>
-                <m:Map Language="he" ScaleVisibility="Hidden" Margin="0 30 0 0" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Height="140" ZoomLevel="15.5" Center="{Binding Location, Mode=TwoWay}">
+                <m:Map Language="he" ScaleVisibility="Hidden" Margin="0 40 0 0" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Height="180" ZoomLevel="15.5" Center="{Binding Location, Mode=TwoWay}">
                     <Canvas m:MapLayer.Position="{Binding IceCream.Store.Location.Location}" m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                         <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
                     </Canvas>
                 </m:Map>
             </StackPanel>
         </materialDesign:Card>
-        <materialDesign:Card Grid.Column="1" Height="480" Background="{DynamicResource MaterialDesignBackground}" Margin="40 10 40 10">
+        <materialDesign:Card Grid.Column="1" Height="630" Background="{DynamicResource MaterialDesignBackground}" Margin="40 25 40 10">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding IceCream.Img , Converter={StaticResource BitmapToImageConverter}}" Width="150" Height="150" Margin="30 10"/>
-                    <StackPanel Orientation="Vertical" Width="220" VerticalAlignment="Center">
-                        <Label Content="{Binding IceCream.Name}" FontSize="20" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
-                        <Label Content="{Binding IceCream.Description}" FontSize="15" Margin="0 -7 0 0"/>
+                    <Image Stretch="UniformToFill" Source="{Binding IceCream.Img , Converter={StaticResource BitmapToImageConverter}}" Width="200" Height="200" Margin="20"/>
+                    <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Center">
+                        <Label Content="{Binding IceCream.Name}" FontSize="35" FontWeight="DemiBold" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                        <Label Content="{Binding IceCream.Description}" FontSize="25" Margin="0 10 0 0"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Separator BorderThickness="0.5" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Height="80"/>
+                        <Separator BorderThickness="0.7" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Height="180"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <Label Content="Rating" FontSize="15" FontWeight="DemiBold" Margin="8 0 0 0"/>
+                        <Label Content="Rating" FontSize="25" FontWeight="DemiBold" Margin="8 0 0 0"/>
                         <materialDesign:RatingBar Value="{Binding IceCream.Score}" VerticalAlignment="Center" Margin="10 0 0 0" IsReadOnly="True"/>
-                        <Label Content="Nutrients in 100g" FontSize="15" FontWeight="DemiBold" Margin="10 15 0 -7"/>
+                        <Label Content="Nutrients in 100g" FontSize="20" FontWeight="DemiBold" Margin="10 20 0 -7"/>
                         <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
-                            <Label Content="Energy: "/>
-                            <Label Content="{Binding IceCream.Nutrients.Energy}"/>
-                            <Label Content="Fats: "/>
-                            <Label Content="{Binding IceCream.Nutrients.Fats}"/>
-                            <Label Content="Protein: "/>
-                            <Label Content="{Binding IceCream.Nutrients.Protein}"/>
+                            <Label Content="Energy: " FontSize="15"/>
+                            <Label Content="{Binding IceCream.Nutrients.Energy}" FontSize="15"/>
+                            <Label Content="Fats: " FontSize="15"/>
+                            <Label Content="{Binding IceCream.Nutrients.Fats}" FontSize="15"/>
+                            <Label Content="Protein: " FontSize="15"/>
+                            <Label Content="{Binding IceCream.Nutrients.Protein}" FontSize="15"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                    <StackPanel Orientation="Vertical" Width="250" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Vertical" Width="750" HorizontalAlignment="Center">
                         <Separator BorderThickness="0.5" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                     </StackPanel>
                     <Grid>
-                        <Label Content="Reviews" FontSize="15" FontWeight="DemiBold"/>
-                        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Height="28" Width="28" Command="{Binding Source={StaticResource ViewModelLocator}, Path=UserIceCreamView.RunRateDialogCommand}" CommandParameter="{Binding}" Style="{DynamicResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon Width="22" Height="22" Kind="MessageDraw"  Foreground="{DynamicResource PrimaryHueMidBrush}" ToolTip="Add A Review"/>
+                        <Label Content="Reviews" FontSize="25" FontWeight="DemiBold"/>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Height="35" Width="35" Command="{Binding Source={StaticResource ViewModelLocator}, Path=UserIceCreamView.RunRateDialogCommand}" CommandParameter="{Binding}" Style="{DynamicResource MaterialDesignToolButton}">
+                            <materialDesign:PackIcon Width="25" Height="25" Kind="MessageDraw"  Foreground="{DynamicResource PrimaryHueMidBrush}" ToolTip="Add A Review"/>
                         </Button>
                     </Grid>
                     <ItemsControl ItemsSource="{Binding IceCream.Reviews}">
@@ -89,18 +84,12 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Margin="10" Height="80">
+                                <materialDesign:Card Margin="10" Height="130">
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Width="70" Height="70" Stretch="UniformToFill" Margin="5"/>
+                                        <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Width="110" Height="110" Stretch="UniformToFill" Margin="10 5"/>
                                         <StackPanel Orientation="Vertical" Margin="15 0 0 0" VerticalAlignment="Center">
-                                            <Label Content="{Binding Description}" Margin="-3 0 0 3 "/>
-                                            <materialDesign:RatingBar Value="{Binding Score}"  VerticalAlignment="Center" IsReadOnly="True">
-                                                <materialDesign:RatingBar.RenderTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
-                                                    </TransformGroup>
-                                                </materialDesign:RatingBar.RenderTransform>
-                                            </materialDesign:RatingBar>
+                                            <Label Content="{Binding Description}" Margin="-3 0 0 10 " FontSize="23"/>
+                                            <materialDesign:RatingBar Value="{Binding Score}"  VerticalAlignment="Center" IsReadOnly="True"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </materialDesign:Card>

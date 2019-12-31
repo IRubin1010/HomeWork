@@ -7,36 +7,18 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              mc:Ignorable="d" 
-             Height="530" Width="1020"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=UserStoreView}">
-
-    <UserControl.Resources>
-        <Style x:Key="ratingBar" TargetType="materialDesign:RatingBar" BasedOn="{StaticResource {x:Type materialDesign:RatingBar}}">
-            <Setter Property="ValueItemTemplate">
-                <Setter.Value>
-                    <DataTemplate DataType="system:Int32">
-                        <Viewbox Width="16" Height="16">
-                            <Canvas Width="25" Height="25">
-                                <Path Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                                  Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Control}, Path=Foreground}" />
-                            </Canvas>
-                        </Viewbox>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <materialDesign:Card Width="230" Height="470" VerticalAlignment="Top" Margin="20 20 0 0">
+        <materialDesign:Card Width="300" Height="630" Margin="25 25 0 0">
             <StackPanel Margin="15 0 15 0">
-                <Image Source="{Binding Store.Img, Converter={StaticResource BitmapToImageConverter}}" Height="140"  Margin="0 15 0 10" Stretch="Fill" HorizontalAlignment="Left"/>
-                <Label Content="{Binding Store.Name}" FontSize="30"/>
+                <Image Source="{Binding Store.Img, Converter={StaticResource BitmapToImageConverter}}" Height="200"  Margin="0 15 0 10" Stretch="Fill" HorizontalAlignment="Left"/>
+                <Label Content="{Binding Store.Name}" FontSize="30" Margin="0 0 0 20" FontWeight="DemiBold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -47,14 +29,14 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="Map" VerticalAlignment="Center"/>
-                    <Label Grid.Column="1" Content="{Binding Store.Location.Address}" FontSize="12" Margin="7 0 0 0"/>
-                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="1" Kind="TelephoneInTalk" VerticalAlignment="Center"/>
-                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding Store.PhoneNumber}" FontSize="12" Margin="7 0 0 0"/>
-                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Kind="InsertLink" VerticalAlignment="Top"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Store.Website}" TextWrapping="WrapWithOverflow" FontSize="12" ToolTip="{Binding Store.Website}" Margin="12 0 0 0"/>
+                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="Map" VerticalAlignment="Center" Width="20" Height="20"/>
+                    <Label Grid.Column="1" Content="{Binding Store.Location.Address}" FontSize="16" Margin="7 0 0 0"/>
+                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="1" Kind="TelephoneInTalk" VerticalAlignment="Center" Width="20" Height="20"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="{Binding Store.PhoneNumber}" FontSize="16" Margin="7 0 0 0"/>
+                    <materialDesign:PackIcon Foreground="{DynamicResource PrimaryHueMidBrush}" Grid.Row="2" Kind="InsertLink" VerticalAlignment="Top" Width="20" Height="20"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Store.Website}" TextWrapping="WrapWithOverflow" FontSize="16" ToolTip="{Binding Store.Website}" Margin="12 0 0 0"/>
                 </Grid>
-                <m:Map ScaleVisibility="Hidden" Margin="0 30 0 0" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Height="140" ZoomLevel="15.5" Center="{Binding Location, Mode=TwoWay}">
+                <m:Map ScaleVisibility="Hidden" Margin="0 30 0 0" CredentialsProvider="AttsGkqIHCOIEA11KtQZDphl5bi8lppin64jeg-ZOOhiS4cdHA_EXJwHSbyZi4Xo" Mode="Road" Height="180" ZoomLevel="15.5" Center="{Binding Location, Mode=TwoWay}">
                     <Canvas m:MapLayer.Position="{Binding Store.Location.Location}" m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                         <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
                     </Canvas>
@@ -83,27 +65,27 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" Margin="50 10" Width="650">
+                    <materialDesign:Card Background="{DynamicResource MaterialDesignBackground}" Margin="10 10" Width="850">
                         <StackPanel>
                             <Expander HorizontalAlignment="Stretch" >
                                 <Expander.Header>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="{Binding Img , Converter={StaticResource BitmapToImageConverter}}" Width="70" Height="70" />
-                                        <StackPanel Orientation="Vertical" Margin="10 0 0 0" Width="220">
-                                            <Label Content="{Binding Name}" FontSize="20" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
-                                            <Label Content="{Binding Description}" FontSize="15" Margin="0 -7 0 0"/>
+                                        <Image Source="{Binding Img , Converter={StaticResource BitmapToImageConverter}}" Width="100" Height="100" />
+                                        <StackPanel Orientation="Vertical" Margin="15 0 0 0" Width="300">
+                                            <Label Content="{Binding Name}" FontSize="27" FontWeight="DemiBold" Foreground="{DynamicResource PrimaryHueMidBrush}" Margin="0 10 0 0"/>
+                                            <Label Content="{Binding Description}" FontSize="20" Margin="0 -3 0 0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <Separator BorderThickness="0.5" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                            <Separator BorderThickness="0.8" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                                         </StackPanel>
                                         <materialDesign:RatingBar Value="{Binding Score}" VerticalAlignment="Center" Margin="10 0 0 0" IsReadOnly="True"/>
                                     </StackPanel>
                                 </Expander.Header>
                                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                    <StackPanel Orientation="Vertical" Margin="0 -7" Width="250" HorizontalAlignment="Left">
-                                        <Separator BorderThickness="0.5" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                    <StackPanel Orientation="Vertical"  Width="650" HorizontalAlignment="Center">
+                                        <Separator BorderThickness="0.8" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                                     </StackPanel>
-                                    <Label Content="Nutrients in 100g" FontSize="15" FontWeight="DemiBold" Margin="0 0 0 -7"/>
+                                    <Label Content="Nutrients in 100g" FontSize="20" FontWeight="DemiBold" />
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="Energy: "/>
                                         <Label Content="{Binding Nutrients.Energy}"/>
@@ -112,11 +94,11 @@
                                         <Label Content="Protein: "/>
                                         <Label Content="{Binding Nutrients.Protein}"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Vertical" Margin="0 -3" Width="250" HorizontalAlignment="Left">
-                                        <Separator BorderThickness="0.5" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                                    <StackPanel Orientation="Vertical" Width="650" HorizontalAlignment="Center">
+                                        <Separator BorderThickness="0.8" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                                     </StackPanel>
                                     <Grid>
-                                        <Label Content="Reviews" FontSize="15" FontWeight="DemiBold"/>
+                                        <Label Content="Reviews" FontSize="20" FontWeight="DemiBold"/>
                                         <Button VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0" Height="28" Width="28" Command="{Binding Source={StaticResource ViewModelLocator}, Path=UserStoreView.RunRateDialogCommand}" CommandParameter="{Binding}" Style="{DynamicResource MaterialDesignToolButton}">
                                             <materialDesign:PackIcon Width="22" Height="22" Kind="MessageDraw"  Foreground="{DynamicResource PrimaryHueMidBrush}" ToolTip="Add A Review"/>
                                         </Button>
@@ -131,10 +113,16 @@
                                             <DataTemplate>
                                                 <materialDesign:Card Margin="7">
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Width="50" Height="50" Stretch="UniformToFill"/>
+                                                        <Image Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" Width="70" Height="70" Stretch="UniformToFill"/>
                                                         <StackPanel Orientation="Vertical" Margin="15 0 0 0" VerticalAlignment="Center">
                                                             <Label Content="{Binding Description}" Margin="-3 -5 0 -2 "/>
-                                                            <materialDesign:RatingBar Value="{Binding Score}" Style="{StaticResource ratingBar}"  VerticalAlignment="Center" IsReadOnly="True"/>
+                                                            <materialDesign:RatingBar Value="{Binding Score}" VerticalAlignment="Center" IsReadOnly="True">
+                                                                <materialDesign:RatingBar.RenderTransform>
+                                                                    <TransformGroup>
+                                                                        <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                                                                    </TransformGroup>
+                                                                </materialDesign:RatingBar.RenderTransform>
+                                                            </materialDesign:RatingBar>
                                                         </StackPanel>
                                                     </StackPanel>
                                                 </materialDesign:Card>

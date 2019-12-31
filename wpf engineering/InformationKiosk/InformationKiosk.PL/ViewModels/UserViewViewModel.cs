@@ -24,7 +24,6 @@ namespace InformationKiosk.PL.ViewModels
         public UserViewViewModel()
         {
             RunLoginDialogCommand = new RelayCommand<INevigator>(LoginDialog, (nevigator) => true, true);
-            Header = "The Stores";
         }
 
         public async void LoginDialog(INevigator nevigator)
@@ -38,25 +37,5 @@ namespace InformationKiosk.PL.ViewModels
                 nevigatorCommand.Execute(new NevigationCommandParameters("Manage"));
             }
         }
-
-        #region Binding Fields
-        private string _header = null;
-        public string Header
-        {
-            get
-            {
-                return _header;
-            }
-            set
-            {
-                if (_header == value)
-                {
-                    return;
-                }
-                _header = value;
-                RaisePropertyChanged(nameof(Header));
-            }
-        }
-        #endregion
     }
 }

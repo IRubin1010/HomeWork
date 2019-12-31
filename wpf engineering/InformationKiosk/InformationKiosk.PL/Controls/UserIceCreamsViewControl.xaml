@@ -9,7 +9,6 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:Nevigation="clr-namespace:InformationKiosk.PL.Nevigation"
              mc:Ignorable="d" 
-             Height="530" Width="1020"
              DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=UserIceCreamsView}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -31,19 +30,19 @@
                             <materialDesign:TransitionEffect Kind="SlideInFromRight" Duration="0:0:1"/>
                             <materialDesign:TransitionEffect Kind="FadeIn" Duration="0:0:1" />
                         </materialDesign:TransitioningContent.OpeningEffects>
-                        <materialDesign:Card Width="440" Margin="15" Height="170" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Stretch">
+                        <materialDesign:Card Width="550" Margin="15" Height="200" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Stretch">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="180"/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Image Margin="20" Stretch="UniformToFill" Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" />
+                                <Image Margin="15" Stretch="UniformToFill" Source="{Binding Img, Converter={StaticResource BitmapToImageConverter}}" />
                                 <StackPanel Grid.Column="1" Margin="10 20">
-                                    <Label Content="{Binding Name}" FontSize="25" Margin="0 5"/>
+                                    <Label Content="{Binding Name}" FontSize="32" Margin="0 5 0 20"/>
                                     <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Width="20" Height="20" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="FileDocument"/>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" FontSize="16" Margin="7 0 0 10"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                            <materialDesign:PackIcon Width="30" Height="30" VerticalAlignment="Top" Foreground="{DynamicResource PrimaryHueMidBrush}" Kind="FileDocument"/>
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" FontSize="20" Margin="7 0 0 10"/>
                                         </StackPanel>
                                         <materialDesign:RatingBar Grid.Row="1" Value="{Binding Score, Mode=TwoWay}" Margin="0 0 0 20"/>
                                     </StackPanel>

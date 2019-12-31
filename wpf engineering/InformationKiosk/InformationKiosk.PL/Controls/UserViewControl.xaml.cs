@@ -1,4 +1,4 @@
-﻿using InformationKiosk.PL.Nevigation;
+using InformationKiosk.PL.Nevigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +33,17 @@ namespace InformationKiosk.PL.Controls
             if (control.Name == "UserStoresView")
             {
                 UserViewsControls.Content = control;
+                Header.Content = "The Stores";
             }
             else if (control.Name == "UserIceCreamsView")
             {
                 UserViewsControls.Content = control;
+                Header.Content = "The Ice Creams";
             }
             else if (control.Name == "Search")
             {
                 UserViewsControls.Content = control;
+                Header.Content = "Search";
             }
             else
             {
