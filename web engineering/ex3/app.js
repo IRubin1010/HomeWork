@@ -4,6 +4,7 @@ let bodyParser = require('body-parser');
 let logger = require('morgan');
 let passport = require('passport');
 let session = require('express-session');
+let favicon = require('serve-favicon');
 
 let passportConfig = require('./config/passport');
 passportConfig.initPassport(passport);
@@ -49,6 +50,8 @@ app.use(passport.session());
 // set morgan
 app.use(logger('dev'));
 
+// set favicon
+app.use(favicon(path.join(__dirname, 'public/images', 'brand-logo.ico')));
 
 // set folders
 app.use(express.static(path.join(__dirname, 'public')));

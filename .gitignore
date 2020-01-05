@@ -292,3 +292,7 @@ web engineering/ex3/package-lock.json
 compilers/venv/
 
 jack-compiler/venv/
+
+web engineering/.vscode/
+
+web engineering/ex3/.vscode/
