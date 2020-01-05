@@ -1,6 +1,12 @@
 let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
+let logger = require('morgan');
+let passport = require('passport');
+let session = require('express-session');
+
+let passportConfig = require('./config/passport');
+passportConfig.initPassport(passport);
 
 //require routs
 let indexRouter = require('./routes/index');
@@ -23,6 +29,27 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
+// set session
+app.use(
+    session({
+        secret: 'theBestSecretEver',
+        cookie: {
+            expires: false,
+            httpOnly: false
+        },
+        resave: true,
+        saveUninitialized: true
+    })
+);
+
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// set morgan
+app.use(logger('dev'));
+
+
 // set folders
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views/partials')));
@@ -38,7 +65,7 @@ app.use('/products', productsRouter);
 app.use('/users', usersRouter);
 
 
-app.listen(3000, function(){
+app.listen(3000, function () {
     console.log(`I am listening to port 3000`)
 });
 

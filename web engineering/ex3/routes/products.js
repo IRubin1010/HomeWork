@@ -2,16 +2,14 @@ let express = require('express');
 let router = express.Router();
 let authService = require('../BL/authService');
 let productRepository = require('../repositories/productRepository');
-var multer = require('multer');
-var fs = require("fs");
-const download = require('image-downloader');
+let multer = require('multer');
+let fs = require("fs");
+let download = require('image-downloader');
 let path = './public/images';
 
-router.use(authService.checkLoggedIn);
+router.use(authService.authenticate);
 
 router.get('/', async function (req, res) {
-
-
     let products = await productRepository.getProducts();
     let groupsProducts = groupBy(products, p => p.catagory)
 
@@ -35,16 +33,16 @@ router.get('/productsData', async function (req, res) {
     });
 });
 
-var uploadImgHandler = multer({
+let uploadImgHandler = multer({
     storage: multer.diskStorage
-        ({
-            destination: function (req, file, callback) {
-                callback(null, path);
-            },
-            filename: function (req, file, callback) {
-                callback(null, file.originalname);
-            }
-        })
+    ({
+        destination: function (req, file, callback) {
+            callback(null, path);
+        },
+        filename: function (req, file, callback) {
+            callback(null, file.originalname);
+        }
+    })
 }).single('product-image');
 
 router.post('/add', authService.checkAdminOrWorker,uploadImgHandler, async function (req, res) {
@@ -55,10 +53,10 @@ router.post('/add', authService.checkAdminOrWorker,uploadImgHandler, async funct
         if (isNotValidProduct !== null) {
             res.sendStatus(403);
         } else {
-            imageTempPath = await downloadImage({ url: url, dest: path })
-            let mimetype = 'image/jpeg';
+            let imageTempPath = await downloadImage({ url: url, dest: path });
+            let type = 'image/jpeg';
             try {
-                await saveImage(imageTempPath, req.body.product, mimetype, res);
+                await saveImage(imageTempPath, req.body.product, type, res);
                 res.status(200).send('OK');
             } catch (err) {
                 console.log('ERROR: ' + err.message);
@@ -69,22 +67,53 @@ router.post('/add', authService.checkAdminOrWorker,uploadImgHandler, async funct
             }
         }
     } catch (err) { // TODO: send the error message and show it to the user...
-        console.log(err.message)
+        console.log(err.message);
         res.status(500).send(err.message);
     }
 });
 
-const downloadImage = async (options) => {
+router.post('/update', authService.checkAdminOrWorker, async function (req, res) {
+
+    let updatedProduct = req.body.updatedProduct;
+
+    let isProductUpdated = await productRepository.updateProduct(updatedProduct);
+
+    if (!isProductUpdated) {
+        res.sendStatus(500);
+    } else {
+        res.sendStatus(200);
+    }
+});
+
+
+module.exports = router;
+
+
+function groupBy(list, keyGetter) {
+    const map = new Map();
+    list.forEach((item) => {
+        const key = keyGetter(item);
+        const collection = map.get(key);
+        if (!collection) {
+            map.set(key, [item]);
+        } else {
+            collection.push(item);
+        }
+    });
+    return map;
+}
+
+async function downloadImage(options){
     try {
-        const { filename, image } = await download.image(options);
-        console.log(`Downloading image: ${filename} finish successfully.`);
-        return filename;
+        let path = await download.image(options);
+        console.log(`Downloading image: ${path} finish successfully.`);
+        return path;
     } catch (err) {
         console.error(err);
     }
-};
+}
 
-const saveImage = async (tempPath, details, mimetype, res) => {
+async function saveImage(tempPath, details, mimetype, res){
     let fileContent = fs.readFileSync(tempPath);
     let encodeFile = fileContent.toString('base64');
     let image = {
@@ -105,33 +134,4 @@ const saveImage = async (tempPath, details, mimetype, res) => {
     } else {
         res.sendStatus(200);
     }
-};
-
-router.post('/update', authService.checkAdminOrWorker, async function (req, res) {
-
-    let updatedProduct = req.body.updatedProduct;
-
-    let isProductUpdated = await productRepository.updateProduct(updatedProduct);
-
-    if (!isProductUpdated) {
-        res.sendStatus(500);
-    } else {
-        res.sendStatus(200);
-    }
-});
-
-module.exports = router;
-
-function groupBy(list, keyGetter) {
-    const map = new Map();
-    list.forEach((item) => {
-        const key = keyGetter(item);
-        const collection = map.get(key);
-        if (!collection) {
-            map.set(key, [item]);
-        } else {
-            collection.push(item);
-        }
-    });
-    return map;
 }

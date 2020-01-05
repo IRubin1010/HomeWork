@@ -27,7 +27,7 @@ $(document).ready(function () {
                 imageUrl: imageUrl
             };
 
-            let res = await fetch("/products/add" + window.location.search, {
+            let res = await fetch("/products/add", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ $(document).ready(function () {
             catagory: catagory,
         };
 
-        let res = await fetch("/products/update" + window.location.search, {
+        let res = await fetch("/products/update", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

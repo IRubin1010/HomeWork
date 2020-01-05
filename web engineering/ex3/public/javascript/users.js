@@ -16,6 +16,7 @@ $(document).ready(function () {
         let mail = modal.find('#add-user-mail').val();
         let role = modal.find('#add-user-role').val();
 
+        password = EncryptPassword(password);
         if (userName === "" || password === "" || mail === "") {
             removeErrMsg();
             $(".modal-body").prepend(`<p style="color: red" id="errMsg">One or more of the fields is empty. All fields must be filled in</p>`);
@@ -28,7 +29,7 @@ $(document).ready(function () {
                 state: "active"
             };
 
-            let res = await fetch("/users/add" + window.location.search, {
+            let res = await fetch("/users/add", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -69,7 +70,7 @@ async function deleteUser(caller) {
     let tableRow = $(caller).closest('tr');
     let user = getUserFromRow(tableRow);
 
-    let res = await fetch("/users/delete" + window.location.search, {
+    let res = await fetch("/users/delete", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -94,9 +95,9 @@ function editUser(caller) {
 
     let tableRow = $(caller).closest('tr');
     let user = getUserFromRow(tableRow);
-    
+    console.log(user);
+
     $("#edit-user-name").val(user.userName);
-    $("#edit-user-password").val(user.password);
     $("#edit-user-mail").val(user.mail);
     $("#edit-user-role").val(user.role);
     $("#edit-user-state").val(user.state);
@@ -123,7 +124,7 @@ $(document).ready(function () {
             state: state
         };
 
-        let res = await fetch("/users/update" + window.location.search, {
+        let res = await fetch("/users/update", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -153,7 +154,7 @@ $(document).ready(function () {
 
 function getUserFromRow(row) {
     let user = {};
-    let userFieldsArray = ["userName", "password", "mail", "role", "state"];
+    let userFieldsArray = ["userName", "mail", "role", "state"];
 
     row.find('td').each(function (i) {
         let field = $(this).text();

@@ -5,11 +5,11 @@ let fruitMock = require('../data/products/fruits');
 let meatMock = require('../data/products/meat');
 let userMock = require('../data/users');
 let vegetablesMock = require('../data/products/vegetables');
-let storeMock = require('../data/stores');
 let productRepository = require('../repositories/productRepository');
 let userRepository = require('../repositories/userRepository');
 let userDb = require('../model')('user');
 let productDB = require('../model')('product');
+let bcrypt = require('bcryptjs');
 
 module.exports.initDB = async () => {
     console.log("--------initDB---------");
@@ -56,9 +56,12 @@ async function initProductsDB() {
 
 module.exports.initUsersDb = async () => {
     console.log("--------initUsersDb---------");
-    userMock.forEach(async user => {
+    let users = userMock.map(async user => {
+        let salt = bcrypt.genSaltSync(10);
+        user.password = bcrypt.hashSync(user.password, salt);
         await userDb.CREATE(user);
     });
+    await Promise.all(users);
 };
 
 
