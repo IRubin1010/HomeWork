@@ -37,8 +37,9 @@ app.use('/auth', authRouter);
 app.use('/products', productsRouter);
 app.use('/users', usersRouter);
 
+module.exports = app;
 
-app.listen(3000, function(){
-    console.log(`I am listening to port 3000`)
-});
+// app.listen(3000, function(){
+//     console.log(`I am listening to port 3000`)
+// });
 

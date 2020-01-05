@@ -134,6 +134,19 @@ router.post('/update', authService.checkAdminOrWorker, async function (req, res)
     }
 });
 
+router.post('/delete', authService.checkAdmin, async function (req, res) {
+
+    let product = req.body.product;
+
+    let isProductDeleted = await productRepository.deleteProduct(product);
+
+    if (!isProductDeleted) {
+        res.sendStatus(500);
+    } else {
+        res.sendStatus(200);
+    }
+});
+
 module.exports = router;
 
 function groupBy(list, keyGetter) {
