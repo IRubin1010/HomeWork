@@ -50,8 +50,8 @@ async function addProduct (product){
 
 async function updateProduct (product){
     try{
-    let fieldsToUpdate = { description: product.description, price: product.price };
-    await productDb.findOneAndUpdate({ image: product.image , catagory: product.catagory }, fieldsToUpdate, { new: true }).exec();
+    let fieldsToUpdate = {price: product.price };
+    await productDb.findOneAndUpdate({ description: product.description , catagory: product.catagory }, fieldsToUpdate, { new: true }).exec();
     return true;
     }catch (err) {
         console.log(err);
@@ -69,10 +69,21 @@ async function validetProduct (productToVlidate) {
     }
 };
 
+ async function deleteProduct (productToDelete) {
+    try {
+        await productDb.findOneAndDelete({description: productToDelete.description, price: productToDelete.price, catagory: productToDelete,catagory}).exec();
+            return true;
+        }catch (err) {
+            console.log(err);
+            return false;
+        }
+};
+
 module.exports.validetProduct = validetProduct;
 module.exports.addProduct = addProduct;
 module.exports.getBreads = getBreads;
 module.exports.getProducts = getProducts;
 module.exports.updateProduct = updateProduct;
+module.exports.deleteProduct = deleteProduct;
 
 
