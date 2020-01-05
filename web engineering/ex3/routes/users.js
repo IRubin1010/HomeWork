@@ -1,10 +1,16 @@
 let express = require('express');
 let router = express.Router();
 let userRepository = require('../repositories/userRepository');
-let usersService = require('../BL/usersService');
 let authService = require('../BL/authService');
+let bcrypt = require('bcryptjs');
+let rsa  = require('./../config/rsa');
 
-router.use(authService.checkLoggedIn);
+router.use((req, res, next) => {
+    if(req.path === "/addClient"){
+        return next();
+    }
+    return authService.authenticate(req,res,next);
+});
 
 router.get('/administratorData', authService.checkAdmin, async function (req, res) {
     let users = await userRepository.getUsers();
@@ -38,11 +44,38 @@ router.get('/workerData', authService.checkWorker, async function (req, res) {
 router.post('/add', authService.checkAdminOrWorker, async function (req, res) {
 
     let user = req.body.user;
+    user.password = rsa.DecryptPassword(user.password);
+    let originPass = (' ' + user.password).slice(1);
+    let salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(user.password, salt);
+
     let isNotValidUser = await userRepository.validetUser(user);
-    if (isNotValidUser !== null) {
+    if (isNotValidUser !== null || !validatePassword(originPass)) {
         res.sendStatus(403);
     } else {
-        let isUserAdded = await userRepository.adduser(user);
+        let isUserAdded = await userRepository.addUser(user);
+        if (!isUserAdded) {
+            res.sendStatus(500);
+        } else {
+            res.sendStatus(200);
+        }
+    }
+});
+
+router.post('/addClient', async function (req, res) {
+
+    let user = req.body.user;
+    user.password = rsa.DecryptPassword(user.password);
+    let originPass = (' ' + user.password).slice(1);
+    let salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(user.password, salt);
+
+    let isNotValidUser = await userRepository.validetUser(user);
+
+    if (isNotValidUser !== null || user.role !== "client" || !validatePassword(originPass)) {
+        res.sendStatus(403);
+    } else {
+        let isUserAdded = await userRepository.addUser(user);
         if (!isUserAdded) {
             res.sendStatus(500);
         } else {
@@ -79,3 +112,8 @@ router.post('/update', authService.checkAdmin, async function (req, res) {
 });
 
 module.exports = router;
+
+function validatePassword(password){
+    console.log(password);
+    return password.length >=4 && password.length <=8;
+}

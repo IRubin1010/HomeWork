@@ -97,8 +97,7 @@ async function loadProducts() {
         $(".cover").hide();
         return;
     }
-
-    let res = await fetch("/products" + window.location.search);
+    let res = await fetch("/products");
     let resJson = await res.json();
 
     let middlePage = resJson.middlePage;
@@ -226,10 +225,10 @@ async function loadUsers() {
         $(".cover").hide();
         return;
     } else if (userRole === "administrator") {
-        let res = await fetch("/users/administratorData" + window.location.search);
+        let res = await fetch("/users/administratorData");
         resJson = await res.json();
     } else if (userRole === "worker") {
-        let res = await fetch("/users/workerData" + window.location.search);
+        let res = await fetch("/users/workerData");
         resJson = await res.json();
     }
     let users = resJson.users;
@@ -269,7 +268,7 @@ async function loadManageProducts() {
         $(".cover").hide();
         return;
     } else {
-        let res = await fetch("/products/productsData" + window.location.search);
+        let res = await fetch("/products/productsData");
         resJson = await res.json();
     }
     let products = resJson.products;
@@ -281,7 +280,7 @@ async function loadManageProducts() {
     let template = await jQuery.get(`templates/${templatePage}`);
     let compiledTemplate = ejs.compile(template, {});
 
-    console.log(products)
+    console.log(products);
     let data = {
         products: products,
     };
@@ -294,23 +293,11 @@ async function loadManageProducts() {
 }
 
 async function getUserRole() {
-    let search = new URLSearchParams(window.location.search);
-    let userName = search.get("userName");
-    let password = search.get("password");
-    let res = await fetch("/auth/userRole", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userName: userName,
-            password: password
-        })
-    });
-    let resJson = await res.json();
+    let res = await fetch("/auth/userRole");
     if (res.status !== 200) {
         return undefined;
     }
+    let resJson = await res.json();
     return resJson.userRole;
 }
 

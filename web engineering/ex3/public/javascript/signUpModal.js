@@ -7,19 +7,34 @@ $(document).ready(function(){
 
 // login button click
 $(document).ready(function(){
-    $('#btn-login-submit').on("click", async function(){
-        let modal = $("#loginModal");
+    $('#btn-sign-up-submit').on("click", async function(){
+
+
+
+        let modal = $("#signUpModal");
+        console.log(modal);
         let userName = modal.find('#user-name').val();
         let password = modal.find('#password').val();
+
         password = EncryptPassword(password);
-        let res = await fetch("/auth/login", {
+        //let d = DecryptPassword(e);
+
+        let mail = modal.find('#mail').val();
+        // password = CryptoJS.MD5(password);
+        let user = {
+            userName: userName,
+            password: password,
+            mail: mail,
+            role: "client",
+            state: "active"
+        };
+        let res = await fetch("/users/addClient", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                userName : userName,
-                password : password
+                user: user
             })
         });
         if(res.status !== 200){
@@ -29,6 +44,16 @@ $(document).ready(function(){
         }
         else{
             $('#exampleModal').modal('hide');
+            await fetch("/auth/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userName : userName,
+                    password : password
+                })
+            });
             location.reload()
         }
     })

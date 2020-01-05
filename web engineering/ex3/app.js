@@ -1,6 +1,13 @@
 let express = require('express');
 let path = require('path');
 let bodyParser = require('body-parser');
+let logger = require('morgan');
+let passport = require('passport');
+let session = require('express-session');
+let favicon = require('serve-favicon');
+
+let passportConfig = require('./config/passport');
+passportConfig.initPassport(passport);
 
 //require routs
 let indexRouter = require('./routes/index');
@@ -22,6 +29,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+
+// set session
+app.use(
+    session({
+        secret: 'theBestSecretEver',
+        cookie: {
+            expires: false,
+            httpOnly: false
+        },
+        resave: true,
+        saveUninitialized: true
+    })
+);
+
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// set morgan
+app.use(logger('dev'));
+
+// set favicon
+app.use(favicon(path.join(__dirname, 'public/images', 'brand-logo.ico')));
 
 // set folders
 app.use(express.static(path.join(__dirname, 'public')));

@@ -158,7 +158,7 @@ $(document).ready(function () {
             catagory: catagory,
         };
 
-        let res = await fetch("/products/update" + window.location.search, {
+        let res = await fetch("/products/update", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

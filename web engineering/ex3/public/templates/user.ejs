@@ -9,9 +9,6 @@
         <thead>
         <tr>
             <th scope="col">Name</th>
-            <% if (userRole === "administrator") { %>
-                <th scope="col">Password</th>
-            <% } %>
             <th scope="col">Mail</th>
             <th scope="col">Role</th>
             <% if (userRole === "administrator") { %>
@@ -25,9 +22,6 @@
         <% users.forEach(function (d) { %>
             <tr id="users-table-row">
                 <td><%- d.userName %></td>
-                <% if(userRole === "administrator") { %>
-                    <td><%- d.password %></td>
-                <% } %>
                 <td><%- d.mail %></td>
                 <td><%- d.role %></td>
                 <% if(userRole === "administrator") { %>

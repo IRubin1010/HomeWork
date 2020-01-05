@@ -2,18 +2,16 @@ let express = require('express');
 let router = express.Router();
 let authService = require('../BL/authService');
 let productRepository = require('../repositories/productRepository');
-var multer = require('multer');
-var fs = require("fs");
-const download = require('image-downloader');
+let multer = require('multer');
+let fs = require("fs");
+let download = require('image-downloader');
 let path = './public/images';
 
-router.use(authService.checkLoggedIn);
+router.use(authService.authenticate);
 
 router.get('/', async function (req, res) {
-
-
     let products = await productRepository.getProducts();
-    let groupsProducts = groupBy(products, p => p.catagory)
+    let groupsProducts = groupBy(products, p => p.catagory);
 
     res.json({
         middlePage: "products.ejs",
@@ -45,14 +43,12 @@ router.post('/add',upload.single('myImage'), async function (req, res) {
         let url = body.ImageUrl;
         let file = req.file;
 
-        //let url = req.body.product.imageUrl;
-        //let file = req.body.product.imageFile;
         let product = {
             description: body.Description,
             price: body.Price,
             catagory: body.Catagory,
 
-        }
+        };
         let isNotValidProduct = await productRepository.validetProduct(product);
         if (isNotValidProduct !== null) {
             res.sendStatus(403);
@@ -65,7 +61,6 @@ router.post('/add',upload.single('myImage'), async function (req, res) {
             !file && (imageTempPath = await downloadImage({ url: url, dest: path }));
             let mimetype = file ? file.mimetype : 'image/jpeg';
 
-           //let mimetype = 'image/jpeg';
             try {
                 await saveImage(imageTempPath, product, mimetype, res,file);
                 res.status(200).send('OK');
@@ -78,48 +73,10 @@ router.post('/add',upload.single('myImage'), async function (req, res) {
             }
         }
     } catch (err) { // TODO: send the error message and show it to the user...
-        console.log(err.message)
+        console.log(err.message);
         res.status(500).send(err.message);
     }
 });
-
-const downloadImage = async (options) => {
-    try {
-        const { filename, image } = await download.image(options);
-        console.log(`Downloading image: ${filename} finish successfully.`);
-        return filename;
-    } catch (err) {
-        console.error(err);
-    }
-};
-
-const saveImage = async (tempPath, details, mimetype, res,file) => {
-    let fileContent;
-    if (file === undefined) {
-        fileContent = fs.readFileSync(tempPath);
-    }else{
-        fileContent = tempPath;
-    }
-    let encodeFile = fileContent.toString('base64');
-    let image = {
-        contentType: mimetype,
-        data: new Buffer(encodeFile, 'base64')
-    };
-
-    let product = {
-        description: details.description,
-        price: details.price,
-        image: image,
-        catagory: details.catagory
-    };
-
-    let isProductAdded = await productRepository.addProduct(product);
-    if(!isProductAdded){
-        res.sendStatus(500);
-    } else {
-        res.sendStatus(200);
-    }
-};
 
 router.post('/update', authService.checkAdminOrWorker, async function (req, res) {
 
@@ -149,11 +106,12 @@ router.post('/delete', authService.checkAdmin, async function (req, res) {
 
 module.exports = router;
 
+
 function groupBy(list, keyGetter) {
-    const map = new Map();
+    let map = new Map();
     list.forEach((item) => {
-        const key = keyGetter(item);
-        const collection = map.get(key);
+        let key = keyGetter(item);
+        let collection = map.get(key);
         if (!collection) {
             map.set(key, [item]);
         } else {
@@ -161,4 +119,42 @@ function groupBy(list, keyGetter) {
         }
     });
     return map;
+}
+
+async function downloadImage(options){
+    try {
+        let path = await download.image(options);
+        console.log(`Downloading image: ${path} finish successfully.`);
+        return path;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+async function saveImage(tempPath, details, mimetype, res,file){
+    let fileContent;
+    if (file === undefined) {
+        fileContent = fs.readFileSync(tempPath);
+    }else{
+        fileContent = tempPath;
+    }
+    let encodeFile = fileContent.toString('base64');
+    let image = {
+        contentType: mimetype,
+        data: new Buffer(encodeFile, 'base64')
+    };
+
+    let product = {
+        description: details.description,
+        price: details.price,
+        image: image,
+        catagory: details.catagory
+    };
+
+    let isProductAdded = await productRepository.addProduct(product);
+    if(!isProductAdded){
+        res.sendStatus(500);
+    } else {
+        res.sendStatus(200);
+    }
 }
