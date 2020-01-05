@@ -150,13 +150,11 @@ $(document).ready(function () {
         removeErrMsg();
         let description = modal.find('#edit-product-description').val();
         let price = modal.find('#edit-product-price').val();
-        let image = modal.find('#edit-product-image').val();
         let catagory = modal.find('#edit-product-catagory').val();
 
         let updatedProduct = {
             description: description,
             price: price,
-            image: image,
             catagory: catagory,
         };
 
@@ -208,6 +206,33 @@ function getProductFromRow(row) {
 
     });
     return product;
+}
+
+
+async function deleteProduct(caller) {
+
+    let tableRow = $(caller).closest('tr');
+    let product = getProductFromRow(tableRow);
+
+    let res = await fetch("/users/delete" + window.location.search, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            product: product
+        })
+    });
+
+    if (res.status !== 200) {
+        if (!$("#errMsg").length) {
+            $(".modal-body").prepend(`<p style="color: red" id="errMsg">an error has occurred please try again</p>`);
+        }
+    } else {
+        $('#exampleModal').modal('hide');
+        window.location.reload();
+    }
+
 }
 
 function removeErrMsg(){

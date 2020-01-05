@@ -1,5 +1,5 @@
     <div class="users-plus-icon" style="margin-top: -2vmax;">
-        <i class="fa fa-repeat" onclick="refreshUsers()"></i>
+        <i class="fa fa-repeat" onclick="refreshProducts()"></i>
         <i class="fa fa-plus-circle" onclick="addProductModal()"></i>
     </div>
 <div class="users-table">
@@ -22,7 +22,7 @@
                 <td><%- d.price %></td>
                 <td><%- d.catagory %></td>
                 <td class="pencil-icon users-table-icon" id="edit-product"><i class="fa fa-pencil" onclick="editProduct(this)"></i></td>
-                <td class="delete-icon users-table-icon" id="edit-user"><i class="fa fa-trash" onclick="deleteUser(this)"></i></td>
+                <td class="delete-icon users-table-icon" id="edit-user"><i class="fa fa-trash" onclick="deleteProduct(this)"></i></td>
             </tr>
         <% }); %>
         </tbody>
