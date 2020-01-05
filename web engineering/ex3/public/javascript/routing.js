@@ -16,7 +16,7 @@ $(document).ready(async function () {
             return;
         }
         if (replacedHash === "Manage-Products") {
-            await loadProducts();
+            await loadManageProducts();
             return;
         }
         $("#middle-page").load(replacedHash + ".ejs");
