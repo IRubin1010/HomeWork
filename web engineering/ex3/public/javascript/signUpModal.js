@@ -8,9 +8,6 @@ $(document).ready(function(){
 // login button click
 $(document).ready(function(){
     $('#btn-sign-up-submit').on("click", async function(){
-
-
-
         let modal = $("#signUpModal");
         console.log(modal);
         let userName = modal.find('#user-name').val();
@@ -39,11 +36,11 @@ $(document).ready(function(){
         });
         if(res.status !== 200){
             if(!$("#errMsg").length){
-                $(".modal-body").prepend( `<p style="color: red" id="errMsg">user name or password is incorrect. please try again</p>`);
+                $("#signup-modal-body").prepend( `<p style="color: red" id="errMsg">user name or password is incorrect. please try again</p>`);
             }
         }
         else{
-            $('#exampleModal').modal('hide');
+            $('#signUpModal').modal('hide');
             await fetch("/auth/login", {
                 method: 'POST',
                 headers: {
@@ -61,7 +58,7 @@ $(document).ready(function(){
 
 // empty modal before exit
 $(document).ready(function(){
-    $('#exampleModal').on('hide.bs.modal', function () {
+    $('#signUpModal').on('hide.bs.modal', function () {
         $(".form-control").val('');
         removeErrMsg()
     })

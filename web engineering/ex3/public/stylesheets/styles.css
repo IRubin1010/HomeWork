@@ -221,8 +221,6 @@ html {
     display: block; }
   .users-data .users-table #users-table-row:hover td {
     vertical-align: sub; }
-    .users-data .users-table #users-table-row td {
-      vertical-align: sub; }
 
 .cover {
   display: none;
@@ -233,6 +231,27 @@ html {
   height: 100%;
   background: rgba(0, 0, 0, 0.1);
   z-index: 100; }
+
+.login-modal-forgot-password {
+  margin-bottom: 5px;
+  font-size: 13.5px;
+  color: #305c65; }
+
+.reset-password-form .row .form-group {
+  width: 40%;
+  float: left; }
+.reset-password-form .row label {
+  font-size: 20px; }
+.reset-password-form .row .btn-submit {
+  align-self: center;
+  height: 50px;
+  width: 200px;
+  font-size: 20px;
+  background-color: #305c65;
+  color: #8fcf69;
+  margin-left: 8% !important; }
+  .reset-password-form .row .btn-submit:focus {
+    box-shadow: 0 0 0 0.2rem rgba(143, 207, 105, 0.45); }
 
 .sk-folding-cube {
   margin-left: -50px;

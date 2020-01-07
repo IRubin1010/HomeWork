@@ -367,10 +367,6 @@ html {
   }
 }
 
-
-
-
-
 .cover{
   display: none;
   position: fixed;
@@ -382,6 +378,35 @@ html {
   z-index: 100;
 }
 
+.login-modal-forgot-password{
+  margin-bottom: 5px;
+  font-size: 13.5px;
+  color: #305c65;
+}
+
+.reset-password-form{
+  .row{
+    .form-group{
+      width: 40%;
+      float: left;
+    }
+    label{
+      font-size: 20px;
+    }
+    .btn-submit{
+      align-self: center;
+      height: 50px;
+      width: 200px;
+      font-size: 20px;
+      background-color: #305c65;
+      color: #8fcf69;
+      margin-left: 8% !important;
+      &:focus{
+        box-shadow: 0 0 0 0.2rem rgba(143, 207, 105, 0.45);
+      }
+    }
+  }
+}
 
 
 .sk-folding-cube {

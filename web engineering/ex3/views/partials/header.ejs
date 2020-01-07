@@ -2,7 +2,7 @@
     <a class="navbar-brand brand-font" href="/" rel="keep-params">
         <img src="images/brand-logo.png" width="60px" height="60px">
         SuperStore</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -54,13 +54,13 @@
         <% } else { %>
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" data-toggle="modal"
-                        data-target="#loginModal" style="margin-right: 30px">LOGIN
+                        id="header-login-btn" data-target="#loginModal" style="margin-right: 30px">LOGIN
                 </button>
             </form>
 
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn btn-outline-light my-2 my-sm-0" data-toggle="modal"
-                        data-target="#signUpModal">SIGN UP
+                        id="header-signup-btn" data-target="#signUpModal">SIGN UP
                 </button>
             </form>
         <% } %>
@@ -68,4 +68,5 @@
 
     <% include loginModal %>
     <% include signUpModal %>
+    <% include resetPasswordModal %>
 </nav>
