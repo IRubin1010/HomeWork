@@ -24,7 +24,6 @@ module.exports.getUsers = async () => {
 module.exports.getUserByUserName = async function (userName) {
     try {
         let user = await userDb.findOne({userName: userName, state: "active"}).exec();
-
         return user;
     } catch (err) {
         console.log(err);
@@ -35,6 +34,33 @@ module.exports.getUserByUserName = async function (userName) {
 module.exports.findById = async function (id) {
     try {
         let user = await userDb.findById(id).exec();
+        return user;
+    } catch (err) {
+        console.log(err);
+        return undefined;
+    }
+};
+
+module.exports.findByEmail = async function (mail) {
+    try {
+        let user = await userDb.findOne({mail: mail, state: "active"}).exec();
+        return user;
+    } catch (err) {
+        console.log(err);
+        return undefined;
+    }
+};
+
+module.exports.findByUserNameAndToken = async function (userName, token) {
+    try {
+        let user = await userDb.findOne({
+            userName: userName,
+            resetToken: token,
+            resetTokenExpires: {
+                $gt: Date.now()
+            },
+            state: "active"
+        }).exec();
         return user;
     } catch (err) {
         console.log(err);
@@ -57,7 +83,6 @@ module.exports.updateUser = async (user) => {
         let fieldsToUpdate = {role: user.role, mail: user.mail, state: user.state};
         await userDb.findOneAndUpdate({
             userName: user.userName,
-            password: user.password
         }, fieldsToUpdate, {new: true}).exec();
         return true;
     } catch (err) {

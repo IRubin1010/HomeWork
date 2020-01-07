@@ -20,4 +20,20 @@ $(document).ready(async function () {
     }
 });
 
+$(document).ready(async function () {
+    $('#header-login-btn').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+    })
+});
+
+$(document).ready(async function () {
+    $('#header-signup-btn').on("click", async function () {
+        $('.navbar-collapse').collapse('hide');
+    })
+});
+
+
+
+
+
 

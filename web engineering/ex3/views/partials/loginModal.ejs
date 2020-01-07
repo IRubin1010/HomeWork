@@ -15,7 +15,7 @@
                     <span aria-hidden="false">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="login-modal-body">
                 <form>
                     <div class="form-group">
                         <label for="user-name" class="col-form-label">User Name</label>
@@ -27,10 +27,15 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="padding-bottom: 7px">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-submit" id="btn-login-submit">Submit</button>
+
             </div>
+            <div class="modal-footer" style="padding: 0.5rem">
+                <a href="#" style="text-decoration: none" class="login-modal-forgot-password" id="login-modal-forgot-password">forgot password?</a>
+            </div>
+
         </div>
     </div>
 </div>
