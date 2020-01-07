@@ -48,7 +48,7 @@ $(document).ready(function () {
                         $(".modal-body").prepend(`<p style="color: red" id="errMsg">an error has occurred please try again</p>`);
                     }
                 } else {
-                    $('#exampleModal').modal('hide');
+                    $('#addUserModal').modal('hide');
                     window.location.reload();
                 }
             }

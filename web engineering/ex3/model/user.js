@@ -11,7 +11,10 @@ module.exports = function(db) {
             mail: {type: String},
             state: {type: String, enum: ['active', 'deleted'] },
             lastUpdate: Date,
-            created: Date
+            created: Date,
+
+            resetToken:{type: String},
+            resetTokenExpires:{type: Date}
         },
         { versionKey: false }
     );

@@ -17,6 +17,7 @@ let authRouter = require('./routes/auth');
 let productsCategoryRouter = require('./routes/productsCategory');
 let productsRouter = require('./routes/products');
 let usersRouter = require('./routes/users');
+let resetPasswordRouter = require('./routes/resetPassword');
 
 
 let app = express();
@@ -66,6 +67,7 @@ app.use('/stores', storesRouter);
 app.use('/auth', authRouter);
 app.use('/products', productsRouter);
 app.use('/users', usersRouter);
+app.use('/resetPassword', resetPasswordRouter);
 
 module.exports = app;
 

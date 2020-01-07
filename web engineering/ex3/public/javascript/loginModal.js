@@ -24,11 +24,11 @@ $(document).ready(function(){
         });
         if(res.status !== 200){
             if(!$("#errMsg").length){
-                $(".modal-body").prepend( `<p style="color: red" id="errMsg">user name or password is incorrect. please try again</p>`);
+                $("#login-modal-body").prepend( `<p style="color: red" id="errMsg">user name or password is incorrect. please try again</p>`);
             }
         }
         else{
-            $('#exampleModal').modal('hide');
+            $('#loginModal').modal('hide');
             location.reload()
         }
     })
@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 // empty modal before exit
 $(document).ready(function(){
-    $('#exampleModal').on('hide.bs.modal', function () {
+    $('#loginModal').on('hide.bs.modal', function () {
         $(".form-control").val('');
         removeErrMsg()
     })
@@ -47,3 +47,12 @@ function removeErrMsg(){
         $("#errMsg").remove();
     }
 }
+
+$(document).ready(function(){
+    $('#login-modal-forgot-password').on('click', function () {
+        $('#loginModal').modal('hide');
+        $('#resetPasswordModal').modal('show');
+        removeErrMsg()
+    })
+});
+
