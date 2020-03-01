@@ -119,6 +119,13 @@ namespace InformationKiosk.PL.ViewModels
             proc.StartInfo.Arguments = string.Concat(progToRun, " ", PhoneNumber, " ", isNewConversation);
 
             proc.Start();
+
+            while (!proc.StandardOutput.EndOfStream)
+            {
+                string line = proc.StandardOutput.ReadLine();
+                Console.WriteLine(line);
+            }
+
             proc.WaitForExit();
         }
 

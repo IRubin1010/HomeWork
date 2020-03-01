@@ -135,7 +135,7 @@ namespace InformationKiosk.PL.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<SearchViewModel>();
+                return new SearchViewModel();
             }
         }
     }

@@ -168,5 +168,5 @@ stack_compare_arithmetic_command = "@SP\nM=M-1\nA=M\nD=M\nA=A-1\nD=M-D\n@LABEL_{
 # 14. (LABEL_{x}) -- definition of label
 # 15. @SP         -- load SP
 # 16. A=M-1       -- A = M[SP]
-# 17. M=-1        -- M[M[SP]] = 1 - true
+# 17. M=-1        -- M[M[SP]] = -1 - true
 # 18. (END_{x})	  -- end label

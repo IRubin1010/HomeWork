@@ -191,7 +191,7 @@ go_to_label_command = "@{label_name}\n0; JMP\n"
 # 1. @{label_name} -- load label into A
 # 2. 0; JMP        -- jump to label
 
-# jump to label if top of stuck != 0
+# jump to label if top of stack != 0
 if_go_to_label_command = "@SP\nM=M-1\nA=M\nD=M\n@{file_name}.{label_name}\nD; JNE\n"
 # 1. @SP                       -- load SP
 # 2. M=M-1                     -- reduce SP tp previous cell in stack (SP--)
@@ -263,17 +263,17 @@ return_command = "@LCL\nD=M\n@5\nA=D-A\nD=M\n@14\nM=D\n" \
 # 2. D=M     -- D = M[LCL]
 # 3. @5      -- A = 5
 # 4. A=D-A   -- A = M[LCL] - 5
-# 5. D=M     -- D = M[M[LCL] - 5]
+# 5. D=M     -- D = M[M[LCL] - 5] (D = return address)
 # 6. @14     -- load custom register 14
 # 7. M=D     -- M[14] = D (save return address in temp register)
 # 8. @SP     -- load SP
-# 9. M=M-1   -- M[SP] = M[SP] - 1 (previous cell in stuck)
+# 9. M=M-1   -- M[SP] = M[SP] - 1 (previous cell in stack - return value)
 # 10. @SP    -- load AP
 # 11. A=M    -- A = M[SP]
 # 12. D=M    -- D = M[M[SP]]
 # 13. @ARG   -- load ARG into A
 # 14. A=M    -- A = M[ARG]
-# 15. M=D    -- M[ARG] = D (M[M[SP]]) (save return value in SP of the caller
+# 15. M=D    -- M[ARG] = D (M[M[SP]]) (save return value in SP of the caller)
 # 16. @ARG   -- load ARG
 # 17. D=M+1  -- D = M[ARG] + 1
 # 18. @SP    -- load SP

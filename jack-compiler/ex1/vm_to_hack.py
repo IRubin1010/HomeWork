@@ -172,4 +172,4 @@ def parse_vm_to_hack(file_to_parse_name_path, output_file_name_path):
                     raise Exception("syntax error at {}.".format(formatted_command))
 
 
-compile_vm_to_hack(os.getcwd() + "\\tests\\MemoryAccess\\BasicTest\\BasicTest.vm")
+compile_vm_to_hack(os.getcwd() + "\\tests\\MemoryAccess\\StaticTest\\StaticTest.vm")

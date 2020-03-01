@@ -103,7 +103,7 @@
             </i:Interaction.Triggers>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <materialDesign:Card Width="470" Margin="15" Height="200" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Stretch">
+                    <materialDesign:Card Width="450" Margin="15" Height="200" TextOptions.TextFormattingMode="Ideal" VerticalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="170"/>
