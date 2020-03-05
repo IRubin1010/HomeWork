@@ -24,11 +24,13 @@ export const useStyles = makeStyles(theme => ({
 
 export const hrCardStyle = {
     cardClass: {
-        flexDirection: 'unset',
-        maxHeight: '6.5rem',
+        flexDirection: 'row',
+        height: '80px',
+        maxHeight: '130px',
         isUpSm: {
             paddingLeft: '4vw',
             paddingRight: '5vw',
+            height: '130px',
         },
     },
     mediaClass: {

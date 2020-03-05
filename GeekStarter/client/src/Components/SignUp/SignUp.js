@@ -22,7 +22,7 @@ const SignUp = (props) => {
     const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('xs'));
     const maxWidth = useMediaQuery(theme => theme.breakpoints.up('xl')) ? 'lg' : 'md';
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
         let user = {
             firstName: event.target.firstName.value,
@@ -35,11 +35,8 @@ const SignUp = (props) => {
             country: event.target.country.value,
             password: event.target.password.value
         };
-        axios.post('/register', {user: user})
-            .then(function (response) {
-                console.log(response);
-            });
-        console.log("form clicked");
+        let res = await axios.post('/register', {user: user});
+        console.log(res);
     };
 
     return (
