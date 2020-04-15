@@ -7,13 +7,13 @@ import useStyles from "./ProjectCard.css";
 
 const ProjectCard = (props) => {
 
-    const classes = useStyles(props);
+    const classes = useStyles();
 
     return (
         <Card className={classes.card}>
             <CardMedia
                 className={classes.media}
-                image={props.project.image} // "/picture1.jpg"
+                image={props.project.image}
                 title={props.project.name}
             />
             <CardContent className={classes.content}>

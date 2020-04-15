@@ -1,114 +1,214 @@
 import React, {Fragment, useState} from "react";
-import {AppBar as MaterialUIAppBar} from "@material-ui/core";
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import {Link, useHistory} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory, useLocation} from "react-router-dom";
+import * as moment from 'moment';
 
+import {AppBar as MaterialUIAppBar} from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from '@material-ui/core/InputBase';
 import Button from "@material-ui/core/Button";
-
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import CloseIcon from '@material-ui/icons/Close';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import Avatar from "@material-ui/core/Avatar";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import MenuIcon from "@material-ui/icons/Menu";
 
 import useStyles from "./AppBar.css";
-import Login from "../../Components/Login/Login";
-
+import Auth from "../../Store/Actions/Auth";
+import Grid from "@material-ui/core/Grid";
+import InputLabel from "@material-ui/core/InputLabel";
+import Drawer from "../Drawer/Drawer";
+import DashBoard from '../../Components/DashBoard/DashBoard'
+import Layout from "../../Store/Actions/Layout";
 
 const AppBar = (props) => {
 
-    const [isSearchInSmallScreen, setIsSearchInSmallScreen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+    // state
+    const [isSearch, setIsSearch] = useState(false);
+    const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
+    const isMenuOpen = Boolean(menuAnchorEl);
+    const isLoggedIn = useSelector(state => {
+        const dateNow = moment().utc();
+        const momentTokenExpiration = moment.unix(state.auth.tokenExpiration ?? undefined).utc();
+        return !!(dateNow.isBefore(momentTokenExpiration));
+    });
+    const user = useSelector(state => state.auth.user);
+    const mobileDrawerOpen = useSelector(state => state.layout.mobileDrawerOpen);
 
+    // uses
     const classes = useStyles();
     const history = useHistory();
+    const location = useLocation();
+    const dispatch = useDispatch();
 
-    const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('xs'));
-
-    const signUpClick = () => {
-        setIsLoginDialogOpen(false);
-        history.push('/signUp')
+    const handleMenuOpen = event => {
+        setMenuAnchorEl(event.currentTarget);
     };
 
-    const forgotPasswordClick = () => {
-        setIsLoginDialogOpen(false);
-        history.push('/forgotPassword')
+    const handleMenuClose = () => {
+        setMenuAnchorEl(null);
     };
 
+    const login = () => {
+        setMenuAnchorEl(null);
+        if (location.pathname !== '/login') {
+            history.push('/login')
+        }
+    };
 
-    let toolBarIcon = isSearchInSmallScreen ?
-        (<IconButton edge="start" className={classes.arrowBackButton} onClick={() => setIsSearchInSmallScreen(false)}>
-            <ArrowBackIcon/>
-        </IconButton>)
-        : (<IconButton edge="start" className={classes.menuButton} aria-label="menu">
-            <MenuIcon/>
-        </IconButton>);
+    const signUp = () => {
+        setMenuAnchorEl(null);
+        if (location.pathname !== '/signUp') {
+            history.push('/signUp')
+        }
+    };
 
-    let title = isSearchInSmallScreen ? null :
-        <Typography variant="h6" className={classes.title}>
-            GeekStarter
-        </Typography>;
+    const logout = async () => {
+        try {
+            await dispatch(Auth.logout());
+            setMenuAnchorEl(null);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-    let search =
-        <IconButton edge="end" onClick={() => setIsSearchInSmallScreen(true)}>
-            <SearchIcon/>
-        </IconButton>;
+    const handleDrawerToggle = () => {
+        dispatch(Layout.setMobileDrawer(!mobileDrawerOpen));
+    };
 
-    if (!isSmallScreen || isSearchInSmallScreen) {
-        search =
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon/>
-                </div>
-                <InputBase
-                    placeholder="Search…"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{'aria-label': 'search'}}
-                />
-            </div>
-    }
+    const menuItems = isLoggedIn ?
+        <MenuItem
+            className={classes.menuItem}
+            onClick={logout}>
+            LOG OUT
+        </MenuItem>
+        :
+        [
+            <MenuItem
+                key={'first'}
+                className={classes.menuItem}
+                onClick={login}>
+                LOG IN
+            </MenuItem>,
+            <MenuItem
+                key={'second'}
+                className={classes.menuItem}
+                onClick={signUp}>
+                SIGN UP
+            </MenuItem>
+        ];
 
-    let accountInfo = isSmallScreen || window.location.pathname.startsWith('/signUp') ? null
-        : isLoggedIn ?
-            <Link to={`profile`}>
+    const menu = (
+        <Menu
+            anchorEl={menuAnchorEl}
+            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+            keepMounted
+            transformOrigin={{vertical: 'top', horizontal: 'right'}}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+            getContentAnchorEl={null}
+        >
+            {menuItems}
+        </Menu>
+    );
+
+    let toolBar =
+        <Toolbar className={classes.toolBar}>
+            {isLoggedIn ?
                 <IconButton
-                    className={classes.accountInfoButton}
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-haspopup="true"
-                    color="inherit">
-                    <AccountCircleIcon style={{width: '2.3rem', height: '2.3rem'}}/>
-                </IconButton>
-            </Link>
-            : <Fragment>
-                <Button
                     color="inherit"
-                    className={classes.accountInfoButton}
-                    onClick={() => setIsLoginDialogOpen(true)}>
-                    Login
-                </Button>
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    className={classes.menuButton}
+                >
+                    <MenuIcon className={classes.menuIcon}/>
+                </IconButton>
+                : null
+            }
+            <Typography variant="h6" className={classes.title}>
+                GeekStarter
+            </Typography>
+            <IconButton edge="end" className={classes.searchIcon} onClick={() => setIsSearch(true)}>
+                <SearchIcon/>
+            </IconButton>
+            <div className={classes.sectionDesktop}>
+                <div className={classes.separator}/>
+                {!isLoggedIn ?
+                    <Fragment>
+                        <Button
+                            color="inherit"
+                            className={classes.loginButton}
+                            onClick={login}>
+                            Log in
+                        </Button>
+                        <div className={classes.loginSeparator}/>
+                        <Button
+                            color="inherit"
+                            className={classes.loginButton}
+                            onClick={signUp}>
+                            Sign Up
+                        </Button>
+                    </Fragment>
+                    :
+                    <Button className={classes.profile} onClick={handleMenuOpen}>
+                        <Grid container spacing={1} alignItems="flex-end">
+                            <Grid item>
+                                <Avatar
+                                    className={classes.avatar}>{`${user?.firstName} ${user?.lastName}`.initials()}</Avatar>
+                            </Grid>
+                            <Grid item className={classes.profileName}>
+                                <InputLabel
+                                    className={classes.profileNameLabel}>{`${user?.firstName.capitalize()} ${user?.lastName.capitalize()}`}</InputLabel>
+                            </Grid>
+                            <Grid item className={classes.profileName}>
+                                <KeyboardArrowDownIcon/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                }
+            </div>
+            <div className={classes.sectionMobile}>
+                {isLoggedIn ?
+                    <Avatar
+                        className={classes.avatarSmall}
+                        onClick={handleMenuOpen}
+                    >
+                        {`${user?.firstName} ${user?.lastName}`.initials()}
+                    </Avatar>
+                    :
+                    <IconButton className={classes.moreIcon} onClick={handleMenuOpen} color="inherit">
+                        <MoreIcon/>
+                    </IconButton>
+                }
 
-            </Fragment>;
+            </div>
+            {menu}
+        </Toolbar>;
 
+    if (isSearch) {
+        toolBar =
+            <Toolbar>
+                <SearchIcon/>
+                <InputBase
+                    className={classes.input}
+                    placeholder="Search..."
+                />
+                <IconButton edge="end" className={classes.closeIcon} onClick={() => setIsSearch(false)}>
+                    <CloseIcon/>
+                </IconButton>
+            </Toolbar>;
+    }
 
     return (
         <div className={classes.root}>
-            <MaterialUIAppBar position="static" color="primary">
-                <Toolbar>
-                    {toolBarIcon}
-                    {title}
-                    {search}
-                    {accountInfo}
-                    <Login open={isLoginDialogOpen} onClose={() => setIsLoginDialogOpen(false)}
-                           onSignUpClick={signUpClick} onForgotPasswordClick={forgotPasswordClick}/> {/*TODO move login into login button*/}
-                </Toolbar>
+            <MaterialUIAppBar position="fixed" className={classes.appBar}>
+                {toolBar}
             </MaterialUIAppBar>
         </div>
     );

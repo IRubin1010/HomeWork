@@ -1,69 +1,145 @@
-import { makeStyles ,fade } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1,
+        display: "flex",
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+        transition: theme.transitions.create(["width", "margin"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen
+        }),
+        backgroundColor: 'white',
+        [theme.breakpoints.down('xs')]: {
+            height: '52px'
+        }
     },
-    arrowBackButton: {
-        marginRight: theme.spacing(2),
+    toolBar: {
+        [theme.breakpoints.up('sm')]: {
+            paddingRight: theme.spacing(0),
+        }
     },
     title: {
         flexGrow: 1,
-        color: theme.palette.black,
+        color: theme.palette.primary.main,
         fontWeight: 'bolder',
         fontFamily: "Baloo",
-        fontSize: "1.4rem",
+        fontSize: "1.7rem",
         [theme.breakpoints.up('sm')]: {
-            fontSize: "2rem",
-            marginLeft: theme.spacing(4)
+            fontSize: "2.5rem",
+            marginLeft: theme.spacing(2)
         }
     },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.35),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.45),
-        },
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
-    },
     searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputRoot: {
-        color: 'inherit',
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create('width'),
-        width: '100%',
+        marginRight: theme.spacing(0),
+        "&:hover": {
+            color: theme.palette.primary.main,
+            backgroundColor: 'inherit'
+        },
         [theme.breakpoints.up('sm')]: {
-            width: 120,
-            '&:focus': {
-                width: 200,
-            },
+            marginRight: theme.spacing(1),
         },
     },
-    accountInfoButton: {
-        marginLeft: '20px',
-        color: 'black'
+    moreIcon: {
+        color: theme.palette.primary.main,
+        paddingLeft: theme.spacing(0),
+        paddingRight: theme.spacing(0),
+        "&:hover": {
+            backgroundColor: 'inherit'
+        }
+    },
+    input: {
+        marginLeft: theme.spacing(2),
+        flexGrow: 1,
+    },
+    closeIcon: {
+        "&:hover": {
+            color: theme.palette.primary.main,
+            backgroundColor: 'inherit'
+        }
+    },
+    loginButton: {
+        margin: theme.spacing(0, 1, 0, 1),
+        color: 'black',
+        "&:hover": {
+            color: theme.palette.primary.main,
+            backgroundColor: 'inherit'
+        },
+    },
+    separator: {
+        backgroundColor: 'rgba(0, 0, 0, 0.12)',
+        width: '1px',
+        height: '64px',
+    },
+    loginSeparator: {
+        backgroundColor: 'rgba(0, 0, 0, 0.12)',
+        width: '0.5px',
+        height: '30px',
+        marginTop: 17,
+    },
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'flex',
+        },
+    },
+    sectionMobile: {
+        display: 'flex',
+        [theme.breakpoints.up('sm')]: {
+            display: 'none',
+        },
+    },
+    menuItem: {
+        width: '250px',
+        fontSize: '0.875rem',
+        fontWeight: '500',
+        "&:hover": {
+            color: theme.palette.primary.main,
+        },
+    },
+    profile: {
+        alignSelf: 'center',
+        height: 64,
+        textTransform: 'none',
+    },
+    avatar: {
+        color: theme.palette.getContrastText(theme.palette.primary.main),
+        backgroundColor: theme.palette.primary.main,
+    },
+    avatarSmall: {
+        color: theme.palette.getContrastText(theme.palette.primary.main),
+        backgroundColor: theme.palette.primary.main,
+        width: theme.spacing(3.5),
+        height: theme.spacing(3.5),
+        fontSize: 15,
+    },
+    profileName: {
+        alignSelf: 'center',
+        marginBottom: 0,
+    },
+    profileNameLabel: {
+        marginLeft: theme.spacing(1),
+        color: 'black',
+        marginBottom: 0,
+    },
+    menuButton: {
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginRight: theme.spacing(1)
+        },
+        [theme.breakpoints.only('sm')]: {
+            fontSize: "large"
+        },
+    },
+    menuIcon: {
+        [theme.breakpoints.only('sm')]: {
+            fontSize: 30
+        },
+        //color: theme.palette.primary.main
     }
-
-
 }));
 
 export default useStyles;

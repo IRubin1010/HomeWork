@@ -7,9 +7,12 @@ const Project = (props) => {
     let {projectId} = props.match.params;
 
   return(
-      <h1>
-          {projectId}
-      </h1>
+      <div style={{marginTop: 64, display: 'flex'}}>
+          <h1 >
+              {projectId}
+          </h1>
+      </div>
+
   )
 };
 

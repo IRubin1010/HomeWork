@@ -562,9 +562,9 @@ const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__["
 
 /***/ }),
 
-/***/ "./src/Components/Login/Login.js":
+/***/ "./src/Components/Login/Auth.js":
 /*!***************************************!*\
-  !*** ./src/Components/Login/Login.js ***!
+  !*** ./src/Components/Login/Auth.js ***!
   \***************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -591,7 +591,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_LockOutlined__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_LockOutlined__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Login_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Login.css */ "./src/Components/Login/Login.css.js");
-var _jsxFileName = "C:\\development\\personal\\HomeWork\\GeekStarter\\client\\src\\Components\\Login\\Login.js";
+var _jsxFileName = "C:\\development\\personal\\HomeWork\\GeekStarter\\client\\src\\Components\\Login\\Auth.js";
 
 
 
@@ -998,7 +998,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/AccountCircle */ "./node_modules/@material-ui/icons/AccountCircle.js");
 /* harmony import */ var _material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _AppBar_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AppBar.css */ "./src/Containers/AppBar/AppBar.css.js");
-/* harmony import */ var _Components_Login_Login__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../Components/Login/Login */ "./src/Components/Login/Login.js");
+/* harmony import */ var _Components_Login_Login__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../Components/Login/Login */ "./src/Components/Login/Auth.js");
 
 var _jsxFileName = "C:\\development\\personal\\HomeWork\\GeekStarter\\client\\src\\Containers\\AppBar\\AppBar.js";
 

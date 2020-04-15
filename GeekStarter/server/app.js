@@ -4,12 +4,13 @@ let cors = require('cors');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+const passport = require('passport');
+const authService = require('./services/authService');
 
 // routes
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 let authRouter = require('./routes/auth');
-let registerRouter = require('./routes/register');
 
 let app = express();
 
@@ -23,12 +24,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:4000',
+  ],
+  credentials: true
+}));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users',passport.authenticate('jwt', {session: false}), authService.setTokenCookies , usersRouter);
 app.use('/auth', authRouter);
-app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
